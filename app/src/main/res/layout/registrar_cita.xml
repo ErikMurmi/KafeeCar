@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/plantilla"
+    android:id="@+id/rCita_lyt"
+    tools:context=".Patioventainterfaz">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/Carro.img"
+            android:layout_width="278dp"
+            android:layout_height="166dp"
+            app:srcCompat="@mipmap/ic_tesla" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fechaCita.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="102dp"
+                android:fontFamily="@font/ocra"
+                android:text="Fecha de cita"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/HoraCita.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ocra"
+                android:text="Hora"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/fechacitames_txt"
+                android:layout_width="70dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <EditText
+                android:id="@+id/fechacitadia_txt"
+                android:layout_width="70dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <EditText
+                android:id="@+id/fechacitaanio_txt"
+                android:layout_width="70dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <EditText
+                android:id="@+id/fechacitahoracita_txt"
+                android:layout_width="70dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+                android:inputType="textPersonName"
+
+                android:textColor="#CEC9D5" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Cliente.title"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:fontFamily="@font/ocra"
+            android:text="Cliente "
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cliente_txt"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <Button
+                android:id="@+id/mascliente_btn"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bordesboton"
+                android:backgroundTint="@color/botones"
+                android:fontFamily="@font/valorant"
+                android:text="..."
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Vendedor.title"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:fontFamily="@font/ocra"
+            android:text="Vendedor"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/vendedor_txt"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <Button
+                android:id="@+id/masvendedor_btn"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bordesboton"
+                android:backgroundTint="@color/botones"
+                android:fontFamily="@font/valorant"
+                android:text="..."
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/vehiculo.title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ocra"
+            android:text="Vehículo"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/vehiculo_txt"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+                android:fontFamily="@font/ocra"
+
+                android:inputType="textPersonName"
+                android:textColor="#CEC9D5" />
+
+            <Button
+                android:id="@+id/masvehiculo_btn"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bordesboton"
+                android:backgroundTint="@color/botones"
+                android:fontFamily="@font/valorant"
+                android:text="..."
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Resolucion.title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ocra"
+            android:text="Resolución"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/resolucion_txt"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/bordesmarcos"
+            android:ems="10"
+            android:fontFamily="@font/ocra"
+            android:inputType="textPersonName"
+
+            android:textColor="#CEC9D5" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Descartar.btn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="82dp"
+                android:background="@drawable/bordesboton"
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/valorant"
+                android:text="Descartar"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/Guardar.btn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bordesboton"
+                android:backgroundTint="@color/botones"
+                android:fontFamily="@font/valorant"
+                android:onClick="registarCita"
+                android:text="Guardar"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

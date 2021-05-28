@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_cat"
+        android:icon="@drawable/ic_car_dark"
+        android:title="@string/catalogo"/>
+    <item
+        android:id="@+id/nav_citas"
+        android:icon="@drawable/ic_talk"
+        android:title="@string/citas"/>
+
+    <item
+        android:id="@+id/nav_ventas"
+        android:icon="@drawable/ic_sell"
+        android:title="@string/Ventas"/>
+
+    <item
+        android:id="@+id/nav_estadisticas"
+        android:icon="@drawable/ic_economic"
+        android:title="@string/estadisticas"/>
+
+
+</menu>

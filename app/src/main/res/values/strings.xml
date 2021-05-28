@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">KafeeCar</string>
+    <string name="login">Log-in</string>
+    <string name="mensaje_registro">¿No tienes una cuenta registrate?</string>
+    <string name="registrate">Registrate</string>
+    <string name="correo">Email</string>
+    <string name="Contrasenia">Contraseña</string>
+    <string name="catalogo">Catálogo</string>
+    <string name="citas">Citas</string>
+    <string name="Ventas">Ventas</string>
+    <string name="estadisticas">Estadísticas</string>
+</resources>

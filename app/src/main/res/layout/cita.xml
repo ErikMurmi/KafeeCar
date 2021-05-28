@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/plantilla"
+    android:id="@+id/vCita_lyt">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="44dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:id="@+id/cita_img"
+            android:layout_width="match_parent"
+            android:layout_height="194dp"
+            android:layout_marginTop="@dimen/top_space"
+            app:srcCompat="@mipmap/ic_tesla_round" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="13dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordesmarcos"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fechaCita_txt"
+                style="@style/texto_style"
+                android:fontFamily="@font/ocra"
+                android:text="Fecha:" />
+
+            <TextView
+                android:id="@+id/horaCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Hora:" />
+
+            <TextView
+                android:id="@+id/clienteCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Cliente:" />
+
+            <TextView
+                android:id="@+id/contactoCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Contacto:" />
+
+            <TextView
+                android:id="@+id/vendedorCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Vendedor:" />
+
+            <TextView
+                android:id="@+id/vehiculoCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Vehículo:" />
+
+            <TextView
+                android:id="@+id/descripcionCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/ocra"
+                android:text="Descripción:" />
+
+            <TextView
+                android:id="@+id/resolucionCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_space"
+                android:fontFamily="@font/ocra"
+                android:text="Resolución:" />
+
+            <TextView
+                android:id="@+id/precioVentaCita_txt"
+                style="@style/texto_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ocra"
+                android:text="Precio venta:" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="13dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/boton_redondeado_dark"
+                android:fontFamily="@font/valoran"
+                android:text="Anular"
+                android:textColor="@color/white" />
+
+            <Space
+                android:layout_width="22dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/boton_redondeado"
+                android:fontFamily="@font/valoran"
+                android:text="editar"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
