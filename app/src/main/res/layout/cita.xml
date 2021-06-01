@@ -123,7 +123,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/eliminar_vehiculo_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:background="@drawable/boton_redondeado_dark"
@@ -137,7 +137,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/editar_vehiculo_btn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@drawable/boton_redondeado"
