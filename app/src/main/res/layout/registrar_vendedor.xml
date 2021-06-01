@@ -2,19 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rVendedor_lyt"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="1sp"
     android:layout_marginEnd="10dp"
-    android:background="@drawable/plantilla"
-    android:paddingBottom="15dp"
-    android:id="@+id/rVendedor_lyt">
+    android:background="@drawable/registrarvendedores"
+    android:paddingBottom="15dp">
 
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
@@ -48,7 +50,7 @@
                     android:fitsSystemWindows="true"
                     android:onClick="botonImagenPerfilVendedor"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/ic_banner_foreground" />
+                    app:srcCompat="@drawable/frame_2" />
             </FrameLayout>
 
             <TextView
@@ -68,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -88,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -108,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="numberSigned"
                 android:textColor="#959898" />
 
@@ -126,7 +131,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="0dp"
                 android:orientation="horizontal">
 
                 <EditText
@@ -136,6 +141,7 @@
                     android:layout_marginRight="7dp"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="date"
                     android:textColor="@color/gris" />
 
@@ -146,6 +152,7 @@
                     android:layout_marginRight="7dp"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="date"
                     android:textColor="@color/gris" />
 
@@ -155,6 +162,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="date"
                     android:textColor="@color/gris" />
             </LinearLayout>
@@ -177,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="numberSigned"
                 android:textColor="#959898" />
 
@@ -198,6 +207,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/gris" />
 
@@ -219,6 +229,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textPassword"
                 android:textColor="@color/gris" />
 
@@ -240,6 +251,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesbotongris"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textPassword"
                 android:textColor="@color/gris" />
 
@@ -248,7 +260,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/ocra"
                 android:text="Horario*"
@@ -316,6 +328,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="number" />
 
                 <EditText
@@ -327,6 +340,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="number" />
 
                 <EditText
@@ -337,6 +351,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
+                    android:fontFamily="@font/ocra"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -372,28 +387,25 @@
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
