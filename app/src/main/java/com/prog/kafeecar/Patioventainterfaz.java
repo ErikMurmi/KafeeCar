@@ -1,14 +1,23 @@
 package com.prog.kafeecar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +33,11 @@ public class Patioventainterfaz extends AppCompatActivity {
     private static PatioVenta patioventa = new PatioVenta();
     Usuario usuarioActual = null;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private static final int REQUEST_PERMISSION_CODE = 100;
+    private static final int REQUEST_IMAGE_GALERY = 101;
 
 
+    ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +172,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void visualizarCita() throws Exception {
-        setTheme(R.style.Theme_KafeeCar_Diseno);
+        //setTheme(R.style.Theme_KafeeCar_Diseno);
         setContentView(R.layout.cita);
         TextView fecha = findViewById(R.id.fechaCita_txt);
         TextView hora = findViewById(R.id.horaCita_txt);
@@ -183,6 +195,32 @@ public class Patioventainterfaz extends AppCompatActivity {
         precio.setText(new String(precio.getText().toString() + " $"+citaPrueba.getVehiculo().getPrecioVenta()));
 
     }
+    public void visualizarVehiculo() throws Exception {
+        //setTheme(R.style.Theme_KafeeCar_Diseno);
+        //setContentView(R.layout.cita);
+        TextView fecha = findViewById(R.id.fechaCita_txt);
+        TextView hora = findViewById(R.id.horaCita_txt);
+        TextView cliente = findViewById(R.id.clienteCita_txt);
+        TextView contacto = findViewById(R.id.contactoCita_txt);
+        TextView vendedor = findViewById(R.id.vendedorCita_txt);
+        TextView vehiculo = findViewById(R.id.vehiculoCita_txt);
+        TextView descripcion = findViewById(R.id.descripcionCita_txt);
+        TextView resolucion = findViewById(R.id.resolucionCita_txt);
+        TextView precio = findViewById(R.id.precioVentaCita_txt);
+        Cita citaPrueba = (Cita) patioventa.getCitas().getPos(0);
+        fecha.setText(new String(String.format(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita()))));
+        hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
+        cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
+        contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
+        vendedor.setText(new String(vendedor.getText().toString() + citaPrueba.getVendedorCita().getNombre()));
+        vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
+        descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
+        resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
+        precio.setText(new String(precio.getText().toString() + " $"+citaPrueba.getVehiculo().getPrecioVenta()));
+
+    }
+
+
 
 
     public void registrarVendedor(View v) throws ParseException {
@@ -279,6 +317,50 @@ public class Patioventainterfaz extends AppCompatActivity {
     public String getFechaMod(Date fechaMod){
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         return sf.format(fechaMod);
+    }
+
+
+    private void openGalery(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE_GALERY);
+    }
+    public void botonImagenPerfilVendedor(View view){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(ActivityCompat.checkSelfPermission(Patioventainterfaz.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                openGalery();
+            }else{
+                ActivityCompat.requestPermissions(Patioventainterfaz.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_PERMISSION_CODE);
+            }
+        }else{
+            openGalery();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_IMAGE_GALERY){
+            if(resultCode == Activity.RESULT_OK && data != null){
+                Uri foto = data.getData();
+                imagenPerfilVendedor = findViewById(R.id.imagenPerfilVendedor_ibtn);
+                imagenPerfilVendedor.setImageURI(foto);
+            }else{
+                Toast.makeText(Patioventainterfaz.this, "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull  int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSION_CODE){
+            if(permissions.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                openGalery();
+            }else{
+                Toast.makeText(Patioventainterfaz.this,"Necesita habilitar los permisos", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void irRegistarse(View view) {

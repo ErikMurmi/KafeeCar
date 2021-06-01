@@ -35,13 +35,21 @@
                 android:textColor="#959898"
                 android:textSize="17sp" />
 
-            <ImageButton
-                android:id="@+id/imagenPerfilVendedor_ibtn"
-                android:layout_width="151dp"
-                android:layout_height="152dp"
-                android:layout_marginLeft="100dp"
-                android:backgroundTint="#00FFFFFF"
-                app:srcCompat="@drawable/bordesbotongris" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
+
+                <ImageButton
+                    android:id="@+id/imagenPerfilVendedor_ibtn"
+                    style="@android:style/Widget.Material.Light.ImageButton"
+                    android:layout_width="347dp"
+                    android:layout_height="218dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:fitsSystemWindows="true"
+                    android:onClick="botonImagenPerfilVendedor"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/ic_banner_foreground" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/nombreVendedor_txt"
