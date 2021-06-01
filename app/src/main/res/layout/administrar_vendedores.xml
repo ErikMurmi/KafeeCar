@@ -6,7 +6,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/administrarvendedores">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="1dp"
+        android:clickable="true"
+        android:onClick="visualizarVehiculo"
+        app:backgroundTint="@color/botones"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/anadir_icon" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="parent"
@@ -15,16 +31,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginRight="25dp"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/cedulaVendedor_etxt2"
+                android:id="@+id/busquedaCedulaVendedor_etxt2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:background="@drawable/bordesbotongris"
+                android:drawableRight="@drawable/search_1"
                 android:ems="10"
+                android:fontFamily="@font/monglos"
                 android:inputType="numberSigned"
-                android:textColor="#959898" />
+                android:text="BÚSQUEDA"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#959898"
+                android:textSize="15sp" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
