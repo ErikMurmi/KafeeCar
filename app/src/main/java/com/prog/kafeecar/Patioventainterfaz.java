@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,14 +29,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import static java.lang.String.*;
+
 public class Patioventainterfaz extends AppCompatActivity {
 
-    private static PatioVenta patioventa = new PatioVenta();
+    public static PatioVenta patioventa = new PatioVenta();
     Usuario usuarioActual = null;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
-    public Catalogo_Admin_Fragment adminView = new Catalogo_Admin_Fragment();
+    public static Catalogo_Admin_Fragment adminView = new Catalogo_Admin_Fragment();
 
     ImageButton imagenPerfilVendedor;
 
@@ -64,7 +67,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }*/
         BottomNavigationView navBar = findViewById(R.id.barra_nav);
         navBar.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Fragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
 
     }
 
@@ -139,7 +142,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                             selectedFragement = new Citas_Fragment();
                             break;
                         case R.id.nav_cat:
-                            selectedFragement = Patioventainterfaz.get;
+                            selectedFragement = Patioventainterfaz.getAdminView();
                             break;
                         case R.id.nav_ventas:
                             selectedFragement = new Ventas_Fragment();
@@ -153,7 +156,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                 }
             };
 
-    public Catalogo_Admin_Fragment getAdminView(){
+    public static Catalogo_Admin_Fragment getAdminView(){
         return adminView;
     }
 
@@ -177,9 +180,9 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
 
-    public void visualizarCita() throws Exception {
+    public void visualizarCita(View v) throws Exception {
         //setTheme(R.style.Theme_KafeeCar_Diseno);
-        setContentView(R.layout.cita);
+        //setContentView(R.layout.cita);
         TextView fecha = findViewById(R.id.fechaCita_txt);
         TextView hora = findViewById(R.id.horaCita_txt);
         TextView cliente = findViewById(R.id.clienteCita_txt);
@@ -190,7 +193,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         TextView resolucion = findViewById(R.id.resolucionCita_txt);
         TextView precio = findViewById(R.id.precioVentaCita_txt);
         Cita citaPrueba = (Cita) patioventa.getCitas().getPos(0);
-        fecha.setText(new String(String.format(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita()))));
+        fecha.setText(new String(format(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita()))));
         hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
         cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
         contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
@@ -201,10 +204,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         precio.setText(new String(precio.getText().toString() + " $"+citaPrueba.getVehiculo().getPrecioVenta()));
 
     }
-    public void visualizarVehiculo() throws Exception {
 
+    public void visualizarVehiculo(View v) throws Exception {
+
+        TextView titulo = findViewById(R.id.auto_titulo_txt);
         TextView placa = findViewById(R.id.placa_txt);
-        TextView matricula = findViewById(R.id.matricula_txt);
+        TextView matricula =findViewById(R.id.matricula_txt);
         TextView anio = findViewById(R.id.vehiculo_anio_txt);
         TextView marca = findViewById(R.id.vehiculo_marca_txt);
         TextView modelo = findViewById(R.id.vehiculo_modelo_txt);
@@ -215,27 +220,27 @@ public class Patioventainterfaz extends AppCompatActivity {
         TextView promocion = findViewById(R.id.vehiculo_promocion_txt);
         TextView matriculado = findViewById(R.id.vehiculo_matriculado_txt);
 
-        Vehiculo vMostrar  = (Vehiculo) patioventa.getVehiculos().getPos(0);
-        placa.setText(vMostrar.getPlaca());
-        matricula.setText(vMostrar.getMatricula());
-        anio.setText(vMostrar.getAnio());
-        marca.setText(vMostrar.getMarca());
-        modelo.setText(vMostrar.getModelo());
-        descripcion.setText(vMostrar.getDescripcion());
-        color.setText(vMostrar.getColor());
-        precioInicial.setText(String.valueOf(vMostrar.getPrecioInicial()));
-        preciVenta.setText(String.valueOf(vMostrar.getPrecioVenta()));
-        String promocion_msg = vMostrar.getPromocion()+"%";
-        promocion.setText(promocion_msg);
+        Vehiculo vMostrar  = (Vehiculo) Patioventainterfaz.patioventa.getVehiculos().getPos(1);
+        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
+        titulo.setText(titulo_str);
+        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
+        matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
+        anio.setText(format("Año :%s",vMostrar.getAnio()));
+        marca.setText(format("Marca :%s",vMostrar.getMarca()));
+        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
+        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
+        color.setText(format("Color :%s",vMostrar.getColor()));
+        precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
+        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
+        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
         if(vMostrar.isMatriculado()){
-            matriculado.setText("Si");
+            matriculado.setText("Matriculado: Si");
         }else{
-            matriculado.setText("No");
+            matriculado.setText("Matriculado: No");
         }
 
 
     }
-
 
 
 
@@ -274,7 +279,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     nombreVendedor_str, cedulaVendedor_str, telefonoVendedor_str, correoVendedor_str, contraseniaVerificada,
                     sdf.parse(fechaNacimientoVendedor_date)),"Vendedor");
         }else{
-            Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
             contraseniaVendedor.setText("");
             confirmarContraseniaVendedor.setText("");
         }
