@@ -9,4 +9,5 @@
     <string name="citas">Citas</string>
     <string name="Ventas">Ventas</string>
     <string name="estadisticas">Estadísticas</string>
+    <string name="matricula_frmt">Matrícula :%s</string>
 </resources>
