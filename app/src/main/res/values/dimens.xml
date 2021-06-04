@@ -3,4 +3,5 @@
     <dimen name="top_space">70dp</dimen>
     <dimen name="text_space">10dp</dimen>
     <dimen name="espacios">4dp</dimen>
+    <dimen name="edit_txt_espacio">5dp</dimen>
 </resources>

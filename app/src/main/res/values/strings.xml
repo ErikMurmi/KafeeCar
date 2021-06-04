@@ -10,4 +10,16 @@
     <string name="Ventas">Ventas</string>
     <string name="estadisticas">Estadísticas</string>
     <string name="matricula_frmt">Matrícula :%s</string>
+    <string name="placa_c">Placa</string>
+    <string name="matricula_c">Matrícula</string>
+    <string name="anio">Año</string>
+    <string name="marca_c">Marca</string>
+    <string name="modelo_c">Modelo</string>
+    <string name="color_c">Color</string>
+    <string name="descripcion_c">Descripción</string>
+    <string name="inicial_c">Inicial</string>
+    <string name="venta_c">Venta</string>
+    <string name="promocion_c">Promoción</string>
+    <string name="matriculado_c">Matriculado</string>
+    <string name="vendedores_c">Vendedores</string>
 </resources>

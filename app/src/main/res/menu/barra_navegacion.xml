@@ -11,14 +11,20 @@
         android:title="@string/citas"/>
 
     <item
-        android:id="@+id/nav_ventas"
+        android:id="@+id/nav_vendedores"
         android:icon="@drawable/vendedores_icono"
+        android:title="@string/vendedores_c"/>
+
+    <item
+        android:id="@+id/nav_ventas"
+        android:icon="@drawable/ventas_icon"
         android:title="@string/Ventas"/>
 
     <item
         android:id="@+id/nav_estadisticas"
         android:icon="@drawable/ic_economic"
         android:title="@string/estadisticas"/>
+
 
 
 </menu>

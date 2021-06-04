@@ -18,7 +18,7 @@
             android:id="@+id/datos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp"
+            android:layout_margin="22dp"
             android:layout_weight="1"
             android:gravity="bottom|center_horizontal"
             android:orientation="vertical"
@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
+                android:fontFamily="@font/ocra"
                 android:text="@string/correo"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -36,6 +37,7 @@
             <EditText
                 android:id="@+id/email_etxt"
                 style="@style/entradas_txt"
+                android:fontFamily="@font/ocra"
                 android:hint="correo"
                 android:inputType="textEmailAddress"
                 tools:text="example@gmail.com" />
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
+                android:fontFamily="@font/ocra"
                 android:text="@string/Contrasenia"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -60,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:ems="10"
+                android:fontFamily="@font/ocra"
                 android:inputType="textPassword"
                 android:padding="8dp" />
 
@@ -67,23 +71,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="24dp" />
 
-            <EditText
-                android:id="@+id/editTextDate"
-                style="@style/entradas_texto"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:inputType="date" />
-
             <Button
                 android:id="@+id/button4"
-                android:layout_width="104dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_btn"
-                android:backgroundTint="#CA2323"
+                android:fontFamily="@font/valorant"
                 android:onClick="logIn"
                 android:padding="5dp"
-                android:text="@string/login" />
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -98,9 +96,10 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
                     android:text="@string/mensaje_registro"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/resgistrar_txt"
@@ -108,11 +107,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
+                    android:fontFamily="@font/ocra"
                     android:onClick="irRegistarse"
                     android:paddingStart="7dp"
                     android:text="@string/registrate"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

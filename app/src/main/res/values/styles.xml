@@ -37,4 +37,16 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="editar_entradas_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">33dp</item>
+        <item name="android:layout_marginBottom">@dimen/edit_txt_espacio</item>
+        <item name="android:background">@drawable/bordesboton</item>
+        <item name="android:ems">10</item>
+        <item name="android:fontFamily">@font/ocra</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 </resources>

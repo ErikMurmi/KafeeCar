@@ -38,16 +38,15 @@ public class Patioventainterfaz extends AppCompatActivity {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
-    public static Catalogo_Admin_Fragment adminView = new Catalogo_Admin_Fragment();
 
     ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        //setContentView(R.layout.home);
         //setTheme(R.style.Theme_AppCompat);
-        //setContentView(R.layout.login);
+        setContentView(R.layout.login);
         try {
             cargarDatos();
 
@@ -65,11 +64,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-        BottomNavigationView navBar = findViewById(R.id.barra_nav);
-        navBar.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new login_fragment()).commit();
+
 
     }
+
 
     public static void cargarDatos() throws Exception {
         System.out.println("\t 2. Lista de vehiculos \n");
@@ -131,6 +131,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         System.out.println("Se añadieron 6 ventas");
     }
 
+    private void irAplicacionAdmin(){
+        setContentView(R.layout.home);
+        BottomNavigationView navBar = findViewById(R.id.barra_nav);
+        navBar.setOnNavigationItemSelectedListener(navListener);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,7 +148,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                             selectedFragement = new Citas_Fragment();
                             break;
                         case R.id.nav_cat:
-                            selectedFragement = Patioventainterfaz.getAdminView();
+                            selectedFragement = new Catalogo_Admin_Fragment();
                             break;
                         case R.id.nav_ventas:
                             selectedFragement = new Ventas_Fragment();
@@ -156,9 +162,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                 }
             };
 
-    public static Catalogo_Admin_Fragment getAdminView(){
-        return adminView;
-    }
 
     public void logIn(View v) throws Exception {
         //Toast.makeText(this, "Esjecuto el metodo",Toast.LENGTH_SHORT).show();
@@ -168,10 +171,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         String clave_str = clave.getText().toString();
         Vendedor ven = patioventa.buscarVendedores("Correo",correo_str);
 
-        if(v!=null){
+        if(ven!=null){
             if(ven.getClave().compareTo(clave_str) == 0){
                 usuarioActual = ven;
                 Toast.makeText(Patioventainterfaz.this, "Se inicio sesion",Toast.LENGTH_SHORT).show();
+                irAplicacionAdmin();
             }
         }
 
