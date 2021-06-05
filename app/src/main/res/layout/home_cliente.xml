@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@android:id/home"
+    android:theme="@style/Theme.KafeeCar"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/frag_contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/barra_nav"
+        android:layout_marginBottom="5dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/barra_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:foregroundGravity="center_vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/boton_redondeado_dark"
+        app:itemIconSize="35dp"
+        app:itemIconTint="@drawable/nav_item_colors"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/barra_navegacion_cliente" />
+</RelativeLayout>

@@ -99,7 +99,7 @@
                     android:fontFamily="@font/ocra"
                     android:text="@string/mensaje_registro"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/resgistrar_txt"
@@ -112,7 +112,7 @@
                     android:paddingStart="7dp"
                     android:text="@string/registrate"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_cat_ven"
+        android:icon="@drawable/catalogo_icon"
+        android:title="@string/catalogo"/>
+    <item
+        android:id="@+id/nav_citas_ven"
+        android:icon="@drawable/cita_icono"
+        android:title="@string/citas"/>
+
+
+    <item
+        android:id="@+id/nav_ventas_ven"
+        android:icon="@drawable/ventas_icon"
+        android:title="@string/Ventas"/>
+
+</menu>

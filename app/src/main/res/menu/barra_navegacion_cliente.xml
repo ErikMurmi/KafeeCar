@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_cat_cl"
+        android:icon="@drawable/catalogo_icon"
+        android:title="@string/catalogo"/>
+
+    <item
+        android:id="@+id/nav_fav_cl"
+        android:icon="@drawable/favoritos_icono"
+        android:title="@string/favoritos_c"/>
+
+    <item
+        android:id="@+id/nav_citas_cl"
+        android:icon="@drawable/cita_icono"
+        android:title="@string/citas"/>
+
+    <item
+        android:id="@+id/nav_perfil_cl"
+        android:icon="@drawable/perfil_icono"
+        android:title="@string/perfil_c"/>
+
+
+
+
+</menu>

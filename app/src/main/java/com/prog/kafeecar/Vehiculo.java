@@ -20,7 +20,8 @@ public class Vehiculo {
         
     }
 
-    public Vehiculo(String placa, String matricula, String marca, String modelo, String color, String descripcion, float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen) {
+    public Vehiculo(String placa, String matricula, String marca, String modelo, String color, String descripcion,
+                    float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen) {
         this.placa = placa;
         this.matricula = matricula;
         this.marca = marca;
@@ -89,10 +90,6 @@ public class Vehiculo {
      * El metodo cambiarDato nos permite cambiar un dato en especifico
      * @param criterio contiene el criterio que deseamos cambiar
      * @param dato lleva el contenido del dato que deseamoscambiar
-     * @param flotantte contiene el valor convertido de string a flotante
-     * @param bo contiene el valor convertido de strig a boolean
-     * @param entero contiene el valor convertido de string a entero
-     * @param imagen contiene la nueva imagen a insertar
      */
     public void cambiarDato(String criterio, String dato)
     {

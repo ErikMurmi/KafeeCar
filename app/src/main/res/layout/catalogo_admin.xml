@@ -7,7 +7,7 @@
     tools:context=".Patioventainterfaz">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/aniadir_vehiculo_btn"
+        android:id="@+id/ir_aniadir_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
@@ -259,7 +259,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName4"
+                            android:id="@+id/aniadir_placa_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_height="35dp"
                             android:textSize="15sp"
@@ -294,7 +294,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName2"
+                            android:id="@+id/editar_vehiculo_anio_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -331,7 +331,7 @@
                     android:textColor="#000000" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName8"
+                    android:id="@+id/editar_descripcion_etxt"
                     style="@style/editar_entradas_txt"
                     android:layout_width="374dp"
                     android:layout_height="77dp"
@@ -343,7 +343,6 @@
                     android:singleLine="false" />
 
                 <TextView
-                    android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ocra"
@@ -351,14 +350,13 @@
                     android:textColor="#000000" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName6"
+                    android:id="@+id/editar_vehiculo_marca_etxt"
                     style="@style/editar_entradas_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="PBY 786" />
 
                 <TextView
-                    android:id="@+id/textView16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ocra"
@@ -373,7 +371,6 @@
                     tools:text="PBY 786" />
 
                 <TextView
-                    android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ocra"
@@ -410,7 +407,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
@@ -432,7 +428,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView18"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
@@ -453,7 +448,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
@@ -509,6 +503,357 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/editar_v_deshacer_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valorant"
+                        android:text="Deshacer"
+                        android:textColor="@color/white" />
+
+                    <Space
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/editar_v_editar_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:fontFamily="@font/valorant"
+                        android:text="Editar"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/aniadir_vehiculo_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plantilla"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/aniadir_vehiculo"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/placa_t_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/placa_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/placa_aniadir_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:inputType="text"
+                            android:text="PBY 786"
+                            android:textSize="15sp"
+                            tools:text="PBY 786" />
+
+                        <TextView
+                            android:id="@+id/matricula_t_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/matricula_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_matricula_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/bordesboton"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+                            android:inputType="textPersonName|text"
+                            android:text="GMN-005195560-PAR"
+                            android:textAlignment="center"
+                            tools:text="GMN-005195560-PAR" />
+
+                        <TextView
+                            android:id="@+id/anio_t_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/anio"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_anio_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesboton"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+                            android:inputType="number|textPersonName"
+                            android:text="2014"
+                            android:textAlignment="center"
+                            tools:text="2014" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <ImageButton
+                        android:id="@+id/aniadir_vehiculo_imagen_txt"
+                        android:layout_width="180dp"
+                        android:layout_height="148dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/frame_2" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/descripcion_t_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/descripcion_c"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/aniadir_descripcion_etxt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="374dp"
+                    android:layout_height="77dp"
+                    android:background="@drawable/bordesmarcos"
+                    android:inputType="textMultiLine|text|textImeMultiLine"
+                    android:lines="3"
+                    android:maxLines="5"
+                    android:singleLine="false"
+                    android:text="Todo esta correcto" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/marca_c"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/aniadir_marca_etxt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="Toyota"
+                    tools:text="Toyota" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/modelo_c"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/aniadir_modelo_etxt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="Fortuner"
+                    tools:text="Fortuner" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/color_c"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/aniadir_color_etxt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="Azul marfil"
+                    tools:text="Azul marfil" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:paddingEnd="15dp"
+                    app:srcCompat="@drawable/precio_titulo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/inicial_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_pinicial_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="32000"
+                            tools:text="32000" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/ocra"
+                        android:text="$"
+                        android:textSize="34sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/venta_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_precio_venta_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="35500"
+                            tools:text="35500" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocra"
+                        android:text="$"
+                        android:textSize="34sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/promocion_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_precio_promocion_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="-"
+                            tools:text="-" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocra"
+                        android:text="$"
+                        android:textSize="34sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/matricula_chkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/botones"
+                        android:text="@string/matriculado_c" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
                         android:id="@+id/button2"
                         android:layout_width="120dp"
                         android:layout_height="35dp"
@@ -522,7 +867,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/aniadir_vehiculo_btn"
                         android:layout_width="120dp"
                         android:layout_height="35dp"
                         android:background="@drawable/boton_redondeado"

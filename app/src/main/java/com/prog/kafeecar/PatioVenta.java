@@ -544,5 +544,23 @@ public class PatioVenta {
         Cita cita = null;
         return cita;
     }
+
+    public Vendedor asignarVendedor(String hora,Date fecha) throws Exception{
+        boolean encontrado = false;
+        Vendedor buscado = null;
+        int con = 0;
+
+        while(con<vendedores.contar()&& !encontrado)
+        {
+            Vendedor actual = (Vendedor) vendedores.getPos(con);
+            int entero = Integer.parseInt(hora);
+            if(actual.disponible(fecha,entero)){
+                buscado = actual;
+                encontrado=true;
+            }
+            con++;
+        }
+        return buscado;
+    }
 }
 

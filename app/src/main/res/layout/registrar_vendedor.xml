@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/edit_txt_espacio"
                 android:fontFamily="@font/ocra"
                 android:paddingBottom="@dimen/espacios"
                 android:text="Fecha de Nacimiento"

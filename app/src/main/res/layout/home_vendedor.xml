@@ -27,5 +27,5 @@
         app:itemIconSize="35dp"
         app:itemIconTint="@drawable/nav_item_colors"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/barra_navegacion" />
+        app:menu="@menu/barra_navegacion_vendedor" />
 </RelativeLayout>

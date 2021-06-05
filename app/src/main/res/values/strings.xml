@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KafeeCar</string>
     <string name="login">Log-in</string>
-    <string name="mensaje_registro">¿No tienes una cuenta registrate?</string>
+    <string name="mensaje_registro">¿No tienes una cuenta?</string>
     <string name="registrate">Registrate</string>
     <string name="correo">Email</string>
     <string name="Contrasenia">Contraseña</string>
@@ -22,4 +22,8 @@
     <string name="promocion_c">Promoción</string>
     <string name="matriculado_c">Matriculado</string>
     <string name="vendedores_c">Vendedores</string>
+    <string name="eliminar_c">Eliminar</string>
+    <string name="guardar_c">Guardar</string>
+    <string name="favoritos_c">Favoritos</string>
+    <string name="perfil_c">Perfil</string>
 </resources>
