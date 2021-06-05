@@ -1,6 +1,8 @@
 package com.prog.kafeecar;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.StorageReference;
 
 import static java.lang.String.format;
 
@@ -150,6 +153,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         EditText pventa_ad = mainView.findViewById(R.id.aniadir_precio_venta_etxt);
         EditText ppromocion_ad = mainView.findViewById(R.id.aniadir_precio_promocion_etxt);
         CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
+        //StorageReference storageRef = storage.getReference();
 
         patio.aniadirVehiculo(
                 new Vehiculo(
@@ -293,6 +297,19 @@ public class Catalogo_Admin_Fragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_IMAGE_GALERY);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_IMAGE_GALERY){
+            if(resultCode == Activity.RESULT_OK && data != null){
+                Uri foto = data.getData();
+                selec_vehiculo_img.setImageURI(foto);
+            }else{
+                Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

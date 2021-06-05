@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "964087352534",
+    "project_id": "kafeecar",
+    "storage_bucket": "kafeecar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964087352534:android:5b831cfcd9f4f1ecb0cd77",
+        "android_client_info": {
+          "package_name": "com.prog.kafeecar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964087352534-06vbuk0efdl9p2rpo7c376dkveppcf7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaJZ03cq8AFO_2O8oIUSsXSgz2QifGe7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964087352534-06vbuk0efdl9p2rpo7c376dkveppcf7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
