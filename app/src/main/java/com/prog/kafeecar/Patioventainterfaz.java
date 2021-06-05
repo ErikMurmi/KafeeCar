@@ -228,42 +228,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     }
 
-    public void visualizarVehiculo(View v) throws Exception {
 
-        TextView titulo = findViewById(R.id.auto_titulo_txt);
-        TextView placa = findViewById(R.id.placa_txt);
-        TextView matricula =findViewById(R.id.matricula_txt);
-        TextView anio = findViewById(R.id.vehiculo_anio_txt);
-        TextView marca = findViewById(R.id.vehiculo_marca_txt);
-        TextView modelo = findViewById(R.id.vehiculo_modelo_txt);
-        TextView color = findViewById(R.id.vehiculo_color_txt);
-        TextView descripcion = findViewById(R.id.vehiculo_descripcion_txt);
-        TextView precioInicial = findViewById(R.id.vehiculo_pinicial_txt);
-        TextView preciVenta = findViewById(R.id.vehiculo_pventa_txt);
-        TextView promocion = findViewById(R.id.vehiculo_promocion_txt);
-        TextView matriculado = findViewById(R.id.vehiculo_matriculado_txt);
-
-        Vehiculo vMostrar  = (Vehiculo) Patioventainterfaz.patioventa.getVehiculos().getPos(1);
-        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
-        titulo.setText(titulo_str);
-        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
-        matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
-        anio.setText(format("Año :%s",vMostrar.getAnio()));
-        marca.setText(format("Marca :%s",vMostrar.getMarca()));
-        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
-        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
-        color.setText(format("Color :%s",vMostrar.getColor()));
-        precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
-        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
-        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
-        if(vMostrar.isMatriculado()){
-            matriculado.setText("Matriculado: Si");
-        }else{
-            matriculado.setText("Matriculado: No");
-        }
-
-
-    }
 
 
 
@@ -365,11 +330,12 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     //Seleccion de imagen en la galeria
 
-    private void openGalery(){
+    public void openGalery(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_IMAGE_GALERY);
     }
+
     public void botonImagenPerfilVendedor(View view){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(Patioventainterfaz.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){

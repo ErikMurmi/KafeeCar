@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,11 +24,14 @@ import static java.lang.String.format;
 
 public class Catalogo_Admin_Fragment extends Fragment {
 
+    private static final int REQUEST_PERMISSION_CODE = 100;
+    private static final int REQUEST_IMAGE_GALERY = 101;
     private View mainView;
 
     private FloatingActionButton irAniadirVehiculo;
     private Button deshacer_btn;
     private Button irVerVehiculo;
+    private ImageButton selec_vehiculo_img;
     private Button irEditarVehiculo;
     public Button editar_btn;
     private Button aniadir_vehiculo_btn;
@@ -46,7 +52,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         patio = Patioventainterfaz.patioventa;
+
         //Botones
+        selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
         irVerVehiculo = mainView.findViewById(R.id.ir_ver_vehiculo);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
@@ -69,7 +77,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.VISIBLE);
         });
 
-
         irVerVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
             irAniadirVehiculo.setVisibility(View.GONE);
@@ -79,7 +86,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
-            verVehiculoEditable("PSD-1234");
+            visualizarVehiculo("PSD-1234");
         });
 
         irEditarVehiculo.setOnClickListener(v -> {
@@ -91,6 +98,10 @@ public class Catalogo_Admin_Fragment extends Fragment {
             //Activar el diseño deseadow
             editar_vehiculo.setVisibility(View.VISIBLE);
             verVehiculoEditable("PSD-1234");
+        });
+
+        selec_vehiculo_img.setOnClickListener(v -> {
+            openGalery();
         });
 
         deshacer_btn.setOnClickListener(v -> {
@@ -121,6 +132,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         editar_vehiculo.setVisibility(View.GONE);
         //Activar el diseño deseadow
         verCatalogo.setVisibility(View.VISIBLE);
+        irAniadirVehiculo.setVisibility(View.VISIBLE);
     }
 
 
@@ -235,6 +247,53 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
+    public void visualizarVehiculo(String placa_buscar){
+
+        TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
+        TextView placa = mainView.findViewById(R.id.placa_txt);
+        TextView matricula = mainView.findViewById(R.id.matricula_txt);
+        TextView anio = mainView.findViewById(R.id.vehiculo_anio_txt);
+        TextView marca = mainView.findViewById(R.id.vehiculo_marca_txt);
+        TextView modelo = mainView.findViewById(R.id.vehiculo_modelo_txt);
+        TextView color = mainView.findViewById(R.id.vehiculo_color_txt);
+        TextView descripcion = mainView.findViewById(R.id.vehiculo_descripcion_txt);
+        TextView precioInicial = mainView.findViewById(R.id.vehiculo_pinicial_txt);
+        TextView preciVenta = mainView.findViewById(R.id.vehiculo_pventa_txt);
+        TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_txt);
+        TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_txt);
+
+        Vehiculo vMostrar  = null;
+        try {
+            vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
+        titulo.setText(titulo_str);
+        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
+        matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
+        anio.setText(format("Año :%s",vMostrar.getAnio()));
+        marca.setText(format("Marca :%s",vMostrar.getMarca()));
+        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
+        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
+        color.setText(format("Color :%s",vMostrar.getColor()));
+        precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
+        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
+        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+        if(vMostrar.isMatriculado()){
+            matriculado.setText("Matriculado: Si");
+        }else{
+            matriculado.setText("Matriculado: No");
+        }
+
+
+    }
+
+    public void openGalery(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE_GALERY);
+    }
 
 
 }
