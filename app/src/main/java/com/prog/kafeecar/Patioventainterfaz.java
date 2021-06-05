@@ -159,6 +159,10 @@ public class Patioventainterfaz extends AppCompatActivity {
                         case R.id.nav_estadisticas:
                             selectedFragement = new Estadisticas_Fragment();
                             break;
+                        case R.id.nav_ventas:
+                            selectedFragement=new Ventas_admin_Fragment();
+                            break;
+
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
                     return true;

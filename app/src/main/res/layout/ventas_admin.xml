@@ -1,302 +1,548 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="3dp"
-    android:background="@drawable/anadir_venta">
+    android:layout_marginTop="3dp">
 
     <LinearLayout
-        android:id="@+id/aniadir_venta.lyt"
-        android:layout_width="370dp"
-        android:layout_height="634dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/Auto.img"
-            android:layout_width="183dp"
-            android:layout_height="179dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            app:srcCompat="@mipmap/ic_tesla" />
+        android:id="@+id/aniadir_venta_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/anadir_venta"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="clip_horizontal|center_vertical"
-            android:orientation="horizontal">
+            android:layout_width="370dp"
+            android:layout_height="634dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/fechaVenta.title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/Auto.img"
+                android:layout_width="183dp"
+                android:layout_height="179dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="90dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="55dp"
-                android:fontFamily="@font/ocraext"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Fecha de Venta"
-                android:textAlignment="center"
-                android:textSize="16sp" />
+                app:srcCompat="@mipmap/ic_tesla" />
 
-            <TextView
-                android:id="@+id/HoraCita.title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ocra"
-                android:text="Hora"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="18sp" />
+                android:gravity="clip_horizontal|center_vertical"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/fechaVenta.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="55dp"
+                    android:fontFamily="@font/ocraext"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Fecha de Venta"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/HoraCita.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="Hora"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/fecha_venta_dia_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+
+                    android:fontFamily="@font/ocra"
+                    android:inputType="number"
+                    android:textColor="#CEC9D5" />
+
+                <EditText
+                    android:id="@+id/fecha_venta_mes_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="number"
+                    android:textColor="#CEC9D5" />
+
+                <EditText
+                    android:id="@+id/fecha_venta_anio_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+
+                    android:fontFamily="@font/ocra"
+                    android:inputType="number"
+                    android:textColor="#CEC9D5" />
+
+                <EditText
+                    android:id="@+id/fecha_venta_hora_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+
+                    android:fontFamily="@font/ocra"
+                    android:inputType="number"
+                    android:textColor="#CEC9D5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/precio.title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="Precio"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/precio_venta_txt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="264dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/cliente.title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Cliente"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <EditText
+                        android:id="@+id/cliente_venta_txt"
+                        style="@style/editar_entradas_txt"
+                        android:layout_width="265dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesboton"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/buscar_cliente.btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/botones"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/agregar_cliente.btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/botones"
+                        android:foregroundTint="#F6F2F2"
+                        app:srcCompat="@drawable/icono_aniadir" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/vendedor.title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Vendedor"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/vendedor_venta_txt"
+                        style="@style/editar_entradas_txt"
+                        android:layout_width="272dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesboton"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/buscar_vendedor.btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/botones"
+                        android:foregroundTint="#F6F2F2"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Vehiculo.title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Vehículo"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/vehiculo_venta.txt"
+                        style="@style/editar_entradas_txt"
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesboton"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <Space
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/buscar_auto.btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/botones"
+                        android:foregroundTint="#F6F2F2"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/descartarVenta.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado_dark"
+                    android:fontFamily="@font/valorant"
+                    android:text="Descartar"
+                    android:textColor="#FFFFFF" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/aniadirVenta.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:onClick="aniadirVenta"
+                    android:text="Añadir" />
+            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ventas_admin_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/administrar_ventas"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/fecha_venta_dia_etxt"
-                android:layout_width="70dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-
-                android:fontFamily="@font/ocra"
-                android:inputType="number"
-                android:textColor="#CEC9D5" />
-
-            <EditText
-                android:id="@+id/fecha_venta_mes_etxt"
-                android:layout_width="70dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-                android:fontFamily="@font/ocra"
-                android:inputType="number"
-                android:textColor="#CEC9D5" />
-
-            <EditText
-                android:id="@+id/fecha_venta_anio_etxt"
-                android:layout_width="70dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-
-                android:fontFamily="@font/ocra"
-                android:inputType="number"
-                android:textColor="#CEC9D5" />
-
-            <EditText
-                android:id="@+id/fecha_venta_hora_etxt"
-                android:layout_width="70dp"
-                android:layout_height="42dp"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-
-                android:fontFamily="@font/ocra"
-                android:inputType="number"
-                android:textColor="#CEC9D5" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_width="370dp"
+            android:layout_height="634dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/precio.title"
+            <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ocra"
-                android:text="Precio"
-                android:textAlignment="textStart"
-                android:textSize="16sp" />
+                app:srcCompat="@drawable/pngwing_3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_vendedor_btn"
+                    android:layout_width="189dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="Por venderor"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/vendedor_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="130dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_generales_btn"
+                    android:layout_width="194dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="Generales "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_aniadirventa_btn"
+                    android:layout_width="197dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="REGISTRAR VENTA "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/logo_venta" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ventas_admin_por_vendedor_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/consultar_estadisticas_vendedores"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
 
             <EditText
-                android:id="@+id/precio_venta_txt"
-                style="@style/editar_entradas_txt"
-                android:layout_width="264dp"
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordesboton"
+                android:background="@drawable/bordesbotongris"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:fontFamily="@font/monglos"
+                android:inputType="textPersonName"
+                android:text="BUSQUEDA"
+                android:textAlignment="center"
+                android:textColor="#8A989696" />
 
             <TextView
-                android:id="@+id/cliente.title"
+                android:id="@+id/listado_ventasVendedor_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/ocraext"
-                android:text="Cliente"
+                android:text="lista de venas"
                 android:textSize="16sp" />
 
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/scroll_view_lista_venta_vendedores_srcll"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ventas_admin_generales_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/consultar_estadisticas_generales"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <EditText
-                    android:id="@+id/cliente_venta_txt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="265dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-
-                <Space
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:id="@+id/buscar_cliente.btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:id="@+id/agregar_cliente.btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    android:foregroundTint="#F6F2F2"
-                    app:srcCompat="@drawable/icono_aniadir" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/vendedor.title"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ocraext"
-                android:text="Vendedor"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/vendedor_venta_txt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="272dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-
-                <Space
-                    android:layout_width="48dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:id="@+id/buscar_vendedor.btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    android:foregroundTint="#F6F2F2"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/Vehiculo.title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ocraext"
-                android:text="Vehículo"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/vehiculo_venta.txt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-
-                <Space
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:id="@+id/buscar_auto.btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    android:foregroundTint="#F6F2F2"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/descartarVenta.btn"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/listado_ventasGenerales_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_dark"
-                android:fontFamily="@font/valorant"
-                android:text="Descartar"
-                android:textColor="#FFFFFF" />
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ocraext"
+                android:text="listado de ventas generales"
+                android:textSize="16sp" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+            <ScrollView
+                android:id="@+id/scroll_view_lista_ventas_generales_srcll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/aniadirVenta.btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado"
-                android:fontFamily="@font/valorant"
-                android:text="Añadir" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
