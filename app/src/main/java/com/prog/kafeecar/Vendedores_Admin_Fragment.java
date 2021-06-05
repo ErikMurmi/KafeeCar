@@ -37,13 +37,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private LinearLayout irAdministrarVendedor;
     private LinearLayout irEditarVendedor;
 
-    private FloatingActionButton aniadirVendedor;
+    private FloatingActionButton aniadirVendedor_btn;
     private Button deshabilitar_btn;
     private Button editar_btn;
     private Button listo_btn;
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
     private Button verVendedor_btn;
+
     private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         patio = Patioventainterfaz.patioventa;
 
         //botones
-        aniadirVendedor = mainView.findViewById(R.id.boton_mas_admin_btn);
+        aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
         deshabilitar_btn = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
@@ -65,11 +66,12 @@ public class Vendedores_Admin_Fragment extends Fragment {
         irAdministrarVendedor = mainView.findViewById(R.id.administrar_vendedor_lyt);
         irEditarVendedor = mainView.findViewById(R.id.editar_vendedor_lyt);
 
-        aniadirVendedor.setOnClickListener(v -> {
+        aniadirVendedor_btn.setOnClickListener(v -> {
             //Desactivar otros diseños
             irVisualizarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.GONE);
+            aniadirVendedor_btn.setVisibility(View.GONE);
             //Activar el diseño deseado
             irRegistrarVendedor.setVisibility(View.VISIBLE);
 
@@ -79,6 +81,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.GONE);
+            aniadirVendedor_btn.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.VISIBLE);
         });
 
@@ -86,6 +89,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.GONE);
+            aniadirVendedor_btn.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.VISIBLE);
             EditText cedulaEdit = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
             verVendedorEditable(cedulaEdit.getText().toString());
@@ -176,7 +180,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
     public void verVendedorEditable(String cedula){
         try{
             Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
-
 
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
