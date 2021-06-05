@@ -846,7 +846,7 @@
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="409dp"
@@ -1254,7 +1254,7 @@
         android:background="@drawable/administrarvendedores"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:id="@+id/scrollView2"

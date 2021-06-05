@@ -61,6 +61,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         verVendedor_btn = mainView.findViewById(R.id.boton_ver_vendedor_btn);
 
         //layouts
+
         irRegistrarVendedor = mainView.findViewById(R.id.registrar_vendedor_lyt);
         irVisualizarVendedor = mainView.findViewById(R.id.visualizar_vendedor_lyt);
         irAdministrarVendedor = mainView.findViewById(R.id.administrar_vendedor_lyt);
@@ -95,7 +96,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             verVendedorEditable(cedulaEdit.getText().toString());
         });
 
-        listo_btn.setOnClickListener(v -> {
+        /*listo_btn.setOnClickListener(v -> {
             try{
                 registrarVendedor();
             }catch (Exception e){
@@ -110,6 +111,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
         imagenPerfilVendedor_btn.setOnClickListener(v -> {
             openGalery();
         });
+        */
+
 
         return mainView;
     }
