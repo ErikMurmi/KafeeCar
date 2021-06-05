@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="3dp"
     android:background="@drawable/anadir_venta">
 
     <LinearLayout
@@ -28,14 +28,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="clip_horizontal|center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/fechaVenta.title"
-                android:layout_width="280dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="55dp"
                 android:fontFamily="@font/ocraext"
+                android:gravity="center_horizontal|center_vertical"
                 android:text="Fecha de Venta"
                 android:textAlignment="center"
                 android:textSize="16sp" />
@@ -53,7 +58,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -66,7 +73,7 @@
                 android:ems="10"
                 android:fontFamily="@font/ocra"
 
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColor="#CEC9D5" />
 
             <EditText
@@ -77,7 +84,7 @@
                 android:background="@drawable/bordesboton"
                 android:ems="10"
                 android:fontFamily="@font/ocra"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColor="#CEC9D5" />
 
             <EditText
@@ -89,7 +96,7 @@
                 android:ems="10"
                 android:fontFamily="@font/ocra"
 
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColor="#CEC9D5" />
 
             <EditText
@@ -99,14 +106,14 @@
                 android:background="@drawable/bordesboton"
                 android:ems="10"
                 android:fontFamily="@font/ocra"
-                android:inputType="textPersonName"
 
+                android:inputType="number"
                 android:textColor="#CEC9D5" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="270dp"
             android:orientation="vertical">
 
             <TextView
@@ -120,6 +127,7 @@
 
             <EditText
                 android:id="@+id/precio_venta_txt"
+                style="@style/editar_entradas_txt"
                 android:layout_width="264dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesboton"
@@ -134,13 +142,52 @@
                 android:text="Cliente"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/cliente_venta_txt"
-                android:layout_width="265dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/cliente_venta_txt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="265dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <Space
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/buscar_cliente.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:backgroundTint="@color/botones"
+                    app:srcCompat="@drawable/icono_busqueda" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/agregar_cliente.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:backgroundTint="@color/botones"
+                    android:foregroundTint="#F6F2F2"
+                    app:srcCompat="@drawable/icono_aniadir" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/vendedor.title"
@@ -150,13 +197,76 @@
                 android:text="Vendedor"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/vendedor_venta_txt"
-                android:layout_width="272dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/vendedor_venta_txt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="272dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <Space
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/buscar_vendedor.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bordesboton"
+                    android:backgroundTint="@color/botones"
+                    android:foregroundTint="#F6F2F2"
+                    app:srcCompat="@drawable/icono_busqueda" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Vehiculo.title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ocraext"
+                android:text="Vehículo"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/vehiculo_venta.txt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesboton"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <Space
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/buscar_auto.btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bordesboton"
+                    android:backgroundTint="@color/botones"
+                    android:foregroundTint="#F6F2F2"
+                    app:srcCompat="@drawable/icono_busqueda" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
