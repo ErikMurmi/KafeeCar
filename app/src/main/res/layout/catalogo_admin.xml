@@ -6,26 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Patioventainterfaz">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ir_aniadir_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:clickable="true"
-        android:visibility="visible"
-        app:backgroundTint="@color/botones"
-        app:borderWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="50dp"
-        app:srcCompat="@drawable/anadir_icon" />
-
     <ScrollView
         android:id="@+id/vehiculo_admin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:background="@drawable/plantilla"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/v_admin"
@@ -207,16 +194,17 @@
         android:background="@drawable/catalogo"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:visibility="gone">
 
         <Button
-            android:id="@+id/ir_editar_vehiculo"
+            android:id="@+id/ir_ver_vehiculo"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:background="@drawable/boton_redondeado"
             android:fontFamily="@font/valorant"
-            android:text="Editar Auto"
+            android:text="Ver Auto"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -224,7 +212,8 @@
         android:id="@+id/editar_vehiculo_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -259,7 +248,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/aniadir_placa_etxt"
+                            android:id="@+id/editar_placa_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_height="35dp"
                             android:textSize="15sp"
@@ -274,7 +263,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName3"
+                            android:id="@+id/editar_matricula_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -364,7 +353,7 @@
                     android:textColor="#000000" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName7"
+                    android:id="@+id/editar_vehiculo_modelo_etxt"
                     style="@style/editar_entradas_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -378,7 +367,7 @@
                     android:textColor="#000000" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName9"
+                    android:id="@+id/editar_vehiculo_color_etxt"
                     style="@style/editar_entradas_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -414,7 +403,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName11"
+                            android:id="@+id/editar_v_pinicial_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
@@ -435,7 +424,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName10"
+                            android:id="@+id/editar_v_pventa_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
@@ -455,7 +444,7 @@
                             android:textColor="#000000" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName12"
+                            android:id="@+id/editar_v_ppromocion_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
@@ -468,37 +457,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal" />
 
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/ocra"
-                        android:text="@string/color_c"
-                        android:textColor="#000000"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/botones"
-                        android:checked="false"
-                        android:clickable="false"
-                        android:duplicateParentState="true"
-                        android:focusable="auto"
-                        android:fontFamily="@font/ocra"
-                        android:text="@string/matriculado_c"
-                        android:textAlignment="textStart"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <CheckBox
+                    android:id="@+id/editar_matriculado_chkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:buttonTint="@color/botones"
+                    android:text="@string/matriculado_c" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -536,13 +508,14 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/aniadir_vehiculo"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -880,5 +853,20 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ir_aniadir_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:backgroundTint="@color/botones"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/anadir_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

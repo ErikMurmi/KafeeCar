@@ -13,6 +13,7 @@
         android:layout_marginBottom="1dp"
         android:clickable="true"
         android:onClick="visualizarVehiculo"
+        android:visibility="visible"
         app:backgroundTint="@color/botones"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -434,7 +435,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrarvendedores"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <ScrollView
             android:id="@+id/scrollView2"

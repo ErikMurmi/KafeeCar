@@ -165,7 +165,8 @@ public class Vehiculo {
     * @param anio actualiza el año del vehiculo
     * @param imagen actualiza la imagen del vehiculo
     */
-    public void actualizarDatos(String placa, String matricula, String marca, String modelo, String color, String descripcion, float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen)
+    public void actualizarDatos(String placa, String matricula, String marca, String modelo, String color, String descripcion,
+                                float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen)
     {
         this.placa = placa;
         this.matricula = matricula;

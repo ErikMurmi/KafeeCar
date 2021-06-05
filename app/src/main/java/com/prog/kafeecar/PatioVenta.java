@@ -312,24 +312,25 @@ public class PatioVenta {
      * @return Vehiculo que coincide con el codigo buscado en el criterio de busqueda.
      */
     public Vehiculo buscarVehiculos(String criterio, String codigo) throws Exception {
-        Vehiculo buscado = new Vehiculo();
-        if (vehiculos.esVacia()) {
-            throw new Exception("No hay vehiculos");
-        }
-            System.out.println("No esta vacia");
-            Nodo aux = vehiculos.getInicio();
-            while (aux != null) {
-                Vehiculo vehiculo=(Vehiculo)aux.getDato();
-                if (criterio.compareToIgnoreCase("Matricula")==0) {
-                    if (vehiculo.getMatricula().compareToIgnoreCase(codigo) == 0) {
-                        buscado = vehiculo;
-                        break;
-                    }
+        Vehiculo buscado = null;
+        int cont = 0;
+        if(criterio.compareToIgnoreCase("Placa")==0){
+            while(cont<vehiculos.contar()){
+                Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
+                if(actual.getPlaca().compareTo(codigo)==0){
+                    buscado = actual;
                 }
-                aux=aux.getSiguiente();
-
+                cont++;
             }
-
+        }else if(criterio.compareToIgnoreCase("Matricula")==0){
+            while(cont<vehiculos.contar()){
+                Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
+                if(actual.getPlaca().compareTo(codigo)==0){
+                    buscado = actual;
+                }
+                cont++;
+            }
+        }
         return buscado;
     }
 

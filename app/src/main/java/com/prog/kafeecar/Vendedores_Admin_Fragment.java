@@ -10,8 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class Vendedores_Admin_Fragment extends Fragment {
-
+    private View mainview;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.registrar_vendedor,container,false);
+        mainview = inflater.inflate(R.layout.vendedor_admin, container, false);
+        return mainview;
     }
 }

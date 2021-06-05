@@ -152,7 +152,7 @@
 
             <EditText
                 android:id="@+id/vendedor_venta_txt"
-                android:layout_width="272dp"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bordesboton"
                 android:ems="10"
