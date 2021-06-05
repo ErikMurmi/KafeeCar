@@ -2,6 +2,8 @@ package com.prog.kafeecar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -28,10 +31,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import static java.lang.String.format;
@@ -270,6 +277,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     public void visualizarVehiculo(String placa_buscar){
 
+        ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);
         TextView matricula = mainView.findViewById(R.id.matricula_txt);
@@ -301,6 +309,24 @@ public class Catalogo_Admin_Fragment extends Fragment {
         precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
         preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
         promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+        //Cargar imagen
+        StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
+        Glide.with(mainView)
+                .load(filePath)
+                .into(v_img);
+        try {
+            final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
+            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    v_img.setImageBitmap(bitmap);
+                }
+            });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        //
         if(vMostrar.isMatriculado()){
             matriculado.setText("Matriculado: Si");
         }else{
