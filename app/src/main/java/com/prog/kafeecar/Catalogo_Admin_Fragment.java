@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +21,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-//import com.google.firebase.storage.StorageReference;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.concurrent.Executor;
 
 import static java.lang.String.format;
 
 public class Catalogo_Admin_Fragment extends Fragment {
 
-    private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
+    private String TAG = "Catalogo";
     private View mainView;
 
     private FloatingActionButton irAniadirVehiculo;
@@ -48,6 +59,10 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private PatioVenta patio;
 
+    private Uri foto;
+
+    private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
+
     @Nullable
     @Override
 
@@ -55,7 +70,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
@@ -139,7 +153,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     }
 
 
-    //
+
     public void aniadirVehiculo(){
         String msg = "";
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
@@ -153,7 +167,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         EditText pventa_ad = mainView.findViewById(R.id.aniadir_precio_venta_etxt);
         EditText ppromocion_ad = mainView.findViewById(R.id.aniadir_precio_promocion_etxt);
         CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
-        //StorageReference storageRef = storage.getReference();
 
         patio.aniadirVehiculo(
                 new Vehiculo(
@@ -171,6 +184,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
                         String.format(placa_ad.getText().toString()+".jpg")
                 )
         );
+        StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_ad.getText().toString()+"_img");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                Toast.makeText(mainView.getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
         try {
             if(patio.buscarVehiculos("Placa",placa_ad.getText().toString())!=null)
                 msg="Se agrego correctamente el vehiculo";
@@ -179,6 +195,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
         Toast.makeText(mainView.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
 
     public void verVehiculoEditable(String placa){
         String msg = "";
@@ -303,14 +320,14 @@ public class Catalogo_Admin_Fragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_GALERY){
             if(resultCode == Activity.RESULT_OK && data != null){
-                Uri foto = data.getData();
+                foto = data.getData();
                 selec_vehiculo_img.setImageURI(foto);
             }else{
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 
 }

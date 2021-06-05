@@ -67,7 +67,7 @@ public class Ventas_admin_Fragment extends Fragment {
             verRegistroNuevaVenta.setVisibility(View.VISIBLE);
 
         });
-
+        
 
         return mainView;
     }
