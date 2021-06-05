@@ -54,7 +54,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         aniadirVendedor = mainView.findViewById(R.id.boton_mas_admin_btn);
         deshabilitar_btn = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
+        listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
+        editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
         verVendedor_btn = mainView.findViewById(R.id.boton_ver_vendedor_btn);
 
         //layouts
