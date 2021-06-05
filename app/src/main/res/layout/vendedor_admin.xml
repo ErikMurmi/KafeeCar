@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/visualizarvendedor"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imagen_perfil_vendedor_img"
@@ -130,7 +132,7 @@
                         android:textSize="19sp" />
 
                     <TextView
-                        android:id="@+id/fecha_nacimiento_txt"
+                        android:id="@+id/fecha_nacimiento_vendedor_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -355,7 +357,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/deshabilitar_btn"
+                android:id="@+id/deshabilitar_vendedor_btn"
                 android:layout_width="114dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -373,7 +375,7 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/editar_btn"
+                android:id="@+id/editar_vendedor_btn"
                 android:layout_width="47dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -394,7 +396,6 @@
         android:layout_marginBottom="1dp"
         android:clickable="true"
         android:onClick="visualizarVehiculo"
-        android:visibility="visible"
         app:backgroundTint="@color/botones"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -410,7 +411,8 @@
         android:orientation="vertical"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="2dp">
+        tools:layout_editor_absoluteX="2dp"
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="409dp"
@@ -817,7 +819,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrarvendedores"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -848,6 +851,19 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#959898"
                     android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/boton_ver_vendedor_btn"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="Ver"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </ScrollView>

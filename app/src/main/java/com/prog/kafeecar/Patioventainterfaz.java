@@ -230,50 +230,6 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
 
-
-
-    public void registrarVendedor(View v) throws ParseException {
-
-        EditText nombreVendedor = findViewById(R.id.nombreVendedor_etxt);
-        EditText apellidoVendedor = findViewById(R.id.apellidoVendedor_etxt);
-        EditText cedulaVendedor = findViewById(R.id.cedulaVendedor_etxt);
-        EditText diaNacimientoVendedor = findViewById(R.id.diaNacimientoVendedor_etxt);
-        EditText mesNacimientoVendedor = findViewById(R.id.mesNacimientoVendedor_etxt);
-        EditText anioNacimientoVendedor = findViewById(R.id.anioNacimientoVendedor_etxt);
-        EditText telefonoVendedor = findViewById(R.id.telefonoVendedor_etxt);
-        EditText correoVendedor = findViewById(R.id.correoVendedor_etxt);
-        EditText contraseniaVendedor = findViewById(R.id.contraseniaVendedor_etxt);
-        EditText confirmarContraseniaVendedor = findViewById(R.id.confirmarContraseniaVendedor_etxt);
-        EditText horaEntradaVendedor = findViewById(R.id.horaEntradaVendedor_etxt);
-        EditText horaSalidaVendedor = findViewById(R.id.horaSalidaVendedor_etxt);
-        EditText horaAlmuerzoVendedor = findViewById(R.id.horaAlmuerzoVendedor_etxt);
-
-        String nombreVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
-        String cedulaVendedor_str = cedulaVendedor.getText().toString();
-        String fechaNacimientoVendedor_date = diaNacimientoVendedor.getText().toString()
-                + "-" + mesNacimientoVendedor.getText().toString()
-                + "-" + anioNacimientoVendedor.getText().toString();
-        String telefonoVendedor_str = telefonoVendedor.getText().toString();
-        String correoVendedor_str = correoVendedor.getText().toString();
-        String contraseniaVendedor_str = contraseniaVendedor.getText().toString();
-        String confirmarContraseniaVendedor_str = confirmarContraseniaVendedor.getText().toString();
-        int horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
-        int horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
-        int horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
-
-        if(contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str)==0){
-            String contraseniaVerificada = contraseniaVendedor_str;
-            patioventa.aniadirUsuario(new Vendedor(horaEntradaVendedor_int,horaSalidaVendedor_int,horaAlmuerzoVendedor_int, patioventa,
-                    nombreVendedor_str, cedulaVendedor_str, telefonoVendedor_str, correoVendedor_str, contraseniaVerificada,
-                    sdf.parse(fechaNacimientoVendedor_date)),"Vendedor");
-        }else{
-            //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
-            contraseniaVendedor.setText("");
-            confirmarContraseniaVendedor.setText("");
-        }
-    }
-
-
     public void citaNueva(View v) throws Exception {
         EditText textodia = findViewById(R.id.dia_etxt);
         EditText textomes = findViewById(R.id.mes_etxt);
@@ -323,7 +279,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-    public String getFechaMod(Date fechaMod){
+    public static String getFechaMod(Date fechaMod){
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         return sf.format(fechaMod);
     }
