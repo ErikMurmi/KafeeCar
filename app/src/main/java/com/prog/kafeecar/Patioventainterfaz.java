@@ -567,5 +567,32 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }*/
 
+   public void aniadirVenta(View v) throws Exception {
+        EditText precio= findViewById(R.id.precio_venta_txt);
+        EditText clientes= findViewById(R.id.cliente_venta_txt);
+        EditText vendedor= findViewById(R.id.vendedor_venta_txt);
+        EditText auto = findViewById(R.id.vehiculo_venta_txt);
+        EditText fechaventadia= findViewById(R.id.fecha_venta_dia_etxt);
+        EditText fechaventames= findViewById(R.id.fecha_venta_mes_etxt);
+        EditText fechaventaanio= findViewById(R.id.fecha_venta_anio_etxt);
+        EditText fechaventahora= findViewById(R.id.fecha_venta_hora_etxt);
+        String fechaventa_str=fechaventaanio.getText().toString()+"-"+fechaventames.getText().toString()+"-"+fechaventadia.getText().toString();
+        String clientes_str=clientes.getText().toString();
+        String vendedores_str= vendedor.getText().toString();
+        String autos_str = auto.getText().toString();
+        int hora= Integer.parseInt(fechaventahora.getText().toString());
+        float precioventa= Float.parseFloat(precio.getText().toString());
+        Cliente clienteventa= patioventa.buscarClientes("Nombre",clientes_str);
+        Vendedor vendedorventa= patioventa.buscarVendedores("Nombre",vendedores_str);
+        Vehiculo autoventa= patioventa.buscarVehiculos("Matricula",autos_str);
 
+
+        Venta nueva= new Venta(sdf.parse(fechaventa_str),precioventa,clienteventa,vendedorventa,autoventa);
+        patioventa.aniadirVenta(nueva);
+
+        if(patioventa.getVentasGenerales().contiene(nueva)){
+            Toast.makeText(Patioventainterfaz.this,"Se registro la venta.",Toast.LENGTH_SHORT).show();
+        }
+
+   }
 }

@@ -65,48 +65,48 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/fechacitames_txt"
+                android:id="@+id/fecha_venta_dia_etxt"
+                android:layout_width="70dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bordesboton"
+                android:ems="10"
+
+                android:fontFamily="@font/ocra"
+                android:inputType="number"
+                android:textColor="#CEC9D5" />
+
+            <EditText
+                android:id="@+id/fecha_venta_mes_etxt"
                 android:layout_width="70dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/bordesboton"
                 android:ems="10"
                 android:fontFamily="@font/ocra"
-
                 android:inputType="number"
                 android:textColor="#CEC9D5" />
 
             <EditText
-                android:id="@+id/fechacitadia_txt"
+                android:id="@+id/fecha_venta_anio_etxt"
                 android:layout_width="70dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/bordesboton"
                 android:ems="10"
+
                 android:fontFamily="@font/ocra"
                 android:inputType="number"
                 android:textColor="#CEC9D5" />
 
             <EditText
-                android:id="@+id/fechacitaanio_txt"
-                android:layout_width="70dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/bordesboton"
-                android:ems="10"
-                android:fontFamily="@font/ocra"
-
-                android:inputType="number"
-                android:textColor="#CEC9D5" />
-
-            <EditText
-                android:id="@+id/fechacitahoracita_txt"
+                android:id="@+id/fecha_venta_hora_etxt"
                 android:layout_width="70dp"
                 android:layout_height="42dp"
                 android:background="@drawable/bordesboton"
                 android:ems="10"
-                android:fontFamily="@font/ocra"
 
+                android:fontFamily="@font/ocra"
                 android:inputType="number"
                 android:textColor="#CEC9D5" />
         </LinearLayout>
