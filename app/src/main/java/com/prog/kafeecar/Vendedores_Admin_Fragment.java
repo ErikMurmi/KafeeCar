@@ -182,13 +182,37 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
     public void verVendedorEditable(String cedula){
         try{
+
             Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
+            EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
+            EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
+            EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
+            EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+            EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
+            EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
+            EditText contrasenia_ed = mainView.findViewById(R.id.contraseniaEditVendedor_etxt);
+            EditText confirmarContrasenia_ed = mainView.findViewById(R.id.confirmarContraseniaEditVendedor_etxt);
+
+            String fechaNacimiento = Patioventainterfaz.getFechaMod(cedulaVen.getFechaNacimiento());
+            String dia = fechaNacimiento.split("-")[2];
+            String mes = fechaNacimiento.split("-")[1];
+            String anio = fechaNacimiento.split("-")[0];
+
+            nombre_ed.setText(cedulaVen.getNombre());
+            dia_ed.setText(dia);
+            mes_ed.setText(mes);
+            anio_ed.setText(anio);
+            cedula_ed.setText(cedulaVen.getCedula());
+            telefono_ed.setText(cedulaVen.getTelefono());
+            correo_ed.setText(cedulaVen.getCorreo());
 
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
         }
-
     }
+
+
 
     public void openGalery(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
