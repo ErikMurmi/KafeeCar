@@ -1,6 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/visualizarvendedor"/>
+    android:background="@drawable/visualizarvendedor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imagen_perfil_vendedor_img"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="80dp"
+            android:adjustViewBounds="false"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="343dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/bordesmarcos"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/datos_personales_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/monglos"
+                android:text="DATOS PERSONALES"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/datos_personales_vendedor_lyt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ver_nombre_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocra"
+                        android:text="Nombre: "
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/nombre_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Martha"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ver_apellido_vendedor_txt1"
+                        android:layout_width="112dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Apellido:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/apellido_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Pérez"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ver_fecha_nacimiento_vendedor_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Fecha de nacimiento: "
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/fecha_nacimiento_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="27/09/1987"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ver_cédula_vendedor_txt"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Cédula:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/cedula_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="9999999999"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ver_telefono_vendedor_txt"
+                        android:layout_width="112dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Teléfono:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/telefono_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="02 366 366"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ver_correo_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Correo:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/correo_vendedor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="m.perez@gmail.com"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="11dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titulo_horario_vendedor_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/monglos"
+                        android:text="Horario"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ver_entrada_vendedor_txt"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Entrada:"
+                            android:textColor="#686363"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/entrada_vendedor_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="8:00 am"
+                            android:textColor="#000000"
+                            android:textSize="19sp" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ver_almuerzo_vendedor_txt"
+                            android:layout_width="112dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Almuerzo:"
+                            android:textColor="#686363"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/almuerzo_vendedor_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="13:00 pm"
+                            android:textColor="#000000"
+                            android:textSize="19sp" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ver_salida_vendedor_txt"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Salida:"
+                            android:textColor="#686363"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/salida_vendedor_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="17:00 pm"
+                            android:textColor="#000000"
+                            android:textSize="19sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="65dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/deshabilitar_btn"
+                android:layout_width="114dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_dark"
+                android:drawableLeft="@android:drawable/stat_sys_warning"
+                android:fontFamily="@font/valorant"
+                android:paddingStart="8dp"
+                android:text="Deshabilitar"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/editar_btn"
+                android:layout_width="47dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado"
+                android:fontFamily="@font/valorant"
+                android:text="Editar"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
