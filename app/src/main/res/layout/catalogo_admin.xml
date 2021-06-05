@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/v_admin"
@@ -194,8 +194,7 @@
         android:background="@drawable/catalogo"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="gone">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/ir_ver_vehiculo"

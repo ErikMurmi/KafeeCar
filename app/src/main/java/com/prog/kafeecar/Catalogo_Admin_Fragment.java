@@ -21,11 +21,12 @@ import static java.lang.String.format;
 
 public class Catalogo_Admin_Fragment extends Fragment {
 
-    View mainView;
+    private View mainView;
 
     private FloatingActionButton irAniadirVehiculo;
     private Button deshacer_btn;
     private Button irVerVehiculo;
+    private Button irEditarVehiculo;
     public Button editar_btn;
     private Button aniadir_vehiculo_btn;
 
@@ -48,6 +49,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //Botones
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
         irVerVehiculo = mainView.findViewById(R.id.ir_ver_vehiculo);
+        irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
@@ -77,6 +79,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
+            verVehiculoEditable("PSD-1234");
+        });
+
+        irEditarVehiculo.setOnClickListener(v -> {
+            irAniadirVehiculo.setVisibility(View.GONE);
+            verCatalogo.setVisibility(View.GONE);
+            verVehiculo.setVisibility(View.GONE);
+            irVerVehiculo.setVisibility(View.GONE);
+            aniadir_vehiculo.setVisibility(View.GONE);
+            //Activar el diseño deseadow
+            editar_vehiculo.setVisibility(View.VISIBLE);
             verVehiculoEditable("PSD-1234");
         });
 
