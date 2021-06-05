@@ -1,11 +1,15 @@
 package com.prog.kafeecar;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Vendedores_Admin_Fragment extends Fragment {
+    private static final int REQUEST_PERMISSION_CODE = 100;
+    private static final int REQUEST_IMAGE_GALERY = 101;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private PatioVenta patio;
@@ -29,12 +35,16 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private LinearLayout irRegistrarVendedor;
     private LinearLayout irVisualizarVendedor;
     private LinearLayout irAdministrarVendedor;
+    private LinearLayout irEditarVendedor;
 
     private FloatingActionButton aniadirVendedor;
     private Button deshabilitar_btn;
     private Button editar_btn;
     private Button listo_btn;
+    private Button editarlisto_btn;
+    private Button editarDeshacer_btn;
     private Button verVendedor_btn;
+    private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
@@ -44,25 +54,39 @@ public class Vendedores_Admin_Fragment extends Fragment {
         aniadirVendedor = mainView.findViewById(R.id.boton_mas_admin_btn);
         deshabilitar_btn = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
+        editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
         verVendedor_btn = mainView.findViewById(R.id.boton_ver_vendedor_btn);
 
         //layouts
         irRegistrarVendedor = mainView.findViewById(R.id.registrar_vendedor_lyt);
         irVisualizarVendedor = mainView.findViewById(R.id.visualizar_vendedor_lyt);
         irAdministrarVendedor = mainView.findViewById(R.id.administrar_vendedor_lyt);
+        irEditarVendedor = mainView.findViewById(R.id.editar_vendedor_lyt);
 
         aniadirVendedor.setOnClickListener(v -> {
             //Desactivar otros diseños
-            irRegistrarVendedor.setVisibility(View.GONE);
+            irVisualizarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
+            irEditarVendedor.setVisibility(View.GONE);
             //Activar el diseño deseado
             irRegistrarVendedor.setVisibility(View.VISIBLE);
 
         });
+
         verVendedor_btn.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
+            irEditarVendedor.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.VISIBLE);
+        });
+
+        editar_btn.setOnClickListener(v -> {
+            irRegistrarVendedor.setVisibility(View.GONE);
+            irAdministrarVendedor.setVisibility(View.GONE);
+            irVisualizarVendedor.setVisibility(View.GONE);
+            irEditarVendedor.setVisibility(View.VISIBLE);
+            EditText cedulaEdit = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+            verVendedorEditable(cedulaEdit.getText().toString());
         });
 
         listo_btn.setOnClickListener(v -> {
@@ -71,6 +95,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        editarlisto_btn.setOnClickListener(v -> {
+
+        });
+
+        imagenPerfilVendedor_btn.setOnClickListener(v -> {
+            openGalery();
         });
 
         return mainView;
@@ -137,6 +169,36 @@ public class Vendedores_Admin_Fragment extends Fragment {
         entrada.setText(venMostrar.getHoraEntrada());
         almuerzo.setText(venMostrar.getHoraComida());
         salida.setText(venMostrar.getHoraSalida());
+    }
+
+    public void verVendedorEditable(String cedula){
+        try{
+            Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
+
+
+        }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void openGalery(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE_GALERY);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_IMAGE_GALERY){
+            if(resultCode == Activity.RESULT_OK && data != null){
+                Uri foto = data.getData();
+                imagenPerfilVendedor_btn.setImageURI(foto);
+            }else{
+                Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
