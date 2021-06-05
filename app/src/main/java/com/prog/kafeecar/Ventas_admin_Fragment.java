@@ -48,6 +48,7 @@ public class Ventas_admin_Fragment extends Fragment {
             verVentasVendedor.setVisibility(View.VISIBLE);
 
         } );
+
         irVentasGenerales.setOnClickListener(view -> {
             irVentasGenerales.setVisibility(View.GONE);
             verVentasVendedor.setVisibility(View.GONE);
@@ -55,6 +56,7 @@ public class Ventas_admin_Fragment extends Fragment {
             verVentasGenerales.setVisibility(View.VISIBLE);
 
         });
+
         irRegistrarNuevaVenta.setOnClickListener(view -> {
             irRegistrarNuevaVenta.setVisibility(View.GONE);
             verVentasGenerales.setVisibility(View.GONE);
