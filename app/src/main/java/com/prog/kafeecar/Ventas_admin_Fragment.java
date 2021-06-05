@@ -23,6 +23,7 @@ public class Ventas_admin_Fragment extends Fragment {
     private LinearLayout verVentasVendedor;
     private LinearLayout verVentasGenerales;
     private LinearLayout verRegistroNuevaVenta;
+    private LinearLayout verVentasAdmin;
 
     @Nullable
     @Override
@@ -39,7 +40,8 @@ public class Ventas_admin_Fragment extends Fragment {
         // layouts
         verVentasVendedor=mainView.findViewById(R.id.ventas_admin_por_vendedor_lyt);
         verVentasGenerales=mainView.findViewById(R.id.ventas_admin_generales_lyt);
-        verRegistroNuevaVenta=mainView.findViewById(R.id.aniadir_venta_lyt);
+        verRegistroNuevaVenta= mainView.findViewById(R.id.adminregistro_lyt);
+        verVentasAdmin=mainView.findViewById(R.id.ventas_admin_lyt);
 
         irVentasPorVendedor.setOnClickListener(view ->{
             irVentasPorVendedor.setVisibility(View.GONE);
@@ -61,6 +63,7 @@ public class Ventas_admin_Fragment extends Fragment {
             irRegistrarNuevaVenta.setVisibility(View.GONE);
             verVentasGenerales.setVisibility(View.GONE);
             verVentasVendedor.setVisibility(View.GONE);
+            verVentasAdmin.setVisibility(View.GONE);
             verRegistroNuevaVenta.setVisibility(View.VISIBLE);
 
         });
