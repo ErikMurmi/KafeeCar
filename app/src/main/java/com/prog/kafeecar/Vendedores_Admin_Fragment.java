@@ -38,19 +38,25 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private LinearLayout irAdministrarVendedor;
     private LinearLayout irEditarVendedor;
 
+    //lyts de los vendedores en la lista
+    private LinearLayout verVendedor_lyt;
+    private LinearLayout verVendedor1_lyt;
+
+
     private FloatingActionButton aniadirVendedor_btn;
     private Button deshabilitar_btn;
     private Button editar_btn;
     private Button listo_btn;
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
-    private Button verVendedor_btn;
+
 
     private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
         patio = Patioventainterfaz.patioventa;
+        verListaVendedores("1732221032", "1721835213");
 
         //botones
         aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
@@ -59,7 +65,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
-        verVendedor_btn = mainView.findViewById(R.id.boton_ver_vendedor_btn);
+
+        //declaracion de los lyts de los vendedores en la lista
+        verVendedor_lyt = mainView.findViewById(R.id.AVvendedor_lyt);
+        verVendedor1_lyt = mainView.findViewById(R.id.AVvendedor2_lyt);
 
         //layouts
 
@@ -79,13 +88,13 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         });
 
-        verVendedor_btn.setOnClickListener(v -> {
+        /*verVendedor_lyt.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.GONE);
             aniadirVendedor_btn.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.VISIBLE);
-        });
+        });*/
 
         editar_btn.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
@@ -145,7 +154,47 @@ public class Vendedores_Admin_Fragment extends Fragment {
         return mainView;
     }
 
+    public void verListaVendedores(String cedula, String cedula1){
+        try{
+            String am = "am";
+
+            Vendedor v_Mostrar = patio.buscarVendedores("Cedula",cedula);
+            Vendedor v_Mostrar1 = patio.buscarVendedores("Cedula",cedula1);
+
+            TextView nombreV = mainView.findViewById(R.id.AVnombre_txt);
+            TextView entradaV = mainView.findViewById(R.id.AVhoraEntrada_txt);
+            TextView almuerzoV = mainView.findViewById(R.id.AVhoraAlmuerzo_txt);
+            TextView salidaV = mainView.findViewById(R.id.AVhoraSalida_txt);
+
+            TextView nombreV1 = mainView.findViewById(R.id.AVnombre1_txt);
+            TextView entradaV1 = mainView.findViewById(R.id.AVhoraEntrada1_txt);
+            TextView almuerzoV1 = mainView.findViewById(R.id.AVhoraAlmuerzo1_txt);
+            TextView salidaV1 = mainView.findViewById(R.id.AVhoraSalida1_txt);
+
+            nombreV.setText(v_Mostrar.getNombre());
+            entradaV.setText(String.format("%d:00 %s",v_Mostrar.getHoraEntrada(),formatoHora(v_Mostrar.getHoraEntrada())));
+            almuerzoV.setText(String.format("%d:00 %s",v_Mostrar.getHoraComida(),formatoHora(v_Mostrar.getHoraComida())));
+            salidaV.setText(String.format("%d:00 %s",v_Mostrar.getHoraSalida(),formatoHora(v_Mostrar.getHoraSalida())));
+
+            nombreV1.setText(v_Mostrar1.getNombre());
+            entradaV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraEntrada(),formatoHora(v_Mostrar1.getHoraEntrada())));
+            almuerzoV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraComida(),formatoHora(v_Mostrar1.getHoraComida())));
+            salidaV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraSalida(),formatoHora(v_Mostrar1.getHoraSalida())));
+
+        }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String formatoHora(int hora){
+        if(hora>12){
+            return "pm";
+        }
+        return "am";
+    }
+
     public void regresarPantallaPrncipal(){
+        verListaVendedores("1732221032", "1721835213");
         irRegistrarVendedor.setVisibility(View.GONE);
         irVisualizarVendedor.setVisibility(View.GONE);
         irEditarVendedor.setVisibility(View.GONE);
@@ -217,9 +266,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         salida.setText(venMostrar.getHoraSalida());
 
         Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
-        if(venMostrar.getActivo()){
+        if (venMostrar.getActivo()) {
             venMostrar.setActivo(false);
-        }else{
+        } else {
             habilitar.setText("Habilitar");
             Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
             venMostrar.setActivo(true);
