@@ -85,15 +85,15 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
-        patioventa.aniadirUsuario(admin,"Vendedor");
+        //Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        patioventa.aniadirUsuario(new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05")),"Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("2000-05-09"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("2001-02-19"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("1990-01-12"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Jessica Alvarez", "0923837273", "1721053207", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("2001-4-08"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "example", "1207", sdf.parse("2001-4-08")), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "example", "1207", sdf.parse("2001-4-08")), "Cliente");
-        patioventa.setAdministrador(admin);
+        //patioventa.setAdministrador(admin);
         System.out.println("Se añadieron 5 vendedores ");
         System.out.println("*********************************");
         System.out.println("\t 2. Lista de citas \n");
@@ -138,6 +138,16 @@ public class Patioventainterfaz extends AppCompatActivity {
             setContentView(R.layout.home_admin);
             BottomNavigationView navBar = findViewById(R.id.barra_nav);
             navBar.setOnNavigationItemSelectedListener(navListener);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+        }else if(tipo.compareTo("VENDEDOR")==0) {
+            setContentView(R.layout.home_vendedor);
+            BottomNavigationView navBar = findViewById(R.id.barra_nav_vendedor);
+            navBar.setOnNavigationItemSelectedListener(nav_vendedor_Listener);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+        }else if(tipo.compareTo("CLIENTE")==0) {
+            setContentView(R.layout.home_cliente);
+            BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
+            navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
         }
 
