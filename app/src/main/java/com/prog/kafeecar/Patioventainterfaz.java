@@ -31,7 +31,7 @@ import static java.lang.String.*;
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
-    Usuario usuarioActual = null;
+    public static Usuario usuarioActual = null;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;

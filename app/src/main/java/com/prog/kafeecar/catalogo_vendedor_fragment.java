@@ -1,5 +1,7 @@
 package com.prog.kafeecar;
 
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -42,8 +44,7 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import static java.lang.String.format;
-
-public class Catalogo_Admin_Fragment extends Fragment {
+public class catalogo_vendedor_fragment extends Fragment {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
@@ -256,18 +257,18 @@ public class Catalogo_Admin_Fragment extends Fragment {
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
 
             m_vehiculo.actualizarDatos(
-                            placa_ed.getText().toString(),
-                            matricula_ed.getText().toString(),
-                            marca_ed.getText().toString(),
-                            modelo_ed.getText().toString(),
-                            color_ed.getText().toString(),
-                            descripcion_ed.getText().toString(),
-                            Float.parseFloat(pinicial_ed.getText().toString()),
-                            Float.parseFloat(pventa_ed.getText().toString()),
-                            Float.parseFloat(ppromocion_ed.getText().toString()),
-                            matriculado_ed.isChecked(),
-                            Integer.parseInt(anio_ed.getText().toString()),
-                            String.format(placa_ed.getText().toString()+".jpg")
+                    placa_ed.getText().toString(),
+                    matricula_ed.getText().toString(),
+                    marca_ed.getText().toString(),
+                    modelo_ed.getText().toString(),
+                    color_ed.getText().toString(),
+                    descripcion_ed.getText().toString(),
+                    Float.parseFloat(pinicial_ed.getText().toString()),
+                    Float.parseFloat(pventa_ed.getText().toString()),
+                    Float.parseFloat(ppromocion_ed.getText().toString()),
+                    matriculado_ed.isChecked(),
+                    Integer.parseInt(anio_ed.getText().toString()),
+                    String.format(placa_ed.getText().toString()+".jpg")
             );
 
         } catch (Exception e) {
@@ -313,7 +314,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
         //Glide.with(mainView)
                // .load(filePath)
-                //.into(v_img);
+               // .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
             filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -353,7 +354,5 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
         }
     }
-
-
 
 }
