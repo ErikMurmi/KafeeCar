@@ -340,9 +340,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
             EditText salida_ed = mainView.findViewById(R.id.horaSalidaEditVendedor_etxt);
 
             String fechaNacimiento = Patioventainterfaz.getFechaMod(cedulaVen.getFechaNacimiento());
-            String dia = fechaNacimiento.split("-")[2];
+            String dia = fechaNacimiento.split("-")[0];
             String mes = fechaNacimiento.split("-")[1];
-            String anio = fechaNacimiento.split("-")[0];
+            String anio = fechaNacimiento.split("-")[2];
 
             nombre_ed.setText(cedulaVen.getNombre());
             dia_ed.setText(dia);
