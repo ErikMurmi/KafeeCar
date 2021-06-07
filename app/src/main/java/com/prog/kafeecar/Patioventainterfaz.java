@@ -10,7 +10,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,8 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.lang.String.*;
 
@@ -46,20 +43,27 @@ public class Patioventainterfaz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.home);
         //setTheme(R.style.Theme_AppCompat);
-
         setContentView(R.layout.login);
         irAplicacion("ADMIN");
         try {
             cargarDatos();
-            Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             Toast.makeText(Patioventainterfaz.this, "Datos no quemados", Toast.LENGTH_SHORT).show();
         }
 
-        /*if(patioventa.getAdministrador()==null){
-            setContentView(R.layout.registrar_admin_lyt);
-        }*/
         //Mensajes de informacion emergentes
+        Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
+        /*try {
+            //setContentView(R.layout.nuevacita);
+            //setContentView(R.layout.registrar_cita);
+
+            //visualizarCita();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new login_fragment()).commit();
 
 
     }
@@ -79,15 +83,15 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        //Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
-        patioventa.aniadirUsuario(new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05")),"Vendedor");
+        Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        patioventa.aniadirUsuario(admin,"Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("2000-05-09"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("2001-02-19"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("1990-01-12"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Jessica Alvarez", "0923837273", "1721053207", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("2001-4-08"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "example", "1207", sdf.parse("2001-4-08")), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "example", "1207", sdf.parse("2001-4-08")), "Cliente");
-
+        patioventa.setAdministrador(admin);
         System.out.println("Se añadieron 5 vendedores ");
         System.out.println("*********************************");
         System.out.println("\t 2. Lista de citas \n");
@@ -329,13 +333,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    public void irRegistarse(View view) {
+    /*public void irRegistarse(View view) {
         setContentView(R.layout.registrar_usuario);
-    }
+    }*/
 
-
-    public void aniadirCliente(View v)
-    {
+    /*public void aniadirCliente(View v) throws ParseException {
         EditText textonombre;
         EditText textocedula;
         EditText textodia;
@@ -352,40 +354,42 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         textocedula = findViewById(R.id.cedula_etxt);
         String cedula_str = textocedula.getText().toString();
-        if (cedula_str.length()!=10) {
+        int cedula = Integer.parseInt(cedula_str);
+        if (cedula <= 999999999) {
             Toast.makeText(Patioventainterfaz.this,"Numero de cedula invalido",Toast.LENGTH_SHORT).show();
-            textocedula.setText("");
             c++;
         }
 
         textotelefono = findViewById(R.id.telefono_etxt);
         String telefono_str = textotelefono.getText().toString();
-        if (telefono_str.length()!=10) {
+        int telefono = Integer.parseInt(telefono_str);
+        if (telefono <= 999999999) {
             Toast.makeText(Patioventainterfaz.this,"Numero de telefono invalido",Toast.LENGTH_SHORT).show();
-            textotelefono.setText("");
             c++;
         }
 
         textocorreo = findViewById(R.id.correo_etxt);
         String correo_str = textocorreo.getText().toString();
-        if(!validarMail(correo_str)){
-            Toast.makeText(Patioventainterfaz.this,"Correo no valido",Toast.LENGTH_SHORT).show();
-            textocorreo.setText("");
-            c++;
-        }
 
         textoclave = findViewById(R.id.claveuser_etxt);
         String clave_str = textoclave.getText().toString();
         textorepetirclave = findViewById(R.id.repetirclaveuser_etxt);
         String repetirclave_str = textorepetirclave.getText().toString();
-        if(clave_str.compareTo(repetirclave_str)!=0)
+        if(clave_str!=repetirclave_str)
         {
             Toast.makeText(Patioventainterfaz.this,"Las claves no coinciden",Toast.LENGTH_SHORT).show();
-            textoclave.setText("");
-            textorepetirclave.setText("");
             c++;
         }
 
+
+        textodia = findViewById(R.id.dia_etxt);
+        String dia_str = textodia.getText().toString();
+        int dia = Integer.parseInt(dia_str);
+        if(dia<1||dia>30)
+        {
+            Toast.makeText(Patioventainterfaz.this,"Dia invalido",Toast.LENGTH_SHORT).show();
+            c++;
+        }
 
         textomes = findViewById(R.id.mes_etxt);
         String mes_str = textomes.getText().toString();
@@ -393,52 +397,100 @@ public class Patioventainterfaz extends AppCompatActivity {
         if(mes<1||mes>12)
         {
             Toast.makeText(Patioventainterfaz.this,"mes invalido",Toast.LENGTH_SHORT).show();
-            textomes.setText("");
             c++;
         }
 
         textoanio = findViewById(R.id.anio_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
-        if(anio<1900||anio>2003)
+        if(anio<2021||anio>2022)
         {
             Toast.makeText(Patioventainterfaz.this,"año invalido",Toast.LENGTH_SHORT).show();
-            textoanio.setText("");
             c++;
         }
+
+        Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+        if(c==0)
+        {
+            Usuario cliente = new Usuario(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha);
+            patioventa.aniadirUsuario(cliente,"Cliente");
+            if(patioventa.getClientes().contiene(cliente)){
+                Toast.makeText(Patioventainterfaz.this,"Se agrego el cliente correctamente",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    }*/
+
+
+
+    /*public void modificarCita(View view) throws Exception
+    {
+        EditText textodia;
+        EditText textomes;
+        EditText textoanio;
+        EditText textohoras;
+        EditText textoplaca;
+
+        int c=0;
+
+        textoplaca = findViewById(R.id.placa_etxt);
+        String placa_str = textoplaca.getText().toString();
 
         textodia = findViewById(R.id.dia_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
-        if(validarDia(anio,mes,dia))
+        if(dia<1||dia>30)
         {
             Toast.makeText(Patioventainterfaz.this,"Dia invalido",Toast.LENGTH_SHORT).show();
-            textodia.setText("");
             c++;
         }
 
-        if(c==0)
+        textomes = findViewById(R.id.mes_etxt);
+        String mes_str = textomes.getText().toString();
+        int mes = Integer.parseInt(mes_str);
+        if(mes<1||mes>12)
         {
-            Date fecha = null;
-            try {
-                fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha);
-            patioventa.aniadirUsuario(cliente,"Cliente");
-            try {
-                if(patioventa.buscarClientes("Cedula",cliente.getCedula())!=null) {
-                    Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
-                    irAplicacion("ADMIN");
+            Toast.makeText(Patioventainterfaz.this,"mes invalido",Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        textoanio = findViewById(R.id.anio_etxt);
+        String anio_str = textoanio.getText().toString();
+        int anio = Integer.parseInt(anio_str);
+        if(anio<2021||anio>2022)
+        {
+            Toast.makeText(Patioventainterfaz.this,"año invalido",Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        textohoras = findViewById(R.id.hora_etxt);
+        String horas_str = textohoras.getText().toString();
+        int horas = Integer.parseInt(horas_str);
+        if(horas<0||horas>24)
+        {
+            Toast.makeText(Patioventainterfaz.this,"horas invalidas",Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+
+        if(c!=0)
+        {
+            Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+                Vehiculo v = patioventa.buscarVehiculos("placa",placa_str);
+                if(patioventa.asignarVendedor(horas_str,fecha)!=null){
+                    Vendedor vendedor = patioventa.asignarVendedor(horas_str,fecha);
+                    int entero = Integer.parseInt(horas_str);
+                    Cita ac = patioventa.buscarCitas("correo","Hola@gmail.com");
+                    ac.actualizar(fecha,entero,v,vendedor,(Cliente) usuarioActual);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                else
+                {
+                    Toast.makeText(Patioventainterfaz.this,"No tenemos personal disponible a esa hora",Toast.LENGTH_SHORT).show();
+                }
 
         }
-    }
-
+    }*/
 
    public void aniadirVenta(View v) throws Exception {
         EditText precio= findViewById(R.id.precio_venta_txt);
@@ -466,60 +518,48 @@ public class Patioventainterfaz extends AppCompatActivity {
         if(patioventa.getVentasGenerales().contiene(nueva)){
             Toast.makeText(Patioventainterfaz.this,"Se registro la venta.",Toast.LENGTH_SHORT).show();
         }
-
    }
 
 
-    public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
-        // Patron para validar el email
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");//El patron que debe seguir el usaurio al ingreasar un mail
+   public void registrarAdministrador() throws ParseException{
 
-        Matcher mather = pattern.matcher(email);//Comprueba si el String ingresado tiene el formato antes mencionado. Si lo cumple devuelve un boleano "true" y si no cumple devuelve "false"
-        return mather.find();//Devuelve el boleano
-    }
+           EditText nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
+           EditText apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
+           EditText cedulaAdmin = findViewById(R.id.reg_cedula_admin_etxt);
+           EditText diaNacimientoAdmin = findViewById(R.id.reg_dia_admin_etxt);
+           EditText mesNacimientoAdmin = findViewById(R.id.reg_mes_admin_etxt);
+           EditText anioNacimientoAdmin = findViewById(R.id.reg_anio_admin_etxt);
+           EditText telefonoAdmin = findViewById(R.id.reg_telefono_admin_etxt);
+           EditText correoAdmin = findViewById(R.id.reg_correo_admin_etxt);
+           EditText contraseniaAdmin = findViewById(R.id.reg_clave_admin_etxt);
+           EditText confirmarContraseniaAdmin = findViewById(R.id.reg_claveconfim_admin_etxt);
+           EditText horaEntradaAdmin = findViewById(R.id.reg_entrada_admin_etxt);
+           EditText horaSalidaAdmin = findViewById(R.id.reg_salida_admin_etxt);
+           EditText horaAlmuerzoAdmin = findViewById(R.id.reg_almuerzo_admin_etxt);
 
+           String nombreAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
+           String cedulaAdmin_str = cedulaAdmin.getText().toString();
+           String fechaNacimientoAdmin_date = diaNacimientoAdmin.getText().toString()
+                   + "/" + mesNacimientoAdmin.getText().toString()
+                   + "/" + anioNacimientoAdmin.getText().toString();
+           String telefonoAdmin_str = telefonoAdmin.getText().toString();
+           String correoAdmin_str = correoAdmin.getText().toString();
+           String contraseniaAdmin_str = contraseniaAdmin.getText().toString();
+           String confirmarContraseniaAdmin_str = confirmarContraseniaAdmin.getText().toString();
+           int horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
+           int horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
+           int horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
 
-    public boolean validarDia(int anio,int mes , int dia){
-       boolean valido=true;
-       int numeroDias=-1;
-       switch(mes){
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                numeroDias=31;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                numeroDias=30;
-                break;
-            case 2:
-                numeroDias=28;
-                if(esBisiesto(anio))
-                    numeroDias=29;
-                break;
+           if(contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str)==0){
+               String contraseniaVerificada = contraseniaAdmin_str;
+               patioventa.aniadirUsuario(new Vendedor(horaEntradaAdmin_int,horaSalidaAdmin_int,horaAlmuerzoAdmin_int, patioventa,
+                       nombreAdmin_str, cedulaAdmin_str, telefonoAdmin_str, correoAdmin_str, contraseniaVerificada,
+                       sdf.parse(fechaNacimientoAdmin_date)),"Administrador");
+           }else{
+               //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
+               contraseniaAdmin.setText("");
+               confirmarContraseniaAdmin.setText("");
+           }
        }
-
-       if(dia>numeroDias || dia<1){
-           valido = false;
-       }
-       return valido;
-    }
-
-    public static boolean esBisiesto(int anio) {
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        boolean esBisiesto = false;
-        if (calendar.isLeapYear(anio)) {
-            esBisiesto = true;
-        }
-        return esBisiesto;
-
-    }
+   }
 }
