@@ -22,7 +22,7 @@ public class Usuario {
     private String clave;
     private Date fechaNacimiento;
     
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
 
 
@@ -129,14 +129,13 @@ public class Usuario {
         return usuario;
     }
 
-    protected Usuario cambiarDatosSinClave(String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException{
+    protected void cambiarDatosSinClave(String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException{
         Usuario usuario = null;
         setNombre(nombre);
         setCedula(cedula);
         setTelefono(telefono);
         setCorreo(correo);
         setFechaNacimiento(fechaNacimiento);
-        return usuario;
     }
     
     /**

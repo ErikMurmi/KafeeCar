@@ -160,6 +160,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editarlisto_btn.setOnClickListener(v -> {
             try{
                 editarVendedor(cedulaVendedorE.getText().toString());
+                Toast.makeText(mainView.getContext(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
+                irEditarVendedor.setVisibility(View.GONE);
+                irVisualizarVendedor.setVisibility(View.VISIBLE);
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
@@ -308,9 +311,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         cedula.setText(venMostrar.getCedula());
         telefono.setText(venMostrar.getTelefono());
         correo.setText(venMostrar.getCorreo());
-        entrada.setText(String.valueOf(venMostrar.getHoraEntrada()));
-        almuerzo.setText(String.valueOf(venMostrar.getHoraComida()));
-        salida.setText(String.valueOf(venMostrar.getHoraSalida()));
+        entrada.setText(String.format("%d:00 %s",venMostrar.getHoraEntrada(),formatoHora(venMostrar.getHoraEntrada())));
+        almuerzo.setText(String.format("%d:00 %s",venMostrar.getHoraComida(),formatoHora(venMostrar.getHoraComida())));
+        salida.setText(String.format("%d:00 %s",venMostrar.getHoraSalida(),formatoHora(venMostrar.getHoraSalida())));
 
         Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         if (venMostrar.getActivo()) {
@@ -367,8 +370,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
             EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
 
             String fechaNacimientoVendedor= dia_ed.getText().toString()
-                    + "/" + mes_ed.getText().toString()
-                    + "/" + anio_ed.getText().toString();
+                    + "-" + mes_ed.getText().toString()
+                    + "-" + anio_ed.getText().toString();
+
             cedulaVen.cambiarDatosSinClave(
                     nombre_ed.getText().toString(),
                     cedula_ed.getText().toString(),
@@ -388,15 +392,13 @@ public class Vendedores_Admin_Fragment extends Fragment {
         try {
          buscado = patio.buscarVendedores("Cedula", cedula_str);
          if(buscado==null){
-             Toast.makeText(mainView.getContext(), "No Existe el vendedor buscado", Toast.LENGTH_SHORT).show();
+             Toast.makeText(mainView.getContext(), "No existe el vendedor buscado", Toast.LENGTH_SHORT).show();
          }else{
              verListaVendedores(cedula_str,"1721835213");
              verVendedor1_lyt.setVisibility(View.GONE);
-
          }
-
         }catch(Exception e){
-        Toast.makeText(mainView.getContext(), "No Existe vendedores", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
     }
     }
 

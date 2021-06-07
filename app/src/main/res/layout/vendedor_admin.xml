@@ -400,7 +400,8 @@
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/cedulaVendedorE_txt"
@@ -422,7 +423,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="numberSigned"
-                    android:textColor="#959898" />
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/fechaNacimientoVendedorE_txt"
@@ -451,7 +452,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/mesNacimientoEditVendedor_etxt"
@@ -462,7 +463,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/anioNacimientoEditVendedor_etxt"
@@ -472,7 +473,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -495,7 +496,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="numberSigned"
-                    android:textColor="#959898" />
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/correoVendedorE_txt"
@@ -517,7 +518,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/gris" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/horarioE_txt"
@@ -593,7 +594,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:textColor="#000000" />
 
                     <EditText
                         android:id="@+id/horaAlmuerzoEditVendedor_etxt"
@@ -605,7 +607,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:textColor="#000000" />
 
                     <EditText
                         android:id="@+id/horaSalidaEditVendedor_etxt"
@@ -616,7 +619,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:textColor="#000000" />
 
                 </LinearLayout>
 
