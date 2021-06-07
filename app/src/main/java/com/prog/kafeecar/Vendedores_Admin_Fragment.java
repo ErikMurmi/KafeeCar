@@ -48,7 +48,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private View mainView;
 
     private EditText cedulaVendedorE;
+
     private ImageView imagenPerfil_img;
+
     private ImageView imagenPerfilV_img;
     private ImageView imagenPerfilV1_img;
 
@@ -439,14 +441,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
             StorageReference filePath = mStorageRef.child("Vendedores/"+cedulaVen.getImagen());
             Glide.with(mainView)
                     .load(filePath)
-                    .into(imagenPerfilVendedor_btn);
+                    .into(imagenPerfilVendedorEdit_btn);
             try {
                 final File localFile = File.createTempFile(cedulaVen.getImagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        imagenPerfilVendedor_btn.setImageBitmap(bitmap);
+                        imagenPerfilVendedorEdit_btn.setImageBitmap(bitmap);
                     }
                 });
             }catch (IOException e) {
