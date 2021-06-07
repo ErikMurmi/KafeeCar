@@ -88,11 +88,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
         //Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
-        patioventa.aniadirUsuario(new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-        patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
-        patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
-        patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
-        patioventa.aniadirUsuario((new Vendedor(8, 17, 13, patioventa, "Jessica Alvarez", "0923837273", "1721053207", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
+        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
+        patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
+        patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
+        patioventa.aniadirUsuario((new Vendedor("0923837273.jpg",8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "example", "1207", sdf.parse("08-4-2001")), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "example", "1207", sdf.parse("08-4-2001")), "Cliente");
         //patioventa.setAdministrador(admin);
@@ -558,8 +558,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) == 0) {
             String contraseniaVerificada = contraseniaAdmin_str;
-            Toast.makeText(Patioventainterfaz.this, "Hasta aqui",Toast.LENGTH_SHORT).show();
             patioventa.aniadirUsuario( new Vendedor(
+                    String.format("%s.jpg",cedulaAdmin_str),
                     horaEntradaAdmin_int,
                     horaSalidaAdmin_int,
                     horaAlmuerzoAdmin_int,
@@ -570,7 +570,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                     correoAdmin_str,
                     contraseniaVerificada,
                     sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
-            Toast.makeText(Patioventainterfaz.this, "Hasta aqui",Toast.LENGTH_SHORT).show();
             irAplicacion("ADMIN");
             Toast.makeText(Patioventainterfaz.this, "Se agrego al admin",Toast.LENGTH_SHORT).show();
         } else {

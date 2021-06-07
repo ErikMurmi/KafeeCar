@@ -130,7 +130,6 @@ public class Usuario {
     }
 
     protected void cambiarDatosSinClave(String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException{
-        Usuario usuario = null;
         setNombre(nombre);
         setCedula(cedula);
         setTelefono(telefono);

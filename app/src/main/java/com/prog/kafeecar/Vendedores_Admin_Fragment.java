@@ -2,6 +2,8 @@ package com.prog.kafeecar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +21,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -55,6 +64,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button editarDeshacer_btn;
     private ImageButton buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
+
+    private Uri foto;
+
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
@@ -278,6 +291,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         if(contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str)==0){
             String contraseniaVerificada = contraseniaVendedor_str;
             patio.aniadirUsuario(new Vendedor(
+                    String.format("%s.jpg",cedulaVendedor_str),
                     horaEntradaVendedor_int,
                     horaSalidaVendedor_int,
                     horaAlmuerzoVendedor_int,
@@ -294,6 +308,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
             contraseniaVendedor.setText("");
             confirmarContraseniaVendedor.setText("");
         }
+
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                Toast.makeText(mainView.getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
 
     public void visualizarVendedor(String ced) throws Exception {
@@ -322,6 +340,22 @@ public class Vendedores_Admin_Fragment extends Fragment {
             habilitar.setText("Deshabilitar");
         } else {
             habilitar.setText("Habilitar");
+        }
+        StorageReference filePath = mStorageRef.child("Vendedores/"+venMostrar.getImagen());
+        Glide.with(mainView)
+                .load(filePath)
+                .into(imagenPerfilVendedor_btn);
+        try {
+            final File localFile = File.createTempFile(venMostrar.getImagen(),"jpg");
+            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    imagenPerfilVendedor_btn.setImageBitmap(bitmap);
+                }
+            });
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -355,6 +389,23 @@ public class Vendedores_Admin_Fragment extends Fragment {
             almuerzo_ed.setText(String.valueOf(cedulaVen.getHoraComida()));
             salida_ed.setText(String.valueOf(cedulaVen.getHoraSalida()));
 
+            StorageReference filePath = mStorageRef.child("Vendedores/"+cedulaVen.getImagen());
+            Glide.with(mainView)
+                    .load(filePath)
+                    .into(imagenPerfilVendedor_btn);
+            try {
+                final File localFile = File.createTempFile(cedulaVen.getImagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        imagenPerfilVendedor_btn.setImageBitmap(bitmap);
+                    }
+                });
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
         }
@@ -381,6 +432,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     telefono_ed.getText().toString(),
                     correo_ed.getText().toString(),
                     fechaNacimientoVendedor);
+            cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
 
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
@@ -414,7 +466,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_GALERY){
             if(resultCode == Activity.RESULT_OK && data != null){
-                Uri foto = data.getData();
+                foto = data.getData();
                 imagenPerfilVendedor_btn.setImageURI(foto);
             }else{
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
