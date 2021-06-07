@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/aniadirfoto_btn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registrousuario">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="5dp">
+
+            <TextView
+                android:id="@+id/nombretextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/edit_txt_espacio"
+                android:fontFamily="@font/ocraext"
+                android:text="Nombre:"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/nombre_etxt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:contentDescription="Nombre"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp"
+                android:text="Pedro Juan Ramirez Lopez"
+                android:textSize="16sp"
+                tools:text="Pedro Juan Ramirez Lopez" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Cédula:"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/cedula_etxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp"
+                android:text="17133220875"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/telefonouser.textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Teléfono:"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/telefono_etxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="number"
+                android:paddingLeft="20dp"
+                android:text="0987654321"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/correo.textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Correo:"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/correo_etxt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="20dp"
+                android:singleLine="false"
+                android:text="hola@gmail.com"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Fecha de Nacimiento:"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/dia_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bordesbotonfilled"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:hint="mm"
+                    android:inputType="date"
+                    android:text="08"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/mes_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="26dp"
+                    android:background="@drawable/bordesbotonfilled"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:hint="dd"
+                    android:inputType="date"
+                    android:text="07"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/anio_etxt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:background="@drawable/bordesbotonfilled"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:hint="aaaa"
+                    android:inputType="date"
+                    android:text="1998"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/contrasenia1_texVeiw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Clave:"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/claveuser_etxt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:text="hola1234"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/repetircontrasenia_texVeiw2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/espacios"
+                android:fontFamily="@font/ocraext"
+                android:text="Repetir clave:"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/repetirclaveuser_etxt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/espacios"
+                android:background="@drawable/bordesbotonfilled"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:text="hola1234"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"/>
+
+            <Button
+                android:id="@+id/registrousuario_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bordesbotongris"
+                android:backgroundTint="@color/botones"
+                android:fontFamily="@font/valorant"
+                android:onClick="aniadirCliente"
+                android:text="Guardar"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

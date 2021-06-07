@@ -23,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Vendedores_Admin_Fragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 100;
@@ -51,7 +53,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button listo_btn;
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
-    private Button buscarCedulaVendedor_btn;
+    private ImageButton buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -291,8 +293,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
             EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
             EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
-            EditText contrasenia_ed = mainView.findViewById(R.id.contraseniaEditVendedor_etxt);
-            EditText confirmarContrasenia_ed = mainView.findViewById(R.id.confirmarContraseniaEditVendedor_etxt);
 
             String fechaNacimiento = Patioventainterfaz.getFechaMod(cedulaVen.getFechaNacimiento());
             String dia = fechaNacimiento.split("-")[2];
@@ -376,5 +376,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 }
