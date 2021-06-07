@@ -196,15 +196,339 @@
         android:visibility="visible"
         tools:visibility="gone">
 
-        <Button
-            android:id="@+id/ir_ver_vehiculo"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/boton_redondeado"
-            android:fontFamily="@font/valorant"
-            android:text="Ver Auto"
-            android:textColor="@color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/busquedaCedulaVendedor_etxt"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bordesbotongris"
+                android:drawableRight="@drawable/search_1"
+                android:ems="10"
+                android:fontFamily="@font/monglos"
+                android:inputType="numberSigned"
+                android:text="BÚSQUEDA"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#959898"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/ocra"
+                    android:text="Filtros"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/aplicar_filtros_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="27dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="Aplicar"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vehiculo_lista_lyt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/bordesmarcosnegro"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/v_lista_img"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="193dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/v_marca_modelo_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="13dp"
+                            android:fontFamily="@font/ocraext"
+                            android:textAlignment="center"
+                            android:textSize="21sp"
+                            tools:text="Cybertruck" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/anio_ver_txt"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Año:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_anio_lista_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="8:00 am"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/v_matricula_lista"
+                                android:layout_width="106dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Matricula:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_matricula_lista_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="13:00 pm"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/ver_placa_lista_txt"
+                                android:layout_width="85dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Placa:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_placa_lista_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="17:00 pm"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/v_precio_lista_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ocra"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            tools:text="$55 000" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vehiculo_lista1_lyt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordesmarcosnegro"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/v_lista1_img"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="193dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/v_marca_modelo1_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="13dp"
+                            android:fontFamily="@font/ocraext"
+                            android:textAlignment="center"
+                            android:textSize="21sp"
+                            tools:text="Cybertruck" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/anio_ver1_txt"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Año:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_anio_lista1txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="8:00 am"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/v_matricula_lista1"
+                                android:layout_width="106dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Matricula:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_matricula_lista1_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="13:00 pm"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/ver_placa_lista1_txt"
+                                android:layout_width="85dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:text="Placa:"
+                                android:textColor="@color/black"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/v_placa_lista1_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocraext"
+                                android:hint="17:00 pm"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/v_precio_lista1_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/ocra"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            tools:text="$55 000" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <ScrollView

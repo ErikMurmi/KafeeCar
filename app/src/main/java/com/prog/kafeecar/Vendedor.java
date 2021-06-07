@@ -12,6 +12,7 @@ public class Vendedor extends Usuario{
     private int horaSalida;
     private int horaComida;
     private PatioVenta sucursal;
+    private boolean activo;
     
     public Vendedor(int horaEntrada, int horaSalida, int horaComida, PatioVenta sucursal, String nombre, String cedula, String telefono, String correo, String clave, Date fechaNacimiento) {
         super(nombre, cedula, telefono, correo, clave, fechaNacimiento);
@@ -57,6 +58,10 @@ public int getHoraEntrada() {
     public void setSucursal(PatioVenta sucursal) {
         this.sucursal = sucursal;
     }
+
+    public boolean getActivo(){ return activo;}
+
+    public void setActivo(boolean activo){ this.activo = activo; }
    
     @Override
     public String toString() {
@@ -138,6 +143,4 @@ public int getHoraEntrada() {
         }
         return disponible;
     }
-    
-    
 }

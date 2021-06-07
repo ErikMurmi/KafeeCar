@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
-import android.annotation.SuppressLint;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,7 +36,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
@@ -43,8 +44,7 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import static java.lang.String.format;
-
-public class Catalogo_Admin_Fragment extends Fragment {
+public class catalogo_vendedor_fragment extends Fragment {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
@@ -52,8 +52,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private FloatingActionButton irAniadirVehiculo;
     private Button deshacer_btn;
-    private LinearLayout irVerVehiculo;
-    private LinearLayout irVerVehiculo1;
+    private Button irVerVehiculo;
     private ImageButton selec_vehiculo_img;
     private Button irEditarVehiculo;
     public Button editar_btn;
@@ -68,9 +67,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private PatioVenta patio;
 
-    TextView placa_v;
-    TextView placa_v1;
-
     private Uri foto;
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
@@ -82,17 +78,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-
-        try {
-            verLista("PSD-1234","GHC-2434");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
@@ -102,12 +90,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
         editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
         aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
-
-        //Edit Text necesarios
-        placa_v = mainView.findViewById(R.id.v_placa_lista_txt);
-        placa_v1 = mainView.findViewById(R.id.v_placa_lista1_txt);
 
         irAniadirVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
@@ -130,19 +112,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             verVehiculo.setVisibility(View.VISIBLE);
             visualizarVehiculo("PSD-1234");
         });
-
-        irVerVehiculo1.setOnClickListener(v -> {
-            //Desactivar otros diseños
-            irAniadirVehiculo.setVisibility(View.GONE);
-            verCatalogo.setVisibility(View.GONE);
-            editar_vehiculo.setVisibility(View.GONE);
-            irVerVehiculo.setVisibility(View.GONE);
-            aniadir_vehiculo.setVisibility(View.GONE);
-            //Activar el diseño deseadow
-            verVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculo("GHC-2434");
-        });
-
 
         irEditarVehiculo.setOnClickListener(v -> {
             irAniadirVehiculo.setVisibility(View.GONE);
@@ -188,83 +157,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //Activar el diseño deseadow
         verCatalogo.setVisibility(View.VISIBLE);
         irAniadirVehiculo.setVisibility(View.VISIBLE);
-        try {
-            verLista("PSD-1234","GHC-2434");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-
-    @SuppressLint("DefaultLocale")
-    public void verLista(String placa, String placa1) throws Exception {
-
-
-        ImageView v_img = mainView.findViewById(R.id.v_lista_img);
-        ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
-
-        TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
-        TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
-        TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
-        TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
-
-        TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
-        TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
-        TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
-        TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
-
-
-            Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-            Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
-            StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
-            Glide.with(mainView)
-                    .load(filePath)
-                    .into(v_img);
-            try {
-                final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        v_img.setImageBitmap(bitmap);
-                    }
-                });
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            //Imagen 2
-            filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
-            Glide.with(mainView)
-                    .load(filePath)
-                    .into(v_img1);
-            try {
-                final File localFile = File.createTempFile(v_Mostrar1.getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        v_img1.setImageBitmap(bitmap);
-                    }
-                });
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-            titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
-            anio.setText(String.valueOf(v_Mostrar.getAnio()));
-            anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
-            matricula.setText(v_Mostrar.getMatricula());
-            matricula1.setText(v_Mostrar1.getMatricula());
-            placa_v.setText(v_Mostrar.getPlaca());
-            placa_v1.setText(v_Mostrar1.getPlaca());
-            precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
-            precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
-
-
-
-
-
-    }
 
 
     public void aniadirVehiculo(){
@@ -362,18 +256,18 @@ public class Catalogo_Admin_Fragment extends Fragment {
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
 
             m_vehiculo.actualizarDatos(
-                            placa_ed.getText().toString(),
-                            matricula_ed.getText().toString(),
-                            marca_ed.getText().toString(),
-                            modelo_ed.getText().toString(),
-                            color_ed.getText().toString(),
-                            descripcion_ed.getText().toString(),
-                            Float.parseFloat(pinicial_ed.getText().toString()),
-                            Float.parseFloat(pventa_ed.getText().toString()),
-                            Float.parseFloat(ppromocion_ed.getText().toString()),
-                            matriculado_ed.isChecked(),
-                            Integer.parseInt(anio_ed.getText().toString()),
-                            String.format(placa_ed.getText().toString()+".jpg")
+                    placa_ed.getText().toString(),
+                    matricula_ed.getText().toString(),
+                    marca_ed.getText().toString(),
+                    modelo_ed.getText().toString(),
+                    color_ed.getText().toString(),
+                    descripcion_ed.getText().toString(),
+                    Float.parseFloat(pinicial_ed.getText().toString()),
+                    Float.parseFloat(pventa_ed.getText().toString()),
+                    Float.parseFloat(ppromocion_ed.getText().toString()),
+                    matriculado_ed.isChecked(),
+                    Integer.parseInt(anio_ed.getText().toString()),
+                    String.format(placa_ed.getText().toString()+".jpg")
             );
 
         } catch (Exception e) {
@@ -415,12 +309,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
         precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
         preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
         promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
-
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        Glide.with(mainView)
-               .load(filePath)
-                .into(v_img);
+        //Glide.with(mainView)
+               // .load(filePath)
+               // .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
             filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -434,7 +327,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             e.printStackTrace();
         }
         //
-
         if(vMostrar.isMatriculado()){
             matriculado.setText("Matriculado: Si");
         }else{
@@ -461,7 +353,5 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
         }
     }
-
-
 
 }

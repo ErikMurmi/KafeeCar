@@ -24,7 +24,7 @@ public class Usuario {
     
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
-    protected boolean activo;
+
 
     
     public Usuario(){}
@@ -83,13 +83,7 @@ public class Usuario {
         this.telefono = telefono;
     }
     
-    /**
-     * Muestra si el usuario esta activo 
-     * @return estado actual del usuario.
-     */
-    protected boolean isActivo(){
-        return activo;
-    }
+
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
@@ -107,8 +101,7 @@ public class Usuario {
                 "\nFecha de Nacimiento: " + fechaNacimiento +
                 "\nCedula: " + cedula + 
                 "\nCorreo: " + correo + 
-                "\nClave: " + clave + 
-                "\nActivo: " + activo ;
+                "\nClave: " + clave;
     }
 
     
@@ -132,6 +125,16 @@ public class Usuario {
         setTelefono(telefono);
         setCorreo(correo);
         setClave(clave);
+        setFechaNacimiento(fechaNacimiento);
+        return usuario;
+    }
+
+    protected Usuario cambiarDatosSinClave(String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException{
+        Usuario usuario = null;
+        setNombre(nombre);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreo(correo);
         setFechaNacimiento(fechaNacimiento);
         return usuario;
     }
@@ -162,14 +165,7 @@ public class Usuario {
     }
     
         
-    /**
-     * Cambia el estado de un usuario de activo a no activo y viceversa
-     * @param activo de tipo booleano que indicara el nuevo estado actual
-     */
-    
-    public void cambiarEstadoUsuario(boolean activo){
-        
-    }
+
     
     
 }
