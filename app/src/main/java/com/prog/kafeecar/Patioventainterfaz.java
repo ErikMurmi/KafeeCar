@@ -341,7 +341,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public static String getFechaMod(Date fechaMod) {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
         return sf.format(fechaMod);
     }
 
