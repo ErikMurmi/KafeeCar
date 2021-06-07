@@ -282,4 +282,38 @@ public class listacitas_cliente_fragment extends Fragment {
         textodia.setText(dia);
     }
 
+    public void verlistacitas() throws Exception
+    {
+        TextView horalista;
+        TextView horalista2;
+        TextView Clientelista;
+        TextView Clientelista2;
+        TextView Telefonolista;
+        TextView Telefonolista2;
+        TextView Matriculalista;
+        TextView Matriculalista2;
+        PatioVenta p = new PatioVenta();
+
+        horalista = mainview.findViewById(R.id.hora_lista_txt);
+        horalista2 = mainview.findViewById(R.id.hora_lista2_txt);
+        Clientelista = mainview.findViewById(R.id.cliente_listacita_txt);
+        Clientelista2 = mainview.findViewById(R.id.clente_listacita2_txt);
+        Telefonolista = mainview.findViewById(R.id.telefono_listacita_txt);
+        Telefonolista2 = mainview.findViewById(R.id.telefono_listacita2_txt);
+        Matriculalista =mainview.findViewById(R.id.matricula_listacita_txt);
+        Matriculalista2 = mainview.findViewById(R.id.matricula_licencia2_txt);
+
+
+        Cita cita = p.buscarCitas("Cliente", "1750115623");
+        horalista.setText(cita.getHora());
+        Clientelista.setText(cita.getVisitante().getNombre());
+        Telefonolista.setText(cita.getVisitante().getTelefono());
+        Matriculalista.setText(cita.getVehiculo().getMatricula());
+
+        Cita cita2 = p.buscarCitas("Cliente", "175014048");
+        horalista2.setText(cita2.getHora());
+        Clientelista2.setText(cita2.getVisitante().getNombre());
+        Telefonolista2.setText(cita2.getVisitante().getTelefono());
+        Matriculalista2.setText(cita2.getVehiculo().getMatricula());
+    }
 }
