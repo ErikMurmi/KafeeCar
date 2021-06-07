@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class listacitas_cliente_fragment extends Fragment {
+public class Citas_cliente_fragment extends Fragment {
 
     private View mainview;
     private Button guardar;
