@@ -44,7 +44,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         //setContentView(R.layout.home);
         //setTheme(R.style.Theme_AppCompat);
         setContentView(R.layout.login);
-        irAplicacion("ADMIN");
+        //irAplicacion("ADMIN");
         try {
             cargarDatos();
 
@@ -63,7 +63,9 @@ public class Patioventainterfaz extends AppCompatActivity {
             e.printStackTrace();
         }*/
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new login_fragment()).commit();
+        if(patioventa.getAdministrador()==null){
+            setContentView(R.layout.registrar_admin_lyt);
+        }
 
 
     }
@@ -178,7 +180,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String correo_str = correo.getText().toString();
         String clave_str = clave.getText().toString();
         Usuario usuario;
-        if(correo_str.compareTo(patioventa.getAdministrador().getCorreo())==0){
+        if(patioventa.getAdministrador()!=null && correo_str.compareTo(patioventa.getAdministrador().getCorreo())==0){
             usuario = patioventa.getAdministrador();
             tipo = "ADMIN";
         }else{
@@ -193,10 +195,13 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if(usuario!=null){
             if(usuario.getClave().compareTo(clave_str) == 0){
+                msg="Se ha iniciado secion correctamente";
                 usuarioActual = usuario;
                 irAplicacion(tipo);
+            }else{
+                msg="Contraseña incorrecta";
             }
-            msg="Contraseña incorrecta";
+
         }else{
             msg="Correo no registrado";
         }
