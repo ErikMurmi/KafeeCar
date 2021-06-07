@@ -10,6 +10,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
@@ -22,8 +24,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,8 +47,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
-
-    ImageButton imagenPerfilVendedor;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -572,6 +580,10 @@ public class Patioventainterfaz extends AppCompatActivity {
             contraseniaAdmin.setText("");
             confirmarContraseniaAdmin.setText("");
         }
+        StorageReference filePath = mStorageRef.child("Vendedores/"+cedulaVen.getImagen());
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                Toast.makeText("-----".getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
