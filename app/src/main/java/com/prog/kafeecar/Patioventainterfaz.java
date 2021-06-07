@@ -91,8 +91,10 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        //Vendedor admin = new Vendedor(8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
         patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+
+        //patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
@@ -373,7 +375,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_IMAGE_GALERY) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                Uri foto = data.getData();
+                foto = data.getData();
                 reg_img.setImageURI(foto);
             } else {
                 Toast.makeText(Patioventainterfaz.this, "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
@@ -582,7 +584,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             confirmarContraseniaAdmin.setText("");
         }
 
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin.getText().toString()+"_img");
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str+".jpg");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
                 Toast.makeText(Patioventainterfaz.this, "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }

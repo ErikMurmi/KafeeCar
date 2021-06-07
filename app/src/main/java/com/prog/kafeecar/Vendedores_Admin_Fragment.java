@@ -350,7 +350,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     sdf.parse(fechaNacimientoVendedor_date)
             ),"Vendedor");
         }else{
-            //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
             contraseniaVendedor.setText("");
             confirmarContraseniaVendedor.setText("");
         }
