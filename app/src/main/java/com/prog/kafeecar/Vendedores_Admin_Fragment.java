@@ -95,9 +95,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
         buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
-
         imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
-
         imagenPerfil_img = mainView.findViewById(R.id.imagen_perfil_vendedor_img);
 
 

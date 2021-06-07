@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +41,10 @@ public class Patioventainterfaz extends AppCompatActivity {
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private Uri foto;
+
+    private ImageButton reg_img;
 
     ImageButton imagenPerfilVendedor;
 
@@ -58,6 +64,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
+            reg_img = findViewById(R.id.reg_imagen_admin_btn);
             Button reg_list = findViewById(R.id.reg_list_btn);
             reg_list.setOnClickListener(v -> {
                 try {
@@ -367,8 +374,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_GALERY) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 Uri foto = data.getData();
-                imagenPerfilVendedor = findViewById(R.id.imagenPerfilVendedor_ibtn);
-                imagenPerfilVendedor.setImageURI(foto);
+                reg_img.setImageURI(foto);
             } else {
                 Toast.makeText(Patioventainterfaz.this, "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }
@@ -569,11 +575,16 @@ public class Patioventainterfaz extends AppCompatActivity {
                     sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
             irAplicacion("ADMIN");
             Toast.makeText(Patioventainterfaz.this, "Se agrego al admin",Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(Patioventainterfaz.this, "No se agrego al admin",Toast.LENGTH_SHORT).show();
             contraseniaAdmin.setText("");
             confirmarContraseniaAdmin.setText("");
         }
+
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin.getText().toString()+"_img");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                Toast.makeText(Patioventainterfaz.this, "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
@@ -632,4 +643,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         usuarioActual =  null;
         setContentView(R.layout.login);
     }
+
+
 }
