@@ -22,20 +22,38 @@
             android:layout_marginRight="25dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/busquedaCedulaVendedor_etxt2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@drawable/bordesbotongris"
-                android:drawableRight="@drawable/search_1"
-                android:ems="10"
-                android:fontFamily="@font/monglos"
-                android:inputType="numberSigned"
-                android:text="BÚSQUEDA"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#959898"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/busquedaCedulaVendedor_etxt2"
+                    android:layout_width="274dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/bordesbotongris"
+                    android:drawableRight="@drawable/search_1"
+                    android:ems="10"
+                    android:fontFamily="@font/monglos"
+                    android:inputType="numberSigned"
+                    android:text="BÚSQUEDA"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="#959898"
+                    android:textSize="15sp" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/busquedaCedulaVendedor_btn2"
+                    android:layout_width="66dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/bordesboton"
+                    android:backgroundTint="@color/botones"
+                    app:srcCompat="@drawable/icono_busqueda" />
+            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"

@@ -51,7 +51,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button listo_btn;
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
-
+    private Button buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
-
+        buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
 
         //declaracion de los lyts de los vendedores en la lista
@@ -76,7 +76,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         verVendedor1_lyt = mainView.findViewById(R.id.AVvendedor2_lyt);
 
         //layouts
-
         irRegistrarVendedor = mainView.findViewById(R.id.registrar_vendedor_lyt);
         irVisualizarVendedor = mainView.findViewById(R.id.visualizar_vendedor_lyt);
         irAdministrarVendedor = mainView.findViewById(R.id.administrar_vendedor_lyt);
@@ -154,6 +153,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         imagenPerfilVendedor_btn.setOnClickListener(v -> {
             openGalery();
+        });
+
+        buscarCedulaVendedor_btn.setOnClickListener(view -> {
+            buscarVendedores();
         });
 
         return mainView;
@@ -333,6 +336,26 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void  buscarVendedores ( ){
+        EditText cedula= mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
+        String cedula_str= cedula.getText().toString();
+        boolean encontrado = false;
+        Vendedor buscado=null;
+        try {
+         buscado = patio.buscarVendedores("Cedula", cedula_str);
+         if(buscado==null){
+             Toast.makeText(mainView.getContext(), "No Existe el vendedor buscado", Toast.LENGTH_SHORT).show();
+         }else{
+             verListaVendedores(cedula_str,"1721835213");
+             verVendedor1_lyt.setVisibility(View.GONE);
+
+         }
+
+        }catch(Exception e){
+        Toast.makeText(mainView.getContext(), "No Existe vendedores", Toast.LENGTH_SHORT).show();
+    }
     }
 
     public void openGalery(){
