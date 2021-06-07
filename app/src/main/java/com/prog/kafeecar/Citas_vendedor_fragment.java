@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class citas_vendedor_fragment extends Fragment{
+public class Citas_vendedor_fragment extends Fragment{
 
     private View mainview;
     private PatioVenta patio;

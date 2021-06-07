@@ -208,21 +208,16 @@ public class Patioventainterfaz extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
-                        case R.id.nav_citas:
-                            selectedFragement = new Citas_Fragment();
-                            break;
-                        case R.id.nav_cat:
+                        case R.id.nav_cat_ven:
                             selectedFragement = new Catalogo_Admin_Fragment();
                             break;
-                        case R.id.nav_vendedores:
-                            selectedFragement = new Vendedores_Admin_Fragment();
+                        case R.id.nav_citas_ven:
+                            selectedFragement = new Citas_vendedor_fragment();
                             break;
-                        case R.id.nav_estadisticas:
-                            selectedFragement = new Estadisticas_Fragment();
+                        case R.id.nav_ventas_ven:
+                            selectedFragement = new ventas_vendedor_fragment();
                             break;
-                        case R.id.nav_ventas:
-                            selectedFragement = new Ventas_admin_Fragment();
-                            break;
+
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
                     return true;
