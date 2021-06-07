@@ -348,7 +348,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             correo_ed.setText(cedulaVen.getCorreo());
             entrada_ed.setText(String.valueOf(cedulaVen.getHoraEntrada()));
             almuerzo_ed.setText(String.valueOf(cedulaVen.getHoraComida()));
-            salida_ed.setText(String.valueOf(cedulaVen.getHoraSalida());
+            salida_ed.setText(String.valueOf(cedulaVen.getHoraSalida()));
 
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
