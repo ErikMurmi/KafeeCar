@@ -266,7 +266,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }catch (IOException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(mainView.getContext(), "Se trato de cargar 1", Toast.LENGTH_SHORT).show();
             filePath = mStorageRef.child("Vendedores/"+v_Mostrar1.getImagen());
             Glide.with(mainView)
                     .load(filePath)

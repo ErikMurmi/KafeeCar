@@ -22,6 +22,7 @@ public class Vendedor extends Usuario{
         this.horaSalida = horaSalida;
         this.horaComida = horaComida;
         this.sucursal = sucursal;
+        setActivo(true);
     }
     
    public Vendedor(String nombre, String cedula) {
