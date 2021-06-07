@@ -103,7 +103,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 visualizarVendedor("1732221032");
             }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
-            regresarPantallaPrncipal();
         }
         });
 
@@ -266,17 +265,15 @@ public class Vendedores_Admin_Fragment extends Fragment {
         cedula.setText(venMostrar.getCedula());
         telefono.setText(venMostrar.getTelefono());
         correo.setText(venMostrar.getCorreo());
-        entrada.setText(venMostrar.getHoraEntrada());
-        almuerzo.setText(venMostrar.getHoraComida());
-        salida.setText(venMostrar.getHoraSalida());
+        entrada.setText(String.valueOf(venMostrar.getHoraEntrada()));
+        almuerzo.setText(String.valueOf(venMostrar.getHoraComida()));
+        salida.setText(String.valueOf(venMostrar.getHoraSalida()));
 
         Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         if (venMostrar.getActivo()) {
-            venMostrar.setActivo(false);
+            habilitar.setText("Deshabilitar");
         } else {
             habilitar.setText("Habilitar");
-            Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
-            venMostrar.setActivo(true);
         }
     }
 
