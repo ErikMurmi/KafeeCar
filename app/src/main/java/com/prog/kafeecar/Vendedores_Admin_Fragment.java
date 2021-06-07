@@ -265,8 +265,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
         String nombreVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
         String cedulaVendedor_str = cedulaVendedor.getText().toString();
         String fechaNacimientoVendedor_date = diaNacimientoVendedor.getText().toString()
-                + "/" + mesNacimientoVendedor.getText().toString()
-                + "/" + anioNacimientoVendedor.getText().toString();
+                + "-" + mesNacimientoVendedor.getText().toString()
+                + "-" + anioNacimientoVendedor.getText().toString();
         String telefonoVendedor_str = telefonoVendedor.getText().toString();
         String correoVendedor_str = correoVendedor.getText().toString();
         String contraseniaVendedor_str = contraseniaVendedor.getText().toString();
