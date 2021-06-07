@@ -93,13 +93,19 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         });
 
-        /*verVendedor_lyt.setOnClickListener(v -> {
+        verVendedor_lyt.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.GONE);
             aniadirVendedor_btn.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.VISIBLE);
-        });*/
+            try {
+                visualizarVendedor("1732221032");
+            }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
+            regresarPantallaPrncipal();
+        }
+        });
 
         editar_btn.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
@@ -243,7 +249,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void visualizarVendedor() throws Exception {
+    public void visualizarVendedor(String ced) throws Exception {
 
         TextView nombre = mainView.findViewById(R.id.nombre_vendedor_txt);
         TextView fechaNacimiento = mainView.findViewById(R.id.fecha_nacimiento_vendedor_txt);
@@ -254,7 +260,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         TextView almuerzo = mainView.findViewById(R.id.almuerzo_vendedor_txt);
         TextView salida = mainView.findViewById(R.id.salida_vendedor_txt);
 
-        Vendedor venMostrar = (Vendedor) Patioventainterfaz.patioventa.getVendedores().getPos(1);
+        Vendedor venMostrar = patio.buscarVendedores("Cedula",ced);
         nombre.setText(venMostrar.getNombre());
         fechaNacimiento.setText(Patioventainterfaz.getFechaMod(venMostrar.getFechaNacimiento()));
         cedula.setText(venMostrar.getCedula());
