@@ -95,9 +95,8 @@ public class listacitas_cliente_fragment extends Fragment {
         textovendedor = mainview.findViewById(R.id.vendedor_txt);
         textovehiculo = mainview.findViewById(R.id.vehiculo_txt);
         textodescripcion = mainview.findViewById(R.id.descripcion_txt);
-        PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = p.buscarCitas("cliente", cliente.getCedula());
+        Cita cita = patio.buscarCitas("cliente", cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
         String dia = fecha.split("-")[2];
         String mes = fecha.split("-")[1];
@@ -118,7 +117,6 @@ public class listacitas_cliente_fragment extends Fragment {
         EditText textomes;
         EditText textoanio;
         EditText textohoras;
-        EditText textoresolucion;
 
         textodia = mainview.findViewById(R.id.dia_etxt);
         String dia_str = textodia.getText().toString();
