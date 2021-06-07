@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -68,6 +69,14 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
+            Button reg_list = findViewById(R.id.reg_list_btn);
+            reg_list.setOnClickListener(v -> {
+                try {
+                    registrarAdministrador();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
         }
 
 
@@ -527,7 +536,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
     public void registrarAdministrador() throws ParseException {
-
+        Toast.makeText(Patioventainterfaz.this, "Se inicio el metodo",Toast.LENGTH_SHORT).show();
         EditText nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
         EditText apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
         EditText cedulaAdmin = findViewById(R.id.reg_cedula_admin_etxt);
@@ -541,12 +550,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         EditText horaEntradaAdmin = findViewById(R.id.reg_entrada_admin_etxt);
         EditText horaSalidaAdmin = findViewById(R.id.reg_salida_admin_etxt);
         EditText horaAlmuerzoAdmin = findViewById(R.id.reg_almuerzo_admin_etxt);
+        Toast.makeText(Patioventainterfaz.this, "id's hechos",Toast.LENGTH_SHORT).show();
 
         String nombreAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
         String cedulaAdmin_str = cedulaAdmin.getText().toString();
         String fechaNacimientoAdmin_date = diaNacimientoAdmin.getText().toString()
-                + "/" + mesNacimientoAdmin.getText().toString()
-                + "/" + anioNacimientoAdmin.getText().toString();
+                + "-" + mesNacimientoAdmin.getText().toString()
+                + "-" + anioNacimientoAdmin.getText().toString();
         String telefonoAdmin_str = telefonoAdmin.getText().toString();
         String correoAdmin_str = correoAdmin.getText().toString();
         String contraseniaAdmin_str = contraseniaAdmin.getText().toString();
@@ -555,9 +565,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         int horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
         int horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
 
+
         if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) == 0) {
             String contraseniaVerificada = contraseniaAdmin_str;
-            Vendedor nuevo_admin = new Vendedor(
+            Toast.makeText(Patioventainterfaz.this, "Hasta aqui",Toast.LENGTH_SHORT).show();
+            patioventa.aniadirUsuario( new Vendedor(
                     horaEntradaAdmin_int,
                     horaSalidaAdmin_int,
                     horaAlmuerzoAdmin_int,
@@ -567,10 +579,12 @@ public class Patioventainterfaz extends AppCompatActivity {
                     telefonoAdmin_str,
                     correoAdmin_str,
                     contraseniaVerificada,
-                    sdf.parse(fechaNacimientoAdmin_date));
-            patioventa.aniadirUsuario((nuevo_admin), "Administrador");
+                    sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
+            Toast.makeText(Patioventainterfaz.this, "Hasta aqui",Toast.LENGTH_SHORT).show();
+            irAplicacion("ADMIN");
+            Toast.makeText(Patioventainterfaz.this, "Se agrego al admin",Toast.LENGTH_SHORT).show();
         } else {
-            //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "No se agrego al admin",Toast.LENGTH_SHORT).show();
             contraseniaAdmin.setText("");
             confirmarContraseniaAdmin.setText("");
         }

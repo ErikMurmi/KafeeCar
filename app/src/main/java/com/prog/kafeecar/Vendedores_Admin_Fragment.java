@@ -384,7 +384,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
     public void buscarVendedores ( ){
         EditText cedula= mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
         String cedula_str= cedula.getText().toString();
-        boolean encontrado = false;
         Vendedor buscado=null;
         try {
          buscado = patio.buscarVendedores("Cedula", cedula_str);

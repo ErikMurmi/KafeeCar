@@ -77,7 +77,8 @@
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:text="Erik" />
 
                 <TextView
                     android:id="@+id/apellidoVendedor_txt"
@@ -98,7 +99,8 @@
                     android:background="@drawable/bordesbotongris"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:text="Murminacho" />
 
                 <TextView
                     android:id="@+id/cedulaVendedor_txt"
@@ -120,6 +122,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="numberSigned"
+                    android:text="1719110528"
                     android:textColor="#959898" />
 
                 <TextView
@@ -149,6 +152,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
+                        android:text="7"
                         android:textColor="@color/gris" />
 
                     <EditText
@@ -160,6 +164,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
+                        android:text="4"
                         android:textColor="@color/gris" />
 
                     <EditText
@@ -170,6 +175,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="date"
+                        android:text="2000"
                         android:textColor="@color/gris" />
                 </LinearLayout>
 
@@ -193,6 +199,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="numberSigned"
+                    android:text="0987654321"
                     android:textColor="#959898" />
 
                 <TextView
@@ -215,6 +222,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="textEmailAddress"
+                    android:text="hola@gmail.com"
                     android:textColor="@color/gris" />
 
                 <TextView
@@ -237,6 +245,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="textPassword"
+                    android:text="clave"
                     android:textColor="@color/gris" />
 
                 <TextView
@@ -259,6 +268,7 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="textPassword"
+                    android:text="clave"
                     android:textColor="@color/gris" />
 
                 <TextView
@@ -335,7 +345,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:text="8" />
 
                     <EditText
                         android:id="@+id/reg_almuerzo_admin_etxt"
@@ -347,7 +358,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:text="13" />
 
                     <EditText
                         android:id="@+id/reg_salida_admin_etxt"
@@ -358,7 +370,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:text="19" />
 
                 </LinearLayout>
 
