@@ -97,25 +97,61 @@ public class Vendedores_Admin_Fragment extends Fragment {
             verVendedorEditable(cedulaEdit.getText().toString());
         });
 
-        /*listo_btn.setOnClickListener(v -> {
+        deshabilitar_btn.setOnClickListener(v -> {
+            try {
+                Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
+                TextView cedula = mainView.findViewById(R.id.cedula_vendedor_txt);
+                Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
+
+                if (habilitar.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
+                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE DESHABILITARÁ DEL SISTEMA!", Toast.LENGTH_SHORT).show();
+                    vendedor.setActivo(false);
+                    habilitar.setText("Habilitar");
+                } else {
+                    habilitar.setText("Deshabilitar");
+                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
+                    vendedor.setActivo(true);
+                }
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "No se pudo ejecutar la petición", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listo_btn.setOnClickListener(v -> {
             try{
                 registrarVendedor();
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
+                regresarPantallaPrncipal();
             }
         });
 
         editarlisto_btn.setOnClickListener(v -> {
-
+            try{
+                EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+                editarVendedor(cedula_ed.getText().toString());
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+                regresarPantallaPrncipal();
+            }
         });
 
         imagenPerfilVendedor_btn.setOnClickListener(v -> {
             openGalery();
         });
-        */
+
 
 
         return mainView;
+    }
+
+    public void regresarPantallaPrncipal(){
+        irRegistrarVendedor.setVisibility(View.GONE);
+        irVisualizarVendedor.setVisibility(View.GONE);
+        irEditarVendedor.setVisibility(View.GONE);
+        //boton y pantalla visible
+        aniadirVendedor_btn.setVisibility(View.VISIBLE);
+        irAdministrarVendedor.setVisibility(View.VISIBLE);
     }
 
     public void registrarVendedor() throws ParseException {
@@ -179,11 +215,19 @@ public class Vendedores_Admin_Fragment extends Fragment {
         entrada.setText(venMostrar.getHoraEntrada());
         almuerzo.setText(venMostrar.getHoraComida());
         salida.setText(venMostrar.getHoraSalida());
+
+        Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
+        if(venMostrar.getActivo()){
+            venMostrar.setActivo(false);
+        }else{
+            habilitar.setText("Habilitar");
+            Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
+            venMostrar.setActivo(true);
+        }
     }
 
     public void verVendedorEditable(String cedula){
         try{
-
             Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
@@ -213,7 +257,31 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
+    public void editarVendedor(String cedula){
+        try {
+            Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
+            EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
+            EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
+            EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
+            EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+            EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
+            EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
 
+            String fechaNacimientoVendedor= dia_ed.getText().toString()
+                    + "/" + mes_ed.getText().toString()
+                    + "/" + anio_ed.getText().toString();
+            cedulaVen.cambiarDatosSinClave(
+                    nombre_ed.getText().toString(),
+                    cedula_ed.getText().toString(),
+                    telefono_ed.getText().toString(),
+                    correo_ed.getText().toString(),
+                    fechaNacimientoVendedor);
+
+        }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void openGalery(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
