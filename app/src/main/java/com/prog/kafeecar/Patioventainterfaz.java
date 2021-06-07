@@ -45,10 +45,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.home);
-        //setTheme(R.style.Theme_AppCompat);
         setContentView(R.layout.login);
-        //irAplicacion("ADMIN");
+
         try {
             cargarDatos();
 
@@ -58,14 +56,6 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
-        /*try {
-            //setContentView(R.layout.nuevacita);
-            //setContentView(R.layout.registrar_cita);
-
-            //visualizarCita();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);

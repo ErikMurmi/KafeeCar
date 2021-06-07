@@ -213,22 +213,23 @@ public class Catalogo_Admin_Fragment extends Fragment {
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
 
-        Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-        Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
 
-        if(v_Mostrar !=null){
-            ImageView v_img = mainView.findViewById(R.id.v_lista_img);
-            TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
-            TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
-            TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
-            TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
+        ImageView v_img = mainView.findViewById(R.id.v_lista_img);
+        ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
 
-            titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-            anio.setText(String.valueOf(v_Mostrar.getAnio()));
-            matricula.setText(v_Mostrar.getMatricula());
-            placa_v.setText(v_Mostrar.getPlaca());
-            precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
+        TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
+        TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
+        TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
+        TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
 
+        TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
+        TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
+        TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
+        TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
+
+
+            Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
+            Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
             Glide.with(mainView)
                     .load(filePath)
@@ -245,24 +246,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }catch (IOException e){
                 e.printStackTrace();
             }
-
-
-        }
-
-        if(v_Mostrar1!= null){
-            ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
-            TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
-            TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
-            TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
-            TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
-
-            titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
-            anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
-            matricula1.setText(v_Mostrar1.getMatricula());
-            placa_v1.setText(v_Mostrar1.getPlaca());
-            precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
             //Imagen 2
-            StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
+            filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
             Glide.with(mainView)
                     .load(filePath)
                     .into(v_img1);
@@ -278,9 +263,16 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }catch (IOException e){
                 e.printStackTrace();
             }
-        }else{
-            irVerVehiculo1.setVisibility(View.GONE);
-        }
+            titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
+            titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
+            anio.setText(String.valueOf(v_Mostrar.getAnio()));
+            anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
+            matricula.setText(v_Mostrar.getMatricula());
+            matricula1.setText(v_Mostrar1.getMatricula());
+            placa_v.setText(v_Mostrar.getPlaca());
+            placa_v1.setText(v_Mostrar1.getPlaca());
+            precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
+            precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
     }
 
 
