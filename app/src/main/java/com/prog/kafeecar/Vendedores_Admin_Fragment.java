@@ -69,6 +69,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
+
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
         buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
@@ -168,6 +169,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 regresarPantallaPrncipal();
             }
         });
+
 
         editarDeshacer_btn.setOnClickListener(v -> {
             try{
