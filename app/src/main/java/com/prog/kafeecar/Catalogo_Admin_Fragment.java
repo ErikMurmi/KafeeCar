@@ -51,7 +51,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private FloatingActionButton irAniadirVehiculo;
     private Button deshacer_btn;
-    private Button irVerVehiculo;
+    private LinearLayout irVerVehiculo;
+    private LinearLayout irVerVehiculo1;
     private ImageButton selec_vehiculo_img;
     private Button irEditarVehiculo;
     public Button editar_btn;
@@ -80,7 +81,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irVerVehiculo = mainView.findViewById(R.id.ir_ver_vehiculo);
+        irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
+        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
@@ -309,6 +311,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
         preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
         promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
         //Glide.with(mainView)
@@ -327,6 +330,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             e.printStackTrace();
         }
         //
+
         if(vMostrar.isMatriculado()){
             matriculado.setText("Matriculado: Si");
         }else{
