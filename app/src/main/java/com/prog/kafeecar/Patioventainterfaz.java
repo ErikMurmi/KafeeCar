@@ -531,7 +531,6 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
     public void registrarAdministrador() throws ParseException {
-        Toast.makeText(Patioventainterfaz.this, "Se inicio el metodo",Toast.LENGTH_SHORT).show();
         EditText nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
         EditText apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
         EditText cedulaAdmin = findViewById(R.id.reg_cedula_admin_etxt);
@@ -545,7 +544,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         EditText horaEntradaAdmin = findViewById(R.id.reg_entrada_admin_etxt);
         EditText horaSalidaAdmin = findViewById(R.id.reg_salida_admin_etxt);
         EditText horaAlmuerzoAdmin = findViewById(R.id.reg_almuerzo_admin_etxt);
-        Toast.makeText(Patioventainterfaz.this, "id's hechos",Toast.LENGTH_SHORT).show();
 
         String nombreAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
         String cedulaAdmin_str = cedulaAdmin.getText().toString();
@@ -576,10 +574,10 @@ public class Patioventainterfaz extends AppCompatActivity {
                     contraseniaVerificada,
                     sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
             irAplicacion("ADMIN");
-            Toast.makeText(Patioventainterfaz.this, "Se agrego al admin",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "Administrador registrado correctamente",Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(Patioventainterfaz.this, "No se agrego al admin",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "No se agrego el administrador",Toast.LENGTH_SHORT).show();
             contraseniaAdmin.setText("");
             confirmarContraseniaAdmin.setText("");
         }
