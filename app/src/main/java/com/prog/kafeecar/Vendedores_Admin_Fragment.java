@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private View mainView;
 
     private EditText cedulaVendedorE;
+    private ImageView imagenPerfil_img;
+    private ImageView imagenPerfilV_img;
+    private ImageView imagenPerfilV1_img;
 
     private LinearLayout irRegistrarVendedor;
     private LinearLayout irVisualizarVendedor;
@@ -65,6 +70,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button editarDeshacer_btn;
     private ImageButton buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
+    private ImageButton imagenPerfilVendedorEdit_btn;
 
     private Uri foto;
 
@@ -87,6 +93,12 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
         buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
+
+        imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
+
+        imagenPerfil_img = mainView.findViewById(R.id.imagen_perfil_vendedor_img);
+        imagenPerfilV_img = mainView.findViewById(R.id.AVimagenPerfil1_img);
+        imagenPerfilV1_img = mainView.findViewById(R.id.AVimagenPerfil2_img);
 
         //declaracion de los lyts de los vendedores en la lista
         verVendedor_lyt = mainView.findViewById(R.id.AVvendedor_lyt);
@@ -237,6 +249,41 @@ public class Vendedores_Admin_Fragment extends Fragment {
             almuerzoV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraComida(),formatoHora(v_Mostrar1.getHoraComida())));
             salidaV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraSalida(),formatoHora(v_Mostrar1.getHoraSalida())));
 
+            StorageReference filePath = mStorageRef.child("Vendedores/"+v_Mostrar.getImagen());
+            Glide.with(mainView)
+                    .load(filePath)
+                    .into(imagenPerfilV_img);
+            try {
+                final File localFile = File.createTempFile(v_Mostrar.getImagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        imagenPerfilV_img.setImageBitmap(bitmap);
+
+                    }
+                });
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            filePath = mStorageRef.child("Vendedores/"+v_Mostrar1.getImagen());
+            Glide.with(mainView)
+                    .load(filePath)
+                    .into(imagenPerfilV1_img);
+            try {
+                final File localFile = File.createTempFile(v_Mostrar1.getImagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        imagenPerfilV1_img.setImageBitmap(bitmap);
+
+                    }
+                });
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
         }
@@ -351,7 +398,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    imagenPerfilVendedor_btn.setImageBitmap(bitmap);
+                    imagenPerfil_img.setImageBitmap(bitmap);
                 }
             });
         }catch (IOException e) {
