@@ -41,6 +41,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private PatioVenta patio;
+    Vendedor venMostrar;
 
     private View mainView;
 
@@ -139,9 +140,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
             irAdministrarVendedor.setVisibility(View.GONE);
             irVisualizarVendedor.setVisibility(View.GONE);
             aniadirVendedor_btn.setVisibility(View.GONE);
-            irEditarVendedor.setVisibility(View.VISIBLE);
             //verVendedorEditable(cedulaVendedorE.getText().toString());
-            verVendedorEditable("1732221032");
+            verVendedorEditable();
+            irEditarVendedor.setVisibility(View.VISIBLE);
         });
 
         deshabilitar_btn.setOnClickListener(v -> {
@@ -173,10 +174,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         editarlisto_btn.setOnClickListener(v -> {
             try{
-                editarVendedor(cedulaVendedorE.getText().toString());
+                editarVendedor();
                 Toast.makeText(mainView.getContext(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
-                irEditarVendedor.setVisibility(View.GONE);
-                irVisualizarVendedor.setVisibility(View.VISIBLE);
+                regresarPantallaPrncipal();
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
@@ -325,7 +325,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         TextView almuerzo = mainView.findViewById(R.id.almuerzo_vendedor_txt);
         TextView salida = mainView.findViewById(R.id.salida_vendedor_txt);
 
-        Vendedor venMostrar = patio.buscarVendedores("Cedula",ced);
+        venMostrar = patio.buscarVendedores("Cedula",ced);
         nombre.setText(venMostrar.getNombre());
         fechaNacimiento.setText(Patioventainterfaz.getFechaMod(venMostrar.getFechaNacimiento()));
         cedula.setText(venMostrar.getCedula());
@@ -359,9 +359,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void verVendedorEditable(String cedula){
+    public void verVendedorEditable(){
         try{
-            Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
+            Vendedor cedulaVen = venMostrar;
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
             EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
@@ -411,9 +411,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void editarVendedor(String cedula){
+    public void editarVendedor(){
         try {
-            Vendedor cedulaVen = patio.buscarVendedores("Cedula", cedula);
+            Vendedor cedulaVen = venMostrar;
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
             EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
@@ -439,7 +439,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void buscarVendedores ( ){
+    public void buscarVendedores (){
         EditText cedula= mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
         String cedula_str= cedula.getText().toString();
         Vendedor buscado=null;
