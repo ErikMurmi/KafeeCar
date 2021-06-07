@@ -33,6 +33,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
     private View mainView;
 
+    private EditText cedulaVendedorE;
+
     private LinearLayout irRegistrarVendedor;
     private LinearLayout irVisualizarVendedor;
     private LinearLayout irAdministrarVendedor;
@@ -57,6 +59,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
         mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
         patio = Patioventainterfaz.patioventa;
         verListaVendedores("1732221032", "1721835213");
+
+        cedulaVendedorE = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
 
         //botones
         aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
@@ -102,22 +106,20 @@ public class Vendedores_Admin_Fragment extends Fragment {
             irVisualizarVendedor.setVisibility(View.GONE);
             aniadirVendedor_btn.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.VISIBLE);
-            EditText cedulaEdit = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
-            verVendedorEditable(cedulaEdit.getText().toString());
+            verVendedorEditable(cedulaVendedorE.getText().toString());
         });
 
         deshabilitar_btn.setOnClickListener(v -> {
             try {
-                Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
                 TextView cedula = mainView.findViewById(R.id.cedula_vendedor_txt);
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
 
-                if (habilitar.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
+                if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
                     Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE DESHABILITARÁ DEL SISTEMA!", Toast.LENGTH_SHORT).show();
                     vendedor.setActivo(false);
-                    habilitar.setText("Habilitar");
+                    deshabilitar_btn.setText("Habilitar");
                 } else {
-                    habilitar.setText("Deshabilitar");
+                    deshabilitar_btn.setText("Deshabilitar");
                     Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
                     vendedor.setActivo(true);
                 }
@@ -137,8 +139,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         editarlisto_btn.setOnClickListener(v -> {
             try{
-                EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
-                editarVendedor(cedula_ed.getText().toString());
+                editarVendedor(cedulaVendedorE.getText().toString());
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
