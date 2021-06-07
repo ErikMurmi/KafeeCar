@@ -107,6 +107,19 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
         });
 
+        verVendedor1_lyt.setOnClickListener(v -> {
+            irRegistrarVendedor.setVisibility(View.GONE);
+            irAdministrarVendedor.setVisibility(View.GONE);
+            irEditarVendedor.setVisibility(View.GONE);
+            aniadirVendedor_btn.setVisibility(View.GONE);
+            irVisualizarVendedor.setVisibility(View.VISIBLE);
+            try {
+                visualizarVendedor("1721835213");
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         editar_btn.setOnClickListener(v -> {
             irRegistrarVendedor.setVisibility(View.GONE);
             irAdministrarVendedor.setVisibility(View.GONE);
@@ -149,6 +162,21 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 editarVendedor(cedulaVendedorE.getText().toString());
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+                regresarPantallaPrncipal();
+            }
+        });
+
+        editarDeshacer_btn.setOnClickListener(v -> {
+            try{
+                irRegistrarVendedor.setVisibility(View.GONE);
+                irAdministrarVendedor.setVisibility(View.GONE);
+                aniadirVendedor_btn.setVisibility(View.GONE);
+                irEditarVendedor.setVisibility(View.GONE);
+
+                irVisualizarVendedor.setVisibility(View.VISIBLE);
+                visualizarVendedor(cedulaVendedorE.getText().toString());
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
             }
         });
@@ -300,9 +328,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
             String anio = fechaNacimiento.split("-")[0];
 
             nombre_ed.setText(cedulaVen.getNombre());
-            dia_ed.setText(dia);
-            mes_ed.setText(mes);
-            anio_ed.setText(anio);
+            dia_ed.setText(String.valueOf(dia));
+            mes_ed.setText(String.valueOf(mes));
+            anio_ed.setText(String.valueOf(anio));
             cedula_ed.setText(cedulaVen.getCedula());
             telefono_ed.setText(cedulaVen.getTelefono());
             correo_ed.setText(cedulaVen.getCorreo());
@@ -338,7 +366,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void  buscarVendedores ( ){
+    public void buscarVendedores ( ){
         EditText cedula= mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
         String cedula_str= cedula.getText().toString();
         boolean encontrado = false;
