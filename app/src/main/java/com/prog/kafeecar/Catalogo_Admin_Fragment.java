@@ -72,7 +72,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     TextView placa_v;
     TextView placa_v1;
-
+    private Vehiculo vMostrar;
     private Uri foto;
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
@@ -131,7 +131,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculo("PSD-1234");
+            try {
+                visualizarVehiculo("PSD-1234");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         irVerVehiculo1.setOnClickListener(v -> {
@@ -143,7 +147,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculo("GHC-2434");
+            try {
+                visualizarVehiculo("GHC-2434");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -323,7 +331,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String msg = "";
 
         try {
-            m_vehiculo = patio.buscarVehiculos("Placa",placa);
+
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -389,9 +397,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
-    public void visualizarVehiculo(String placa_buscar){
+    public void visualizarVehiculo(String placa_buscar) throws Exception {
 
-
+        m_vehiculo = patio.buscarVehiculos("Placa",placa_buscar);
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);

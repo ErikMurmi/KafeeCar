@@ -46,7 +46,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
         try {
             cargarDatos();
 
@@ -68,8 +67,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
 
@@ -629,5 +626,10 @@ public class Patioventainterfaz extends AppCompatActivity {
             esBisiesto = true;
         }
         return esBisiesto;
+    }
+
+    public void salir(View v){
+        usuarioActual =  null;
+        setContentView(R.layout.login);
     }
 }
