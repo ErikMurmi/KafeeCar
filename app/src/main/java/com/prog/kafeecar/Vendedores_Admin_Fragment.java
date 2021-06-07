@@ -99,8 +99,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
 
         imagenPerfil_img = mainView.findViewById(R.id.imagen_perfil_vendedor_img);
-        imagenPerfilV_img = mainView.findViewById(R.id.AVimagenPerfil1_img);
-        imagenPerfilV1_img = mainView.findViewById(R.id.AVimagenPerfil2_img);
+
 
         //declaracion de los lyts de los vendedores en la lista
         verVendedor_lyt = mainView.findViewById(R.id.AVvendedor_lyt);
@@ -227,7 +226,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
     public void verListaVendedores(String cedula, String cedula1){
         try{
             String am = "am";
-
+            imagenPerfilV_img = mainView.findViewById(R.id.AVimagenPerfil1_img);
+            imagenPerfilV1_img = mainView.findViewById(R.id.AVimagenPerfil2_img);
             Vendedor v_Mostrar = patio.buscarVendedores("Cedula",cedula);
             Vendedor v_Mostrar1 = patio.buscarVendedores("Cedula",cedula1);
 
@@ -268,7 +268,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }catch (IOException e) {
                 e.printStackTrace();
             }
-
+            Toast.makeText(mainView.getContext(), "Se trato de cargar 1", Toast.LENGTH_SHORT).show();
             filePath = mStorageRef.child("Vendedores/"+v_Mostrar1.getImagen());
             Glide.with(mainView)
                     .load(filePath)
