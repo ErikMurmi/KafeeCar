@@ -112,7 +112,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
             irVisualizarVendedor.setVisibility(View.GONE);
             aniadirVendedor_btn.setVisibility(View.GONE);
             irEditarVendedor.setVisibility(View.VISIBLE);
-            verVendedorEditable(cedulaVendedorE.getText().toString());
+            //verVendedorEditable(cedulaVendedorE.getText().toString());
+            verVendedorEditable("1732221032");
         });
 
         deshabilitar_btn.setOnClickListener(v -> {
