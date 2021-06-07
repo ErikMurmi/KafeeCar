@@ -562,4 +562,3 @@ public class Patioventainterfaz extends AppCompatActivity {
            }
        }
    }
-}

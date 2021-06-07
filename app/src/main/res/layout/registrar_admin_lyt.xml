@@ -376,7 +376,7 @@
                     android:insetTop="5dp"
                     android:insetRight="5dp"
                     android:insetBottom="5dp"
-                    android:onClick="registrarVendedor"
+                    android:onClick="registrarAdministrador"
                     android:text="Listo"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
