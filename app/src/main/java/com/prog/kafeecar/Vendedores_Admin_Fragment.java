@@ -52,7 +52,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
 
-
     private ImageButton imagenPerfilVendedor_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +68,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
+
+        imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
 
         //declaracion de los lyts de los vendedores en la lista
         verVendedor_lyt = mainView.findViewById(R.id.AVvendedor_lyt);
@@ -113,7 +114,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             try {
                 TextView cedula = mainView.findViewById(R.id.cedula_vendedor_txt);
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
-
                 if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
                     Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE DESHABILITARÁ DEL SISTEMA!", Toast.LENGTH_SHORT).show();
                     vendedor.setActivo(false);
@@ -149,8 +149,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         imagenPerfilVendedor_btn.setOnClickListener(v -> {
             openGalery();
         });
-
-
 
         return mainView;
     }

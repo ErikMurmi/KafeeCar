@@ -81,7 +81,6 @@ public class catalogo_vendedor_fragment extends Fragment {
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irVerVehiculo = mainView.findViewById(R.id.ir_ver_vehiculo);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
