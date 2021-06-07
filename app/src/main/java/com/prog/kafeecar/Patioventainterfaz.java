@@ -557,9 +557,18 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) == 0) {
             String contraseniaVerificada = contraseniaAdmin_str;
-            patioventa.aniadirUsuario(new Vendedor(horaEntradaAdmin_int, horaSalidaAdmin_int, horaAlmuerzoAdmin_int, patioventa,
-                    nombreAdmin_str, cedulaAdmin_str, telefonoAdmin_str, correoAdmin_str, contraseniaVerificada,
-                    sdf.parse(fechaNacimientoAdmin_date)), "Administrador");
+            Vendedor nuevo_admin = new Vendedor(
+                    horaEntradaAdmin_int,
+                    horaSalidaAdmin_int,
+                    horaAlmuerzoAdmin_int,
+                    patioventa,
+                    nombreAdmin_str,
+                    cedulaAdmin_str,
+                    telefonoAdmin_str,
+                    correoAdmin_str,
+                    contraseniaVerificada,
+                    sdf.parse(fechaNacimientoAdmin_date));
+            patioventa.aniadirUsuario((nuevo_admin), "Administrador");
         } else {
             //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
             contraseniaAdmin.setText("");
