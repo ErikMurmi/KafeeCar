@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
-public class ventas_vendedor_fragment extends Fragment{
+public class Ventas_vendedor_fragment extends Fragment{
     private View mainview;
     private LinearLayout verventa;
     private LinearLayout aniadirventa;
