@@ -272,9 +272,18 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         if(contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str)==0){
             String contraseniaVerificada = contraseniaVendedor_str;
-            patio.aniadirUsuario(new Vendedor(horaEntradaVendedor_int,horaSalidaVendedor_int,horaAlmuerzoVendedor_int, patio,
-                    nombreVendedor_str, cedulaVendedor_str, telefonoVendedor_str, correoVendedor_str, contraseniaVerificada,
-                    sdf.parse(fechaNacimientoVendedor_date)),"Vendedor");
+            patio.aniadirUsuario(new Vendedor(
+                    horaEntradaVendedor_int,
+                    horaSalidaVendedor_int,
+                    horaAlmuerzoVendedor_int,
+                    patio,
+                    nombreVendedor_str,
+                    cedulaVendedor_str,
+                    telefonoVendedor_str,
+                    correoVendedor_str,
+                    contraseniaVerificada,
+                    sdf.parse(fechaNacimientoVendedor_date)
+            ),"Vendedor");
         }else{
             //Toast.makeText(Patioventainterfaz.this, "Las contraseÃ±as no coinciden. Ingrese Nuevamente.",Toast.LENGTH_SHORT).show();
             contraseniaVendedor.setText("");
@@ -321,6 +330,9 @@ public class Vendedores_Admin_Fragment extends Fragment {
             EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
             EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
             EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
+            EditText entrada_ed = mainView.findViewById(R.id.horaEntradaEditVendedor_etxt);
+            EditText almuerzo_ed = mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
+            EditText salida_ed = mainView.findViewById(R.id.horaSalidaEditVendedor_etxt);
 
             String fechaNacimiento = Patioventainterfaz.getFechaMod(cedulaVen.getFechaNacimiento());
             String dia = fechaNacimiento.split("-")[2];
@@ -328,12 +340,15 @@ public class Vendedores_Admin_Fragment extends Fragment {
             String anio = fechaNacimiento.split("-")[0];
 
             nombre_ed.setText(cedulaVen.getNombre());
-            dia_ed.setText(String.valueOf(dia));
-            mes_ed.setText(String.valueOf(mes));
-            anio_ed.setText(String.valueOf(anio));
+            dia_ed.setText(dia);
+            mes_ed.setText(mes);
+            anio_ed.setText(anio);
             cedula_ed.setText(cedulaVen.getCedula());
             telefono_ed.setText(cedulaVen.getTelefono());
             correo_ed.setText(cedulaVen.getCorreo());
+            entrada_ed.setText(String.valueOf(cedulaVen.getHoraEntrada()));
+            almuerzo_ed.setText(String.valueOf(cedulaVen.getHoraComida()));
+            salida_ed.setText(String.valueOf(cedulaVen.getHoraSalida());
 
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();

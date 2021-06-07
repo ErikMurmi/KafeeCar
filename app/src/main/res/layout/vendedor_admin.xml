@@ -12,7 +12,7 @@
         android:background="@drawable/administrarvendedores"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -517,50 +517,6 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/gris" />
-
-                <TextView
-                    android:id="@+id/contraseniaVendedorE_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Contraseña"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/contraseniaEditVendedor_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:inputType="textPassword"
-                    android:textColor="@color/gris" />
-
-                <TextView
-                    android:id="@+id/confirmarContraseniaVendedorE_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Confirmar Contraseña"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/confirmarContraseniaEditVendedor_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:inputType="textPassword"
                     android:textColor="@color/gris" />
 
                 <TextView
@@ -1105,10 +1061,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/registrarvendedores"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="409dp"
