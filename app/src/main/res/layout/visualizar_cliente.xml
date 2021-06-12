@@ -4,296 +4,255 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/plantilla_vacia"
     android:foregroundGravity="center"
     app:layout_anchorGravity="center">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
+        android:id="@+id/visualizar_cliente_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/perfilcliente"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/usuario_img"
-            android:layout_width="213dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/foto_usuario" />
+            android:id="@+id/imagen_perfil_cliente_img"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="122dp"
+            android:layout_marginTop="80dp"
+            android:adjustViewBounds="false"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="360dp"
+            android:layout_height="343dp"
+            android:layout_marginLeft="30dp"
             android:background="@drawable/bordesmarcos"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/datos_personales_cliente.txt"
+                android:id="@+id/datos_personales_cliente_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/ocraext"
-                android:text="Datos Personales"
+                android:fontFamily="@font/monglos"
+                android:text="DATOS PERSONALES"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/nombre_usuario_txt"
-                    android:layout_width="30dp"
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Nombre:"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/nombre_usuario_etxt"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/ver_nombre_cliente_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocra"
+                        android:text="Nombre: "
+                        android:textColor="#686363"
+                        android:textSize="21sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <TextView
+                        android:id="@+id/nombre_cliente_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Martha"
+                        android:textColor="#000000"
+                        android:textSize="21sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="Martha" />
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/ver_fecha_nacimiento_cliente_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Fecha de nacimiento: "
+                        android:textColor="#686363"
+                        android:textSize="21sp" />
 
-                <TextView
-                    android:id="@+id/apellido_usuario_txt"
-                    android:layout_width="29dp"
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <TextView
+                        android:id="@+id/fecha_nacimiento_cliente_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="27/09/1987"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Apellido:"
-                    android:textColorHint="@color/black"
-                    android:textSize="18dp" />
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/apellido_usuario_etxt"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/ver_cédula_cliente_txt"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Cédula:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/cedula_cliente_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="9999999999"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="Pérez"
-                    android:textColorHint="@color/black"
-                    android:textSize="18dp" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:foregroundGravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/ver_telefono_cliente_txt"
+                        android:layout_width="112dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Teléfono:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
 
-                <TextView
-                    android:id="@+id/nacimiento_usuario_txt"
-                    android:layout_width="77dp"
+                    <TextView
+                        android:id="@+id/telefono_cliente_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="02 366 366"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Fecha     Nacimiento"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/dia_usuario_etxt"
-                    android:layout_width="33dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="dia"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/ver_correo_cliente_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/ocraext"
+                        android:text="Correo:"
+                        android:textColor="#686363"
+                        android:textSize="19sp" />
 
-                <EditText
-                    android:id="@+id/mes_usuario_etxt"
-                    android:layout_width="28dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="mes"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/correo_cliente_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="m.perez@gmail.com"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+                </LinearLayout>
 
-                <EditText
-                    android:id="@+id/anio_usuario_etxt"
-                    android:layout_width="74dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="año"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="11dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/cedula_usuario_txt"
-                    android:layout_width="26dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Cédula:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/cedula_usuario_etxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="17203647293"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/telefono_usuario_txt"
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Teléfono:"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/telefono_usuario_etxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="0998817253"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/correo_usuario_txt"
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Correo:"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/correo_usuario_etxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="@font/ocraext"
-                    android:inputType="textPersonName"
-                    android:text="mperez@gmail.com"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/contrasenia_usuario_txt"
-                    android:layout_width="92dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocraext"
-                    android:text="Clave:"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/contrasenia_usuario_etxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPassword"
-                    android:text="1234567890" />
-
-                <Button
-                    android:id="@+id/contrasenia_usuario_btn"
-                    android:layout_width="21dp"
-                    android:layout_height="24dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/ic_menu_edit"
-                    android:fontFamily="@font/ocraext"
-                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/cerrar_sesion_usuario_btn"
-                android:layout_width="107dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="10dp"
+                android:id="@+id/deshabilitar_vendedor_btn"
+                android:layout_width="114dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_dark"
+                android:drawableLeft="@android:drawable/stat_sys_warning"
                 android:fontFamily="@font/valorant"
-                android:text="Cerrar Sesión"
-                android:textColor="@color/ic_banner_background"
-                android:textSize="17sp" />
+                android:paddingStart="8dp"
+                android:text="Deshabilitar"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/editar_usuario_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado"
-                android:fontFamily="@font/valorant"
-                android:text="Editar"
-                android:textSize="17sp" />
-        </LinearLayout>
+                android:id="@+id/editar_vendedor_btn"
+                style="@style/boton_editar"
+                android:text="Editar" />
 
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
