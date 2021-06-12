@@ -106,7 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Entrada:"
-                                android:textColor="#000000"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -134,7 +134,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Almuerzo:"
-                                android:textColor="#000000"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -162,7 +162,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Salida:"
-                                android:textColor="#000000"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -234,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Entrada:"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="17sp" />
 
                         <TextView
@@ -262,7 +262,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Almuerzo:"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="17sp" />
 
                         <TextView
@@ -290,7 +290,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Salida:"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="17sp" />
 
                         <TextView
@@ -723,7 +723,7 @@
             android:layout_height="15dp" />
 
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="344dp"
             android:layout_height="343dp"
             android:layout_marginLeft="30dp"
             android:background="@drawable/bordesmarcos"
@@ -742,7 +742,9 @@
             <LinearLayout
                 android:id="@+id/datos_personales_vendedor_lyt"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="7dp"
                 android:orientation="vertical">
 
                 <Space
@@ -758,7 +760,6 @@
                         android:id="@+id/ver_nombre_vendedor_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/ocra"
                         android:text="Nombre: "
                         android:textColor="#686363"
@@ -789,7 +790,6 @@
                         android:id="@+id/ver_fecha_nacimiento_vendedor_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Fecha de nacimiento: "
@@ -800,7 +800,6 @@
                         android:id="@+id/fecha_nacimiento_vendedor_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/ocraext"
                         android:hint="27/09/1987"
                         android:textColor="#000000"
@@ -821,7 +820,6 @@
                         android:id="@+id/ver_cédula_vendedor_txt"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Cédula:"
                         android:textColor="#686363"
@@ -852,7 +850,6 @@
                         android:id="@+id/ver_telefono_vendedor_txt"
                         android:layout_width="112dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Teléfono:"
                         android:textColor="#686363"
@@ -881,7 +878,6 @@
                         android:id="@+id/ver_correo_vendedor_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Correo:"
@@ -892,7 +888,6 @@
                         android:id="@+id/correo_vendedor_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:fontFamily="@font/ocraext"
                         android:hint="m.perez@gmail.com"
                         android:textColor="#000000"
@@ -928,7 +923,6 @@
                             android:id="@+id/ver_entrada_vendedor_txt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:fontFamily="@font/ocraext"
                             android:text="Entrada:"
                             android:textColor="#686363"
@@ -959,7 +953,6 @@
                             android:id="@+id/ver_almuerzo_vendedor_txt"
                             android:layout_width="112dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:fontFamily="@font/ocraext"
                             android:text="Almuerzo:"
                             android:textColor="#686363"
@@ -988,7 +981,6 @@
                             android:id="@+id/ver_salida_vendedor_txt"
                             android:layout_width="88dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:fontFamily="@font/ocraext"
                             android:text="Salida:"
                             android:textColor="#686363"
@@ -1017,8 +1009,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:layout_marginRight="55dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
             android:orientation="horizontal">
 
             <Button
@@ -1033,7 +1025,7 @@
                 android:text="Deshabilitar"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <Space
                 android:layout_width="30dp"
@@ -1042,7 +1034,9 @@
             <Button
                 android:id="@+id/editar_vendedor_btn"
                 style="@style/boton_editar"
-                android:text="Editar" />
+                android:layout_width="60dp"
+                android:text="Editar"
+                android:textSize="18sp" />
 
         </LinearLayout>
     </LinearLayout>

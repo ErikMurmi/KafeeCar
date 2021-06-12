@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Perfil_cliente_fragment extends Fragment{
-    private View mainview;
+    /*private View mainview;
     private View login;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private Button cerrarsesion;
@@ -161,5 +161,5 @@ public class Perfil_cliente_fragment extends Fragment{
         textocontrasenia.setText(cliente.getClave());
     }
 
-
+*/
 }
