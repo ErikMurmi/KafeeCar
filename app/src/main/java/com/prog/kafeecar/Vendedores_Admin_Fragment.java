@@ -333,91 +333,168 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         nombreVendedor = mainView.findViewById(R.id.nombreVendedor_etxt);
         apellidoVendedor = mainView.findViewById(R.id.apellidoVendedor_etxt);
-        String nombreVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
+        String nombreCampoVendedor_str = nombreVendedor.getText().toString();
+        String apellidoCampoVendedor_str = apellidoVendedor.getText().toString();
+        String nombreCompletoVendedor_str = "";
+        if(nombreCampoVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
+            c++;
+        }else{
+            if(apellidoCampoVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Apellido*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                nombreCompletoVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
+            }
+        }
 
         cedulaVendedor = mainView.findViewById(R.id.cedulaVendedor_etxt);
         String cedulaVendedor_str = cedulaVendedor.getText().toString();
-        if(cedulaVendedor_str.length()!=10){
+        if(cedulaVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
+            c++;
+        }else{
+            if(cedulaVendedor_str.length()!=10){
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedulaVendedor.setText("");
+            }
         }
 
         anioNacimientoVendedor = mainView.findViewById(R.id.anioNacimientoVendedor_etxt);
         String anio_str = anioNacimientoVendedor.getText().toString();
-        int anio = Integer.parseInt(anio_str);
-        if (anio < 1900 || anio > 2003) {
-            Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
-            anioNacimientoVendedor.setText("");
+        int anio = -1;
+        if(anio_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            anio = Integer.parseInt(anio_str);
+            if (anio < 1900 || anio > 2003) {
+                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                anioNacimientoVendedor.setText("");
+                c++;
+            }
         }
 
         mesNacimientoVendedor = mainView.findViewById(R.id.mesNacimientoVendedor_etxt);
         String mes_str = mesNacimientoVendedor.getText().toString();
-        int mes = Integer.parseInt(mes_str);
-        if (mes < 1 || mes > 12) {
-            Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
-            mesNacimientoVendedor.setText("");
+        int mes = -1;
+        if(mes_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            mes = Integer.parseInt(mes_str);
+            if (mes < 1 || mes > 12) {
+                Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+                mesNacimientoVendedor.setText("");
+                c++;
+            }
         }
 
         diaNacimientoVendedor = mainView.findViewById(R.id.diaNacimientoVendedor_etxt);
         String dia_str = diaNacimientoVendedor.getText().toString();
-        int dia = Integer.parseInt(dia_str);
-        if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
-            Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
-            diaNacimientoVendedor.setText("");
+        int dia = -1;
+        if(dia_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            dia = Integer.parseInt(dia_str);
+            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
+                Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
+                diaNacimientoVendedor.setText("");
+                c++;
+            }
         }
 
         telefonoVendedor = mainView.findViewById(R.id.telefonoVendedor_etxt);
         String telefonoVendedor_str = telefonoVendedor.getText().toString();
-        if (telefonoVendedor_str.length() != 10) {
-            Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
-            telefonoVendedor.setText("");
+        if(telefonoVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            if (telefonoVendedor_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
+                telefonoVendedor.setText("");
+                c++;
+            }
         }
 
         correoVendedor = mainView.findViewById(R.id.correoVendedor_etxt);
         String correoVendedor_str = correoVendedor.getText().toString();
-        if (!Patioventainterfaz.validarMail(correoVendedor_str)) {
-            Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
-            correoVendedor.setText("");
+        if(correoVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            if (!Patioventainterfaz.validarMail(correoVendedor_str)) {
+                Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
+                correoVendedor.setText("");
+                c++;
+            }
         }
 
         contraseniaVendedor = mainView.findViewById(R.id.contraseniaVendedor_etxt);
         confirmarContraseniaVendedor = mainView.findViewById(R.id.confirmarContraseniaVendedor_etxt);
         String contraseniaVendedor_str = contraseniaVendedor.getText().toString();
         String confirmarContraseniaVendedor_str = confirmarContraseniaVendedor.getText().toString();
-        if (contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str) != 0) {
-            Toast.makeText(mainView.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
-            contraseniaVendedor.setText("");
-            confirmarContraseniaVendedor.setText("");
+        if(contraseniaVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            if(confirmarContraseniaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                if (contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str) != 0) {
+                    Toast.makeText(mainView.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
+                    contraseniaVendedor.setText("");
+                    confirmarContraseniaVendedor.setText("");
+                    c++;
+                }
+            }
         }
 
         horaEntradaVendedor = mainView.findViewById(R.id.horaEntradaVendedor_etxt);
-        int horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
-        if(horaEntradaVendedor_int >0 && horaEntradaVendedor_int < 24){
-            Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
-            horaEntradaVendedor.setText("");
+        String horaEntradaVendedor_str = horaEntradaVendedor.getText().toString();
+        int horaEntradaVendedor_int = -1;
+        if(horaEntradaVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
+            if(horaEntradaVendedor_int >0 && horaEntradaVendedor_int < 24){
+                Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
+                horaEntradaVendedor.setText("");
+                c++;
+            }
         }
 
         horaAlmuerzoVendedor = mainView.findViewById(R.id.horaAlmuerzoVendedor_etxt);
-        int horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
-        if(horaAlmuerzoVendedor_int >0 && horaAlmuerzoVendedor_int < 24){
-            Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
-            horaAlmuerzoVendedor.setText("");
+        String horaAlmuerzoVendedor_str = horaAlmuerzoVendedor.getText().toString();
+        int horaAlmuerzoVendedor_int = -1;
+        if(horaEntradaVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
+            if(horaAlmuerzoVendedor_int >0 && horaAlmuerzoVendedor_int < 24){
+                Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
+                horaAlmuerzoVendedor.setText("");
+                c++;
+            }
         }
 
         horaSalidaVendedor = mainView.findViewById(R.id.horaSalidaVendedor_etxt);
-        int horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
-        if(horaSalidaVendedor_int >0 && horaSalidaVendedor_int < 24){
-            Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
-            horaSalidaVendedor.setText("");
+        String horaSalidaVendedor_str = horaAlmuerzoVendedor.getText().toString();
+        int horaSalidaVendedor_int = -1;
+        if(horaSalidaVendedor_str.isEmpty()){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
             c++;
+        }else{
+            horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
+            if(horaSalidaVendedor_int >0 && horaSalidaVendedor_int < 24){
+                Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
+                horaSalidaVendedor.setText("");
+                c++;
+            }
         }
 
         String contraseniaVerificada = contraseniaVendedor_str;
@@ -435,7 +512,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     horaSalidaVendedor_int,
                     horaAlmuerzoVendedor_int,
                     patio,
-                    nombreVendedor_str,
+                    nombreCompletoVendedor_str,
                     cedulaVendedor_str,
                     telefonoVendedor_str,
                     correoVendedor_str,
@@ -450,12 +527,12 @@ public class Vendedores_Admin_Fragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
         StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
                 Toast.makeText(mainView.getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
+
     }
 
     public void visualizarVendedor(String ced) throws Exception {
