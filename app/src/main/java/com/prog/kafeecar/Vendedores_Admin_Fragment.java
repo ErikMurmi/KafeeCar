@@ -634,36 +634,130 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
     public void editarVendedor(){
         try {
+            int c = 0;
             Vendedor cedulaVen = venMostrar;
+
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
-            EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            String nombre_str = nombre_ed.getText().toString();
+            if(nombre_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
+                c++;
+            }
+
+            EditText anio_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            String anio_str = anio_ed.getText().toString();
+            int anio = -1;
+            if(anio_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                anio = Integer.parseInt(anio_str);
+                if (anio < 1900 || anio > 2003) {
+                    Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                    anio_ed.setText("");
+                    c++;
+                }
+            }
             EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
-            EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
+            String mes_str = mes_ed.getText().toString();
+            int mes = -1;
+            if(mes_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                mes = Integer.parseInt(mes_str);
+                if (mes < 1 || mes > 12) {
+                    Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+                    mes_ed.setText("");
+                    c++;
+                }
+            }
+
+            EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            String dia_str = dia_ed.getText().toString();
+            int dia = -1;
+            if(dia_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                dia = Integer.parseInt(dia_str);
+                if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
+                    Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
+                    dia_ed.setText("");
+                    c++;
+                }
+            }
+
             EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+            String cedula_str = cedula_ed.getText().toString();
+            if(cedula_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                if(cedula_str.length()!=10){
+                    Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                    cedula_ed.setText("");
+                }
+            }
+
             EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
+            String telefono_str = telefono_ed.getText().toString();
+            if(telefono_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                if (telefono_str.length() != 10) {
+                    Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
+                    telefono_ed.setText("");
+                    c++;
+                }
+            }
+
             EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
+            String correo_str = correo_ed.getText().toString();
+            if(correo_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                if (!Patioventainterfaz.validarMail(correo_str)) {
+                    Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
+                    correo_ed.setText("");
+                    c++;
+                }
+            }
 
-            String fechaNacimientoVendedor= dia_ed.getText().toString()
-                    + "-" + mes_ed.getText().toString()
-                    + "-" + anio_ed.getText().toString();
-
-            cedulaVen.cambiarDatosSinClave(
-                    nombre_ed.getText().toString(),
-                    cedula_ed.getText().toString(),
-                    telefono_ed.getText().toString(),
-                    correo_ed.getText().toString(),
-                    fechaNacimientoVendedor);
-            cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
-
+            if (c == 0) {
+                Date fecha = null;
+                try {
+                    fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                cedulaVen.cambiarDatosSinClave(
+                        nombre_ed.getText().toString(),
+                        cedula_ed.getText().toString(),
+                        telefono_ed.getText().toString(),
+                        correo_ed.getText().toString(),
+                        String.valueOf(fecha));
+                cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
+                try {
+                    if (patio.buscarClientes("Cedula", cedulaVen.getCedula()) != null) {
+                        Toast.makeText(mainView.getContext(), "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                        irVisualizarVendedor.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }catch (Exception e){
             Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void buscarVendedores (){
-        EditText cedula= mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
-        String cedula_str= cedula.getText().toString();
-        Vendedor buscado=null;
+        EditText cedula = mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
+        String cedula_str = cedula.getText().toString();
+        Vendedor buscado = null;
         try {
          buscado = patio.buscarVendedores("Cedula", cedula_str);
          if(buscado==null){
@@ -673,8 +767,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
              verVendedor1_lyt.setVisibility(View.GONE);
          }
         }catch(Exception e){
-        Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
-    }
+            Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openGalery(){

@@ -591,7 +591,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-
     public void registrarAdministrador() throws ParseException {
         EditText nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
         EditText apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
@@ -649,8 +648,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                 Toast.makeText(Patioventainterfaz.this, "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
 
-
-
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
         // Patron para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -659,7 +656,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         Matcher mather = pattern.matcher(email);//Comprueba si el String ingresado tiene el formato antes mencionado. Si lo cumple devuelve un boleano "true" y si no cumple devuelve "false"
         return mather.find();//Devuelve el boleano
     }
-
 
     public static boolean validarDia(int anio, int mes, int dia) {
         boolean valido = true;
