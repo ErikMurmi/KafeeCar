@@ -1410,28 +1410,48 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/botonListo_btn"
+                <Space
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="100dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:backgroundTint="#F7530C"
-                    android:fontFamily="@font/valorant"
-                    android:insetLeft="5dp"
-                    android:insetTop="5dp"
-                    android:insetRight="5dp"
-                    android:insetBottom="5dp"
-                    android:onClick="registrarVendedor"
-                    android:text="Listo"
-                    android:textColor="#FFFFFF"
-                    android:textSize="22sp"
-                    app:cornerRadius="50dp"
-                    app:iconTint="#FF5722"
-                    app:rippleColor="#FF5722"
-                    app:strokeColor="#FF5722" />
+                    android:layout_height="20dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/botonCancelarVendedores_btn"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valorant"
+                        android:text="Cancelar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/botonListo_btn"
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="#F7530C"
+                        android:fontFamily="@font/valorant"
+                        android:insetLeft="5dp"
+                        android:insetTop="5dp"
+                        android:insetRight="5dp"
+                        android:insetBottom="5dp"
+                        android:onClick="registrarVendedor"
+                        android:text="Listo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        app:cornerRadius="50dp"
+                        app:iconTint="#FF5722"
+                        app:rippleColor="#FF5722"
+                        app:strokeColor="#FF5722" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView11"

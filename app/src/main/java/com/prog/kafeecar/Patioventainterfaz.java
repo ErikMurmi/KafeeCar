@@ -417,11 +417,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         textocedula = findViewById(R.id.cedula_etxt);
         String cedula_str = textocedula.getText().toString();
-        if (cedula_str.length() != 10) {
-            Toast.makeText(Patioventainterfaz.this, "Numero de cedula invalido", Toast.LENGTH_SHORT).show();
-            textocedula.setText("");
-            c++;
-        }
+
+
 
         textotelefono = findViewById(R.id.telefono_etxt);
         String telefono_str = textotelefono.getText().toString();
@@ -455,7 +452,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String mes_str = textomes.getText().toString();
         int mes = Integer.parseInt(mes_str);
         if (mes < 1 || mes > 12) {
-            Toast.makeText(Patioventainterfaz.this, "mes invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "Mes inválido", Toast.LENGTH_SHORT).show();
             textomes.setText("");
             c++;
         }
@@ -464,7 +461,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
         if (anio < 1900 || anio > 2003) {
-            Toast.makeText(Patioventainterfaz.this, "año invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "Año inválido", Toast.LENGTH_SHORT).show();
             textoanio.setText("");
             c++;
         }
@@ -473,7 +470,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
         if (!validarDia(anio, mes, dia)) {
-            Toast.makeText(Patioventainterfaz.this, "Dia invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Patioventainterfaz.this, "Día inválido", Toast.LENGTH_SHORT).show();
             textodia.setText("");
             c++;
         }
@@ -598,7 +595,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
 
-    public boolean validarDia(int anio, int mes, int dia) {
+    public static boolean validarDia(int anio, int mes, int dia) {
         boolean valido = true;
         int numeroDias = -1;
         switch (mes) {
