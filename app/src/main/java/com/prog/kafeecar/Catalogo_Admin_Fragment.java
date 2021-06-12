@@ -231,39 +231,53 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
 
         ImageView v_img = mainView.findViewById(R.id.v_lista_img);
-        ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
-
         TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
         TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
         TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
         TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
 
+        ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
         TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
         TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
         TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
         TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
 
 
-            Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-            Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
-            StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
-            Glide.with(mainView)
-                    .load(filePath)
-                    .into(v_img);
-            try {
-                final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        v_img.setImageBitmap(bitmap);
+        Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
+        placa_v.setText(v_Mostrar.getPlaca());
+        precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
+        titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
+        matricula.setText(v_Mostrar.getMatricula());
+        anio.setText(String.valueOf(v_Mostrar.getAnio()));
+
+        Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
+        titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
+        placa_v1.setText(v_Mostrar1.getPlaca());
+        precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
+        anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
+        matricula1.setText(v_Mostrar1.getMatricula());
+
+
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
+        Glide.with(mainView)
+                .load(filePath)
+                .into(v_img);
+        try {
+            final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
+            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    v_img.setImageBitmap(bitmap);
                     }
-                });
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            //Imagen 2
-            filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
+            });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        //Imagen 2
+        filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
             Glide.with(mainView)
                     .load(filePath)
                     .into(v_img1);
@@ -279,16 +293,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }catch (IOException e){
                 e.printStackTrace();
             }
-            titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-            titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
-            anio.setText(String.valueOf(v_Mostrar.getAnio()));
-            anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
-            matricula.setText(v_Mostrar.getMatricula());
-            matricula1.setText(v_Mostrar1.getMatricula());
-            placa_v.setText(v_Mostrar.getPlaca());
-            placa_v1.setText(v_Mostrar1.getPlaca());
-            precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
-            precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
+
     }
 
 
@@ -473,17 +478,21 @@ public class Catalogo_Admin_Fragment extends Fragment {
     public void buscarVehiculos () {
         EditText placa = mainView.findViewById(R.id.busqueda_placa_etxt);
         String placa_str = placa.getText().toString();
-        Vendedor buscado = null;
+        Vehiculo buscado = null;
         try {
-            buscado = patio.buscarVendedores("Placa",placa_str);
+            buscado = patio.buscarVehiculos("Placa",placa_str);
+            Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
             if (buscado == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo buscado", Toast.LENGTH_SHORT).show();
             } else {
+                Toast.makeText(mainView.getContext(), "2", Toast.LENGTH_SHORT).show();
                 verLista(placa_str, "GHC-2434");
+                Toast.makeText(mainView.getContext(), "3", Toast.LENGTH_SHORT).show();
                 irVerVehiculo1.setVisibility(View.GONE);
+                Toast.makeText(mainView.getContext(), "4", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "No existe el vehiculo", Toast.LENGTH_SHORT).show();
         }
     }
 
