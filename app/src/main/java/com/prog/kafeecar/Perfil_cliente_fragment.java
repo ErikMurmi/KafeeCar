@@ -23,7 +23,7 @@ public class Perfil_cliente_fragment extends Fragment{
     private Button cerrarsesion;
     private Button editar;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainview = inflater.inflate(R.layout.visualizar_cliente, container, false);
+        mainview = inflater.inflate(R.layout.perfil_cliente, container, false);
         login = inflater.inflate(R.layout.login,container,false);
         visualizarperfileditable_Cliente();
 

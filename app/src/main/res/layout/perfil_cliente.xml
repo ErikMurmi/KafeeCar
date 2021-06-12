@@ -3,4 +3,307 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:background="@drawable/plantilla_vacia"
+    android:foregroundGravity="center"
+    app:layout_anchorGravity="center">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleVC_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ocraext"
+            android:text="Visualizar Cliente"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="34sp" />
+
+        <ImageView
+            android:id="@+id/usuario_img"
+            android:layout_width="213dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/foto_usuario" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bordesmarcos"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/datos_personales.txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ocraext"
+                android:text="Datos Personales"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nombre_usuario_txt"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Nombre:"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/nombre_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="Martha" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/apellido_usuario_txt"
+                    android:layout_width="29dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Apellido:"
+                    android:textColorHint="@color/black"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/apellido_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="Pérez"
+                    android:textColorHint="@color/black"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nacimiento_usuario_txt"
+                    android:layout_width="77dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Fecha     Nacimiento"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/dia_usuario_etxt"
+                    android:layout_width="33dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="dia"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/mes_usuario_etxt"
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="mes"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/anio_usuario_etxt"
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="año"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cedula_usuario_txt"
+                    android:layout_width="26dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Cédula:"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/cedula_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="17203647293"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/telefono_usuario_txt"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Teléfono:"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/telefono_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="0998817253"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/correo_usuario_txt"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Correo:"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/correo_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="mperez@gmail.com"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/contrasenia_usuario_txt"
+                    android:layout_width="92dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ocraext"
+                    android:text="Clave:"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/contrasenia_usuario_etxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:text="1234567890" />
+
+                <Button
+                    android:id="@+id/contrasenia_usuario_btn"
+                    android:layout_width="21dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/ic_menu_edit"
+                    android:fontFamily="@font/ocraext"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cerrar_sesion_usuario_btn"
+                android:layout_width="107dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_dark"
+                android:fontFamily="@font/valorant"
+                android:text="Cerrar Sesión"
+                android:textColor="@color/ic_banner_background"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/editar_usuario_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado"
+                android:fontFamily="@font/valorant"
+                android:text="Editar"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
