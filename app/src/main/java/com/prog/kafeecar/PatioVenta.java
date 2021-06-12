@@ -318,20 +318,24 @@ public class PatioVenta {
      */
     public Vehiculo buscarVehiculos(String criterio, String codigo) throws Exception {
         Vehiculo buscado = null;
-        int cont = 0;
-        if(criterio.compareToIgnoreCase("Placa")==0){
+
+        if(criterio.compareTo("Placa")==0){
+            int cont = 0;
             while(cont<vehiculos.contar()){
                 Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
                 if(actual.getPlaca().compareTo(codigo)==0){
                     buscado = actual;
+                    break;
                 }
                 cont++;
             }
         }else if(criterio.compareToIgnoreCase("Matricula")==0){
+            int cont = 0;
             while(cont<vehiculos.contar()){
                 Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
-                if(actual.getPlaca().compareTo(codigo)==0){
+                if(actual.getMatricula().compareTo(codigo)==0){
                     buscado = actual;
+                    break;
                 }
                 cont++;
             }

@@ -56,6 +56,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private LinearLayout irVerVehiculo;
     private LinearLayout irVerVehiculo1;
     private ImageButton selec_vehiculo_img;
+    private ImageButton buscar_btn;
     private Button irEditarVehiculo;
     public Button editar_btn;
     private Button eliminar_btn;
@@ -101,7 +102,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
         eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
-
+        buscar_btn = mainView.findViewById(R.id.busqueda_admin_btn);
         //Layouts
         verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
@@ -198,6 +199,10 @@ public class Catalogo_Admin_Fragment extends Fragment {
         aniadir_vehiculo_btn.setOnClickListener(v -> {
             aniadirVehiculo();
             irCatalogo();
+        });
+
+        buscar_btn.setOnClickListener(v -> {
+            buscarVehiculos();
         });
         return mainView;
     }
@@ -463,6 +468,23 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
 
 
+    }
+
+    public void buscarVehiculos () {
+        EditText placa = mainView.findViewById(R.id.busqueda_placa_etxt);
+        String placa_str = placa.getText().toString();
+        Vendedor buscado = null;
+        try {
+            buscado = patio.buscarVendedores("Placa",placa_str);
+            if (buscado == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo buscado", Toast.LENGTH_SHORT).show();
+            } else {
+                verLista(placa_str, "GHC-2434");
+                irVerVehiculo1.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openGalery(){

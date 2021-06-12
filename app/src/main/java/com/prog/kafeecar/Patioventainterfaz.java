@@ -14,11 +14,13 @@ import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ public class Patioventainterfaz extends AppCompatActivity {
     private ImageButton reg_img;
     private Button irAgendar;
 
+    private LinearLayout aniadirCitaconVehiculo;
+    private LinearLayout adCita;
+
     ImageButton imagenPerfilVendedor;
 
     @Override
@@ -60,8 +65,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
-        irAgendar =  findViewById(R.id.aniadir_cita_btn);
-
+        aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin);
+        adCita = findViewById(R.id.ver_cita_lyt);
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
@@ -77,18 +82,25 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irRegistarCitaVehiculo(View v){
-        TextView placa_txt = findViewById(R.id.placa_txt);
+        //TextView placa_txt = findViewById(R.id.placa_txt);
         Vehiculo v_m=null;
+        Toast.makeText(Patioventainterfaz.this, "1", Toast.LENGTH_SHORT).show();
         try {
-            v_m = patioventa.buscarVehiculos("Placa",placa_txt.toString());
+            v_m = patioventa.buscarVehiculos("Placa","PSD-1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
+        Toast.makeText(Patioventainterfaz.this, "2", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor,new Citas_Admin_Fragment()).commit();
+        Toast.makeText(Patioventainterfaz.this, "4", Toast.LENGTH_SHORT).show();
+        //aniadirCitaconVehiculo.setVisibility(View.VISIBLE);
+
         if(v_m!=null){
             EditText placa_cita = findViewById(R.id.vehiculo_txt);
-            placa_cita.setText(placa_txt.toString());
+            placa_cita.setText(v_m.getPlaca());
+            Toast.makeText(Patioventainterfaz.this, "Vehiculo encontrado", Toast.LENGTH_SHORT).show();
         }
+        Toast.makeText(Patioventainterfaz.this, "5", Toast.LENGTH_SHORT).show();
     }
 
     public static void cargarDatos() throws Exception {
@@ -173,9 +185,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-    public void irRegistrarCita(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
