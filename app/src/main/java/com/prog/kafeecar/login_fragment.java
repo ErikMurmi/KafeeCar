@@ -16,4 +16,5 @@ public class login_fragment extends Fragment {
         View mainView = inflater.inflate(R.layout.login, container, false);
         return mainView;
     }
+
 }
