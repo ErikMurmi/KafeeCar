@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +71,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private Button listo_btn;
     private Button editarlisto_btn;
     private Button editarDeshacer_btn;
+    private Button cancelar_btn;
     private ImageButton buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
     private ImageButton imagenPerfilVendedorEdit_btn;
@@ -91,11 +93,13 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
         listo_btn = mainView.findViewById(R.id.botonListo_btn);
         editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
-
         editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
+        cancelar_btn = mainView.findViewById(R.id.botonCancelarVendedores_btn);
+
         buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
         imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
+
         imagenPerfil_img = mainView.findViewById(R.id.imagen_perfil_vendedor_img);
 
 
@@ -181,6 +185,11 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
             }
+        });
+
+        cancelar_btn.setOnClickListener(v -> {
+            regresarPantallaPrncipal();
+            Toast.makeText(mainView.getContext(), "Se canceló la acción", Toast.LENGTH_SHORT).show();
         });
 
         editarlisto_btn.setOnClickListener(v -> {
@@ -307,36 +316,120 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
     public void registrarVendedor() throws ParseException {
 
-        EditText nombreVendedor = mainView.findViewById(R.id.nombreVendedor_etxt);
-        EditText apellidoVendedor = mainView.findViewById(R.id.apellidoVendedor_etxt);
-        EditText cedulaVendedor = mainView.findViewById(R.id.cedulaVendedor_etxt);
-        EditText diaNacimientoVendedor = mainView.findViewById(R.id.diaNacimientoVendedor_etxt);
-        EditText mesNacimientoVendedor = mainView.findViewById(R.id.mesNacimientoVendedor_etxt);
-        EditText anioNacimientoVendedor = mainView.findViewById(R.id.anioNacimientoVendedor_etxt);
-        EditText telefonoVendedor = mainView.findViewById(R.id.telefonoVendedor_etxt);
-        EditText correoVendedor = mainView.findViewById(R.id.correoVendedor_etxt);
-        EditText contraseniaVendedor = mainView.findViewById(R.id.contraseniaVendedor_etxt);
-        EditText confirmarContraseniaVendedor = mainView.findViewById(R.id.confirmarContraseniaVendedor_etxt);
-        EditText horaEntradaVendedor = mainView.findViewById(R.id.horaEntradaVendedor_etxt);
-        EditText horaSalidaVendedor = mainView.findViewById(R.id.horaSalidaVendedor_etxt);
-        EditText horaAlmuerzoVendedor = mainView.findViewById(R.id.horaAlmuerzoVendedor_etxt);
+        EditText nombreVendedor;
+        EditText apellidoVendedor;
+        EditText cedulaVendedor;
+        EditText diaNacimientoVendedor;
+        EditText mesNacimientoVendedor;
+        EditText anioNacimientoVendedor;
+        EditText telefonoVendedor;
+        EditText correoVendedor;
+        EditText contraseniaVendedor;
+        EditText confirmarContraseniaVendedor;
+        EditText horaEntradaVendedor;
+        EditText horaSalidaVendedor;
+        EditText horaAlmuerzoVendedor;
+        int c =0;
 
+        nombreVendedor = mainView.findViewById(R.id.nombreVendedor_etxt);
+        apellidoVendedor = mainView.findViewById(R.id.apellidoVendedor_etxt);
         String nombreVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
+
+        cedulaVendedor = mainView.findViewById(R.id.cedulaVendedor_etxt);
         String cedulaVendedor_str = cedulaVendedor.getText().toString();
-        String fechaNacimientoVendedor_date = diaNacimientoVendedor.getText().toString()
-                + "-" + mesNacimientoVendedor.getText().toString()
-                + "-" + anioNacimientoVendedor.getText().toString();
+        if(cedulaVendedor_str.length()!=10){
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cedulaVendedor.setText("");
+        }
+
+        anioNacimientoVendedor = mainView.findViewById(R.id.anioNacimientoVendedor_etxt);
+        String anio_str = anioNacimientoVendedor.getText().toString();
+        int anio = Integer.parseInt(anio_str);
+        if (anio < 1900 || anio > 2003) {
+            Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+            anioNacimientoVendedor.setText("");
+            c++;
+        }
+
+        mesNacimientoVendedor = mainView.findViewById(R.id.mesNacimientoVendedor_etxt);
+        String mes_str = mesNacimientoVendedor.getText().toString();
+        int mes = Integer.parseInt(mes_str);
+        if (mes < 1 || mes > 12) {
+            Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+            mesNacimientoVendedor.setText("");
+            c++;
+        }
+
+        diaNacimientoVendedor = mainView.findViewById(R.id.diaNacimientoVendedor_etxt);
+        String dia_str = diaNacimientoVendedor.getText().toString();
+        int dia = Integer.parseInt(dia_str);
+        if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
+            Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
+            diaNacimientoVendedor.setText("");
+            c++;
+        }
+
+        telefonoVendedor = mainView.findViewById(R.id.telefonoVendedor_etxt);
         String telefonoVendedor_str = telefonoVendedor.getText().toString();
+        if (telefonoVendedor_str.length() != 10) {
+            Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
+            telefonoVendedor.setText("");
+            c++;
+        }
+
+        correoVendedor = mainView.findViewById(R.id.correoVendedor_etxt);
         String correoVendedor_str = correoVendedor.getText().toString();
+        if (!Patioventainterfaz.validarMail(correoVendedor_str)) {
+            Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
+            correoVendedor.setText("");
+            c++;
+        }
+
+        contraseniaVendedor = mainView.findViewById(R.id.contraseniaVendedor_etxt);
+        confirmarContraseniaVendedor = mainView.findViewById(R.id.confirmarContraseniaVendedor_etxt);
         String contraseniaVendedor_str = contraseniaVendedor.getText().toString();
         String confirmarContraseniaVendedor_str = confirmarContraseniaVendedor.getText().toString();
-        int horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
-        int horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
-        int horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
+        if (contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str) != 0) {
+            Toast.makeText(mainView.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
+            contraseniaVendedor.setText("");
+            confirmarContraseniaVendedor.setText("");
+            c++;
+        }
 
-        if(contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str)==0){
-            String contraseniaVerificada = contraseniaVendedor_str;
-            patio.aniadirUsuario(new Vendedor(
+        horaEntradaVendedor = mainView.findViewById(R.id.horaEntradaVendedor_etxt);
+        int horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
+        if(horaEntradaVendedor_int >0 && horaEntradaVendedor_int < 24){
+            Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
+            horaEntradaVendedor.setText("");
+            c++;
+        }
+
+        horaAlmuerzoVendedor = mainView.findViewById(R.id.horaAlmuerzoVendedor_etxt);
+        int horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
+        if(horaAlmuerzoVendedor_int >0 && horaAlmuerzoVendedor_int < 24){
+            Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
+            horaAlmuerzoVendedor.setText("");
+            c++;
+        }
+
+        horaSalidaVendedor = mainView.findViewById(R.id.horaSalidaVendedor_etxt);
+        int horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
+        if(horaSalidaVendedor_int >0 && horaSalidaVendedor_int < 24){
+            Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
+            horaSalidaVendedor.setText("");
+            c++;
+        }
+
+        String contraseniaVerificada = contraseniaVendedor_str;
+
+        if (c == 0) {
+            Date fecha = null;
+            try {
+                fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Vendedor vendedor = new Vendedor(
                     String.format("%s.jpg",cedulaVendedor_str),
                     horaEntradaVendedor_int,
                     horaSalidaVendedor_int,
@@ -347,11 +440,17 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     telefonoVendedor_str,
                     correoVendedor_str,
                     contraseniaVerificada,
-                    sdf.parse(fechaNacimientoVendedor_date)
-            ),"Vendedor");
-        }else{
-            contraseniaVendedor.setText("");
-            confirmarContraseniaVendedor.setText("");
+                    sdf.parse(String.valueOf(fecha)));
+            patio.aniadirUsuario(vendedor,"Vendedor");
+            try {
+                if (patio.buscarClientes("Cedula", vendedor.getCedula()) != null) {
+                    Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
+                    regresarPantallaPrncipal();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
         StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
