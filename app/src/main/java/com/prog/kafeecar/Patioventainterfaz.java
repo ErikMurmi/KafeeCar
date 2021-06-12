@@ -171,7 +171,6 @@ public class Patioventainterfaz extends AppCompatActivity {
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
         }
-
     }
 
     public void irRegistrarCita(){
