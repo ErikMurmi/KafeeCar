@@ -22,10 +22,11 @@ public class Perfil_cliente_fragment extends Fragment{
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private Button cerrarsesion;
     private Button editar;
+
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.perfil_cliente, container, false);
-        visualizarperfileditable_Cliente();
-
         cerrarsesion.setOnClickListener(v ->{
             try{
                 Patioventainterfaz usuarioactual = null;

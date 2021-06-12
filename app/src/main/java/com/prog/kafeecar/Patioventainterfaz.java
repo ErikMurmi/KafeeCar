@@ -14,7 +14,6 @@ import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -65,7 +64,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
-        aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin);
+        aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin_lyt);
         adCita = findViewById(R.id.ver_cita_lyt);
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
@@ -297,9 +296,9 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
     public void visualizarCita(View v) throws Exception {
-        /*
+
         setTheme(R.style.Theme_KafeeCar_Diseno);
-        setContentView(R.layout.cita);
+        //setContentView(R.layout.cita);
         TextView fecha = findViewById(R.id.fechaCita_txt);
         TextView hora = findViewById(R.id.horaCita_txt);
         TextView cliente = findViewById(R.id.clienteCita_txt);
@@ -310,7 +309,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         TextView resolucion = findViewById(R.id.resolucionCita_txt);
         TextView precio = findViewById(R.id.precioVentaCita_txt);
         Cita citaPrueba = (Cita) patioventa.getCitas().getPos(0);
-        fecha.setText(new String(format(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita()))));
+        fecha.setText(new String(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita())));
         hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
         cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
         contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
@@ -318,7 +317,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
         descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
         resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
-        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));*/
+        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
 
     }
 
