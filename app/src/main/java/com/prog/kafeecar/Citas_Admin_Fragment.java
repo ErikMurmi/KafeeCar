@@ -20,11 +20,7 @@ public class Citas_Admin_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.citas_admin,container,false);
         patio = Patioventainterfaz.patioventa;
-        verCita = mainview.findViewById(R.id.ver_cita_lyt);
         return mainview;
     }
 
-    /*public void irRegistarCitaV(){
-        verCita.setVisibility(View.VISIBLE);
-    }*/
 }

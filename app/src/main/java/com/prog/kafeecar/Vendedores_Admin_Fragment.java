@@ -597,7 +597,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
          }
         }catch(Exception e){
         Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
-    }
+        }
     }
 
     public void openGalery(){
