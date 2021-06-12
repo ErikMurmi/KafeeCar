@@ -72,8 +72,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private PatioVenta patio;
     private Vehiculo m_vehiculo;
 
-    TextView placa_v;
-    TextView placa_v1;
+
     private Vehiculo vMostrar;
     private Uri foto;
 
@@ -111,9 +110,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
 
-        //Edit Text necesarios
-        placa_v = mainView.findViewById(R.id.v_placa_lista_txt);
-        placa_v1 = mainView.findViewById(R.id.v_placa_lista1_txt);
 
         irAniadirVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
@@ -235,20 +231,23 @@ public class Catalogo_Admin_Fragment extends Fragment {
         TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
         TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
         TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
+        TextView placa_v = mainView.findViewById(R.id.v_placa_lista_txt);
 
         ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
         TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
         TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
         TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
+        TextView placa_v1 = mainView.findViewById(R.id.v_placa_lista1_txt);
         TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
 
 
         Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-        placa_v.setText(v_Mostrar.getPlaca());
-        precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
         titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-        matricula.setText(v_Mostrar.getMatricula());
         anio.setText(String.valueOf(v_Mostrar.getAnio()));
+        matricula.setText(v_Mostrar.getMatricula());
+        placa_v.setText(placa);
+        precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
+
 
         Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
         titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
