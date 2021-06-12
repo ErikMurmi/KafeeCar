@@ -61,20 +61,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
         irAgendar =  findViewById(R.id.aniadir_cita_btn);
-        irAgendar.setOnClickListener(v -> {
-            TextView placa_txt = findViewById(R.id.placa_txt);
-            Vehiculo v_m=null;
-            try {
-                v_m = patioventa.buscarVehiculos("Placa",placa_txt.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
-            if(v_m!=null){
-                EditText placa_cita = findViewById(R.id.vehiculo_txt);
-                placa_cita.setText(placa_txt.toString());
-            }
-        });
 
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
@@ -90,7 +76,20 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-    public void ir
+    public void irRegistarCitaVehiculo(View v){
+        TextView placa_txt = findViewById(R.id.placa_txt);
+        Vehiculo v_m=null;
+        try {
+            v_m = patioventa.buscarVehiculos("Placa",placa_txt.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
+        if(v_m!=null){
+            EditText placa_cita = findViewById(R.id.vehiculo_txt);
+            placa_cita.setText(placa_txt.toString());
+        }
+    }
 
     public static void cargarDatos() throws Exception {
         System.out.println("\t 2. Lista de vehiculos \n");

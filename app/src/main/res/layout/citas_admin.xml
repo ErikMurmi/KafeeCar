@@ -3,14 +3,170 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/cita_individual">
+
+    <LinearLayout
+        android:id="@+id/ver_cita_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <?xml version="1.0" encoding="utf-8"?>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cita_individual"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="40dp"
+            android:paddingRight="20dp">
+
+            <ImageView
+                android:id="@+id/cita_img"
+                android:layout_width="match_parent"
+                android:layout_height="212dp"
+                android:layout_marginTop="@dimen/top_space"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/ic_tesla_round" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="13dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bordesmarcos"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fechaCita_txt"
+                    style="@style/texto_style"
+                    android:fontFamily="@font/ocra"
+                    android:text="Fecha:" />
+
+                <TextView
+                    android:id="@+id/horaCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Hora:" />
+
+                <TextView
+                    android:id="@+id/clienteCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Cliente:" />
+
+                <TextView
+                    android:id="@+id/contactoCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Contacto:" />
+
+                <TextView
+                    android:id="@+id/vendedorCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vendedor:" />
+
+                <TextView
+                    android:id="@+id/vehiculoCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vehículo:" />
+
+                <TextView
+                    android:id="@+id/descripcionCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/ocra"
+                    android:text="Descripción:" />
+
+                <TextView
+                    android:id="@+id/resolucionCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_space"
+                    android:fontFamily="@font/ocra"
+                    android:text="Resolución:" />
+
+                <TextView
+                    android:id="@+id/precioVentaCita_txt"
+                    style="@style/texto_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="Precio venta:" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="13dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/eliminar_vehiculo_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/boton_redondeado_dark"
+                    android:fontFamily="@font/valoran"
+                    android:text="Anular"
+                    android:textColor="@color/white" />
+
+                <Space
+                    android:layout_width="22dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/editar_vehiculo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valoran"
+                    android:onClick="visualizarCita"
+                    android:text="editar"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/add_cita_admin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/cita_nueva_back"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
