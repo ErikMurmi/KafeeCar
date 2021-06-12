@@ -32,12 +32,12 @@ public class Citas_cliente_fragment extends Fragment {
     private ScrollView vercita;
     private LinearLayout editarcita;
     private PatioVenta patio;
-    private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.listacitas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
+
         //Botones
 
         guardar = mainview.findViewById(R.id.guardar_btn);
@@ -162,13 +162,12 @@ public class Citas_cliente_fragment extends Fragment {
             Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             String h = horas_str;
             int entero = Integer.parseInt(h);
-            PatioVenta patio = new PatioVenta();
+
             Vendedor ve = patio.buscarVendedores("cedula", "1800370809");
             Vehiculo v = patio.buscarVehiculos("matricula", "A001");
             Cliente cliente = patio.buscarClientes("cedula", "1752866291");
             Cita aux = new Cita(fecha, entero, resolucion_str, cliente, ve, v);
-            PatioVenta p = new PatioVenta();
-            p.aniadirCita(aux);
+            patio.aniadirCita(aux);
         }
     }
 
@@ -181,7 +180,6 @@ public class Citas_cliente_fragment extends Fragment {
         EditText textoplaca;
 
         int c=0;
-        PatioVenta patioventa = new PatioVenta();
 
         textoplaca = mainview.findViewById(R.id.placa_etxt);
         String placa_str = textoplaca.getText().toString();
@@ -231,11 +229,11 @@ public class Citas_cliente_fragment extends Fragment {
         {
 
             Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-            Vehiculo v = patioventa.buscarVehiculos("placa",placa_str);
-            if(patioventa.asignarVendedor(horas_str,fecha)!=null){
-                Vendedor vendedor = patioventa.asignarVendedor(horas_str,fecha);
+            Vehiculo v = patio.buscarVehiculos("placa",placa_str);
+            if(patio.asignarVendedor(horas_str,fecha)!=null){
+                Vendedor vendedor = patio.asignarVendedor(horas_str,fecha);
                 int entero = Integer.parseInt(horas_str);
-                Cita ac = patioventa.buscarCitas("correo","Hola@gmail.com");
+                Cita ac = patio.buscarCitas("correo","Hola@gmail.com");
                 ac.actualizar(fecha,entero,v,vendedor,(Cliente) Patioventainterfaz.usuarioActual);
             }
             else
@@ -260,7 +258,6 @@ public class Citas_cliente_fragment extends Fragment {
         EditText textoanio;
         EditText textohoras;
         EditText textoplaca;
-        Patioventainterfaz patio = new Patioventainterfaz();
         textoplaca = mainview.findViewById(R.id.placa_etxt);
         textodia = mainview.findViewById(R.id.dia_etxt);
         textomes = mainview.findViewById(R.id.mes_etxt);
@@ -271,7 +268,7 @@ public class Citas_cliente_fragment extends Fragment {
         Cita cita = p.buscarCitas("cliente",cliente.getCedula());
         textohoras.setText(cita.getHora());
         textoplaca.setText(cita.getVehiculo().getPlaca());
-        String fecha =  patio.getFechaMod(cita.getFechaCita());
+        String fecha =  Patioventainterfaz.getFechaMod(cita.getFechaCita());
         String dia = fecha.split("-")[2];
         String mes = fecha.split("-")[1];
         String anio = fecha.split("-")[0];
@@ -290,7 +287,7 @@ public class Citas_cliente_fragment extends Fragment {
         TextView Telefonolista2;
         TextView Matriculalista;
         TextView Matriculalista2;
-        PatioVenta p = new PatioVenta();
+
 
         horalista = mainview.findViewById(R.id.hora_lista_txt);
         horalista2 = mainview.findViewById(R.id.hora_lista2_txt);
@@ -302,13 +299,13 @@ public class Citas_cliente_fragment extends Fragment {
         Matriculalista2 = mainview.findViewById(R.id.matricula_licencia2_txt);
 
 
-        Cita cita = p.buscarCitas("Cliente", "1750115623");
+        Cita cita = patio.buscarCitas("Cliente", "1750115623");
         horalista.setText(cita.getHora());
         Clientelista.setText(cita.getVisitante().getNombre());
         Telefonolista.setText(cita.getVisitante().getTelefono());
         Matriculalista.setText(cita.getVehiculo().getMatricula());
 
-        Cita cita2 = p.buscarCitas("Cliente", "175014048");
+        Cita cita2 = patio.buscarCitas("Cliente", "175014048");
         horalista2.setText(cita2.getHora());
         Clientelista2.setText(cita2.getVisitante().getNombre());
         Telefonolista2.setText(cita2.getVisitante().getTelefono());

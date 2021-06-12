@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -100,6 +101,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
         eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
+
         //Layouts
         verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
@@ -161,10 +163,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
             verVehiculo.setVisibility(View.GONE);
             irVerVehiculo.setVisibility(View.GONE);
             aniadir_vehiculo.setVisibility(View.GONE);
-            //Activar el diseño deseadow
+            //Activar el diseño deseado
             editar_vehiculo.setVisibility(View.VISIBLE);
             verVehiculoEditable("PSD-1234");
         });
+
 
         selec_vehiculo_img.setOnClickListener(v -> {
             openGalery();
@@ -423,7 +426,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
         String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
         titulo.setText(titulo_str);
-        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
+        placa.setText(vMostrar.getPlaca());
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
         anio.setText(format("Año :%s",vMostrar.getAnio()));
         marca.setText(format("Marca :%s",vMostrar.getMarca()));

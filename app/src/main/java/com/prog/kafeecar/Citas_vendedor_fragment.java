@@ -22,9 +22,22 @@ public class Citas_vendedor_fragment extends Fragment{
     private View mainview;
     private PatioVenta patio;
 
+    public EditText placa_txt;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.listacitas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
         return mainview;
     }
+
+    public void irAniadirCita(String placa){
+        if(!placa.equals("")){
+            try {
+                Vehiculo v = patio.buscarVehiculos("Placa",placa);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

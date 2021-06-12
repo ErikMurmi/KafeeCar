@@ -32,8 +32,6 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.lang.String.*;
-
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
@@ -45,6 +43,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     private Uri foto;
 
     private ImageButton reg_img;
+    private Button irAgendar;
 
     ImageButton imagenPerfilVendedor;
 
@@ -61,6 +60,21 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
+        irAgendar =  findViewById(R.id.aniadir_cita_btn);
+        irAgendar.setOnClickListener(v -> {
+            TextView placa_txt = findViewById(R.id.placa_txt);
+            Vehiculo v_m=null;
+            try {
+                v_m = patioventa.buscarVehiculos("Placa",placa_txt.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
+            if(v_m!=null){
+                EditText placa_cita = findViewById(R.id.vehiculo_txt);
+                placa_cita.setText(placa_txt.toString());
+            }
+        });
 
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
@@ -76,6 +90,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+    public void ir
 
     public static void cargarDatos() throws Exception {
         System.out.println("\t 2. Lista de vehiculos \n");
@@ -160,6 +175,10 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     }
 
+    public void irRegistrarCita(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -167,7 +186,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_citas:
-                            selectedFragement = new Citas_Fragment();
+                            selectedFragement = new Citas_Admin_Fragment();
                             break;
                         case R.id.nav_cat:
                             selectedFragement = new Catalogo_Admin_Fragment();
@@ -271,8 +290,9 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
     public void visualizarCita(View v) throws Exception {
-        //setTheme(R.style.Theme_KafeeCar_Diseno);
-        //setContentView(R.layout.cita);
+        /*
+        setTheme(R.style.Theme_KafeeCar_Diseno);
+        setContentView(R.layout.cita);
         TextView fecha = findViewById(R.id.fechaCita_txt);
         TextView hora = findViewById(R.id.horaCita_txt);
         TextView cliente = findViewById(R.id.clienteCita_txt);
@@ -291,7 +311,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
         descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
         resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
-        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
+        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));*/
 
     }
 
