@@ -68,7 +68,7 @@
                 android:fontFamily="@font/ocraext"
                 android:inputType="textPersonName"
                 android:paddingLeft="20dp"
-                android:text="17133220875"
+                android:text="1713322087"
                 android:textSize="16sp" />
 
             <TextView
@@ -148,7 +148,7 @@
                     android:background="@drawable/bordesbotonfilled"
                     android:ems="10"
                     android:fontFamily="@font/ocraext"
-                    android:hint="mm"
+                    android:hint="dd"
                     android:inputType="date"
                     android:text="08"
                     android:textAlignment="center"
@@ -162,7 +162,7 @@
                     android:background="@drawable/bordesbotonfilled"
                     android:ems="10"
                     android:fontFamily="@font/ocraext"
-                    android:hint="dd"
+                    android:hint="mm"
                     android:inputType="date"
                     android:text="07"
                     android:textAlignment="center"

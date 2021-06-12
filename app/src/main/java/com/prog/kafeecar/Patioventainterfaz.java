@@ -91,17 +91,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
-        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-
-        //patioventa.aniadirUsuario(admin,"Administrador");
+        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg",8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
-        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "example", "1207", sdf.parse("08-4-2001")), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "example", "1207", sdf.parse("08-4-2001")), "Cliente");
-        //patioventa.setAdministrador(admin);
+        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
         System.out.println("Se añadieron 5 vendedores ");
         System.out.println("*********************************");
         System.out.println("\t 2. Lista de citas \n");
@@ -176,8 +175,8 @@ public class Patioventainterfaz extends AppCompatActivity {
                         case R.id.nav_vendedores:
                             selectedFragement = new Vendedores_Admin_Fragment();
                             break;
-                        case R.id.nav_estadisticas:
-                            selectedFragement = new Estadisticas_Fragment();
+                        case R.id.nav_admin_perfil:
+                            selectedFragement = new Perfil_admin_Fragment();
                             break;
                         case R.id.nav_ventas:
                             selectedFragement = new Ventas_admin_Fragment();
@@ -473,7 +472,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         textodia = findViewById(R.id.dia_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
-        if (validarDia(anio, mes, dia)) {
+        if (!validarDia(anio, mes, dia)) {
             Toast.makeText(Patioventainterfaz.this, "Dia invalido", Toast.LENGTH_SHORT).show();
             textodia.setText("");
             c++;
@@ -586,6 +585,8 @@ public class Patioventainterfaz extends AppCompatActivity {
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
                 Toast.makeText(Patioventainterfaz.this, "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
+
+
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
         // Patron para validar el email
