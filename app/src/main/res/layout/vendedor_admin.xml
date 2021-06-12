@@ -43,11 +43,7 @@
 
                 <ImageButton
                     android:id="@+id/busquedaCedulaVendedor_btn2"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
+                    style="@style/Boton_buscar"
                     app:srcCompat="@drawable/icono_busqueda" />
             </LinearLayout>
 
@@ -1045,14 +1041,8 @@
 
             <Button
                 android:id="@+id/editar_vendedor_btn"
-                android:layout_width="47dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado"
-                android:fontFamily="@font/valorant"
-                android:text="Editar"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                style="@style/boton_editar"
+                android:text="Editar" />
 
         </LinearLayout>
     </LinearLayout>
@@ -1433,20 +1423,9 @@
 
                     <Button
                         android:id="@+id/botonListo_btn"
-                        android:layout_width="135dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:background="@drawable/boton_redondeado"
-                        android:backgroundTint="#F7530C"
-                        android:fontFamily="@font/valorant"
-                        android:insetLeft="5dp"
-                        android:insetTop="5dp"
-                        android:insetRight="5dp"
-                        android:insetBottom="5dp"
+                        style="@style/boton_listo"
                         android:onClick="registrarVendedor"
                         android:text="Listo"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp"
                         app:cornerRadius="50dp"
                         app:iconTint="#FF5722"
                         app:rippleColor="#FF5722"

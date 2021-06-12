@@ -49,4 +49,37 @@
         <item name="android:inputType">textPersonName</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="Boton_buscar">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:background">@drawable/bordesboton</item>
+        <item name="android:backgroundTint">@color/botones</item>
+    </style>
+
+    <style name="boton_listo">
+        <item name="android:layout_width">135dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:background">@drawable/boton_redondeado</item>
+        <item name="android:backgroundTint">#F7530C</item>
+        <item name="android:fontFamily">@font/valorant</item>
+        <item name="android:insetLeft">5dp</item>
+        <item name="android:insetTop">5dp</item>
+        <item name="android:insetRight">5dp</item>
+        <item name="android:insetBottom">5dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="boton_editar">
+        <item name="android:layout_width">47dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/boton_redondeado</item>
+        <item name="android:fontFamily">@font/valorant</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
