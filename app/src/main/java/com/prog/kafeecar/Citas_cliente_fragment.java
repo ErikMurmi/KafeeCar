@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class listacitas_cliente_fragment extends Fragment {
+public class Citas_cliente_fragment extends Fragment {
 
     private View mainview;
     private Button guardar;
@@ -95,9 +95,8 @@ public class listacitas_cliente_fragment extends Fragment {
         textovendedor = mainview.findViewById(R.id.vendedor_txt);
         textovehiculo = mainview.findViewById(R.id.vehiculo_txt);
         textodescripcion = mainview.findViewById(R.id.descripcion_txt);
-        PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = p.buscarCitas("cliente", cliente.getCedula());
+        Cita cita = patio.buscarCitas("cliente", cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
         String dia = fecha.split("-")[2];
         String mes = fecha.split("-")[1];
@@ -118,7 +117,6 @@ public class listacitas_cliente_fragment extends Fragment {
         EditText textomes;
         EditText textoanio;
         EditText textohoras;
-        EditText textoresolucion;
 
         textodia = mainview.findViewById(R.id.dia_etxt);
         String dia_str = textodia.getText().toString();
@@ -282,4 +280,38 @@ public class listacitas_cliente_fragment extends Fragment {
         textodia.setText(dia);
     }
 
+    public void verlistacitas() throws Exception
+    {
+        TextView horalista;
+        TextView horalista2;
+        TextView Clientelista;
+        TextView Clientelista2;
+        TextView Telefonolista;
+        TextView Telefonolista2;
+        TextView Matriculalista;
+        TextView Matriculalista2;
+        PatioVenta p = new PatioVenta();
+
+        horalista = mainview.findViewById(R.id.hora_lista_txt);
+        horalista2 = mainview.findViewById(R.id.hora_lista2_txt);
+        Clientelista = mainview.findViewById(R.id.cliente_listacita_txt);
+        Clientelista2 = mainview.findViewById(R.id.clente_listacita2_txt);
+        Telefonolista = mainview.findViewById(R.id.telefono_listacita_txt);
+        Telefonolista2 = mainview.findViewById(R.id.telefono_listacita2_txt);
+        Matriculalista =mainview.findViewById(R.id.matricula_listacita_txt);
+        Matriculalista2 = mainview.findViewById(R.id.matricula_licencia2_txt);
+
+
+        Cita cita = p.buscarCitas("Cliente", "1750115623");
+        horalista.setText(cita.getHora());
+        Clientelista.setText(cita.getVisitante().getNombre());
+        Telefonolista.setText(cita.getVisitante().getTelefono());
+        Matriculalista.setText(cita.getVehiculo().getMatricula());
+
+        Cita cita2 = p.buscarCitas("Cliente", "175014048");
+        horalista2.setText(cita2.getHora());
+        Clientelista2.setText(cita2.getVisitante().getNombre());
+        Telefonolista2.setText(cita2.getVisitante().getTelefono());
+        Matriculalista2.setText(cita2.getVehiculo().getMatricula());
+    }
 }

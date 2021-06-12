@@ -57,6 +57,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private ImageButton selec_vehiculo_img;
     private Button irEditarVehiculo;
     public Button editar_btn;
+    private Button eliminar_btn;
     private Button aniadir_vehiculo_btn;
 
 
@@ -67,10 +68,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private ScrollView aniadir_vehiculo;
 
     private PatioVenta patio;
+    private Vehiculo m_vehiculo;
 
     TextView placa_v;
     TextView placa_v1;
-
+    private Vehiculo vMostrar;
     private Uri foto;
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
@@ -96,6 +98,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
+        eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
         //Layouts
         verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
@@ -128,7 +131,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculo("PSD-1234");
+            try {
+                visualizarVehiculo("PSD-1234");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         irVerVehiculo1.setOnClickListener(v -> {
@@ -140,7 +147,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculo("GHC-2434");
+            try {
+                visualizarVehiculo("GHC-2434");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -157,6 +168,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         selec_vehiculo_img.setOnClickListener(v -> {
             openGalery();
+        });
+
+        eliminar_btn.setOnClickListener(v -> {
+            try {
+                patio.removerVehiculo(m_vehiculo.getMatricula());
+                Toast.makeText(mainView.getContext(),"Se ha eliminado el vehiculo", Toast.LENGTH_SHORT).show();
+                irCatalogo();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(mainView.getContext(),"No se pudo eliminar", Toast.LENGTH_SHORT).show();
+            }
         });
 
         deshacer_btn.setOnClickListener(v -> {
@@ -259,11 +281,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             placa_v1.setText(v_Mostrar1.getPlaca());
             precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
             precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
-
-
-
-
-
     }
 
 
@@ -314,7 +331,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String msg = "";
 
         try {
-            Vehiculo m_vehiculo = patio.buscarVehiculos("Placa",placa);
+
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -348,7 +365,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String msg = "";
 
         try {
-            Vehiculo m_vehiculo = patio.buscarVehiculos("Placa",placa);
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -381,8 +397,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
-    public void visualizarVehiculo(String placa_buscar){
+    public void visualizarVehiculo(String placa_buscar) throws Exception {
 
+        m_vehiculo = patio.buscarVehiculos("Placa",placa_buscar);
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);
@@ -400,6 +417,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         Vehiculo vMostrar  = null;
         try {
             vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
+            m_vehiculo = vMostrar;
         } catch (Exception e) {
             e.printStackTrace();
         }

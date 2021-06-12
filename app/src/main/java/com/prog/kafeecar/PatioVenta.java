@@ -154,6 +154,11 @@ public class PatioVenta {
             clientes.add(nuevo);
             agregado = clientes.contiene(nuevo);
         }
+        if(tipo.compareTo("Administrador")==0){
+            vendedores.add(nuevo);
+            setAdministrador((Vendedor) nuevo);
+            agregado = vendedores.contiene(nuevo);
+        }
         return agregado;
     }
     /**

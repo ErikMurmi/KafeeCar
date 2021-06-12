@@ -15,15 +15,15 @@
         android:layout_marginBottom="5dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/barra_nav"
+        android:id="@+id/barra_nav_vendedor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
-        android:foregroundGravity="center_vertical"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/boton_redondeado_dark"
+        android:foregroundGravity="center_vertical"
         app:itemIconSize="35dp"
         app:itemIconTint="@drawable/nav_item_colors"
         app:labelVisibilityMode="unlabeled"
