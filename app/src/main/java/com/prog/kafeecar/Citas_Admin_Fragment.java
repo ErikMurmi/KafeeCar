@@ -113,21 +113,21 @@ public class Citas_Admin_Fragment extends Fragment {
         ImageView c_img = mainView.findViewById(R.id.c_lista_img);
         TextView horario = mainView.findViewById(R.id.hora_c_lista_txt);
         TextView cliente = mainView.findViewById(R.id.nombre_c_lista_txt);
-        TextView matricula =  mainView.findViewById(R.id.matricula_c_lista_txt);
+        TextView placa_txt =  mainView.findViewById(R.id.matricula_c_lista_txt);
         TextView telefono = mainView.findViewById(R.id.telefono_c_lista_txt);
 
         ImageView c_img1 = mainView.findViewById(R.id.c_lista1_img);
         TextView horario1 = mainView.findViewById(R.id.hora_c_lista1_txt);
         TextView cliente1 = mainView.findViewById(R.id.nombre_c_lista1_txt);
-        TextView matricula1 =  mainView.findViewById(R.id.matricula_c_lista1_txt);
+        TextView placa1_txt =  mainView.findViewById(R.id.matricula_c_lista1_txt);
         TextView telefono1 = mainView.findViewById(R.id.telefono_c_lista1_txt);
 
 
         Cita c_Mostrar = patio.buscarCitas("Vehiculo",placa);
         if(c_Mostrar!=null){
-            horario.setText(String.format("%02d:00%s - %02d:00%s",c_Mostrar.getHora(),formatoHora(c_Mostrar.getHora()),c_Mostrar.getHora()+1,formatoHora(c_Mostrar.getHora()+1)));
+            horario.setText(String.format("%02d:00%s-%02d:00%s",c_Mostrar.getHora(),formatoHora(c_Mostrar.getHora()),c_Mostrar.getHora()+1,formatoHora(c_Mostrar.getHora()+1)));
             cliente.setText(c_Mostrar.getVisitante().getNombre());
-            matricula.setText(c_Mostrar.getVehiculo().getMatricula());
+            placa_txt.setText(c_Mostrar.getVehiculo().getPlaca());
             telefono.setText(c_Mostrar.getVisitante().getTelefono());
         }else{
             Toast.makeText(mainView.getContext(), "No se encontro el vehiculo "+placa, Toast.LENGTH_SHORT).show();
@@ -136,9 +136,9 @@ public class Citas_Admin_Fragment extends Fragment {
 
 
         Cita c_Mostrar1 = patio.buscarCitas("Vehiculo",placa1);
-        //horario1.setText(String.format("%.2d:00 - %.2d:00",c_Mostrar1.getHora(), c_Mostrar1.getHora()+1));
+        horario1.setText(String.format("%02d:00%s-%02d:00%s",c_Mostrar1.getHora(),formatoHora(c_Mostrar1.getHora()),c_Mostrar1.getHora()+1,formatoHora(c_Mostrar1.getHora()+1)));
         cliente1.setText(c_Mostrar1.getVisitante().getNombre());
-        matricula1.setText(c_Mostrar1.getVehiculo().getMatricula());
+        placa1_txt.setText(c_Mostrar1.getVehiculo().getPlaca());
         telefono1.setText(c_Mostrar1.getVisitante().getTelefono());
 
 

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -197,7 +197,7 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Cliente"
+                                android:text="Cliente:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -207,6 +207,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:hint="8:00 am"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -223,7 +224,7 @@
                                 android:layout_width="106dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Telefono"
+                                android:text="Telefono:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -233,6 +234,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:hint="13:00 pm"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -249,7 +251,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Matricula"
+                                android:text="Placa:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -258,6 +260,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -321,7 +324,7 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Cliente"
+                                android:text="Cliente:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -331,6 +334,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:hint="8:00 am"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -347,7 +351,7 @@
                                 android:layout_width="106dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Telefono"
+                                android:text="Teléfono:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -357,6 +361,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:hint="13:00 pm"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -370,10 +375,10 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:text="Matricula"
+                                android:text="Placa:"
                                 android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
@@ -382,6 +387,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
+                                android:textColor="@color/black"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -448,7 +454,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/cita_individual"
+            android:background="@drawable/cita_back"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="40dp"
@@ -598,7 +604,7 @@
         android:background="@drawable/cita_nueva_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -613,108 +619,144 @@
                 android:id="@+id/Carro.img"
                 android:layout_width="278dp"
                 android:layout_height="166dp"
+                android:layout_marginBottom="10dp"
                 app:srcCompat="@mipmap/ic_tesla" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/fechaCita.title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="102dp"
-                    android:fontFamily="@font/ocra"
-                    android:text="Fecha de cita"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/HoraCita.title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="Hora"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/fechacitames_txt"
-                    android:layout_width="70dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    android:inputType="textPersonName"
-                    android:textColor="#CEC9D5" />
+                    <TextView
+                        android:id="@+id/fechaCita.title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/ocra"
+                        android:text="Fecha de cita"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/fechacitadia_txt"
-                    android:layout_width="70dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName"
-                    android:textColor="#CEC9D5" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/fechacitaanio_txt"
-                    android:layout_width="70dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
+                        <EditText
+                            android:id="@+id/fechacitames_txt"
+                            android:layout_width="70dp"
+                            android:layout_height="37dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/bordesboton"
+                            android:ems="10"
 
-                    android:inputType="textPersonName"
-                    android:textColor="#CEC9D5" />
+                            android:fontFamily="@font/ocra"
+                            android:hint="dd"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:textColor="#CEC9D5" />
 
-                <EditText
-                    android:id="@+id/fechacitahoracita_txt"
-                    android:layout_width="70dp"
-                    android:layout_height="42dp"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName"
+                        <EditText
+                            android:id="@+id/fechacitadia_txt"
+                            android:layout_width="70dp"
+                            android:layout_height="37dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/bordesboton"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+                            android:hint="mm"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:textColor="#CEC9D5" />
 
-                    android:textColor="#CEC9D5" />
+                        <EditText
+                            android:id="@+id/fechacitaanio_txt"
+                            android:layout_width="70dp"
+                            android:layout_height="37dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/bordesboton"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+
+                            android:hint="aaaa"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:textColor="#CEC9D5" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/HoraCita.title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/ocra"
+                        android:text="Hora"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/fechacitahoracita_txt"
+                        android:layout_width="70dp"
+                        android:layout_height="37dp"
+                        android:background="@drawable/bordesboton"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:hint="h"
+
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textColor="#CEC9D5" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/Cliente.title"
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="@dimen/edit_txt_espacio"
+                android:layout_marginBottom="@dimen/espacios"
                 android:fontFamily="@font/ocra"
                 android:text="Cliente "
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/cliente_txt"
-                    android:layout_width="284dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:background="@drawable/bordesboton"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
@@ -722,76 +764,84 @@
                     android:inputType="textPersonName"
                     android:textColor="#CEC9D5" />
 
-                <Button
-                    android:id="@+id/mascliente_btn"
-                    android:layout_width="45dp"
+                <ImageButton
+                    android:id="@+id/busqueda_citas_admin_btn2"
+                    android:layout_width="60dp"
                     android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/bordesboton"
                     android:backgroundTint="@color/botones"
-                    android:fontFamily="@font/valorant"
-                    android:text="..."
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    app:srcCompat="@drawable/icono_busqueda" />
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/Vendedor.title"
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="@dimen/edit_txt_espacio"
+                android:layout_marginBottom="@dimen/espacios"
                 android:fontFamily="@font/ocra"
                 android:text="Vendedor"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/vendedor_txt"
-                    android:layout_width="284dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:background="@drawable/bordesboton"
+
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-
                     android:inputType="textPersonName"
                     android:textColor="#CEC9D5" />
 
-                <Button
-                    android:id="@+id/masvendedor_btn"
-                    android:layout_width="45dp"
+                <ImageButton
+                    android:id="@+id/busqueda_citas_admin_btn3"
+                    android:layout_width="60dp"
                     android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/bordesboton"
                     android:backgroundTint="@color/botones"
-                    android:fontFamily="@font/valorant"
-                    android:text="..."
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    app:srcCompat="@drawable/icono_busqueda" />
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/vehiculo.title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="@dimen/edit_txt_espacio"
+                android:layout_marginBottom="@dimen/espacios"
                 android:fontFamily="@font/ocra"
                 android:text="Vehículo"
+                android:textColor="@color/black"
                 android:textSize="18dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/vehiculo_txt"
-                    android:layout_width="284dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:background="@drawable/bordesboton"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
@@ -799,37 +849,40 @@
                     android:inputType="textPersonName"
                     android:textColor="#CEC9D5" />
 
-                <Button
-                    android:id="@+id/masvehiculo_btn"
-                    android:layout_width="45dp"
+                <ImageButton
+                    android:id="@+id/busqueda_citas_admin_btn4"
+                    android:layout_width="60dp"
                     android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/bordesboton"
                     android:backgroundTint="@color/botones"
-                    android:fontFamily="@font/valorant"
-                    android:text="..."
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    app:srcCompat="@drawable/icono_busqueda" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/Resolucion.title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="@dimen/edit_txt_espacio"
+                android:layout_marginBottom="@dimen/espacios"
                 android:fontFamily="@font/ocra"
                 android:text="Resolución"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/resolucion_txt"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="88dp"
                 android:background="@drawable/bordesmarcos"
                 android:ems="10"
                 android:fontFamily="@font/ocra"
-                android:inputType="textPersonName"
 
+                android:inputType="textMultiLine|text"
                 android:textColor="#CEC9D5" />
 
             <Space
@@ -847,7 +900,7 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="82dp"
+                    android:layout_marginEnd="50dp"
                     android:background="@drawable/bordesboton"
                     android:backgroundTint="@color/black"
                     android:fontFamily="@font/valorant"
