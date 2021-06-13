@@ -54,7 +54,13 @@ public class Patioventainterfaz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+
+        //Login normal
+        //setContentView(R.layout.login);
+
+        // Login de pruebas
+        setContentView(R.layout.login_sinclaves);
+
         try {
             cargarDatos();
 
@@ -138,9 +144,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
         Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
-        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
+        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
+        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
         patioventa.aniadirCita(c1);
         patioventa.aniadirCita(c2);
         patioventa.aniadirCita(c3);
@@ -184,6 +190,20 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+    public void irAdmin(View v){
+        usuarioActual = patioventa.getAdministrador();
+        irAplicacion("ADMIN");
+    }
+
+    public void irVendedor(View v) throws Exception {
+        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
+        irAplicacion("VENDEDOR");
+    }
+
+    public void irCliente(View v) throws Exception {
+        usuarioActual = (Usuario) patioventa.getClientes().getPos(1);
+        irAplicacion("CLIENTE");
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -709,7 +729,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void salir(View v){
         usuarioActual =  null;
-        setContentView(R.layout.login);
+        //setContentView(R.layout.login);
+        setContentView(R.layout.login_sinclaves);
     }
 
 

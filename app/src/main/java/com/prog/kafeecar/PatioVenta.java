@@ -274,17 +274,19 @@ public class PatioVenta {
      */
     public Cita buscarCitas(String criterio, String texto) throws Exception {
         Cita citaEncontrada = null;
-        int cont = 0;
-        if(criterio.compareToIgnoreCase("vehiculo")==0){
+
+        if(criterio.compareToIgnoreCase("Vehiculo")==0){
+            int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getMatricula().compareTo(texto)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(texto)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
                 cont++;
             }
-        }else if(criterio.compareToIgnoreCase("vendedor")==0){
+        }else if(criterio.compareToIgnoreCase("Vendedor")==0){
+            int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
                 if(actual.getVendedorCita().getNombre().compareTo(texto)==0){
@@ -293,7 +295,8 @@ public class PatioVenta {
                 }
                 cont++;
             }
-        } else if(criterio.compareToIgnoreCase("cliente")==0){
+        } else if(criterio.compareToIgnoreCase("Cliente")==0){
+            int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
                 if(actual.getVisitante().getCedula().compareTo(texto)==0){

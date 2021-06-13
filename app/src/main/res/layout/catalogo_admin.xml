@@ -333,6 +333,7 @@
                             android:layout_marginTop="13dp"
                             android:fontFamily="@font/ocraext"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textSize="21sp"
                             tools:text="Cybertruck" />
 
@@ -351,7 +352,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Año:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -378,7 +379,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Matricula:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -405,7 +406,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Placa:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -472,6 +473,7 @@
                             android:layout_marginTop="13dp"
                             android:fontFamily="@font/ocraext"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textSize="21sp"
                             tools:text="Cybertruck" />
 
@@ -490,7 +492,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Año:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -517,7 +519,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Matricula:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -544,7 +546,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
                                 android:text="Placa:"
-                                android:textColor="@color/black"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="17sp" />
 
                             <TextView
