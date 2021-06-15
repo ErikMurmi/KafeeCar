@@ -581,6 +581,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+
     public void registrarAdministrador() throws ParseException {
         EditText nombreAdmin;
         EditText apellidoAdmin;
@@ -804,6 +805,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
 
     }
+
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
         // Patron para validar el email

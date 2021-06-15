@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,24 +23,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.bumptech.glide.Glide;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.String.format;
 
@@ -225,7 +217,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
 
-
         ImageView v_img = mainView.findViewById(R.id.v_lista_img);
         TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
         TextView anio = mainView.findViewById(R.id.v_anio_lista_txt);
@@ -296,37 +287,115 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     public void aniadirVehiculo(){
         String msg = "";
+        int c=0;
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
-        EditText matricula_ad = mainView.findViewById(R.id.aniadir_matricula_etxt);
-        EditText anio_ad = mainView.findViewById(R.id.aniadir_anio_etxt);
-        EditText descripcion_ad = mainView.findViewById(R.id.aniadir_descripcion_etxt);
-        EditText marca_ad = mainView.findViewById(R.id.aniadir_marca_etxt);
-        EditText modelo_ad = mainView.findViewById(R.id.aniadir_modelo_etxt);
-        EditText color_ad = mainView.findViewById(R.id.aniadir_color_etxt);
-        EditText pinicial_ad = mainView.findViewById(R.id.aniadir_pinicial_etxt);
-        EditText pventa_ad = mainView.findViewById(R.id.aniadir_precio_venta_etxt);
-        EditText ppromocion_ad = mainView.findViewById(R.id.aniadir_precio_promocion_etxt);
-        CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
+        if(!isEmpty(placa_ad)){
+            Toast.makeText(mainView.getContext(),"Campo de placa vacio", Toast.LENGTH_SHORT).show();
+            c++;
+        }else if(placa_ad.getText().toString().length() != 8){
+            Toast.makeText(mainView.getContext(),"Placa no válida", Toast.LENGTH_SHORT).show();
+            c++;
+        }
 
-        patio.aniadirVehiculo(
-                new Vehiculo(
-                        placa_ad.getText().toString(),
-                        matricula_ad.getText().toString(),
-                        marca_ad.getText().toString(),
-                        modelo_ad.getText().toString(),
-                        color_ad.getText().toString(),
-                        descripcion_ad.getText().toString(),
-                        Float.parseFloat(pinicial_ad.getText().toString()),
-                        Float.parseFloat(pventa_ad.getText().toString()),
-                        Float.parseFloat(ppromocion_ad.getText().toString()),
-                        matriculado_ad.isChecked(),
-                        Integer.parseInt(anio_ad.getText().toString()),
-                        String.format(placa_ad.getText().toString()+".jpg")
-                )
-        );
+
+        EditText matricula_ad = mainView.findViewById(R.id.aniadir_matricula_etxt);
+        if(!isEmpty(matricula_ad)){
+            Toast.makeText(mainView.getContext(),"Campo de matricula vacio", Toast.LENGTH_SHORT).show();
+            c++;
+        }else if(matricula_ad.getText().toString().length() != 8){
+            Toast.makeText(mainView.getContext(),"Matricula no válida", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText anio_ad = mainView.findViewById(R.id.aniadir_anio_etxt);
+        if(!isEmpty(anio_ad)){
+            Toast.makeText(mainView.getContext(),"Campo de anio vacio", Toast.LENGTH_SHORT).show();
+            c++;
+        }else if(Integer.parseInt(anio_ad.getText().toString()) < 1900 || Integer.parseInt(anio_ad.getText().toString()) > 2021){
+                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                anio_ad.setText("");
+                c++;
+        }
+
+
+        EditText descripcion_ad = mainView.findViewById(R.id.aniadir_descripcion_etxt);
+        if(!isEmpty(descripcion_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de descripcion vacia", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText marca_ad = mainView.findViewById(R.id.aniadir_marca_etxt);
+        if(!isEmpty(marca_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de marca vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText modelo_ad = mainView.findViewById(R.id.aniadir_modelo_etxt);
+        if(!isEmpty(modelo_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de modelo vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText color_ad = mainView.findViewById(R.id.aniadir_color_etxt);
+        if(!isEmpty(color_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de color vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText pinicial_ad = mainView.findViewById(R.id.aniadir_pinicial_etxt);
+        if(!isEmpty(pinicial_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de precio inicial vacio", Toast.LENGTH_SHORT).show();
+        }else if(Integer.parseInt(pinicial_ad.getText().toString())<=0){
+            c++;
+            Toast.makeText(mainView.getContext(),"Valor incial invalido", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText pventa_ad = mainView.findViewById(R.id.aniadir_precio_venta_etxt);
+        if(!isEmpty(pventa_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de valor de venta vacio", Toast.LENGTH_SHORT).show();
+        }else if(Integer.parseInt(pventa_ad.getText().toString())<=0){
+            c++;
+            Toast.makeText(mainView.getContext(),"Valor de venta invalido", Toast.LENGTH_SHORT).show();
+        }
+        EditText ppromocion_ad = mainView.findViewById(R.id.aniadir_precio_promocion_etxt);
+        if(!isEmpty(ppromocion_ad)){
+            c++;
+            Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
+        }else if(Integer.parseInt(pventa_ad.getText().toString())<0){
+            c++;
+            Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
+        }
+        CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
+        AtomicBoolean isFoto = new AtomicBoolean(false);
         StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_ad.getText().toString()+"_img");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(mainView.getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
+                        isFoto.set(true)
+                );
+        if(!isFoto.get()){
+            c++;
+            Toast.makeText(mainView.getContext(),"No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
+        }
+        if(c==0 ){
+            patio.aniadirVehiculo(
+                    new Vehiculo(
+                            placa_ad.getText().toString(),
+                            matricula_ad.getText().toString(),
+                            marca_ad.getText().toString(),
+                            modelo_ad.getText().toString(),
+                            color_ad.getText().toString(),
+                            descripcion_ad.getText().toString(),
+                            Float.parseFloat(pinicial_ad.getText().toString()),
+                            Float.parseFloat(pventa_ad.getText().toString()),
+                            Float.parseFloat(ppromocion_ad.getText().toString()),
+                            matriculado_ad.isChecked(),
+                            Integer.parseInt(anio_ad.getText().toString()),
+                            String.format(placa_ad.getText().toString()+".jpg")
+                    )
+            );
+        }
+
         try {
             if(patio.buscarVehiculos("Placa",placa_ad.getText().toString())!=null)
                 msg="Se agrego correctamente el vehiculo";
@@ -341,7 +410,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String msg = "";
 
         try {
-
+            ImageButton perfil_img_bt = mainView.findViewById(R.id.perfil_img_bt);
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -353,7 +422,22 @@ public class Catalogo_Admin_Fragment extends Fragment {
             EditText pventa_ed = mainView.findViewById(R.id.editar_v_pventa_etxt);
             EditText ppromocion_ed = mainView.findViewById(R.id.editar_v_ppromocion_etxt);
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
+            StorageReference filePath = mStorageRef.child("Vehiculos/"+m_vehiculo.getimagen());
 
+            Glide.with(mainView).load(filePath).into(perfil_img_bt);
+
+            try {
+                final File localFile = File.createTempFile(m_vehiculo.getimagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        perfil_img_bt.setImageBitmap(bitmap);
+                    }
+                });
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
             placa_ed.setText(m_vehiculo.getPlaca());
             matricula_ed.setText(m_vehiculo.getMatricula());
             anio_ed.setText(String.valueOf(m_vehiculo.getAnio()));
@@ -373,35 +457,105 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     public void editarVehiculo(String placa){
         String msg = "";
-
+        int c=0;
         try {
+
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
+            if(!isEmpty(placa_ed)){
+                Toast.makeText(mainView.getContext(),"Campo de placa vacio", Toast.LENGTH_SHORT).show();
+                c++;
+            }else if(placa_ed.getText().toString().length() != 8){
+                Toast.makeText(mainView.getContext(),"Placa no válida", Toast.LENGTH_SHORT).show();
+                c++;
+            }
+
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
+            if(!isEmpty(matricula_ed)){
+                Toast.makeText(mainView.getContext(),"Campo de matricula vacio", Toast.LENGTH_SHORT).show();
+                c++;
+            }else if(matricula_ed.getText().toString().length() != 8){
+                Toast.makeText(mainView.getContext(),"Matricula no válida", Toast.LENGTH_SHORT).show();
+                c++;
+            }
+
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
+            if(!isEmpty(anio_ed)){
+                Toast.makeText(mainView.getContext(),"Campo de anio vacio", Toast.LENGTH_SHORT).show();
+                c++;
+            }else if(Integer.parseInt(anio_ed.getText().toString()) < 1900 || Integer.parseInt(anio_ed.getText().toString()) > 2021){
+                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                anio_ed.setText("");
+                c++;
+            }
+
             EditText descripcion_ed = mainView.findViewById(R.id.editar_descripcion_etxt);
+            if(!isEmpty(descripcion_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de descripcion vacia", Toast.LENGTH_SHORT).show();
+            }
+
             EditText marca_ed = mainView.findViewById(R.id.editar_vehiculo_marca_etxt);
+            if(!isEmpty(marca_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de marca vacio", Toast.LENGTH_SHORT).show();
+            }
+
             EditText modelo_ed = mainView.findViewById(R.id.editar_vehiculo_modelo_etxt);
+            if(!isEmpty(modelo_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de modelo vacio", Toast.LENGTH_SHORT).show();
+            }
+
             EditText color_ed = mainView.findViewById(R.id.editar_vehiculo_color_etxt);
+            if(!isEmpty(color_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de color vacio", Toast.LENGTH_SHORT).show();
+            }
+
             EditText pinicial_ed = mainView.findViewById(R.id.editar_v_pinicial_etxt);
+            if(!isEmpty(pinicial_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de precio inicial vacio", Toast.LENGTH_SHORT).show();
+            }else if(Integer.parseInt(pinicial_ed.getText().toString())<=0){
+                c++;
+                Toast.makeText(mainView.getContext(),"Valor incial invalido", Toast.LENGTH_SHORT).show();
+            }
+
             EditText pventa_ed = mainView.findViewById(R.id.editar_v_pventa_etxt);
+            if(!isEmpty(pventa_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
+            }else if(Integer.parseInt(pventa_ed.getText().toString())<0){
+                c++;
+                Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
+            }
+
             EditText ppromocion_ed = mainView.findViewById(R.id.editar_v_ppromocion_etxt);
+            if(!isEmpty(ppromocion_ed)){
+                c++;
+                Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
+            }else if(Integer.parseInt(ppromocion_ed.getText().toString())<0){
+                c++;
+                Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
+            }
+
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
-
-            m_vehiculo.actualizarDatos(
-                            placa_ed.getText().toString(),
-                            matricula_ed.getText().toString(),
-                            marca_ed.getText().toString(),
-                            modelo_ed.getText().toString(),
-                            color_ed.getText().toString(),
-                            descripcion_ed.getText().toString(),
-                            Float.parseFloat(pinicial_ed.getText().toString()),
-                            Float.parseFloat(pventa_ed.getText().toString()),
-                            Float.parseFloat(ppromocion_ed.getText().toString()),
-                            matriculado_ed.isChecked(),
-                            Integer.parseInt(anio_ed.getText().toString()),
-                            String.format(placa_ed.getText().toString()+".jpg")
-            );
-
+            if(c==0){
+                m_vehiculo.actualizarDatos(
+                        placa_ed.getText().toString(),
+                        matricula_ed.getText().toString(),
+                        marca_ed.getText().toString(),
+                        modelo_ed.getText().toString(),
+                        color_ed.getText().toString(),
+                        descripcion_ed.getText().toString(),
+                        Float.parseFloat(pinicial_ed.getText().toString()),
+                        Float.parseFloat(pventa_ed.getText().toString()),
+                        Float.parseFloat(ppromocion_ed.getText().toString()),
+                        matriculado_ed.isChecked(),
+                        Integer.parseInt(anio_ed.getText().toString()),
+                        String.format(placa_ed.getText().toString()+".jpg")
+                );
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -506,6 +660,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
-
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
 
 }
