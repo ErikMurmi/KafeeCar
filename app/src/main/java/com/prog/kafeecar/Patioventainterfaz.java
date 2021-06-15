@@ -56,10 +56,10 @@ public class Patioventainterfaz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Login normal
-        //setContentView(R.layout.login);
+        setContentView(R.layout.login);
 
         // Login de pruebas
-        setContentView(R.layout.login_sinclaves);
+        //setContentView(R.layout.login_sinclaves);
 
         try {
             cargarDatos();
@@ -110,9 +110,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
-        //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-        patioventa.aniadirUsuario(admin,"Administrador");
+        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
+        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        //patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
@@ -691,8 +691,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void salir(View v){
         usuarioActual =  null;
-        //setContentView(R.layout.login);
-        setContentView(R.layout.login_sinclaves);
+        setContentView(R.layout.login);
+        //setContentView(R.layout.login_sinclaves);
     }
 
 
