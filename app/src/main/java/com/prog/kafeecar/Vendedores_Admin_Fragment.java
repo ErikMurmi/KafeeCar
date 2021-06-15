@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -315,7 +316,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
     }
 
     public void registrarVendedor() throws ParseException {
-
         EditText nombreVendedor;
         EditText apellidoVendedor;
         EditText cedulaVendedor;
@@ -329,7 +329,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         EditText horaEntradaVendedor;
         EditText horaSalidaVendedor;
         EditText horaAlmuerzoVendedor;
-        int c =0;
+        int c = 0;
 
         nombreVendedor = mainView.findViewById(R.id.nombreVendedor_etxt);
         apellidoVendedor = mainView.findViewById(R.id.apellidoVendedor_etxt);
@@ -483,7 +483,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
 
         horaSalidaVendedor = mainView.findViewById(R.id.horaSalidaVendedor_etxt);
-        String horaSalidaVendedor_str = horaAlmuerzoVendedor.getText().toString();
+        String horaSalidaVendedor_str = horaSalidaVendedor.getText().toString();
         int horaSalidaVendedor_int = -1;
         if(horaSalidaVendedor_str.isEmpty()){
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
@@ -495,6 +495,17 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 horaSalidaVendedor.setText("");
                 c++;
             }
+        }
+
+        AtomicBoolean isFoto = new AtomicBoolean(false);
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+            isFoto.set(true)
+        );
+
+        if(!isFoto.get()){
+            Toast.makeText(mainView.getContext(), "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
+            c++;
         }
 
         String contraseniaVerificada = contraseniaVendedor_str;
@@ -520,7 +531,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     sdf.parse(String.valueOf(fecha)));
             patio.aniadirUsuario(vendedor,"Vendedor");
             try {
-                if (patio.buscarClientes("Cedula", vendedor.getCedula()) != null) {
+                if (patio.buscarVendedores("Cedula", vendedor.getCedula()) != null) {
                     Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
                     regresarPantallaPrncipal();
                 }
@@ -529,9 +540,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }
         }
 
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
-        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(mainView.getContext(), "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
 
     }
 
