@@ -1,5 +1,11 @@
 package com.prog.kafeecar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,13 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.storage.FirebaseStorage;
@@ -56,10 +57,10 @@ public class Patioventainterfaz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Login normal
-        //setContentView(R.layout.login);
+        setContentView(R.layout.login);
 
         // Login de pruebas
-        setContentView(R.layout.login_sinclaves);
+        //setContentView(R.layout.login_sinclaves);
 
         try {
             cargarDatos();
@@ -110,9 +111,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
-        //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-        patioventa.aniadirUsuario(admin,"Administrador");
+        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
+        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        //patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
@@ -552,6 +553,35 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+
+    public void aniadirVenta(View v) throws Exception {
+        EditText precio = findViewById(R.id.precio_venta_txt);
+        EditText clientes = findViewById(R.id.cliente_venta_txt);
+        EditText vendedor = findViewById(R.id.vendedor_venta_txt);
+        EditText auto = findViewById(R.id.vehiculo_venta_txt);
+        EditText fechaventadia = findViewById(R.id.fecha_venta_dia_etxt);
+        EditText fechaventames = findViewById(R.id.fecha_venta_mes_etxt);
+        EditText fechaventaanio = findViewById(R.id.fecha_venta_anio_etxt);
+        EditText fechaventahora = findViewById(R.id.fecha_venta_hora_etxt);
+        String fechaventa_str = fechaventaanio.getText().toString() + "-" + fechaventames.getText().toString() + "-" + fechaventadia.getText().toString();
+        String clientes_str = clientes.getText().toString();
+        String vendedores_str = vendedor.getText().toString();
+        String autos_str = auto.getText().toString();
+        int hora = Integer.parseInt(fechaventahora.getText().toString());
+        float precioventa = Float.parseFloat(precio.getText().toString());
+        Cliente clienteventa = patioventa.buscarClientes("Nombre", clientes_str);
+        Vendedor vendedorventa = patioventa.buscarVendedores("Nombre", vendedores_str);
+        Vehiculo autoventa = patioventa.buscarVehiculos("Matricula", autos_str);
+
+
+        Venta nueva = new Venta(sdf.parse(fechaventa_str), precioventa, clienteventa, vendedorventa, autoventa);
+        patioventa.aniadirVenta(nueva);
+
+        if (patioventa.getVentasGenerales().contiene(nueva)) {
+            Toast.makeText(Patioventainterfaz.this, "Se registro la venta.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void registrarAdministrador() throws ParseException {
         EditText nombreAdmin;
         EditText apellidoAdmin;
@@ -831,8 +861,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void salir(View v){
         usuarioActual =  null;
-        //setContentView(R.layout.login);
-        setContentView(R.layout.login_sinclaves);
+        setContentView(R.layout.login);
+        //setContentView(R.layout.login_sinclaves);
     }
 
 
