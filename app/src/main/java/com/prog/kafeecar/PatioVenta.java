@@ -326,7 +326,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<vehiculos.contar()){
                 Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
-                if(actual.getPlaca().compareTo(codigo)==0){
+                if(actual.getPlaca().compareToIgnoreCase(codigo)==0){
                     buscado = actual;
                     break;
                 }
