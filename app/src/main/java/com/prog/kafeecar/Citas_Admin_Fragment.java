@@ -100,7 +100,6 @@ public class Citas_Admin_Fragment extends Fragment {
             CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
             CheckBox anio = mainView.findViewById(R.id.filtro_anio_ckb);
             CheckBox hora = mainView.findViewById(R.id.filtro_hora_ckb);
-
         });
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
@@ -193,7 +192,6 @@ public class Citas_Admin_Fragment extends Fragment {
 
 
     public void visualizarCita() throws Exception {
-
         TextView fecha = mainView.findViewById(R.id.fechaCita_txt);
         TextView hora = mainView.findViewById(R.id.horaCita_txt);
         TextView cliente = mainView.findViewById(R.id.clienteCita_txt);

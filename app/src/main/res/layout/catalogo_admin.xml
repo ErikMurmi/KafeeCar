@@ -582,7 +582,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -670,7 +670,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/perfil_img_bt"
                         android:layout_width="189dp"
                         android:layout_height="148dp"
                         android:layout_marginTop="15dp"
