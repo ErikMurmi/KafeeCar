@@ -612,7 +612,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) == 0) {
             String contraseniaVerificada = contraseniaAdmin_str;
-            patioventa.aniadirUsuario( new Vendedor(
+            Vendedor user = new Vendedor(
                     String.format("%s.jpg",cedulaAdmin_str),
                     horaEntradaAdmin_int,
                     horaSalidaAdmin_int,
@@ -623,7 +623,9 @@ public class Patioventainterfaz extends AppCompatActivity {
                     telefonoAdmin_str,
                     correoAdmin_str,
                     contraseniaVerificada,
-                    sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
+                    sdf.parse(fechaNacimientoAdmin_date));
+            usuarioActual = user;
+            patioventa.aniadirUsuario( user, "Administrador");
             irAplicacion("ADMIN");
             Toast.makeText(Patioventainterfaz.this, "Administrador registrado correctamente",Toast.LENGTH_SHORT).show();
 
