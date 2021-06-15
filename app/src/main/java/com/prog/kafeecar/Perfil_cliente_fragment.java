@@ -162,5 +162,5 @@ public class Perfil_cliente_fragment extends Fragment{
         textocontrasenia.setText(cliente.getClave());
     }*/
 
-*/
+
 }

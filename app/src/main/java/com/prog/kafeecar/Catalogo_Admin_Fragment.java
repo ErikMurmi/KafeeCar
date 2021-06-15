@@ -228,7 +228,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         ImageView v_img = mainView.findViewById(R.id.v_lista_img);
         TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
-        TextView  anio = mainView.findViewById(R.id.v_anio_lista_txt);
+        TextView anio = mainView.findViewById(R.id.v_anio_lista_txt);
         TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
         TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
         TextView placa_v = mainView.findViewById(R.id.v_placa_lista_txt);
@@ -255,8 +255,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
         anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
         matricula1.setText(v_Mostrar1.getMatricula());
-
-
 
         StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
         Glide.with(mainView)
@@ -480,15 +478,10 @@ public class Catalogo_Admin_Fragment extends Fragment {
         Vehiculo buscado = null;
         try {
             buscado = patio.buscarVehiculos("Placa",placa_str);
-            Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
             if (buscado == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo buscado", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(mainView.getContext(), "2", Toast.LENGTH_SHORT).show();
                 verLista(placa_str, "GHC-2434");
-                Toast.makeText(mainView.getContext(), "3", Toast.LENGTH_SHORT).show();
-                irVerVehiculo1.setVisibility(View.GONE);
-                Toast.makeText(mainView.getContext(), "4", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No existe el vehiculo", Toast.LENGTH_SHORT).show();
