@@ -96,15 +96,12 @@ public class Perfil_admin_Fragment extends Fragment {
             TextView cedula_ed = mainview.findViewById(R.id.cedula_admin_txt);
             TextView telefono_ed = mainview.findViewById(R.id.telefono_admin_txt);
             TextView correo_ed = mainview.findViewById(R.id.correo_admin_txt);
-            Toast.makeText(mainview.getContext(), "1", Toast.LENGTH_SHORT).show();
             String fechaNacimiento = Patioventainterfaz.getFechaMod(user.getFechaNacimiento());
-            Toast.makeText(mainview.getContext(), "2", Toast.LENGTH_SHORT).show();
             nombre_ed.setText(user.getNombre());
             fecha_ed.setText(fechaNacimiento);
             cedula_ed.setText(user.getCedula());
             telefono_ed.setText(user.getTelefono());
             correo_ed.setText(user.getCorreo());
-            Toast.makeText(mainview.getContext(), "3", Toast.LENGTH_SHORT).show();
             StorageReference filePath = mStorageRef.child("Vendedores/"+user.getImagen());
             Glide.with(mainview)
                     .load(filePath)
@@ -118,11 +115,9 @@ public class Perfil_admin_Fragment extends Fragment {
                         perfil_img.setImageBitmap(bitmap);
                     }
                 });
-                Toast.makeText(mainview.getContext(), "4", Toast.LENGTH_SHORT).show();
             }catch (IOException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(mainview.getContext(), "5", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(mainview.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
         }
