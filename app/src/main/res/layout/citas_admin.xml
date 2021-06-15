@@ -607,7 +607,7 @@
         tools:visibility="visible">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="35dp"
             android:layout_marginTop="80dp"
@@ -623,7 +623,7 @@
                 app:srcCompat="@mipmap/ic_tesla" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
@@ -747,9 +747,9 @@
                 android:textSize="18sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -761,7 +761,9 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
 
-                    android:inputType="textPersonName"
+                    android:hint="@string/cedula_c"
+                    android:inputType="number"
+                    android:textAlignment="center"
                     android:textColor="#CEC9D5" />
 
                 <ImageButton
@@ -792,7 +794,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -804,7 +806,9 @@
 
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName"
+                    android:hint="@string/cedula_c"
+                    android:inputType="number"
+                    android:textAlignment="center"
                     android:textColor="#CEC9D5" />
 
                 <ImageButton
@@ -834,7 +838,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -846,7 +850,9 @@
                     android:ems="10"
                     android:fontFamily="@font/ocra"
 
+                    android:hint="@string/placa_c"
                     android:inputType="textPersonName"
+                    android:textAlignment="center"
                     android:textColor="#CEC9D5" />
 
                 <ImageButton
@@ -882,7 +888,9 @@
                 android:ems="10"
                 android:fontFamily="@font/ocra"
 
+                android:hint="Por ver"
                 android:inputType="textMultiLine|text"
+                android:textAlignment="center"
                 android:textColor="#CEC9D5" />
 
             <Space

@@ -12,7 +12,7 @@
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/admin_img"
@@ -21,6 +21,7 @@
             android:layout_marginLeft="122dp"
             android:layout_marginTop="80dp"
             android:adjustViewBounds="false"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <Space
@@ -231,12 +232,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/deshabilitar_vendedor_btn"
+                android:id="@+id/logout_admin_btn"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_dark"
                 android:fontFamily="@font/valorant"
+                android:onClick="salir"
                 android:paddingStart="8dp"
                 android:text="Log out"
                 android:textAlignment="center"
@@ -248,7 +250,7 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/editar_vendedor_btn"
+                android:id="@+id/ireditar_admin_btn"
                 style="@style/boton_editar"
                 android:layout_width="60dp"
                 android:text="Editar"
@@ -259,11 +261,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/perfil_admin_ed_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -289,10 +292,11 @@
 
                     <ImageButton
                         android:id="@+id/admin_img_btn"
-                        android:layout_width="match_parent"
+                        android:layout_width="180dp"
                         android:layout_height="180dp"
+                        android:layout_gravity="center_horizontal"
                         android:background="#00FFFFFF"
-                        android:scaleType="fitCenter"
+                        android:scaleType="centerCrop"
                         tools:src="@tools:sample/avatars"
                         tools:srcCompat="@tools:sample/avatars" />
 
@@ -511,6 +515,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/visualizar_admin_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"

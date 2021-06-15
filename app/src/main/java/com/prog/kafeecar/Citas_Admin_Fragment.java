@@ -3,12 +3,14 @@ package com.prog.kafeecar;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,6 +48,7 @@ public class Citas_Admin_Fragment extends Fragment {
     //Image Buttons
     private ImageButton buscar_btn;
 
+    private TextView vehiculo_nuevacita;
     //Botones
     private Button irVerCita;
     private Button irAniadirCita;
@@ -68,15 +71,11 @@ public class Citas_Admin_Fragment extends Fragment {
         irVerCita = mainView.findViewById(R.id.ir_ver_cita);
         irAniadirCita = mainView.findViewById(R.id.ir_editar_cita);
 
-
+        //TextViews
+        vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Image Buttons
         buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);
         //OnClick
-        try {
-            verLista("GHC-2434","IMH-2233");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         irVerCita.setOnClickListener(v -> {
             aniadirCita.setVisibility(View.GONE);
@@ -90,6 +89,7 @@ public class Citas_Admin_Fragment extends Fragment {
         });
 
         irAniadirCita.setOnClickListener(v -> {
+            Toast.makeText(mainView.getContext(), "2", Toast.LENGTH_SHORT).show();
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
@@ -102,6 +102,18 @@ public class Citas_Admin_Fragment extends Fragment {
             CheckBox hora = mainView.findViewById(R.id.filtro_hora_ckb);
 
         });
+
+        if(Patioventainterfaz.CITA_CON_VEHICULO){
+            irAniadirCita.callOnClick();
+            vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
+            vehiculo_nuevacita.setTextColor(Color.BLACK);
+        }else{
+            try {
+                verLista("GHC-2434","IMH-2233");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return mainView;
     }
 
@@ -203,6 +215,64 @@ public class Citas_Admin_Fragment extends Fragment {
         precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
     }
 
+    public void registarCita(View v) throws Exception {
+        EditText fechacitadia = mainView.findViewById(R.id.fechacitadia_txt);
+        EditText fechacitames = mainView.findViewById(R.id.fechacitames_txt);
+        EditText fechacitaanio = mainView.findViewById(R.id.fechacitaanio_txt);
+        EditText fechacitahora = mainView.findViewById(R.id.fechacitahoracita_txt);
+        Vendedor vendedor_v =null;
+        Cliente cliente_c =null;
+        Vehiculo vehiculo =null;
+        String fechacita_str ="";
+        int c = 0;
+        int hora =-1;
+        if((!isEmpty(fechacitadia) && !isEmpty(fechacitames)) && (!isEmpty(fechacitaanio) && !isEmpty(fechacitahora))){
+            fechacita_str = fechacitadia.getText().toString()+ "-" + fechacitames.getText().toString() + "-" + fechacitaanio.getText().toString();
+            hora = Integer.parseInt(fechacitahora.getText().toString());
+        }else{
+            c++;
+            Toast.makeText(mainView.getContext(), "Campos de fecha vacíos", Toast.LENGTH_SHORT).show();
+        }
+        EditText cliente = mainView.findViewById(R.id.cliente_txt);
+        EditText vendedor = mainView.findViewById(R.id.vendedor_txt);
+        EditText auto= mainView.findViewById(R.id.vehiculo_txt);
+        if(!isEmpty(cliente)){
+            String cliente_str = cliente.getText().toString();
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        }else{
+            c++;
+            Toast.makeText(mainView.getContext(), "Campo de cliente vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        if(!isEmpty(vendedor)){
+            String vendedor_str = vendedor.getText().toString();
+            vendedor_v = patio.buscarVendedores("Cedula", vendedor_str);
+        }else{
+            c++;
+            Toast.makeText(mainView.getContext(), "Campo de vendedor vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        if(!isEmpty(auto)){
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+        }else{
+            c++;
+            Toast.makeText(mainView.getContext(), "Campo de vehiculo vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        EditText resolucion = mainView.findViewById(R.id.resolucion_txt);
+        String resolucion_str = resolucion.getText().toString();
+
+        if(c==0){
+            Cita nueva = new Cita(Patioventainterfaz.sdf.parse(fechacita_str), hora, resolucion_str, cliente_c, vendedor_v, vehiculo);
+            patio.aniadirCita(nueva);
+            if (patio.getCitas().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
     public String formatoHora(int hora){
         if(hora>12){
             return "pm";
@@ -210,4 +280,7 @@ public class Citas_Admin_Fragment extends Fragment {
         return "am";
     }
 
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
 }
