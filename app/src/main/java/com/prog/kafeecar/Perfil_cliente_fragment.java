@@ -160,7 +160,7 @@ public class Perfil_cliente_fragment extends Fragment{
         textoanio.setText(anio);
         textocorreo.setText(cliente.getCorreo());
         textocontrasenia.setText(cliente.getClave());
-    }
+    }*/
 
 */
 }

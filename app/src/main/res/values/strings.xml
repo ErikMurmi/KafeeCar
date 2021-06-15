@@ -26,4 +26,5 @@
     <string name="guardar_c">Guardar</string>
     <string name="favoritos_c">Favoritos</string>
     <string name="perfil_c">Perfil</string>
+    <string name="cedula_c">Cédula</string>
 </resources>

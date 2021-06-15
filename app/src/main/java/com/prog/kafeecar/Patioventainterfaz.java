@@ -37,24 +37,30 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
     public static Usuario usuarioActual = null;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Uri foto;
-
+    public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     private Button irAgendar;
 
     private LinearLayout aniadirCitaconVehiculo;
     private LinearLayout adCita;
-
+    public static Vehiculo v_aux_cita;
     ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+
+        //Login normal
+        //setContentView(R.layout.login);
+
+        // Login de pruebas
+        setContentView(R.layout.login_sinclaves);
+
         try {
             cargarDatos();
 
@@ -81,25 +87,13 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irRegistarCitaVehiculo(View v){
-        //TextView placa_txt = findViewById(R.id.placa_txt);
-        Vehiculo v_m=null;
-        Toast.makeText(Patioventainterfaz.this, "1", Toast.LENGTH_SHORT).show();
         try {
-            v_m = patioventa.buscarVehiculos("Placa","PSD-1234");
+            v_aux_cita = patioventa.buscarVehiculos("Placa","PSD-1234");
+            CITA_CON_VEHICULO = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor,new Citas_Admin_Fragment()).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Toast.makeText(Patioventainterfaz.this, "2", Toast.LENGTH_SHORT).show();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor,new Citas_Admin_Fragment()).commit();
-        Toast.makeText(Patioventainterfaz.this, "4", Toast.LENGTH_SHORT).show();
-        //aniadirCitaconVehiculo.setVisibility(View.VISIBLE);
-
-        if(v_m!=null){
-            EditText placa_cita = findViewById(R.id.vehiculo_txt);
-            placa_cita.setText(v_m.getPlaca());
-            Toast.makeText(Patioventainterfaz.this, "Vehiculo encontrado", Toast.LENGTH_SHORT).show();
-        }
-        Toast.makeText(Patioventainterfaz.this, "5", Toast.LENGTH_SHORT).show();
     }
 
     public static void cargarDatos() throws Exception {
@@ -116,7 +110,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
         //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
         patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
@@ -138,9 +132,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
         Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
-        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
+        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
+        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
         patioventa.aniadirCita(c1);
         patioventa.aniadirCita(c2);
         patioventa.aniadirCita(c3);
@@ -184,6 +178,20 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+    public void irAdmin(View v){
+        usuarioActual = patioventa.getAdministrador();
+        irAplicacion("ADMIN");
+    }
+
+    public void irVendedor(View v) throws Exception {
+        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
+        irAplicacion("VENDEDOR");
+    }
+
+    public void irCliente(View v) throws Exception {
+        usuarioActual = (Usuario) patioventa.getClientes().getPos(1);
+        irAplicacion("CLIENTE");
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -295,31 +303,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
 
-    public void visualizarCita(View v) throws Exception {
-
-        setTheme(R.style.Theme_KafeeCar_Diseno);
-        //setContentView(R.layout.cita);
-        TextView fecha = findViewById(R.id.fechaCita_txt);
-        TextView hora = findViewById(R.id.horaCita_txt);
-        TextView cliente = findViewById(R.id.clienteCita_txt);
-        TextView contacto = findViewById(R.id.contactoCita_txt);
-        TextView vendedor = findViewById(R.id.vendedorCita_txt);
-        TextView vehiculo = findViewById(R.id.vehiculoCita_txt);
-        TextView descripcion = findViewById(R.id.descripcionCita_txt);
-        TextView resolucion = findViewById(R.id.resolucionCita_txt);
-        TextView precio = findViewById(R.id.precioVentaCita_txt);
-        Cita citaPrueba = (Cita) patioventa.getCitas().getPos(0);
-        fecha.setText(new String(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita())));
-        hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
-        cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
-        contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
-        vendedor.setText(new String(vendedor.getText().toString() + citaPrueba.getVendedorCita().getNombre()));
-        vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
-        descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
-        resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
-        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
-
-    }
 
 
     public void citaNueva(View v) throws Exception {
@@ -372,8 +355,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public static String getFechaMod(Date fechaMod) {
-        SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-        return sf.format(fechaMod);
+        return sdf.format(fechaMod);
     }
 
     //Seleccion de imagen en la galeria
@@ -709,7 +691,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void salir(View v){
         usuarioActual =  null;
-        setContentView(R.layout.login);
+        //setContentView(R.layout.login);
+        setContentView(R.layout.login_sinclaves);
     }
 
 
