@@ -639,7 +639,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         try {
             int c = 0;
             Vendedor cedulaVen = venMostrar;
-
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             String nombre_str = nombre_ed.getText().toString();
             if(nombre_str.isEmpty()){
