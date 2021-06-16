@@ -196,7 +196,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         editarlisto_btn.setOnClickListener(v -> {
             try{
                 editarVendedor();
-                Toast.makeText(mainView.getContext(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
@@ -648,14 +647,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 c++;
             }
 
-            EditText anio_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
             String anio_str = anio_ed.getText().toString();
             int anio = -1;
             if(anio_str.isEmpty()){
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
-                anio = Integer.parseInt(anio_str);
+                anio = Integer.parseInt(anio_ed.getText().toString());
                 if (anio < 1900 || anio > 2003) {
                     Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
                     anio_ed.setText("");
@@ -776,12 +775,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }
 
             if (c == 0) {
-                Date fecha = null;
-                try {
-                    fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                String fecha = dia_str + "-" + mes_str + "-" + anio_str;
                 cedulaVen.cambiarDatosSinClaveVendedor(
                         horaEntradaVendedor_int,
                         horaAlmuerzoVendedor_int,
@@ -793,8 +787,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
                         String.valueOf(fecha));
                 cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
                 try {
-                    if (patio.buscarClientes("Cedula", cedulaVen.getCedula()) != null) {
-                        Toast.makeText(mainView.getContext(), "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                    if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
+                        Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
                         irVisualizarVendedor.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
@@ -802,7 +796,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 }
             }
         }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "No se pudo actualizar la información del vendedor", Toast.LENGTH_SHORT).show();
         }
     }
 
