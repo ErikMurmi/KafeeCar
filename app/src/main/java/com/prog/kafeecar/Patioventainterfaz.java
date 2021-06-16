@@ -437,6 +437,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             if(cedula_str.length()!=10){
                 Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 textocedula.setText("");
+                c++;
             }
         }
 
@@ -624,6 +625,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             if(cedulaAdmin_str.length()!=10){
                 Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedulaAdmin.setText("");
+                c++;
             }
         }
 

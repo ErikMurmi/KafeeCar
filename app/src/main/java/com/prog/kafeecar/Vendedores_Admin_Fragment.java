@@ -357,6 +357,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             if(cedulaVendedor_str.length()!=10){
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedulaVendedor.setText("");
+                c++;
             }
         }
 
