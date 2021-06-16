@@ -729,7 +729,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
-            if(horaEntradaAdmin_int >0 && horaEntradaAdmin_int < 24){
+            if(horaEntradaAdmin_int < 0 || horaEntradaAdmin_int > 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                 horaEntradaAdmin.setText("");
                 c++;
@@ -744,7 +744,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
-            if(horaAlmuerzoAdmin_int >0 && horaAlmuerzoAdmin_int < 24){
+            if(horaAlmuerzoAdmin_int <0 || horaAlmuerzoAdmin_int > 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                 horaAlmuerzoAdmin.setText("");
                 c++;
@@ -759,25 +759,18 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
-            if(horaSalidaAdmin_int >0 && horaSalidaAdmin_int < 24){
+            if(horaSalidaAdmin_int < 0 || horaSalidaAdmin_int > 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                 horaSalidaAdmin.setText("");
                 c++;
             }
         }
 
-        AtomicBoolean isFoto = new AtomicBoolean(false);
         StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str+".jpg");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                isFoto.set(true)
+                Toast.makeText(Patioventainterfaz.this, "Se subio la imagen", Toast.LENGTH_SHORT).show()
         );
 
-        if(!isFoto.get()){
-            Toast.makeText(Patioventainterfaz.this, "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        String contraseniaVerificada = contraseniaAdmin_str;
 
         if (c == 0) {
             Date fecha = null;
@@ -796,8 +789,8 @@ public class Patioventainterfaz extends AppCompatActivity {
                     cedulaAdmin_str,
                     telefonoAdmin_str,
                     correoAdmin_str,
-                    contraseniaVerificada,
-                    sdf.parse(String.valueOf(fecha)));
+                    contraseniaAdmin_str,
+                    fecha);
             usuarioActual = user;
             patioventa.aniadirUsuario(user, "Administrador");
             try {
