@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -24,43 +25,35 @@ public class Vendedor extends Usuario{
         this.sucursal = sucursal;
         setActivo(true);
     }
+
+    protected void cambiarDatosSinClaveVendedor(int horaEntrada, int horaSalida, int horaComida, String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException {
+        setHoraEntrada(horaEntrada);
+        setHoraComida(horaComida);
+        setHoraSalida(horaSalida);
+        setNombre(nombre);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreo(correo);
+        setFechaNacimiento(fechaNacimiento);
+    }
     
-   public Vendedor(String nombre, String cedula) {
-        super(nombre, cedula);
-        
-    }
+   public Vendedor(String nombre, String cedula) { super(nombre, cedula); }
 
-public int getHoraEntrada() {
-        return horaEntrada;
-    }
+    public int getHoraEntrada() { return horaEntrada; }
 
-    public void setHoraEntrada(int horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
+    public void setHoraEntrada(int horaEntrada) { this.horaEntrada = horaEntrada; }
 
-    public int getHoraSalida() {
-        return horaSalida;
-    }
+    public int getHoraSalida() { return horaSalida; }
 
-    public void setHoraSalida(int horaSalida) {
-        this.horaSalida = horaSalida;
-    }
+    public void setHoraSalida(int horaSalida) { this.horaSalida = horaSalida; }
 
-    public int getHoraComida() {
-        return horaComida;
-    }
+    public int getHoraComida() { return horaComida; }
 
-    public void setHoraComida(int horaComida) {
-        this.horaComida = horaComida;
-    }
+    public void setHoraComida(int horaComida) { this.horaComida = horaComida; }
 
-    public PatioVenta getSucursal() {
-        return sucursal;
-    }
+    public PatioVenta getSucursal() { return sucursal;  }
 
-    public void setSucursal(PatioVenta sucursal) {
-        this.sucursal = sucursal;
-    }
+    public void setSucursal(PatioVenta sucursal) { this.sucursal = sucursal; }
 
     public boolean getActivo(){ return activo;}
 

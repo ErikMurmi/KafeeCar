@@ -730,6 +730,51 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 }
             }
 
+            EditText horaEntrada_ed = mainView.findViewById(R.id.horaEntradaEditVendedor_etxt);
+            String horaEntradaVendedor_str = horaEntrada_ed.getText().toString();
+            int horaEntradaVendedor_int = -1;
+            if(horaEntradaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaEntradaVendedor_int = Integer.parseInt(horaEntrada_ed.getText().toString());
+                if(horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
+                    horaEntrada_ed.setText("");
+                    c++;
+                }
+            }
+
+            EditText horaAlmuerzo_ed= mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
+            String horaAlmuerzoVendedor_str = horaAlmuerzo_ed.getText().toString();
+            int horaAlmuerzoVendedor_int = -1;
+            if(horaEntradaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzo_ed.getText().toString());
+                if(horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
+                    horaAlmuerzo_ed.setText("");
+                    c++;
+                }
+            }
+
+            EditText horaSalida_ed = mainView.findViewById(R.id.horaSalidaEditVendedor_etxt);
+            String horaSalidaVendedor_str = horaSalida_ed.getText().toString();
+            int horaSalidaVendedor_int = -1;
+            if(horaSalidaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaSalidaVendedor_int = Integer.parseInt(horaSalida_ed.getText().toString());
+                if(horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
+                    horaSalida_ed.setText("");
+                    c++;
+                }
+            }
+
             if (c == 0) {
                 Date fecha = null;
                 try {
@@ -737,7 +782,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                cedulaVen.cambiarDatosSinClave(
+                cedulaVen.cambiarDatosSinClaveVendedor(
+                        horaEntradaVendedor_int,
+                        horaAlmuerzoVendedor_int,
+                        horaSalidaVendedor_int,
                         nombre_ed.getText().toString(),
                         cedula_ed.getText().toString(),
                         telefono_ed.getText().toString(),
