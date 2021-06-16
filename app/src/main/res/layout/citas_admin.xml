@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -408,7 +408,9 @@
                 android:background="@drawable/boton_redondeado"
                 android:fontFamily="@font/valorant"
                 android:text="Editar"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
             <Space
                 android:layout_width="match_parent"
@@ -421,7 +423,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
-                android:text="Ver" />
+                android:text="Ver"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
         </LinearLayout>
 
@@ -604,7 +608,7 @@
         android:background="@drawable/cita_nueva_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -645,7 +649,7 @@
                         android:fontFamily="@font/ocra"
                         android:text="Fecha de cita"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -666,7 +670,7 @@
                             android:hint="dd"
                             android:inputType="textPersonName"
                             android:textAlignment="center"
-                            android:textColor="#CEC9D5" />
+                            android:textColor="#000000" />
 
                         <EditText
                             android:id="@+id/fechacitadia_txt"
@@ -679,7 +683,7 @@
                             android:hint="mm"
                             android:inputType="textPersonName"
                             android:textAlignment="center"
-                            android:textColor="#CEC9D5" />
+                            android:textColor="#000000" />
 
                         <EditText
                             android:id="@+id/fechacitaanio_txt"
@@ -693,7 +697,7 @@
                             android:hint="aaaa"
                             android:inputType="textPersonName"
                             android:textAlignment="center"
-                            android:textColor="#CEC9D5" />
+                            android:textColor="#000000" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -713,7 +717,7 @@
                         android:fontFamily="@font/ocra"
                         android:text="Hora"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="18sp" />
 
                     <EditText
@@ -727,7 +731,7 @@
 
                         android:inputType="textPersonName"
                         android:textAlignment="center"
-                        android:textColor="#CEC9D5" />
+                        android:textColor="#000000" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -743,7 +747,7 @@
                 android:fontFamily="@font/ocra"
                 android:text="Cliente "
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/black"
+                android:textColor="@color/gris_visualizar"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -764,7 +768,7 @@
                     android:hint="@string/cedula_c"
                     android:inputType="number"
                     android:textAlignment="center"
-                    android:textColor="#CEC9D5" />
+                    android:textColor="#000000" />
 
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn2"
@@ -788,7 +792,7 @@
                 android:fontFamily="@font/ocra"
                 android:text="Vendedor"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/black"
+                android:textColor="@color/gris_visualizar"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -809,7 +813,7 @@
                     android:hint="@string/cedula_c"
                     android:inputType="number"
                     android:textAlignment="center"
-                    android:textColor="#CEC9D5" />
+                    android:textColor="#000000" />
 
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn3"
@@ -832,7 +836,7 @@
                 android:layout_marginBottom="@dimen/espacios"
                 android:fontFamily="@font/ocra"
                 android:text="Vehículo"
-                android:textColor="@color/black"
+                android:textColor="@color/gris_visualizar"
                 android:textSize="18dp" />
 
             <LinearLayout
@@ -853,7 +857,7 @@
                     android:hint="@string/placa_c"
                     android:inputType="textPersonName"
                     android:textAlignment="center"
-                    android:textColor="#CEC9D5" />
+                    android:textColor="#000000" />
 
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn4"
@@ -877,7 +881,7 @@
                 android:fontFamily="@font/ocra"
                 android:text="Resolución"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/black"
+                android:textColor="@color/gris_visualizar"
                 android:textSize="18sp" />
 
             <EditText
@@ -891,7 +895,7 @@
                 android:hint="Por ver"
                 android:inputType="textMultiLine|text"
                 android:textAlignment="center"
-                android:textColor="#CEC9D5" />
+                android:textColor="#000000" />
 
             <Space
                 android:layout_width="match_parent"
