@@ -42,7 +42,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    private Uri foto = null;
+    private Uri foto;
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     private Button irAgendar;
@@ -50,7 +50,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     private LinearLayout aniadirCitaconVehiculo;
     private LinearLayout adCita;
     public static Vehiculo v_aux_cita;
-    ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -550,6 +549,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
 
@@ -729,7 +729,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
-            if(horaEntradaAdmin_int < 0 || horaEntradaAdmin_int > 24){
+            if(horaEntradaAdmin_int >0 && horaEntradaAdmin_int < 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                 horaEntradaAdmin.setText("");
                 c++;
@@ -744,7 +744,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
-            if(horaAlmuerzoAdmin_int < 0 || horaAlmuerzoAdmin_int > 24){
+            if(horaAlmuerzoAdmin_int >0 && horaAlmuerzoAdmin_int < 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                 horaAlmuerzoAdmin.setText("");
                 c++;
@@ -759,22 +759,25 @@ public class Patioventainterfaz extends AppCompatActivity {
             c++;
         }else{
             horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
-            if(horaSalidaAdmin_int < 0 || horaSalidaAdmin_int > 24){
+            if(horaSalidaAdmin_int >0 && horaSalidaAdmin_int < 24){
                 Toast.makeText(Patioventainterfaz.this, "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                 horaSalidaAdmin.setText("");
                 c++;
             }
         }
 
+        AtomicBoolean isFoto = new AtomicBoolean(false);
         StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str+".jpg");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(Patioventainterfaz.this, "Se ha añadió satisfactoriamente la imagen", Toast.LENGTH_SHORT).show()
+                isFoto.set(true)
         );
 
-        if(foto == null){
+        if(!isFoto.get()){
             Toast.makeText(Patioventainterfaz.this, "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
             c++;
         }
+
+        String contraseniaVerificada = contraseniaAdmin_str;
 
         if (c == 0) {
             Date fecha = null;
@@ -793,8 +796,8 @@ public class Patioventainterfaz extends AppCompatActivity {
                     cedulaAdmin_str,
                     telefonoAdmin_str,
                     correoAdmin_str,
-                    contraseniaAdmin_str,
-                    fecha);
+                    contraseniaVerificada,
+                    sdf.parse(String.valueOf(fecha)));
             usuarioActual = user;
             patioventa.aniadirUsuario(user, "Administrador");
             try {
@@ -804,7 +807,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
