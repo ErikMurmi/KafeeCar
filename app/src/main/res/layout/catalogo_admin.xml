@@ -702,7 +702,7 @@
                             android:layout_height="wrap_content" />
 
                         <ImageButton
-                            android:id="@+id/imageButton"
+                            android:id="@+id/perfil_img_bt"
                             android:layout_width="189dp"
                             android:layout_height="148dp"
                             android:layout_marginTop="15dp"
