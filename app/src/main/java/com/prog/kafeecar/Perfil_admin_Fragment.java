@@ -53,7 +53,7 @@ public class Perfil_admin_Fragment extends Fragment {
     private Button irEditar;
 
     //Botones con imagen
-    private ImageButton admin_img_btn ;
+    private ImageButton admin_img_btn;
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     @Nullable
@@ -150,7 +150,7 @@ public class Perfil_admin_Fragment extends Fragment {
 
             StorageReference filePath = mStorageRef.child("Vendedores/"+user.getImagen());
             Glide.with(mainview)
-                    .load(filePath)
+                   .load(filePath)
                     .into(admin_img_btn);
             try {
                 final File localFile = File.createTempFile(user.getImagen(),"jpg");

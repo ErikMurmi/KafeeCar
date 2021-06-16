@@ -117,9 +117,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg",8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
-        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Daniel", "1750140481", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"),"1750140481.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115623.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115233.jpg"), "Cliente");
         System.out.println("Se añadieron 5 vendedores ");
         System.out.println("*********************************");
         System.out.println("\t 2. Lista de citas \n");
@@ -539,7 +539,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha);
+            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha,String.format("%s.jpg",cedula_str));
             patioventa.aniadirUsuario(cliente, "Cliente");
             try {
                 if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {

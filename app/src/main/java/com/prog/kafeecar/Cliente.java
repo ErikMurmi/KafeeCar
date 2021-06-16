@@ -15,7 +15,7 @@ public class Cliente extends Usuario{
 
     
     Lista favoritos;
-    
+    private String imagen;
     /**
      * Este es el constructor que inicialeza los parámetros 
      * @param nombre Parámetro de cliente
@@ -24,8 +24,9 @@ public class Cliente extends Usuario{
      * @param correo Parámetro de cliente
      * @param clave Parámetro de cliente
      */
-    public Cliente(String nombre, String cedula, String telefono, String correo, String clave, Date fechaNacimiento) {
+    public Cliente(String nombre, String cedula, String telefono, String correo, String clave, Date fechaNacimiento,String imagen) {
         super(nombre, cedula,telefono, correo, clave,fechaNacimiento);
+        this.imagen = imagen;
         favoritos = new Lista();
     }
 
@@ -44,7 +45,14 @@ public class Cliente extends Usuario{
                 datos + 
                 "\nFavoritos: \n" + favoritos;
     }
-    
+    public String getImagen(){
+        return imagen;
+    }
+    public void setImagen(String imagen){
+        this.imagen = imagen;
+    }
+
+
     //Metodos para el sistemas
      
      /**

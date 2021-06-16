@@ -8,6 +8,281 @@
     app:layout_anchorGravity="center" >
 
     <LinearLayout
+        android:id="@+id/editar_cliente_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/editarperfilcliente"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="2dp"
+        tools:visibility="gone">
+
+        <ScrollView
+            android:layout_width="409dp"
+            android:layout_height="729dp"
+            android:layout_marginTop="72dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:orientation="vertical"
+                android:paddingLeft="28dp">
+
+                <TextView
+                    android:id="@+id/imagenPerfilClienteE_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Imagen de Perfil"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp">
+
+                    <ImageButton
+                        android:id="@+id/imagenPerfilEditCliente_ibtn"
+                        style="@android:style/Widget.Material.Light.ImageButton"
+                        android:layout_width="347dp"
+                        android:layout_height="218dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:fitsSystemWindows="true"
+                        android:onClick="botonImagenPerfilVendedor"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/frame_2" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/nombreClienteE_txt"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Nombre y Apellido:"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/nombreEditCliente_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/cedulaClienterE_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Cédula"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/cedulaEditCliente_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/fechaNacimientoClienteE_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Fecha de Nacimiento"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/diaNacimientoEditCliente_etxt"
+                        android:layout_width="101dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:inputType="date"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/mesNacimientoEditCliente_etxt"
+                        android:layout_width="102dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:inputType="date"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/anioNacimientoEditCliente_etxt"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:inputType="date"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/telefonoClienteE_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Teléfono"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/telefonoEditCliente_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/correoClienteE_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Correo"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/correoEditCliente_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <LinearLayout
+                    android:id="@+id/botones"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/botonEditDeshacerCliente_btn"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/barra_nav"
+                        android:fontFamily="@font/valorant"
+                        android:text="Deshacer"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/botonEditListoCliente_btn"
+                        android:layout_width="156dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="#F7530C"
+                        android:fontFamily="@font/valorant"
+                        android:insetLeft="5dp"
+                        android:insetTop="5dp"
+                        android:insetRight="5dp"
+                        android:insetBottom="5dp"
+                        android:onClick="registrarVendedor"
+                        android:text="Listo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        app:cornerRadius="50dp"
+                        app:iconTint="#FF5722"
+                        app:rippleColor="#FF5722"
+                        app:strokeColor="#FF5722" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/v2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/v3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/v4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/v5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/v6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/visualizar_cliente_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -238,12 +513,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/deshabilitar_vendedor_btn"
+                android:id="@+id/cerrarsesion_cliente_btn"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_dark"
                 android:fontFamily="@font/valorant"
+                android:onClick="salir"
                 android:paddingStart="8dp"
                 android:text="Log out"
                 android:textAlignment="center"
@@ -255,7 +531,7 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/editar_vendedor_btn"
+                android:id="@+id/editar_Cliente_btn"
                 style="@style/boton_editar"
                 android:layout_width="60dp"
                 android:text="Editar"
