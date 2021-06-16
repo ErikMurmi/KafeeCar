@@ -461,7 +461,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             c++;
         }else{
             horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
-            if(horaEntradaVendedor_int < 0 && horaEntradaVendedor_int > 24){
+            if(horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24){
                 Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                 horaEntradaVendedor.setText("");
                 c++;
@@ -476,7 +476,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
             c++;
         }else{
             horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
-            if(horaAlmuerzoVendedor_int < 0 && horaAlmuerzoVendedor_int > 24){
+            if(horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24){
                 Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                 horaAlmuerzoVendedor.setText("");
                 c++;
@@ -491,14 +491,13 @@ public class Vendedores_Admin_Fragment extends Fragment {
             c++;
         }else{
             horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
-            if(horaSalidaVendedor_int < 0 && horaSalidaVendedor_int > 24){
+            if(horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24){
                 Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                 horaSalidaVendedor.setText("");
                 c++;
             }
         }
 
-        AtomicBoolean isFoto = new AtomicBoolean(false);
         StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
                 Toast.makeText(mainView.getContext(), "Se ha añadió satisfactoriamente la imagen", Toast.LENGTH_SHORT).show()
@@ -538,8 +537,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     public void visualizarVendedor(String ced) throws Exception {
