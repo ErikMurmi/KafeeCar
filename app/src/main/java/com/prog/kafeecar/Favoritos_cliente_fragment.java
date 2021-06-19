@@ -28,16 +28,11 @@ public class Favoritos_cliente_fragment extends Fragment{
     RecyclerView listaview;
     Context context;
     Adaptador_Lista_Favoritos adptadorlistaview;
-    public Favoritos_cliente_fragment( Context contex){
-
-        this.context=contex;
-
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.favorito_cliente, container, false);
-        cliente = Patioventainterfaz.clientefav;
+        //cliente = Patioventainterfaz.clientefav;
 
         try {
             cargar();

@@ -305,7 +305,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
 
-    public void citaNueva(View v) throws Exception {
+    /*public void citaNueva(View v) throws Exception {
         EditText textodia = findViewById(R.id.dia_etxt);
         EditText textomes = findViewById(R.id.mes_etxt);
         EditText textoanio = findViewById(R.id.anio_etxt);
@@ -325,7 +325,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             Toast.makeText(Patioventainterfaz.this, "Se agrego correctamente.", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
 
     public void registarCita(View v) throws Exception {
@@ -539,7 +539,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha);
+            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha,cedula_str+".jpg");
             patioventa.aniadirUsuario(cliente, "Cliente");
             try {
                 if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {

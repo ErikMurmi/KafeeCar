@@ -26,6 +26,12 @@ public class Cliente extends Usuario{
         this.imagen = imagen;
         favoritos = new Lista();
     }
+
+    public Cliente(String nombre, String cedula, String telefono, String correo, String clave, Date fechaNacimiento) {
+        super(nombre, cedula,telefono, correo, clave,fechaNacimiento);
+        this.imagen = "";
+        favoritos = new Lista();
+    }
     public Cliente(){
 
     }

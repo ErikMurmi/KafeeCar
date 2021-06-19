@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/vehiculos_catalogo_vendedor"
@@ -42,13 +43,12 @@
 
                 <ImageButton
                     android:id="@+id/busqueda_vendedor_btn"
-                    android:srcCompat="@drawable/icono_busqueda"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/bordesboton"
                     android:backgroundTint="@color/botones"
-                    android:src="@drawable/icono_busqueda" />
+                    app:srcCompat="@drawable/icono_busqueda" />
             </LinearLayout>
 
             <LinearLayout
