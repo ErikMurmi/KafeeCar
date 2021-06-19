@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.util.GregorianCalendar;
@@ -856,10 +857,15 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void salir(View v){
-        usuarioActual =  null;
-        setContentView(R.layout.login);
+        AlertDialog.Builder msg = new AlertDialog.Builder(this);
+        msg.setMessage("Quiere cerrar sesión");
+        msg.setTitle("LOG OUT");
+        msg.setPositiveButton("Si", (dialog, which) -> {
+            usuarioActual =  null;
+            setContentView(R.layout.login);
+        });
+        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        msg.show();
         //setContentView(R.layout.login_sinclaves);
     }
-
-
 }
