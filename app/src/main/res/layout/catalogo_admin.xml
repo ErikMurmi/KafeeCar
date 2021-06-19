@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/v_admin"
@@ -225,7 +225,7 @@
         android:background="@drawable/catalogo"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="gone">
 
         <LinearLayout
@@ -331,10 +331,10 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="13dp"
                             android:fontFamily="@font/ocraext"
-                            android:hint="Cybertruck"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="21sp" />
+                            android:textSize="21sp"
+                            tools:text="Cybertruck" />
 
                         <Space
                             android:layout_width="match_parent"
@@ -359,7 +359,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="2010"
+                                android:hint="8:00 am"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -386,7 +386,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="I2505"
+                                android:hint="13:00 pm"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -413,7 +413,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="PPP-5555"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -424,9 +423,9 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ocra"
-                            android:hint="$5,000"
                             android:textColor="#000000"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            tools:text="$55 000" />
 
                     </LinearLayout>
 
@@ -472,10 +471,10 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="13dp"
                             android:fontFamily="@font/ocraext"
-                            android:hint="Cybertruck"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="21sp" />
+                            android:textSize="21sp"
+                            tools:text="Cybertruck" />
 
                         <Space
                             android:layout_width="match_parent"
@@ -500,7 +499,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="2010"
+                                android:hint="8:00 am"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -527,7 +526,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="I2052"
+                                android:hint="13:00 pm"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -554,7 +553,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
-                                android:hint="PPP-5555"
                                 android:textSize="17sp" />
                         </LinearLayout>
 
@@ -565,9 +563,9 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/ocra"
-                            android:hint="$5,000"
                             android:textColor="#000000"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            tools:text="$55 000" />
 
                     </LinearLayout>
 
@@ -583,9 +581,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/cita_individual_editar"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="0dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"

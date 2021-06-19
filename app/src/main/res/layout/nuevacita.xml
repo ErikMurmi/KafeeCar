@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/nuevacita_text"
+            android:id="@+id/nueva_cita_cliente_lb"
             android:layout_width="288dp"
             android:layout_height="54dp"
             android:layout_marginStart="50dp"
@@ -30,7 +30,7 @@
             android:textColor="@android:color/background_dark" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imagen_auto_cita_img"
             android:layout_width="386dp"
             android:layout_height="224dp"
             android:layout_marginStart="5dp"
@@ -44,7 +44,7 @@
             android:layout_height="59dp" />
 
         <TextView
-            android:id="@+id/ingresarfecha_text"
+            android:id="@+id/ingresar_fecha_lb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/background_light"
@@ -60,7 +60,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/dia_etxt"
+                android:id="@+id/dia_cita_nueva_etxt"
                 style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
@@ -71,7 +71,7 @@
                 android:textColor="@android:color/background_dark" />
 
             <EditText
-                android:id="@+id/mes_etxt"
+                android:id="@+id/mes_cita_nueva_etxt"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:layout_marginLeft="20dp"
@@ -80,7 +80,7 @@
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/anio_etxt"
+                android:id="@+id/anio_cita_nueva_etxt"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:layout_marginLeft="20dp"
@@ -90,7 +90,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/dospuntos_txt"
+            android:id="@+id/dospuntos_lb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -100,7 +100,7 @@
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/ingresarhora_text"
+            android:id="@+id/ingresar_hora_lb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ingrese la hora:"
@@ -115,7 +115,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/hora_etxt"
+                android:id="@+id/hora_clita_nueva_etxt"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:backgroundTint="@android:color/darker_gray"
@@ -123,7 +123,7 @@
                 android:inputType="date|number" />
 
             <EditText
-                android:id="@+id/minutos_etxt"
+                android:id="@+id/minutos_clita_nueva_etxt"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:layout_marginLeft="20dp"
@@ -133,7 +133,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/guardar_btn"
+            android:id="@+id/guardar_clita_nueva_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/boton_redondeado"

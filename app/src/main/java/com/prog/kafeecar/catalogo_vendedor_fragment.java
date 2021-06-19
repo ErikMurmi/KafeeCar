@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,22 +25,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 //import com.bumptech.glide.Glide;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Executor;
 
 import static java.lang.String.format;
 public class catalogo_vendedor_fragment extends Fragment {
@@ -279,17 +271,17 @@ public class catalogo_vendedor_fragment extends Fragment {
 
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
-        TextView placa = mainView.findViewById(R.id.placa_txt);
-        TextView matricula = mainView.findViewById(R.id.matricula_txt);
-        TextView anio = mainView.findViewById(R.id.vehiculo_anio_txt);
-        TextView marca = mainView.findViewById(R.id.vehiculo_marca_txt);
-        TextView modelo = mainView.findViewById(R.id.vehiculo_modelo_txt);
-        TextView color = mainView.findViewById(R.id.vehiculo_color_txt);
-        TextView descripcion = mainView.findViewById(R.id.vehiculo_descripcion_txt);
-        TextView precioInicial = mainView.findViewById(R.id.vehiculo_pinicial_txt);
-        TextView preciVenta = mainView.findViewById(R.id.vehiculo_pventa_txt);
-        TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_txt);
-        TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_txt);
+        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
+        TextView matricula = mainView.findViewById(R.id.matricula_cliente_txt);
+        TextView anio = mainView.findViewById(R.id.vehiculo_anio_cliente_txt);
+        TextView marca = mainView.findViewById(R.id.vehiculo_marca_cliente_txt);
+        TextView modelo = mainView.findViewById(R.id.vehiculo_modelo_cliente_txt);
+        TextView color = mainView.findViewById(R.id.vehiculo_color_cliente_txt);
+        TextView descripcion = mainView.findViewById(R.id.vehiculo_descripcion_cliente_txt);
+        //TextView precioInicial = mainView.findViewById(R.id.vehiculo_pinicial_cliente_txt);
+        TextView preciVenta = mainView.findViewById(R.id.vehiculo_pventa_cliente_txt);
+        TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
+        TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
 
         Vehiculo vMostrar  = null;
         try {
@@ -306,7 +298,7 @@ public class catalogo_vendedor_fragment extends Fragment {
         modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
         descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
         color.setText(format("Color :%s",vMostrar.getColor()));
-        precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
+       // precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
         preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
         promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
         //Cargar imagen

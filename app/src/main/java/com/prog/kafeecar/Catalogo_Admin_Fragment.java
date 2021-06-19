@@ -47,10 +47,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private Button deshacer_btn;
     private LinearLayout irVerVehiculo;
     private LinearLayout irVerVehiculo1;
-
     private ImageButton selec_vehiculo_img;
     private ImageButton buscar_btn;
-    private ImageButton edit_vehiculo_img;
     private Button irEditarVehiculo;
     public Button editar_btn;
     private Button eliminar_btn;
@@ -69,8 +67,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private Vehiculo vMostrar;
     private Uri foto;
-
-    private String IMAGEN ="";
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
 
@@ -98,7 +94,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
         buscar_btn = mainView.findViewById(R.id.busqueda_admin_btn);
-        edit_vehiculo_img = mainView.findViewById(R.id.vehiculo_edit_img);
         //Layouts
         verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
@@ -162,12 +157,8 @@ public class Catalogo_Admin_Fragment extends Fragment {
             verVehiculoEditable("PSD-1234");
         });
 
-        edit_vehiculo_img.setOnClickListener(v -> {
-            IMAGEN ="EDIT";
-            openGalery();
-        });
+
         selec_vehiculo_img.setOnClickListener(v -> {
-            IMAGEN ="NUEVO";
             openGalery();
         });
 
@@ -295,7 +286,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
 
     public void aniadirVehiculo(){
-
         String msg = "";
         int c=0;
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
@@ -306,6 +296,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             Toast.makeText(mainView.getContext(),"Placa no válida", Toast.LENGTH_SHORT).show();
             c++;
         }
+
 
         EditText matricula_ad = mainView.findViewById(R.id.aniadir_matricula_etxt);
         if(!isEmpty(matricula_ad)){
@@ -377,11 +368,12 @@ public class Catalogo_Admin_Fragment extends Fragment {
             Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
         }
         CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
+        AtomicBoolean isFoto = new AtomicBoolean(false);
         StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_ad.getText().toString()+"_img");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(mainView.getContext(),"Se guardo la imagen", Toast.LENGTH_SHORT).show()
+                        isFoto.set(true)
                 );
-        if(foto == null){
+        if(!isFoto.get()){
             c++;
             Toast.makeText(mainView.getContext(),"No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
         }
@@ -418,7 +410,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String msg = "";
 
         try {
-            ImageButton perfil_img_bt = mainView.findViewById(R.id.vehiculo_edit_img);
+            ImageButton perfil_img_bt = mainView.findViewById(R.id.perfil_img_bt);
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -469,7 +461,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         try {
 
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
-            if(isEmpty(placa_ed)){
+            if(!isEmpty(placa_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de placa vacio", Toast.LENGTH_SHORT).show();
                 c++;
             }else if(placa_ed.getText().toString().length() != 8){
@@ -478,18 +470,16 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
 
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
-            if(isEmpty(matricula_ed)){
+            if(!isEmpty(matricula_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de matricula vacio", Toast.LENGTH_SHORT).show();
                 c++;
-            }else if(matricula_ed.getText().toString().length() > 20){
+            }else if(matricula_ed.getText().toString().length() != 8){
                 Toast.makeText(mainView.getContext(),"Matricula no válida", Toast.LENGTH_SHORT).show();
                 c++;
-            } else {
-                matricula_ed.getText().toString().length();
             }
 
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
-            if(isEmpty(anio_ed)){
+            if(!isEmpty(anio_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de anio vacio", Toast.LENGTH_SHORT).show();
                 c++;
             }else if(Integer.parseInt(anio_ed.getText().toString()) < 1900 || Integer.parseInt(anio_ed.getText().toString()) > 2021){
@@ -499,31 +489,31 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
 
             EditText descripcion_ed = mainView.findViewById(R.id.editar_descripcion_etxt);
-            if(isEmpty(descripcion_ed)){
+            if(!isEmpty(descripcion_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de descripcion vacia", Toast.LENGTH_SHORT).show();
             }
 
             EditText marca_ed = mainView.findViewById(R.id.editar_vehiculo_marca_etxt);
-            if(isEmpty(marca_ed)){
+            if(!isEmpty(marca_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de marca vacio", Toast.LENGTH_SHORT).show();
             }
 
             EditText modelo_ed = mainView.findViewById(R.id.editar_vehiculo_modelo_etxt);
-            if(isEmpty(modelo_ed)){
+            if(!isEmpty(modelo_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de modelo vacio", Toast.LENGTH_SHORT).show();
             }
 
             EditText color_ed = mainView.findViewById(R.id.editar_vehiculo_color_etxt);
-            if(isEmpty(color_ed)){
+            if(!isEmpty(color_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de color vacio", Toast.LENGTH_SHORT).show();
             }
 
             EditText pinicial_ed = mainView.findViewById(R.id.editar_v_pinicial_etxt);
-            if(isEmpty(pinicial_ed)){
+            if(!isEmpty(pinicial_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de precio inicial vacio", Toast.LENGTH_SHORT).show();
             }else if(Integer.parseInt(pinicial_ed.getText().toString())<=0){
@@ -532,7 +522,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
 
             EditText pventa_ed = mainView.findViewById(R.id.editar_v_pventa_etxt);
-            if(isEmpty(pventa_ed)){
+            if(!isEmpty(pventa_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
             }else if(Integer.parseInt(pventa_ed.getText().toString())<0){
@@ -541,7 +531,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
 
             EditText ppromocion_ed = mainView.findViewById(R.id.editar_v_ppromocion_etxt);
-            if(isEmpty(ppromocion_ed)){
+            if(!isEmpty(ppromocion_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
             }else if(Integer.parseInt(ppromocion_ed.getText().toString())<0){
@@ -550,11 +540,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }
 
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
-            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_ed.getText().toString()+"_img");
-            filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                    Toast.makeText(mainView.getContext(),"Se guardo la imagen", Toast.LENGTH_SHORT).show()
-            );
-
             if(c==0){
                 m_vehiculo.actualizarDatos(
                         placa_ed.getText().toString(),
@@ -570,7 +555,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
                         Integer.parseInt(anio_ed.getText().toString()),
                         String.format(placa_ed.getText().toString()+".jpg")
                 );
-                Toast.makeText(mainView.getContext(),"Se actualizaron los datos", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -669,17 +653,12 @@ public class Catalogo_Admin_Fragment extends Fragment {
         if(requestCode == REQUEST_IMAGE_GALERY){
             if(resultCode == Activity.RESULT_OK && data != null){
                 foto = data.getData();
-                if(IMAGEN.compareTo("NUEVO")==0){
-                    selec_vehiculo_img.setImageURI(foto);
-                }else if (IMAGEN.compareTo("EDIT")==0){
-                    edit_vehiculo_img.setImageURI(foto);
-                }
+                selec_vehiculo_img.setImageURI(foto);
             }else{
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;

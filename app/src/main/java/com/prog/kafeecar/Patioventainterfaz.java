@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,37 +29,30 @@ import com.google.firebase.storage.StorageReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.lang.String.*;
 
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
+    public static Cliente clientefav = new Cliente();
     public static Usuario usuarioActual = null;
-    public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Uri foto;
-    public static Boolean CITA_CON_VEHICULO = false;
-    private ImageButton reg_img;
-    private Button irAgendar;
 
-    private LinearLayout aniadirCitaconVehiculo;
-    private LinearLayout adCita;
-    public static Vehiculo v_aux_cita;
+    private ImageButton reg_img;
+
+    ImageButton imagenPerfilVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Login normal
         setContentView(R.layout.login);
-
-        // Login de pruebas
-        //setContentView(R.layout.login_sinclaves);
-
         try {
             cargarDatos();
 
@@ -70,8 +62,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         //Mensajes de informacion emergentes
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
-        aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin_lyt);
-        adCita = findViewById(R.id.ver_cita_lyt);
+
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
@@ -86,15 +77,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-    public void irRegistarCitaVehiculo(View v){
-        try {
-            v_aux_cita = patioventa.buscarVehiculos("Placa","PSD-1234");
-            CITA_CON_VEHICULO = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor,new Citas_Admin_Fragment()).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void cargarDatos() throws Exception {
         System.out.println("\t 2. Lista de vehiculos \n");
@@ -110,14 +92,15 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
-        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-        //patioventa.aniadirUsuario(admin,"Administrador");
+        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("2006-06-05"));
+        //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg",8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "1750140481", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"),"1750140481.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Nik", "1750140481", "0999548928", "123", "123", sdf.parse("29-1-1996"),"1750140481.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115623.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115233.jpg"), "Cliente");
         System.out.println("Se añadieron 5 vendedores ");
@@ -132,9 +115,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
         Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
-        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
+        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
         patioventa.aniadirCita(c1);
         patioventa.aniadirCita(c2);
         patioventa.aniadirCita(c3);
@@ -176,21 +159,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
         }
-    }
 
-    public void irAdmin(View v){
-        usuarioActual = patioventa.getAdministrador();
-        irAplicacion("ADMIN");
-    }
-
-    public void irVendedor(View v) throws Exception {
-        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
-        irAplicacion("VENDEDOR");
-    }
-
-    public void irCliente(View v) throws Exception {
-        usuarioActual = (Usuario) patioventa.getClientes().getPos(1);
-        irAplicacion("CLIENTE");
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -200,7 +169,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_citas:
-                            selectedFragement = new Citas_Admin_Fragment();
+                           // selectedFragement = new Citas_Fragment();
                             break;
                         case R.id.nav_cat:
                             selectedFragement = new Catalogo_Admin_Fragment();
@@ -226,13 +195,13 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_cat_cl:
-                            selectedFragement = new Catalogo_Admin_Fragment();
+                            selectedFragement = new Catalogo_Cliente_fragment();
                             break;
                         case R.id.nav_citas_cl:
-                            selectedFragement = new Citas_cliente_fragment();
+                            selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
                             break;
                         case R.id.nav_fav_cl:
-                            selectedFragement = new Favoritos_cliente_fragment();
+                            selectedFragement = new Favoritos_cliente_fragment(getApplicationContext());
                             break;
                         case R.id.nav_perfil_cl:
                             selectedFragement = new Perfil_cliente_fragment();
@@ -303,13 +272,37 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
 
+    public void visualizarCita(View v) throws Exception {
+        //setTheme(R.style.Theme_KafeeCar_Diseno);
+        //setContentView(R.layout.cita);
+        TextView fecha = findViewById(R.id.fechaCita_txt);
+        TextView hora = findViewById(R.id.horaCita_txt);
+        TextView cliente = findViewById(R.id.clienteCita_txt);
+        TextView contacto = findViewById(R.id.contactoCita_txt);
+        TextView vendedor = findViewById(R.id.vendedorCita_txt);
+        TextView vehiculo = findViewById(R.id.vehiculoCita_txt);
+        TextView descripcion = findViewById(R.id.descripcionCita_txt);
+        TextView resolucion = findViewById(R.id.resolucionCita_txt);
+        TextView precio = findViewById(R.id.precioVentaCita_txt);
+        Cita citaPrueba = (Cita) patioventa.getCitas().getPos(0);
+        fecha.setText(new String(format(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita()))));
+        hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
+        cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
+        contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
+        vendedor.setText(new String(vendedor.getText().toString() + citaPrueba.getVendedorCita().getNombre()));
+        vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
+        descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
+        resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
+        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
+
+    }
 
 
     public void citaNueva(View v) throws Exception {
-        EditText textodia = findViewById(R.id.dia_etxt);
-        EditText textomes = findViewById(R.id.mes_etxt);
-        EditText textoanio = findViewById(R.id.anio_etxt);
-        EditText textohoras = findViewById(R.id.hora_etxt);
+        EditText textodia = findViewById(R.id.dia_cita_nueva_etxt);
+        EditText textomes = findViewById(R.id.mes_cita_nueva_etxt);
+        EditText textoanio = findViewById(R.id.anio_cita_nueva_etxt);
+        EditText textohoras = findViewById(R.id.hora_clita_nueva_etxt);
         String dia_str = textodia.getText().toString();
         String mes_str = textomes.getText().toString();
         String anio_str = textoanio.getText().toString();
@@ -355,7 +348,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public static String getFechaMod(Date fechaMod) {
-        return sdf.format(fechaMod);
+        SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+        return sf.format(fechaMod);
     }
 
     //Seleccion de imagen en la galeria
@@ -422,114 +416,68 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         textonombre = findViewById(R.id.nombre_etxt);
         String nombre_str = textonombre.getText().toString();
-        if(nombre_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
 
         textocedula = findViewById(R.id.cedula_etxt);
         String cedula_str = textocedula.getText().toString();
-        if(cedula_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
+        if (cedula_str.length() != 10) {
+            Toast.makeText(Patioventainterfaz.this, "Numero de cedula invalido", Toast.LENGTH_SHORT).show();
+            textocedula.setText("");
             c++;
-        }else{
-            if(cedula_str.length()!=10){
-                Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                textocedula.setText("");
-                c++;
-            }
         }
 
         textotelefono = findViewById(R.id.telefono_etxt);
         String telefono_str = textotelefono.getText().toString();
-        if(telefono_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
+        if (telefono_str.length() != 10) {
+            Toast.makeText(Patioventainterfaz.this, "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
+            textotelefono.setText("");
             c++;
-        }else{
-            if (telefono_str.length() != 10) {
-                Toast.makeText(Patioventainterfaz.this, "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
-                textotelefono.setText("");
-                c++;
-            }
         }
 
         textocorreo = findViewById(R.id.correo_etxt);
         String correo_str = textocorreo.getText().toString();
-        if(correo_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
+        if (!validarMail(correo_str)) {
+            Toast.makeText(Patioventainterfaz.this, "Correo no valido", Toast.LENGTH_SHORT).show();
+            textocorreo.setText("");
             c++;
-        }else{
-            if (!Patioventainterfaz.validarMail(correo_str)) {
-                Toast.makeText(Patioventainterfaz.this, "Correo no valido", Toast.LENGTH_SHORT).show();
-                textocorreo.setText("");
-                c++;
-            }
         }
 
         textoclave = findViewById(R.id.claveuser_etxt);
         String clave_str = textoclave.getText().toString();
         textorepetirclave = findViewById(R.id.repetirclaveuser_etxt);
         String repetirclave_str = textorepetirclave.getText().toString();
-        if(clave_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
+        if (clave_str.compareTo(repetirclave_str) != 0) {
+            Toast.makeText(Patioventainterfaz.this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
+            textoclave.setText("");
+            textorepetirclave.setText("");
             c++;
-        }else{
-            if(repetirclave_str.isEmpty()){
-                Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
-                c++;
-            }else{
-                if (clave_str.compareTo(repetirclave_str) != 0) {
-                    Toast.makeText(Patioventainterfaz.this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
-                    textoclave.setText("");
-                    textorepetirclave.setText("");
-                    c++;
-                }
-            }
         }
 
-        textomes = findViewById(R.id.mes_etxt);
+
+        textomes = findViewById(R.id.mes_cita_nueva_etxt);
         String mes_str = textomes.getText().toString();
-        int mes = -1;
-        if(mes_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
+        int mes = Integer.parseInt(mes_str);
+        if (mes < 1 || mes > 12) {
+            Toast.makeText(Patioventainterfaz.this, "mes invalido", Toast.LENGTH_SHORT).show();
+            textomes.setText("");
             c++;
-        }else{
-            mes = Integer.parseInt(mes_str);
-            if (mes < 1 || mes > 12) {
-                Toast.makeText(Patioventainterfaz.this, "Mes inválido", Toast.LENGTH_SHORT).show();
-                textomes.setText("");
-                c++;
-            }
         }
 
-        textoanio = findViewById(R.id.anio_etxt);
+        textoanio = findViewById(R.id.anio_cita_nueva_etxt);
         String anio_str = textoanio.getText().toString();
-        int anio = -1;
-        if(anio_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
+        int anio = Integer.parseInt(anio_str);
+        if (anio < 1900 || anio > 2003) {
+            Toast.makeText(Patioventainterfaz.this, "año invalido", Toast.LENGTH_SHORT).show();
+            textoanio.setText("");
             c++;
-        }else{
-            anio = Integer.parseInt(anio_str);
-            if (anio < 1900 || anio > 2003) {
-                Toast.makeText(Patioventainterfaz.this, "Año inválido", Toast.LENGTH_SHORT).show();
-                textoanio.setText("");
-                c++;
-            }
         }
 
-        textodia = findViewById(R.id.dia_etxt);
+        textodia = findViewById(R.id.dia_cita_nueva_etxt);
         String dia_str = textodia.getText().toString();
-        int dia = -1;
-        if(dia_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
+        int dia = Integer.parseInt(dia_str);
+        if (!validarDia(anio, mes, dia)) {
+            Toast.makeText(Patioventainterfaz.this, "Dia invalido", Toast.LENGTH_SHORT).show();
+            textodia.setText("");
             c++;
-        }else{
-            dia = Integer.parseInt(dia_str);
-            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
-                Toast.makeText(Patioventainterfaz.this, "Día inválido", Toast.LENGTH_SHORT).show();
-                textodia.setText("");
-                c++;
-            }
         }
 
         if (c == 0) {
@@ -584,224 +532,62 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
     public void registrarAdministrador() throws ParseException {
-        EditText nombreAdmin;
-        EditText apellidoAdmin;
-        EditText cedulaAdmin;
-        EditText diaNacimientoAdmin;
-        EditText mesNacimientoAdmin;
-        EditText anioNacimientoAdmin;
-        EditText telefonoAdmin;
-        EditText correoAdmin;
-        EditText contraseniaAdmin ;
-        EditText confirmarContraseniaAdmin;
-        EditText horaEntradaAdmin;
-        EditText horaSalidaAdmin;
-        EditText horaAlmuerzoAdmin;
+        EditText nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
+        EditText apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
+        EditText cedulaAdmin = findViewById(R.id.reg_cedula_admin_etxt);
+        EditText diaNacimientoAdmin = findViewById(R.id.reg_dia_admin_etxt);
+        EditText mesNacimientoAdmin = findViewById(R.id.reg_mes_admin_etxt);
+        EditText anioNacimientoAdmin = findViewById(R.id.reg_anio_admin_etxt);
+        EditText telefonoAdmin = findViewById(R.id.reg_telefono_admin_etxt);
+        EditText correoAdmin = findViewById(R.id.reg_correo_admin_etxt);
+        EditText contraseniaAdmin = findViewById(R.id.reg_clave_admin_etxt);
+        EditText confirmarContraseniaAdmin = findViewById(R.id.reg_claveconfim_admin_etxt);
+        EditText horaEntradaAdmin = findViewById(R.id.reg_entrada_admin_etxt);
+        EditText horaSalidaAdmin = findViewById(R.id.reg_salida_admin_etxt);
+        EditText horaAlmuerzoAdmin = findViewById(R.id.reg_almuerzo_admin_etxt);
 
-        int c = 0;
-
-        nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
-        apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
-        String nombreCampoAdmin_str = nombreAdmin.getText().toString();
-        String apellidoCampoAdmin_str = apellidoAdmin.getText().toString();
-        String nombreCompletoAdmin_str = "";
-        if(nombreCampoAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            if(apellidoCampoAdmin_str.isEmpty()){
-                Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Apellido*", Toast.LENGTH_SHORT).show();
-                c++;
-            }else{
-                nombreCompletoAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
-            }
-        }
-
-        cedulaAdmin = findViewById(R.id.reg_cedula_admin_etxt);
+        String nombreAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
         String cedulaAdmin_str = cedulaAdmin.getText().toString();
-        if(cedulaAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            if(cedulaAdmin_str.length()!=10){
-                Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                cedulaAdmin.setText("");
-                c++;
-            }
-        }
-
-        anioNacimientoAdmin = findViewById(R.id.reg_anio_admin_etxt);
-        String anio_str = anioNacimientoAdmin.getText().toString();
-        int anio = -1;
-        if(anio_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            anio = Integer.parseInt(anio_str);
-            if (anio < 1900 || anio > 2003) {
-                Toast.makeText(Patioventainterfaz.this, "Año inválido", Toast.LENGTH_SHORT).show();
-                anioNacimientoAdmin.setText("");
-                c++;
-            }
-        }
-
-        mesNacimientoAdmin = findViewById(R.id.reg_mes_admin_etxt);
-        String mes_str = mesNacimientoAdmin.getText().toString();
-        int mes = -1;
-        if(mes_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            mes = Integer.parseInt(mes_str);
-            if (mes < 1 || mes > 12) {
-                Toast.makeText(Patioventainterfaz.this, "Mes inválido", Toast.LENGTH_SHORT).show();
-                mesNacimientoAdmin.setText("");
-                c++;
-            }
-        }
-
-        diaNacimientoAdmin = findViewById(R.id.reg_dia_admin_etxt);
-        String dia_str = diaNacimientoAdmin.getText().toString();
-        int dia = -1;
-        if(dia_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            dia = Integer.parseInt(dia_str);
-            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
-                Toast.makeText(Patioventainterfaz.this, "Día inválido", Toast.LENGTH_SHORT).show();
-                diaNacimientoAdmin.setText("");
-                c++;
-            }
-        }
-
-        telefonoAdmin = findViewById(R.id.reg_telefono_admin_etxt);
+        String fechaNacimientoAdmin_date = diaNacimientoAdmin.getText().toString()
+                + "-" + mesNacimientoAdmin.getText().toString()
+                + "-" + anioNacimientoAdmin.getText().toString();
         String telefonoAdmin_str = telefonoAdmin.getText().toString();
-        if(telefonoAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            if (telefonoAdmin_str.length() != 10) {
-                Toast.makeText(Patioventainterfaz.this, "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
-                telefonoAdmin.setText("");
-                c++;
-            }
-        }
-
-        correoAdmin = findViewById(R.id.reg_correo_admin_etxt);
         String correoAdmin_str = correoAdmin.getText().toString();
-        if(correoAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            if (!validarMail(correoAdmin_str)) {
-                Toast.makeText(Patioventainterfaz.this, "Correo no valido", Toast.LENGTH_SHORT).show();
-                correoAdmin.setText("");
-                c++;
-            }
-        }
-
-        contraseniaAdmin = findViewById(R.id.reg_clave_admin_etxt);
-        confirmarContraseniaAdmin = findViewById(R.id.reg_claveconfim_admin_etxt);
         String contraseniaAdmin_str = contraseniaAdmin.getText().toString();
         String confirmarContraseniaAdmin_str = confirmarContraseniaAdmin.getText().toString();
-        if(contraseniaAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            if(confirmarContraseniaAdmin_str.isEmpty()){
-                Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
-                c++;
-            }else{
-                if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) != 0) {
-                    Toast.makeText(Patioventainterfaz.this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
-                    contraseniaAdmin.setText("");
-                    confirmarContraseniaAdmin.setText("");
-                    c++;
-                }
-            }
-        }
-
-        horaEntradaAdmin = findViewById(R.id.reg_entrada_admin_etxt);
-        String horaEntradaAdmin_str = horaEntradaAdmin.getText().toString();
-        int horaEntradaAdmin_int = -1;
-        if(horaEntradaAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
-            if(horaEntradaAdmin_int < 0 || horaEntradaAdmin_int > 24){
-                Toast.makeText(Patioventainterfaz.this, "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
-                horaEntradaAdmin.setText("");
-                c++;
-            }
-        }
-
-        horaAlmuerzoAdmin = findViewById(R.id.reg_almuerzo_admin_etxt);
-        String horaAlmuerzoAdmin_str = horaAlmuerzoAdmin.getText().toString();
-        int horaAlmuerzoAdmin_int = -1;
-        if(horaAlmuerzoAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
-            if(horaAlmuerzoAdmin_int <0 || horaAlmuerzoAdmin_int > 24){
-                Toast.makeText(Patioventainterfaz.this, "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
-                horaAlmuerzoAdmin.setText("");
-                c++;
-            }
-        }
-
-        horaSalidaAdmin = findViewById(R.id.reg_salida_admin_etxt);
-        String horaSalidaAdmin_str = horaSalidaAdmin.getText().toString();
-        int horaSalidaAdmin_int = -1;
-        if(horaSalidaAdmin_str.isEmpty()){
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
-            c++;
-        }else{
-            horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
-            if(horaSalidaAdmin_int < 0 || horaSalidaAdmin_int > 24){
-                Toast.makeText(Patioventainterfaz.this, "Hora de salida inválida", Toast.LENGTH_SHORT).show();
-                horaSalidaAdmin.setText("");
-                c++;
-            }
-        }
-
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str+".jpg");
-        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(Patioventainterfaz.this, "Se subio la imagen", Toast.LENGTH_SHORT).show()
-        );
+        int horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
+        int horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
+        int horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
 
 
-        if (c == 0) {
-            Date fecha = null;
-            try {
-                fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Vendedor user = new Vendedor(
+        if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) == 0) {
+            String contraseniaVerificada = contraseniaAdmin_str;
+            patioventa.aniadirUsuario( new Vendedor(
                     String.format("%s.jpg",cedulaAdmin_str),
                     horaEntradaAdmin_int,
                     horaSalidaAdmin_int,
                     horaAlmuerzoAdmin_int,
                     patioventa,
-                    nombreCompletoAdmin_str,
+                    nombreAdmin_str,
                     cedulaAdmin_str,
                     telefonoAdmin_str,
                     correoAdmin_str,
-                    contraseniaAdmin_str,
-                    fecha);
-            usuarioActual = user;
-            patioventa.aniadirUsuario(user, "Administrador");
-            try {
-                irAplicacion("ADMIN");
-                Toast.makeText(Patioventainterfaz.this, "Administrador registrado correctamente",Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                    contraseniaVerificada,
+                    sdf.parse(fechaNacimientoAdmin_date)), "Vendedor");
+            irAplicacion("ADMIN");
+            Toast.makeText(Patioventainterfaz.this, "Administrador registrado correctamente",Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(Patioventainterfaz.this, "No se agrego el administrador",Toast.LENGTH_SHORT).show();
+            contraseniaAdmin.setText("");
+            confirmarContraseniaAdmin.setText("");
         }
+
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str+".jpg");
+        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                Toast.makeText(Patioventainterfaz.this, "Imagen subida satisfactoriamente",Toast.LENGTH_SHORT).show());
     }
+
 
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
@@ -813,7 +599,8 @@ public class Patioventainterfaz extends AppCompatActivity {
         return mather.find();//Devuelve el boleano
     }
 
-    public static boolean validarDia(int anio, int mes, int dia) {
+
+    public boolean validarDia(int anio, int mes, int dia) {
         boolean valido = true;
         int numeroDias = -1;
         switch (mes) {
@@ -858,8 +645,9 @@ public class Patioventainterfaz extends AppCompatActivity {
     public void salir(View v){
         usuarioActual =  null;
         setContentView(R.layout.login);
-        //setContentView(R.layout.login_sinclaves);
     }
-
+    public  AppCompatActivity getActvity(){
+        return this;
+    }
 
 }

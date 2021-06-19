@@ -143,8 +143,20 @@ public class Lista {
     public boolean contiene(Object buscado){
         Nodo aux = inicio;
         boolean encontrado = false;
-        while(aux != null  || !encontrado){
-            if(aux.getDato().equals(buscado)){
+        if(esVacia()){
+            return false;
+        }
+        while((aux != null && aux.getDato()!=null ) || !encontrado){
+
+            if(buscado instanceof String ){
+                String text=(String) buscado;
+                String text2=(String)aux.getDato();
+                if(text.compareTo(text2)==0){
+                    encontrado=true;
+                    break;
+                }
+            }
+            else if(aux.getDato().equals(buscado)){
                 encontrado = true;
             }
             aux = aux.getSiguiente();
@@ -198,24 +210,48 @@ public class Lista {
         } 
         return cambiado;
     }
-    
+    private Object eliminarNodo(Nodo nodoeliminar){
+        if(esVacia()){
+            return null;
+        }
+        if(nodoeliminar==inicio && nodoeliminar==fin){
+            inicio=fin=null;
+        }else if(nodoeliminar==inicio){
+            inicio=nodoeliminar.getSiguiente();
+            nodoeliminar.setSiguiente(null);
+        }else if(nodoeliminar==fin){
+            fin=nodoeliminar.getAnterior();
+            nodoeliminar.setAnterior(null);
+        }else {
+            nodoeliminar.getAnterior().setSiguiente(nodoeliminar.getSiguiente());
+            nodoeliminar.getSiguiente().setAnterior(nodoeliminar.getAnterior());
+            nodoeliminar.setAnterior(null);
+            nodoeliminar.setSiguiente(null);
+        }
+    return nodoeliminar.getDato();
+    }
     
     /**
      * Elimina un objeto
      * @param buscado objeto a eliminar
      * @return objeto eliminado
      */
+
     public Object eliminar(Object buscado){
         Nodo aux = inicio;
-        while(aux != null ){
-            aux = aux.getSiguiente();
-            if(aux.getSiguiente().getDato().equals(buscado)){
-                aux.getAnterior().setSiguiente(aux.getSiguiente());
-                aux.getSiguiente().setAnterior(aux.getAnterior());
-                aux.setAnterior(null);
-                aux.setSiguiente(null);
-                break;
+        while(aux != null && aux.getDato()!=null){
+
+            if(buscado instanceof String ) {
+                String text = (String) buscado;
+                String text2 = (String) aux.getDato();
+                if (text.compareTo(text2) == 0) {
+                    return eliminarNodo(aux);
+                }
             }
+            else if(aux.getSiguiente().getDato().equals(buscado)){
+                return eliminarNodo(aux);
+            }
+            aux = aux.getSiguiente();
         } 
         
         return aux.getDato();
@@ -244,6 +280,30 @@ public class Lista {
         aux.setAnterior(null);
         aux.setSiguiente(null);
         return aux.getDato();
+    }
+    public Lista listabusqueda(Object buscar) throws Exception {
+        if (esVacia()) {
+            return new Lista();
+        }
+        Lista encontrados = new Lista();
+        Nodo aux = inicio;
+
+        if (buscar instanceof Cliente) {
+            Cliente c = (Cliente) buscar;
+
+            while (aux != null) {
+                Cita actual = (Cita) aux.getDato();
+                if (actual.getVisitante().getCedula().compareTo(c.getCedula()) == 0) {
+                    encontrados.add(actual);
+                }
+                aux = aux.getSiguiente();
+
+            }
+        } else {
+            throw new Exception("No implementado");
+        }
+
+        return encontrados;
     }
     
 }

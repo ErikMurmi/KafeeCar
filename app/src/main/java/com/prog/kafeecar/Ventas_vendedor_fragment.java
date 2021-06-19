@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -37,7 +36,7 @@ public class Ventas_vendedor_fragment extends Fragment{
         //aniadir = mainview.findViewById(R.id.aniadir_btn);
         descartar = mainview.findViewById(R.id.descartar_btn);
         actualizar = mainview.findViewById(R.id.actualizar_btn);
-        guardar = mainview.findViewById(R.id.guardar_btn);
+        guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
 
         //Layouts
         //verventa = mainview.findViewById(R.id.verventa_layout);

@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +31,9 @@ public class Citas_cliente_fragment extends Fragment {
     private ScrollView vercita;
     private LinearLayout editarcita;
     private PatioVenta patio;
+    private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.listacitas_cliente, container, false);
@@ -40,7 +41,7 @@ public class Citas_cliente_fragment extends Fragment {
 
         //Botones
 
-        guardar = mainview.findViewById(R.id.guardar_btn);
+        guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
         actualizar = mainview.findViewById(R.id.actualizar_btn);
         descartar = mainview.findViewById(R.id.descartar_btn);
 
@@ -118,7 +119,7 @@ public class Citas_cliente_fragment extends Fragment {
         EditText textoanio;
         EditText textohoras;
 
-        textodia = mainview.findViewById(R.id.dia_etxt);
+        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
         if (dia < 1 || dia > 30) {
@@ -127,7 +128,7 @@ public class Citas_cliente_fragment extends Fragment {
             c++;
         }
 
-        textomes = mainview.findViewById(R.id.mes_etxt);
+        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
         String mes_str = textomes.getText().toString();
         int mes = Integer.parseInt(mes_str);
         if (mes < 1 || mes > 12) {
@@ -136,7 +137,7 @@ public class Citas_cliente_fragment extends Fragment {
             c++;
         }
 
-        textoanio = mainview.findViewById(R.id.anio_etxt);
+        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
         if (anio < 2021 || anio > 2022) {
@@ -184,7 +185,7 @@ public class Citas_cliente_fragment extends Fragment {
         textoplaca = mainview.findViewById(R.id.placa_etxt);
         String placa_str = textoplaca.getText().toString();
 
-        textodia = mainview.findViewById(R.id.dia_etxt);
+        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
         if(dia<1||dia>30)
@@ -194,7 +195,7 @@ public class Citas_cliente_fragment extends Fragment {
             c++;
         }
 
-        textomes = mainview.findViewById(R.id.mes_etxt);
+        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
         String mes_str = textomes.getText().toString();
         int mes = Integer.parseInt(mes_str);
         if(mes<1||mes>12)
@@ -204,7 +205,7 @@ public class Citas_cliente_fragment extends Fragment {
             c++;
         }
 
-        textoanio = mainview.findViewById(R.id.anio_etxt);
+        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
         if(anio<2021||anio>2022)
@@ -259,10 +260,10 @@ public class Citas_cliente_fragment extends Fragment {
         EditText textohoras;
         EditText textoplaca;
         textoplaca = mainview.findViewById(R.id.placa_etxt);
-        textodia = mainview.findViewById(R.id.dia_etxt);
-        textomes = mainview.findViewById(R.id.mes_etxt);
-        textoanio = mainview.findViewById(R.id.anio_etxt);
-        textohoras = mainview.findViewById(R.id.hora_etxt);
+        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
+        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
+        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
+        textohoras = mainview.findViewById(R.id.hora_clita_nueva_etxt);
         PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
         Cita cita = p.buscarCitas("cliente",cliente.getCedula());
@@ -288,8 +289,8 @@ public class Citas_cliente_fragment extends Fragment {
         TextView Matriculalista;
         TextView Matriculalista2;
 
-
-        horalista = mainview.findViewById(R.id.hora_lista_txt);
+/*
+        horalista = mainview.findViewById(R.id.hora_lista_t);
         horalista2 = mainview.findViewById(R.id.hora_lista2_txt);
         Clientelista = mainview.findViewById(R.id.cliente_listacita_txt);
         Clientelista2 = mainview.findViewById(R.id.clente_listacita2_txt);
@@ -310,5 +311,7 @@ public class Citas_cliente_fragment extends Fragment {
         Clientelista2.setText(cita2.getVisitante().getNombre());
         Telefonolista2.setText(cita2.getVisitante().getTelefono());
         Matriculalista2.setText(cita2.getVehiculo().getMatricula());
+
+ */
     }
 }

@@ -7,10 +7,7 @@ package com.prog.kafeecar;
 
 import java.util.Date;
 
-/**
- *
- * @author Erik
- */
+
 public class Cliente extends Usuario{
 
     
@@ -29,10 +26,13 @@ public class Cliente extends Usuario{
         this.imagen = imagen;
         favoritos = new Lista();
     }
+    public Cliente(){
 
+    }
     public Lista getFavoritos() {
         return favoritos;
     }
+
 
     public void setFavoritos(Lista favoritos) {
         this.favoritos = favoritos;
