@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible">
 
         <LinearLayout
@@ -87,6 +87,7 @@
 
                 <TextView
                     android:id="@+id/vehiculo_modelo_txt"
+                    style="@style/texto_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/text_space"
@@ -224,7 +225,7 @@
         android:background="@drawable/catalogo"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:visibility="gone">
 
         <LinearLayout
