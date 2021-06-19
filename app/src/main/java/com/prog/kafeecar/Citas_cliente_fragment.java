@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,12 +36,14 @@ public class Citas_cliente_fragment extends Fragment {
     private ScrollView vercita;
     private LinearLayout editarcita;
     private PatioVenta patio;
+    private RecyclerView listaview;
+    private Adaptador_Lista_Cliente_Cita adptadorlistaview;
     private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainview = inflater.inflate(R.layout.listacitas_cliente, container, false);
+        mainview = inflater.inflate(R.layout.lista_citas, container, false);
         patio = Patioventainterfaz.patioventa;
 
         //Botones
@@ -48,6 +55,12 @@ public class Citas_cliente_fragment extends Fragment {
         //layouts
         vercita = mainview.findViewById(R.id.ver_cita_Scroll);
         editarcita = mainview.findViewById(R.id.editar_cita_linear);
+
+        try {
+            cargar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         guardar.setOnClickListener(v ->{
             try {
@@ -278,6 +291,16 @@ public class Citas_cliente_fragment extends Fragment {
         textodia.setText(dia);
     }
 
+    public void cargar() throws Exception {
+        Cita cita1=(Cita)patio.getCitas().getInicio().getDato();
+        listaview=mainview.findViewById(R.id.listacitas_Rv);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.getCitas().listabusqueda(cita1.getVisitante()));
+        listaview.setAdapter(adptadorlistaview);
+        listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
+    }
     public void verlistacitas() throws Exception
     {
         TextView horalista;
