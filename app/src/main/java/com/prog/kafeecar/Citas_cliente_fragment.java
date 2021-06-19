@@ -29,16 +29,28 @@ import java.util.Date;
 public class Citas_cliente_fragment extends Fragment {
 
     private View mainview;
-    private Button guardar;
-    private Button actualizar;
-    private Button descartar;
+    private Button deacartarnuevacita;
+    private Button guardarcitanueva;
+    private Button guardarcitaeditada;
+    private Button descartareditarcita;
     private Button regresar;
+    private Button actualizarvercita;
+
+
     private ScrollView vercita;
+    private ScrollView catalogoAutosCliente;
+
     private LinearLayout editarcita;
+    private LinearLayout nuevacita;
+
     private PatioVenta patio;
+
     private RecyclerView listaview;
+
     private Adaptador_Lista_Cliente_Cita adptadorlistaview;
+
     private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
+
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -46,15 +58,25 @@ public class Citas_cliente_fragment extends Fragment {
         mainview = inflater.inflate(R.layout.lista_citas, container, false);
         patio = Patioventainterfaz.patioventa;
 
-        //Botones
+        //Botones aniadir cita nueva
+        deacartarnuevacita=mainview.findViewById(R.id.descartar_NC_btn);
+        guardarcitanueva = mainview.findViewById(R.id.guardar_clita_nueva_NC_btn);
+        //Botones actualizar cita cuando se edita
+        guardarcitaeditada=mainview.findViewById(R.id.guardar_cita_nueva_EC_btn);
+        descartareditarcita = mainview.findViewById(R.id.descartar_EC_btn);
 
-        guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
-        actualizar = mainview.findViewById(R.id.actualizar_btn);
-        descartar = mainview.findViewById(R.id.descartar_btn);
-
-        //layouts
+        //boton de ver cita
+        regresar = mainview.findViewById(R.id.regresar_cita_VC_btn);
+        actualizarvercita=mainview.findViewById(R.id.actualizar_cita_VC_btn);
+        //Botton que entre a cita grande
+        //layouts/Scroll
+        catalogoAutosCliente=mainview.findViewById(R.id.catalogoautos_cliente_scl);
         vercita = mainview.findViewById(R.id.ver_cita_Scroll);
+
         editarcita = mainview.findViewById(R.id.editar_cita_linear);
+
+        nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);
+
 
         try {
             cargar();
@@ -62,15 +84,30 @@ public class Citas_cliente_fragment extends Fragment {
             e.printStackTrace();
         }
 
-        guardar.setOnClickListener(v ->{
+        guardarcitanueva.setOnClickListener(v ->{
+            try {
+                citaNueva();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        deacartarnuevacita.setOnClickListener(v -> {
+            mainview.setVisibility(View.GONE);
+            catalogoAutosCliente.setVisibility(View.VISIBLE);
+        });
+        guardarcitaeditada.setOnClickListener(v ->{
             try {
                 modificarCita();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
+        descartareditarcita.setOnClickListener(v -> {
+            mainview.setVisibility(View.VISIBLE);
+            vercita.setVisibility(View.GONE);
+        });
 
-        actualizar.setOnClickListener(v -> {
+        vercita.setOnClickListener(v -> {
             try {
                 visualizarCitacliente();
             } catch (Exception e) {
@@ -78,9 +115,14 @@ public class Citas_cliente_fragment extends Fragment {
             }
         });
 
-        descartar.setOnClickListener(v -> {
+        descartareditarcita.setOnClickListener(v -> {
             mainview.setVisibility(View.VISIBLE);
             vercita.setVisibility(View.GONE);
+        });
+
+        actualizarvercita.setOnClickListener(v -> {
+            mainview.setVisibility(View.GONE);
+            editarcita.setVisibility(View.VISIBLE);
         });
 
         regresar.setOnClickListener(v -> {
@@ -102,13 +144,13 @@ public class Citas_cliente_fragment extends Fragment {
         TextView textodescripcion;
 
 
-        textodia = mainview.findViewById(R.id.fecha_txt3);
-        textomes = mainview.findViewById(R.id.fecha_txt2);
-        textoanio = mainview.findViewById(R.id.fecha_txt);
-        textohoras = mainview.findViewById(R.id.hora_txt);
-        textovendedor = mainview.findViewById(R.id.vendedor_txt);
-        textovehiculo = mainview.findViewById(R.id.vehiculo_txt);
-        textodescripcion = mainview.findViewById(R.id.descripcion_txt);
+        textodia = mainview.findViewById(R.id.dia_cita_VC_etxt);
+        textomes = mainview.findViewById(R.id.mes_cita_VC_etxt);
+        textoanio = mainview.findViewById(R.id.anio_cita_VC_etxt);
+        textohoras = mainview.findViewById(R.id.hora_cita_VC_etxt);
+        textovendedor = mainview.findViewById(R.id.nomvendedor_cita_VC_etxt);
+        textovehiculo = mainview.findViewById(R.id.vehiculo_cita_VC_etxt);
+        textodescripcion = mainview.findViewById(R.id.descripcion_cita_VC_etxt);
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
         Cita cita = patio.buscarCitas("cliente", cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
@@ -159,7 +201,7 @@ public class Citas_cliente_fragment extends Fragment {
             c++;
         }
 
-        textohoras = mainview.findViewById(R.id.hora_txt);
+        textohoras = mainview.findViewById(R.id.hora_clita_nueva_etxt);
         String horas_str = textohoras.getText().toString();
         int horas = Integer.parseInt(horas_str);
         if (horas < 0 || horas > 24) {

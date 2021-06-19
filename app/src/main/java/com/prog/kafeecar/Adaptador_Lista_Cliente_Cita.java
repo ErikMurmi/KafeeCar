@@ -56,7 +56,6 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             Glide.with(view)
                     .load(filePath)
                     .into(holder.imagen);
-            Toast.makeText(view.getContext(),"1", Toast.LENGTH_SHORT).show();
             try {
                 Toast.makeText(view.getContext(),"2", Toast.LENGTH_SHORT).show();
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
