@@ -43,12 +43,9 @@ public class catalogo_vendedor_fragment extends Fragment {
     private String TAG = "Catalogo";
     private View mainView;
 
-    private ImageButton selec_vehiculo_img;
     private Button buscarPlacaVn_btn;
 
-
     private ScrollView verVehiculo;
-    private ScrollView editar_vehiculo;
 
     //lyts de los vendedores en la lista
     private LinearLayout verCatalogo;
@@ -59,7 +56,7 @@ public class catalogo_vendedor_fragment extends Fragment {
 
     private Uri foto;
 
-    private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     @Nullable
     @Override
@@ -76,12 +73,11 @@ public class catalogo_vendedor_fragment extends Fragment {
         }
 
         //Botones
-        selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         buscarPlacaVn_btn = mainView.findViewById(R.id.busqueda_placa_vn_btn);
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
-        //verVehiculo = mainView.findViewById(R.id.ver_vehiculo_catalogo_vendedor);
+        verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
         verVehiculoLista_lyt = mainView.findViewById(R.id.vehiculo_lista_vendedor_lyt);
         verVehiculoLista1_lyt = mainView.findViewById(R.id.vehiculo_lista1_vendedor_lyt);
 
@@ -100,7 +96,6 @@ public class catalogo_vendedor_fragment extends Fragment {
         verVehiculoLista1_lyt.setOnClickListener(v -> {
             //Desactivar otros diseños
             verCatalogo.setVisibility(View.GONE);
-            editar_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
             try {
@@ -110,12 +105,8 @@ public class catalogo_vendedor_fragment extends Fragment {
             }
         });
 
-        selec_vehiculo_img.setOnClickListener(v -> {
-            openGalery();
-        });
-
         buscarPlacaVn_btn.setOnClickListener(view -> {
-
+            buscarVehiculos();
         });
 ;
         return mainView;
@@ -249,7 +240,7 @@ public class catalogo_vendedor_fragment extends Fragment {
     }
 
     public void buscarVehiculos () {
-        EditText placa = mainView.findViewById(R.id.busqueda_placa_etxt);
+        EditText placa = mainView.findViewById(R.id.buscar_placa_vendedor_etxt);
         String placa_str = placa.getText().toString();
         Vehiculo buscado = null;
         try {
@@ -275,7 +266,6 @@ public class catalogo_vendedor_fragment extends Fragment {
         if(requestCode == REQUEST_IMAGE_GALERY){
             if(resultCode == Activity.RESULT_OK && data != null){
                 foto = data.getData();
-                selec_vehiculo_img.setImageURI(foto);
             }else{
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }
