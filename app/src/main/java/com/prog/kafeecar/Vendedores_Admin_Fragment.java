@@ -210,13 +210,21 @@ public class Vendedores_Admin_Fragment extends Fragment {
         });
 
         editarlisto_btn.setOnClickListener(v -> {
-            try{
-                editarVendedor();
-                regresarPantallaPrncipal();
-            }catch (Exception e){
-                Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
-                regresarPantallaPrncipal();
-            }
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Editar datos vendedor");
+            msg.setMessage("¿Está seguro de actualizar los datos del cliente "+ venMostrar.getNombre()+ " ?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try{
+                    editarVendedor();
+                    regresarPantallaPrncipal();
+                }catch (Exception e){
+                    Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+                    regresarPantallaPrncipal();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+
         });
 
         editarDeshacer_btn.setOnClickListener(v -> {
