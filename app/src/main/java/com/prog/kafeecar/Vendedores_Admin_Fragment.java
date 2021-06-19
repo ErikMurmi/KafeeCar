@@ -1,6 +1,8 @@
 package com.prog.kafeecar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -166,13 +168,27 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 TextView cedula = mainView.findViewById(R.id.cedula_vendedor_txt);
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
                 if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
-                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE DESHABILITARÁ DEL SISTEMA!", Toast.LENGTH_SHORT).show();
-                    vendedor.setActivo(false);
-                    deshabilitar_btn.setText("Habilitar");
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setMessage("Este Vendedor se DESHABILITARÁ. Desea Continuar");
+                    msg.setTitle("ADVERTENCIA");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        vendedor.setActivo(false);
+                        deshabilitar_btn.setText("Habilitar");
+                        regresarPantallaPrncipal();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 } else {
-                    deshabilitar_btn.setText("Deshabilitar");
-                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
-                    vendedor.setActivo(true);
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setMessage("Este Vendedor se HABILITARÁ. Desea Continuar");
+                    msg.setTitle("ADVERTENCIA");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        vendedor.setActivo(true);
+                        deshabilitar_btn.setText("Deshabilitar");
+                        regresarPantallaPrncipal();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo ejecutar la petición", Toast.LENGTH_SHORT).show();
@@ -203,7 +219,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }
         });
 
-
         editarDeshacer_btn.setOnClickListener(v -> {
             try{
                 irRegistrarVendedor.setVisibility(View.GONE);
@@ -228,6 +243,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
         });
 
         return mainView;
+    }
+
+    public void deshabilitar (){
+
     }
 
     public void verListaVendedores(String cedula, String cedula1){
