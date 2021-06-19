@@ -26,9 +26,7 @@ public class PruebasListaCitasFragment extends Fragment {
     Context context;
     Adaptador_Lista_Cliente_Cita adptadorlistaview;
     public PruebasListaCitasFragment( Context contex){
-
         this.context=contex;
-
     }
     @Nullable
     @Override

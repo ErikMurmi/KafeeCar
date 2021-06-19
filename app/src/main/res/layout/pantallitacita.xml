@@ -18,7 +18,7 @@
             android:layout_height="127dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="6dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:srcCompat="@mipmap/ic_tesla" />
 
         <LinearLayout
             android:layout_width="215dp"
