@@ -81,22 +81,26 @@ public class Perfil_Vendedor_Fragment extends Fragment {
 
     public void verPerfil(){
         try{
+            Toast.makeText(mainview.getContext(), "1", Toast.LENGTH_SHORT).show();
             TextView nombre_ed = mainview.findViewById(R.id.nombre_pe_vn_txt);
             TextView fecha_ed = mainview.findViewById(R.id.fecha_pe_vn_txt);
             TextView cedula_ed = mainview.findViewById(R.id.cedula_pe_vn_txt);
             TextView telefono_ed = mainview.findViewById(R.id.telefono_cedula_pe_vn_txt);
             TextView correo_ed = mainview.findViewById(R.id.correo_cedula_pe_vn_txt);
             String fechaNacimiento = Patioventainterfaz.getFechaMod(user.getFechaNacimiento());
+            Toast.makeText(mainview.getContext(), "2", Toast.LENGTH_SHORT).show();
             nombre_ed.setText(user.getNombre());
             fecha_ed.setText(fechaNacimiento);
             cedula_ed.setText(user.getCedula());
             telefono_ed.setText(user.getTelefono());
             correo_ed.setText(user.getCorreo());
+            Toast.makeText(mainview.getContext(), "3", Toast.LENGTH_SHORT).show();
             StorageReference filePath = mStorageRef.child("Vendedores/"+user.getImagen());
             Glide.with(mainview)
                     .load(filePath)
                     .into(perfil_img);
             try {
+                Toast.makeText(mainview.getContext(), "4", Toast.LENGTH_SHORT).show();
                 final File localFile = File.createTempFile(user.getImagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
@@ -106,6 +110,7 @@ public class Perfil_Vendedor_Fragment extends Fragment {
                     }
                 });
             }catch (IOException e) {
+                Toast.makeText(mainview.getContext(), "catch", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }catch (Exception e){
