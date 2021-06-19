@@ -7,6 +7,159 @@
     tools:context=".Patioventainterfaz">
 
     <LinearLayout
+        android:id="@+id/editarcita_EC_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible">
+
+        <TextView
+            android:id="@+id/editarcita_EC_txt"
+            android:layout_width="213dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/ocraext"
+            android:gravity="center"
+            android:text="Editar Cita"
+            android:textColor="@android:color/background_dark"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/imagenauto_cita_nueva_EC_img"
+            android:layout_width="262dp"
+            android:layout_height="159dp"
+            android:layout_marginTop="15dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/nuevafecha_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/ocraext"
+            android:text="Nueva  Fecha"
+            android:textColor="#111111"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="394dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/dia_cita_nueva_EC_etxt"
+                android:layout_width="50dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bordesbotongris"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPersonName"
+                android:lineSpacingExtra="0sp"
+                android:text="dd"
+                android:textAlignment="center"
+                android:textDirection="anyRtl"
+                android:textSize="20sp"
+                android:typeface="normal" />
+
+            <EditText
+                android:id="@+id/mes_cita_nueva_EC_etxt"
+                android:layout_width="50dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/bordesbotongris"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPersonName"
+                android:text="mm"
+                android:textAlignment="center"
+                android:textDirection="anyRtl"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/anio_cita_nueva_EC_etxt"
+                android:layout_width="50dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/bordesbotongris"
+                android:ems="10"
+                android:fontFamily="@font/ocraext"
+                android:inputType="textPersonName"
+                android:text="aa"
+                android:textAlignment="center"
+                android:textDirection="anyRtl"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/nuevacita_EC_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ocraext"
+            android:text="Nueva hora "
+            android:textColor="#111111"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/hora_cita_nueva_EC_etxt"
+            android:layout_width="88dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bordesbotongris"
+            android:ems="10"
+            android:fontFamily="@font/ocraext"
+            android:inputType="textPersonName"
+            android:text="00"
+            android:textAlignment="center"
+            android:textDirection="anyRtl"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/placadelvehiculo_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/ocraext"
+            android:text="Placa del vehiculo"
+            android:textColor="#111111"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/placa_cita_nueva_EC_etxt"
+            android:layout_width="280dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bordesbotongris"
+            android:ems="10"
+            android:fontFamily="@font/ocraext"
+            android:inputType="textPersonName"
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/guardar_cita_nueva_EC_btn"
+            android:layout_width="121dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bordesbotongris"
+            android:backgroundTint="#F7530C"
+            android:fontFamily="@font/valoran"
+            android:text="Guardar"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/nueva_cita_cliente_lay"
         android:layout_width="421dp"
         android:layout_height="724dp"
@@ -14,7 +167,7 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/nueva_cita_cliente_lb"
@@ -56,17 +209,16 @@
             tools:visibility="visible" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="58dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/dia_cita_nueva_etxt"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="60dp"
                 android:layout_height="39dp"
-                android:background="@drawable/bordesbotongris"
-                android:backgroundTint="@color/white"
+                android:background="@drawable/bordesmarcosgris"
                 android:ems="10"
                 android:inputType="number"
                 android:textColor="@android:color/background_dark" />
@@ -76,7 +228,7 @@
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:layout_marginLeft="20dp"
-                android:backgroundTint="@android:color/darker_gray"
+                android:background="@drawable/bordesmarcosgris"
                 android:ems="10"
                 android:inputType="number" />
 
@@ -85,20 +237,10 @@
                 android:layout_width="60dp"
                 android:layout_height="39dp"
                 android:layout_marginLeft="20dp"
-                android:backgroundTint="@android:color/darker_gray"
+                android:background="@drawable/bordesmarcosgris"
                 android:ems="10"
                 android:inputType="number" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/dospuntos_lb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=":"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_dark"
-            android:visibility="visible"
-            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/ingresar_hora_lb"
@@ -111,9 +253,12 @@
             tools:visibility="visible" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="111dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bordesmarcosgris"
             android:orientation="horizontal">
+
 
             <EditText
                 android:id="@+id/hora_clita_nueva_etxt"
@@ -134,9 +279,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/guardar_clita_nueva_btn"
+            android:id="@+id/guardar_clita_nueva_NC_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/boton_redondeado"
             android:backgroundTint="?android:attr/colorMultiSelectHighlight"
             android:elegantTextHeight="true"
@@ -144,7 +290,6 @@
             android:fontFamily="@font/valorant"
             android:gravity="center|center_horizontal|center_vertical"
             android:lineSpacingExtra="8sp"
-            android:onClick="citaNueva"
             android:padding="5dp"
             android:text="Guardar"
             android:textAlignment="center"
@@ -162,7 +307,7 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="703dp"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <FrameLayout
             android:layout_width="412dp"
