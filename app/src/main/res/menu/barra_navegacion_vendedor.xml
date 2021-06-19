@@ -16,4 +16,9 @@
         android:icon="@drawable/ventas_icon"
         android:title="@string/Ventas"/>
 
+    <item
+        android:id="@+id/nav_perfil_ven"
+        android:icon="@drawable/perfil_icono"
+        android:title="@string/perfil_c"/>
+
 </menu>
