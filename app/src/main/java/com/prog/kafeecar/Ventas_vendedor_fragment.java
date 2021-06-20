@@ -34,15 +34,15 @@ public class Ventas_vendedor_fragment extends Fragment{
 
         //Botones
         //aniadir = mainview.findViewById(R.id.aniadir_btn);
-        descartar = mainview.findViewById(R.id.descartar_btn);
-        actualizar = mainview.findViewById(R.id.actualizar_btn);
+       // descartar = mainview.findViewById(R.id.descartar_btn);
+        //actualizar = mainview.findViewById(R.id.actualizar_btn);
         guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
 
         //Layouts
         //verventa = mainview.findViewById(R.id.verventa_layout);
         //aniadirventa = mainview.findViewById(R.id.aniadirventa_layout);
         //editarventa = mainview.findViewById(R.id.editarventa_layout);
-
+        /*
         aniadir.setOnClickListener(v ->{
             try {
                 aniadirVenta();
@@ -64,7 +64,7 @@ public class Ventas_vendedor_fragment extends Fragment{
 
         guardar.setOnClickListener(v ->{
 
-        });
+        });*/
         return mainview;
     }
 

@@ -71,9 +71,6 @@ public class Perfil_admin_Fragment extends Fragment {
             verPerfilEditable();
         });
 
-        /*cancelar.setOnClickListener(v -> {
-
-        });*/
         return mainview;
     }
     public void initViews(){

@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**/
@@ -169,7 +167,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             setContentView(R.layout.home_vendedor);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_vendedor);
             navBar.setOnNavigationItemSelectedListener(nav_vendedor_Listener);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Catalogo_Vendedor_Fragment()).commit();
         } else if (tipo.compareTo("CLIENTE") == 0) {
             setContentView(R.layout.home_cliente);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
@@ -184,7 +182,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irVendedor(View v) throws Exception {
-        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
+        usuarioActual = (Usuario) patioventa.getVendedores().getPos(2);
         irAplicacion("VENDEDOR");
     }
 
@@ -219,6 +217,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     return true;
                 }
             };
+
     private BottomNavigationView.OnNavigationItemSelectedListener nav_cliente_Listener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -248,24 +247,21 @@ public class Patioventainterfaz extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
-                        case R.id.nav_cat_ven:
-                            selectedFragement = new Catalogo_Admin_Fragment();
-                            break;
                         case R.id.nav_citas_ven:
                             selectedFragement = new Citas_vendedor_fragment();
                             break;
-                        case R.id.nav_ventas_ven:
-                            selectedFragement = new Ventas_vendedor_fragment();
+                        case R.id.nav_cat_ven:
+                            selectedFragement = new Catalogo_Vendedor_Fragment();
                             break;
                         case R.id.nav_perfil_ven:
                             selectedFragement = new Perfil_Vendedor_Fragment();
                             break;
-
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, selectedFragement).commit();
                     return true;
                 }
             };
+
 
 
     public void logIn(View v) throws Exception {

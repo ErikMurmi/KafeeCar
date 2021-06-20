@@ -8,13 +8,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:id="@+id/frag_contenedor"
+        android:id="@+id/frag_contenedor_ven"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/barra_nav_vendedor"
-        android:layout_marginBottom="5dp"
-        android:visibility="invisible"
-        tools:visibility="invisible" />
+        android:layout_marginBottom="5dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barra_nav_vendedor"

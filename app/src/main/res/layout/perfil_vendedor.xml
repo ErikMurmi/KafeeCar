@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/ven_img"
@@ -231,7 +232,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/logout_admin_btn"
+                android:id="@+id/logout_ven_btn"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -249,7 +250,7 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/ireditar_admin_btn"
+                android:id="@+id/ireditar_ven_btn"
                 style="@style/boton_editar"
                 android:layout_width="60dp"
                 android:text="Editar"
@@ -265,7 +266,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -360,7 +361,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/diaNacimiento__pe_vn_etxt"
+                            android:id="@+id/diaNacimiento_pe_vn_etxt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesbotongris"
