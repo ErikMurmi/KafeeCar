@@ -68,7 +68,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
         favoritoBoton=mainView.findViewById(R.id.aniadir_favorito_btn);
-        agendarcita=mainView.findViewById(R.id.agendarcita_btn);
+        agendarcita=mainView.findViewById(R.id.agendarcita_cliente_btn);
         //Recursos
         estrelladorada=favoritoBoton.getBackground();
         if(!esfavorito()){
@@ -76,7 +76,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         }
 
         //Layouts
-        verCatalogo = mainView.findViewById(R.id.vehiculos_cliente);
+        verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
         vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_lay);
         irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
@@ -252,7 +252,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
             Toast t= Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG);
             t.show();
         }
-        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
+        String titulo_str = m_vehiculo.getMarca()+" "+m_vehiculo.getModelo();
         titulo.setText(titulo_str);
         placa.setText(format("Placa: %s", vMostrar.getPlaca()));
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));

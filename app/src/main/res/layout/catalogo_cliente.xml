@@ -9,7 +9,9 @@
     <ScrollView
         android:id="@+id/catalogoautos_cliente_scl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -682,183 +684,209 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/vista_vehiculo_lay"
+    <ScrollView
+        android:id="@+id/vista_vehiculo_VV_scl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="703dp"
+        android:visibility="invisible"
         tools:visibility="invisible">
 
-        <FrameLayout
-            android:layout_width="412dp"
-            android:layout_height="296dp"
-            android:layout_marginLeft="5dp">
-
-            <Button
-                android:id="@+id/aniadir_favorito_btn"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="205dp"
-                android:background="@android:drawable/star_big_on"
-                android:fontFamily="@font/ocraext"
-                app:showAsAction="always" />
-
-            <ImageView
-                android:id="@+id/foto_auto_imageView"
-                android:layout_width="411dp"
-                android:layout_height="307dp"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-            <EditText
-                android:id="@+id/titulo_auto_txt"
-                android:layout_width="425dp"
-                android:layout_height="76dp"
-                android:background="@android:color/background_dark"
-                android:backgroundTint="?attr/colorControlNormal"
-                android:ems="10"
-                android:fontFamily="@font/ocraext"
-                android:inputType="textPersonName"
-                android:text="Chevrolet Semi-nuevo"
-                android:textAlignment="textStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/background_light"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/precio_auto_txt"
-                android:layout_width="423dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="240dp"
-                android:background="@android:color/background_dark"
-                android:backgroundTint="?attr/colorControlNormal"
-                android:ems="10"
-                android:fontFamily="@font/ocraext"
-                android:inputType="textPersonName"
-                android:text=" $5000   "
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/background_light"
-                android:textSize="30sp" />
-        </FrameLayout>
-
         <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="412dp"
-            android:layout_height="369dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:orientation="vertical">
+            android:id="@+id/vista_vehiculo_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:visibility="visible">
 
-            <Button
-                android:id="@+id/agendarcita_btn"
-                android:layout_width="59dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="320dp"
-                android:layout_marginTop="7dp"
-                android:background="?attr/actionModePasteDrawable"
-                android:fontFamily="@font/ocraext"
-                android:text="+"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="24sp" />
+            <FrameLayout
+                android:layout_width="412dp"
+                android:layout_height="296dp"
+                android:layout_marginLeft="5dp">
+
+                <Button
+                    android:id="@+id/aniadir_favorito_btn"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="205dp"
+                    android:background="@android:drawable/star_big_on"
+                    android:fontFamily="@font/ocraext"
+                    app:showAsAction="always" />
+
+                <ImageView
+                    android:id="@+id/foto_auto_imageView"
+                    android:layout_width="411dp"
+                    android:layout_height="307dp"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <EditText
+                    android:id="@+id/titulo_auto_txt"
+                    android:layout_width="425dp"
+                    android:layout_height="76dp"
+                    android:background="@android:color/background_dark"
+                    android:backgroundTint="?attr/colorControlNormal"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text="Chevrolet Semi-nuevo"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="30sp" />
+
+                <EditText
+                    android:id="@+id/precio_auto_txt"
+                    android:layout_width="423dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="240dp"
+                    android:background="@android:color/background_dark"
+                    android:backgroundTint="?attr/colorControlNormal"
+                    android:ems="10"
+                    android:fontFamily="@font/ocraext"
+                    android:inputType="textPersonName"
+                    android:text=" $5000   "
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="30sp" />
+            </FrameLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bordesmarcos"
+                android:id="@+id/linearLayout4"
+                android:layout_width="412dp"
+                android:layout_height="369dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/placa_cliente_txt"
-                    style="@style/texto_style"
-                    android:fontFamily="@font/ocra"
-                    android:text="Placa: "
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/matricula_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="397dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/text_space"
-                    android:fontFamily="@font/ocra"
-                    android:text="Matricula: " />
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/bordesmarcos"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/vehiculo_anio_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/text_space"
-                    android:fontFamily="@font/ocra"
-                    android:text="Año: " />
+                    <TextView
+                        android:id="@+id/placa_cliente_txt"
+                        style="@style/texto_style"
+                        android:fontFamily="@font/ocra"
+                        android:text="Placa: "
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/vehiculo_marca_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/text_space"
-                    android:fontFamily="@font/ocra"
-                    android:text="Marca:" />
+                    <TextView
+                        android:id="@+id/matricula_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_space"
+                        android:fontFamily="@font/ocra"
+                        android:text="Matricula: " />
 
-                <TextView
-                    android:id="@+id/vehiculo_modelo_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/text_space"
-                    android:fontFamily="@font/ocra"
-                    android:text="Modelo: " />
+                    <TextView
+                        android:id="@+id/vehiculo_anio_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_space"
+                        android:fontFamily="@font/ocra"
+                        android:text="Año: " />
 
-                <TextView
-                    android:id="@+id/vehiculo_color_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/text_space"
-                    android:fontFamily="@font/ocra"
-                    android:text="Color: " />
+                    <TextView
+                        android:id="@+id/vehiculo_marca_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_space"
+                        android:fontFamily="@font/ocra"
+                        android:text="Marca:" />
 
-                <TextView
-                    android:id="@+id/vehiculo_descripcion_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/ocra"
-                    android:text="Descripción:" />
+                    <TextView
+                        android:id="@+id/vehiculo_modelo_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_space"
+                        android:fontFamily="@font/ocra"
+                        android:text="Modelo: " />
 
-                <TextView
-                    android:id="@+id/vehiculo_pventa_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="Precio venta:" />
+                    <TextView
+                        android:id="@+id/vehiculo_color_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_space"
+                        android:fontFamily="@font/ocra"
+                        android:text="Color: " />
 
-                <TextView
-                    android:id="@+id/vehiculo_promocion_cliente_txt"
-                    style="@style/texto_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="Promoción: " />
+                    <TextView
+                        android:id="@+id/vehiculo_descripcion_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/ocra"
+                        android:text="Descripción:" />
 
-                <TextView
-                    android:id="@+id/vehiculo_matriculado_cliente_txt"
-                    style="@style/texto_style"
+                    <TextView
+                        android:id="@+id/vehiculo_pventa_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocra"
+                        android:text="Precio venta:" />
+
+                    <TextView
+                        android:id="@+id/vehiculo_promocion_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocra"
+                        android:text="Promoción: " />
+
+                    <TextView
+                        android:id="@+id/vehiculo_matriculado_cliente_txt"
+                        style="@style/texto_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocra"
+                        android:text="Matriculado: " />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="Matriculado: " />
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/regresar_VV_cliente_btn"
+                        android:layout_width="158dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valorant"
+                        android:text="Regresar"
+                        android:textColor="@color/ic_banner_background"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/agendarcita_cliente_btn"
+                        android:layout_width="158dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:fontFamily="@font/valoran"
+                        android:text="Agendar"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
             </LinearLayout>
-
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
