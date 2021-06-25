@@ -172,7 +172,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             setContentView(R.layout.home_cliente);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Cliente_fragment()).commit();
         }
     }
 
