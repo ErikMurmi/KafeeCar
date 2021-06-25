@@ -1,6 +1,8 @@
 package com.prog.kafeecar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -166,13 +168,27 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 TextView cedula = mainView.findViewById(R.id.cedula_vendedor_txt);
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
                 if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
-                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE DESHABILITARÁ DEL SISTEMA!", Toast.LENGTH_SHORT).show();
-                    vendedor.setActivo(false);
-                    deshabilitar_btn.setText("Habilitar");
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setMessage("Este Vendedor se DESHABILITARÁ. Desea Continuar");
+                    msg.setTitle("ADVERTENCIA");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        vendedor.setActivo(false);
+                        deshabilitar_btn.setText("Habilitar");
+                        regresarPantallaPrncipal();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 } else {
-                    deshabilitar_btn.setText("Deshabilitar");
-                    Toast.makeText(mainView.getContext(), "¡ADVETENCIA: ESTE USUARIO SE HABILITARÁ EN EL SISTEMA!", Toast.LENGTH_SHORT).show();
-                    vendedor.setActivo(true);
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setMessage("Este Vendedor se HABILITARÁ. Desea Continuar");
+                    msg.setTitle("ADVERTENCIA");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        vendedor.setActivo(true);
+                        deshabilitar_btn.setText("Deshabilitar");
+                        regresarPantallaPrncipal();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }catch (Exception e){
                 Toast.makeText(mainView.getContext(), "No se pudo ejecutar la petición", Toast.LENGTH_SHORT).show();
@@ -194,16 +210,22 @@ public class Vendedores_Admin_Fragment extends Fragment {
         });
 
         editarlisto_btn.setOnClickListener(v -> {
-            try{
-                editarVendedor();
-                Toast.makeText(mainView.getContext(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
-                regresarPantallaPrncipal();
-            }catch (Exception e){
-                Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
-                regresarPantallaPrncipal();
-            }
-        });
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Editar datos vendedor");
+            msg.setMessage("¿Está seguro de actualizar los datos del cliente "+ venMostrar.getNombre()+ " ?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try{
+                    editarVendedor();
+                    regresarPantallaPrncipal();
+                }catch (Exception e){
+                    Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+                    regresarPantallaPrncipal();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
 
+        });
 
         editarDeshacer_btn.setOnClickListener(v -> {
             try{
@@ -229,6 +251,10 @@ public class Vendedores_Admin_Fragment extends Fragment {
         });
 
         return mainView;
+    }
+
+    public void deshabilitar (){
+
     }
 
     public void verListaVendedores(String cedula, String cedula1){
@@ -640,7 +666,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         try {
             int c = 0;
             Vendedor cedulaVen = venMostrar;
-
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             String nombre_str = nombre_ed.getText().toString();
             if(nombre_str.isEmpty()){
@@ -648,14 +673,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 c++;
             }
 
-            EditText anio_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
+            EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
             String anio_str = anio_ed.getText().toString();
             int anio = -1;
             if(anio_str.isEmpty()){
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
-                anio = Integer.parseInt(anio_str);
+                anio = Integer.parseInt(anio_ed.getText().toString());
                 if (anio < 1900 || anio > 2003) {
                     Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
                     anio_ed.setText("");
@@ -730,14 +755,57 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 }
             }
 
-            if (c == 0) {
-                Date fecha = null;
-                try {
-                    fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+            EditText horaEntrada_ed = mainView.findViewById(R.id.horaEntradaEditVendedor_etxt);
+            String horaEntradaVendedor_str = horaEntrada_ed.getText().toString();
+            int horaEntradaVendedor_int = -1;
+            if(horaEntradaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaEntradaVendedor_int = Integer.parseInt(horaEntrada_ed.getText().toString());
+                if(horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
+                    horaEntrada_ed.setText("");
+                    c++;
                 }
-                cedulaVen.cambiarDatosSinClave(
+            }
+
+            EditText horaAlmuerzo_ed= mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
+            String horaAlmuerzoVendedor_str = horaAlmuerzo_ed.getText().toString();
+            int horaAlmuerzoVendedor_int = -1;
+            if(horaEntradaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzo_ed.getText().toString());
+                if(horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
+                    horaAlmuerzo_ed.setText("");
+                    c++;
+                }
+            }
+
+            EditText horaSalida_ed = mainView.findViewById(R.id.horaSalidaEditVendedor_etxt);
+            String horaSalidaVendedor_str = horaSalida_ed.getText().toString();
+            int horaSalidaVendedor_int = -1;
+            if(horaSalidaVendedor_str.isEmpty()){
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                horaSalidaVendedor_int = Integer.parseInt(horaSalida_ed.getText().toString());
+                if(horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24){
+                    Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
+                    horaSalida_ed.setText("");
+                    c++;
+                }
+            }
+
+            if (c == 0) {
+                String fecha = dia_str + "-" + mes_str + "-" + anio_str;
+                cedulaVen.cambiarDatosSinClaveVendedor(
+                        horaEntradaVendedor_int,
+                        horaAlmuerzoVendedor_int,
+                        horaSalidaVendedor_int,
                         nombre_ed.getText().toString(),
                         cedula_ed.getText().toString(),
                         telefono_ed.getText().toString(),
@@ -745,8 +813,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
                         String.valueOf(fecha));
                 cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
                 try {
-                    if (patio.buscarClientes("Cedula", cedulaVen.getCedula()) != null) {
-                        Toast.makeText(mainView.getContext(), "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                    if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
+                        Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
                         irVisualizarVendedor.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
@@ -754,7 +822,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 }
             }
         }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "No se pudo actualizar la información del vendedor", Toast.LENGTH_SHORT).show();
         }
     }
 

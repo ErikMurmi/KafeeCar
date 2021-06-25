@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -163,14 +165,20 @@ public class Catalogo_Admin_Fragment extends Fragment {
         });
 
         eliminar_btn.setOnClickListener(v -> {
-            try {
-                patio.removerVehiculo(m_vehiculo.getMatricula());
-                Toast.makeText(mainView.getContext(),"Se ha eliminado el vehiculo", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Eliminar vehículo");
+            msg.setMessage("¿Está seguro de eliminar el vehículo con la placa "+ m_vehiculo.getPlaca()+ " ?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerVehiculo(m_vehiculo.getMatricula());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(mainView.getContext(),"Se ha eliminado el vehículo", Toast.LENGTH_SHORT).show();
                 irCatalogo();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(mainView.getContext(),"No se pudo eliminar", Toast.LENGTH_SHORT).show();
-            }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         deshacer_btn.setOnClickListener(v -> {
@@ -179,9 +187,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
         });
 
         editar_btn.setOnClickListener(v -> {
-            EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
-            editarVehiculo(placa_ed.getText().toString());
-            irCatalogo();
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Editar vehículo");
+            msg.setMessage("¿Está seguro de editar el vehículo con la placa "+ m_vehiculo.getPlaca()+ " ?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
+                editarVehiculo(placa_ed.getText().toString());
+                Toast.makeText(mainView.getContext(),"Se actualizaron los datos", Toast.LENGTH_SHORT).show();
+                irCatalogo();
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         aniadir_vehiculo_btn.setOnClickListener(v -> {
@@ -562,7 +578,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
     }
 
     public void visualizarVehiculo(String placa_buscar) throws Exception {
-
         m_vehiculo = patio.buscarVehiculos("Placa",placa_buscar);
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
@@ -588,15 +603,15 @@ public class Catalogo_Admin_Fragment extends Fragment {
         String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
         titulo.setText(titulo_str);
         placa.setText(vMostrar.getPlaca());
-        matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
-        anio.setText(format("Año :%s",vMostrar.getAnio()));
-        marca.setText(format("Marca :%s",vMostrar.getMarca()));
-        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
-        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
-        color.setText(format("Color :%s",vMostrar.getColor()));
-        precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
-        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
-        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+        matricula.setText(vMostrar.getMatricula());
+        anio.setText(vMostrar.getAnio());
+        marca.setText(vMostrar.getMarca());
+        modelo.setText(vMostrar.getModelo());
+        descripcion.setText(vMostrar.getDescripcion());
+        color.setText(vMostrar.getColor());
+        precioInicial.setText(String.valueOf(vMostrar.getPrecioInicial()));
+        preciVenta.setText(String.valueOf(vMostrar.getPrecioVenta()));
+        promocion.setText(String.valueOf(vMostrar.getPromocion()));
 
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
@@ -663,5 +678,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+
 
 }

@@ -27,24 +27,20 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
-public class Perfil_admin_Fragment extends Fragment {
-    private View mainview;
-    private static final int REQUEST_PERMISSION_CODE = 100;
+public class Perfil_Vendedor_Fragment extends Fragment {
+
+
     private static final int REQUEST_IMAGE_GALERY = 101;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-    private PatioVenta patio;
-    private Vendedor user = (Vendedor) Patioventainterfaz.usuarioActual;
-
-
+    private String TAG = "Perfil vendedor";
+    private View mainview;
     private Uri foto;
+    private Vendedor user = (Vendedor) Patioventainterfaz.usuarioActual;
+    private PatioVenta patio;
     //Layouts
     private LinearLayout perfil_lyt;
     private LinearLayout editar_perfil_lyt;
     private LinearLayout perfil_btns_lyt;
-
 
     //Imagenes
     private ImageView perfil_img;
@@ -60,50 +56,48 @@ public class Perfil_admin_Fragment extends Fragment {
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mainview =inflater.inflate(R.layout.perfil_admin, container, false);
-        initViews();
+        mainview = inflater.inflate(R.layout.perfil_vendedor, container, false);
+        patio = Patioventainterfaz.patioventa;
+        //Layouts
+        Toast.makeText(mainview.getContext(), "1", Toast.LENGTH_SHORT).show();
+        perfil_btns_lyt = mainview.findViewById(R.id.visualizar_ven_btns);
+        perfil_lyt = mainview.findViewById(R.id.visualizar_ven_lyt);
+        editar_perfil_lyt = mainview.findViewById(R.id.perfil_vn_lyt);
+        Toast.makeText(mainview.getContext(), "2", Toast.LENGTH_SHORT).show();
+        //Imagenes
+        perfil_img = mainview.findViewById(R.id.ven_img);
+        Toast.makeText(mainview.getContext(), "3", Toast.LENGTH_SHORT).show();
+        //Botones
+        admin_img_btn = mainview.findViewById(R.id.vendedor_pe_vn_btn);
+        cancelar = mainview.findViewById(R.id.cancelar_edit_pe_vn_lyt);
+        Toast.makeText(mainview.getContext(), "4", Toast.LENGTH_SHORT).show();
         verPerfil();
-        irEditar.setOnClickListener(v -> {
-            perfil_lyt.setVisibility(View.GONE);
-            perfil_btns_lyt.setVisibility(View.VISIBLE);
-            editar_perfil_lyt.setVisibility(View.VISIBLE);
-            verPerfilEditable();
-        });
-
         return mainview;
     }
-    public void initViews(){
-        //Layouts
-        perfil_btns_lyt = mainview.findViewById(R.id.visualizar_admin_btns);
-        perfil_lyt = mainview.findViewById(R.id.visualizar_admin_lyt);
-        editar_perfil_lyt = mainview.findViewById(R.id.perfil_admin_ed_lyt);
-        //Imagenes
-        perfil_img = mainview.findViewById(R.id.admin_img);
-        //Botones
-        admin_img_btn = mainview.findViewById(R.id.admin_img_btn);
-        cancelar = mainview.findViewById(R.id.cancelar_edit_admin_btn);
-        irEditar = mainview.findViewById(R.id.ireditar_admin_btn);
 
-    }
+
     public void verPerfil(){
         try{
-            TextView nombre_ed = mainview.findViewById(R.id.nombre_admin_txt);
-            TextView fecha_ed = mainview.findViewById(R.id.fecha_admin_txt);
-            TextView cedula_ed = mainview.findViewById(R.id.cedula_admin_txt);
-            TextView telefono_ed = mainview.findViewById(R.id.telefono_admin_txt);
-            TextView correo_ed = mainview.findViewById(R.id.correo_admin_txt);
+            //Toast.makeText(mainview.getContext(), "1", Toast.LENGTH_SHORT).show();
+            TextView nombre_ed = mainview.findViewById(R.id.nombre_pe_vn_txt);
+            TextView fecha_ed = mainview.findViewById(R.id.fecha_pe_vn_txt);
+            TextView cedula_ed = mainview.findViewById(R.id.cedula_pe_vn_txt);
+            TextView telefono_ed = mainview.findViewById(R.id.telefono_cedula_pe_vn_txt);
+            TextView correo_ed = mainview.findViewById(R.id.correo_cedula_pe_vn_txt);
             String fechaNacimiento = Patioventainterfaz.getFechaMod(user.getFechaNacimiento());
+            //Toast.makeText(mainview.getContext(), "2", Toast.LENGTH_SHORT).show();
             nombre_ed.setText(user.getNombre());
             fecha_ed.setText(fechaNacimiento);
             cedula_ed.setText(user.getCedula());
             telefono_ed.setText(user.getTelefono());
             correo_ed.setText(user.getCorreo());
+            //Toast.makeText(mainview.getContext(), "3", Toast.LENGTH_SHORT).show();
             StorageReference filePath = mStorageRef.child("Vendedores/"+user.getImagen());
             Glide.with(mainview)
                     .load(filePath)
                     .into(perfil_img);
             try {
+                Toast.makeText(mainview.getContext(), "4", Toast.LENGTH_SHORT).show();
                 final File localFile = File.createTempFile(user.getImagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
@@ -113,6 +107,7 @@ public class Perfil_admin_Fragment extends Fragment {
                     }
                 });
             }catch (IOException e) {
+                Toast.makeText(mainview.getContext(), "catch", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }catch (Exception e){
@@ -122,15 +117,15 @@ public class Perfil_admin_Fragment extends Fragment {
 
     public void verPerfilEditable(){
         try{
-            EditText nombre_ed = mainview.findViewById(R.id.nombre_admin_etxt);
-            EditText dia_ed = mainview.findViewById(R.id.diaNacimiento_admin_etxt);
-            EditText mes_ed = mainview.findViewById(R.id.mesNacimiento_admin_etxt);
-            EditText anio_ed = mainview.findViewById(R.id.anioNacimiento_admin_etxt);
-            EditText cedula_ed = mainview.findViewById(R.id.cedula_admin_etxt);
-            EditText telefono_ed = mainview.findViewById(R.id.telefono_admin_etxt);
-            EditText correo_ed = mainview.findViewById(R.id.correo_admin_etxt);
-            /*EditText contrasenia_ed = mainview.findViewById(R.id.contrasenia_admin_etxt);
-            EditText confirm_c_ed = mainview.findViewById(R.id.contrasenia_confirm_admin_etxt);*/
+            EditText nombre_ed = mainview.findViewById(R.id.nombre_pe_vn_etxt);
+            EditText dia_ed = mainview.findViewById(R.id.diaNacimiento_pe_vn_etxt);
+            EditText mes_ed = mainview.findViewById(R.id.mesNacimiento_pe_vn_etxt);
+            EditText anio_ed = mainview.findViewById(R.id.anioNacimiento_pe_vn_etxt);
+            EditText cedula_ed = mainview.findViewById(R.id.cedula_pe_vn_etxt);
+            EditText telefono_ed = mainview.findViewById(R.id.telefono_pe_vn_etxt);
+            EditText correo_ed = mainview.findViewById(R.id.correo_pe_vn_etxt);
+            EditText contrasenia_ed = mainview.findViewById(R.id.contrasenia_pe_vn_etxt);
+            EditText confirm_c_ed = mainview.findViewById(R.id.clave_confirm_pe_vn_etxt);
 
             String fechaNacimiento = Patioventainterfaz.getFechaMod(user.getFechaNacimiento());
             String dia = fechaNacimiento.split("-")[0];
@@ -147,7 +142,7 @@ public class Perfil_admin_Fragment extends Fragment {
 
             StorageReference filePath = mStorageRef.child("Vendedores/"+user.getImagen());
             Glide.with(mainview)
-                   .load(filePath)
+                    .load(filePath)
                     .into(admin_img_btn);
             try {
                 final File localFile = File.createTempFile(user.getImagen(),"jpg");

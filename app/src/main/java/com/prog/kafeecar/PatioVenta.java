@@ -9,6 +9,7 @@ public class PatioVenta {
     private Lista clientes;
     private Lista vehiculos;
     private Lista citas;
+
     
     private Vendedor administrador;
     private String direccion;
@@ -29,6 +30,7 @@ public class PatioVenta {
         setVehiculos(vehiculos);
         setAdministrador(administrador);
     }
+
 
     public Lista getCitas() {
         return citas;

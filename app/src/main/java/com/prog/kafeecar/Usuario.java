@@ -22,11 +22,6 @@ public class Usuario {
     private String clave;
     private Date fechaNacimiento;
     
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    
-
-
-    
     public Usuario(){}
     
     public Usuario(String nombre, String cedula, String telefono, String correo, String clave, Date fechaNacimiento) {
@@ -90,7 +85,7 @@ public class Usuario {
     }
 
     public void setFechaNacimiento(String fechaNacimiento) throws ParseException {
-        this.fechaNacimiento = sdf.parse(fechaNacimiento);
+        this.fechaNacimiento = Patioventainterfaz.sdf.parse(fechaNacimiento);
     }
 
 

@@ -6,16 +6,16 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/visualizar_admin_lyt"
+        android:id="@+id/visualizar_ven_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
-            android:id="@+id/admin_img"
+            android:id="@+id/ven_img"
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:layout_marginLeft="122dp"
@@ -74,7 +74,7 @@
                         android:layout_height="6dp" />
 
                     <TextView
-                        android:id="@+id/nombre_admin_txt"
+                        android:id="@+id/nombre_pe_vn_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
@@ -106,7 +106,7 @@
                         android:layout_height="6dp" />
 
                     <TextView
-                        android:id="@+id/fecha_admin_txt"
+                        android:id="@+id/fecha_pe_vn_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
@@ -138,7 +138,7 @@
                         android:layout_height="6dp" />
 
                     <TextView
-                        android:id="@+id/cedula_admin_txt"
+                        android:id="@+id/cedula_pe_vn_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -171,7 +171,7 @@
                         android:layout_height="6dp" />
 
                     <TextView
-                        android:id="@+id/telefono_admin_txt"
+                        android:id="@+id/telefono_cedula_pe_vn_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
@@ -203,7 +203,7 @@
                         android:layout_height="6dp" />
 
                     <TextView
-                        android:id="@+id/correo_admin_txt"
+                        android:id="@+id/correo_cedula_pe_vn_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
@@ -232,7 +232,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/logout_admin_btn"
+                android:id="@+id/logout_ven_btn"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -250,7 +250,7 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/ireditar_admin_btn"
+                android:id="@+id/ireditar_ven_btn"
                 style="@style/boton_editar"
                 android:layout_width="60dp"
                 android:text="Editar"
@@ -261,12 +261,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/perfil_admin_ed_lyt"
+        android:id="@+id/perfil_vn_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -291,7 +291,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/admin_img_btn"
+                        android:id="@+id/vendedor_pe_vn_btn"
                         android:layout_width="180dp"
                         android:layout_height="180dp"
                         android:layout_gravity="center_horizontal"
@@ -312,7 +312,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/nombre_admin_etxt"
+                        android:id="@+id/nombre_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -332,7 +332,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/cedula_admin_etxt"
+                        android:id="@+id/cedula_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -361,7 +361,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/diaNacimiento_admin_etxt"
+                            android:id="@+id/diaNacimiento_pe_vn_etxt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesbotongris"
@@ -383,7 +383,7 @@
                             android:textSize="24sp" />
 
                         <EditText
-                            android:id="@+id/mesNacimiento_admin_etxt"
+                            android:id="@+id/mesNacimiento_pe_vn_etxt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="7dp"
@@ -407,7 +407,7 @@
                             android:textSize="24sp" />
 
                         <EditText
-                            android:id="@+id/anioNacimiento_admin_etxt"
+                            android:id="@+id/anioNacimiento_pe_vn_etxt"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesbotongris"
@@ -432,7 +432,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/telefono_admin_etxt"
+                        android:id="@+id/telefono_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -454,7 +454,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/correo_admin_etxt"
+                        android:id="@+id/correo_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -476,7 +476,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/contrasenia_admin_etxt"
+                        android:id="@+id/contrasenia_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -498,7 +498,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/contrasenia_confirm_admin_etxt"
+                        android:id="@+id/clave_confirm_pe_vn_etxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -515,7 +515,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/visualizar_admin_btns"
+        android:id="@+id/visualizar_ven_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
@@ -528,7 +528,7 @@
         tools:visibility="gone">
 
         <Button
-            android:id="@+id/cancelar_edit_admin_btn"
+            android:id="@+id/cancelar_edit_pe_vn_lyt"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
@@ -539,7 +539,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/salir_btn2"
+            android:id="@+id/editar_pe_vn_lyt"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/boton_redondeado"

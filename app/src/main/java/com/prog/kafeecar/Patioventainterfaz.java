@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,10 +29,9 @@ import com.google.firebase.storage.StorageReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**/
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
@@ -56,10 +54,10 @@ public class Patioventainterfaz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Login normal
-        setContentView(R.layout.login);
+        //setContentView(R.layout.login);
 
         // Login de pruebas
-        //setContentView(R.layout.login_sinclaves);
+        setContentView(R.layout.login_sinclaves);
 
         try {
             cargarDatos();
@@ -100,9 +98,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         System.out.println("\t 2. Lista de vehiculos \n");
         patioventa.aniadirVehiculo(new Vehiculo("PSD-1234", "Y3553", "Mercedes", "GLB SUV", "Gris", "Tiene 5 años de uso", 70000, 95000, 80000, true, 2016, "PSD-1234.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("GHC-2434", "I3748", "Chevrolet", "Cruze", "Blanco", "Muestra un choque en la parte lateral", 17000, 25000, 18500, true, 2014, "GHC-2434.jpg"));
-        patioventa.aniadirVehiculo(new Vehiculo("IMH-2233", "O8394", "Hyundai", "Elantra", "Rojo", "Automático", 14000, 15000, 0, false, 2013, "O8394.jpg"));
-        patioventa.aniadirVehiculo(new Vehiculo("PHG-1225", "382I83", "Ford", "EcoSport", "Negro", "Exelente estado documentación y matrícula al día", 14000, 15800, 0, true, 2014, "382I83.jpg"));
-        patioventa.aniadirVehiculo(new Vehiculo("PCR-1832", "38J382", "Chevrolet", "Optra", "Negro", "EL dueño lo vende por viaje", 5000, 6000, 0, true, 2004, "38J382.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("IMH-2233", "O8394", "Hyundai", "Elantra", "Rojo", "Automático", 14000, 15000, 0, false, 2013, "IMH-2233.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("PHG-1225", "382I83", "Ford", "EcoSport", "Negro", "Exelente estado documentación y matrícula al día", 14000, 15800, 0, true, 2014, "PHG-1225.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("PCR-1832", "38J382", "Chevrolet", "Optra", "Negro", "EL dueño lo vende por viaje", 5000, 6000, 0, true, 2004, "PCR-1832.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("GUN-1764", "283I32", "Chevrolet", "Sail", "Negro", "Cahsis de sedán y mecaanismo manual ", 13000, 16000, 0, true, 2019, "283I32.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("IPO-1963", "23JW22", "Jeep", "Compass Sport", "Gris", "Autómático poco uso", 70000, 95000, 80000, true, 2017, "23JW22.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("IOS-1275", "M382N3", "Hyundai", "Tucson", "Gris", "Vidrios electricos radio de pantalla", 17000, 20300, 0, true, 2015, "M382N3.jpg"));
@@ -110,16 +108,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
         System.out.println("Se añadieron los 10 vehículos ");
         System.out.println("\t 2. Lista de Vendedores \n");
-        //Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
-        patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
-        //patioventa.aniadirUsuario(admin,"Administrador");
+        Vendedor admin = new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
+        //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
+        patioventa.aniadirUsuario(admin,"Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg",8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg",8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg",8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg",8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
-        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001")), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"),"175014048.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115623.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"),"1750115233.jpg"), "Cliente");
         System.out.println("Se añadieron 5 vendedores ");
         System.out.println("*********************************");
         System.out.println("\t 2. Lista de citas \n");
@@ -129,12 +127,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         Date fechaCita3 = new Date(2021, 05, 20);
         Date fechaCita4 = new Date(2021, 05, 20);
         Date fechaCita5 = new Date(2021, 05, 20);
-        Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
         Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
         Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
+        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
+        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
         patioventa.aniadirCita(c1);
         patioventa.aniadirCita(c2);
         patioventa.aniadirCita(c3);
@@ -169,12 +167,12 @@ public class Patioventainterfaz extends AppCompatActivity {
             setContentView(R.layout.home_vendedor);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_vendedor);
             navBar.setOnNavigationItemSelectedListener(nav_vendedor_Listener);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Catalogo_Vendedor_Fragment()).commit();
         } else if (tipo.compareTo("CLIENTE") == 0) {
             setContentView(R.layout.home_cliente);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Cliente_fragment()).commit();
         }
     }
 
@@ -184,7 +182,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irVendedor(View v) throws Exception {
-        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
+        usuarioActual = (Usuario) patioventa.getVendedores().getPos(2);
         irAplicacion("VENDEDOR");
     }
 
@@ -219,6 +217,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     return true;
                 }
             };
+
     private BottomNavigationView.OnNavigationItemSelectedListener nav_cliente_Listener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -226,13 +225,13 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_cat_cl:
-                            selectedFragement = new Catalogo_Admin_Fragment();
+                            selectedFragement = new Catalogo_Cliente_fragment();
                             break;
                         case R.id.nav_citas_cl:
-                            selectedFragement = new Citas_cliente_fragment();
+                            selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
                             break;
                         case R.id.nav_fav_cl:
-                            selectedFragement = new Favoritos_cliente_fragment();
+                            selectedFragement = new Favoritos_cliente_fragment(getApplicationContext());
                             break;
                         case R.id.nav_perfil_cl:
                             selectedFragement = new Perfil_cliente_fragment();
@@ -248,21 +247,21 @@ public class Patioventainterfaz extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
-                        case R.id.nav_cat_ven:
-                            selectedFragement = new Catalogo_Admin_Fragment();
-                            break;
                         case R.id.nav_citas_ven:
                             selectedFragement = new Citas_vendedor_fragment();
                             break;
-                        case R.id.nav_ventas_ven:
-                            selectedFragement = new Ventas_vendedor_fragment();
+                        case R.id.nav_cat_ven:
+                            selectedFragement = new Catalogo_Vendedor_Fragment();
                             break;
-
+                        case R.id.nav_perfil_ven:
+                            selectedFragement = new Perfil_Vendedor_Fragment();
+                            break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, selectedFragement).commit();
                     return true;
                 }
             };
+
 
 
     public void logIn(View v) throws Exception {
@@ -305,7 +304,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
 
 
-    public void citaNueva(View v) throws Exception {
+    /*public void citaNueva(View v) throws Exception {
         EditText textodia = findViewById(R.id.dia_etxt);
         EditText textomes = findViewById(R.id.mes_etxt);
         EditText textoanio = findViewById(R.id.anio_etxt);
@@ -325,7 +324,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             Toast.makeText(Patioventainterfaz.this, "Se agrego correctamente.", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
 
     public void registarCita(View v) throws Exception {
@@ -539,7 +538,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha);
+            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha,cedula_str+".jpg");
             patioventa.aniadirUsuario(cliente, "Cliente");
             try {
                 if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {
@@ -855,8 +854,8 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void salir(View v){
         usuarioActual =  null;
-        setContentView(R.layout.login);
-        //setContentView(R.layout.login_sinclaves);
+        //setContentView(R.layout.login);
+        setContentView(R.layout.login_sinclaves);
     }
 
 

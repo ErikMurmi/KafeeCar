@@ -13,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -239,145 +240,11 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/Info_listacita_layout"
-                android:layout_width="395dp"
-                android:layout_height="138dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/bordesbotongris"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/auto_imgView"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-                <LinearLayout
-                    android:layout_width="216dp"
-                    android:layout_height="125dp"
-                    android:foregroundGravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/hora_lista_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:text="8:00 AM-9:00 AM"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/cliente_listacita_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Cliente: María Perez"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/telefono_listacita_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Teléfono: 0998877665"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/matricula_listacita_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Matricula: PCQ 1298"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/info_lista2_layaout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listacitas_Rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/bordesbotongris"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/auto2_imgView"
-                    android:layout_width="159dp"
-                    android:layout_height="119dp"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/hora_lista2_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="10:00 AM- 11:00 AM"
-                        android:textAlignment="center"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/clente_listacita2_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Cliente: Francisco Ortega"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/telefono_listacita2_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Teléfono 0991234560"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/matricula_licencia2_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Matricula: PDF 1234"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/aniadir_cita_btn"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="340dp"
-                android:layout_marginTop="340dp"
-                android:background="@drawable/anadir_icon" />
+                android:layout_marginLeft="15dp" />
 
         </LinearLayout>
     </ScrollView>
