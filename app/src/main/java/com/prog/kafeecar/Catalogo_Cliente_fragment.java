@@ -37,6 +37,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
     private View mainView;
     private LinearLayout irVerVehiculo;
     private LinearLayout irVerVehiculo1;
+    private LinearLayout irCitaNueva;
     private ScrollView verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
@@ -47,6 +48,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
     private Uri foto;
     private Button favoritoBoton;
     private Button agendarcita;
+    private Button regresarVistaVehiculo;
     private Drawable estrelladorada;
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -70,6 +72,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
         favoritoBoton=mainView.findViewById(R.id.aniadir_favorito_btn);
         agendarcita=mainView.findViewById(R.id.agendarcita_cliente_btn);
+        regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
         //Recursos
         estrelladorada=favoritoBoton.getBackground();
         if(!esfavorito()){
@@ -81,12 +84,21 @@ public class Catalogo_Cliente_fragment extends Fragment {
         vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_VV_scl);
         irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
+        irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
         placa_v = mainView.findViewById(R.id.vehiculo1_placa_lista_cliente_txt);
         placa_v1 = mainView.findViewById(R.id.vehiculo2_placa_lista_cliente_txt);
 
 
         irVerVehiculo.setOnClickListener(v -> {
+
+            try {
+                visualizarVehiculo("PSD-1234");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        regresarVistaVehiculo.setOnClickListener(v -> {
 
             try {
                 visualizarVehiculo("PSD-1234");
@@ -111,7 +123,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
 
             try {
                 vistaVehiculo.setVisibility(View.GONE);
-                agendarcita.setVisibility(View.VISIBLE);
+                irCitaNueva.setVisibility(View.VISIBLE);
              aniadirCita();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -254,6 +266,8 @@ public class Catalogo_Cliente_fragment extends Fragment {
             t.show();
         }
         String titulo_str = m_vehiculo.getMarca()+" "+m_vehiculo.getModelo();//ojo
+        String precioTitulo = "$"+m_vehiculo.getPrecioVenta();
+        precio.setText(precioTitulo);
         titulo.setText(titulo_str);
         placa.setText(format("Placa: %s", vMostrar.getPlaca()));
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));

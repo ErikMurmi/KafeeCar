@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente"
@@ -684,7 +684,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="invisible">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"
