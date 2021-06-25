@@ -253,10 +253,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         return mainView;
     }
 
-    public void deshabilitar (){
-
-    }
-
     public void verListaVendedores(String cedula, String cedula1){
         try{
             String am = "am";

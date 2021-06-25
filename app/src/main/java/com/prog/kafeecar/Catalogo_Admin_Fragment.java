@@ -604,7 +604,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         titulo.setText(titulo_str);
         placa.setText(vMostrar.getPlaca());
         matricula.setText(vMostrar.getMatricula());
-        anio.setText(vMostrar.getAnio());
+        anio.setText(String.valueOf(vMostrar.getAnio()));
         marca.setText(vMostrar.getMarca());
         modelo.setText(vMostrar.getModelo());
         descripcion.setText(vMostrar.getDescripcion());
