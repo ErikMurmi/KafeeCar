@@ -225,7 +225,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_cat_cl:
-                            selectedFragement = new Catalogo_Admin_Fragment();
+                            selectedFragement = new Catalogo_Cliente_fragment();
                             break;
                         case R.id.nav_citas_cl:
                             selectedFragement = new PruebasListaCitasFragment(getApplicationContext());

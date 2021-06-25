@@ -246,14 +246,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp" />
 
-            <Button
-                android:id="@+id/aniadir_cita_btn"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="340dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/anadir_icon" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
