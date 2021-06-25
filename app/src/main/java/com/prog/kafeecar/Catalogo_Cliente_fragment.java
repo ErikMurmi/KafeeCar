@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +37,8 @@ public class Catalogo_Cliente_fragment extends Fragment {
     private View mainView;
     private LinearLayout irVerVehiculo;
     private LinearLayout irVerVehiculo1;
-    private LinearLayout verCatalogo;
-    private LinearLayout vistaVehiculo;
+    private ScrollView verCatalogo;
+    private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo m_vehiculo;
     TextView placa_v;
@@ -77,7 +78,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
-        vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_lay);
+        vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_VV_scl);
         irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
         //Edit Text necesarios
@@ -252,7 +253,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
             Toast t= Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG);
             t.show();
         }
-        String titulo_str = m_vehiculo.getMarca()+" "+m_vehiculo.getModelo();
+        String titulo_str = m_vehiculo.getMarca()+" "+m_vehiculo.getModelo();//ojo
         titulo.setText(titulo_str);
         placa.setText(format("Placa: %s", vMostrar.getPlaca()));
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
