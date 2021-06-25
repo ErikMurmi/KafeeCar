@@ -32,27 +32,55 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_aniadirventa_btn"
+                    android:layout_width="197dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="REGISTRAR VENTA "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/logo_venta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/administrar_venta_vendedor_btn"
-                    android:layout_width="189dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="140dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/boton_redondeado"
                     android:fontFamily="@font/valorant"
                     android:text="Por vendedor"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <ImageView
                     android:id="@+id/vendedor_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="130dp"
-                    android:layout_weight="1"
+                    android:layout_marginRight="40dp"
                     app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
             </LinearLayout>
 
@@ -82,31 +110,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/administrar_venta_aniadirventa_btn"
-                    android:layout_width="197dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:fontFamily="@font/valorant"
-                    android:text="REGISTRAR VENTA "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/logo_venta" />
             </LinearLayout>
 
         </LinearLayout>
@@ -540,7 +543,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/boton_redondeado"
                     android:fontFamily="@font/valorant"
-                    android:onClick="aniadirVenta"
                     android:text="Añadir" />
             </LinearLayout>
         </LinearLayout>
