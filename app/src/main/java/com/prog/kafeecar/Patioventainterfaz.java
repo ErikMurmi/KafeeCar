@@ -1,11 +1,5 @@
 package com.prog.kafeecar;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +15,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.storage.FirebaseStorage;
@@ -798,6 +798,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
 
@@ -856,6 +857,20 @@ public class Patioventainterfaz extends AppCompatActivity {
         usuarioActual =  null;
         //setContentView(R.layout.login);
         setContentView(R.layout.login_sinclaves);
+    }
+    public Lista buscarVentas(String cedula) throws Exception {
+        Venta buscada = null;
+        Lista ventas=new Lista();
+        int cont =0;
+        while(cont< patioventa.getVentasGenerales().contar()){
+            Venta actual = (Venta) patioventa.getVentasGenerales().getPos(cont);
+            if(actual.getVendedor().getCedula().compareTo(cedula)==0){
+                buscada = actual;
+                ventas.add(buscada);
+            }
+            cont++;
+        }
+        return ventas;
     }
 
 

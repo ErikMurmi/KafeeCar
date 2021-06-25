@@ -160,6 +160,8 @@ public class Ventas_admin_Fragment extends Fragment {
     }
 
 
+
+
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
