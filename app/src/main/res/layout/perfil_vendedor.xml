@@ -525,7 +525,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <Button
             android:id="@+id/cancelar_edit_pe_vn_lyt"

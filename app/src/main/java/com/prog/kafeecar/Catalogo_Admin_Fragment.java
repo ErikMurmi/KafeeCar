@@ -2,12 +2,12 @@ package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -679,5 +679,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
         return etText.getText().toString().trim().length() == 0;
     }
 
+    /*public static void irAtras(){
+        ScrollView verVehiculo = ca.findViewById(R.id.vehiculo_admin);
+        if(verVehiculo.getVisibility()==View.VISIBLE){
+            Toast.makeText(mainView.getContext(), "Metodo funcionando",Toast.LENGTH_SHORT).show();
+        }
+    }*/
 
 }

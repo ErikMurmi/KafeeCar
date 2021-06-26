@@ -2,8 +2,12 @@ package com.prog.kafeecar;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-/**/
+
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
@@ -44,10 +49,12 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     private Button irAgendar;
-
+    private Button salir;
     private LinearLayout aniadirCitaconVehiculo;
     private LinearLayout adCita;
     public static Vehiculo v_aux_cita;
+
+    private String tipo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
         aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin_lyt);
         adCita = findViewById(R.id.ver_cita_lyt);
+        //Si no se ha asignado administrador
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
@@ -267,7 +275,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public void logIn(View v) throws Exception {
 
         String msg = "";
-        String tipo = "";
+
         EditText correo = findViewById(R.id.email_etxt);
         EditText clave = findViewById(R.id.clave_etxt);
         String correo_str = correo.getText().toString();
@@ -853,10 +861,24 @@ public class Patioventainterfaz extends AppCompatActivity {
         return esBisiesto;
     }
 
-    public void salir(View v){
-        usuarioActual =  null;
-        //setContentView(R.layout.login);
-        setContentView(R.layout.login_sinclaves);
+    public void salir(View view){
+        Dialog msg = new Dialog(Patioventainterfaz.this);
+        msg.setContentView(R.layout.mensajes_emergentes);
+        msg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button no_btn = msg.findViewById(R.id.no_salir_btn);
+        no_btn.setOnClickListener(v -> {
+            msg.dismiss();
+        });
+
+        salir = msg.findViewById(R.id.si_salir_btn);
+        salir.setOnClickListener(v -> {
+            msg.dismiss();
+            usuarioActual = null;
+            setContentView(R.layout.login_sinclaves);
+        });
+        msg.show();
+
     }
     public Lista buscarVentas(String cedula) throws Exception {
         Venta buscada = null;
@@ -872,6 +894,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
         return ventas;
     }
+
+    /*@Override
+    public void onBackPressed() {
+        // do something on back.
+        if(tipo.compareTo("ADMIN")==0){
+
+        }
+
+        return;
+    }*/
 
 
 }
