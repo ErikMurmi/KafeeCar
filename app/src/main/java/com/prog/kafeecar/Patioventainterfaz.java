@@ -862,7 +862,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void salir(View view){
-        Dialog msg = new Dialog(Patioventainterfaz.this);
+        /*Dialog msg = new Dialog(Patioventainterfaz.this);
         msg.setContentView(R.layout.mensajes_emergentes);
         msg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -877,6 +877,15 @@ public class Patioventainterfaz extends AppCompatActivity {
             usuarioActual = null;
             setContentView(R.layout.login_sinclaves);
         });
+        msg.show();*/
+        AlertDialog.Builder msg = new AlertDialog.Builder(Patioventainterfaz.this);
+        msg.setMessage("¿Estás seguro de cerrar sesión?");
+        msg.setTitle("LOG OUT");
+        msg.setPositiveButton("Aceptar", (dialog, which) -> {
+            usuarioActual = null;
+            setContentView(R.layout.login_sinclaves);
+        });
+        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
         msg.show();
 
     }
@@ -895,7 +904,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         return ventas;
     }
 
-    /*@Override
+    /*/@Override
     public void onBackPressed() {
         // do something on back.
         if(tipo.compareTo("ADMIN")==0){

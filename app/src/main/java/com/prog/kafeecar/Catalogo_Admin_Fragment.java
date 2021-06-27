@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
@@ -104,7 +105,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
 
-
         irAniadirVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
             irAniadirVehiculo.setVisibility(View.GONE);
@@ -117,18 +117,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         irVerVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
-            irAniadirVehiculo.setVisibility(View.GONE);
-            verCatalogo.setVisibility(View.GONE);
-            editar_vehiculo.setVisibility(View.GONE);
-            irVerVehiculo.setVisibility(View.GONE);
-            aniadir_vehiculo.setVisibility(View.GONE);
-            //Activar el diseño deseadow
-            verVehiculo.setVisibility(View.VISIBLE);
-            try {
-                visualizarVehiculo("PSD-1234");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            irV1();
         });
 
         irVerVehiculo1.setOnClickListener(v -> {
@@ -208,6 +197,25 @@ public class Catalogo_Admin_Fragment extends Fragment {
         buscar_btn.setOnClickListener(v -> {
             buscarVehiculos();
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                /*
+                verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
+                verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
+                editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
+                aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
+                irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
+                irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
+                 */
+                if(editar_vehiculo.getVisibility()== View.VISIBLE){
+                    irV1();
+                }
+                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
         return mainView;
     }
 
@@ -229,6 +237,20 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
+    public void irV1(){
+        irAniadirVehiculo.setVisibility(View.GONE);
+        verCatalogo.setVisibility(View.GONE);
+        editar_vehiculo.setVisibility(View.GONE);
+        irVerVehiculo.setVisibility(View.GONE);
+        aniadir_vehiculo.setVisibility(View.GONE);
+        //Activar el diseño deseadow
+        verVehiculo.setVisibility(View.VISIBLE);
+        try {
+            visualizarVehiculo("PSD-1234");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {

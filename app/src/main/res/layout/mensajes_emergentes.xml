@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bordesmarcos"
         app:cardCornerRadius="15dp"
         tools:layout_editor_absoluteX="82dp"
         tools:layout_editor_absoluteY="281dp">
@@ -17,28 +18,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/textView22"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ocra"
-                android:text="LOG-OUT"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/monglos"
+                android:text="Cerrar sesion"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/ocra"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-light"
                 android:inputType="textMultiLine"
-                android:text="¿Estas seguro de cerrar sesión?"
-                android:textSize="20sp" />
+                android:text="¿Estás seguro?"
+                android:textAlignment="center"
+                android:textColor="@color/gris_visualizar"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,27 +52,27 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/si_salir_btn"
-                    style="@style/boton_editar"
+                <TextView
+                    android:id="@+id/textView26"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="si" />
+                    android:text="CANCELAR"
+                    android:textColor="@color/gris_visualizar" />
 
                 <Space
-                    android:layout_width="30dp"
+                    android:layout_width="17dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0" />
 
-                <Button
-                    android:id="@+id/no_salir_btn"
-                    style="@style/boton_editar"
+                <TextView
+                    android:id="@+id/textView28"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:backgroundTint="@color/black"
-                    android:text="no" />
+                    android:text="ACEPTAR"
+                    android:textColor="@color/gris_visualizar" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
