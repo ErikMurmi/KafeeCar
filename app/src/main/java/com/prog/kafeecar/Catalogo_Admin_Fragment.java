@@ -218,7 +218,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                    msg.setPositiveButton("Si", (dialog, which) -> {
                         irV1();
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());

@@ -39,7 +39,8 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
     private View mainView;
-    private Vehiculo m_vehiculo;
+
+    private Button agendarCita_btn;
 
     private ImageButton buscarPlacaVn_btn;
 
@@ -72,6 +73,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
 
         //Botones
         buscarPlacaVn_btn = mainView.findViewById(R.id.busqueda_placa_vn_btn);
+        agendarCita_btn = mainView.findViewById(R.id.irAgendarCita_ca_vn_btn);
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
@@ -85,11 +87,8 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
             try {
-                Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
                 visualizarVehiculoVendedor("PSD-1234");
-                Toast.makeText(mainView.getContext(), "2", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "2,5", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         });
@@ -106,12 +105,19 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
             }
         });
 
+        agendarCita_btn.setOnClickListener(v -> {
+            verCatalogo.setVisibility(View.GONE);
+            verVehiculo.setVisibility(View.GONE);
+            //aniadir la visibilidad del agendar una cita
+        });
+
         buscarPlacaVn_btn.setOnClickListener(view -> {
             buscarVehiculos();
         });
-;
+
         return mainView;
     }
+
 
     public void verLista(String placa, String placa1) throws Exception {
 
@@ -151,12 +157,9 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 .into(v_img);
         try {
             final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -169,12 +172,9 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 .into(v_img1);
         try {
             final File localFile = File.createTempFile(v_Mostrar1.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img1.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img1.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -186,7 +186,6 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
         TextView titulo = mainView.findViewById(R.id.auto_titulo_ca_vn_txt);
         TextView placa = mainView.findViewById(R.id.ver_placa_ca_vn_txt);
         TextView matricula = mainView.findViewById(R.id.ver_matricula_ca_vn_txt);
-        Toast.makeText(mainView.getContext(), "5", Toast.LENGTH_SHORT).show();
         TextView matriculado = mainView.findViewById(R.id.ver_matriculado_ca_vn_txt);
         TextView marca = mainView.findViewById(R.id.ver_marca_ca_vn_txt);
         TextView modelo = mainView.findViewById(R.id.ver_modelo_ca_vn_txt);
@@ -199,9 +198,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
         Vehiculo vMostrar  = null;
         try {
             vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
-            Toast.makeText(mainView.getContext(), "3", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "4", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -222,7 +219,6 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
         preciVenta.setText(String.valueOf(vMostrar.getPrecioVenta()));
         promocion.setText(String.valueOf(vMostrar.getPromocion()));
         descripcion.setText(vMostrar.getDescripcion());
-        Toast.makeText(mainView.getContext(), "7", Toast.LENGTH_SHORT).show();
 
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
@@ -231,18 +227,13 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
         }
-        //
-
     }
 
     public void buscarVehiculos () {
