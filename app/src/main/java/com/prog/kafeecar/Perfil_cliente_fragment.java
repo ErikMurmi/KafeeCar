@@ -252,10 +252,22 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             }
 
+            EditText contrasenia_pe_cli_etxt  = mainview.findViewById(R.id.contraseniaEditCliente_etxt);
+            String contrasenia_str = contrasenia_pe_cli_etxt.getText().toString();
+            if(contrasenia_str.isEmpty()){
+                Toast.makeText(mainview.getContext(), "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
+                c++;
+            }else{
+                if (contrasenia_str.length()<4) {
+                    Toast.makeText(mainview.getContext(), "Contraseña invalida", Toast.LENGTH_SHORT).show();
+                    contrasenia_pe_cli_etxt.setText("");
+                    c++;
+                }
+            }
 
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                cliente.cambiarDatos(nombre_str,cedula_str,telefono_str,correo_str,cliente.getClave(),fecha);
+                cliente.cambiarDatos(nombre_str,cedula_str,telefono_str,correo_str,contrasenia_str,fecha);
                 cliente.setImagen(String.format("%s.jpg",cedula_pe_cli_etxt.getText().toString()));
                 try {
                     if (patio.buscarClientes("Cedula", cliente.getCedula()) != null) {
