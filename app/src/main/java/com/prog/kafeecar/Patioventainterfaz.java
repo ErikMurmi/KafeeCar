@@ -862,22 +862,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void salir(View view){
-        /*Dialog msg = new Dialog(Patioventainterfaz.this);
-        msg.setContentView(R.layout.mensajes_emergentes);
-        msg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Button no_btn = msg.findViewById(R.id.no_salir_btn);
-        no_btn.setOnClickListener(v -> {
-            msg.dismiss();
-        });
-
-        salir = msg.findViewById(R.id.si_salir_btn);
-        salir.setOnClickListener(v -> {
-            msg.dismiss();
-            usuarioActual = null;
-            setContentView(R.layout.login_sinclaves);
-        });
-        msg.show();*/
         AlertDialog.Builder msg = new AlertDialog.Builder(Patioventainterfaz.this);
         msg.setMessage("¿Estás seguro de cerrar sesión?");
         msg.setTitle("LOG OUT");
@@ -887,8 +871,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
         msg.show();
-
     }
+
+
     public Lista buscarVentas(String cedula) throws Exception {
         Venta buscada = null;
         Lista ventas=new Lista();
