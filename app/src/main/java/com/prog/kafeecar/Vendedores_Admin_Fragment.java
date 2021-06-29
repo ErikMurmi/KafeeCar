@@ -169,7 +169,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
                 if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setMessage("Este Vendedor se DESHABILITARÁ. Desea Continuar");
+                    msg.setMessage("Este vendedor se DESHABILITARÁ. ¿Desea continuar?");
                     msg.setTitle("ADVERTENCIA");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         vendedor.setActivo(false);
@@ -180,7 +180,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     msg.show();
                 } else {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setMessage("Este Vendedor se HABILITARÁ. Desea Continuar");
+                    msg.setMessage("Este vendedor se HABILITARÁ. ¿Desea continuar?");
                     msg.setTitle("ADVERTENCIA");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         vendedor.setActivo(true);
