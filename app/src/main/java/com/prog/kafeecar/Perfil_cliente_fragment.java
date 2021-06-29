@@ -292,6 +292,7 @@ public class Perfil_cliente_fragment extends Fragment{
         EditText mes_pe_ci_etxt;
         EditText anio_pe_ci_etxt;
         EditText correo_pe_ci_etxt;
+        EditText contrasenia_pe_ci_etxt;
 
         nombre_pe_ci_etxt = mainview.findViewById(R.id.nombreEditCliente_etxt);
         telefono_pe_ci_etxt = mainview.findViewById(R.id.telefonoEditCliente_etxt);
@@ -300,7 +301,9 @@ public class Perfil_cliente_fragment extends Fragment{
         dia_pe_ci_etxt = mainview.findViewById(R.id.diaNacimientoEditCliente_etxt);
         mes_pe_ci_etxt = mainview.findViewById(R.id.mesNacimientoEditCliente_etxt);
         anio_pe_ci_etxt = mainview.findViewById(R.id.anioNacimientoEditCliente_etxt);
+        contrasenia_pe_ci_etxt = mainview.findViewById(R.id.contraseniaEditCliente_etxt);
 
+        contrasenia_pe_ci_etxt.setText(cliente.getClave());
         nombre_pe_ci_etxt.setText(cliente.getNombre());
         telefono_pe_ci_etxt.setText(cliente.getTelefono());
         cedula_pe_ci_etxt.setText(cliente.getCedula());
