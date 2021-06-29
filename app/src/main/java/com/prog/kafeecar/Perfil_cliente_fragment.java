@@ -300,6 +300,24 @@ public class Perfil_cliente_fragment extends Fragment{
         mes_pe_ci_etxt.setText(mes);
         anio_pe_ci_etxt.setText(anio);
         correo_pe_ci_etxt.setText(cliente.getCorreo());
+
+        StorageReference filePath = mStorageRef.child("Clientes/"+cliente.getImagen());
+        Glide.with(mainview)
+                .load(filePath)
+                .into(perfil_img_btn);
+        try {
+            final File localFile = File.createTempFile(cliente.getImagen(),"jpg");
+            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    perfil_img_btn.setImageBitmap(bitmap);
+                }
+            });
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

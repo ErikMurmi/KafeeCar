@@ -16,7 +16,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="409dp"
@@ -289,7 +289,7 @@
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imagen_perfil_cliente_img"

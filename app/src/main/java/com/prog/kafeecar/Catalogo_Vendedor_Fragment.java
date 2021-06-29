@@ -37,7 +37,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static java.lang.String.format;
-public class catalogo_vendedor_fragment extends Fragment {
+public class Catalogo_Vendedor_Fragment extends Fragment {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
