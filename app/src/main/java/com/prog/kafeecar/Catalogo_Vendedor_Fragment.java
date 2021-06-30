@@ -1,7 +1,4 @@
 package com.prog.kafeecar;
-
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -43,7 +40,9 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
     private String TAG = "Catalogo";
     private View mainView;
 
-    private Button buscarPlacaVn_btn;
+    private Button agendarCita_btn;
+
+    private ImageButton buscarPlacaVn_btn;
 
     private ScrollView verVehiculo;
 
@@ -63,7 +62,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
+        mainView = inflater.inflate(R.layout.catalogo_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
 
         try {
@@ -74,6 +73,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
 
         //Botones
         buscarPlacaVn_btn = mainView.findViewById(R.id.busqueda_placa_vn_btn);
+        agendarCita_btn = mainView.findViewById(R.id.irAgendarCita_ca_vn_btn);
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
@@ -87,7 +87,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
             try {
-                visualizarVehiculo("PSD-1234");
+                visualizarVehiculoVendedor("PSD-1234");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -99,18 +99,25 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
             try {
-                visualizarVehiculo("GHC-2434");
+                visualizarVehiculoVendedor("GHC-2434");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
+        agendarCita_btn.setOnClickListener(v -> {
+            verCatalogo.setVisibility(View.GONE);
+            verVehiculo.setVisibility(View.GONE);
+            //aniadir la visibilidad del agendar una cita
+        });
+
         buscarPlacaVn_btn.setOnClickListener(view -> {
             buscarVehiculos();
         });
-;
+
         return mainView;
     }
+
 
     public void verLista(String placa, String placa1) throws Exception {
 
@@ -150,12 +157,9 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 .into(v_img);
         try {
             final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -168,74 +172,67 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 .into(v_img1);
         try {
             final File localFile = File.createTempFile(v_Mostrar1.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img1.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img1.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public void visualizarVehiculo(String placa_buscar){
-
-        ImageView v_img = mainView.findViewById(R.id.v_lista_vendedor_img);
-        TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
-        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
-        TextView matricula = mainView.findViewById(R.id.matricula_cliente_txt);
-        TextView anio = mainView.findViewById(R.id.vehiculo_anio_cliente_txt);
-        TextView marca = mainView.findViewById(R.id.vehiculo_marca_cliente_txt);
-        TextView modelo = mainView.findViewById(R.id.vehiculo_modelo_cliente_txt);
-        TextView color = mainView.findViewById(R.id.vehiculo_color_cliente_txt);
-        TextView descripcion = mainView.findViewById(R.id.vehiculo_descripcion_cliente_txt);
-        //TextView precioInicial = mainView.findViewById(R.id.vehiculo_pinicial_cliente_txt);
-        TextView preciVenta = mainView.findViewById(R.id.vehiculo_pventa_cliente_txt);
-        TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
-        TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
-
+    public void visualizarVehiculoVendedor(String placa_buscar) throws Exception{
+        ImageView v_img = mainView.findViewById(R.id.vehiculo_ca_vn_img);
+        TextView titulo = mainView.findViewById(R.id.auto_titulo_ca_vn_txt);
+        TextView placa = mainView.findViewById(R.id.ver_placa_ca_vn_txt);
+        TextView matricula = mainView.findViewById(R.id.ver_matricula_ca_vn_txt);
+        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_ca_vn_txt);
+        TextView marca = mainView.findViewById(R.id.ver_marca_ca_vn_txt);
+        TextView modelo = mainView.findViewById(R.id.ver_modelo_ca_vn_txt);
+        TextView anio = mainView.findViewById(R.id.ver_anio_ca_vn_txt);
+        TextView color = mainView.findViewById(R.id.ver_color_ca_vn_txt);
+        TextView precioInicial = mainView.findViewById(R.id.ver_pinicial_ca_vn_txt);
+        TextView preciVenta = mainView.findViewById(R.id.ver_pventa_ca_vn_txt);
+        TextView promocion = mainView.findViewById(R.id.ver_promocion_ca_vn_txt);
+        TextView descripcion = mainView.findViewById(R.id.ver_descipcion_ca_vn_txt);
         Vehiculo vMostrar  = null;
         try {
             vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
         titulo.setText(titulo_str);
-        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
-        matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
-        anio.setText(format("Año :%s",vMostrar.getAnio()));
-        marca.setText(format("Marca :%s",vMostrar.getMarca()));
-        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
-        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
-        color.setText(format("Color :%s",vMostrar.getColor()));
-       // precioInicial.setText(format("Precio inicial :%.2f",vMostrar.getPrecioInicial()));
-        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
-        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+        placa.setText(vMostrar.getPlaca());
+        matricula.setText(vMostrar.getMatricula());
+        if(vMostrar.isMatriculado()){
+            matriculado.setText("Si");
+        }else{
+            matriculado.setText("No");
+        }
+        marca.setText(vMostrar.getMarca());
+        modelo.setText(vMostrar.getModelo());
+        anio.setText(String.valueOf(vMostrar.getAnio()));
+        color.setText(vMostrar.getColor());
+        precioInicial.setText(String.valueOf(vMostrar.getPrecioInicial()));
+        preciVenta.setText(String.valueOf(vMostrar.getPrecioVenta()));
+        promocion.setText(String.valueOf(vMostrar.getPromocion()));
+        descripcion.setText(vMostrar.getDescripcion());
+
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        //Glide.with(mainView)
-               // .load(filePath)
-               // .into(v_img);
+        Glide.with(mainView)
+                .load(filePath)
+                .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
-        }
-        //
-        if(vMostrar.isMatriculado()){
-            matriculado.setText("Matriculado: Si");
-        }else{
-            matriculado.setText("Matriculado: No");
         }
     }
 

@@ -36,6 +36,15 @@ public class Vendedor extends Usuario{
         setCorreo(correo);
         setFechaNacimiento(fechaNacimiento);
     }
+
+    protected void cambiarDatosVendedor(String nombre, String cedula, String telefono, String correo, String fechaNacimiento,String contrasenia) throws ParseException {
+        setNombre(nombre);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreo(correo);
+        setFechaNacimiento(fechaNacimiento);
+        setClave(contrasenia);
+    }
     
    public Vendedor(String nombre, String cedula) { super(nombre, cedula); }
 

@@ -336,7 +336,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/datos_personales_cliente_txt"
+                android:id="@+id/datos_personales_cliente_lyt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/monglos"

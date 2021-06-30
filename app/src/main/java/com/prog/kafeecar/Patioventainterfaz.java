@@ -1,15 +1,13 @@
 package com.prog.kafeecar;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Build;
@@ -20,7 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,7 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-/**/
+
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
@@ -44,10 +49,12 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     private Button irAgendar;
-
+    private Button salir;
     private LinearLayout aniadirCitaconVehiculo;
     private LinearLayout adCita;
     public static Vehiculo v_aux_cita;
+
+    private String tipo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
         aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin_lyt);
         adCita = findViewById(R.id.ver_cita_lyt);
+        //Si no se ha asignado administrador
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
@@ -172,7 +180,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             setContentView(R.layout.home_cliente);
             BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Cliente_fragment()).commit();
         }
     }
 
@@ -225,7 +233,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     Fragment selectedFragement = null;
                     switch (item.getItemId()) {
                         case R.id.nav_cat_cl:
-                            selectedFragement = new Catalogo_Admin_Fragment();
+                            selectedFragement = new Catalogo_Cliente_fragment();
                             break;
                         case R.id.nav_citas_cl:
                             selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
@@ -267,7 +275,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public void logIn(View v) throws Exception {
 
         String msg = "";
-        String tipo = "";
+
         EditText correo = findViewById(R.id.email_etxt);
         EditText clave = findViewById(R.id.clave_etxt);
         String correo_str = correo.getText().toString();
@@ -581,7 +589,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
-
     public void registrarAdministrador() throws ParseException {
         EditText nombreAdmin;
         EditText apellidoAdmin;
@@ -799,9 +806,9 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
-
 
     public static boolean validarMail(String email) {//Valida un mail con un formato, es estático para poder usado en cualquier contexto
         // Patron para validar el email
@@ -854,11 +861,43 @@ public class Patioventainterfaz extends AppCompatActivity {
         return esBisiesto;
     }
 
-    public void salir(View v){
-        usuarioActual =  null;
-        //setContentView(R.layout.login);
-        setContentView(R.layout.login_sinclaves);
+    public void salir(View view){
+        AlertDialog.Builder msg = new AlertDialog.Builder(Patioventainterfaz.this);
+        msg.setMessage("¿Estás seguro de cerrar sesión?");
+        msg.setTitle("LOG OUT");
+        msg.setPositiveButton("Aceptar", (dialog, which) -> {
+            usuarioActual = null;
+            setContentView(R.layout.login_sinclaves);
+        });
+        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        msg.show();
     }
+
+
+    public Lista buscarVentas(String cedula) throws Exception {
+        Venta buscada = null;
+        Lista ventas=new Lista();
+        int cont =0;
+        while(cont< patioventa.getVentasGenerales().contar()){
+            Venta actual = (Venta) patioventa.getVentasGenerales().getPos(cont);
+            if(actual.getVendedor().getCedula().compareTo(cedula)==0){
+                buscada = actual;
+                ventas.add(buscada);
+            }
+            cont++;
+        }
+        return ventas;
+    }
+
+    /*/@Override
+    public void onBackPressed() {
+        // do something on back.
+        if(tipo.compareTo("ADMIN")==0){
+
+        }
+
+        return;
+    }*/
 
 
 }

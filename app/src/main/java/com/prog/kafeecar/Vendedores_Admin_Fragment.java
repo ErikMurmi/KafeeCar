@@ -2,7 +2,6 @@ package com.prog.kafeecar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,13 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -37,9 +35,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Vendedores_Admin_Fragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 100;
@@ -136,8 +131,8 @@ public class Vendedores_Admin_Fragment extends Fragment {
             try {
                 visualizarVendedor("1732221032");
             }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
-        }
+                Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
+            }
         });
 
         verVendedor1_lyt.setOnClickListener(v -> {
@@ -169,7 +164,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                 Vendedor vendedor = patio.buscarVendedores("Cedula", cedula.getText().toString());
                 if (deshabilitar_btn.getText().toString().compareToIgnoreCase("Deshabilitar") == 0) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setMessage("Este Vendedor se DESHABILITARÁ. Desea Continuar");
+                    msg.setMessage("Este vendedor se DESHABILITARÁ. ¿Desea continuar?");
                     msg.setTitle("ADVERTENCIA");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         vendedor.setActivo(false);
@@ -180,7 +175,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     msg.show();
                 } else {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setMessage("Este Vendedor se HABILITARÁ. Desea Continuar");
+                    msg.setMessage("Este vendedor se HABILITARÁ. ¿Desea continuar?");
                     msg.setTitle("ADVERTENCIA");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         vendedor.setActivo(true);
@@ -250,11 +245,41 @@ public class Vendedores_Admin_Fragment extends Fragment {
             buscarVendedores();
         });
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(irEditarVendedor.getVisibility() == View.VISIBLE){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        irV1();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if(irVisualizarVendedor.getVisibility()== View.VISIBLE){
+                    regresarPantallaPrncipal();
+                }
+                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
+
         return mainView;
     }
 
-    public void deshabilitar (){
-
+    public void irV1() {
+        irRegistrarVendedor.setVisibility(View.GONE);
+        irAdministrarVendedor.setVisibility(View.GONE);
+        irEditarVendedor.setVisibility(View.GONE);
+        aniadirVendedor_btn.setVisibility(View.GONE);
+        irVisualizarVendedor.setVisibility(View.VISIBLE);
+        try {
+            visualizarVendedor("1732221032");
+        }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void verListaVendedores(String cedula, String cedula1){

@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -64,6 +66,7 @@ public class Perfil_admin_Fragment extends Fragment {
         mainview =inflater.inflate(R.layout.perfil_admin, container, false);
         initViews();
         verPerfil();
+
         irEditar.setOnClickListener(v -> {
             perfil_lyt.setVisibility(View.GONE);
             perfil_btns_lyt.setVisibility(View.VISIBLE);
@@ -71,6 +74,17 @@ public class Perfil_admin_Fragment extends Fragment {
             verPerfilEditable();
         });
 
+        cancelar.setOnClickListener(v -> salirsinGuardar());
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(editar_perfil_lyt.getVisibility()== View.VISIBLE){
+                    salirsinGuardar();
+                }
+                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
+            }
+        };
         return mainview;
     }
     public void initViews(){
@@ -86,6 +100,21 @@ public class Perfil_admin_Fragment extends Fragment {
         irEditar = mainview.findViewById(R.id.ireditar_admin_btn);
 
     }
+
+    public void salirsinGuardar(){
+        AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+        msg.setTitle("NO GUARDAR");
+        msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+        msg.setPositiveButton("Aceptar", (dialog, which) -> {
+            perfil_btns_lyt.setVisibility(View.GONE);
+            perfil_lyt.setVisibility(View.GONE);
+            editar_perfil_lyt.setVisibility(View.VISIBLE);
+        });
+        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        msg.show();
+    }
+
+
     public void verPerfil(){
         try{
             TextView nombre_ed = mainview.findViewById(R.id.nombre_admin_txt);

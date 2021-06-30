@@ -2,12 +2,12 @@ package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
@@ -72,6 +73,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
 
+    //Variables extras
+
+    public boolean guardarEdit = false;
     @Nullable
     @Override
 
@@ -104,7 +108,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
 
-
         irAniadirVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
             irAniadirVehiculo.setVisibility(View.GONE);
@@ -117,18 +120,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         irVerVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
-            irAniadirVehiculo.setVisibility(View.GONE);
-            verCatalogo.setVisibility(View.GONE);
-            editar_vehiculo.setVisibility(View.GONE);
-            irVerVehiculo.setVisibility(View.GONE);
-            aniadir_vehiculo.setVisibility(View.GONE);
-            //Activar el diseño deseadow
-            verVehiculo.setVisibility(View.VISIBLE);
-            try {
-                visualizarVehiculo("PSD-1234");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            irV1();
         });
 
         irVerVehiculo1.setOnClickListener(v -> {
@@ -137,6 +129,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             verCatalogo.setVisibility(View.GONE);
             editar_vehiculo.setVisibility(View.GONE);
             irVerVehiculo.setVisibility(View.GONE);
+            irVerVehiculo1.setVisibility(View.GONE);
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
@@ -156,6 +149,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseado
             editar_vehiculo.setVisibility(View.VISIBLE);
+            guardarEdit = false;
             verVehiculoEditable("PSD-1234");
         });
 
@@ -208,6 +202,35 @@ public class Catalogo_Admin_Fragment extends Fragment {
         buscar_btn.setOnClickListener(v -> {
             buscarVehiculos();
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                /*
+                verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
+                verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
+                editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
+                aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
+                irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
+                irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
+                 */
+                if(editar_vehiculo.getVisibility()== View.VISIBLE){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        irV1();
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if(verVehiculo.getVisibility()== View.VISIBLE){
+                    irCatalogo();
+                }
+                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
         return mainView;
     }
 
@@ -216,10 +239,12 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irAniadirVehiculo.setVisibility(View.GONE);
 
         verVehiculo.setVisibility(View.GONE);
-        //irEditar.setVisibility(View.GONE);
+
         aniadir_vehiculo.setVisibility(View.GONE);
         editar_vehiculo.setVisibility(View.GONE);
-        //Activar el diseño deseadow
+        //Activar el diseño deseado
+        irVerVehiculo.setVisibility(View.VISIBLE);
+        irVerVehiculo1.setVisibility(View.VISIBLE);
         verCatalogo.setVisibility(View.VISIBLE);
         irAniadirVehiculo.setVisibility(View.VISIBLE);
         try {
@@ -229,6 +254,20 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
+    public void irV1(){
+        irAniadirVehiculo.setVisibility(View.GONE);
+        verCatalogo.setVisibility(View.GONE);
+        editar_vehiculo.setVisibility(View.GONE);
+        irVerVehiculo.setVisibility(View.GONE);
+        aniadir_vehiculo.setVisibility(View.GONE);
+        //Activar el diseño deseadow
+        verVehiculo.setVisibility(View.VISIBLE);
+        try {
+            visualizarVehiculo("PSD-1234");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
@@ -444,12 +483,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
             try {
                 final File localFile = File.createTempFile(m_vehiculo.getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        perfil_img_bt.setImageBitmap(bitmap);
-                    }
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    perfil_img_bt.setImageBitmap(bitmap);
                 });
             }catch (IOException e) {
                 e.printStackTrace();
@@ -571,6 +607,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
                         Integer.parseInt(anio_ed.getText().toString()),
                         String.format(placa_ed.getText().toString()+".jpg")
                 );
+                guardarEdit = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -604,7 +641,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         titulo.setText(titulo_str);
         placa.setText(vMostrar.getPlaca());
         matricula.setText(vMostrar.getMatricula());
-        anio.setText(vMostrar.getAnio());
+        anio.setText(String.valueOf(vMostrar.getAnio()));
         marca.setText(vMostrar.getMarca());
         modelo.setText(vMostrar.getModelo());
         descripcion.setText(vMostrar.getDescripcion());
@@ -620,12 +657,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
                 .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -633,9 +667,9 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //
 
         if(vMostrar.isMatriculado()){
-            matriculado.setText("Matriculado: Si");
+            matriculado.setText("Si");
         }else{
-            matriculado.setText("Matriculado: No");
+            matriculado.setText("No");
         }
 
 
@@ -679,5 +713,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
         return etText.getText().toString().trim().length() == 0;
     }
 
+    /*public static void irAtras(){
+        ScrollView verVehiculo = ca.findViewById(R.id.vehiculo_admin);
+        if(verVehiculo.getVisibility()==View.VISIBLE){
+            Toast.makeText(mainView.getContext(), "Metodo funcionando",Toast.LENGTH_SHORT).show();
+        }
+    }*/
 
 }
