@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.String.format;
 
-public class Catalogo_Admin_Fragment extends Fragment {
+public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
@@ -58,6 +59,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private ImageButton buscar_btn;
     private Button irEditarVehiculo;
     public Button editar_btn;
+    public Button cancelar_btn;
     private Button eliminar_btn;
     private Button aniadir_vehiculo_btn;
 
@@ -70,7 +72,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private ScrollView aniadir_vehiculo;
 
     private PatioVenta patio;
-    private Vehiculo m_vehiculo;
 
 
     private Vehiculo vMostrar;
@@ -88,12 +89,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-
-        try {
-            verLista("PSD-1234","GHC-2434");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
@@ -101,6 +96,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
+        cancelar_btn = mainView.findViewById(R.id.cancelar_ca_ad_btn);
         eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
         buscar_btn = mainView.findViewById(R.id.busqueda_admin_btn);
@@ -133,7 +129,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
             //Activar el diseño deseadow
             verVehiculo.setVisibility(View.VISIBLE);
             try {
-                visualizarVehiculo("GHC-2434");
+                visualizarVehiculo();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -141,15 +137,15 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
 
         irEditarVehiculo.setOnClickListener(v -> {
+            Toast.makeText(mainView.getContext(), "Entra al metodo", Toast.LENGTH_SHORT).show();
             irAniadirVehiculo.setVisibility(View.GONE);
             verCatalogo.setVisibility(View.GONE);
             verVehiculo.setVisibility(View.GONE);
-            irVerVehiculo.setVisibility(View.GONE);
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseado
             editar_vehiculo.setVisibility(View.VISIBLE);
             guardarEdit = false;
-            verVehiculoEditable("PSD-1234");
+            verVehiculoEditable();
         });
 
 
@@ -160,10 +156,10 @@ public class Catalogo_Admin_Fragment extends Fragment {
         eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar vehículo");
-            msg.setMessage("¿Está seguro de eliminar el vehículo con la placa "+ m_vehiculo.getPlaca()+ " ?");
+            msg.setMessage("¿Está seguro de eliminar el vehículo con la placa "+ vMostrar.getPlaca()+ " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    patio.removerVehiculo(m_vehiculo.getMatricula());
+                    patio.removerVehiculo(vMostrar.getMatricula());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -175,14 +171,13 @@ public class Catalogo_Admin_Fragment extends Fragment {
         });
 
         deshacer_btn.setOnClickListener(v -> {
-            EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
-            verVehiculoEditable(placa_ed.getText().toString());
+            verVehiculoEditable();
         });
 
         editar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Editar vehículo");
-            msg.setMessage("¿Está seguro de editar el vehículo con la placa "+ m_vehiculo.getPlaca()+ " ?");
+            msg.setMessage("¿Está seguro de editar el vehículo con la placa "+ vMostrar.getPlaca()+ " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
                 editarVehiculo(placa_ed.getText().toString());
@@ -198,8 +193,15 @@ public class Catalogo_Admin_Fragment extends Fragment {
             irCatalogo();
         });
 
-        buscar_btn.setOnClickListener(v -> {
-            buscarVehiculos();
+        buscar_btn.setOnClickListener(v -> buscarVehiculos());
+
+        cancelar_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Cancelar");
+            msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> irCatalogo());
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
         try {
             cargar();
@@ -221,12 +223,20 @@ public class Catalogo_Admin_Fragment extends Fragment {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> irV1());
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> irVer());
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
                 if(verVehiculo.getVisibility()== View.VISIBLE){
                     irCatalogo();
+                }
+                if(aniadir_vehiculo.getVisibility()==View.VISIBLE){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("Volver");
+                    msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> irCatalogo());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
                 //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
             }
@@ -236,31 +246,25 @@ public class Catalogo_Admin_Fragment extends Fragment {
     }
 
     public void cargar() throws Exception {
-        Toast.makeText(mainView.getContext(),"1", Toast.LENGTH_SHORT).show();
         listaview=mainView.findViewById(R.id.rc_autos);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview=new Adaptador_Lista_Catalogo(patio.getVehiculos());
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos(),this);
         listaview.setAdapter(adptadorlistaview);
-        listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
-        Toast.makeText(mainView.getContext(),"2", Toast.LENGTH_SHORT).show();
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     public void irCatalogo(){
         irAniadirVehiculo.setVisibility(View.GONE);
-
         verVehiculo.setVisibility(View.GONE);
-
         aniadir_vehiculo.setVisibility(View.GONE);
         editar_vehiculo.setVisibility(View.GONE);
         //Activar el diseño deseado
-        irVerVehiculo.setVisibility(View.VISIBLE);
-        irVerVehiculo1.setVisibility(View.VISIBLE);
         verCatalogo.setVisibility(View.VISIBLE);
         irAniadirVehiculo.setVisibility(View.VISIBLE);
         try {
-            verLista("PSD-1234","GHC-2434");
+            cargar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -275,80 +279,26 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //Activar el diseño deseadow
         verVehiculo.setVisibility(View.VISIBLE);
         try {
-            visualizarVehiculo("PSD-1234");
+            visualizarVehiculo();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @SuppressLint("DefaultLocale")
-    public void verLista(String placa, String placa1) throws Exception {
 
-        ImageView v_img = mainView.findViewById(R.id.v_lista_img);
-        TextView titulo = mainView.findViewById(R.id.v_marca_modelo_txt);
-        TextView anio = mainView.findViewById(R.id.v_anio_lista_txt);
-        TextView matricula =  mainView.findViewById(R.id.v_matricula_lista_txt);
-        TextView precio = mainView.findViewById(R.id.v_precio_lista_txt);
-        TextView placa_v = mainView.findViewById(R.id.v_placa_lista_txt);
+    public void irVer(){
 
-        ImageView v_img1 = mainView.findViewById(R.id.v_lista1_img);
-        TextView titulo1 = mainView.findViewById(R.id.v_marca_modelo1_txt);
-        TextView  anio1 = mainView.findViewById(R.id.v_anio_lista1txt);
-        TextView matricula1 =  mainView.findViewById(R.id.v_matricula_lista1_txt);
-        TextView placa_v1 = mainView.findViewById(R.id.v_placa_lista1_txt);
-        TextView precio1 = mainView.findViewById(R.id.v_precio_lista1_txt);
-
-
-        Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-        titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-        anio.setText(String.valueOf(v_Mostrar.getAnio()));
-        matricula.setText(v_Mostrar.getMatricula());
-        placa_v.setText(placa);
-        precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
-
-
-        Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
-        titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
-        placa_v1.setText(v_Mostrar1.getPlaca());
-        precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
-        anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
-        matricula1.setText(v_Mostrar1.getMatricula());
-
-        StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
-        Glide.with(mainView)
-                .load(filePath)
-                .into(v_img);
+        irAniadirVehiculo.setVisibility(View.GONE);
+        verCatalogo.setVisibility(View.GONE);
+        editar_vehiculo.setVisibility(View.GONE);
+        aniadir_vehiculo.setVisibility(View.GONE);
+        //Activar el diseño deseadow
+        verVehiculo.setVisibility(View.VISIBLE);
         try {
-            final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                    }
-            });
-        }catch (IOException e){
+            visualizarVehiculo();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //Imagen 2
-        filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
-            Glide.with(mainView)
-                    .load(filePath)
-                    .into(v_img1);
-            try {
-                final File localFile = File.createTempFile(v_Mostrar1.getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        v_img1.setImageBitmap(bitmap);
-                    }
-                });
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
     }
 
 
@@ -473,7 +423,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     }
 
 
-    public void verVehiculoEditable(String placa){
+    public void verVehiculoEditable(){
         String msg = "";
 
         try {
@@ -489,12 +439,12 @@ public class Catalogo_Admin_Fragment extends Fragment {
             EditText pventa_ed = mainView.findViewById(R.id.editar_v_pventa_etxt);
             EditText ppromocion_ed = mainView.findViewById(R.id.editar_v_ppromocion_etxt);
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
-            StorageReference filePath = mStorageRef.child("Vehiculos/"+m_vehiculo.getimagen());
+            StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
 
             Glide.with(mainView).load(filePath).into(perfil_img_bt);
 
             try {
-                final File localFile = File.createTempFile(m_vehiculo.getimagen(),"jpg");
+                final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                     perfil_img_bt.setImageBitmap(bitmap);
@@ -502,17 +452,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
             }catch (IOException e) {
                 e.printStackTrace();
             }
-            placa_ed.setText(m_vehiculo.getPlaca());
-            matricula_ed.setText(m_vehiculo.getMatricula());
-            anio_ed.setText(String.valueOf(m_vehiculo.getAnio()));
-            descripcion_ed.setText(m_vehiculo.getDescripcion());
-            marca_ed.setText(m_vehiculo.getMarca());
-            modelo_ed.setText(m_vehiculo.getModelo());
-            color_ed.setText(m_vehiculo.getColor());
-            pinicial_ed.setText(String.valueOf(m_vehiculo.getPrecioInicial()));
-            pventa_ed.setText(String.valueOf(m_vehiculo.getPrecioVenta()));
-            ppromocion_ed.setText(String.valueOf(m_vehiculo.getPromocion()));
-            matriculado_ed.setChecked(m_vehiculo.isMatriculado());
+            placa_ed.setText(vMostrar.getPlaca());
+            matricula_ed.setText(vMostrar.getMatricula());
+            anio_ed.setText(String.valueOf(vMostrar.getAnio()));
+            descripcion_ed.setText(vMostrar.getDescripcion());
+            marca_ed.setText(vMostrar.getMarca());
+            modelo_ed.setText(vMostrar.getModelo());
+            color_ed.setText(vMostrar.getColor());
+            pinicial_ed.setText(String.valueOf(vMostrar.getPrecioInicial()));
+            pventa_ed.setText(String.valueOf(vMostrar.getPrecioVenta()));
+            ppromocion_ed.setText(String.valueOf(vMostrar.getPromocion()));
+            matriculado_ed.setChecked(vMostrar.isMatriculado());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -605,7 +555,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
             if(c==0){
-                m_vehiculo.actualizarDatos(
+                vMostrar.actualizarDatos(
                         placa_ed.getText().toString(),
                         matricula_ed.getText().toString(),
                         marca_ed.getText().toString(),
@@ -626,8 +576,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
         }
     }
 
-    public void visualizarVehiculo(String placa_buscar) throws Exception {
-        m_vehiculo = patio.buscarVehiculos("Placa",placa_buscar);
+    public void visualizarVehiculo() throws Exception {
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);
@@ -642,13 +591,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_txt);
         TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_txt);
 
-        Vehiculo vMostrar  = null;
-        try {
-            vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
-            m_vehiculo = vMostrar;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();
         titulo.setText(titulo_str);
         placa.setText(vMostrar.getPlaca());
@@ -690,13 +632,13 @@ public class Catalogo_Admin_Fragment extends Fragment {
     public void buscarVehiculos () {
         EditText placa = mainView.findViewById(R.id.busqueda_placa_etxt);
         String placa_str = placa.getText().toString();
-        Vehiculo buscado = null;
+        Vehiculo buscado;
         try {
             buscado = patio.buscarVehiculos("Placa",placa_str);
             if (buscado == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo buscado", Toast.LENGTH_SHORT).show();
             } else {
-                verLista(placa_str, "GHC-2434");
+                //verLista(placa_str, "GHC-2434");
             }
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No existe el vehiculo", Toast.LENGTH_SHORT).show();
@@ -723,6 +665,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
+    }
+
+    @Override
+    public void itemClick(String placa) {
+        //irVer(placa);
+        try {
+            vMostrar = patio.buscarVehiculos("Placa",placa);
+            irVer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*public static void irAtras(){

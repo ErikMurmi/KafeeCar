@@ -200,74 +200,65 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragement = null;
-                    switch (item.getItemId()) {
-                        case R.id.nav_citas:
-                            selectedFragement = new Citas_Admin_Fragment();
-                            break;
-                        case R.id.nav_cat:
-                            selectedFragement = new Catalogo_Admin_Fragment();
-                            break;
-                        case R.id.nav_vendedores:
-                            selectedFragement = new Vendedores_Admin_Fragment();
-                            break;
-                        case R.id.nav_admin_perfil:
-                            selectedFragement = new Perfil_admin_Fragment();
-                            break;
-                        case R.id.nav_ventas:
-                            selectedFragement = new Ventas_admin_Fragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
-                    return true;
+            item -> {
+                Fragment selectedFragement = null;
+                switch (item.getItemId()) {
+                    case R.id.nav_citas:
+                        selectedFragement = new Citas_Admin_Fragment();
+                        break;
+                    case R.id.nav_cat:
+                        selectedFragement = new Catalogo_Admin_Fragment();
+                        break;
+                    case R.id.nav_vendedores:
+                        selectedFragement = new Vendedores_Admin_Fragment();
+                        break;
+                    case R.id.nav_admin_perfil:
+                        selectedFragement = new Perfil_admin_Fragment();
+                        break;
+                    case R.id.nav_ventas:
+                        selectedFragement = new Ventas_admin_Fragment();
+                        break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
+                return true;
             };
 
     private BottomNavigationView.OnNavigationItemSelectedListener nav_cliente_Listener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragement = null;
-                    switch (item.getItemId()) {
-                        case R.id.nav_cat_cl:
-                            selectedFragement = new Catalogo_Cliente_fragment();
-                            break;
-                        case R.id.nav_citas_cl:
-                            selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
-                            break;
-                        case R.id.nav_fav_cl:
-                            selectedFragement = new Favoritos_cliente_fragment(getApplicationContext());
-                            break;
-                        case R.id.nav_perfil_cl:
-                            selectedFragement = new Perfil_cliente_fragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
-                    return true;
+            item -> {
+                Fragment selectedFragement = null;
+                switch (item.getItemId()) {
+                    case R.id.nav_cat_cl:
+                        selectedFragement = new Catalogo_Cliente_fragment();
+                        break;
+                    case R.id.nav_citas_cl:
+                        selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
+                        break;
+                    case R.id.nav_fav_cl:
+                        selectedFragement = new Favoritos_cliente_fragment(getApplicationContext());
+                        break;
+                    case R.id.nav_perfil_cl:
+                        selectedFragement = new Perfil_cliente_fragment();
+                        break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, selectedFragement).commit();
+                return true;
             };
     private BottomNavigationView.OnNavigationItemSelectedListener nav_vendedor_Listener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragement = null;
-                    switch (item.getItemId()) {
-                        case R.id.nav_citas_ven:
-                            selectedFragement = new Citas_vendedor_fragment();
-                            break;
-                        case R.id.nav_cat_ven:
-                            selectedFragement = new Catalogo_Vendedor_Fragment();
-                            break;
-                        case R.id.nav_perfil_ven:
-                            selectedFragement = new Perfil_Vendedor_Fragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, selectedFragement).commit();
-                    return true;
+            item -> {
+                Fragment selectedFragement = null;
+                switch (item.getItemId()) {
+                    case R.id.nav_citas_ven:
+                        selectedFragement = new Citas_vendedor_fragment();
+                        break;
+                    case R.id.nav_cat_ven:
+                        selectedFragement = new Catalogo_Vendedor_Fragment();
+                        break;
+                    case R.id.nav_perfil_ven:
+                        selectedFragement = new Perfil_Vendedor_Fragment();
+                        break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, selectedFragement).commit();
+                return true;
             };
 
 

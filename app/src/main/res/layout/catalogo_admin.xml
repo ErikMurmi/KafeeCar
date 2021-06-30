@@ -478,7 +478,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -548,10 +548,9 @@
                 android:id="@+id/rc_autos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="35dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                tools:visibility="visible" />
+                android:layout_marginRight="20dp" />
 
             <LinearLayout
                 android:id="@+id/vehiculo_lista1_lyt"
@@ -562,6 +561,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bordesmarcosnegro"
                 android:orientation="vertical"
+                android:visibility="gone"
                 tools:visibility="gone">
 
                 <LinearLayout
@@ -710,420 +710,425 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="80dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/placa_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_placa_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_height="35dp"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="PBU-1907"
-                                android:textColor="#000000"
-                                android:textSize="15sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="5dp" />
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/matricula_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_matricula_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:ems="10"
-                                android:fontFamily="@font/ocra"
-                                android:hint="Y3553"
-                                android:inputType="textPersonName"
-                                android:textAlignment="center"
-                                android:textColor="#000000" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="5dp" />
-
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/anio"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_vehiculo_anio_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:ems="10"
-                                android:fontFamily="@font/ocra"
-                                android:hint="2010"
-                                android:inputType="textPersonName"
-                                android:textAlignment="center"
-                                android:textColor="#000000" />
-
-                        </LinearLayout>
-
-                        <Space
-                            android:layout_width="10dp"
-                            android:layout_height="wrap_content" />
-
-                        <ImageButton
-                            android:id="@+id/perfil_img_bt"
-                            android:layout_width="189dp"
-                            android:layout_height="148dp"
-                            android:layout_marginTop="15dp"
-                            android:background="#00FFFFFF"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@mipmap/ic_tesla" />
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp" />
-
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocra"
-                        android:text="@string/descripcion_c"
-                        android:textColor="@color/gris_visualizar"
-                        android:textSize="16sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp" />
-
-                    <EditText
-                        android:id="@+id/editar_descripcion_etxt"
-                        style="@style/editar_entradas_txt"
-                        android:layout_width="374dp"
-                        android:layout_height="77dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/bordesmarcosgris"
-                        android:hint="Estado del auto..."
-                        android:inputType="text|textImeMultiLine"
-                        android:lines="3"
-                        android:maxLines="5"
-                        android:singleLine="false" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="185dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="72dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/marca_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_vehiculo_marca_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="KIA"
-                                android:textColor="#000000" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/modelo_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_vehiculo_modelo_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="166dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="Picanto"
-                                android:textColor="#000000" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="188dp"
-                            android:layout_height="60dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/color_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_vehiculo_color_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="Negro"
-                                android:textColor="#000000" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp" />
-
-                            <CheckBox
-                                android:id="@+id/editar_matriculado_chkbox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:buttonTint="@color/botones"
-                                android:fontFamily="@font/ocraext"
-                                android:text="@string/matriculado_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="18dp" />
-
-                    <ImageView
-                        android:id="@+id/Auto.img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        app:srcCompat="@drawable/precio_titulo" />
+                        android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/inicial_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_v_pinicial_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="$5,000"
-                                android:textColor="#000000" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/venta_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
-
-                            <EditText
-                                android:id="@+id/editar_v_pventa_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="$5,000"
-                                android:textColor="#000000" />
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/textView9"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/placa_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocra"
-                                android:text="@string/promocion_c"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="16sp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
 
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp" />
+                        <EditText
+                            android:id="@+id/editar_placa_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_height="35dp"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="PBU-1907"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
 
-                            <EditText
-                                android:id="@+id/editar_v_ppromocion_etxt"
-                                style="@style/editar_entradas_txt"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bordesbotongris"
-                                android:hint="$0,00"
-                                android:textColor="#000000" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" />
 
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/matricula_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_matricula_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Y3553"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:textColor="#000000" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/anio"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_vehiculo_anio_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:ems="10"
+                            android:fontFamily="@font/ocra"
+                            android:hint="2010"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:textColor="#000000" />
+
                     </LinearLayout>
 
                     <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="10dp"
-                        android:layout_weight="1" />
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <ImageButton
+                        android:id="@+id/perfil_img_bt"
+                        android:layout_width="189dp"
+                        android:layout_height="148dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@mipmap/ic_tesla" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/descripcion_c"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <EditText
+                    android:id="@+id/editar_descripcion_etxt"
+                    style="@style/editar_entradas_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:hint="Estado del auto..."
+                    android:inputType="text|textImeMultiLine"
+                    android:lines="3"
+                    android:maxLines="5"
+                    android:singleLine="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/editar_v_deshacer_btn"
-                            android:layout_width="120dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/boton_redondeado_dark"
-                            android:fontFamily="@font/valorant"
-                            android:text="Deshacer"
-                            android:textColor="@color/white" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/marca_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
 
                         <Space
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content" />
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
 
-                        <Button
-                            android:id="@+id/editar_v_editar_btn"
-                            android:layout_width="120dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/boton_redondeado"
-                            android:fontFamily="@font/valorant"
-                            android:text="Editar"
-                            android:textColor="@color/white" />
+                        <EditText
+                            android:id="@+id/editar_vehiculo_marca_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="KIA"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/modelo_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_vehiculo_modelo_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="Picanto"
+                            android:textColor="#000000" />
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/color_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_vehiculo_color_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="Negro"
+                            android:textColor="#000000" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp" />
+
+                        <CheckBox
+                            android:id="@+id/editar_matriculado_chkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:buttonTint="@color/cafe_grisaceo"
+                            android:fontFamily="@font/ocraext"
+                            android:text="@string/matriculado_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp" />
+
+                <ImageView
+                    android:id="@+id/Auto.img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/precio_titulo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/inicial_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_v_pinicial_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="$5,000"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/venta_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_v_pventa_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="$5,000"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/promocion_c"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp" />
+
+                        <EditText
+                            android:id="@+id/editar_v_ppromocion_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="$0,00"
+                            android:textColor="#000000" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/editar_v_deshacer_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valorant"
+                        android:text="Deshacer"
+                        android:textColor="@color/white" />
+
+                    <Space
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/editar_v_editar_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:fontFamily="@font/valorant"
+                        android:text="Editar"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -1133,22 +1138,21 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/aniadir_vehiculo"
             android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
+                android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -1174,6 +1178,7 @@
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="text"
                             android:text="PBY 786"
                             android:textSize="15sp"
@@ -1192,7 +1197,7 @@
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
-                            android:background="@drawable/bordesboton"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
                             android:inputType="textPersonName|text"
@@ -1213,7 +1218,7 @@
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bordesboton"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
                             android:inputType="number|textPersonName"
@@ -1229,8 +1234,8 @@
 
                     <ImageButton
                         android:id="@+id/aniadir_vehiculo_imagen_btn"
-                        android:layout_width="180dp"
-                        android:layout_height="148dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_marginTop="15dp"
                         android:background="#00FFFFFF"
                         android:scaleType="fitCenter"
@@ -1249,65 +1254,112 @@
                 <EditText
                     android:id="@+id/aniadir_descripcion_etxt"
                     style="@style/editar_entradas_txt"
-                    android:layout_width="374dp"
+                    android:layout_width="match_parent"
                     android:layout_height="77dp"
-                    android:background="@drawable/bordesmarcos"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:inputType="textMultiLine|text|textImeMultiLine"
                     android:lines="3"
                     android:maxLines="5"
                     android:singleLine="false"
                     android:text="Todo esta correcto" />
 
-                <TextView
-                    android:id="@+id/textView12"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="@string/marca_c"
-                    android:textColor="#000000" />
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/aniadir_marca_etxt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="Toyota"
-                    tools:text="Toyota" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="@string/modelo_c"
-                    android:textColor="#000000" />
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/marca_c"
+                            android:textColor="#000000" />
 
-                <EditText
-                    android:id="@+id/aniadir_modelo_etxt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="Fortuner"
-                    tools:text="Fortuner" />
+                        <EditText
+                            android:id="@+id/aniadir_marca_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:inputType="text"
+                            android:text="Toyota"
+                            tools:text="Toyota" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="@string/color_c"
-                    android:textColor="#000000" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="bottom"
+                            android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/aniadir_color_etxt"
-                    style="@style/editar_entradas_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="Azul marfil"
-                    tools:text="Azul marfil" />
+                            <TextView
+                                android:id="@+id/textView14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocra"
+                                android:text="@string/color_c"
+                                android:textColor="#000000" />
+
+                            <EditText
+                                android:id="@+id/aniadir_color_etxt"
+                                style="@style/editar_entradas_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:inputType="text"
+                                android:text="Azul marfil"
+                                tools:text="Azul marfil" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:fontFamily="@font/ocra"
+                            android:text="@string/modelo_c"
+                            android:textColor="#000000" />
+
+                        <EditText
+                            android:id="@+id/aniadir_modelo_etxt"
+                            style="@style/editar_entradas_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:inputType="text"
+                            android:text="Fortuner"
+                            tools:text="Fortuner" />
+
+                        <CheckBox
+                            android:id="@+id/matricula_chkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="15dp"
+                            android:buttonTint="@color/cafe_grisaceo"
+                            android:text="@string/matriculado_c" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -1343,8 +1395,9 @@
                         <EditText
                             android:id="@+id/aniadir_pinicial_etxt"
                             style="@style/editar_entradas_txt"
-                            android:layout_width="90dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
                             android:text="32000"
                             tools:text="32000" />
@@ -1362,7 +1415,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -1376,8 +1429,9 @@
                         <EditText
                             android:id="@+id/aniadir_precio_venta_etxt"
                             style="@style/editar_entradas_txt"
-                            android:layout_width="90dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
                             android:text="35500"
                             tools:text="35500" />
@@ -1388,7 +1442,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:layout_weight="1"
                         android:fontFamily="@font/ocra"
                         android:text="$"
                         android:textSize="34sp" />
@@ -1396,11 +1449,12 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView17"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/promocion_c"
@@ -1409,11 +1463,12 @@
                         <EditText
                             android:id="@+id/aniadir_precio_promocion_etxt"
                             style="@style/editar_entradas_txt"
-                            android:layout_width="90dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
-                            android:text="-"
-                            tools:text="-" />
+                            android:text="0"
+                            tools:text="0" />
 
                     </LinearLayout>
 
@@ -1422,7 +1477,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:layout_weight="1"
                         android:fontFamily="@font/ocra"
                         android:text="$"
                         android:textSize="34sp" />
@@ -1434,13 +1488,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/matricula_chkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/botones"
-                        android:text="@string/matriculado_c" />
 
                 </LinearLayout>
 
@@ -1453,12 +1500,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/cancelar_ca_ad_btn"
                         android:layout_width="120dp"
                         android:layout_height="35dp"
                         android:background="@drawable/boton_redondeado_dark"
                         android:fontFamily="@font/valorant"
-                        android:text="Deshacer"
+                        android:text="cancelar"
                         android:textColor="@color/white" />
 
                     <Space
@@ -1487,13 +1534,11 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:clickable="true"
-        android:visibility="visible"
         app:backgroundTint="@color/botones"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="50dp"
-        app:srcCompat="@drawable/anadir_icon"
-        tools:visibility="gone" />
+        app:srcCompat="@drawable/anadir_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

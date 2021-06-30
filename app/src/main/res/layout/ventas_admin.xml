@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrar_ventas"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="370dp"
@@ -555,15 +555,13 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/vehiculo_admin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
-            android:id="@+id/v_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

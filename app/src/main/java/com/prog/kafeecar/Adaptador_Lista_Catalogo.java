@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,10 +23,13 @@ import java.io.IOException;
 public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lista_Catalogo.clienteHolder> {
     Lista autos;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+   // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
-    public Adaptador_Lista_Catalogo(Lista fav){
+    private RecyclerItemClick itemClick;
+    public Adaptador_Lista_Catalogo(Lista fav, RecyclerItemClick itemClick){
 
         this.autos=fav;
+        this.itemClick = itemClick;
     }
 
     @NonNull
@@ -38,7 +43,6 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Catalogo.clienteHolder holder, int position) {
         try {
             Vehiculo c=(Vehiculo)autos.getPos(position);
-
             String precio="";
             String nombre= c.getMarca()+" "+c.getModelo();
             if (c.getPromocion()==0){
@@ -63,12 +67,20 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
                 e.printStackTrace();
             }
 
-            //holder.imagenauto.setBackground(R.);
+            //lyt = holder;
             holder.nombre.setText(nombre);
             holder.precioauto.setText(precio);
             holder.matricula.setText(matricula);
             holder.placa.setText(placa);
             holder.anio.setText(anio);
+            holder.itemView.setOnClickListener(v -> {
+                itemClick.itemClick(placa);
+            });
+            /*
+            holder.itemView.setOnClickListener(v -> {
+                Catalogo_Admin_Fragment.irVer(placa);
+            });*/
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,7 +100,6 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
         public TextView matricula;
         public TextView placa;
 
-
         public clienteHolder(@NonNull View view) {
             super(view);
             imagenauto=view.findViewById(R.id.v_lista_img);
@@ -99,5 +110,14 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
             anio = view.findViewById(R.id.v_anio_lista_txt);
         }
     }
+
+    public interface RecyclerItemClick{
+        void itemClick(String placa);
+    }
+/*
+    @Override
+    public void itemClick(ItemList item){
+
+    }*/
 }
 
