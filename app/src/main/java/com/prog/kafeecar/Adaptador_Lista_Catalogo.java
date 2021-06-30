@@ -1,49 +1,74 @@
 package com.prog.kafeecar;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+
 public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lista_Catalogo.clienteHolder> {
-    Lista favoritos;
+    Lista autos;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    View view;
     public Adaptador_Lista_Catalogo(Lista fav){
 
-        this.favoritos=fav;
+        this.autos=fav;
     }
 
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.pantallitacita,parent,false);
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.pantallita_auto,parent,false);
         return new clienteHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Catalogo.clienteHolder holder, int position) {
         try {
-            Cliente cienteactual=(Cliente)Patioventainterfaz.usuarioActual;
-            favoritos=Patioventainterfaz.patioventa.getCitas().listabusqueda(cienteactual);
+            Vehiculo c=(Vehiculo)autos.getPos(position);
 
-            Vehiculo c=(Vehiculo)favoritos.getPos(position);
-            //Drawable foto= (Drawable)c.getimagen();
             String precio="";
-            String nombre= "Auto: "+c.getMarca()+" "+c.getModelo();
+            String nombre= c.getMarca()+" "+c.getModelo();
             if (c.getPromocion()==0){
-                 precio= " Precio "+c.getPrecioVenta();
+                 precio= "$ "+c.getPrecioVenta();
             }else{
-                 precio= " Precio promoción "+c.getPromocion();
+                 precio= "$ "+c.getPromocion();
             }
-            String matricula="Matricula N#= "+c.getMatricula();
-
+            String matricula=c.getMatricula();
+            String placa = c.getPlaca();
+            String anio = String.valueOf(c.getAnio());
+            StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());
+            Glide.with(view)
+                    .load(filePath)
+                    .into(holder.imagenauto);
+            try {
+                final File localFile = File.createTempFile(c.getimagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    holder.imagenauto.setImageBitmap(bitmap);
+                });
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
             //holder.imagenauto.setBackground(R.);
             holder.nombre.setText(nombre);
             holder.precioauto.setText(precio);
             holder.matricula.setText(matricula);
+            holder.placa.setText(placa);
+            holder.anio.setText(anio);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,23 +77,26 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
 
     @Override
     public int getItemCount() {
-        return favoritos.contar();
+        return autos.contar();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
         public TextView precioauto;
+        public TextView anio;
         public TextView nombre;
         public TextView matricula;
-
+        public TextView placa;
 
 
         public clienteHolder(@NonNull View view) {
             super(view);
-            imagenauto=view.findViewById(R.id.fotoauto_Lista_cliente_pantallita_img);
-            precioauto=view.findViewById(R.id.precio_lista_cliente_pantallita_txt);
-            nombre=view.findViewById(R.id.nombreauto_lista_cliente_pantallita_txt);
-            matricula=view.findViewById(R.id.matricula_lista_cliente_pantallita_txt);
+            imagenauto=view.findViewById(R.id.v_lista_img);
+            precioauto=view.findViewById(R.id.v_precio_lista_txt);
+            nombre=view.findViewById(R.id.v_marca_modelo_txt);
+            matricula=view.findViewById(R.id.v_matricula_lista_txt);
+            placa = view.findViewById(R.id.v_placa_lista_txt);
+            anio = view.findViewById(R.id.v_anio_lista_txt);
         }
     }
 }

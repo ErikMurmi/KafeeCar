@@ -50,28 +50,19 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             String nombre= "Nombre: "+c.getVisitante().getNombre();
             String telefono= "Telefono: "+c.getVisitante().getTelefono();
             String matricula="Matricula N#= "+c.getVehiculo().getMatricula();
-
-
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
             Glide.with(view)
                     .load(filePath)
                     .into(holder.imagen);
             try {
-                Toast.makeText(view.getContext(),"2", Toast.LENGTH_SHORT).show();
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        holder.imagen.setImageBitmap(bitmap);
-                        Toast.makeText(view.getContext(),"3", Toast.LENGTH_SHORT).show();
-                    }
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    holder.imagen.setImageBitmap(bitmap);
                 });
             }catch (IOException e){
-                Toast.makeText(view.getContext(),"4", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-            //holder.imagen.setImageDrawable();
             holder.horacita.setText(hora);
             holder.nombre.setText(nombre);
             holder.telefono.setText(telefono);

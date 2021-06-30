@@ -66,11 +66,11 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
 
 
         public clienteHolder(@NonNull View view) {
-            super(view);
+            super(view);/*
             imagenauto=view.findViewById(R.id.fotoauto_Lista_cliente_pantallita_img);
             precioauto=view.findViewById(R.id.precio_lista_cliente_pantallita_txt);
             nombre=view.findViewById(R.id.nombreauto_lista_cliente_pantallita_txt);
-            matricula=view.findViewById(R.id.matricula_lista_cliente_pantallita_txt);
+            matricula=view.findViewById(R.id.matricula_lista_cliente_pantallita_txt);*/
         }
     }
 }

@@ -26,6 +26,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,6 +64,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
 
     private ScrollView verVehiculo;
     private ScrollView editar_vehiculo;
+    private RecyclerView listaview;
 
     private LinearLayout verCatalogo;
     private ScrollView aniadir_vehiculo;
@@ -72,7 +77,7 @@ public class Catalogo_Admin_Fragment extends Fragment {
     private Uri foto;
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
-
+    private Adaptador_Lista_Catalogo adptadorlistaview;
     //Variables extras
 
     public boolean guardarEdit = false;
@@ -92,7 +97,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
@@ -105,7 +109,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
         editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
         aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
         irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
 
         irAniadirVehiculo.setOnClickListener(v -> {
@@ -118,10 +121,6 @@ public class Catalogo_Admin_Fragment extends Fragment {
             aniadir_vehiculo.setVisibility(View.VISIBLE);
         });
 
-        irVerVehiculo.setOnClickListener(v -> {
-            //Desactivar otros diseños
-            irV1();
-        });
 
         irVerVehiculo1.setOnClickListener(v -> {
             //Desactivar otros diseños
@@ -202,7 +201,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
         buscar_btn.setOnClickListener(v -> {
             buscarVehiculos();
         });
-
+        try {
+            cargar();
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(),"No se cargaron los autos", Toast.LENGTH_SHORT).show();
+        }
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -214,13 +217,11 @@ public class Catalogo_Admin_Fragment extends Fragment {
                 irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
                 irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
                  */
-                if(editar_vehiculo.getVisibility()== View.VISIBLE){
+                if(editar_vehiculo.getVisibility()==View.VISIBLE){
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Si", (dialog, which) -> {
-                        irV1();
-                    });
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> irV1());
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
@@ -234,6 +235,17 @@ public class Catalogo_Admin_Fragment extends Fragment {
         return mainView;
     }
 
+    public void cargar() throws Exception {
+        Toast.makeText(mainView.getContext(),"1", Toast.LENGTH_SHORT).show();
+        listaview=mainView.findViewById(R.id.rc_autos);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview=new Adaptador_Lista_Catalogo(patio.getVehiculos());
+        listaview.setAdapter(adptadorlistaview);
+        listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
+        Toast.makeText(mainView.getContext(),"2", Toast.LENGTH_SHORT).show();
+    }
 
     public void irCatalogo(){
         irAniadirVehiculo.setVisibility(View.GONE);
