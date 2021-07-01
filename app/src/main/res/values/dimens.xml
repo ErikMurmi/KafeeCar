@@ -4,4 +4,5 @@
     <dimen name="text_space">10dp</dimen>
     <dimen name="espacios">4dp</dimen>
     <dimen name="edit_txt_espacio">5dp</dimen>
+    <dimen name="item_lista_espacio">7dp</dimen>
 </resources>

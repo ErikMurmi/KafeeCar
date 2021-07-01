@@ -11,6 +11,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,7 +29,7 @@ import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 
 
-public class Citas_vendedor_fragment extends Fragment{
+public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick {
 
     private View mainView;
     private PatioVenta patio;
@@ -35,9 +38,11 @@ public class Citas_vendedor_fragment extends Fragment{
 
     private LinearLayout aniadir_cita_lyt;
     private LinearLayout citas_vn_lyt;
+    private RecyclerView listaview;
 
     private FloatingActionButton ir_aniadir_ci_vn_btn;
     private Button guardar_ci_vn_btn;
+    private Adaptador_Lista_Citas_Admin adptadorlistaview;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_vendedor, container, false);
@@ -77,8 +82,21 @@ public class Citas_vendedor_fragment extends Fragment{
                 e.printStackTrace();
             }
         }
-
+        try {
+            cargar();
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error en cargar citas", Toast.LENGTH_SHORT).show();
+        }
         return mainView;
+    }
+    public void cargar() throws Exception {
+        listaview=mainView.findViewById(R.id.lista_citas_rv);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(),this);
+        listaview.setAdapter(adptadorlistaview);
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     /*public void visualizarCita() throws Exception {
@@ -248,5 +266,8 @@ public class Citas_vendedor_fragment extends Fragment{
     }
 
 
-
+    @Override
+    public void itemClick(String placa) {
+        irAniadirCita("PSD-1234");
+    }
 }

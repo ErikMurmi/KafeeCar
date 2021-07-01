@@ -1,4 +1,5 @@
 package com.prog.kafeecar;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -17,45 +18,39 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lista_Catalogo.clienteHolder> {
-    Lista autos;
+public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_Lista_Citas_Admin.clienteHolder> {
+    Lista citas;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
    // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
     private RecyclerItemClick itemClick;
-    public Adaptador_Lista_Catalogo(Lista fav, RecyclerItemClick itemClick){
-
-        this.autos=fav;
+    public Adaptador_Lista_Citas_Admin(Lista citas, RecyclerItemClick itemClick){
+        this.citas =citas;
         this.itemClick = itemClick;
     }
 
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_auto,parent,false);
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cita,parent,false);
         return new clienteHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  Adaptador_Lista_Catalogo.clienteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  Adaptador_Lista_Citas_Admin.clienteHolder holder, int position) {
         try {
-            Vehiculo c=(Vehiculo)autos.getPos(position);
-            String precio="";
-            String nombre= c.getMarca()+" "+c.getModelo();
-            if (c.getPromocion()==0){
-                 precio= "$ "+c.getPrecioVenta();
-            }else{
-                 precio= "$ "+c.getPromocion();
-            }
-            String matricula=c.getMatricula();
-            String placa = c.getPlaca();
-            String anio = String.valueOf(c.getAnio());
-            StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());
+            Cita c= (Cita) citas.getPos(position);
+            String nombre= c.getVisitante().getNombre();
+            String telefono =c.getVisitante().getTelefono();
+            String placa = c.getVehiculo().getPlaca();
+            String horario = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
+                    formatoHora(c.getHora());
+            StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
             Glide.with(view)
                     .load(filePath)
                     .into(holder.imagenauto);
             try {
-                final File localFile = File.createTempFile(c.getimagen(),"jpg");
+                final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                     holder.imagenauto.setImageBitmap(bitmap);
@@ -64,14 +59,14 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
                 e.printStackTrace();
             }
 
-            //lyt = holder;
+
             holder.nombre.setText(nombre);
-            holder.precioauto.setText(precio);
-            holder.matricula.setText(matricula);
+            holder.horario.setText(horario);
+            holder.telefono.setText(telefono);
             holder.placa.setText(placa);
-            holder.anio.setText(anio);
+
             holder.itemView.setOnClickListener(v -> {
-                itemClick.itemClick(placa);
+                itemClick.itemClick("PSD-1234");
             });
             /*
             holder.itemView.setOnClickListener(v -> {
@@ -86,30 +81,36 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
 
     @Override
     public int getItemCount() {
-        return autos.contar();
+        return citas.contar();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
-        public TextView precioauto;
-        public TextView anio;
+        public TextView telefono;
+        public TextView horario;
         public TextView nombre;
-        public TextView matricula;
         public TextView placa;
 
         public clienteHolder(@NonNull View view) {
             super(view);
-            imagenauto=view.findViewById(R.id.v_lista_img);
-            precioauto=view.findViewById(R.id.v_precio_lista_txt);
-            nombre=view.findViewById(R.id.v_marca_modelo_txt);
-            matricula=view.findViewById(R.id.v_matricula_lista_txt);
-            placa = view.findViewById(R.id.v_placa_lista_txt);
-            anio = view.findViewById(R.id.v_anio_lista_txt);
+            imagenauto=view.findViewById(R.id.c_lista_img);
+            nombre=view.findViewById(R.id.nombre_c_lista_txt);
+            horario=view.findViewById(R.id.hora_c_lista_txt);
+            placa = view.findViewById(R.id.matricula_c_lista_txt);
+            telefono = view.findViewById(R.id.telefono_c_lista_txt);
         }
     }
 
     public interface RecyclerItemClick{
         void itemClick(String placa);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String formatoHora(int hora){
+        if(hora>12){
+            return "pm";
+        }
+        return "am";
     }
 /*
     @Override
