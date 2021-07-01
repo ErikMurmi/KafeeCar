@@ -34,22 +34,37 @@ public class Citas_vendedor_fragment extends Fragment{
     public EditText placa_ci_vn_etxt;
 
     private LinearLayout aniadir_cita_lyt;
+    private LinearLayout citas_vn_lyt;
 
     private FloatingActionButton ir_aniadir_ci_vn_btn;
+    private Button guardar_ci_vn_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
 
-        placa_ci_vn_etxt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
+        placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_etxt);
 
+        //citas_vn_lyt = mainView.findViewById(R.id.citas_vn_lyt);
         aniadir_cita_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
 
         ir_aniadir_ci_vn_btn = mainView.findViewById(R.id.ir_aniadir_ci_vn_btn);
+        guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
             aniadir_cita_lyt.setVisibility(View.VISIBLE);
+        });
+
+        guardar_ci_vn_btn.setOnClickListener(v -> {
+            try{
+                registarCita();
+                Toast.makeText(mainView.getContext(), "Cita Registrada", Toast.LENGTH_SHORT).show();
+
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "No se pudo registrar la cita", Toast.LENGTH_SHORT).show();
+                //citas_vn_lyt.setVisibility(View.VISIBLE);
+            }
         });
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
@@ -88,7 +103,7 @@ public class Citas_vendedor_fragment extends Fragment{
         precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
     }*/
 
-    public void registarCita(View v) throws Exception {
+    public void registarCita() throws Exception {
         EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_etxt);
         EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_etxt);
