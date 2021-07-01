@@ -708,7 +708,7 @@
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/ocra"
                         android:text="Descripción:"
-                        android:textColor="@color/gris_visualizar" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/descripcionCita_ven_txt"
