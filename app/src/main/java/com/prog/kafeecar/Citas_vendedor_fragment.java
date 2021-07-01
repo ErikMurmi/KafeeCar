@@ -121,7 +121,7 @@ public class Citas_vendedor_fragment extends Fragment{
         if(!isEmpty(fechacitaanio)){
             String anio_str = fechacitaanio.getText().toString();
             anio = Integer.parseInt(anio_str);
-            if (anio < 1900 || anio > 2003) {
+            if (anio < 2021) {
                 Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
                 fechacitaanio.setText("");
                 c++;
