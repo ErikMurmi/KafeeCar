@@ -50,7 +50,7 @@ public class Citas_Admin_Fragment extends Fragment {
     //Image Buttons
     private ImageButton buscar_btn;
 
-    private TextView vehiculo_nuevacita;
+    private EditText vehiculo_nuevacita;
     //Botones
     private Button irVerCita;
     private Button irAniadirCita;
@@ -91,7 +91,6 @@ public class Citas_Admin_Fragment extends Fragment {
         });
 
         irAniadirCita.setOnClickListener(v -> {
-            Toast.makeText(mainView.getContext(), "2", Toast.LENGTH_SHORT).show();
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);

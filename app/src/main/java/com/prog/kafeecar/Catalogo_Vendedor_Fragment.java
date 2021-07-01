@@ -51,6 +51,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
     private LinearLayout verVehiculoLista_lyt;
     private LinearLayout verVehiculoLista1_lyt;
 
+
     private PatioVenta patio;
 
     private Uri foto;
@@ -81,6 +82,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
         verVehiculoLista_lyt = mainView.findViewById(R.id.vehiculo_lista_vendedor_lyt);
         verVehiculoLista1_lyt = mainView.findViewById(R.id.vehiculo_lista1_vendedor_lyt);
 
+
         verVehiculoLista_lyt.setOnClickListener(v -> {
             //Desactivar otros diseños
             verCatalogo.setVisibility(View.GONE);
@@ -104,6 +106,8 @@ public class Catalogo_Vendedor_Fragment extends Fragment {
                 e.printStackTrace();
             }
         });
+
+
 
         agendarCita_btn.setOnClickListener(v -> {
             verCatalogo.setVisibility(View.GONE);
