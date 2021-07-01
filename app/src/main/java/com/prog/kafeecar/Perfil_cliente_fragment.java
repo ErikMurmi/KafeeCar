@@ -161,7 +161,7 @@ public class Perfil_cliente_fragment extends Fragment{
     public void editarCliente(){
 
         try {
-
+            boolean cambiar_clave = false;
             int c = 0;
 
             EditText nombre_pe_cli_etxt = mainview.findViewById(R.id.nombreEditCliente_etxt);
@@ -252,18 +252,21 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             }
 
-            EditText contrasenia_pe_cli_etxt  = mainview.findViewById(R.id.contraseniaEditCliente_etxt);
+            EditText contrasenia_pe_cli_etxt = mainview.findViewById(R.id.contraseniaEditCliente_etxt);
             String contrasenia_str = contrasenia_pe_cli_etxt.getText().toString();
-            if(contrasenia_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
-                c++;
-            }else{
-                if (contrasenia_str.length()<4) {
-                    Toast.makeText(mainview.getContext(), "Contraseña invalida", Toast.LENGTH_SHORT).show();
+            EditText confirmarcontrasenia_pe_cli_etxt = mainview.findViewById(R.id.confirmarcontraseniaEditCliente_etxt);
+            String confirmarcontrasenia_str = confirmarcontrasenia_pe_cli_etxt.getText().toString();
+            if(!contrasenia_str.isEmpty() && !confirmarcontrasenia_str.isEmpty()){
+                if ( (contrasenia_str.compareTo(confirmarcontrasenia_str) != 0)) {
+                    Toast.makeText(mainview.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                     contrasenia_pe_cli_etxt.setText("");
+                    confirmarcontrasenia_pe_cli_etxt.setText("");
                     c++;
+                }else{
+                    cambiar_clave = true;
                 }
             }
+
 
             StorageReference filePath = mStorageRef.child("Clientes/").child(cedula_str+".jpg");
             filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
@@ -272,9 +275,12 @@ public class Perfil_cliente_fragment extends Fragment{
 
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                cliente.cambiarDatos(nombre_str,cedula_str,telefono_str,correo_str,contrasenia_str,fecha);
-
-
+                if(cambiar_clave) {
+                    cliente.cambiarDatos(nombre_str, cedula_str, telefono_str, correo_str, contrasenia_str, fecha);
+                }
+                else {
+                    cliente.cambiarDatos(nombre_str, cedula_str, telefono_str, correo_str, cliente.getClave(), fecha);
+                }
                 cliente.setImagen(String.format("%s.jpg",cedula_pe_cli_etxt.getText().toString()));
                 try {
                     if (patio.buscarClientes("Cedula", cliente.getCedula()) != null) {
@@ -299,7 +305,6 @@ public class Perfil_cliente_fragment extends Fragment{
         EditText mes_pe_ci_etxt;
         EditText anio_pe_ci_etxt;
         EditText correo_pe_ci_etxt;
-        EditText contrasenia_pe_ci_etxt;
 
         nombre_pe_ci_etxt = mainview.findViewById(R.id.nombreEditCliente_etxt);
         telefono_pe_ci_etxt = mainview.findViewById(R.id.telefonoEditCliente_etxt);
@@ -308,9 +313,7 @@ public class Perfil_cliente_fragment extends Fragment{
         dia_pe_ci_etxt = mainview.findViewById(R.id.diaNacimientoEditCliente_etxt);
         mes_pe_ci_etxt = mainview.findViewById(R.id.mesNacimientoEditCliente_etxt);
         anio_pe_ci_etxt = mainview.findViewById(R.id.anioNacimientoEditCliente_etxt);
-        contrasenia_pe_ci_etxt = mainview.findViewById(R.id.contraseniaEditCliente_etxt);
 
-        contrasenia_pe_ci_etxt.setText(cliente.getClave());
         nombre_pe_ci_etxt.setText(cliente.getNombre());
         telefono_pe_ci_etxt.setText(cliente.getTelefono());
         cedula_pe_ci_etxt.setText(cliente.getCedula());

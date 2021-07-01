@@ -217,6 +217,28 @@
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black" />
 
+                <TextView
+                    android:id="@+id/confirmarcontraseniaCliente_txt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Confirmar contraseña"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/confirmarcontraseniaEditCliente_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
