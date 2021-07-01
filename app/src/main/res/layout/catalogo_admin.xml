@@ -41,7 +41,7 @@
                 android:id="@+id/vehiculo_img"
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
-                app:srcCompat="@mipmap/ic_tesla_round" />
+                android:scaleType="fitCenter" />
 
             <Space
                 android:layout_width="match_parent"
@@ -550,149 +550,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp" />
-
-            <LinearLayout
-                android:id="@+id/vehiculo_lista1_lyt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bordesmarcosnegro"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/v_lista1_img"
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="193dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/v_marca_modelo1_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="13dp"
-                            android:fontFamily="@font/ocraext"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="21sp"
-                            tools:text="Cybertruck" />
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/anio_ver1_txt"
-                                android:layout_width="95dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:text="Año:"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="17sp" />
-
-                            <TextView
-                                android:id="@+id/v_anio_lista1txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:hint="8:00 am"
-                                android:textSize="17sp" />
-                        </LinearLayout>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/v_matricula_lista1"
-                                android:layout_width="106dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:text="Matricula:"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="17sp" />
-
-                            <TextView
-                                android:id="@+id/v_matricula_lista1_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:hint="13:00 pm"
-                                android:textSize="17sp" />
-                        </LinearLayout>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/ver_placa_lista1_txt"
-                                android:layout_width="85dp"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:text="Placa:"
-                                android:textColor="@color/gris_visualizar"
-                                android:textSize="17sp" />
-
-                            <TextView
-                                android:id="@+id/v_placa_lista1_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ocraext"
-                                android:textSize="17sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/v_precio_lista1_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/ocra"
-                            android:textColor="#000000"
-                            android:textSize="20sp"
-                            tools:text="$55 000" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_marginRight="15dp" />
 
         </LinearLayout>
 
@@ -819,13 +677,21 @@
                         android:layout_height="wrap_content" />
 
                     <ImageButton
-                        android:id="@+id/perfil_img_bt"
+                        android:id="@+id/im_cat_ad_imgbtn"
                         android:layout_width="189dp"
                         android:layout_height="148dp"
                         android:layout_marginTop="15dp"
                         android:background="#00FFFFFF"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@mipmap/ic_tesla" />
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:srcCompat="@tools:sample/avatars" />
 
                 </LinearLayout>
 

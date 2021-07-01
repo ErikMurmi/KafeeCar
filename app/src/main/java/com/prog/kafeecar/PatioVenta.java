@@ -189,15 +189,15 @@ public class PatioVenta {
 
     /**
      * Elimina un vehiculo del catalogo
-     * @param matricula vehiculo a eliminar a la lista
+     * @param placa vehiculo a eliminar a la lista
      * @return true si se elimino el vehiculo, false en caso de que no.
      */
-    public boolean removerVehiculo(String matricula) throws Exception {
+    public boolean removerVehiculo(String placa) throws Exception {
         boolean encontrado = false;
         int cont =0;
         while(cont<vehiculos.contar() && !encontrado){
             Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
-            if(actual.getMatricula().compareTo(matricula) ==0 ){
+            if(actual.getPlaca().compareToIgnoreCase(placa) ==0 ){
                 vehiculos.eliminarPos(cont);
                 encontrado=true;
             }

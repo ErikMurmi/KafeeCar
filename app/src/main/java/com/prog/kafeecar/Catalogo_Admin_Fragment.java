@@ -53,8 +53,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
     private FloatingActionButton irAniadirVehiculo;
     private Button deshacer_btn;
-    private LinearLayout irVerVehiculo;
-    private LinearLayout irVerVehiculo1;
     private ImageButton selec_vehiculo_img;
     private ImageButton buscar_btn;
     private Button irEditarVehiculo;
@@ -62,7 +60,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public Button cancelar_btn;
     private Button eliminar_btn;
     private Button aniadir_vehiculo_btn;
-
+    private ImageButton edit_vehiculo_img;
 
     private ScrollView verVehiculo;
     private ScrollView editar_vehiculo;
@@ -75,7 +73,8 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
 
     private Vehiculo vMostrar;
-    private Uri foto;
+    private Uri foto = null;
+    private boolean editar_imagen = false;
 
     private final StorageReference mStorageRef =FirebaseStorage.getInstance().getReference();
     private Adaptador_Lista_Catalogo adptadorlistaview;
@@ -86,13 +85,12 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
         irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
         aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
         deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
@@ -100,12 +98,13 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
         buscar_btn = mainView.findViewById(R.id.busqueda_admin_btn);
+        //Botonoes imagen
+        edit_vehiculo_img = mainView.findViewById(R.id.im_cat_ad_imgbtn);
         //Layouts
         verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
         verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
         editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
         aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
 
         irAniadirVehiculo.setOnClickListener(v -> {
             //Desactivar otros diseños
@@ -118,33 +117,13 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         });
 
 
-        irVerVehiculo1.setOnClickListener(v -> {
-            //Desactivar otros diseños
-            irAniadirVehiculo.setVisibility(View.GONE);
-            verCatalogo.setVisibility(View.GONE);
-            editar_vehiculo.setVisibility(View.GONE);
-            irVerVehiculo.setVisibility(View.GONE);
-            irVerVehiculo1.setVisibility(View.GONE);
-            aniadir_vehiculo.setVisibility(View.GONE);
-            //Activar el diseño deseadow
-            verVehiculo.setVisibility(View.VISIBLE);
-            try {
-                visualizarVehiculo();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-
         irEditarVehiculo.setOnClickListener(v -> {
-            Toast.makeText(mainView.getContext(), "Entra al metodo", Toast.LENGTH_SHORT).show();
             irAniadirVehiculo.setVisibility(View.GONE);
             verCatalogo.setVisibility(View.GONE);
             verVehiculo.setVisibility(View.GONE);
             aniadir_vehiculo.setVisibility(View.GONE);
             //Activar el diseño deseado
             editar_vehiculo.setVisibility(View.VISIBLE);
-            guardarEdit = false;
             verVehiculoEditable();
         });
 
@@ -153,13 +132,18 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             openGalery();
         });
 
+        edit_vehiculo_img.setOnClickListener(v -> {
+            openGalery();
+            editar_imagen = true;
+        });
+
         eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar vehículo");
             msg.setMessage("¿Está seguro de eliminar el vehículo con la placa "+ vMostrar.getPlaca()+ " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    patio.removerVehiculo(vMostrar.getMatricula());
+                    patio.removerVehiculo(vMostrar.getPlaca());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -179,10 +163,9 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.setTitle("Editar vehículo");
             msg.setMessage("¿Está seguro de editar el vehículo con la placa "+ vMostrar.getPlaca()+ " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
-                EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
-                editarVehiculo(placa_ed.getText().toString());
-                Toast.makeText(mainView.getContext(),"Se actualizaron los datos", Toast.LENGTH_SHORT).show();
-                irCatalogo();
+                editarVehiculo();
+                verVehiculoEditable();
+                //irCatalogo();
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
@@ -270,22 +253,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }
     }
 
-    public void irV1(){
-        irAniadirVehiculo.setVisibility(View.GONE);
-        verCatalogo.setVisibility(View.GONE);
-        editar_vehiculo.setVisibility(View.GONE);
-        irVerVehiculo.setVisibility(View.GONE);
-        aniadir_vehiculo.setVisibility(View.GONE);
-        //Activar el diseño deseadow
-        verVehiculo.setVisibility(View.VISIBLE);
-        try {
-            visualizarVehiculo();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void irVer(){
 
         irAniadirVehiculo.setVisibility(View.GONE);
@@ -305,8 +272,9 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public void aniadirVehiculo(){
         String msg = "";
         int c=0;
+        String placa_str;
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
-        if(!isEmpty(placa_ad)){
+        if(isEmpty(placa_ad)){
             Toast.makeText(mainView.getContext(),"Campo de placa vacio", Toast.LENGTH_SHORT).show();
             c++;
         }else if(placa_ad.getText().toString().length() != 8){
@@ -316,16 +284,16 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
 
         EditText matricula_ad = mainView.findViewById(R.id.aniadir_matricula_etxt);
-        if(!isEmpty(matricula_ad)){
+        /*if(isEmpty(matricula_ad)){
             Toast.makeText(mainView.getContext(),"Campo de matricula vacio", Toast.LENGTH_SHORT).show();
             c++;
         }else if(matricula_ad.getText().toString().length() != 8){
             Toast.makeText(mainView.getContext(),"Matricula no válida", Toast.LENGTH_SHORT).show();
             c++;
-        }
+        }*/
 
         EditText anio_ad = mainView.findViewById(R.id.aniadir_anio_etxt);
-        if(!isEmpty(anio_ad)){
+        if(isEmpty(anio_ad)){
             Toast.makeText(mainView.getContext(),"Campo de anio vacio", Toast.LENGTH_SHORT).show();
             c++;
         }else if(Integer.parseInt(anio_ad.getText().toString()) < 1900 || Integer.parseInt(anio_ad.getText().toString()) > 2021){
@@ -336,31 +304,31 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
 
         EditText descripcion_ad = mainView.findViewById(R.id.aniadir_descripcion_etxt);
-        if(!isEmpty(descripcion_ad)){
+        if(isEmpty(descripcion_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de descripcion vacia", Toast.LENGTH_SHORT).show();
         }
 
         EditText marca_ad = mainView.findViewById(R.id.aniadir_marca_etxt);
-        if(!isEmpty(marca_ad)){
+        if(isEmpty(marca_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de marca vacio", Toast.LENGTH_SHORT).show();
         }
 
         EditText modelo_ad = mainView.findViewById(R.id.aniadir_modelo_etxt);
-        if(!isEmpty(modelo_ad)){
+        if(isEmpty(modelo_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de modelo vacio", Toast.LENGTH_SHORT).show();
         }
 
         EditText color_ad = mainView.findViewById(R.id.aniadir_color_etxt);
-        if(!isEmpty(color_ad)){
+        if(isEmpty(color_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de color vacio", Toast.LENGTH_SHORT).show();
         }
 
         EditText pinicial_ad = mainView.findViewById(R.id.aniadir_pinicial_etxt);
-        if(!isEmpty(pinicial_ad)){
+        if(isEmpty(pinicial_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de precio inicial vacio", Toast.LENGTH_SHORT).show();
         }else if(Integer.parseInt(pinicial_ad.getText().toString())<=0){
@@ -369,7 +337,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }
 
         EditText pventa_ad = mainView.findViewById(R.id.aniadir_precio_venta_etxt);
-        if(!isEmpty(pventa_ad)){
+        if(isEmpty(pventa_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de valor de venta vacio", Toast.LENGTH_SHORT).show();
         }else if(Integer.parseInt(pventa_ad.getText().toString())<=0){
@@ -377,7 +345,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             Toast.makeText(mainView.getContext(),"Valor de venta invalido", Toast.LENGTH_SHORT).show();
         }
         EditText ppromocion_ad = mainView.findViewById(R.id.aniadir_precio_promocion_etxt);
-        if(!isEmpty(ppromocion_ad)){
+        if(isEmpty(ppromocion_ad)){
             c++;
             Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
         }else if(Integer.parseInt(pventa_ad.getText().toString())<0){
@@ -385,19 +353,14 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
         }
         CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
-        AtomicBoolean isFoto = new AtomicBoolean(false);
-        StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_ad.getText().toString()+"_img");
-        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                        isFoto.set(true)
-                );
-        if(!isFoto.get()){
-            c++;
-            Toast.makeText(mainView.getContext(),"No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
-        }
+
         if(c==0 ){
+            placa_str = placa_ad.getText().toString();
+            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str+".jpg");
+            filePath.putFile(foto);
             patio.aniadirVehiculo(
                     new Vehiculo(
-                            placa_ad.getText().toString(),
+                            placa_str,
                             matricula_ad.getText().toString(),
                             marca_ad.getText().toString(),
                             modelo_ad.getText().toString(),
@@ -411,15 +374,16 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                             String.format(placa_ad.getText().toString()+".jpg")
                     )
             );
+            try {
+                if(patio.buscarVehiculos("Placa",placa_str)!=null)
+                {                msg="Se agrego correctamente el vehiculo";
+                    irCatalogo();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-        try {
-            if(patio.buscarVehiculos("Placa",placa_ad.getText().toString())!=null)
-                msg="Se agrego correctamente el vehiculo";
-        } catch (Exception e) {
-            msg="No se agrego el vehiculo";
-        }
-        Toast.makeText(mainView.getContext(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mainView.getContext(),"msg", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -427,7 +391,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         String msg = "";
 
         try {
-            ImageButton perfil_img_bt = mainView.findViewById(R.id.perfil_img_bt);
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
@@ -441,13 +404,12 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
 
-            Glide.with(mainView).load(filePath).into(perfil_img_bt);
-
+            Glide.with(mainView).load(filePath).into(edit_vehiculo_img);
             try {
                 final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    perfil_img_bt.setImageBitmap(bitmap);
+                    Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                    edit_vehiculo_img.setImageURI(nuevo);
                 });
             }catch (IOException e) {
                 e.printStackTrace();
@@ -469,13 +431,13 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }
     }
 
-    public void editarVehiculo(String placa){
+    public void editarVehiculo(){
         String msg = "";
         int c=0;
         try {
 
             EditText placa_ed = mainView.findViewById(R.id.editar_placa_etxt);
-            if(!isEmpty(placa_ed)){
+            if(isEmpty(placa_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de placa vacio", Toast.LENGTH_SHORT).show();
                 c++;
             }else if(placa_ed.getText().toString().length() != 8){
@@ -484,16 +446,16 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             }
 
             EditText matricula_ed = mainView.findViewById(R.id.editar_matricula_etxt);
-            if(!isEmpty(matricula_ed)){
+            /*if(isEmpty(matricula_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de matricula vacio", Toast.LENGTH_SHORT).show();
                 c++;
             }else if(matricula_ed.getText().toString().length() != 8){
                 Toast.makeText(mainView.getContext(),"Matricula no válida", Toast.LENGTH_SHORT).show();
                 c++;
-            }
+            }*/
 
             EditText anio_ed = mainView.findViewById(R.id.editar_vehiculo_anio_etxt);
-            if(!isEmpty(anio_ed)){
+            if(isEmpty(anio_ed)){
                 Toast.makeText(mainView.getContext(),"Campo de anio vacio", Toast.LENGTH_SHORT).show();
                 c++;
             }else if(Integer.parseInt(anio_ed.getText().toString()) < 1900 || Integer.parseInt(anio_ed.getText().toString()) > 2021){
@@ -503,60 +465,60 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             }
 
             EditText descripcion_ed = mainView.findViewById(R.id.editar_descripcion_etxt);
-            if(!isEmpty(descripcion_ed)){
+            if(isEmpty(descripcion_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de descripcion vacia", Toast.LENGTH_SHORT).show();
             }
 
             EditText marca_ed = mainView.findViewById(R.id.editar_vehiculo_marca_etxt);
-            if(!isEmpty(marca_ed)){
+            if(isEmpty(marca_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de marca vacio", Toast.LENGTH_SHORT).show();
             }
-
             EditText modelo_ed = mainView.findViewById(R.id.editar_vehiculo_modelo_etxt);
-            if(!isEmpty(modelo_ed)){
+            if(isEmpty(modelo_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de modelo vacio", Toast.LENGTH_SHORT).show();
             }
-
             EditText color_ed = mainView.findViewById(R.id.editar_vehiculo_color_etxt);
-            if(!isEmpty(color_ed)){
+            if(isEmpty(color_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de color vacio", Toast.LENGTH_SHORT).show();
             }
-
             EditText pinicial_ed = mainView.findViewById(R.id.editar_v_pinicial_etxt);
-            if(!isEmpty(pinicial_ed)){
+            if(isEmpty(pinicial_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de precio inicial vacio", Toast.LENGTH_SHORT).show();
-            }else if(Integer.parseInt(pinicial_ed.getText().toString())<=0){
+            }else if(Float.parseFloat(pinicial_ed.getText().toString())<=0){
                 c++;
                 Toast.makeText(mainView.getContext(),"Valor incial invalido", Toast.LENGTH_SHORT).show();
             }
 
             EditText pventa_ed = mainView.findViewById(R.id.editar_v_pventa_etxt);
-            if(!isEmpty(pventa_ed)){
+            if(isEmpty(pventa_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
-            }else if(Integer.parseInt(pventa_ed.getText().toString())<0){
+            }else if(Float.parseFloat(pventa_ed.getText().toString())<0){
                 c++;
                 Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
             }
-
             EditText ppromocion_ed = mainView.findViewById(R.id.editar_v_ppromocion_etxt);
-            if(!isEmpty(ppromocion_ed)){
+            if(isEmpty(ppromocion_ed)){
                 c++;
                 Toast.makeText(mainView.getContext(),"Campo de promoción inicial vacio", Toast.LENGTH_SHORT).show();
-            }else if(Integer.parseInt(ppromocion_ed.getText().toString())<0){
+            }else if(Float.parseFloat(ppromocion_ed.getText().toString())<0){
                 c++;
                 Toast.makeText(mainView.getContext(),"Valor de promoción invalido", Toast.LENGTH_SHORT).show();
             }
-
             CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
             if(c==0){
+                String placa_n =  placa_ed.getText().toString();
+                if(foto!=null){
+                    StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_n+".jpg");
+                    filePath.putFile(foto);
+                }
                 vMostrar.actualizarDatos(
-                        placa_ed.getText().toString(),
+                        placa_n,
                         matricula_ed.getText().toString(),
                         marca_ed.getText().toString(),
                         modelo_ed.getText().toString(),
@@ -567,12 +529,12 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                         Float.parseFloat(ppromocion_ed.getText().toString()),
                         matriculado_ed.isChecked(),
                         Integer.parseInt(anio_ed.getText().toString()),
-                        String.format(placa_ed.getText().toString()+".jpg")
+                        placa_n + ".jpg"
                 );
-                guardarEdit = true;
+                Toast.makeText(mainView.getContext(),"Se cambio", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(),"Errores", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -606,14 +568,11 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        Glide.with(mainView)
-               .load(filePath)
-                .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                v_img.setImageBitmap(bitmap);
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                v_img.setImageURI(nuevo);
             });
         }catch (IOException e){
             e.printStackTrace();
@@ -625,8 +584,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }else{
             matriculado.setText("No");
         }
-
-
     }
 
     public void buscarVehiculos () {
@@ -652,11 +609,17 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_GALERY){
             if(resultCode == Activity.RESULT_OK && data != null){
                 foto = data.getData();
-                selec_vehiculo_img.setImageURI(foto);
+                if(editar_imagen){
+                    Glide.with(mainView).load(data.getData()).into(edit_vehiculo_img);
+                    edit_vehiculo_img.setImageURI(foto);
+                    editar_imagen = false;
+                }else{
+                    selec_vehiculo_img.setImageURI(foto);
+                }
             }else{
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }

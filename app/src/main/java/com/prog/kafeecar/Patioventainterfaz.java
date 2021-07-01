@@ -49,9 +49,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     private Button irAgendar;
-    private Button salir;
-    private LinearLayout aniadirCitaconVehiculo;
-    private LinearLayout adCita;
     public static Vehiculo v_aux_cita;
 
     private String tipo = "";
@@ -74,9 +71,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
 
         //Mensajes de informacion emergentes
-        Toast.makeText(Patioventainterfaz.this, "Datos quemados", Toast.LENGTH_SHORT).show();
-        aniadirCitaconVehiculo = findViewById(R.id.add_cita_admin_lyt);
-        adCita = findViewById(R.id.ver_cita_lyt);
         //Si no se ha asignado administrador
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);

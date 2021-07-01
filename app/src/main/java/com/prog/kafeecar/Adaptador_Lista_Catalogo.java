@@ -51,9 +51,6 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
             String placa = c.getPlaca();
             String anio = String.valueOf(c.getAnio());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());
-            Glide.with(view)
-                    .load(filePath)
-                    .into(holder.imagenauto);
             try {
                 final File localFile = File.createTempFile(c.getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
@@ -64,7 +61,6 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
                 e.printStackTrace();
             }
 
-            //lyt = holder;
             holder.nombre.setText(nombre);
             holder.precioauto.setText(precio);
             holder.matricula.setText(matricula);
@@ -73,10 +69,6 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
             holder.itemView.setOnClickListener(v -> {
                 itemClick.itemClick(placa);
             });
-            /*
-            holder.itemView.setOnClickListener(v -> {
-                Catalogo_Admin_Fragment.irVer(placa);
-            });*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,10 +103,5 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     public interface RecyclerItemClick{
         void itemClick(String placa);
     }
-/*
-    @Override
-    public void itemClick(ItemList item){
-
-    }*/
 }
 
