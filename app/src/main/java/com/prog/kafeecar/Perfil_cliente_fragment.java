@@ -265,9 +265,16 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             }
 
+            StorageReference filePath = mStorageRef.child("Clientes/").child(cedula_str+".jpg");
+            filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                    Toast.makeText(mainview.getContext(), "Se subio la imagen", Toast.LENGTH_SHORT).show()
+            );
+
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
                 cliente.cambiarDatos(nombre_str,cedula_str,telefono_str,correo_str,contrasenia_str,fecha);
+
+
                 cliente.setImagen(String.format("%s.jpg",cedula_pe_cli_etxt.getText().toString()));
                 try {
                     if (patio.buscarClientes("Cedula", cliente.getCedula()) != null) {
