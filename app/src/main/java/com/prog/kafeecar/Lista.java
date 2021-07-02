@@ -305,5 +305,15 @@ public class Lista {
 
         return encontrados;
     }
+
+    public void copiar(Lista c){
+        for(int i=0; i<c.contar();i++){
+            try {
+                add(c.getPos(i));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
 }

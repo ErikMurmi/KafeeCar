@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.String.format;
 
-public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick {
+public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
@@ -65,6 +66,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     private ScrollView verVehiculo;
     private ScrollView editar_vehiculo;
     private RecyclerView listaview;
+    private SearchView busqueda_placa;
 
     private LinearLayout verCatalogo;
     private ScrollView aniadir_vehiculo;
@@ -87,6 +89,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
+        busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
         patio = Patioventainterfaz.patioventa;
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
@@ -194,14 +197,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                /*
-                verVehiculo = mainView.findViewById(R.id.vehiculo_admin);
-                verCatalogo = mainView.findViewById(R.id.vehiculos_admin);
-                editar_vehiculo = mainView.findViewById(R.id.editar_vehiculo_lyt);
-                aniadir_vehiculo =  mainView.findViewById(R.id.aniadir_vehiculo_lyt);
-                irVerVehiculo = mainView.findViewById(R.id.vehiculo_lista_lyt);
-                irVerVehiculo1 = mainView.findViewById(R.id.vehiculo_lista1_lyt);
-                 */
                 if(editar_vehiculo.getVisibility()==View.VISIBLE){
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
@@ -221,10 +216,10 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
+        busqueda_placa.setOnQueryTextListener(this);
         return mainView;
     }
 
@@ -639,6 +634,22 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toUpperCase();
+        try {
+            adptadorlistaview.filtro(newText);
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     /*public static void irAtras(){
