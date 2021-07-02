@@ -45,12 +45,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     private View mainView;
 
-    private EditText cedulaVendedorE;
-
     private ImageView imagenPerfil_img;
-
-    private ImageView imagenPerfilV_img;
-    private ImageView imagenPerfilV1_img;
 
     private RecyclerView listaview;
 
@@ -262,62 +257,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores(),this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
-    }
-
-    public void verListaVendedores(String cedula, String cedula1){
-        try{
-            imagenPerfilV_img = mainView.findViewById(R.id.AVimagenPerfil1_img);
-            imagenPerfilV1_img = mainView.findViewById(R.id.AVimagenPerfil2_img);
-            Vendedor v_Mostrar = patio.buscarVendedores("Cedula",cedula);
-            Vendedor v_Mostrar1 = patio.buscarVendedores("Cedula",cedula1);
-
-            TextView nombreV = mainView.findViewById(R.id.AVnombre_txt);
-            TextView entradaV = mainView.findViewById(R.id.AVhoraEntrada_txt);
-            TextView almuerzoV = mainView.findViewById(R.id.AVhoraAlmuerzo_txt);
-            TextView salidaV = mainView.findViewById(R.id.AVhoraSalida_txt);
-
-            TextView nombreV1 = mainView.findViewById(R.id.AVnombre1_txt);
-            TextView entradaV1 = mainView.findViewById(R.id.AVhoraEntrada1_txt);
-            TextView almuerzoV1 = mainView.findViewById(R.id.AVhoraAlmuerzo1_txt);
-            TextView salidaV1 = mainView.findViewById(R.id.AVhoraSalida1_txt);
-
-            nombreV.setText(v_Mostrar.getNombre());
-            entradaV.setText(String.format("%d:00 %s",v_Mostrar.getHoraEntrada(),formatoHora(v_Mostrar.getHoraEntrada())));
-            almuerzoV.setText(String.format("%d:00 %s",v_Mostrar.getHoraComida(),formatoHora(v_Mostrar.getHoraComida())));
-            salidaV.setText(String.format("%d:00 %s",v_Mostrar.getHoraSalida(),formatoHora(v_Mostrar.getHoraSalida())));
-
-            nombreV1.setText(v_Mostrar1.getNombre());
-            entradaV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraEntrada(),formatoHora(v_Mostrar1.getHoraEntrada())));
-            almuerzoV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraComida(),formatoHora(v_Mostrar1.getHoraComida())));
-            salidaV1.setText(String.format("%d:00 %s",v_Mostrar1.getHoraSalida(),formatoHora(v_Mostrar1.getHoraSalida())));
-
-            StorageReference filePath = mStorageRef.child("Vendedores/"+v_Mostrar.getImagen());
-
-            try {
-                final File localFile = File.createTempFile(v_Mostrar.getImagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    imagenPerfilV_img.setImageBitmap(bitmap);
-
-                });
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-            filePath = mStorageRef.child("Vendedores/"+v_Mostrar1.getImagen());
-
-            try {
-                final File localFile = File.createTempFile(v_Mostrar1.getImagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    imagenPerfilV1_img.setImageBitmap(bitmap);
-
-                });
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-        }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public String formatoHora(int hora){
