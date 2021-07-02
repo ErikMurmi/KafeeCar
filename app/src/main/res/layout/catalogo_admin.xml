@@ -498,37 +498,6 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/busqueda_placa_etxt"
-                    android:layout_width="274dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:hint="BÚSQUEDA POR PLACA"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
-
-                <ImageButton
-                    android:id="@+id/busqueda_admin_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    app:srcCompat="@drawable/icono_busqueda" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView

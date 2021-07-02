@@ -74,7 +74,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
+        mainView = inflater.inflate(R.layout.vendedor_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         try {
             cargar();
@@ -149,15 +149,15 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "No se pudo ejecutar la petición", Toast.LENGTH_SHORT).show();
             }
         });
 
         listo_btn.setOnClickListener(v -> {
-            try{
+            try {
                 registrarVendedor();
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
             }
@@ -177,12 +177,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         editarlisto_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Editar Cambios");
-            msg.setMessage("¿Está seguro de actualizar los datos del vendedor "+ venMostrar.getNombre()+ "?");
+            msg.setMessage("¿Está seguro de actualizar los datos del vendedor " + venMostrar.getNombre() + "?");
             msg.setPositiveButton("Si", (dialog, which) -> {
-                try{
+                try {
                     editarVendedor();
                     regresarPantallaPrncipal();
-                }catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
                     regresarPantallaPrncipal();
                 }
@@ -196,14 +196,14 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             msg.setTitle("Deshacer Cambios");
             msg.setMessage("¿Está seguro de no guardar los cambios?");
             msg.setPositiveButton("Si", (dialog, which) -> {
-                try{
+                try {
                     irRegistrarVendedor.setVisibility(View.GONE);
                     irAdministrarVendedor.setVisibility(View.GONE);
                     aniadirVendedor_btn.setVisibility(View.GONE);
                     irEditarVendedor.setVisibility(View.GONE);
                     visualizarVendedor();
                     irVisualizarVendedor.setVisibility(View.VISIBLE);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
                     regresarPantallaPrncipal();
                 }
@@ -225,7 +225,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(irEditarVendedor.getVisibility() == View.VISIBLE){
+                if (irEditarVendedor.getVisibility() == View.VISIBLE) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
@@ -239,12 +239,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if(irVisualizarVendedor.getVisibility()== View.VISIBLE){
+                if (irVisualizarVendedor.getVisibility() == View.VISIBLE) {
                     regresarPantallaPrncipal();
                 }
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return mainView;
     }
@@ -254,19 +254,19 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores(),this);
+        adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
-    public String formatoHora(int hora){
-        if(hora>12){
+    public String formatoHora(int hora) {
+        if (hora > 12) {
             return "pm";
         }
         return "am";
     }
 
-    public void regresarPantallaPrncipal(){
+    public void regresarPantallaPrncipal() {
         try {
             cargar();
         } catch (Exception e) {
@@ -301,25 +301,25 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         String nombreCampoVendedor_str = nombreVendedor.getText().toString();
         String apellidoCampoVendedor_str = apellidoVendedor.getText().toString();
         String nombreCompletoVendedor_str = "";
-        if(nombreCampoVendedor_str.isEmpty()){
+        if (nombreCampoVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
-            if(apellidoCampoVendedor_str.isEmpty()){
+        } else {
+            if (apellidoCampoVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Apellido*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 nombreCompletoVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
             }
         }
 
         cedulaVendedor = mainView.findViewById(R.id.cedulaVendedor_etxt);
         String cedulaVendedor_str = cedulaVendedor.getText().toString();
-        if(cedulaVendedor_str.isEmpty()){
+        if (cedulaVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
-            if(cedulaVendedor_str.length()!=10){
+        } else {
+            if (cedulaVendedor_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedulaVendedor.setText("");
                 c++;
@@ -329,10 +329,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         anioNacimientoVendedor = mainView.findViewById(R.id.anioNacimientoVendedor_etxt);
         String anio_str = anioNacimientoVendedor.getText().toString();
         int anio = -1;
-        if(anio_str.isEmpty()){
+        if (anio_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             anio = Integer.parseInt(anio_str);
             if (anio < 1900 || anio > 2003) {
                 Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
@@ -344,10 +344,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         mesNacimientoVendedor = mainView.findViewById(R.id.mesNacimientoVendedor_etxt);
         String mes_str = mesNacimientoVendedor.getText().toString();
         int mes = -1;
-        if(mes_str.isEmpty()){
+        if (mes_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             mes = Integer.parseInt(mes_str);
             if (mes < 1 || mes > 12) {
                 Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
@@ -359,10 +359,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         diaNacimientoVendedor = mainView.findViewById(R.id.diaNacimientoVendedor_etxt);
         String dia_str = diaNacimientoVendedor.getText().toString();
         int dia = -1;
-        if(dia_str.isEmpty()){
+        if (dia_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             dia = Integer.parseInt(dia_str);
             if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
                 Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
@@ -373,10 +373,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
         telefonoVendedor = mainView.findViewById(R.id.telefonoVendedor_etxt);
         String telefonoVendedor_str = telefonoVendedor.getText().toString();
-        if(telefonoVendedor_str.isEmpty()){
+        if (telefonoVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             if (telefonoVendedor_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
                 telefonoVendedor.setText("");
@@ -386,10 +386,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
         correoVendedor = mainView.findViewById(R.id.correoVendedor_etxt);
         String correoVendedor_str = correoVendedor.getText().toString();
-        if(correoVendedor_str.isEmpty()){
+        if (correoVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             if (!Patioventainterfaz.validarMail(correoVendedor_str)) {
                 Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
                 correoVendedor.setText("");
@@ -401,14 +401,14 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         confirmarContraseniaVendedor = mainView.findViewById(R.id.confirmarContraseniaVendedor_etxt);
         String contraseniaVendedor_str = contraseniaVendedor.getText().toString();
         String confirmarContraseniaVendedor_str = confirmarContraseniaVendedor.getText().toString();
-        if(contraseniaVendedor_str.isEmpty()){
+        if (contraseniaVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
-            if(confirmarContraseniaVendedor_str.isEmpty()){
+        } else {
+            if (confirmarContraseniaVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 if (contraseniaVendedor_str.compareTo(confirmarContraseniaVendedor_str) != 0) {
                     Toast.makeText(mainView.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                     contraseniaVendedor.setText("");
@@ -421,12 +421,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         horaEntradaVendedor = mainView.findViewById(R.id.horaEntradaVendedor_etxt);
         String horaEntradaVendedor_str = horaEntradaVendedor.getText().toString();
         int horaEntradaVendedor_int = -1;
-        if(horaEntradaVendedor_str.isEmpty()){
+        if (horaEntradaVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             horaEntradaVendedor_int = Integer.parseInt(horaEntradaVendedor.getText().toString());
-            if(horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24){
+            if (horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24) {
                 Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                 horaEntradaVendedor.setText("");
                 c++;
@@ -436,12 +436,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         horaAlmuerzoVendedor = mainView.findViewById(R.id.horaAlmuerzoVendedor_etxt);
         String horaAlmuerzoVendedor_str = horaAlmuerzoVendedor.getText().toString();
         int horaAlmuerzoVendedor_int = -1;
-        if(horaEntradaVendedor_str.isEmpty()){
+        if (horaEntradaVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzoVendedor.getText().toString());
-            if(horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24){
+            if (horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24) {
                 Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                 horaAlmuerzoVendedor.setText("");
                 c++;
@@ -451,24 +451,24 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         horaSalidaVendedor = mainView.findViewById(R.id.horaSalidaVendedor_etxt);
         String horaSalidaVendedor_str = horaSalidaVendedor.getText().toString();
         int horaSalidaVendedor_int = -1;
-        if(horaSalidaVendedor_str.isEmpty()){
+        if (horaSalidaVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
             c++;
-        }else{
+        } else {
             horaSalidaVendedor_int = Integer.parseInt(horaSalidaVendedor.getText().toString());
-            if(horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24){
+            if (horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24) {
                 Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                 horaSalidaVendedor.setText("");
                 c++;
             }
         }
 
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString()+"_img");
+        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString() + "_img");
         filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
                 Toast.makeText(mainView.getContext(), "Se ha añadió satisfactoriamente la imagen", Toast.LENGTH_SHORT).show()
         );
 
-        if(foto == null){
+        if (foto == null) {
             Toast.makeText(mainView.getContext(), "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
             c++;
         }
@@ -481,7 +481,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 e.printStackTrace();
             }
             Vendedor vendedor = new Vendedor(
-                    String.format("%s.jpg",cedulaVendedor_str),
+                    String.format("%s.jpg", cedulaVendedor_str),
                     horaEntradaVendedor_int,
                     horaSalidaVendedor_int,
                     horaAlmuerzoVendedor_int,
@@ -492,7 +492,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     correoVendedor_str,
                     contraseniaVendedor_str,
                     fecha);
-            patio.aniadirUsuario(vendedor,"Vendedor");
+            patio.aniadirUsuario(vendedor, "Vendedor");
             try {
                 if (patio.buscarVendedores("Cedula", vendedor.getCedula()) != null) {
                     Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
@@ -525,9 +525,9 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         cedula.setText(venMostrar.getCedula());
         telefono.setText(venMostrar.getTelefono());
         correo.setText(venMostrar.getCorreo());
-        entrada.setText(String.format("%d:00 %s",venMostrar.getHoraEntrada(),formatoHora(venMostrar.getHoraEntrada())));
-        almuerzo.setText(String.format("%d:00 %s",venMostrar.getHoraComida(),formatoHora(venMostrar.getHoraComida())));
-        salida.setText(String.format("%d:00 %s",venMostrar.getHoraSalida(),formatoHora(venMostrar.getHoraSalida())));
+        entrada.setText(String.format("%d:00 %s", venMostrar.getHoraEntrada(), formatoHora(venMostrar.getHoraEntrada())));
+        almuerzo.setText(String.format("%d:00 %s", venMostrar.getHoraComida(), formatoHora(venMostrar.getHoraComida())));
+        salida.setText(String.format("%d:00 %s", venMostrar.getHoraSalida(), formatoHora(venMostrar.getHoraSalida())));
 
         Button habilitar = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
         if (venMostrar.getActivo()) {
@@ -535,21 +535,21 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         } else {
             habilitar.setText("Habilitar");
         }
-        StorageReference filePath = mStorageRef.child("Vendedores/"+venMostrar.getImagen());
+        StorageReference filePath = mStorageRef.child("Vendedores/" + venMostrar.getImagen());
 
         try {
-            final File localFile = File.createTempFile(venMostrar.getImagen(),"jpg");
+            final File localFile = File.createTempFile(venMostrar.getImagen(), "jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 imagenPerfil_img.setImageBitmap(bitmap);
             });
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void verVendedorEditable(){
-        try{
+    public void verVendedorEditable() {
+        try {
             Vendedor cedulaVen = venMostrar;
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
@@ -578,30 +578,30 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             almuerzo_ed.setText(String.valueOf(cedulaVen.getHoraComida()));
             salida_ed.setText(String.valueOf(cedulaVen.getHoraSalida()));
 
-            StorageReference filePath = mStorageRef.child("Vendedores/"+cedulaVen.getImagen());
+            StorageReference filePath = mStorageRef.child("Vendedores/" + cedulaVen.getImagen());
 
             try {
-                final File localFile = File.createTempFile(cedulaVen.getImagen(),"jpg");
+                final File localFile = File.createTempFile(cedulaVen.getImagen(), "jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                     imagenPerfilVendedorEdit_btn.setImageBitmap(bitmap);
                 });
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void editarVendedor(){
+    public void editarVendedor() {
         try {
             int c = 0;
             Vendedor cedulaVen = venMostrar;
             EditText nombre_ed = mainView.findViewById(R.id.nombreEditVendedor_etxt);
             String nombre_str = nombre_ed.getText().toString();
-            if(nombre_str.isEmpty()){
+            if (nombre_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
                 c++;
             }
@@ -609,10 +609,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText anio_ed = mainView.findViewById(R.id.anioNacimientoEditVendedor_etxt);
             String anio_str = anio_ed.getText().toString();
             int anio = -1;
-            if(anio_str.isEmpty()){
+            if (anio_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 anio = Integer.parseInt(anio_ed.getText().toString());
                 if (anio < 1900 || anio > 2003) {
                     Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
@@ -623,10 +623,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText mes_ed = mainView.findViewById(R.id.mesNacimientoEditVendedor_etxt);
             String mes_str = mes_ed.getText().toString();
             int mes = -1;
-            if(mes_str.isEmpty()){
+            if (mes_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 mes = Integer.parseInt(mes_str);
                 if (mes < 1 || mes > 12) {
                     Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
@@ -638,10 +638,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
             String dia_str = dia_ed.getText().toString();
             int dia = -1;
-            if(dia_str.isEmpty()){
+            if (dia_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 dia = Integer.parseInt(dia_str);
                 if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
                     Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
@@ -652,11 +652,11 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             EditText cedula_ed = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
             String cedula_str = cedula_ed.getText().toString();
-            if(cedula_str.isEmpty()){
+            if (cedula_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
-                if(cedula_str.length()!=10){
+            } else {
+                if (cedula_str.length() != 10) {
                     Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                     cedula_ed.setText("");
                 }
@@ -664,10 +664,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             EditText telefono_ed = mainView.findViewById(R.id.telefonoEditVendedor_etxt);
             String telefono_str = telefono_ed.getText().toString();
-            if(telefono_str.isEmpty()){
+            if (telefono_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 if (telefono_str.length() != 10) {
                     Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
                     telefono_ed.setText("");
@@ -677,10 +677,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             EditText correo_ed = mainView.findViewById(R.id.correoEditVendedor_etxt);
             String correo_str = correo_ed.getText().toString();
-            if(correo_str.isEmpty()){
+            if (correo_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 if (!Patioventainterfaz.validarMail(correo_str)) {
                     Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
                     correo_ed.setText("");
@@ -691,27 +691,27 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText horaEntrada_ed = mainView.findViewById(R.id.horaEntradaEditVendedor_etxt);
             String horaEntradaVendedor_str = horaEntrada_ed.getText().toString();
             int horaEntradaVendedor_int = -1;
-            if(horaEntradaVendedor_str.isEmpty()){
+            if (horaEntradaVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 horaEntradaVendedor_int = Integer.parseInt(horaEntrada_ed.getText().toString());
-                if(horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24){
+                if (horaEntradaVendedor_int < 0 || horaEntradaVendedor_int > 24) {
                     Toast.makeText(mainView.getContext(), "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                     horaEntrada_ed.setText("");
                     c++;
                 }
             }
 
-            EditText horaAlmuerzo_ed= mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
+            EditText horaAlmuerzo_ed = mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
             String horaAlmuerzoVendedor_str = horaAlmuerzo_ed.getText().toString();
             int horaAlmuerzoVendedor_int = -1;
-            if(horaEntradaVendedor_str.isEmpty()){
+            if (horaEntradaVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 horaAlmuerzoVendedor_int = Integer.parseInt(horaAlmuerzo_ed.getText().toString());
-                if(horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24){
+                if (horaAlmuerzoVendedor_int < 0 || horaAlmuerzoVendedor_int > 24) {
                     Toast.makeText(mainView.getContext(), "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                     horaAlmuerzo_ed.setText("");
                     c++;
@@ -721,12 +721,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText horaSalida_ed = mainView.findViewById(R.id.horaSalidaEditVendedor_etxt);
             String horaSalidaVendedor_str = horaSalida_ed.getText().toString();
             int horaSalidaVendedor_int = -1;
-            if(horaSalidaVendedor_str.isEmpty()){
+            if (horaSalidaVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
                 c++;
-            }else{
+            } else {
                 horaSalidaVendedor_int = Integer.parseInt(horaSalida_ed.getText().toString());
-                if(horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24){
+                if (horaSalidaVendedor_int < 0 || horaSalidaVendedor_int > 24) {
                     Toast.makeText(mainView.getContext(), "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                     horaSalida_ed.setText("");
                     c++;
@@ -735,7 +735,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString()+".jpg");
+                StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString() + ".jpg");
                 filePath.putFile(foto);
                 cedulaVen.cambiarDatosSinClaveVendedor(
                         horaEntradaVendedor_int,
@@ -746,7 +746,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                         telefono_ed.getText().toString(),
                         correo_ed.getText().toString(),
                         fecha);
-                cedulaVen.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
+                cedulaVen.setImagen(String.format("%s.jpg", cedula_ed.getText().toString()));
                 try {
                     if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
                         Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
@@ -756,12 +756,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     e.printStackTrace();
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No se pudo actualizar la información del vendedor", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void openGalery(){
+    public void openGalery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_IMAGE_GALERY);
@@ -769,16 +769,16 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_IMAGE_GALERY){
-            if(resultCode == Activity.RESULT_OK && data != null){
+        if (requestCode == REQUEST_IMAGE_GALERY) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
                 foto = data.getData();
-                if(editarImagen){
+                if (editarImagen) {
                     imagenPerfilVendedorEdit_btn.setImageURI(foto);
                     editarImagen = false;
-                }else{
+                } else {
                     imagenPerfilVendedor_btn.setImageURI(foto);
                 }
-            }else{
+            } else {
                 Toast.makeText(mainView.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
             }
         }
@@ -787,10 +787,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     @Override
     public void itemClick(String cedula) {
-        try{
+        try {
             venMostrar = patio.buscarVendedores("Cedula", cedula);
             visualizarVendedor();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No se puede mostrar la lista", Toast.LENGTH_SHORT).show();
         }
     }
