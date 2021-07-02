@@ -1,5 +1,7 @@
 package com.prog.kafeecar;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -53,6 +55,7 @@ public class Perfil_admin_Fragment extends Fragment {
     //Botones
     private Button cancelar;
     private Button irEditar;
+    private Button guardar_editar;
 
     //Botones con imagen
     private ImageButton admin_img_btn;
@@ -73,9 +76,11 @@ public class Perfil_admin_Fragment extends Fragment {
             editar_perfil_lyt.setVisibility(View.VISIBLE);
             verPerfilEditable();
         });
+        /*guardar_editar.setOnClickListener(v -> {
 
+        });*/
         cancelar.setOnClickListener(v -> salirsinGuardar());
-
+        admin_img_btn.setOnClickListener(v -> openGalery());
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -98,6 +103,7 @@ public class Perfil_admin_Fragment extends Fragment {
         admin_img_btn = mainview.findViewById(R.id.admin_img_btn);
         cancelar = mainview.findViewById(R.id.cancelar_edit_admin_btn);
         irEditar = mainview.findViewById(R.id.ireditar_admin_btn);
+        guardar_editar = mainview.findViewById(R.id.ed_pe_ven_btn);
 
     }
 
@@ -107,8 +113,8 @@ public class Perfil_admin_Fragment extends Fragment {
         msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
         msg.setPositiveButton("Aceptar", (dialog, which) -> {
             perfil_btns_lyt.setVisibility(View.GONE);
-            perfil_lyt.setVisibility(View.GONE);
-            editar_perfil_lyt.setVisibility(View.VISIBLE);
+            perfil_lyt.setVisibility(View.VISIBLE);
+            editar_perfil_lyt.setVisibility(View.GONE);
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
         msg.show();
@@ -134,12 +140,9 @@ public class Perfil_admin_Fragment extends Fragment {
                     .into(perfil_img);
             try {
                 final File localFile = File.createTempFile(user.getImagen(),"jpg");
-                filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        perfil_img.setImageBitmap(bitmap);
-                    }
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    perfil_img.setImageBitmap(bitmap);
                 });
             }catch (IOException e) {
                 e.printStackTrace();
@@ -193,6 +196,24 @@ public class Perfil_admin_Fragment extends Fragment {
 
         }catch (Exception e){
             Toast.makeText(mainview.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void openGalery(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE_GALERY);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
+        if(requestCode == REQUEST_IMAGE_GALERY){
+            if(resultCode == Activity.RESULT_OK && data != null){
+                foto = data.getData();
+                admin_img_btn.setImageURI(foto);
+            }else{
+                Toast.makeText(mainview.getContext(), "No se ha insertado la imagen", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
