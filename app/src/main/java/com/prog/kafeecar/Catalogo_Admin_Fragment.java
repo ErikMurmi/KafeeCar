@@ -43,16 +43,10 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public Button cancelar_btn;
     private View mainView;
     private FloatingActionButton irAniadirVehiculo;
-    private Button deshacer_btn;
     private ImageButton selec_vehiculo_img;
-    private Button irEditarVehiculo;
-    private Button eliminar_btn;
-    private Button aniadir_vehiculo_btn;
     private ImageButton edit_vehiculo_img;
     private ScrollView verVehiculo;
     private ScrollView editar_vehiculo;
-    private RecyclerView listaview;
-    private SearchView busqueda_placa;
     private LinearLayout verCatalogo;
     private ScrollView aniadir_vehiculo;
     private PatioVenta patio;
@@ -67,16 +61,16 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
-        busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
+        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
         patio = Patioventainterfaz.patioventa;
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
         irAniadirVehiculo = mainView.findViewById(R.id.ir_aniadir_btn);
-        irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
-        aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
-        deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
+        Button irEditarVehiculo = mainView.findViewById(R.id.editar_vehiculo_btn);
+        Button aniadir_vehiculo_btn = mainView.findViewById(R.id.aniadir_vehiculo_btn);
+        Button deshacer_btn = mainView.findViewById(R.id.editar_v_deshacer_btn);
         cancelar_btn = mainView.findViewById(R.id.cancelar_ca_ad_btn);
-        eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
+        Button eliminar_btn = mainView.findViewById(R.id.eliminar_vehiculo_btn);
         editar_btn = mainView.findViewById(R.id.editar_v_editar_btn);
         //Botonoes imagen
         edit_vehiculo_img = mainView.findViewById(R.id.im_cat_ad_imgbtn);
@@ -107,9 +101,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             verVehiculoEditable();
         });
 
-        selec_vehiculo_img.setOnClickListener(v -> {
-            openGalery();
-        });
+        selec_vehiculo_img.setOnClickListener(v -> openGalery());
 
         edit_vehiculo_img.setOnClickListener(v -> {
             openGalery();
@@ -142,9 +134,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Deshacer Cambios");
             msg.setMessage("¿Está seguro de no guardar los cambios?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                verVehiculoEditable();
-            });
+            msg.setPositiveButton("Si", (dialog, which) -> verVehiculoEditable());
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -204,7 +194,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     }
 
     public void cargar() {
-        listaview = mainView.findViewById(R.id.rc_autos);
+        RecyclerView listaview = mainView.findViewById(R.id.rc_autos);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -231,16 +221,11 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         aniadir_vehiculo.setVisibility(View.GONE);
         //Activar el diseño deseado
         verVehiculo.setVisibility(View.VISIBLE);
-        try {
-            visualizarVehiculo();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        visualizarVehiculo();
     }
 
 
     public void aniadirVehiculo() {
-        String msg = "";
         int c = 0;
         String placa_str;
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
@@ -341,7 +326,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                             Float.parseFloat(ppromocion_ad.getText().toString()),
                             matriculado_ad.isChecked(),
                             Integer.parseInt(anio_ad.getText().toString()),
-                            String.format(placa_ad.getText().toString() + ".jpg")
+                            placa_ad.getText().toString() + ".jpg"
                     )
             );
             try {
@@ -497,7 +482,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }
     }
 
-    public void visualizarVehiculo() throws Exception {
+    public void visualizarVehiculo() {
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);
@@ -536,12 +521,13 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        String matriculado_str;
         if (vMostrar.isMatriculado()) {
-            matriculado.setText("Si");
+            matriculado_str = "Si";
         } else {
-            matriculado.setText("No");
+            matriculado_str = "No";
         }
+        matriculado.setText(matriculado_str);
     }
 
 
