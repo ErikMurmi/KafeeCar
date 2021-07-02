@@ -20,12 +20,11 @@ import java.io.IOException;
 public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lista_Catalogo.clienteHolder> {
     Lista autos;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-   // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
     private RecyclerItemClick itemClick;
-    public Adaptador_Lista_Catalogo(Lista fav, RecyclerItemClick itemClick){
 
-        this.autos=fav;
+    public Adaptador_Lista_Catalogo(Lista autos, RecyclerItemClick itemClick){
+        this.autos=autos;
         this.itemClick = itemClick;
     }
 
@@ -40,7 +39,7 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Catalogo.clienteHolder holder, int position) {
         try {
             Vehiculo c=(Vehiculo)autos.getPos(position);
-            String precio="";
+            String precio;
             String nombre= c.getMarca()+" "+c.getModelo();
             if (c.getPromocion()==0){
                  precio= "$ "+c.getPrecioVenta();
@@ -48,6 +47,10 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
                  precio= "$ "+c.getPromocion();
             }
             String matricula=c.getMatricula();
+            //TODO
+            /*
+            Cambiar matricula por marca y titulo solo modelo
+            * */
             String placa = c.getPlaca();
             String anio = String.valueOf(c.getAnio());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());

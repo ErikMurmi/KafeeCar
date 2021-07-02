@@ -93,7 +93,7 @@
                         android:layout_width="106dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
-                        android:text="Matricula:"
+                        android:text="Marca:"
                         android:textColor="@color/gris_visualizar"
                         android:textSize="17sp" />
 

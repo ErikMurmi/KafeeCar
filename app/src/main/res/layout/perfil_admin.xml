@@ -545,7 +545,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/salir_btn2"
+            android:id="@+id/ed_pe_ven_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/boton_redondeado"
