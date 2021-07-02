@@ -1,24 +1,19 @@
 package com.prog.kafeecar;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +36,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
     public static Usuario usuarioActual = null;
+    @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
@@ -49,8 +45,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     public static Vehiculo v_aux_cita;
-
-    private String tipo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,6 +242,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String correo_str = correo.getText().toString();
         String clave_str = clave.getText().toString();
         Usuario usuario;
+        String tipo = "";
         if (patioventa.getAdministrador() != null && correo_str.compareTo(patioventa.getAdministrador().getCorreo()) == 0) {
             usuario = patioventa.getAdministrador();
             tipo = "ADMIN";
@@ -341,14 +336,10 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void botonImagenPerfilVendedor(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(Patioventainterfaz.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                openGalery();
-            } else {
-                ActivityCompat.requestPermissions(Patioventainterfaz.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
-            }
-        } else {
+        if (ActivityCompat.checkSelfPermission(Patioventainterfaz.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             openGalery();
+        } else {
+            ActivityCompat.requestPermissions(Patioventainterfaz.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
         }
     }
 
@@ -493,7 +484,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         textodia = findViewById(R.id.dia_etxt);
         String dia_str = textodia.getText().toString();
-        int dia = -1;
+        int dia;
         if (dia_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
@@ -536,12 +527,10 @@ public class Patioventainterfaz extends AppCompatActivity {
         EditText fechaventadia = findViewById(R.id.fecha_venta_dia_etxt);
         EditText fechaventames = findViewById(R.id.fecha_venta_mes_etxt);
         EditText fechaventaanio = findViewById(R.id.fecha_venta_anio_etxt);
-        EditText fechaventahora = findViewById(R.id.fecha_venta_hora_etxt);
         String fechaventa_str = fechaventaanio.getText().toString() + "-" + fechaventames.getText().toString() + "-" + fechaventadia.getText().toString();
         String clientes_str = clientes.getText().toString();
         String vendedores_str = vendedor.getText().toString();
         String autos_str = auto.getText().toString();
-        int hora = Integer.parseInt(fechaventahora.getText().toString());
         float precioventa = Float.parseFloat(precio.getText().toString());
         Cliente clienteventa = patioventa.buscarClientes("Nombre", clientes_str);
         Vendedor vendedorventa = patioventa.buscarVendedores("Nombre", vendedores_str);
@@ -635,7 +624,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         diaNacimientoAdmin = findViewById(R.id.reg_dia_admin_etxt);
         String dia_str = diaNacimientoAdmin.getText().toString();
-        int dia = -1;
+        int dia;
         if (dia_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
