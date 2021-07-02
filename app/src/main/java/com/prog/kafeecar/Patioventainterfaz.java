@@ -874,6 +874,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         return ventas;
     }
 
+    public static String formatoHora(int hora){
+        if(hora>12){
+            return "pm";
+        }
+        return "am";
+    }
+
     /*/@Override
     public void onBackPressed() {
         // do something on back.

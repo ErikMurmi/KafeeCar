@@ -22,6 +22,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,7 +36,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Vendedores_Admin_Fragment extends Fragment {
+public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lista_Vendedores.RecyclerItemClick {
     private static final int REQUEST_IMAGE_GALERY = 101;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -49,13 +52,14 @@ public class Vendedores_Admin_Fragment extends Fragment {
     private ImageView imagenPerfilV_img;
     private ImageView imagenPerfilV1_img;
 
+    private RecyclerView listaview;
+
+    private Adaptador_Lista_Vendedores adptadorlistaview;
+
     private LinearLayout irRegistrarVendedor;
     private LinearLayout irVisualizarVendedor;
     private LinearLayout irAdministrarVendedor;
     private LinearLayout irEditarVendedor;
-
-    private LinearLayout verVendedor_lyt;
-    private LinearLayout verVendedor1_lyt;
 
     private FloatingActionButton aniadirVendedor_btn;
     private Button deshabilitar_btn;
@@ -77,9 +81,11 @@ public class Vendedores_Admin_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin,container,false);
         patio = Patioventainterfaz.patioventa;
-        verListaVendedores("1732221032", "1721835213");
-
-        cedulaVendedorE = mainView.findViewById(R.id.cedulaEditVendedor_etxt);
+        try {
+            cargar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //botones
         aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
@@ -96,10 +102,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
 
         imagenPerfil_img = mainView.findViewById(R.id.imagen_perfil_vendedor_img);
 
-        //declaracion de los lyts de los vendedores en la lista
-        verVendedor_lyt = mainView.findViewById(R.id.AVvendedor_lyt);
-        verVendedor1_lyt = mainView.findViewById(R.id.AVvendedor2_lyt);
-
         //layouts
         irRegistrarVendedor = mainView.findViewById(R.id.registrar_vendedor_lyt);
         irVisualizarVendedor = mainView.findViewById(R.id.visualizar_vendedor_lyt);
@@ -114,32 +116,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             aniadirVendedor_btn.setVisibility(View.GONE);
             //Activar el diseño deseado
             irRegistrarVendedor.setVisibility(View.VISIBLE);
-        });
-
-        verVendedor_lyt.setOnClickListener(v -> {
-            irRegistrarVendedor.setVisibility(View.GONE);
-            irAdministrarVendedor.setVisibility(View.GONE);
-            irEditarVendedor.setVisibility(View.GONE);
-            aniadirVendedor_btn.setVisibility(View.GONE);
-            irVisualizarVendedor.setVisibility(View.VISIBLE);
-            try {
-                visualizarVendedor("1732221032");
-            }catch (Exception e){
-                Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        verVendedor1_lyt.setOnClickListener(v -> {
-            irRegistrarVendedor.setVisibility(View.GONE);
-            irAdministrarVendedor.setVisibility(View.GONE);
-            irEditarVendedor.setVisibility(View.GONE);
-            aniadirVendedor_btn.setVisibility(View.GONE);
-            irVisualizarVendedor.setVisibility(View.VISIBLE);
-            try {
-                visualizarVendedor("1721835213");
-            }catch (Exception e){
-                Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
-            }
         });
 
         editar_btn.setOnClickListener(v -> {
@@ -230,7 +206,7 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     irAdministrarVendedor.setVisibility(View.GONE);
                     aniadirVendedor_btn.setVisibility(View.GONE);
                     irEditarVendedor.setVisibility(View.GONE);
-                    visualizarVendedor(cedulaVendedorE.getText().toString());
+                    visualizarVendedor();
                     irVisualizarVendedor.setVisibility(View.VISIBLE);
                 }catch (Exception e){
                     Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
@@ -250,9 +226,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
             openGalery();
         });
 
-        buscarCedulaVendedor_btn.setOnClickListener(view -> {
-            buscarVendedores();
-        });
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -262,7 +235,11 @@ public class Vendedores_Admin_Fragment extends Fragment {
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
-                        irV1();
+                        try {
+                            visualizarVendedor();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
@@ -277,22 +254,18 @@ public class Vendedores_Admin_Fragment extends Fragment {
         return mainView;
     }
 
-    public void irV1() {
-        irRegistrarVendedor.setVisibility(View.GONE);
-        irAdministrarVendedor.setVisibility(View.GONE);
-        irEditarVendedor.setVisibility(View.GONE);
-        aniadirVendedor_btn.setVisibility(View.GONE);
-        irVisualizarVendedor.setVisibility(View.VISIBLE);
-        try {
-            visualizarVendedor("1732221032");
-        }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "No se pudo realizar la peticion deseada", Toast.LENGTH_SHORT).show();
-        }
+    public void cargar() throws Exception {
+        listaview = mainView.findViewById(R.id.lista_vendedores_admin);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores(),this);
+        listaview.setAdapter(adptadorlistaview);
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     public void verListaVendedores(String cedula, String cedula1){
         try{
-            String am = "am";
             imagenPerfilV_img = mainView.findViewById(R.id.AVimagenPerfil1_img);
             imagenPerfilV1_img = mainView.findViewById(R.id.AVimagenPerfil2_img);
             Vendedor v_Mostrar = patio.buscarVendedores("Cedula",cedula);
@@ -355,7 +328,11 @@ public class Vendedores_Admin_Fragment extends Fragment {
     }
 
     public void regresarPantallaPrncipal(){
-        verListaVendedores("1732221032", "1721835213");
+        try {
+            cargar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         irRegistrarVendedor.setVisibility(View.GONE);
         irVisualizarVendedor.setVisibility(View.GONE);
         irEditarVendedor.setVisibility(View.GONE);
@@ -588,7 +565,12 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void visualizarVendedor(String ced) throws Exception {
+    public void visualizarVendedor() throws Exception {
+        irRegistrarVendedor.setVisibility(View.GONE);
+        irAdministrarVendedor.setVisibility(View.GONE);
+        irEditarVendedor.setVisibility(View.GONE);
+        aniadirVendedor_btn.setVisibility(View.GONE);
+        irVisualizarVendedor.setVisibility(View.VISIBLE);
 
         TextView nombre = mainView.findViewById(R.id.nombre_vendedor_txt);
         TextView fechaNacimiento = mainView.findViewById(R.id.fecha_nacimiento_vendedor_txt);
@@ -599,7 +581,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         TextView almuerzo = mainView.findViewById(R.id.almuerzo_vendedor_txt);
         TextView salida = mainView.findViewById(R.id.salida_vendedor_txt);
 
-        venMostrar = patio.buscarVendedores("Cedula",ced);
         nombre.setText(venMostrar.getNombre());
         fechaNacimiento.setText(Patioventainterfaz.getFechaMod(venMostrar.getFechaNacimiento()));
         cedula.setText(venMostrar.getCedula());
@@ -841,23 +822,6 @@ public class Vendedores_Admin_Fragment extends Fragment {
         }
     }
 
-    public void buscarVendedores (){
-        EditText cedula = mainView.findViewById(R.id.busquedaCedulaVendedor_etxt2);
-        String cedula_str = cedula.getText().toString();
-        Vendedor buscado = null;
-        try {
-         buscado = patio.buscarVendedores("Cedula", cedula_str);
-         if(buscado==null){
-             Toast.makeText(mainView.getContext(), "No existe el vendedor buscado", Toast.LENGTH_SHORT).show();
-         }else{
-             verListaVendedores(cedula_str,"1721835213");
-             verVendedor1_lyt.setVisibility(View.GONE);
-         }
-        }catch(Exception e){
-            Toast.makeText(mainView.getContext(), "No existen vendedores", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     public void openGalery(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -880,5 +844,15 @@ public class Vendedores_Admin_Fragment extends Fragment {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void itemClick(String cedula) {
+        try{
+            venMostrar = patio.buscarVendedores("Cedula", cedula);
+            visualizarVendedor();
+        }catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "No se puede mostrar la lista", Toast.LENGTH_SHORT).show();
+        }
     }
 }
