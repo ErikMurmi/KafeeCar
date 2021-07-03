@@ -13,7 +13,7 @@
         android:background="@drawable/administrar_ventas"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="370dp"
@@ -199,7 +199,7 @@
         android:background="@drawable/consultar_estadisticas_generales"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -222,7 +222,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="24dp"
@@ -248,6 +248,13 @@
                     android:orientation="vertical" />
             </ScrollView>
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_ventas_admin_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp" />
 
     </LinearLayout>
 

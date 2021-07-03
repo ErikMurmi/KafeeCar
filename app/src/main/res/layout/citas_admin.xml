@@ -377,7 +377,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:visibility="gone">
 
                 <CheckBox
                     android:id="@+id/filtro_dia_ckb"
@@ -420,7 +421,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="55dp"
                 android:orientation="horizontal">
 
                 <EditText
@@ -483,6 +484,11 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#959898"
                     android:textSize="15sp" />
+
+                <SearchView
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:iconifiedByDefault="false" />
 
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn"

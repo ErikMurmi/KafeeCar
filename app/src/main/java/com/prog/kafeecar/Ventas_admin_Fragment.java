@@ -12,13 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Ventas_admin_Fragment extends Fragment {
+public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick{
     private View mainView;
     private PatioVenta patio;
-    private FloatingActionButton irAniadirVehiculo;
     private Button irVentasPorVendedor;
     private Button irVentasGenerales;
     private Button irRegistrarNuevaVenta;
@@ -27,6 +29,7 @@ public class Ventas_admin_Fragment extends Fragment {
     private LinearLayout verVentasGenerales;
     private LinearLayout verRegistroNuevaVenta;
     private LinearLayout verVentasAdmin;
+    private Adaptador_Lista_Ventas_Admin adptadorlistaview;
 
     @Nullable
     @Override
@@ -82,6 +85,8 @@ public class Ventas_admin_Fragment extends Fragment {
 
         });
 
+        cargar();
+
         return mainView;
     }
 
@@ -95,19 +100,15 @@ public class Ventas_admin_Fragment extends Fragment {
         EditText fechaventadia = mainView.findViewById(R.id.fecha_venta_dia_etxt);
         EditText fechaventames = mainView.findViewById(R.id.fecha_venta_mes_etxt);
         EditText fechaventaanio = mainView.findViewById(R.id.fecha_venta_anio_etxt);
-        EditText fechaventahora = mainView.findViewById(R.id.fecha_venta_hora_etxt);
 
         String fechaventa_str ="";
 
 
 
-        float precioventa =0;
         int c = 0;
-        int hora =-1;
 
-        if((!isEmpty(fechaventadia) && !isEmpty(fechaventames)) && (!isEmpty(fechaventaanio) && !isEmpty(fechaventahora))){
+        if((!isEmpty(fechaventadia) && !isEmpty(fechaventames)) && (!isEmpty(fechaventaanio))){
             fechaventa_str = fechaventaanio.getText().toString() + "-" + fechaventames.getText().toString() + "-" + fechaventadia.getText().toString();
-            hora=Integer.parseInt(fechaventahora.getText().toString());
         }else{
             c++;
             Toast.makeText(mainView.getContext(),"Campos de fecha vacios",Toast.LENGTH_SHORT).show();
@@ -138,18 +139,10 @@ public class Ventas_admin_Fragment extends Fragment {
             Toast.makeText(mainView.getContext(),"Campo de Vehiculo vacio",Toast.LENGTH_SHORT).show();
         }
 
-        EditText precio = mainView.findViewById(R.id.precio_venta_txt);
-        if(!isEmpty(precio)){
-            precioventa = Float.parseFloat(precio.getText().toString());
-        }else{
-            c++;
-            Toast.makeText(mainView.getContext(),"Campo de precio vacio",Toast.LENGTH_SHORT).show();
-
-        }
 
 
         if(c==0){
-            nueva = new Venta(Patioventainterfaz.sdf.parse(fechaventa_str), precioventa, clienteventa, vendedorventa, autoventa);
+            nueva = new Venta(Patioventainterfaz.sdf.parse(fechaventa_str), clienteventa, vendedorventa, autoventa);
             patio.aniadirVenta(nueva);
             if (patio.getVentasGenerales().contiene(nueva)) {
                 Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
@@ -159,10 +152,23 @@ public class Ventas_admin_Fragment extends Fragment {
 
     }
 
-
+    public void cargar(){
+        RecyclerView listaview = mainView.findViewById(R.id.lista_ventas_admin_rv);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Ventas_Admin(patio.getVentasGenerales(), this);
+        listaview.setAdapter(adptadorlistaview);
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
+    }
 
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
+    }
+
+    @Override
+    public void itemClick(String placa) {
+        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
     }
 }

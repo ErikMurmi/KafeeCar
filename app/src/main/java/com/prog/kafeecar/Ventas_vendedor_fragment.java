@@ -88,7 +88,7 @@ public class Ventas_vendedor_fragment extends Fragment{
         Vehiculo autoventa= patioventa.buscarVehiculos("Matricula",autos_str);
 
 
-        Venta nueva= new Venta(sdf.parse(fechaventa_str),precioventa,clienteventa,vendedorventa,autoventa);
+        Venta nueva= new Venta(sdf.parse(fechaventa_str),clienteventa,vendedorventa,autoventa);
         patioventa.aniadirVenta(nueva);
 
         if(patioventa.getVentasGenerales().contiene(nueva)){

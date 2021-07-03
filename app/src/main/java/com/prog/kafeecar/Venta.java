@@ -14,12 +14,11 @@ import java.util.Date;
 public class Venta {
     
     private Date fecha;
-    
     private Cliente comprador;
     private Vendedor vendedor;
     private Lista vehiculos;
 
-    public Venta(Date fecha, float precio, Cliente comprador, Vendedor vendedor, Vehiculo v) {
+    public Venta(Date fecha, Cliente comprador, Vendedor vendedor, Vehiculo v) {
         this.fecha = fecha;
         this.comprador = comprador;
         this.vendedor = vendedor;
