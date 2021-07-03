@@ -799,7 +799,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        //strBusqueda = strBusqueda.toUpperCase();
+        newText = newText.toUpperCase();
         try{
             adptadorlistaview.busqueda(newText);
         } catch (Exception e) {

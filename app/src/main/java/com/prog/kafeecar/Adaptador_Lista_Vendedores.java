@@ -125,7 +125,7 @@ public class Adaptador_Lista_Vendedores extends RecyclerView.Adapter<Adaptador_L
                 } catch (Exception e) {
                     Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
-                if(actual.getCedula().contains(strBusqueda)){
+                if(actual.getCedula().contains(strBusqueda) || actual.getNombre().toUpperCase().contains(strBusqueda) ){
                     vendedores.add(actual);
                 }
             }
