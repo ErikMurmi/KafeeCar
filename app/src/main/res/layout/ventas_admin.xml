@@ -59,29 +59,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/administrar_venta_vendedor_btn"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:fontFamily="@font/valorant"
-                    android:text="Por vendedor"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/vendedor_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
-                    app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,76 +105,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ventas_admin_por_vendedor_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/consultar_estadisticas_vendedores"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="24dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bordesbotongris"
-                android:ems="10"
-                android:fontFamily="@font/monglos"
-                android:inputType="textPersonName"
-                android:text="BUSQUEDA"
-                android:textAlignment="center"
-                android:textColor="#8A989696" />
-
-            <TextView
-                android:id="@+id/listado_ventasVendedor_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/ocraext"
-                android:text="lista de ventas"
-                android:textSize="16sp" />
-
-            <ScrollView
-                android:id="@+id/scroll_view_lista_venta_vendedores_srcll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/ventas_admin_generales_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -219,6 +131,12 @@
                 app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
 
         </LinearLayout>
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

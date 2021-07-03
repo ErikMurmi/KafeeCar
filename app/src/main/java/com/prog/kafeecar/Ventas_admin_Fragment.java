@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick{
+public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainView;
     private PatioVenta patio;
     private Button irVentasPorVendedor;
@@ -40,13 +39,11 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         patio = Patioventainterfaz.patioventa;
 
         //Botones
-        irVentasPorVendedor=mainView.findViewById(R.id.administrar_venta_vendedor_btn);
         irVentasGenerales=mainView.findViewById(R.id.administrar_venta_generales_btn);
         irRegistrarNuevaVenta=mainView.findViewById(R.id.administrar_venta_aniadirventa_btn);
         realizarVenta=mainView.findViewById(R.id.aniadirVenta_btn);
 
         // layouts
-        verVentasVendedor=mainView.findViewById(R.id.ventas_admin_por_vendedor_lyt);
         verVentasGenerales=mainView.findViewById(R.id.ventas_admin_generales_lyt);
         verRegistroNuevaVenta= mainView.findViewById(R.id.adminregistro_lyt);
         verVentasAdmin=mainView.findViewById(R.id.ventas_admin_lyt);
@@ -170,5 +167,22 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     @Override
     public void itemClick(String placa) {
         Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toUpperCase();
+        try{
+            adptadorlistaview.filtro(s);
+
+        }catch (Exception e){
+            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }

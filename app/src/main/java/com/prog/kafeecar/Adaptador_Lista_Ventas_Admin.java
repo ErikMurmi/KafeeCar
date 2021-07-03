@@ -1,11 +1,11 @@
 package com.prog.kafeecar;
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +25,10 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
     View view;
     private RecyclerItemClick itemClick;
     public Adaptador_Lista_Ventas_Admin(Lista ventas, RecyclerItemClick itemClick){
-        this.ventas_original =ventas;
+        this.ventas_buscadas =ventas;
         this.itemClick = itemClick;
+        ventas_original=new Lista();
+        ventas_original.copiar(ventas);
     }
 
     @NonNull
@@ -110,6 +112,27 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
             placas = view.findViewById(R.id.vt_placas_lista_txt);
             precio = view.findViewById(R.id.vt_carro_precio_lista_txt);
         }
+    }
+
+    public void filtro(String strBuscar){
+        if(strBuscar.length()==0){
+            ventas_buscadas.vaciar();
+            ventas_buscadas.copiar(ventas_original);
+        }else {
+            ventas_buscadas.vaciar();
+            for(int i=0; i<ventas_original.contar();i++){
+                Vehiculo actual=null;
+                try {
+                    actual = (Vehiculo) ventas_original.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                if(actual.getPlaca().contains(strBuscar)){
+                    ventas_buscadas.add(actual);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public interface RecyclerItemClick{
