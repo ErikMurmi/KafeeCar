@@ -73,12 +73,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-        try {
-            cargar();
-            campoBusqueda.setOnQueryTextListener(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         //botones
         aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
@@ -244,6 +238,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+        campoBusqueda.setOnQueryTextListener(this);
+        try {
+            cargar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return mainView;
     }
@@ -798,10 +798,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
     public boolean onQueryTextSubmit(String query) {return false; }
 
     @Override
-    public boolean onQueryTextChange(String strBusqueda) {
+    public boolean onQueryTextChange(String newText) {
         //strBusqueda = strBusqueda.toUpperCase();
         try{
-            adptadorlistaview.busqueda(strBusqueda);
+            adptadorlistaview.busqueda(newText);
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
