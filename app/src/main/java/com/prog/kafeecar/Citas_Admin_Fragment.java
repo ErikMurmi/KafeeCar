@@ -22,6 +22,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,14 +36,17 @@ import java.io.File;
 import java.io.IOException;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
+import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 
-public class Citas_Admin_Fragment extends Fragment {
+public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick{
 
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Citas_Admin";
     private PatioVenta patio;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
+    private RecyclerView listaview;
+    private Adaptador_Lista_Citas_Admin adptadorlistaview;
     //Auxiliar para pasar del vehiculo a registrar cita
     //TODO
     private static Vehiculo aux;
@@ -70,16 +76,14 @@ public class Citas_Admin_Fragment extends Fragment {
         listaCitas = mainView.findViewById(R.id.citas_admin_lyt);
 
         //Botones
-        irVerCita = mainView.findViewById(R.id.ir_ver_cita);
-        irAniadirCita = mainView.findViewById(R.id.ir_editar_cita);
-
+        irAniadirCita = mainView.findViewById(R.id.ir_aniadir_btn2);
         //TextViews
         vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Image Buttons
         buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);
         //OnClick
 
-        irVerCita.setOnClickListener(v -> {
+        /*irVerCita.setOnClickListener(v -> {
             aniadirCita.setVisibility(View.GONE);
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.VISIBLE);
@@ -95,7 +99,7 @@ public class Citas_Admin_Fragment extends Fragment {
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
         });
-
+*/
         buscar_btn.setOnClickListener(v -> {
             CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
             CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
@@ -109,7 +113,6 @@ public class Citas_Admin_Fragment extends Fragment {
             vehiculo_nuevacita.setTextColor(Color.BLACK);
         }else{
             try {
-                verLista("GHC-2434","IMH-2233");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -142,78 +145,14 @@ public class Citas_Admin_Fragment extends Fragment {
         return mainView;
     }
 
-
-    @SuppressLint("DefaultLocale")
-    public void verLista(String placa, String placa1) throws Exception {
-
-
-        ImageView c_img = mainView.findViewById(R.id.c_lista_img);
-        TextView horario = mainView.findViewById(R.id.hora_c_lista_txt);
-        TextView cliente = mainView.findViewById(R.id.nombre_c_lista_txt);
-        TextView placa_txt =  mainView.findViewById(R.id.matricula_c_lista_txt);
-        TextView telefono = mainView.findViewById(R.id.telefono_c_lista_txt);
-
-        ImageView c_img1 = mainView.findViewById(R.id.c_lista1_img);
-        TextView horario1 = mainView.findViewById(R.id.hora_c_lista1_txt);
-        TextView cliente1 = mainView.findViewById(R.id.nombre_c_lista1_txt);
-        TextView placa1_txt =  mainView.findViewById(R.id.matricula_c_lista1_txt);
-        TextView telefono1 = mainView.findViewById(R.id.telefono_c_lista1_txt);
-
-
-        Cita c_Mostrar = patio.buscarCitas("Vehiculo",placa);
-        if(c_Mostrar!=null){
-            horario.setText(String.format("%02d:00%s-%02d:00%s",c_Mostrar.getHora(),formatoHora(c_Mostrar.getHora()),c_Mostrar.getHora()+1,formatoHora(c_Mostrar.getHora()+1)));
-            cliente.setText(c_Mostrar.getVisitante().getNombre());
-            placa_txt.setText(c_Mostrar.getVehiculo().getPlaca());
-            telefono.setText(c_Mostrar.getVisitante().getTelefono());
-        }else{
-            Toast.makeText(mainView.getContext(), "No se encontro el vehiculo "+placa, Toast.LENGTH_SHORT).show();
-        }
-
-
-
-        Cita c_Mostrar1 = patio.buscarCitas("Vehiculo",placa1);
-        horario1.setText(String.format("%02d:00%s-%02d:00%s",c_Mostrar1.getHora(),formatoHora(c_Mostrar1.getHora()),c_Mostrar1.getHora()+1,formatoHora(c_Mostrar1.getHora()+1)));
-        cliente1.setText(c_Mostrar1.getVisitante().getNombre());
-        placa1_txt.setText(c_Mostrar1.getVehiculo().getPlaca());
-        telefono1.setText(c_Mostrar1.getVisitante().getTelefono());
-
-
-        StorageReference filePath = mStorageRef.child("Vehiculos/"+c_Mostrar.getVehiculo().getimagen());
-        Glide.with(mainView)
-                .load(filePath)
-                .into(c_img);
-        try {
-            final File localFile = File.createTempFile(c_Mostrar.getVehiculo().getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    c_img.setImageBitmap(bitmap);
-                }
-            });
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        //Imagen 2
-        filePath = mStorageRef.child("Vehiculos/"+c_Mostrar1.getVehiculo().getimagen());
-        Glide.with(mainView)
-                .load(filePath)
-                .into(c_img1);
-        try {
-            final File localFile = File.createTempFile(c_Mostrar1.getVehiculo().getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    c_img1.setImageBitmap(bitmap);
-                }
-            });
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
+    public void cargar() throws Exception {
+        listaview = mainView.findViewById(R.id.rc_citas_admin);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(),this);
+        listaview.setAdapter(adptadorlistaview);
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
 
@@ -306,5 +245,10 @@ public class Citas_Admin_Fragment extends Fragment {
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
+    }
+
+    @Override
+    public void itemClick(String placa) {
+
     }
 }

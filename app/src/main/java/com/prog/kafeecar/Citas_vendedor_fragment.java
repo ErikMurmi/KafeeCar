@@ -89,8 +89,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
         return mainView;
     }
+
     public void cargar() throws Exception {
-        listaview=mainView.findViewById(R.id.lista_citas_rv);
+        listaview=mainView.findViewById(R.id.rc_citas_vendedor);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());

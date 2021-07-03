@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:visibility="invisible">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente"
@@ -26,7 +26,7 @@
             <LinearLayout
                 android:id="@+id/vehiculos_cliente_CV_lyt"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <EditText
@@ -73,286 +73,7 @@
                         android:fontFamily="@font/valorant"
                         android:text="Aplicar"
                         android:textColor="@color/white" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/vehiculo1_lista_cliente_lyt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="7dp"
-                    android:background="@drawable/bordesmarcosnegro"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/vehiculo1_lista_cliente_img"
-                            android:layout_width="120dp"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitCenter"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                        <Space
-                            android:layout_width="20dp"
-                            android:layout_height="wrap_content" />
-
-                        <LinearLayout
-                            android:layout_width="193dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/vehiculo1_marca_modelo_cliente_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="13dp"
-                                android:fontFamily="@font/ocraext"
-                                android:textAlignment="center"
-                                android:textSize="21sp"
-                                tools:text="Cybertruck" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo1_anio_cliente_lb"
-                                    android:layout_width="95dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Año:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo1_anio_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="2017"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="4dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo_matricula_lista_cliente_lb"
-                                    android:layout_width="106dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Matricula:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo1_matricula_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="PQR-123"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="4dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo1_placa_lista_cliente_lb"
-                                    android:layout_width="85dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Placa:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo1_placa_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="17:00 pm"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/vehiculo1_precio_lista_cliente_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/ocra"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:text="$55 000" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/vehiculo2_lista_cliente_lyt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/bordesmarcosnegro"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/vehiculo2_lista_cliente_img"
-                            android:layout_width="120dp"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitCenter"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                        <Space
-                            android:layout_width="20dp"
-                            android:layout_height="wrap_content" />
-
-                        <LinearLayout
-                            android:layout_width="193dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/vehiculo2_marca_modelo_cliente_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="13dp"
-                                android:fontFamily="@font/ocraext"
-                                android:textAlignment="center"
-                                android:textSize="21sp"
-                                tools:text="Cybertruck" />
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_anio_cliente_lb"
-                                    android:layout_width="95dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Año:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_anio_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="8:00 am"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="4dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_matricula_lista_cliente_lb"
-                                    android:layout_width="106dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Matricula:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_matricula_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="13:00 pm"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="match_parent"
-                                android:layout_height="4dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_placa_lista_cliente_lb"
-                                    android:layout_width="85dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:text="Placa:"
-                                    android:textColor="@color/black"
-                                    android:textSize="17sp" />
-
-                                <TextView
-                                    android:id="@+id/vehiculo2_placa_lista_cliente_txt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ocraext"
-                                    android:hint="17:00 pm"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/vehiculo2_precio_lista_cliente_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/ocra"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:text="$55 000" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -372,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/editarcita_EC_txt"
@@ -539,7 +260,7 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/nueva_cita_cliente_lb"
@@ -684,7 +405,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"
