@@ -14,7 +14,6 @@ import java.util.Date;
 public class Venta {
     
     private Date fecha;
-    private float precio;
     
     private Cliente comprador;
     private Vendedor vendedor;
@@ -22,7 +21,6 @@ public class Venta {
 
     public Venta(Date fecha, float precio, Cliente comprador, Vendedor vendedor, Vehiculo v) {
         this.fecha = fecha;
-        this.precio = precio;
         this.comprador = comprador;
         this.vendedor = vendedor;
         vehiculos = new Lista();
@@ -39,13 +37,19 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public float getPrecio() {
+    public float getPrecio() throws Exception {
+        float precio =0;
+        for(int i=0; i<vehiculos.contar();i++){
+            Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
+            if(actual.getPromocion()==0){
+                precio += actual.getPromocion();
+            }else{
+                precio += actual.getPrecioVenta();
+            }
+        }
         return precio;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
 
     public Cliente getComprador() {
         return comprador;
@@ -116,12 +120,10 @@ public class Venta {
     public String toString() {
         return "Venta" + 
                 "\nFecha: " + fecha +
-                "\nPrecio: " + precio + 
                 "\nComprador: " + comprador +
                 "\nVendedor: " + vendedor + 
                 "\nVehiculo=" + vehiculos;
     }
-    
     
     /**
      * Método que ayuda al vendedor o administrador a actualizar la información de una venta

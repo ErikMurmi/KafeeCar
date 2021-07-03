@@ -19,23 +19,16 @@ import java.io.IOException;
 
 public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lista_Catalogo.clienteHolder> {
     private Lista autos_original;
-    private Lista autos;
+    private Lista autos_buscados;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     View view;
     private RecyclerItemClick itemClick;
 
     public Adaptador_Lista_Catalogo(Lista autos, RecyclerItemClick itemClick){
-        this.autos =autos;
+        this.autos_buscados =autos;
         this.itemClick = itemClick;
         autos_original = new Lista();
-        //autos.copiar(autos_original);
-        for(int i=0; i<autos.contar();i++){
-            try {
-                autos_original.add(autos.getPos(i));
-            } catch (Exception e) {
-                Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        }
+        autos_original.copiar(autos);
     }
 
     @NonNull
@@ -48,7 +41,7 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     @Override
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Catalogo.clienteHolder holder, int position) {
         try {
-            Vehiculo c=(Vehiculo) autos.getPos(position);
+            Vehiculo c=(Vehiculo) autos_buscados.getPos(position);
             String precio;
             String nombre= c.getMarca()+" "+c.getModelo();
             if (c.getPromocion()==0){
@@ -91,21 +84,15 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
 
     @Override
     public int getItemCount() {
-        return autos.contar();
+        return autos_buscados.contar();
     }
 
     public void filtro(String strBuscar){
         if(strBuscar.length()==0){
-            autos.vaciar();
-            for(int i=0; i<autos_original.contar();i++){
-                try {
-                    autos.add(autos_original.getPos(i));
-                } catch (Exception e) {
-                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
+            autos_buscados.vaciar();
+            autos_buscados.copiar(autos_original);
         }else {
-            autos.vaciar();
+            autos_buscados.vaciar();
             for(int i=0; i<autos_original.contar();i++){
                 Vehiculo actual=null;
                 try {
@@ -114,7 +101,7 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
                     Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
                 if(actual.getPlaca().contains(strBuscar)){
-                    autos.add(actual);
+                    autos_buscados.add(actual);
                 }
             }
         }
