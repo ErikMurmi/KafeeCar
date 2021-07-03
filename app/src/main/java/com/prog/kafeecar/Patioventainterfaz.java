@@ -94,6 +94,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("IOS-1275", "M382N3", "Hyundai", "Tucson", "Gris", "Vidrios electricos radio de pantalla", 17000, 20300, 0, true, 2015, "M382N3.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("HPO-2517", "JD8382", "Chevrolet", "DMAX Optima", "Gris", "Camioneta una cavina", 14500, 16500, 16000, true, 2013, "JD8382.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "D3828E.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("PD7894", "J43569", "Toyota", "Fortuner", "Negro", "SUV deportivo", 75000, 76000, 70000, true, 2021, "PD7894.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("AD9578", "M55789", "Ford", "Explorer", "Blanco", "SUV deportivo", 85000, 84000, 80000, true, 2020, "AD9578.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("DC4879", "J36978", "Tesla", "Model x", "Blanco", "SUV deportivo", 65000, 66000, 64000, true, 2021, "DC4879.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("WE1236", "T19478", "Toyota", "BZ4X", "Gris", "SUV deportivo", 55000, 76000, 70000, true, 2020, "PD7894.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("XA8541", "C76948", "Toyota", "Venza", "Azul", "SUV deportivo", 77000, 76000, 70000, true, 2020, "XA8541.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("IO3687", "K89457", "Peugeot", "3008", "Negro", "SUV deportivo", 78000, 77000, 70000, true, 2020, "IO3687.jpg"));
+
         Vendedor admin = new Vendedor("1721053207.jpg", 8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
         //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
         patioventa.aniadirUsuario(admin, "Administrador");
