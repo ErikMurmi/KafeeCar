@@ -128,6 +128,7 @@ public class PatioVenta {
      */
     public void aniadirVehiculo(Vehiculo nuevo){
         vehiculos.add(nuevo);
+
     }
 
     /**
@@ -135,8 +136,17 @@ public class PatioVenta {
      * @param nueva venta a ser agregada
      * @return true si se agrego , false en caso de que no.
      */
-    public void aniadirVenta(Venta nueva){
+    public void aniadirVenta(Venta nueva) throws Exception {
         ventasGenerales.add(nueva);
+        if (nueva.getVehiculos().contar()==1){
+            Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(0);
+            removerVehiculo(actual.getPlaca());
+        }else{
+            for (int i=0;i<nueva.getVehiculos().contar();i++){
+            Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(i);
+            removerVehiculo(actual.getPlaca());
+                }
+        }
     }
 
 
