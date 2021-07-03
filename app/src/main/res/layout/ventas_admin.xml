@@ -140,6 +140,7 @@
         </LinearLayout>
 
         <SearchView
+            android:id="@+id/vt_busqueda_plcas_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
