@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.content.res.Resources;
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,16 +50,13 @@ public class Patioventainterfaz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //Login normal
         //setContentView(R.layout.login);
 
         // Login de pruebas
         setContentView(R.layout.login_sinclaves);
-
         try {
             cargarDatos();
-
         } catch (Exception e) {
             Toast.makeText(Patioventainterfaz.this, "Datos no quemados", Toast.LENGTH_SHORT).show();
         }
@@ -129,12 +127,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirCita(c4);
         patioventa.aniadirCita(c5);
         patioventa.aniadirCita(c6);
-        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(11));
-        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(12));
-        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(13));
-        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(3), (Vehiculo) patioventa.getVehiculos().getPos(14));
-        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(3), (Vendedor) patioventa.getVendedores().getPos(3), (Vehiculo) patioventa.getVehiculos().getPos(15));
-        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(3), (Vendedor) patioventa.getVendedores().getPos(4), (Vehiculo) patioventa.getVehiculos().getPos(16));
+        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(0), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(3), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven1);
         patioventa.aniadirVenta(ven2);
         patioventa.aniadirVenta(ven3);
@@ -144,6 +142,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     private void irAplicacion(String tipo) {
+
         if (tipo.compareTo("ADMIN") == 0) {
             setContentView(R.layout.home_admin);
             BottomNavigationView navBar = findViewById(R.id.barra_nav);

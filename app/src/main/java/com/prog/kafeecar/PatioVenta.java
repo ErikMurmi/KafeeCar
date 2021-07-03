@@ -142,10 +142,10 @@ public class PatioVenta {
             Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(0);
             removerVehiculo(actual.getPlaca());
         }else{
-            for (int i=0;i<nueva.getVehiculos().contar();i++){
-            Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(i);
-            removerVehiculo(actual.getPlaca());
-                }
+            for (int i=1;i<nueva.getVehiculos().contar();i++){
+                Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(i);
+                removerVehiculo(actual.getPlaca());
+            }
         }
     }
 

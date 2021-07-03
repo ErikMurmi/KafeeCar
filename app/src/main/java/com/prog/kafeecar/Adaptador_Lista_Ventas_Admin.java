@@ -92,7 +92,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
 
     @Override
     public int getItemCount() {
-        return ventas_original.contar();
+        return ventas_buscadas.contar();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{

@@ -45,7 +45,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private PatioVenta patio;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    private RecyclerView listaview;
     private Adaptador_Lista_Citas_Admin adptadorlistaview;
     //Auxiliar para pasar del vehiculo a registrar cita
     //TODO
@@ -71,6 +70,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         mainView = inflater.inflate(R.layout.citas_admin,container,false);
         patio = Patioventainterfaz.patioventa;
         //Layouts
+        /*
         verCita = mainView.findViewById(R.id.ver_cita_lyt);
         aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
         listaCitas = mainView.findViewById(R.id.citas_admin_lyt);
@@ -80,7 +80,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //TextViews
         vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Image Buttons
-        buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);
+        buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);*/
         //OnClick
 
         /*irVerCita.setOnClickListener(v -> {
@@ -99,7 +99,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
         });
-*/
+
         buscar_btn.setOnClickListener(v -> {
             CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
             CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
@@ -116,7 +116,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         /*
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -142,11 +142,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
             }
         };*/
+        cargar();
         return mainView;
     }
 
-    public void cargar() throws Exception {
-        listaview = mainView.findViewById(R.id.rc_citas_admin);
+    public void cargar() {
+        RecyclerView listaview = mainView.findViewById(R.id.rc_citas_admin);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -249,6 +250,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     @Override
     public void itemClick(String placa) {
-
+        Toast.makeText(mainView.getContext(), "SOK", Toast.LENGTH_SHORT).show();
     }
 }

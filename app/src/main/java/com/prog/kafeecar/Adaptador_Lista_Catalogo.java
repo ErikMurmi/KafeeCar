@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +44,13 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
         try {
             Vehiculo c=(Vehiculo) autos_buscados.getPos(position);
             String precio;
-            String nombre= c.getMarca()+" "+c.getModelo();
+            String modelo=c.getModelo();
             if (c.getPromocion()==0){
                  precio= "$ "+c.getPrecioVenta();
             }else{
                  precio= "$ "+c.getPromocion();
             }
-            String matricula=c.getMatricula();
+            String marca=c.getMarca();
             //TODO
             /*
             Cambiar matricula por marca y titulo solo modelo
@@ -60,21 +61,19 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
             try {
                 final File localFile = File.createTempFile(c.getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    holder.imagenauto.setImageBitmap(bitmap);
+                    Uri foto = Uri.parse(localFile.getAbsolutePath());
+                    holder.imagenauto.setImageURI(foto);
                 });
             }catch (IOException e){
                 e.printStackTrace();
             }
 
-            holder.nombre.setText(nombre);
+            holder.modelo.setText(modelo);
             holder.precioauto.setText(precio);
-            holder.matricula.setText(matricula);
+            holder.marca.setText(marca);
             holder.placa.setText(placa);
             holder.anio.setText(anio);
-            holder.itemView.setOnClickListener(v -> {
-                itemClick.itemClick(placa);
-            });
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,16 +111,16 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
         public ImageView imagenauto;
         public TextView precioauto;
         public TextView anio;
-        public TextView nombre;
-        public TextView matricula;
+        public TextView modelo;
+        public TextView marca;
         public TextView placa;
 
         public clienteHolder(@NonNull View view) {
             super(view);
             imagenauto=view.findViewById(R.id.v_lista_img);
             precioauto=view.findViewById(R.id.v_precio_lista_txt);
-            nombre=view.findViewById(R.id.v_marca_modelo_txt);
-            matricula=view.findViewById(R.id.v_matricula_lista_txt);
+            modelo=view.findViewById(R.id.v_marca_modelo_txt);
+            marca=view.findViewById(R.id.v_matricula_lista_txt);
             placa = view.findViewById(R.id.v_placa_lista_txt);
             anio = view.findViewById(R.id.v_anio_lista_txt);
         }
