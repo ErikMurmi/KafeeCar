@@ -35,15 +35,11 @@ public class Catalogo_Cliente_fragment extends Fragment {
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
     private View mainView;
-    private LinearLayout irVerVehiculo;
-    private LinearLayout irVerVehiculo1;
     private LinearLayout irCitaNueva;
     private ScrollView verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo m_vehiculo;
-    TextView placa_v;
-    TextView placa_v1;
     private Vehiculo vMostrar;
     private Uri foto;
     private Button favoritoBoton;
@@ -85,15 +81,6 @@ public class Catalogo_Cliente_fragment extends Fragment {
         //Edit Text necesarios
 
 
-
-        irVerVehiculo.setOnClickListener(v -> {
-
-            try {
-                visualizarVehiculo("PSD-1234");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         regresarVistaVehiculo.setOnClickListener(v -> {
 
             try {
@@ -103,15 +90,6 @@ public class Catalogo_Cliente_fragment extends Fragment {
             }
         });
 
-
-        irVerVehiculo1.setOnClickListener(v -> {
-
-            try {
-                visualizarVehiculo("GHC-2434");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         favoritoBoton.setOnClickListener(v -> {
             modificarFavorito();
         });

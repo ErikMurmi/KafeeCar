@@ -37,7 +37,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-        SearchView busqueda_placa = mainView.findViewById(R.id.vt_busqueda_plcas_admin);
+
         //Botones
         irVentasGenerales=mainView.findViewById(R.id.administrar_venta_generales_btn);
         irRegistrarNuevaVenta=mainView.findViewById(R.id.administrar_venta_aniadirventa_btn);
@@ -75,7 +75,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         contar= mainView.findViewById(R.id.contar_txt);
         contar.setText(String.valueOf(patio.getVehiculos().contar()));
 
-        busqueda_placa.setOnQueryTextListener(this);
+
         cargar();
 
         return mainView;
