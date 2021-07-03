@@ -311,7 +311,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
         if (c == 0) {
             placa_str = placa_ad.getText().toString();
-            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str + ".jpg");
+            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str+".jpg");
             filePath.putFile(foto);
             patio.aniadirVehiculo(
                     new Vehiculo(
