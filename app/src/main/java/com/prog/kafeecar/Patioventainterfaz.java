@@ -92,7 +92,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("PDF-7894", "J43569", "Toyota", "Fortuner", "Negro", "SUV deportivo", 75000, 76000, 70000, true, 2021, "PDF-7894.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("ADA-9578", "M55789", "Ford", "Explorer", "Blanco", "SUV deportivo", 85000, 84000, 80000, true, 2020, "ADA-9578.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("DCD-4879", "J36978", "Tesla", "Model x", "Blanco", "SUV deportivo", 65000, 66000, 64000, true, 2021, "DCD-4879.jpg"));
-        patioventa.aniadirVehiculo(new Vehiculo("WER-1236", "T19478", "Toyota", "BZ4X", "Gris", "SUV deportivo", 55000, 76000, 70000, true, 2020, "PDR-7894.jpg"));
+        patioventa.aniadirVehiculo(new Vehiculo("WER-1236", "T19478", "Toyota", "BZ4X", "Gris", "SUV deportivo", 55000, 76000, 70000, true, 2020, "WER-1236.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("XAB-8541", "C76948", "Toyota", "Venza", "Azul", "SUV deportivo", 77000, 76000, 70000, true, 2020, "XAB-8541.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("IOT-3687", "K89457", "Peugeot", "3008", "Negro", "SUV deportivo", 78000, 77000, 70000, true, 2020, "IOT-3687.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("GUN-1764", "283I32", "Chevrolet", "Sail", "Negro", "Cahsis de sedán y mecaanismo manual ", 13000, 16000, 0, true, 2019, "GUN-1764.jpg"));
@@ -129,12 +129,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirCita(c4);
         patioventa.aniadirCita(c5);
         patioventa.aniadirCita(c6);
-        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(11));
+        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(12));
+        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(2), (Vehiculo) patioventa.getVehiculos().getPos(13));
+        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(3), (Vehiculo) patioventa.getVehiculos().getPos(14));
+        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(3), (Vendedor) patioventa.getVendedores().getPos(3), (Vehiculo) patioventa.getVehiculos().getPos(15));
+        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(3), (Vendedor) patioventa.getVendedores().getPos(4), (Vehiculo) patioventa.getVehiculos().getPos(16));
         patioventa.aniadirVenta(ven1);
         patioventa.aniadirVenta(ven2);
         patioventa.aniadirVenta(ven3);
