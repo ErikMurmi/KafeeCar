@@ -50,8 +50,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     private ImageView imagenPerfil_img;
 
-    private SearchView campoBusqueda;
-
     private Adaptador_Lista_Vendedores adptadorlistaview;
 
     private LinearLayout irRegistrarVendedor;
@@ -70,6 +68,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.vendedor_admin, container, false);
         patio = Patioventainterfaz.patioventa;
@@ -83,7 +82,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         Button editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
         Button cancelar_btn = mainView.findViewById(R.id.botonCancelarVendedores_btn);
 
-        campoBusqueda = mainView.findViewById(R.id.busqueda_vn_ad_srv);
+        SearchView campoBusqueda = mainView.findViewById(R.id.busqueda_vn_ad_srv);
 
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
         imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
@@ -160,9 +159,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Cancelar");
             msg.setMessage("¿Está seguro de salir sin guardar?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                regresarPantallaPrncipal();
-            });
+            msg.setPositiveButton("Si", (dialog, which) -> regresarPantallaPrncipal());
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -205,9 +202,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             msg.show();
         });
 
-        imagenPerfilVendedor_btn.setOnClickListener(v -> {
-            openGalery();
-        });
+        imagenPerfilVendedor_btn.setOnClickListener(v -> openGalery());
 
         imagenPerfilVendedorEdit_btn.setOnClickListener(v -> {
             editarImagen = true;
@@ -238,17 +233,14 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
         campoBusqueda.setOnQueryTextListener(this);
-        try {
-            cargar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        cargar();
 
         return mainView;
     }
 
-    public void cargar() throws Exception {
+    public void cargar(){
         RecyclerView listaview = mainView.findViewById(R.id.lista_vendedores_admin);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
@@ -279,7 +271,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         irAdministrarVendedor.setVisibility(View.VISIBLE);
     }
 
-    public void registrarVendedor() throws ParseException {
+    public void registrarVendedor() {
         EditText nombreVendedor;
         EditText apellidoVendedor;
         EditText cedulaVendedor;
@@ -357,7 +349,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
         diaNacimientoVendedor = mainView.findViewById(R.id.diaNacimientoVendedor_etxt);
         String dia_str = diaNacimientoVendedor.getText().toString();
-        int dia = -1;
+        int dia;
         if (dia_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
@@ -435,7 +427,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         horaAlmuerzoVendedor = mainView.findViewById(R.id.horaAlmuerzoVendedor_etxt);
         String horaAlmuerzoVendedor_str = horaAlmuerzoVendedor.getText().toString();
         int horaAlmuerzoVendedor_int = -1;
-        if (horaEntradaVendedor_str.isEmpty()) {
+        if (horaAlmuerzoVendedor_str.isEmpty()) {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
             c++;
         } else {
@@ -503,7 +495,8 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         }
     }
 
-    public void visualizarVendedor() throws Exception {
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
+    public void visualizarVendedor() {
         irRegistrarVendedor.setVisibility(View.GONE);
         irAdministrarVendedor.setVisibility(View.GONE);
         irEditarVendedor.setVisibility(View.GONE);
@@ -636,7 +629,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             EditText dia_ed = mainView.findViewById(R.id.diaNacimientoEditVendedor_etxt);
             String dia_str = dia_ed.getText().toString();
-            int dia = -1;
+            int dia;
             if (dia_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
                 c++;
@@ -705,7 +698,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             EditText horaAlmuerzo_ed = mainView.findViewById(R.id.horaAlmuerzoEditVendedor_etxt);
             String horaAlmuerzoVendedor_str = horaAlmuerzo_ed.getText().toString();
             int horaAlmuerzoVendedor_int = -1;
-            if (horaEntradaVendedor_str.isEmpty()) {
+            if (horaAlmuerzoVendedor_str.isEmpty()) {
                 Toast.makeText(mainView.getContext(), "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
                 c++;
             } else {
