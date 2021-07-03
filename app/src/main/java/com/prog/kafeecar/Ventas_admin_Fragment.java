@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Ventas_admin_Fragment extends Fragment {
+public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick{
     private View mainView;
     private PatioVenta patio;
     private FloatingActionButton irAniadirVehiculo;
@@ -27,6 +30,7 @@ public class Ventas_admin_Fragment extends Fragment {
     private LinearLayout verVentasGenerales;
     private LinearLayout verRegistroNuevaVenta;
     private LinearLayout verVentasAdmin;
+    private Adaptador_Lista_Ventas_Admin adptadorlistaview;
 
     @Nullable
     @Override
@@ -81,6 +85,8 @@ public class Ventas_admin_Fragment extends Fragment {
             }
 
         });
+
+        //cargar();
 
         return mainView;
     }
@@ -159,10 +165,23 @@ public class Ventas_admin_Fragment extends Fragment {
 
     }
 
-
+    public void cargar(){
+        RecyclerView listaview = mainView.findViewById(R.id.lista_ventas_admin_rv);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Ventas_Admin(patio.getVentasGenerales(), this);
+        listaview.setAdapter(adptadorlistaview);
+        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
+    }
 
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
+    }
+
+    @Override
+    public void itemClick(String placa) {
+        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
     }
 }
