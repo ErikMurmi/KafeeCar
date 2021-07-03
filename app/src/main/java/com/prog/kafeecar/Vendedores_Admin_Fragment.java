@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +38,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lista_Vendedores.RecyclerItemClick {
+public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lista_Vendedores.RecyclerItemClick, SearchView.OnQueryTextListener {
     private static final int REQUEST_IMAGE_GALERY = 101;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    @SuppressLint("SimpleDateFormat")
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private PatioVenta patio;
     Vendedor venMostrar;
@@ -47,7 +50,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     private ImageView imagenPerfil_img;
 
-    private RecyclerView listaview;
+    private SearchView campoBusqueda;
 
     private Adaptador_Lista_Vendedores adptadorlistaview;
 
@@ -58,12 +61,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
     private FloatingActionButton aniadirVendedor_btn;
     private Button deshabilitar_btn;
-    private Button editar_btn;
-    private Button listo_btn;
-    private Button editarlisto_btn;
-    private Button editarDeshacer_btn;
-    private Button cancelar_btn;
-    private ImageButton buscarCedulaVendedor_btn;
     private ImageButton imagenPerfilVendedor_btn;
     private ImageButton imagenPerfilVendedorEdit_btn;
 
@@ -78,6 +75,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         patio = Patioventainterfaz.patioventa;
         try {
             cargar();
+            campoBusqueda.setOnQueryTextListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,13 +83,14 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         //botones
         aniadirVendedor_btn = mainView.findViewById(R.id.boton_mas_admin_btn);
         deshabilitar_btn = mainView.findViewById(R.id.deshabilitar_vendedor_btn);
-        editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
-        listo_btn = mainView.findViewById(R.id.botonListo_btn);
-        editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
-        editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
-        cancelar_btn = mainView.findViewById(R.id.botonCancelarVendedores_btn);
+        Button editar_btn = mainView.findViewById(R.id.editar_vendedor_btn);
+        Button listo_btn = mainView.findViewById(R.id.botonListo_btn);
+        Button editarDeshacer_btn = mainView.findViewById(R.id.botonEditDeshacerVendedor_btn);
+        Button editarlisto_btn = mainView.findViewById(R.id.botonEditListo_btn);
+        Button cancelar_btn = mainView.findViewById(R.id.botonCancelarVendedores_btn);
 
-        buscarCedulaVendedor_btn = mainView.findViewById(R.id.busquedaCedulaVendedor_btn2);
+        campoBusqueda = mainView.findViewById(R.id.busqueda_vn_ad_srv);
+
         imagenPerfilVendedor_btn = mainView.findViewById(R.id.imagenPerfilVendedor_ibtn);
         imagenPerfilVendedorEdit_btn = mainView.findViewById(R.id.imagenPerfilEditVendedor_ibtn);
 
@@ -250,7 +249,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
     }
 
     public void cargar() throws Exception {
-        listaview = mainView.findViewById(R.id.lista_vendedores_admin);
+        RecyclerView listaview = mainView.findViewById(R.id.lista_vendedores_admin);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -793,5 +792,19 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No se puede mostrar la lista", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {return false; }
+
+    @Override
+    public boolean onQueryTextChange(String strBusqueda) {
+        //strBusqueda = strBusqueda.toUpperCase();
+        try{
+            adptadorlistaview.busqueda(strBusqueda);
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }

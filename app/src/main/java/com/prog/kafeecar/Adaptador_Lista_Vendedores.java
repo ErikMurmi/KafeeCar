@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +18,22 @@ import java.io.File;
 import java.io.IOException;
 
 public class Adaptador_Lista_Vendedores extends RecyclerView.Adapter<Adaptador_Lista_Vendedores.clienteHolder> {
+    Lista ven_original;
     Lista vendedores;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     View view;
     private RecyclerItemClick itemClick;
-    public Adaptador_Lista_Vendedores(Lista fav, RecyclerItemClick itemClick){
-
-        this.vendedores = fav;
+    public Adaptador_Lista_Vendedores(Lista vendedores, RecyclerItemClick itemClick){
+        this.vendedores = vendedores;
         this.itemClick = itemClick;
+        ven_original = new Lista();
+        for(int i=0; i<vendedores.contar();i++){
+            try {
+                ven_original.add(vendedores.getPos(i));
+            } catch (Exception e) {
+                Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @NonNull
@@ -94,6 +103,34 @@ public class Adaptador_Lista_Vendedores extends RecyclerView.Adapter<Adaptador_L
 
     public interface RecyclerItemClick{
         void itemClick(String cedula);
+    }
+
+    public void busqueda(String strBusqueda){
+        if(strBusqueda.length()==0){
+            vendedores.vaciar();
+            vendedores.copiar(ven_original);
+            /*for(int i=0; i<vendedores.contar();i++){
+                try {
+                    venBuscados.add(vendedores.getPos(i));
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+            }*/
+        }else{
+            vendedores.vaciar();
+            for(int i=0; i<ven_original.contar();i++){
+                Vendedor actual=null;
+                try {
+                    actual = (Vendedor) ven_original.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                if(actual.getCedula().contains(strBusqueda)){
+                    vendedores.add(actual);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
 
