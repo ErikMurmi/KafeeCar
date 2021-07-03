@@ -324,7 +324,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -345,7 +346,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="numberSigned"
-                        android:textColor="#959898" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/fechaNacimientoVendedor_txt2"
@@ -376,7 +377,7 @@
                             android:hint="dd"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView23"
@@ -399,7 +400,7 @@
                             android:hint="mm"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView25"
@@ -422,7 +423,7 @@
                             android:hint="aaaa"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
                     </LinearLayout>
 
                     <TextView
@@ -445,7 +446,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="numberSigned"
-                        android:textColor="#959898" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/correoVendedor_txt2"
@@ -467,7 +468,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/contraseniaVendedor_txt2"
@@ -489,7 +490,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textPassword"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/confirmarContraseniaVendedor_txt2"
@@ -512,7 +513,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textPassword"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </ScrollView>
