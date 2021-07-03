@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private LinearLayout verRegistroNuevaVenta;
     private LinearLayout verVentasAdmin;
     private Adaptador_Lista_Ventas_Admin adptadorlistaview;
+    private TextView contar;
 
     @Nullable
     @Override
@@ -70,6 +72,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             }
 
         });
+        contar= mainView.findViewById(R.id.contar_txt);
+        contar.setText(String.valueOf(patio.getVehiculos().contar()));
+
 
         cargar();
 
