@@ -21,7 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick{
     private View mainView;
     private PatioVenta patio;
-    private FloatingActionButton irAniadirVehiculo;
     private Button irVentasPorVendedor;
     private Button irVentasGenerales;
     private Button irRegistrarNuevaVenta;
@@ -86,7 +85,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
         });
 
-        //cargar();
+        cargar();
 
         return mainView;
     }
@@ -101,19 +100,15 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         EditText fechaventadia = mainView.findViewById(R.id.fecha_venta_dia_etxt);
         EditText fechaventames = mainView.findViewById(R.id.fecha_venta_mes_etxt);
         EditText fechaventaanio = mainView.findViewById(R.id.fecha_venta_anio_etxt);
-        EditText fechaventahora = mainView.findViewById(R.id.fecha_venta_hora_etxt);
 
         String fechaventa_str ="";
 
 
 
-        float precioventa =0;
         int c = 0;
-        int hora =-1;
 
-        if((!isEmpty(fechaventadia) && !isEmpty(fechaventames)) && (!isEmpty(fechaventaanio) && !isEmpty(fechaventahora))){
+        if((!isEmpty(fechaventadia) && !isEmpty(fechaventames)) && (!isEmpty(fechaventaanio))){
             fechaventa_str = fechaventaanio.getText().toString() + "-" + fechaventames.getText().toString() + "-" + fechaventadia.getText().toString();
-            hora=Integer.parseInt(fechaventahora.getText().toString());
         }else{
             c++;
             Toast.makeText(mainView.getContext(),"Campos de fecha vacios",Toast.LENGTH_SHORT).show();
@@ -144,18 +139,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             Toast.makeText(mainView.getContext(),"Campo de Vehiculo vacio",Toast.LENGTH_SHORT).show();
         }
 
-        EditText precio = mainView.findViewById(R.id.precio_venta_txt);
-        if(!isEmpty(precio)){
-            precioventa = Float.parseFloat(precio.getText().toString());
-        }else{
-            c++;
-            Toast.makeText(mainView.getContext(),"Campo de precio vacio",Toast.LENGTH_SHORT).show();
-
-        }
 
 
         if(c==0){
-            nueva = new Venta(Patioventainterfaz.sdf.parse(fechaventa_str), precioventa, clienteventa, vendedorventa, autoventa);
+            nueva = new Venta(Patioventainterfaz.sdf.parse(fechaventa_str), clienteventa, vendedorventa, autoventa);
             patio.aniadirVenta(nueva);
             if (patio.getVentasGenerales().contiene(nueva)) {
                 Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();

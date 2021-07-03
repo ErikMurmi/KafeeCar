@@ -122,12 +122,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirCita(c4);
         patioventa.aniadirCita(c5);
         patioventa.aniadirCita(c6);
-        Venta ven1 = new Venta(fechaCita, 24012.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven2 = new Venta(fechaCita1, 486145.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Venta ven3 = new Venta(fechaCita2, 89695.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven4 = new Venta(fechaCita3, 79832.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Venta ven5 = new Venta(fechaCita4, 102365.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Venta ven6 = new Venta(fechaCita5, 798450.8f, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
         patioventa.aniadirVenta(ven1);
         patioventa.aniadirVenta(ven2);
         patioventa.aniadirVenta(ven3);
@@ -161,7 +161,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irVendedor(View v) throws Exception {
-        usuarioActual = (Usuario) patioventa.getVendedores().getPos(2);
+        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
         irAplicacion("VENDEDOR");
     }
 
@@ -537,7 +537,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         Vehiculo autoventa = patioventa.buscarVehiculos("Matricula", autos_str);
 
 
-        Venta nueva = new Venta(sdf.parse(fechaventa_str), precioventa, clienteventa, vendedorventa, autoventa);
+        Venta nueva = new Venta(sdf.parse(fechaventa_str), clienteventa, vendedorventa, autoventa);
         patioventa.aniadirVenta(nueva);
 
         if (patioventa.getVentasGenerales().contiene(nueva)) {

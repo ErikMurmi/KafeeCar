@@ -39,7 +39,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private LinearLayout aniadir_cita_lyt;
     private LinearLayout citas_vn_lyt;
     private RecyclerView listaview;
-
+    private Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
     private FloatingActionButton ir_aniadir_ci_vn_btn;
     private Button guardar_ci_vn_btn;
     private Adaptador_Lista_Citas_Admin adptadorlistaview;
@@ -85,7 +85,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         try {
             cargar();
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Error en cargar citas", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
         return mainView;
     }
@@ -94,7 +94,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(),this);
+        adptadorlistaview = new Adaptador_Lista_Citas_Admin(usuarioActual.obtenerCitas(),this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }

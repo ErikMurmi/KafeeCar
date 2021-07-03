@@ -13,102 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginTop="45dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/dia_listacita_txt"
-                    android:layout_width="19dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="45dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocra"
-                    android:text="Día"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/día_listacita.btn"
-                    android:layout_width="5dp"
-                    android:layout_height="21dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/browser_actions_text_color"
-                    android:text="Button" />
-
-                <TextView
-                    android:id="@+id/mes_listacita_txt"
-                    android:layout_width="15dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocra"
-                    android:text="Mes"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/mes_listacita_btn"
-                    android:layout_width="5dp"
-                    android:layout_height="21dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:text="Button" />
-
-                <TextView
-                    android:id="@+id/anio_listacita_txt"
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocra"
-                    android:text="Año"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/anio_listacita_btn"
-                    android:layout_width="5dp"
-                    android:layout_height="21dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:text="Button" />
-
-                <TextView
-                    android:id="@+id/hora_listacita_txt"
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/ocra"
-                    android:text="Hora"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/hora_listacita_btn"
-                    android:layout_width="5dp"
-                    android:layout_height="21dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesboton"
-                    android:text="Button" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -244,7 +151,8 @@
                 android:id="@+id/listacitas_Rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
     </ScrollView>

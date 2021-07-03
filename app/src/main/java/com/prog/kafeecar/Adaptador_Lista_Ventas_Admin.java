@@ -52,7 +52,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
                     placas += " ,"+actual.getPlaca();
                 }
             }
-            String precio =String.valueOf(vt.getPrecio());
+            //String precio =String.valueOf(vt.getPrecio());
             Vehiculo actual = (Vehiculo) vt.getVehiculos().getPos(0);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+actual.getimagen());
 
@@ -72,7 +72,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
             holder.fecha.setText(fecha);
             holder.vendedor.setText(vendedor);
             holder.placas.setText(placas);
-            holder.precio.setText(precio);
+            //holder.precio.setText(precio);
 
             holder.itemView.setOnClickListener(v -> {
                 itemClick.itemClick("PSD-1234");
@@ -90,7 +90,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
 
     @Override
     public int getItemCount() {
-        return ventas_buscadas.contar();
+        return ventas_original.contar();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{
@@ -116,13 +116,6 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
         void itemClick(String placa);
     }
 
-    @SuppressLint("DefaultLocale")
-    public String formatoHora(int hora){
-        if(hora>12){
-            return "pm";
-        }
-        return "am";
-    }
 /*
     @Override
     public void itemClick(ItemList item){
