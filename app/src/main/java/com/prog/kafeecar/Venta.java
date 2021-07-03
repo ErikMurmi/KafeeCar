@@ -38,13 +38,18 @@ public class Venta {
 
     public float getPrecio() throws Exception {
         float precio =0;
-        for(int i=0; i<vehiculos.contar();i++){
-            Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
-            if(actual.getPromocion()==0){
-                precio += actual.getPromocion();
-            }else{
-                precio += actual.getPrecioVenta();
+        if(vehiculos.contar()>1){
+            for(int i=0; i<vehiculos.contar();i++){
+                Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
+                if(actual.getPromocion()==0){
+                    precio += actual.getPromocion();
+                }else{
+                    precio += actual.getPrecioVenta();
+                }
             }
+        }else{
+            Vehiculo vehiculo = (Vehiculo) vehiculos.getPos(0);
+            precio = vehiculo.getPrecioVenta();
         }
         return precio;
     }

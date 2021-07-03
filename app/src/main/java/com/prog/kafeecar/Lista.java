@@ -228,7 +228,7 @@ public class Lista {
             nodoeliminar.setAnterior(null);
             nodoeliminar.setSiguiente(null);
         }
-    return nodoeliminar.getDato();
+        return nodoeliminar.getDato();
     }
     
     /**
@@ -261,10 +261,9 @@ public class Lista {
     /**
      * Elimina un objeto de determina posicion  
      * @param pos posicion del objeto a eliminar
-     * @return  objeto eliminado
-     * @throws Exception 
+     * @throws Exception
      */
-    public Object eliminarPos(int pos) throws Exception{
+    /*public Object eliminarPos(int pos) throws Exception{
         if(esVacia()){
             throw new Exception("Esta vacia");
         }else if(pos>contar()){
@@ -280,7 +279,42 @@ public class Lista {
         aux.setAnterior(null);
         aux.setSiguiente(null);
         return aux.getDato();
+    }*/
+
+    public void eliminarPos(int pos) throws Exception{
+        if(esVacia()){
+            throw new Exception("Esta vacia");
+        }else if(pos>contar()){
+            throw new Exception("El indice supera el tamanio de la lista");
+        }
+        int cont=0;
+        Nodo aux = inicio;
+        while(cont < pos){
+            cont++;
+            aux = aux.getSiguiente();
+        }
+        if (inicio==fin && cont==0){
+            inicio=fin=null;
+        }
+        else if (cont==0){
+            aux= inicio;
+            inicio=inicio.getSiguiente();
+            aux.setSiguiente(null);
+            inicio.setAnterior(null);
+        }
+        else if(cont == contar()){
+            aux=fin;
+            fin=fin.getAnterior();
+            aux.setAnterior(null);
+            fin.setSiguiente(null);
+        }else{
+            aux.getAnterior().setSiguiente(aux.getSiguiente());
+            aux.getSiguiente().setAnterior(aux.getAnterior());
+            aux.setAnterior(null);
+            aux.setSiguiente(null);
+        }
     }
+
     public Lista listabusqueda(Object buscar) throws Exception {
         if (esVacia()) {
             return new Lista();

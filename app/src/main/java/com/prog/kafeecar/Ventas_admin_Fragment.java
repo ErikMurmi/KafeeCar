@@ -20,11 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainView;
     private PatioVenta patio;
-    private Button irVentasPorVendedor;
     private Button irVentasGenerales;
     private Button irRegistrarNuevaVenta;
     private Button realizarVenta;
-    private LinearLayout verVentasVendedor;
     private LinearLayout verVentasGenerales;
     private LinearLayout verRegistroNuevaVenta;
     private LinearLayout verVentasAdmin;
@@ -48,17 +46,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         verRegistroNuevaVenta= mainView.findViewById(R.id.adminregistro_lyt);
         verVentasAdmin=mainView.findViewById(R.id.ventas_admin_lyt);
 
-        irVentasPorVendedor.setOnClickListener(view ->{
-            irVentasPorVendedor.setVisibility(View.GONE);
-            verRegistroNuevaVenta.setVisibility(View.GONE);
-            verVentasGenerales.setVisibility(View.GONE);
-            verVentasVendedor.setVisibility(View.VISIBLE);
-
-        } );
 
         irVentasGenerales.setOnClickListener(view -> {
             irVentasGenerales.setVisibility(View.GONE);
-            verVentasVendedor.setVisibility(View.GONE);
             verRegistroNuevaVenta.setVisibility(View.GONE);
             verVentasGenerales.setVisibility(View.VISIBLE);
 
@@ -67,7 +57,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         irRegistrarNuevaVenta.setOnClickListener(view -> {
             irRegistrarNuevaVenta.setVisibility(View.GONE);
             verVentasGenerales.setVisibility(View.GONE);
-            verVentasVendedor.setVisibility(View.GONE);
             verVentasAdmin.setVisibility(View.GONE);
             verRegistroNuevaVenta.setVisibility(View.VISIBLE);
 

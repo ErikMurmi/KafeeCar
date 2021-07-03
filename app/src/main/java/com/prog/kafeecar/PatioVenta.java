@@ -204,7 +204,7 @@ public class PatioVenta {
      */
     public boolean removerVehiculo(String placa) throws Exception {
         boolean encontrado = false;
-        int cont =0;
+        int cont=0;
         while(cont<vehiculos.contar() && !encontrado){
             Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
             if(actual.getPlaca().compareToIgnoreCase(placa) ==0 ){

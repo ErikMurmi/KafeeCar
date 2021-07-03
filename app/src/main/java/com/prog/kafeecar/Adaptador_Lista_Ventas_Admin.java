@@ -54,7 +54,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
                     placas += " ,"+actual.getPlaca();
                 }
             }
-            //String precio =String.valueOf(vt.getPrecio());
+            String precio =String.valueOf(vt.getPrecio());
             Vehiculo actual = (Vehiculo) vt.getVehiculos().getPos(0);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+actual.getimagen());
 
@@ -74,7 +74,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
             holder.fecha.setText(fecha);
             holder.vendedor.setText(vendedor);
             holder.placas.setText(placas);
-            //holder.precio.setText(precio);
+            holder.precio.setText(precio);
 
             holder.itemView.setOnClickListener(v -> {
                 itemClick.itemClick("PSD-1234");
