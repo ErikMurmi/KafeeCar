@@ -68,8 +68,6 @@ public class Catalogo_Cliente_fragment extends Fragment {
         }
         //
         //Botones
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
         favoritoBoton=mainView.findViewById(R.id.aniadir_favorito_btn);
         agendarcita=mainView.findViewById(R.id.agendarcita_cliente_btn);
         regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
@@ -82,12 +80,10 @@ public class Catalogo_Cliente_fragment extends Fragment {
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
         vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-        irVerVehiculo = mainView.findViewById(R.id.vehiculo1_lista_cliente_lyt);
-        irVerVehiculo1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_lyt);
+
         irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
-        placa_v = mainView.findViewById(R.id.vehiculo1_placa_lista_cliente_txt);
-        placa_v1 = mainView.findViewById(R.id.vehiculo2_placa_lista_cliente_txt);
+
 
 
         irVerVehiculo.setOnClickListener(v -> {
@@ -158,67 +154,6 @@ public class Catalogo_Cliente_fragment extends Fragment {
 
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
-
-
-        ImageView v_img = mainView.findViewById(R.id.vehiculo1_lista_cliente_img);
-        ImageView v_img1 = mainView.findViewById(R.id.vehiculo2_lista_cliente_img);
-
-        TextView titulo = mainView.findViewById(R.id.vehiculo1_marca_modelo_cliente_txt);
-        TextView  anio = mainView.findViewById(R.id.vehiculo1_anio_lista_cliente_txt);
-        TextView matricula =  mainView.findViewById(R.id.vehiculo1_matricula_lista_cliente_txt);
-        TextView precio = mainView.findViewById(R.id.vehiculo1_precio_lista_cliente_txt);
-
-        TextView titulo1 = mainView.findViewById(R.id.vehiculo2_marca_modelo_cliente_txt);
-        TextView  anio1 = mainView.findViewById(R.id.vehiculo2_anio_lista_cliente_txt);
-        TextView matricula1 =  mainView.findViewById(R.id.vehiculo2_matricula_lista_cliente_txt);
-        TextView precio1 = mainView.findViewById(R.id.vehiculo2_precio_lista_cliente_txt);
-
-
-        Vehiculo v_Mostrar = patio.buscarVehiculos("Placa",placa);
-        Vehiculo v_Mostrar1 = patio.buscarVehiculos("Placa",placa1);
-        StorageReference filePath = mStorageRef.child("Vehiculos/"+v_Mostrar.getimagen());
-        //Glide.with(mainView)
-        //      .load(filePath)
-        //    .into(v_img);
-        try {
-            final File localFile = File.createTempFile(v_Mostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
-            });
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        //Imagen 2
-        filePath = mStorageRef.child("Vehiculos/"+v_Mostrar1.getimagen());
-        //Glide.with(mainView)
-        //      .load(filePath)
-        //    .into(v_img1);
-        try {
-            final File localFile = File.createTempFile(v_Mostrar1.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img1.setImageBitmap(bitmap);
-                }
-            });
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        titulo.setText(new String(v_Mostrar.getMarca()+" "+ v_Mostrar.getModelo()));
-        titulo1.setText(new String(v_Mostrar1.getMarca()+" "+ v_Mostrar1.getModelo()));
-        anio.setText(String.valueOf(v_Mostrar.getAnio()));
-        anio1.setText(String.valueOf(v_Mostrar1.getAnio()));
-        matricula.setText(v_Mostrar.getMatricula());
-        matricula1.setText(v_Mostrar1.getMatricula());
-        placa_v.setText(v_Mostrar.getPlaca());
-        placa_v1.setText(v_Mostrar1.getPlaca());
-        precio.setText(String.format("$ %.2f",v_Mostrar.getPrecioVenta()));
-        precio1.setText(String.format("$ %.2f",v_Mostrar1.getPrecioVenta()));
     }
 
 
