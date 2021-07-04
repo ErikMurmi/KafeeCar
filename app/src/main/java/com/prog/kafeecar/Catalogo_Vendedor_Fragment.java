@@ -49,18 +49,13 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         mainView = inflater.inflate(R.layout.catalogo_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
 
-        //Botones
-        Button agendarCita_btn = mainView.findViewById(R.id.irAgendarCita_ca_vn_btn);
-
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
         verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
 
-        agendarCita_btn.setOnClickListener(v -> {
-            verCatalogo.setVisibility(View.GONE);
-            verVehiculo.setVisibility(View.GONE);
-            //aniadir la visibilidad del agendar una cita
-        });
+
+
+
 
         /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override

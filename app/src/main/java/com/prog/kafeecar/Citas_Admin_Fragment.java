@@ -1,24 +1,16 @@
 package com.prog.kafeecar;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,21 +18,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
-
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
-import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 
-public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick{
+public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick {
 
-    private static final int REQUEST_IMAGE_GALERY = 101;
+    private static int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Citas_Admin";
     private PatioVenta patio;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -66,8 +51,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.citas_admin,container,false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mainView = inflater.inflate(R.layout.citas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         //Layouts
         /*
@@ -148,10 +133,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     public void cargar() {
         RecyclerView listaview = mainView.findViewById(R.id.rc_citas_admin);
-        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(),this);
+        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
@@ -184,42 +169,42 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         EditText fechacitames = mainView.findViewById(R.id.fechacitames_txt);
         EditText fechacitaanio = mainView.findViewById(R.id.fechacitaanio_txt);
         EditText fechacitahora = mainView.findViewById(R.id.fechacitahoracita_txt);
-        Vendedor vendedor_v =null;
-        Cliente cliente_c =null;
-        Vehiculo vehiculo =null;
-        String fechacita_str ="";
+        Vendedor vendedor_v = null;
+        Cliente cliente_c = null;
+        Vehiculo vehiculo = null;
+        String fechacita_str = "";
         int c = 0;
-        int hora =-1;
-        if((!isEmpty(fechacitadia) && !isEmpty(fechacitames)) && (!isEmpty(fechacitaanio) && !isEmpty(fechacitahora))){
-            fechacita_str = fechacitadia.getText().toString()+ "-" + fechacitames.getText().toString() + "-" + fechacitaanio.getText().toString();
+        int hora = -1;
+        if ((!isEmpty(fechacitadia) && !isEmpty(fechacitames)) && (!isEmpty(fechacitaanio) && !isEmpty(fechacitahora))) {
+            fechacita_str = fechacitadia.getText().toString() + "-" + fechacitames.getText().toString() + "-" + fechacitaanio.getText().toString();
             hora = Integer.parseInt(fechacitahora.getText().toString());
-        }else{
+        } else {
             c++;
             Toast.makeText(mainView.getContext(), "Campos de fecha vacíos", Toast.LENGTH_SHORT).show();
         }
         EditText cliente = mainView.findViewById(R.id.cliente_txt);
         EditText vendedor = mainView.findViewById(R.id.vendedor_txt);
-        EditText auto= mainView.findViewById(R.id.vehiculo_txt);
-        if(!isEmpty(cliente)){
+        EditText auto = mainView.findViewById(R.id.vehiculo_txt);
+        if (!isEmpty(cliente)) {
             String cliente_str = cliente.getText().toString();
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
-        }else{
+        } else {
             c++;
             Toast.makeText(mainView.getContext(), "Campo de cliente vacio", Toast.LENGTH_SHORT).show();
         }
 
-        if(!isEmpty(vendedor)){
+        if (!isEmpty(vendedor)) {
             String vendedor_str = vendedor.getText().toString();
             vendedor_v = patio.buscarVendedores("Cedula", vendedor_str);
-        }else{
+        } else {
             c++;
             Toast.makeText(mainView.getContext(), "Campo de vendedor vacio", Toast.LENGTH_SHORT).show();
         }
 
-        if(!isEmpty(auto)){
+        if (!isEmpty(auto)) {
             String vehiculo_str = auto.getText().toString();
             vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
-        }else{
+        } else {
             c++;
             Toast.makeText(mainView.getContext(), "Campo de vehiculo vacio", Toast.LENGTH_SHORT).show();
         }
@@ -227,7 +212,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         EditText resolucion = mainView.findViewById(R.id.resolucion_txt);
         String resolucion_str = resolucion.getText().toString();
 
-        if(c==0){
+        if (c == 0) {
             Cita nueva = new Cita(Patioventainterfaz.sdf.parse(fechacita_str), hora, resolucion_str, cliente_c, vendedor_v, vehiculo);
             patio.aniadirCita(nueva);
             if (patio.getCitas().contiene(nueva)) {
@@ -237,8 +222,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     }
 
-    public String formatoHora(int hora){
-        if(hora>12){
+    public String formatoHora(int hora) {
+        if (hora > 12) {
             return "pm";
         }
         return "am";
