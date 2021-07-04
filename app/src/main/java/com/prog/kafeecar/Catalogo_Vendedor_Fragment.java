@@ -28,7 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Lista_Catalogo_vn.RecyclerItemClick {
+public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick {
 
     private View mainView;
 
@@ -94,7 +94,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        Adaptador_Lista_Catalogo_vn adptadorlistaview = new Adaptador_Lista_Catalogo_vn(patio.getVehiculos(), this);
+        Adaptador_Lista_Catalogo adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 

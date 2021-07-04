@@ -5,13 +5,15 @@
  */
 package com.prog.kafeecar;
 
+import android.widget.TextView;
+
 import java.util.Date;
 
 
 public class Cliente extends Usuario{
 
     
-    Lista favoritos;
+    public Lista favoritos;
     private String imagen;
     /**
      * Este es el constructor que inicialeza los parámetros 
@@ -66,7 +68,7 @@ public class Cliente extends Usuario{
      * @param matricula del vehiculo favorito a agregar
      * @return  true si se agrego,caso contrario false
      */
-    public Boolean aniadirFavorito(String matricula ){
+    public Boolean aniadirFavorito(TextView matricula ){
         favoritos.add(matricula);
         return false;
     }
@@ -76,15 +78,16 @@ public class Cliente extends Usuario{
      * @param matricula del vehiculo a remover de favoritos
      * @return true si se borro, caso contrario false
      */
-    public void removeFavorito(String matricula) throws Exception {
 
+   //**** public void removeFavorito(String matricula) throws Exception {
+    public void removeFavorito(TextView matricula) throws Exception{
         if (favoritos.esVacia()) {
             throw new Exception("Esta vacia");
         }
         int cont=0;
         while (cont< favoritos.contar()) {
             String vehiculo=(String)favoritos.getPos(cont);
-            if (vehiculo.compareToIgnoreCase(matricula) == 0) {
+            if (vehiculo.compareToIgnoreCase(String.valueOf(matricula)) == 0) {
                 favoritos.eliminarPos(cont);
                 break;
             }

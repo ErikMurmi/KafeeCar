@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/catalogo_vehiculo_cliente_Rv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Patioventainterfaz">
@@ -10,8 +11,8 @@
         android:id="@+id/catalogoautos_cliente_scl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="invisible"
+        tools:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente"
@@ -29,23 +30,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/vehiculos_busqueda_cliente_etxt"
+
+                <SearchView
+                    android:id="@+id/busqueda_placa_cl_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/bordesbotongris"
-                    android:drawableRight="@drawable/search_1"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:inputType="numberSigned"
-                    android:text="BÚSQUEDA"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="@color/botones"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="@string/placa_c" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -78,6 +72,15 @@
 
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lista_autos_cl_Rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp" />
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -93,7 +96,7 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="invisible">
 
         <TextView
             android:id="@+id/editarcita_EC_txt"
@@ -260,7 +263,7 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="invisible">
 
         <TextView
             android:id="@+id/nueva_cita_cliente_lb"
@@ -347,7 +350,7 @@
             tools:visibility="visible" />
 
         <EditText
-            android:id="@+id/hora_clita_nueva_etxt"
+            android:id="@+id/hora_cita_nueva_cl_etxt"
             android:layout_width="97dp"
             android:layout_height="39dp"
             android:layout_marginTop="10dp"
@@ -405,7 +408,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="gone">
+        tools:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"

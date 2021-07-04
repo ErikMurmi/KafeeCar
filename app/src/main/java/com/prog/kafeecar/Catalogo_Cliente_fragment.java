@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -14,12 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -30,22 +35,29 @@ import java.io.File;
 import java.io.IOException;
 
 import static java.lang.String.format;
+public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo_Cl.RecyclerItemClick, SearchView.OnQueryTextListener {
 
-public class Catalogo_Cliente_fragment extends Fragment {
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
     private View mainView;
+    private LinearLayout irVerVehiculo;
+    private LinearLayout verVehiculoCl;
     private LinearLayout irCitaNueva;
     private ScrollView verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo m_vehiculo;
+    TextView placa_v;
+    TextView placa_v1;
     private Vehiculo vMostrar;
     private Uri foto;
     private Button favoritoBoton;
     private Button agendarcita;
     private Button regresarVistaVehiculo;
     private Drawable estrelladorada;
+
+
+    private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -55,40 +67,46 @@ public class Catalogo_Cliente_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mainView = inflater.inflate(R.layout.catalogo_cliente, container, false);
+        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_cl_bar);
         patio = Patioventainterfaz.patioventa;
 
         try {
-            verLista("PSD-1234","GHC-2434");
+            verLista("PSD-1234", "GHC-2434");
         } catch (Exception e) {
             e.printStackTrace();
         }
         //
         //Botones
-        favoritoBoton=mainView.findViewById(R.id.aniadir_favorito_btn);
-        agendarcita=mainView.findViewById(R.id.agendarcita_cliente_btn);
+        favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
+        agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
         regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
         //Recursos
-        estrelladorada=favoritoBoton.getBackground();
-        if(!esfavorito()){
+        estrelladorada = favoritoBoton.getBackground();
+        if (!esfavorito()) {
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
         }
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
-        vistaVehiculo=mainView.findViewById(R.id.vista_vehiculo_VV_scl);
+        vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
+        verVehiculoCl=mainView.findViewById(R.id.vehiculo_lista_cl_lyt);
 
         irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
 
 
+
+
         regresarVistaVehiculo.setOnClickListener(v -> {
 
             try {
-                visualizarVehiculo("PSD-1234");
+                visualizarVehiculo();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
+
+
 
         favoritoBoton.setOnClickListener(v -> {
             modificarFavorito();
@@ -103,18 +121,55 @@ public class Catalogo_Cliente_fragment extends Fragment {
                 e.printStackTrace();
             }
         });
+        //Metodo para el control del boton atras
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
 
+                if (vistaVehiculo.getVisibility() == View.VISIBLE) {
+                    irCatalogo();
+                }
 
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+        busqueda_placa.setOnQueryTextListener(this);
+        cargar();
 
 
         return mainView;
+    }
+    public void cargar() {
+        RecyclerView listaview = mainView.findViewById(R.id.rc_autos);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Catalogo_Cl(patio.getVehiculos(), this);
+        listaview.setAdapter(adptadorlistaview);
+    }
+    public void irVer() throws Exception {
+
+
+        verCatalogo.setVisibility(View.GONE);
+
+        //Activar el diseño deseado
+        vistaVehiculo.setVisibility(View.VISIBLE);
+        visualizarVehiculo();
+    }
+    public void irCatalogo() {
+
+        vistaVehiculo.setVisibility(View.GONE);
+
+        //Activar el diseño deseado
+        verCatalogo.setVisibility(View.VISIBLE);
+        cargar();
     }
 
     public void aniadirCita(){
 
 
     }
-    public void irCatalogo(){
+   /* public void irCatalogo(){
 
 
       vistaVehiculo.setVisibility(View.GONE);
@@ -127,7 +182,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     @SuppressLint("DefaultLocale")
@@ -153,9 +208,8 @@ public class Catalogo_Cliente_fragment extends Fragment {
     }
 
 
-    public void visualizarVehiculo(String placa_buscar) throws Exception {
+    public void visualizarVehiculo() {
 
-        m_vehiculo = patio.buscarVehiculos("Placa",placa_buscar);
         ImageView v_img = mainView.findViewById(R.id.foto_auto_imageView);
         TextView titulo = mainView.findViewById(R.id.titulo_auto_txt);
         TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
@@ -170,16 +224,8 @@ public class Catalogo_Cliente_fragment extends Fragment {
         TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
         TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
 
-        Vehiculo vMostrar  = null;
-        try {
-            vMostrar = patio.buscarVehiculos("Placa",placa_buscar);
-            m_vehiculo = vMostrar;
-        } catch (Exception e) {
-            Toast t= Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG);
-            t.show();
-        }
-        String titulo_str = m_vehiculo.getMarca()+" "+m_vehiculo.getModelo();//ojo
-        String precioTitulo = "$"+m_vehiculo.getPrecioVenta();
+        String titulo_str = vMostrar.getMarca()+" "+m_vehiculo.getModelo();//ojo
+        String precioTitulo = "$"+vMostrar.getPrecioVenta();
         precio.setText(precioTitulo);
         titulo.setText(titulo_str);
         placa.setText(format("Placa: %s", vMostrar.getPlaca()));
@@ -216,7 +262,9 @@ public class Catalogo_Cliente_fragment extends Fragment {
         }else{
             matriculado.setText("Matriculado: No");
         }
-        irVehiculo();
+        verCatalogo.setVisibility(View.GONE);
+        vistaVehiculo.setVisibility(View.VISIBLE);
+        //irVehiculo();
 
 
     }
@@ -229,7 +277,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         verCatalogo.setVisibility(View.GONE);
     }
 
-    public void aniadirCitaCliente() throws Exception {
+    /*public void aniadirCitaCliente() throws Exception {
         Lista citanueva;
         Cliente clienten= (Cliente) Patioventainterfaz.usuarioActual;
 
@@ -238,7 +286,7 @@ public class Catalogo_Cliente_fragment extends Fragment {
         EditText mescita = mainView.findViewById(R.id.mes_cita_nueva_etxt);
         EditText aniocita = mainView.findViewById(R.id.anio_cita_nueva_etxt);
         EditText minutocita = mainView.findViewById(R.id.minutos_clita_nueva_etxt);
-        EditText horacita = mainView.findViewById(R.id.hora_clita_nueva_etxt);
+        EditText horacita = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
         int cont=0;
 
         String fechacita_str = aniocita.getText().toString() + "-" + mescita.getText().toString() + "-" + diacita.getText().toString();
@@ -252,6 +300,31 @@ public class Catalogo_Cliente_fragment extends Fragment {
            // Cita nuevo=new Cita();//meter inof de la cita
           //  citanueva.add(nuevo);
         }
+    }*/
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toUpperCase();
+        try {
+            adptadorlistaview.filtro(newText);
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
+    @Override
+    public void itemClick(String placa) {
+        //irVer(placa);
+        try {
+            vMostrar = patio.buscarVehiculos("Placa", placa);
+            irVer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

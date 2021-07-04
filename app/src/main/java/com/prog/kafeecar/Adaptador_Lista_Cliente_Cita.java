@@ -44,7 +44,6 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
         try {
             Cliente cienteactual=(Cliente)Patioventainterfaz.usuarioActual;
             citas=Patioventainterfaz.patioventa.getCitas().listabusqueda(cienteactual);
-
             Cita c=(Cita)citas.getPos(position);
             String hora= "Hora: "+c.getHora();
             String nombre= "Nombre: "+c.getVisitante().getNombre();

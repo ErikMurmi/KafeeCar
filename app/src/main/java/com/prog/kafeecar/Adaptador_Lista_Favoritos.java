@@ -1,26 +1,47 @@
 package com.prog.kafeecar;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Lista_Favoritos.clienteHolder> {
-    Lista favoritos;
-    public Adaptador_Lista_Favoritos(Lista fav){
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-        this.favoritos=fav;
+import java.io.File;
+import java.io.IOException;
+
+public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Lista_Favoritos.clienteHolder> {
+    private Lista favoritos;
+    private Lista autos_buscados;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    View view;
+    private RecyclerItemClick itemClick;
+
+    public Adaptador_Lista_Favoritos(Lista fav, RecyclerItemClick itemClick){
+
+        this.autos_buscados =fav;
+        this.itemClick = itemClick;
+        favoritos = new Lista();
+        favoritos.copiar(fav);
     }
 
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.pantallitacita,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_auto_cl,parent,false);
         return new clienteHolder(view);
     }
 
@@ -28,50 +49,94 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Favoritos.clienteHolder holder, int position) {
         try {
             Cliente cienteactual=(Cliente)Patioventainterfaz.usuarioActual;
-            favoritos=Patioventainterfaz.patioventa.getCitas().listabusqueda(cienteactual);
-
+            favoritos=Patioventainterfaz.listaFav.getFavoritos().listabusqueda(cienteactual);
             Vehiculo c=(Vehiculo)favoritos.getPos(position);
-            //Drawable foto= (Drawable)c.getimagen();
             String precio="";
-            String nombre= "Auto: "+c.getMarca()+" "+c.getModelo();
             if (c.getPromocion()==0){
-                 precio= " Precio "+c.getPrecioVenta();
+                precio= "$ "+c.getPrecioVenta();
             }else{
-                 precio= " Precio promoción "+c.getPromocion();
+                precio= "$ "+c.getPromocion();
             }
-            String matricula="Matricula N#= "+c.getMatricula();
+
+            String marca=c.getMarca();
+            String placa = c.getPlaca();
+            String anio = String.valueOf(c.getAnio());
+             //holder.imagenauto.setBackground(R.);
 
 
-            //holder.imagenauto.setBackground(R.);
-            holder.nombre.setText(nombre);
+            /////
+            StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());
+            try {
+                final File localFile = File.createTempFile(c.getimagen(),"jpg");
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Uri foto = Uri.parse(localFile.getAbsolutePath());
+                    holder.imagenauto.setImageURI(foto);
+                });
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            holder.modelo.setText(marca);
             holder.precioauto.setText(precio);
-            holder.matricula.setText(matricula);
+            holder.marca.setText(marca);
+            holder.placa.setText(placa);
+            holder.anio.setText(anio);
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
 
+    }
+/////te quedaste aqui
     @Override
     public int getItemCount() {
-        return favoritos.contar();
+        return autos_buscados.contar();
+    }
+    public void filtro(String strBuscar){
+        if(strBuscar.length()==0){
+            autos_buscados.vaciar();
+            autos_buscados.copiar(favoritos);
+        }else {
+            autos_buscados.vaciar();
+            for(int i=0; i<favoritos.contar();i++){
+                Vehiculo actual=null;
+                try {
+                    actual = (Vehiculo) favoritos.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                if(actual.getPlaca().contains(strBuscar)){
+                    autos_buscados.add(actual);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
         public TextView precioauto;
-        public TextView nombre;
         public TextView matricula;
-
+        public TextView modelo;
+        public TextView marca;
+        public TextView placa;
+        public TextView anio;
 
 
         public clienteHolder(@NonNull View view) {
-            super(view);/*
-            imagenauto=view.findViewById(R.id.fotoauto_Lista_cliente_pantallita_img);
-            precioauto=view.findViewById(R.id.precio_lista_cliente_pantallita_txt);
-            nombre=view.findViewById(R.id.nombreauto_lista_cliente_pantallita_txt);
-            matricula=view.findViewById(R.id.matricula_lista_cliente_pantallita_txt);*/
+            super(view);
+            imagenauto=view.findViewById(R.id.v_lista_cl_img);
+            precioauto=view.findViewById(R.id.v_precio_lista_cl_txt);
+            modelo=view.findViewById(R.id.v_marca_modelo_cl_txt);
+            marca=view.findViewById(R.id.v_nummatricula_cl_lista);
+            placa = view.findViewById(R.id.v_placa_lista_cl_txt);
+            anio = view.findViewById(R.id.v_anio_lista_cl_txt);
         }
+        }
+    public interface RecyclerItemClick{
+        void itemClick(String placa);
     }
-}
+    }
+
 

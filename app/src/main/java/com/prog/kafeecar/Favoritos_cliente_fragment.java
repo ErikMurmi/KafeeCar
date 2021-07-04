@@ -23,21 +23,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class Favoritos_cliente_fragment extends Fragment{
-    private View mainview;
+    View mainview;
     Cliente cliente;
+    PatioVenta patio;
     RecyclerView listaview;
     Context context;
     Adaptador_Lista_Favoritos adptadorlistaview;
     public Favoritos_cliente_fragment( Context contex){
-
         this.context=contex;
-
     }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.favorito_cliente, container, false);
-        //cliente = Patioventainterfaz.clientefav;
+        //patio = Patioventainterfaz.listaFav;
 
         try {
             cargar();
@@ -48,15 +49,19 @@ public class Favoritos_cliente_fragment extends Fragment{
             }
             public void cargar() throws Exception {
                 Cliente autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();
-                listaview=mainview.findViewById(R.id.listafavoritos_Rv);
-                RecyclerView.LayoutManager manager=new LinearLayoutManager(context);
+                RecyclerView listaview = mainview.findViewById(R.id.listafavoritos_Rv);
+                RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
                 listaview.setLayoutManager(manager);
                 listaview.setItemAnimator(new DefaultItemAnimator());
-                adptadorlistaview=new Adaptador_Lista_Favoritos( cliente.getFavoritos().listabusqueda(autofavorito.getFavoritos()));
+                adptadorlistaview=new Adaptador_Lista_Favoritos( cliente.getFavoritos().listabusqueda(autofavorito.getFavoritos()), (Adaptador_Lista_Favoritos.RecyclerItemClick) this);
                 listaview.setAdapter(adptadorlistaview);
                 listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
             }
 
         }
+
+
+
+
 
 

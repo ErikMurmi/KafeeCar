@@ -320,6 +320,23 @@ public class PatioVenta {
         }
         return null;
     }
+    public Lista buscarporfecha(Date fech) throws Exception {
+        Cita citaEncontrada = null;
+        Lista citaslista=new Lista();
+            int cont = 0;
+            while(cont<citas.contar()){
+                Cita actual = (Cita) citas.getPos(cont);
+                if(actual.getFechaCita().compareTo(fech)==0){
+                    citaEncontrada=actual;
+                    citaslista.add(citaEncontrada);
+                    return citaslista;
+                }
+                cont++;
+            }
+
+        return null;
+
+    }
 
 
 

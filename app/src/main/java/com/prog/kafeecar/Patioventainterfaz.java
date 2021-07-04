@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 public class Patioventainterfaz extends AppCompatActivity {
 
     public static PatioVenta patioventa = new PatioVenta();
+    public static Cliente listaFav=new Cliente();
     public static Usuario usuarioActual = null;
     @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
