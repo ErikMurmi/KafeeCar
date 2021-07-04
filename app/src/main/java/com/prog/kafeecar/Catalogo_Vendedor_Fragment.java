@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -59,6 +61,35 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
             verVehiculo.setVisibility(View.GONE);
             //aniadir la visibilidad del agendar una cita
         });
+
+        /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (aniadir.getVisibility() == View.VISIBLE) {
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> irVer());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if (verVehiculo.getVisibility() == View.VISIBLE) {
+                    irCatalogo();
+                }
+                if (aniadir_vehiculo.getVisibility() == View.VISIBLE) {
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("Volver");
+                    msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> irCatalogo());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+            }
+        };*/
+
+        //requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+        //busqueda_placa.setOnQueryTextListener(this);
+        cargar();
 
         return mainView;
     }
