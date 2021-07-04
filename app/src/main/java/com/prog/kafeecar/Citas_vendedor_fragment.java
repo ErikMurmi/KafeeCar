@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,13 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private View mainView;
     private PatioVenta patio;
+    private Cita cita_mostrar;
 
     public EditText placa_ci_vn_etxt;
 
     private LinearLayout aniadir_ci_vn_lyt;
     private LinearLayout citas_vn_lyt;
+    private LinearLayout ver_ci_vn_lyt;
 
     private RecyclerView listaview;
 
@@ -47,6 +50,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         patio = Patioventainterfaz.patioventa;
 
         placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_etxt);
+        ver_ci_vn_lyt = mainView.findViewById(R.id.ver_ci_vn_lyt);
 
         //citas_vn_lyt = mainView.findViewById(R.id.citas_vn_lyt);
         aniadir_ci_vn_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
@@ -98,7 +102,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
-    /*public void visualizarCita() throws Exception {
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
+    public void visualizarCita() {
         TextView fecha = mainView.findViewById(R.id.fechaCita_txt);
         TextView hora = mainView.findViewById(R.id.horaCita_txt);
         TextView cliente = mainView.findViewById(R.id.clienteCita_txt);
@@ -108,17 +113,17 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         TextView descripcion = mainView.findViewById(R.id.descripcionCita_txt);
         TextView resolucion = mainView.findViewById(R.id.resolucionCita_txt);
         TextView precio = mainView.findViewById(R.id.precioVentaCita_txt);
-        Cita citaPrueba = (Cita) patio.getCitas().getPos(0);
-        fecha.setText(new String(fecha.getText().toString() + getFechaMod(citaPrueba.getFechaCita())));
-        hora.setText(new String(hora.getText().toString() + citaPrueba.getHora()));
-        cliente.setText(new String(cliente.getText().toString() + citaPrueba.getVisitante().getNombre()));
-        contacto.setText(new String(contacto.getText().toString() + citaPrueba.getVisitante().getTelefono()));
-        vendedor.setText(new String(vendedor.getText().toString() + citaPrueba.getVendedorCita().getNombre()));
-        vehiculo.setText(new String(vehiculo.getText().toString() + citaPrueba.getVehiculo().getModelo()));
-        descripcion.setText(new String(descripcion.getText().toString() + citaPrueba.getVehiculo().getDescripcion()));
-        resolucion.setText(new String(resolucion.getText().toString() + citaPrueba.getResolucion()));
-        precio.setText(new String(precio.getText().toString() + " $" + citaPrueba.getVehiculo().getPrecioVenta()));
-    }*/
+
+        fecha.setText(Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita()));
+        hora.setText(String.format("%d:00 %s", cita_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
+        cliente.setText(cita_mostrar.getVisitante().getNombre());
+        contacto.setText(cita_mostrar.getVisitante().getTelefono());
+        vendedor.setText(cita_mostrar.getVendedorCita().getNombre());
+        vehiculo.setText(cita_mostrar.getVehiculo().getModelo());
+        descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());
+        resolucion.setText(cita_mostrar.getResolucion());
+        precio.setText(cita_mostrar.getVehiculo().getPrecioVenta() + " $" );
+    }
 
     public void registarCita() throws Exception {
         EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_etxt);
@@ -128,7 +133,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Vendedor vendedor_v = null;
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        String fechacita_str = "";
         int c = 0;
         int hora = -1;
         int dia = -1;
@@ -218,6 +222,19 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             c++;
         }
 
+        if (!isEmpty(fechacitahora)) {
+            String hora_str = fechacitahora.getText().toString();
+            hora = Integer.parseInt(hora_str);
+            if (hora < 7 || hora > 17 || hora == vendedor_v.getHoraComida()) {
+                Toast.makeText(mainView.getContext(), "Hora inválida", Toast.LENGTH_SHORT).show();
+                fechacitahora.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
         EditText resolucion = mainView.findViewById(R.id.resolucion_ci_vn_etxt);
         String resolucion_str = resolucion.getText().toString();
 
@@ -242,14 +259,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
     }
 
-
-    public String formatoHora(int hora) {
-        if (hora > 12) {
-            return "pm";
-        }
-        return "am";
-    }
-
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
@@ -264,6 +273,11 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
     }
 
+    private void irVer() {
+        //verCatalogo.setVisibility(View.GONE);
+        ver_ci_vn_lyt.setVisibility(View.VISIBLE);
+        visualizarCita();
+    }
 
     @Override
     public void itemClick(String placa) {

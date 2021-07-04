@@ -40,8 +40,6 @@ import java.util.Date;
 
 public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lista_Vendedores.RecyclerItemClick, SearchView.OnQueryTextListener {
     private static final int REQUEST_IMAGE_GALERY = 101;
-    @SuppressLint("SimpleDateFormat")
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private PatioVenta patio;
     Vendedor venMostrar;
@@ -467,7 +465,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         if (c == 0) {
             Date fecha = null;
             try {
-                fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+                fecha = Patioventainterfaz.sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
