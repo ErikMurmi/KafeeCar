@@ -12,11 +12,13 @@ import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,7 +111,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg", 8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"), "175014048.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115623.jpg"), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Diana", "1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115233.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Diana","1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115233.jpg"), "Cliente");
+        Cliente c = (Cliente) patioventa.getClientes().getPos(1);
+        //c.aniadirFavorito("IPO-1963");
         Date fechaCita = sdf.parse("08-4-2019");
         Date fechaCita1 = sdf.parse("08-10-2020");
         Date fechaCita2 = sdf.parse("01-9-2020");
@@ -143,7 +147,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     private void irAplicacion(String tipo) {
-
+        Window w = getWindow();
+        w.setStatusBarColor(0);
         if (tipo.compareTo("ADMIN") == 0) {
             setContentView(R.layout.home_admin);
             BottomNavigationView navBar = findViewById(R.id.barra_nav);

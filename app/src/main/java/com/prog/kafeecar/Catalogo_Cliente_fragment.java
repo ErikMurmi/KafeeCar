@@ -40,15 +40,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private static final int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Catalogo";
     private View mainView;
-    private LinearLayout irVerVehiculo;
-    private LinearLayout verVehiculoCl;
     private LinearLayout irCitaNueva;
     private ScrollView verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo m_vehiculo;
-    TextView placa_v;
-    TextView placa_v1;
     private Vehiculo vMostrar;
     private Uri foto;
     private Button favoritoBoton;
@@ -70,11 +66,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_cl_bar);
         patio = Patioventainterfaz.patioventa;
 
-        try {
-            verLista("PSD-1234", "GHC-2434");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //
         //Botones
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
@@ -89,7 +80,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-        verVehiculoCl=mainView.findViewById(R.id.vehiculo_lista_cl_lyt);
 
         irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
@@ -134,7 +124,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         busqueda_placa.setOnQueryTextListener(this);
-        cargar();
+        //cargar();
 
 
         return mainView;

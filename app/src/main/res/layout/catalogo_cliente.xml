@@ -11,8 +11,8 @@
         android:id="@+id/catalogoautos_cliente_scl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        tools:visibility="invisible">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente"
