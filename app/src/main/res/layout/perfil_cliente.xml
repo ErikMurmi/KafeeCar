@@ -16,10 +16,10 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="729dp"
             android:layout_marginTop="72dp">
 
@@ -242,7 +242,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                 </LinearLayout>
 
@@ -335,13 +335,13 @@
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/imagen_perfil_cliente_img"
             android:layout_width="170dp"
             android:layout_height="170dp"
-            android:layout_marginLeft="122dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp"
             android:adjustViewBounds="false"
             tools:srcCompat="@tools:sample/avatars" />
@@ -351,10 +351,11 @@
             android:layout_height="15dp" />
 
         <LinearLayout
-            android:layout_width="346dp"
-            android:layout_height="343dp"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/bordesmarcos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bordesmarcosnegro"
             android:orientation="vertical">
 
             <TextView

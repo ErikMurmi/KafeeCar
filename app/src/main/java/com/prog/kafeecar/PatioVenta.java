@@ -219,23 +219,21 @@ public class PatioVenta {
 
     /**
      * Remueve una venta
-     * @param matricula dato del vehiculo de la venta a ser eliminada
+     * @param placa dato del vehiculo de la venta a ser eliminada
      * @return true si se elimino , false en caso de que no.
      */
-    public boolean removerVenta(String matricula) throws Exception {
+    public void removerVenta(String placa) throws Exception {
 
         boolean encontrado = false;
         int cont =0;
         while(cont<ventasGenerales.contar() && !encontrado){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.buscarVehiculo(matricula)!=null){
+            if(actual.buscarVehiculo(placa)!=null){
                 ventasGenerales.eliminarPos(cont);
                 encontrado=true;
             }
             cont++;
         }
-
-        return encontrado;
     }
 
 
@@ -284,14 +282,14 @@ public class PatioVenta {
      * @param texto palabra a buscar en el criterrio
      * @return Lista de citas que corresponden al criterio de busquda
      */
-    public Cita buscarCitas(String criterio, String texto) throws Exception {
+    public Cita buscarCitas(String criterio, String texto, String cliente) throws Exception {
         Cita citaEncontrada = null;
 
         if(criterio.compareToIgnoreCase("Vehiculo")==0){
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getPlaca().compareTo(texto)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(texto)==0 && actual.getVisitante().getCedula().compareTo(cliente)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -379,15 +377,15 @@ public class PatioVenta {
     /**
      * Busca ventas bajo disintos criterios
      * @param cedula cedula del cliente de la venta
-     * @param matricula matricula del vehiculo de la venta
+     * @param placa matricula del vehiculo de la venta
      * @return venta que coincide con los criterios de busqueda
      */
-    public Venta buscarVentas(String cedula, String matricula) throws Exception {
+    public Venta buscarVentas(String placa, String cedula){
         Venta buscada = null;
         int cont =0;
         while(cont<ventasGenerales.contar() && buscada==null){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.getComprador().getCedula().compareTo(cedula)==0 && actual.buscarVehiculo(matricula)!=null){
+            if(actual.getComprador().getCedula().compareTo(cedula)==0 && actual.buscarVehiculo(placa)!=null){
                 buscada = actual;
             }
             cont++;

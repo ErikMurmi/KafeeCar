@@ -182,7 +182,7 @@ public class Citas_cliente_fragment extends Fragment {
         textovehiculo = mainview.findViewById(R.id.vehiculo_cita_VC_etxt);
         textodescripcion = mainview.findViewById(R.id.descripcion_cita_VC_etxt);
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = patio.buscarCitas("cliente", cliente.getCedula());
+        Cita cita = patio.buscarCitas("cliente", cliente.getCedula(), cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
         String dia = fecha.split("-")[2];
         String mes = fecha.split("-")[1];
@@ -359,7 +359,7 @@ public class Citas_cliente_fragment extends Fragment {
             if(patio.asignarVendedor(horas_str,fecha)!=null){
                 Vendedor vendedor = patio.asignarVendedor(horas_str,fecha);
                 int entero = Integer.parseInt(horas_str);
-                Cita ac = patio.buscarCitas("correo","Hola@gmail.com");
+                Cita ac = patio.buscarCitas("correo","Hola@gmail.com",Patioventainterfaz.usuarioActual.getCedula());
                 ac.actualizar(fecha,entero,v,vendedor,(Cliente) Patioventainterfaz.usuarioActual);
             }
             else
@@ -391,7 +391,7 @@ public class Citas_cliente_fragment extends Fragment {
         textohoras = mainview.findViewById(R.id.hora_cita_nueva_cl_etxt);
         PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = p.buscarCitas("cliente",cliente.getCedula());
+        Cita cita = p.buscarCitas("cliente",cliente.getCedula(),cliente.getCedula());
         textohoras.setText(cita.getHora());
         textoplaca.setText(cita.getVehiculo().getPlaca());
         String fecha =  Patioventainterfaz.getFechaMod(cita.getFechaCita());

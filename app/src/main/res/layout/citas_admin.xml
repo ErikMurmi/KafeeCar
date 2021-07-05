@@ -7,6 +7,308 @@
     android:background="@drawable/citas_lista">
 
     <LinearLayout
+        android:id="@+id/ver_ci_ad_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cita_back"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/top_space">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:paddingRight="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_car_dark"
+                    tools:srcCompat="@drawable/ic_car_dark" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/ocra"
+                            android:text="Fecha:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_fecha_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:hint="01-07-2021"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Hora:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_hora_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="14:00pm"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Cliente:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_cliente_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Martha Sanchez"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Contacto:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_contacto_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="0999999999"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Vendedor:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_vendedor_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Juan Jácome"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Vehículo:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_vehiculo_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="KIA Picanto"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/texto_style"
+                                android:layout_width="145dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocra"
+                                android:text="Precio venta:"
+                                android:textColor="@color/gris_visualizar" />
+
+                            <TextView
+                                android:id="@+id/ver_precioVenta_ci_ad_txt"
+                                style="@style/texto_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocra"
+                                android:hint="$5,000"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Descripción:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_descripcion_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Auto que tuvo reparaciones recientes"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Resolución:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_resolucion_ci_ad_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Se acordó un descuento del 10% para su venta posterior."
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="13dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/anular_ci_vn_btn"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valoran"
+                        android:text="Anular"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <Space
+                        android:layout_width="22dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/editar_ci_vn_btn"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:fontFamily="@font/valoran"
+                        android:text="editar"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/add_cita_admin_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +318,7 @@
         tools:visibility="gone">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="35dp"
             android:layout_marginTop="80dp"
@@ -35,6 +337,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -63,11 +366,10 @@
 
                         <EditText
                             android:id="@+id/fechacitames_txt"
-                            android:layout_width="70dp"
+                            android:layout_width="60dp"
                             android:layout_height="37dp"
                             android:layout_marginEnd="12dp"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:ems="10"
 
                             android:fontFamily="@font/ocra"
                             android:hint="dd"
@@ -82,7 +384,6 @@
                             android:layout_height="37dp"
                             android:layout_marginEnd="12dp"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:ems="10"
                             android:fontFamily="@font/ocra"
                             android:hint="mm"
                             android:inputType="textPersonName"
@@ -92,11 +393,10 @@
 
                         <EditText
                             android:id="@+id/fechacitaanio_txt"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="37dp"
                             android:layout_marginEnd="12dp"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:ems="10"
                             android:fontFamily="@font/ocra"
 
                             android:hint="aaaa"
@@ -113,8 +413,8 @@
                     android:layout_height="8dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -132,7 +432,7 @@
 
                     <EditText
                         android:id="@+id/fechacitahoracita_txt"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="37dp"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
@@ -170,7 +470,7 @@
 
                 <EditText
                     android:id="@+id/cliente_txt"
-                    android:layout_width="280dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
@@ -217,7 +517,7 @@
 
                 <EditText
                     android:id="@+id/vendedor_txt"
-                    android:layout_width="280dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
 
@@ -263,7 +563,7 @@
 
                 <EditText
                     android:id="@+id/vehiculo_txt"
-                    android:layout_width="280dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
@@ -359,7 +659,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/citas_admin_lyt"
+        android:id="@+id/citas_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -373,11 +673,32 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="55dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <SearchView
+                    android:id="@+id/busqueda_c_ad_srv"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bordesbotongris"
+                    android:iconifiedByDefault="false"
+                    android:inputType="date"
+                    android:queryBackground="@color/white"
+                    android:queryHint="dd/mm/aaaa" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="gone">
 
                 <EditText
                     android:id="@+id/dia_busqueda_etxt"
@@ -440,11 +761,6 @@
                     android:textColor="#959898"
                     android:textSize="15sp" />
 
-                <SearchView
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:iconifiedByDefault="false" />
-
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn"
                     android:layout_width="60dp"
@@ -454,51 +770,6 @@
                     android:backgroundTint="@color/botones"
                     app:srcCompat="@drawable/icono_busqueda" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                tools:visibility="gone">
-
-                <CheckBox
-                    android:id="@+id/filtro_dia_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Día" />
-
-                <CheckBox
-                    android:id="@+id/filtro_mes_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Mes" />
-
-                <CheckBox
-                    android:id="@+id/filtro_anio_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Año" />
-
-                <CheckBox
-                    android:id="@+id/filtro_hora_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Hora" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -514,7 +785,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ir_aniadir_btn2"
+        android:id="@+id/ir_aniadir_cita_ad_fbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
@@ -527,7 +798,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="50dp"
         app:srcCompat="@drawable/anadir_icon"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ver_cita_lyt"
@@ -544,8 +815,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="40dp"
-            android:paddingRight="20dp"
-            android:visibility="visible">
+            android:paddingRight="20dp">
 
             <ImageView
                 android:id="@+id/cita_img"

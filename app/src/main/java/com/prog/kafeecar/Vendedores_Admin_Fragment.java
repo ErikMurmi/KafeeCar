@@ -725,8 +725,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString() + ".jpg");
-                filePath.putFile(foto);
+                if(foto!=null){
+                    StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString() + ".jpg");
+                    filePath.putFile(foto);
+                }
                 cedulaVen.cambiarDatosSinClaveVendedor(
                         horaEntradaVendedor_int,
                         horaAlmuerzoVendedor_int,

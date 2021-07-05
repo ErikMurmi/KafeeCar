@@ -16,7 +16,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador_Lista_Ventas_Admin.clienteHolder> {
+public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista_Ventas.clienteHolder> {
     Lista ventas_original;
     Lista ventas_buscadas;
 
@@ -24,7 +24,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
    // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
     private RecyclerItemClick itemClick;
-    public Adaptador_Lista_Ventas_Admin(Lista ventas, RecyclerItemClick itemClick){
+    public Adaptador_Lista_Ventas(Lista ventas, RecyclerItemClick itemClick){
         this.ventas_buscadas =ventas;
         this.itemClick = itemClick;
         ventas_original=new Lista();
@@ -39,7 +39,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  Adaptador_Lista_Ventas_Admin.clienteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  Adaptador_Lista_Ventas.clienteHolder holder, int position) {
         try {
             Venta vt= (Venta) ventas_original.getPos(position);
             String nombre= vt.getComprador().getNombre();
@@ -54,7 +54,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
                     placas += " ,"+actual.getPlaca();
                 }
             }
-            String precio =String.valueOf(vt.getPrecio());
+            String precio = "$ "+ vt.getPrecio();
             Vehiculo actual = (Vehiculo) vt.getVehiculos().getPos(0);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+actual.getimagen());
 
@@ -76,9 +76,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
             holder.placas.setText(placas);
             holder.precio.setText(precio);
 
-            holder.itemView.setOnClickListener(v -> {
-                itemClick.itemClick("PSD-1234");
-            });
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(actual.getPlaca(),vt.getComprador().getCedula()));
             /*
             holder.itemView.setOnClickListener(v -> {
                 Catalogo_Admin_Fragment.irVer(placa);
@@ -95,7 +93,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
         return ventas_buscadas.contar();
     }
 
-    public class clienteHolder extends RecyclerView.ViewHolder{
+    public static class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
         public TextView vendedor;
         public TextView fecha;
@@ -121,12 +119,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
         }else {
             ventas_buscadas.vaciar();
             for(int i=0; i<ventas_original.contar();i++){
-                Vehiculo actual=null;
-                try {
-                    actual = (Vehiculo) ventas_original.getPos(i);
-                } catch (Exception e) {
-                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
+                Vehiculo actual = (Vehiculo) ventas_original.getPos(i);
                 if(actual.getPlaca().contains(strBuscar)){
                     ventas_buscadas.add(actual);
                 }
@@ -136,7 +129,7 @@ public class Adaptador_Lista_Ventas_Admin extends RecyclerView.Adapter<Adaptador
     }
 
     public interface RecyclerItemClick{
-        void itemClick(String placa);
+        void itemClick(String placa, String cliente);
     }
 
 /*

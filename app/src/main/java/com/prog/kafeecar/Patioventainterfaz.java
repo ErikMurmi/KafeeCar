@@ -159,6 +159,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     private void irAplicacion(String tipo) {
         Window w = getWindow();
         w.setStatusBarColor(0);
+        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         if (tipo.compareTo("ADMIN") == 0) {
             setContentView(R.layout.home_admin);
             BottomNavigationView navBar = findViewById(R.id.barra_nav);
@@ -245,6 +246,9 @@ public class Patioventainterfaz extends AppCompatActivity {
                         break;
                     case R.id.nav_cat_ven:
                         selectedFragement = new Catalogo_Vendedor_Fragment();
+                        break;
+                    case R.id.nav_ventas_ven:
+                        selectedFragement = new Ventas_vendedor_fragment();
                         break;
                     case R.id.nav_perfil_ven:
                         selectedFragement = new Perfil_Vendedor_Fragment();

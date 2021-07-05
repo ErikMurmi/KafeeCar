@@ -484,15 +484,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <SearchView
                 android:id="@+id/busqueda_placa_bar"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginRight="15dp"
-                android:backgroundTint="@color/botones"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bordesbotongris"
                 android:iconifiedByDefault="false"
+                android:queryBackground="@color/white"
                 android:queryHint="@string/placa_c" />
 
             <LinearLayout
@@ -527,7 +528,7 @@
                 android:id="@+id/rc_autos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp" />
 

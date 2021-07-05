@@ -134,9 +134,6 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        Glide.with(mainView)
-                .load(filePath)
-                .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {

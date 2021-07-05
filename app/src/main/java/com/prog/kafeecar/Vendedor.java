@@ -108,24 +108,19 @@ public class Vendedor extends Usuario{
      * Busca las ventas del vendedor en la sucursal
      * @return ventas del vendedor 
      */
-    public void obtenerVentas() throws Exception {
+    public Lista obtenerVentas() {
         Lista ventas =  new Lista();
         Lista copiaSitema=sucursal.getVentasGenerales();
         int cont =0;
-        System.out.println(copiaSitema.contar());
-       while(cont< copiaSitema.contar())
-       {
+        while(cont< copiaSitema.contar())
+        {
             Venta act= (Venta) copiaSitema.getPos(cont) ;
             if(act.getVendedor().getNombre().compareTo(this.getNombre())==0){
-                System.out.println("Encontrado");
                 ventas.add(act);
             }
-                                
-                 cont++;
+            cont++;
        }
-         
-       System.out.println("las ventas son "+ventas.contar()); 
-       
+        return ventas;
     }
     
     /**
