@@ -34,7 +34,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     public EditText placa_ci_vn_etxt;
 
     private LinearLayout aniadir_ci_vn_lyt;
-    private LinearLayout citas_vn_lyt;
+    private LinearLayout citas_vendedor_lyt;
     private LinearLayout ver_ci_vn_lyt;
 
     private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
@@ -47,8 +47,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
         placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_etxt);
         ver_ci_vn_lyt = mainView.findViewById(R.id.ver_ci_vn_lyt);
-
-        //citas_vn_lyt = mainView.findViewById(R.id.citas_vn_lyt);
+        citas_vendedor_lyt = mainView.findViewById(R.id.citas_vendedor_lyt);
         aniadir_ci_vn_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
 
         ir_aniadir_ci_vn_btn = mainView.findViewById(R.id.ir_aniadir_ci_vn_btn);
@@ -64,10 +63,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             try {
                 registarCita();
                 Toast.makeText(mainView.getContext(), "Cita Registrada", Toast.LENGTH_SHORT).show();
-
             } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "No se pudo registrar la cita", Toast.LENGTH_SHORT).show();
-                //citas_vn_lyt.setVisibility(View.VISIBLE);
+                citas_vendedor_lyt.setVisibility(View.VISIBLE);
             }
         });
 
@@ -185,6 +183,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             c++;
         }
 
+
+
         EditText cliente = mainView.findViewById(R.id.cedula_cliente_ci_cn_etxt);
         EditText vendedor = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
         EditText auto = mainView.findViewById(R.id.placa_ci_vn_etxt);
@@ -199,19 +199,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        if (!isEmpty(vendedor)) {
-            String vendedor_str = cliente.getText().toString();
-            if (vendedor_str.length() != 10) {
-                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                cliente.setText("");
-                c++;
-            }
-            vendedor_v = patio.buscarVendedores("Cedula", vendedor_str);
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Vendedor*", Toast.LENGTH_SHORT).show();
             c++;
         }
 
@@ -231,13 +218,14 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         if (!isEmpty(fechacitahora)) {
             String hora_str = fechacitahora.getText().toString();
             hora = Integer.parseInt(hora_str);
-            if (hora < 7 || hora > 17 || hora == vendedor_v.getHoraComida()) {
-                Toast.makeText(mainView.getContext(), "Hora inválida", Toast.LENGTH_SHORT).show();
-                fechacitahora.setText("");
-                c++;
-            }
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        Date fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
+        if(!usuarioActual.disponible(fecha, hora)){
+            Toast.makeText(mainView.getContext(), "El vendedor no está disponible", Toast.LENGTH_SHORT).show();
             c++;
         }
 
@@ -245,12 +233,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         String resolucion_str = resolucion.getText().toString();
 
         if (c == 0) {
-            Date fecha = null;
-            try {
-                fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             Cita nueva = new Cita(
                     fecha,
                     hora,
@@ -280,7 +262,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
     private void irVer() {
-        //verCatalogo.setVisibility(View.GONE);
+        citas_vendedor_lyt.setVisibility(View.GONE);
         ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
         aniadir_ci_vn_lyt.setVisibility(View.GONE);
         ver_ci_vn_lyt.setVisibility(View.VISIBLE);
