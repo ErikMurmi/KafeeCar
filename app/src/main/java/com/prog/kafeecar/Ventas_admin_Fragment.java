@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas_Admin.RecyclerItemClick, SearchView.OnQueryTextListener {
+public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainView;
     private PatioVenta patio;
     private Button irVentasGenerales;
@@ -27,7 +27,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private LinearLayout verVentasGenerales;
     private LinearLayout verRegistroNuevaVenta;
     private LinearLayout verVentasAdmin;
-    private Adaptador_Lista_Ventas_Admin adptadorlistaview;
+    private Adaptador_Lista_Ventas adptadorlistaview;
     private TextView contar;
 
     @Nullable
@@ -148,7 +148,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Ventas_Admin(patio.getVentasGenerales(), this);
+        adptadorlistaview = new Adaptador_Lista_Ventas(patio.getVentasGenerales(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }

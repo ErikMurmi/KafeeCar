@@ -120,11 +120,13 @@ public class Lista {
      * @return
      * @throws Exception
      */
-    public Object getPos(int pos) throws Exception{
+    public Object getPos(int pos){
         if(esVacia()){
-            throw new Exception("Esta vacia");
+            System.out.println("Lista vacia");
+            return null;
         }else if(pos>contar()){
-            throw new Exception("El indice supera el tamanio de la lista");
+            System.out.println("Indice supera el tamanio de la lista");
+            return null;
         }
         int cont=0;
         Nodo aux = inicio;
