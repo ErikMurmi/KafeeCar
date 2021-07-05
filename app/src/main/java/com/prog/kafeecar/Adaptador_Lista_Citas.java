@@ -20,14 +20,14 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_Lista_Citas_Admin.clienteHolder> {
+public class Adaptador_Lista_Citas extends RecyclerView.Adapter<Adaptador_Lista_Citas.clienteHolder> {
     Lista citas_originales;
     private Lista citas_buscadas;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
    // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
     private RecyclerItemClick itemClick;
-    public Adaptador_Lista_Citas_Admin(Lista citas, RecyclerItemClick itemClick){
+    public Adaptador_Lista_Citas(Lista citas, RecyclerItemClick itemClick){
         this.citas_buscadas =citas;
         this.itemClick = itemClick;
         citas_originales = new Lista();
@@ -42,7 +42,7 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  Adaptador_Lista_Citas_Admin.clienteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  Adaptador_Lista_Citas.clienteHolder holder, int position) {
         try {
             Cita c= (Cita) citas_buscadas.getPos(position);
             String nombre= c.getVisitante().getNombre();
