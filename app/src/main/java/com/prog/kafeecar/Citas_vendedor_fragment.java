@@ -30,6 +30,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private View mainView;
     private PatioVenta patio;
     Cita cita_mostrar;
+    Cliente cliente_mostrar;
 
     public EditText placa_ci_vn_etxt;
 
@@ -73,7 +74,14 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("ANULAR");
             msg.setMessage("¿Está seguro de anular la cita?");
-            msg.setPositiveButton("Si", (dialog, which) -> irVer());
+            msg.setPositiveButton("Si", (dialog, which) -> {
+            try {
+                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cliente_mostrar.getCedula());
+                irVer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -103,7 +111,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         listaview.setItemAnimator(new DefaultItemAnimator());
         Adaptador_Lista_Citas adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
         listaview.setAdapter(adptadorlistaview);
-        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
@@ -182,8 +189,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
             c++;
         }
-
-
 
         EditText cliente = mainView.findViewById(R.id.cedula_cliente_ci_cn_etxt);
         EditText vendedor = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
