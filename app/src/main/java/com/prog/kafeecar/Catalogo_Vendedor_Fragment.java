@@ -32,7 +32,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
     private View mainView;
 
-    private ScrollView verVehiculo;
+    private LinearLayout verVehiculo;
 
     private LinearLayout verCatalogo;
 
@@ -52,6 +52,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
         verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
+
 
 
 
