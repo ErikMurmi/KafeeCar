@@ -6,13 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vehiculo_lista_lyt"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/item_lista_espacio"
+    app:cardCornerRadius="15dp">
 
     <LinearLayout
         android:id="@+id/AVvendedor_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/item_lista_espacio"
         android:background="@drawable/bordesmarcosnegro"
         android:orientation="vertical">
 

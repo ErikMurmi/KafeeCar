@@ -18,7 +18,7 @@
             android:id="@+id/ven_img"
             android:layout_width="170dp"
             android:layout_height="170dp"
-            android:layout_marginLeft="122dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp"
             android:adjustViewBounds="false"
             android:scaleType="centerCrop"
@@ -29,10 +29,11 @@
             android:layout_height="15dp" />
 
         <LinearLayout
-            android:layout_width="346dp"
+            android:layout_width="match_parent"
             android:layout_height="343dp"
             android:layout_marginLeft="35dp"
-            android:background="@drawable/bordesmarcos"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bordesmarcosnegro"
             android:orientation="vertical">
 
             <TextView
@@ -318,7 +319,8 @@
                         android:background="@drawable/bordesbotongris"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -339,7 +341,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="numberSigned"
-                        android:textColor="#959898" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/fechaNacimientoVendedor_txt2"
@@ -362,7 +364,7 @@
 
                         <EditText
                             android:id="@+id/diaNacimiento_pe_vn_etxt"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesbotongris"
                             android:ems="10"
@@ -370,7 +372,7 @@
                             android:hint="dd"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView23"
@@ -384,7 +386,7 @@
 
                         <EditText
                             android:id="@+id/mesNacimiento_pe_vn_etxt"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="7dp"
                             android:background="@drawable/bordesbotongris"
@@ -393,7 +395,7 @@
                             android:hint="mm"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView25"
@@ -408,7 +410,7 @@
 
                         <EditText
                             android:id="@+id/anioNacimiento_pe_vn_etxt"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesbotongris"
                             android:ems="10"
@@ -416,7 +418,7 @@
                             android:hint="aaaa"
                             android:inputType="date"
                             android:textAlignment="center"
-                            android:textColor="@color/gris" />
+                            android:textColor="@color/black" />
                     </LinearLayout>
 
                     <TextView
@@ -439,7 +441,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="numberSigned"
-                        android:textColor="#959898" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/correoVendedor_txt2"
@@ -461,7 +463,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/contraseniaVendedor_txt2"
@@ -483,7 +485,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textPassword"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/confirmarContraseniaVendedor_txt2"
@@ -506,7 +508,7 @@
                         android:ems="10"
                         android:fontFamily="@font/ocra"
                         android:inputType="textPassword"
-                        android:textColor="@color/gris" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </ScrollView>
@@ -525,7 +527,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <Button
             android:id="@+id/cancelar_edit_pe_vn_lyt"

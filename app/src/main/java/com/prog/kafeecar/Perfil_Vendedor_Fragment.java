@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -84,7 +85,13 @@ public class Perfil_Vendedor_Fragment extends Fragment {
         });
 
         guardarEditar.setOnClickListener(v -> {
-            editarVendedor();
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+            msg.setTitle("Editar Perfil");
+            msg.setMessage("¿Estás seguro editar los datos de su perfil?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> editarVendedor());
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+
         });
 
         ven_img_btn.setOnClickListener(v -> {
