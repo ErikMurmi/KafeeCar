@@ -149,6 +149,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     private void irAplicacion(String tipo) {
         Window w = getWindow();
         w.setStatusBarColor(0);
+        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         if (tipo.compareTo("ADMIN") == 0) {
             setContentView(R.layout.home_admin);
             BottomNavigationView navBar = findViewById(R.id.barra_nav);

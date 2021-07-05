@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ import com.google.firebase.storage.StorageReference;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
-public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick {
+public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private static int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Citas_Admin";
@@ -35,12 +37,15 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     //TODO
     private static Vehiculo aux;
     private View mainView;
-
+    private SearchView busqueda_citas;
 
     //Image Buttons
     private ImageButton buscar_btn;
 
     private EditText vehiculo_nuevacita;
+    private EditText dia_b;
+    private EditText mes_b;
+    private EditText anio_b;
     //Botones
     private Button irVerCita;
     private Button irAniadirCita;
@@ -55,17 +60,21 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         mainView = inflater.inflate(R.layout.citas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         //Layouts
-        /*
-        verCita = mainView.findViewById(R.id.ver_cita_lyt);
-        aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
-        listaCitas = mainView.findViewById(R.id.citas_admin_lyt);
+        busqueda_citas = mainView.findViewById(R.id.busqueda_c_ad_srv);
+        //verCita = mainView.findViewById(R.id.ver_cita_lyt);
+        //aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
+        //listaCitas = mainView.findViewById(R.id.citas_admin_lyt);
 
         //Botones
-        irAniadirCita = mainView.findViewById(R.id.ir_aniadir_btn2);
+        //irAniadirCita = mainView.findViewById(R.id.ir_aniadir_btn2);
         //TextViews
-        vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
+        //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
+        //Edit Text
+        dia_b = mainView.findViewById(R.id.dia_busqueda_etxt);
+        mes_b = mainView.findViewById(R.id.mes_busqueda_etxt);
+        anio_b = mainView.findViewById(R.id.anio_busqueda_etxt);
         //Image Buttons
-        buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);*/
+        buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);
         //OnClick
 
         /*irVerCita.setOnClickListener(v -> {
@@ -127,7 +136,14 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
             }
         };*/
+        busqueda_citas.setOnQueryTextListener(this);
         cargar();
+        /*buscar_btn.setOnClickListener(v -> {
+            String dia = dia_b.getText().toString();
+            String mes = mes_b.getText().toString();
+            String anio = anio_b.getText().toString();
+            adptadorlistaview.buscar(dia,mes,anio);
+        });*/
         return mainView;
     }
 
@@ -138,6 +154,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         listaview.setItemAnimator(new DefaultItemAnimator());
         adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(), this);
         listaview.setAdapter(adptadorlistaview);
+
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
@@ -236,5 +253,29 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     @Override
     public void itemClick(String placa) {
         Toast.makeText(mainView.getContext(), "SOK", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String b = newText;
+        if(newText.length()==2){
+            b+="-";
+            busqueda_citas.setQuery(b,false);
+        }
+        if(newText.length()==5){
+            b+="-";
+            busqueda_citas.setQuery(b,false);
+        }
+        if(newText.length()>10){
+            b= b.substring(0,10);
+            busqueda_citas.setQuery(b,false);
+        }
+        adptadorlistaview.buscar(b);
+        return false;
     }
 }

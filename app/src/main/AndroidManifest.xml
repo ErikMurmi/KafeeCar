@@ -10,8 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:windowSoftInputMode="adjustNothing"
         android:theme="@style/Theme.KafeeCar">
-        <activity android:name=".Patioventainterfaz">
+        <activity android:name=".Patioventainterfaz"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

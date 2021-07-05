@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,14 +20,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_Lista_Citas_Admin.clienteHolder> {
-    Lista citas;
+    Lista citas_originales;
+    private Lista citas_buscadas;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
    // public Adaptador_Lista_Catalogo.clienteHolder lyt;
     View view;
     private RecyclerItemClick itemClick;
     public Adaptador_Lista_Citas_Admin(Lista citas, RecyclerItemClick itemClick){
-        this.citas =citas;
+        this.citas_buscadas =citas;
         this.itemClick = itemClick;
+        citas_originales = new Lista();
+        citas_originales.copiar(citas);
     }
 
     @NonNull
@@ -39,16 +43,13 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
     @Override
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Citas_Admin.clienteHolder holder, int position) {
         try {
-            Cita c= (Cita) citas.getPos(position);
+            Cita c= (Cita) citas_buscadas.getPos(position);
             String nombre= c.getVisitante().getNombre();
             String telefono =c.getVisitante().getTelefono();
             String placa = c.getVehiculo().getPlaca();
             String horario = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
                     formatoHora(c.getHora());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
-            Glide.with(view)
-                    .load(filePath)
-                    .into(holder.imagenauto);
             try {
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
@@ -62,16 +63,13 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
 
             holder.nombre.setText(nombre);
             holder.horario.setText(horario);
-            holder.telefono.setText(telefono);
+            //holder.telefono.setText(telefono);
+            holder.telefono.setText(Patioventainterfaz.getFechaMod(c.getFechaCita()));
             holder.placa.setText(placa);
 
             holder.itemView.setOnClickListener(v -> {
                 itemClick.itemClick("PSD-1234");
             });
-            /*
-            holder.itemView.setOnClickListener(v -> {
-                Catalogo_Admin_Fragment.irVer(placa);
-            });*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +79,7 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
 
     @Override
     public int getItemCount() {
-        return citas.contar();
+        return citas_buscadas.contar();
     }
 
     public class clienteHolder extends RecyclerView.ViewHolder{
@@ -103,6 +101,51 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
 
     public interface RecyclerItemClick{
         void itemClick(String placa);
+    }
+
+    /*public void buscar(String dia,String mes,String anio){
+        citas_buscadas.vaciar();
+        for(int i=0; i<citas_originales.contar();i++){
+            Cita actual=null;
+            try {
+                actual = (Cita) citas_originales.getPos(i);
+            } catch (Exception e) {
+                Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+            String f = Patioventainterfaz.getFechaMod(actual.getFechaCita());
+            String dia_c = f.split("-")[0];
+            String mes_c = f.split("-")[1];
+            String anio_c = f.split("-")[2];
+            if(!dia_c.isEmpty() && !mes_c.isEmpty() && !anio_c.isEmpty()){
+                if( (dia_c.compareTo(dia)==0 && mes_c.compareTo(mes)==0) && anio_c.compareTo(anio)==0){
+                    citas_buscadas.add(actual);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+    }*/
+    public void buscar(String fecha){
+        if(fecha.length()==0){
+            citas_buscadas.vaciar();
+            citas_buscadas.copiar(citas_originales);
+        }else {
+            citas_buscadas.vaciar();
+            for (int i = 0; i < citas_originales.contar(); i++) {
+                Cita actual = null;
+                try {
+                    actual = (Cita) citas_originales.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                String f = Patioventainterfaz.getFechaMod(actual.getFechaCita());
+                if (f.contains(fecha)) {
+                    citas_buscadas.add(actual);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 
     @SuppressLint("DefaultLocale")

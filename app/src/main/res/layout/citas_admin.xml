@@ -377,7 +377,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="gone">
 
                 <EditText
                     android:id="@+id/dia_busqueda_etxt"
@@ -440,11 +442,6 @@
                     android:textColor="#959898"
                     android:textSize="15sp" />
 
-                <SearchView
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:iconifiedByDefault="false" />
-
                 <ImageButton
                     android:id="@+id/busqueda_citas_admin_btn"
                     android:layout_width="60dp"
@@ -456,50 +453,16 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <SearchView
+                android:id="@+id/busqueda_c_ad_srv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                tools:visibility="gone">
-
-                <CheckBox
-                    android:id="@+id/filtro_dia_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Día" />
-
-                <CheckBox
-                    android:id="@+id/filtro_mes_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Mes" />
-
-                <CheckBox
-                    android:id="@+id/filtro_anio_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Año" />
-
-                <CheckBox
-                    android:id="@+id/filtro_hora_ckb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/botones"
-                    android:text="Hora" />
-            </LinearLayout>
+                android:layout_marginTop="55dp"
+                android:background="@drawable/bordesbotongris"
+                android:iconifiedByDefault="false"
+                android:inputType="date"
+                android:queryBackground="@color/white"
+                android:queryHint="dd/mm/aaaa" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_citas_admin"
