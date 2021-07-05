@@ -74,6 +74,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
     }
 
+    public void irRegistarCitaVehiculoVendedor(View v) {
+        try {
+            v_aux_cita = patioventa.buscarVehiculos("Placa", "PSD-1234");
+            CITA_CON_VEHICULO = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Citas_vendedor_fragment()).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void irRegistarCitaVehiculo(View v) {
         try {
             v_aux_cita = patioventa.buscarVehiculos("Placa", "PSD-1234");

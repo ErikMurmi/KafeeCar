@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.ParseException;
 import java.util.Date;
 
-public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick {
+public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
 
     private View mainView;
     private PatioVenta patio;
@@ -85,7 +85,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             placa_ci_vn_etxt.setText(Patioventainterfaz.v_aux_cita.getPlaca());
         } else {
             try {
-                //verLista("GHC-2434","IMH-2233");
+                cargar();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -103,7 +103,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        Adaptador_Lista_Citas_Admin adptadorlistaview = new Adaptador_Lista_Citas_Admin(usuarioActual.obtenerCitas(), this);
+        Adaptador_Lista_Citas adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }

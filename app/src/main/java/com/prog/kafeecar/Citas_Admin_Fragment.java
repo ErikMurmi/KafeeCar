@@ -23,14 +23,14 @@ import com.google.firebase.storage.StorageReference;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
-public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas_Admin.RecyclerItemClick {
+public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
 
     private static int REQUEST_IMAGE_GALERY = 101;
     private String TAG = "Citas_Admin";
     private PatioVenta patio;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    private Adaptador_Lista_Citas_Admin adptadorlistaview;
+    private Adaptador_Lista_Citas adptadorlistaview;
     //Auxiliar para pasar del vehiculo a registrar cita
     //TODO
     private static Vehiculo aux;
@@ -136,7 +136,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas_Admin(patio.getCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
