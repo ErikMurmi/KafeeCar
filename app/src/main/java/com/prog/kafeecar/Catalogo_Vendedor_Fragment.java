@@ -101,6 +101,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
     @SuppressLint("SetTextI18n")
     public void visualizarVehiculoVendedor(){
+        Patioventainterfaz.v_aux_cita = vMostrar;
         ImageView v_img = mainView.findViewById(R.id.vehiculo_ca_vn_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_ca_vn_txt);
         TextView placa = mainView.findViewById(R.id.ver_placa_ca_vn_txt);

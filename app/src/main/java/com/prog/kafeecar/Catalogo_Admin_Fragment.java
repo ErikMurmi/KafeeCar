@@ -483,6 +483,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     }
 
     public void visualizarVehiculo() {
+        Patioventainterfaz.v_aux_cita = vMostrar;
         ImageView v_img = mainView.findViewById(R.id.vehiculo_img);
         TextView titulo = mainView.findViewById(R.id.auto_titulo_txt);
         TextView placa = mainView.findViewById(R.id.placa_txt);

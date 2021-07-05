@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -68,7 +69,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //Botones
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
         //TextViews
-        //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
+        vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
         dia_b = mainView.findViewById(R.id.dia_busqueda_etxt);
         mes_b = mainView.findViewById(R.id.mes_busqueda_etxt);
@@ -83,25 +84,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             aniadirCita.setVisibility(View.VISIBLE);
         });
 
-        /*irVerCita.setOnClickListener(v -> {
-            aniadirCita.setVisibility(View.GONE);
-            listaCitas.setVisibility(View.GONE);
-            verCita.setVisibility(View.VISIBLE);
-            try {
-                visualizarCita();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
 
-
-
-        buscar_btn.setOnClickListener(v -> {
+        /*buscar_btn.setOnClickListener(v -> {
             CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
             CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
             CheckBox anio = mainView.findViewById(R.id.filtro_anio_ckb);
             CheckBox hora = mainView.findViewById(R.id.filtro_hora_ckb);
-        });
+        });*/
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
@@ -112,7 +101,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
         /*
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
