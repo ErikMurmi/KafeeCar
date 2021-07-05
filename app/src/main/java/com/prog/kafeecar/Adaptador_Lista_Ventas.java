@@ -76,9 +76,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
             holder.placas.setText(placas);
             holder.precio.setText(precio);
 
-            holder.itemView.setOnClickListener(v -> {
-                itemClick.itemClick("PSD-1234");
-            });
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(actual.getPlaca(),vt.getComprador().getCedula()));
             /*
             holder.itemView.setOnClickListener(v -> {
                 Catalogo_Admin_Fragment.irVer(placa);
@@ -95,7 +93,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
         return ventas_buscadas.contar();
     }
 
-    public class clienteHolder extends RecyclerView.ViewHolder{
+    public static class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
         public TextView vendedor;
         public TextView fecha;
@@ -121,12 +119,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
         }else {
             ventas_buscadas.vaciar();
             for(int i=0; i<ventas_original.contar();i++){
-                Vehiculo actual=null;
-                try {
-                    actual = (Vehiculo) ventas_original.getPos(i);
-                } catch (Exception e) {
-                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
+                Vehiculo actual = (Vehiculo) ventas_original.getPos(i);
                 if(actual.getPlaca().contains(strBuscar)){
                     ventas_buscadas.add(actual);
                 }
@@ -136,7 +129,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
     }
 
     public interface RecyclerItemClick{
-        void itemClick(String placa);
+        void itemClick(String placa, String cliente);
     }
 
 /*

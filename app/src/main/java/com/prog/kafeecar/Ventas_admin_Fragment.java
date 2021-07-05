@@ -158,10 +158,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         return etText.getText().toString().trim().length() == 0;
     }
 
-    @Override
-    public void itemClick(String placa) {
-        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -178,5 +174,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+
+    @Override
+    public void itemClick(String placa, String cliente) {
+        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
     }
 }

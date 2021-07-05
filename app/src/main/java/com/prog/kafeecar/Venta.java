@@ -112,11 +112,16 @@ public class Venta {
     
     /**
      * Busca un vehiculo en la venta
-     * @param matricula del vehiculo buscado
+     * @param placa del vehiculo buscado
      * @return el vehiculo busado
      */
-    public Vehiculo buscarVehiculo(String matricula){
-        
+    public Vehiculo buscarVehiculo(String placa){
+        for(int i = 0; i<vehiculos.contar();i++){
+            Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
+            if(actual.getPlaca().compareTo(placa)==0){
+                return actual;
+            }
+        }
         return null;
     }
     

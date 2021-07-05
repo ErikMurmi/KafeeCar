@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,12 +27,14 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private LinearLayout verventa;
     private LinearLayout aniadirventa;
     private LinearLayout editarventa;
+    private LinearLayout lista_ventas;
     private FloatingActionButton aniadir;
-    private Button descartar;
+    private Button eliminar;
     private Button actualizar;
     private Button guardar;
     private PatioVenta patio;
     private Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
+    private Venta venta_mostrar;
     private Adaptador_Lista_Ventas adaptadorVentas;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -41,15 +44,34 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         //Botones
         aniadir = mainview.findViewById(R.id.aniadir_vt_vn_ftbn);
-        //descartar = mainview.findViewById(R.id.descartar_btn);
+
+        eliminar = mainview.findViewById(R.id.eliminar_vt_vn_btn);
         //actualizar = mainview.findViewById(R.id.actualizar_btn);
         //guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
 
         //Layouts
-        //verventa = mainview.findViewById(R.id.verventa_layout);
+        lista_ventas = mainview.findViewById(R.id.lista_vt_vn_lyt);
+        verventa = mainview.findViewById(R.id.ver_vt_vn_lyt);
         //aniadirventa = mainview.findViewById(R.id.aniadirventa_layout);
         //editarventa = mainview.findViewById(R.id.editarventa_layout);
-
+        eliminar.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+            msg.setTitle("Eliminar Venta");
+            msg.setMessage("¿Estás seguro de eliminar esta venta?");
+            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculos().getPos(0);
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    patio.removerVenta(vh.getPlaca());
+                    irVerVentas();
+                    //TODO
+                    //Mensaje para aniadir los vehiculos de nuevo al catalogo
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
 
         cargar();
         return mainview;
@@ -64,6 +86,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         listaview.setAdapter(adaptadorVentas);
     }
 
+    public void irVerVentas(){
+        cargar();
+        lista_ventas.setVisibility(View.VISIBLE);
+        verventa.setVisibility(View.GONE);
+    }
     public void aniadirVenta() throws Exception {
         EditText precio= mainview.findViewById(R.id.precio_venta_txt);
         EditText clientes= mainview.findViewById(R.id.cliente_venta_txt);
@@ -93,8 +120,20 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
     }
 
-    @Override
-    public void itemClick(String placa) {
+    public void verVenta(){
+        lista_ventas.setVisibility(View.GONE);
+        verventa.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void itemClick(String placa, String cliente) {
+        try {
+            venta_mostrar = patio.buscarVentas(placa,cliente);
+            if(venta_mostrar!=null){
+                verVenta();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
