@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private View mainView;
     private PatioVenta patio;
-    private Cita cita_mostrar;
+    Cita cita_mostrar;
 
     public EditText placa_ci_vn_etxt;
 
@@ -36,14 +37,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private LinearLayout citas_vn_lyt;
     private LinearLayout ver_ci_vn_lyt;
 
-    private RecyclerView listaview;
-
-    private Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
+    private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
 
     private FloatingActionButton ir_aniadir_ci_vn_btn;
-    private Button guardar_ci_vn_btn;
-
-    private Adaptador_Lista_Citas_Admin adptadorlistaview;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_vendedor, container, false);
@@ -56,7 +52,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         aniadir_ci_vn_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
 
         ir_aniadir_ci_vn_btn = mainView.findViewById(R.id.ir_aniadir_ci_vn_btn);
-        guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
+        Button guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
+        Button anular_ci_vn_btn = mainView.findViewById(R.id.anular_ci_vn_btn);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -72,6 +69,15 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 Toast.makeText(mainView.getContext(), "No se pudo registrar la cita", Toast.LENGTH_SHORT).show();
                 //citas_vn_lyt.setVisibility(View.VISIBLE);
             }
+        });
+
+        anular_ci_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("ANULAR");
+            msg.setMessage("¿Está seguro de anular la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> irVer());
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         if (Patioventainterfaz.CITA_CON_VEHICULO) {
@@ -93,11 +99,11 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
     public void cargar() throws Exception {
-        listaview = mainView.findViewById(R.id.rc_citas_vendedor);
+        RecyclerView listaview = mainView.findViewById(R.id.rc_citas_vendedor);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas_Admin(usuarioActual.obtenerCitas(), this);
+        Adaptador_Lista_Citas_Admin adptadorlistaview = new Adaptador_Lista_Citas_Admin(usuarioActual.obtenerCitas(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
@@ -275,6 +281,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private void irVer() {
         //verCatalogo.setVisibility(View.GONE);
+        ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
+        aniadir_ci_vn_lyt.setVisibility(View.GONE);
         ver_ci_vn_lyt.setVisibility(View.VISIBLE);
         visualizarCita();
     }
