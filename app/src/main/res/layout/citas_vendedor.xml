@@ -17,7 +17,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/top_space">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,7 +32,6 @@
                     android:id="@+id/foto_auto_ci_vn_img"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginTop="@dimen/top_space"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@mipmap/ic_tesla_round"
@@ -44,6 +44,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:orientation="vertical"
                     android:paddingLeft="15dp">
@@ -237,7 +238,7 @@
                         <TextView
                             android:id="@+id/ver_descripcion_ci_vn_txt"
                             style="@style/texto_style"
-                            android:layout_width="320dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/ocra"
@@ -274,12 +275,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
-
-                    <Space
-                        android:layout_width="51dp"
-                        android:layout_height="15dp"
-                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/anular_ci_vn_btn"

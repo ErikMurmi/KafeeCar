@@ -284,14 +284,14 @@ public class PatioVenta {
      * @param texto palabra a buscar en el criterrio
      * @return Lista de citas que corresponden al criterio de busquda
      */
-    public Cita buscarCitas(String criterio, String texto) throws Exception {
+    public Cita buscarCitas(String criterio, String texto, String cliente) throws Exception {
         Cita citaEncontrada = null;
 
         if(criterio.compareToIgnoreCase("Vehiculo")==0){
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getPlaca().compareTo(texto)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(texto)==0 && actual.getVisitante().getCedula().compareTo(cliente)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }

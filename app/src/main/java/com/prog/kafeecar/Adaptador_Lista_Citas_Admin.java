@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
             Cita c= (Cita) citas_buscadas.getPos(position);
             String nombre= c.getVisitante().getNombre();
             String telefono =c.getVisitante().getTelefono();
+            //String vehiculo = c.getVehiculo().getMarca() + c.getVehiculo().getModelo();
             String placa = c.getVehiculo().getPlaca();
             String horario = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
                     formatoHora(c.getHora());
@@ -53,8 +55,8 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
             try {
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    holder.imagenauto.setImageBitmap(bitmap);
+                    Uri foto = Uri.parse(localFile.getAbsolutePath());
+                    holder.imagenauto.setImageURI(foto);
                 });
             }catch (IOException e){
                 e.printStackTrace();
@@ -63,13 +65,10 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
 
             holder.nombre.setText(nombre);
             holder.horario.setText(horario);
-            //holder.telefono.setText(telefono);
-            holder.telefono.setText(Patioventainterfaz.getFechaMod(c.getFechaCita()));
+            holder.telefono.setText(telefono);
             holder.placa.setText(placa);
-
-            holder.itemView.setOnClickListener(v -> {
-                itemClick.itemClick("PSD-1234");
-            });
+            //holder.vehiculo.setText(vehiculo);
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa,c.getVisitante().getCedula()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,6 +86,7 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
         public TextView telefono;
         public TextView horario;
         public TextView nombre;
+        //public TextView vehiculo;
         public TextView placa;
 
         public clienteHolder(@NonNull View view) {
@@ -94,13 +94,14 @@ public class Adaptador_Lista_Citas_Admin extends RecyclerView.Adapter<Adaptador_
             imagenauto=view.findViewById(R.id.c_lista_img);
             nombre=view.findViewById(R.id.nombre_c_lista_txt);
             horario=view.findViewById(R.id.hora_c_lista_txt);
+            //vehiculo = view.findViewById(R.id.vehiculo_c_lista_text);
             placa = view.findViewById(R.id.matricula_c_lista_txt);
             telefono = view.findViewById(R.id.telefono_c_lista_txt);
         }
     }
 
     public interface RecyclerItemClick{
-        void itemClick(String placa);
+        void itemClick(String placa,String cedula_cliente);
     }
 
     /*public void buscar(String dia,String mes,String anio){

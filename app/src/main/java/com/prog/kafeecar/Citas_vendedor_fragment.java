@@ -287,8 +287,13 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         visualizarCita();
     }
 
+
     @Override
-    public void itemClick(String placa) {
-        irAniadirCita("PSD-1234");
+    public void itemClick(String placa, String cedula_cliente) {
+        try {
+            cita_mostrar = patio.buscarCitas("Vehiculo",placa,cedula_cliente);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
