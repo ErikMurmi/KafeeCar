@@ -49,6 +49,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
     public static Vehiculo v_aux_cita;
+    private BottomNavigationView navBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,26 +72,6 @@ public class Patioventainterfaz extends AppCompatActivity {
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
             Button reg_list = findViewById(R.id.reg_list_btn);
             reg_list.setOnClickListener(v -> registrarAdministrador());
-        }
-    }
-
-    public void irRegistarCitaVehiculoVendedor(View v) {
-        try {
-            v_aux_cita = patioventa.buscarVehiculos("Placa", "PSD-1234");
-            CITA_CON_VEHICULO = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Citas_vendedor_fragment()).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void irRegistarCitaVehiculo(View v) {
-        try {
-            v_aux_cita = patioventa.buscarVehiculos("Placa", "PSD-1234");
-            CITA_CON_VEHICULO = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -162,22 +143,41 @@ public class Patioventainterfaz extends AppCompatActivity {
         w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         if (tipo.compareTo("ADMIN") == 0) {
             setContentView(R.layout.home_admin);
-            BottomNavigationView navBar = findViewById(R.id.barra_nav);
+            navBar= findViewById(R.id.barra_nav);
             navBar.setOnNavigationItemSelectedListener(navListener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Admin_Fragment()).commit();
         } else if (tipo.compareTo("VENDEDOR") == 0) {
             setContentView(R.layout.home_vendedor);
-            BottomNavigationView navBar = findViewById(R.id.barra_nav_vendedor);
+            navBar = findViewById(R.id.barra_nav_vendedor);
             navBar.setOnNavigationItemSelectedListener(nav_vendedor_Listener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Catalogo_Vendedor_Fragment()).commit();
         } else if (tipo.compareTo("CLIENTE") == 0) {
             setContentView(R.layout.home_cliente);
-            BottomNavigationView navBar = findViewById(R.id.barra_nav_cliente);
+            navBar = findViewById(R.id.barra_nav_cliente);
             navBar.setOnNavigationItemSelectedListener(nav_cliente_Listener);
             getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Catalogo_Cliente_fragment()).commit();
         }
     }
 
+    public void irRegistarCitaVehiculoVendedor(View v) {
+        try {
+            CITA_CON_VEHICULO = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor_ven, new Citas_vendedor_fragment()).commit();
+            navBar.setSelectedItemId(R.id.nav_citas_ven);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void irRegistarCitaVehiculo(View v) {
+        try {
+            CITA_CON_VEHICULO = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_contenedor, new Citas_Admin_Fragment()).commit();
+            navBar.setSelectedItemId(R.id.nav_citas);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void irAdmin(View v) {
         usuarioActual = patioventa.getAdministrador();
         irAplicacion("ADMIN");
