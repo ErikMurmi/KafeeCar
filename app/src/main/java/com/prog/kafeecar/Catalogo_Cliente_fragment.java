@@ -73,9 +73,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
         //Recursos
         estrelladorada = favoritoBoton.getBackground();
-        if (!esfavorito()) {
+        /*if (!esfavorito()) {
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
-        }
+        }*/
 
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
@@ -90,7 +90,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         regresarVistaVehiculo.setOnClickListener(v -> {
 
             try {
-                visualizarVehiculo();
+                vistaVehiculo.setVisibility(View.GONE);
+                verCatalogo.setVisibility(View.VISIBLE);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -124,7 +126,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         busqueda_placa.setOnQueryTextListener(this);
-        //cargar();
+        cargar();
 
 
         return mainView;
@@ -182,19 +184,20 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
     public void modificarFavorito(){
         Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
-        TextView matricula = mainView.findViewById(R.id.matricula_cliente_txt);
+        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
         if(esfavorito()){
-           clienteActual.getFavoritos().eliminar(matricula.getText());
+           clienteActual.getFavoritos().eliminar(placa.getText());
            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
         }else{
-            clienteActual.getFavoritos().add(matricula.getText());
+            clienteActual.getFavoritos().add(placa.getText());
             favoritoBoton.setBackground(estrelladorada);
+
         }
     }
     public boolean esfavorito(){
         Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
-        TextView matricula = mainView.findViewById(R.id.matricula_cliente_txt);
-        return clienteActual.getFavoritos().contiene(matricula.getText());
+        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
+        return clienteActual.getFavoritos().contiene(placa.getText());
     }
 
 
@@ -218,7 +221,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         String precioTitulo = "$"+vMostrar.getPrecioVenta();
         precio.setText(precioTitulo);
         titulo.setText(titulo_str);
-        placa.setText(format("Placa: %s", vMostrar.getPlaca()));
+        placa.setText( vMostrar.getPlaca());
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
         anio.setText(format("Año :%s",vMostrar.getAnio()));
         marca.setText(format("Marca :%s",vMostrar.getMarca()));
