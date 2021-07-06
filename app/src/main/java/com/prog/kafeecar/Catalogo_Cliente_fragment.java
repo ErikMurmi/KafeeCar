@@ -130,7 +130,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         return mainView;
     }
     public void cargar() {
-        RecyclerView listaview = mainView.findViewById(R.id.rc_autos);
+        RecyclerView listaview = mainView.findViewById(R.id.lista_autos_cl_Rv);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -214,7 +214,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
         TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
 
-        String titulo_str = vMostrar.getMarca()+" "+m_vehiculo.getModelo();//ojo
+        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();//ojo
         String precioTitulo = "$"+vMostrar.getPrecioVenta();
         precio.setText(precioTitulo);
         titulo.setText(titulo_str);

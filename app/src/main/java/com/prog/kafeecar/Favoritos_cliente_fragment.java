@@ -48,12 +48,14 @@ public class Favoritos_cliente_fragment extends Fragment{
         return mainview;
             }
             public void cargar() throws Exception {
-                Cliente autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();
+                cliente= (Cliente)Patioventainterfaz.usuarioActual;
+
+                //P autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();
                 RecyclerView listaview = mainview.findViewById(R.id.listafavoritos_Rv);
                 RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
                 listaview.setLayoutManager(manager);
                 listaview.setItemAnimator(new DefaultItemAnimator());
-                adptadorlistaview=new Adaptador_Lista_Favoritos( cliente.getFavoritos().listabusqueda(autofavorito.getFavoritos()), (Adaptador_Lista_Favoritos.RecyclerItemClick) this);
+                adptadorlistaview=new Adaptador_Lista_Favoritos( patio.buscarVehiculosFav("Placa", cliente.getFavoritos()), (Adaptador_Lista_Favoritos.RecyclerItemClick) this);
                 listaview.setAdapter(adptadorlistaview);
                 listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
             }

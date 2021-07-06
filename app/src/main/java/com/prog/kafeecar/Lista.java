@@ -339,8 +339,35 @@ public class Lista {
             throw new Exception("No implementado");
         }
 
+
         return encontrados;
     }
+    public Lista listabusquedaFav(Object placa) throws Exception {
+        if (esVacia()) {
+            return new Lista();
+        }
+        Lista encontradosF = new Lista();
+        Nodo aux = inicio;
+
+        if (placa instanceof Vehiculo) {
+            Vehiculo v = (Vehiculo) placa;
+
+            while (aux != null) {
+                Vehiculo actual = (Vehiculo) aux.getDato();
+                if (actual.getPlaca().compareTo(v.getPlaca()) == 0) {
+                    encontradosF.add(actual);
+                }
+                aux = aux.getSiguiente();
+
+            }
+        } else {
+            throw new Exception("No implementado");
+        }
+
+
+        return encontradosF;
+    }
+
 
     public void copiar(Lista c){
         for(int i=0; i<c.contar();i++){

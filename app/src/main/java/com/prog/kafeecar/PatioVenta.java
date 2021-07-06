@@ -377,6 +377,23 @@ public class PatioVenta {
         }
         return buscado;
     }
+    public Lista buscarVehiculosFav(String criterio, Lista favoritos) throws Exception {
+
+        Lista listaBuscadosFav= new Lista();
+
+        if(criterio.compareTo("Placa")==0) {
+            int cont = 0;
+            while (cont < favoritos.contar()) {
+                Vehiculo v=buscarVehiculos("Placa",(String)favoritos.getPos(cont));
+                if(v!=null){
+                    listaBuscadosFav.add(v);
+
+                }
+                cont++;
+            }
+        }
+        return listaBuscadosFav;
+    }
 
     
     /**
@@ -607,5 +624,6 @@ public class PatioVenta {
         }
         return buscado;
     }
+
 }
 
