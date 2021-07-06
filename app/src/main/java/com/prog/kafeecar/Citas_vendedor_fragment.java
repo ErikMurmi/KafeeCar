@@ -173,7 +173,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         dia_ed.setText(dia);
         mes_ed.setText(mes);
         anio_ed.setText(anio);
-        hora_ed.setText(cita_mostrar.getHora());
+        hora_ed.setText(String.valueOf(cita_mostrar.getHora()));
         cliente_ed.setText(cita_mostrar.getCliente().getCedula());
         vendedor_ed.setText(cita_mostrar.getVendedorCita().getCedula());
         vehiculo_ed.setText(cita_mostrar.getVehiculo().getPlaca());
