@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
 
     private View mainView;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private PatioVenta patio;
     Cita cita_mostrar;
     Cliente cliente_mostrar;
@@ -77,8 +84,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setPositiveButton("Si", (dialog, which) -> {
             try {
                 patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cliente_mostrar.getCedula());
-                irVer();
+                irListaCitas();
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             });
@@ -104,6 +112,18 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         return mainView;
     }
 
+    public void irListaCitas(){
+        try {
+            cargar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ver_ci_vn_lyt.setVisibility(View.GONE);
+        aniadir_ci_vn_lyt.setVisibility(View.GONE);
+        ir_aniadir_ci_vn_btn.setVisibility(View.VISIBLE);
+        citas_vendedor_lyt.setVisibility(View.VISIBLE);
+    }
+
     public void cargar() throws Exception {
         RecyclerView listaview = mainView.findViewById(R.id.rc_citas_vendedor);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
@@ -115,15 +135,27 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void visualizarCita() {
-        TextView fecha = mainView.findViewById(R.id.fechaCita_txt);
-        TextView hora = mainView.findViewById(R.id.horaCita_txt);
-        TextView cliente = mainView.findViewById(R.id.clienteCita_txt);
-        TextView contacto = mainView.findViewById(R.id.contactoCita_txt);
-        TextView vendedor = mainView.findViewById(R.id.vendedorCita_txt);
-        TextView vehiculo = mainView.findViewById(R.id.vehiculoCita_txt);
-        TextView descripcion = mainView.findViewById(R.id.descripcionCita_txt);
-        TextView resolucion = mainView.findViewById(R.id.resolucionCita_txt);
-        TextView precio = mainView.findViewById(R.id.precioVentaCita_txt);
+        ImageView imagen = mainView.findViewById(R.id.foto_auto_ci_vn_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_ci_vn_txt);
+        TextView hora = mainView.findViewById(R.id.ver_hora_ci_vn_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_ci_vn_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_ci_vn_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_ci_vn_txt);
+        TextView vehiculo = mainView.findViewById(R.id.ver_vehiculo_ci_vn_txt);
+        TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_vn_txt);
+        TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_vn_txt);
+        TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_vn_txt);
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         fecha.setText(Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.format("%d:00 %s", cita_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
@@ -133,7 +165,16 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         vehiculo.setText(cita_mostrar.getVehiculo().getModelo());
         descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());
         resolucion.setText(cita_mostrar.getResolucion());
-        precio.setText(cita_mostrar.getVehiculo().getPrecioVenta() + " $" );
+        String resolucion_str = cita_mostrar.getResolucion();
+        if(!resolucion_str.equals(" ")){
+            resolucion.setVisibility(View.VISIBLE);
+            resolucion.setText(resolucion_str);
+        }else{
+            resolucion.setVisibility(View.GONE);
+        }
+        precio.setText("$" + cita_mostrar.getVehiculo().getPrecioVenta());
+
+
     }
 
     public void registarCita() throws Exception {
@@ -279,6 +320,11 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     public void itemClick(String placa, String cedula_cliente) {
         try {
             cita_mostrar = patio.buscarCitas("Vehiculo",placa,cedula_cliente);
+            if(cita_mostrar == null){
+            }else{
+                irVer();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

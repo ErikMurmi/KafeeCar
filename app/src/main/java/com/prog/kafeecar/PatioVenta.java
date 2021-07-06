@@ -175,19 +175,23 @@ public class PatioVenta {
     }
     /**
      * Elimina una cita de la lista de citas
-     * @param matricula del vehiculo que se desea eliminiar de la lista
+     * @param placa del vehiculo que se desea eliminiar de la lista
      * @param cedula del cliente que deseaba el vehiculo
      * @return true si se elimino de la lista, caso contrario false
      */
     
-    public boolean removerCita(String matricula, String cedula) throws Exception {
+    public boolean removerCita(String placa, String cedula) {
         int cont = 0;
         boolean removido = false;
         while(cont<citas.contar() && removido==false){
             Cita actual = (Cita) citas.getPos(cont);
             if(actual.getVisitante().getCedula().compareTo(cedula)==0){
-                if(actual.getVehiculo().getMatricula().compareTo(matricula)==0){
-                    citas.eliminar(actual);
+                if(actual.getVehiculo().getPlaca().compareTo(placa)==0){
+                    try {
+                        citas.eliminarPos(cont);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     removido = true;
                 }
             }
@@ -279,17 +283,17 @@ public class PatioVenta {
     /**
      * Busca citas por distintos criterios
      * @param criterio atributo por el cual buscar del cliente
-     * @param texto palabra a buscar en el criterrio
+     * @param vehiculo palabra a buscar en el criterrio
      * @return Lista de citas que corresponden al criterio de busquda
      */
-    public Cita buscarCitas(String criterio, String texto, String cliente) throws Exception {
-        Cita citaEncontrada = null;
+    public Cita buscarCitas(String criterio, String vehiculo, String cliente){
+        Cita citaEncontrada;
 
         if(criterio.compareToIgnoreCase("Vehiculo")==0){
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getPlaca().compareTo(texto)==0 && actual.getVisitante().getCedula().compareTo(cliente)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(vehiculo)==0 && actual.getVisitante().getCedula().compareTo(cliente)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -299,7 +303,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVendedorCita().getNombre().compareTo(texto)==0){
+                if(actual.getVendedorCita().getNombre().compareTo(vehiculo)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -309,7 +313,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVisitante().getCedula().compareTo(texto)==0){
+                if(actual.getVisitante().getCedula().compareTo(vehiculo)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -318,8 +322,9 @@ public class PatioVenta {
         }
         return null;
     }
-    public Lista buscarporfecha(Date fech) throws Exception {
-        Cita citaEncontrada = null;
+
+    public Lista buscarporfecha(Date fech) {
+        Cita citaEncontrada;
         Lista citaslista=new Lista();
             int cont = 0;
             while(cont<citas.contar()){

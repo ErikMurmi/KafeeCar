@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="40dp"
-                android:paddingRight="20dp"
-                android:visibility="visible">
+                android:paddingRight="20dp">
 
                 <ImageView
                     android:id="@+id/foto_auto_ci_vn_img"
@@ -34,7 +33,6 @@
                     android:layout_height="200dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/ic_tesla_round"
                     tools:srcCompat="@drawable/ic_car_dark" />
 
                 <Space
@@ -52,6 +50,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -158,17 +157,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="Vendedor:"
+                            android:text="Vehículo:"
                             android:textColor="@color/gris_visualizar" />
 
                         <TextView
-                            android:id="@+id/ver_vendedor_ci_vn_txt"
+                            android:id="@+id/ver_vehiculo_ci_vn_txt"
                             style="@style/texto_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:hint="Juan Jácome"
+                            android:hint="KIA Picanto"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
@@ -199,32 +198,32 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            style="@style/texto_style"
-                            android:layout_width="105dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/text_space"
-                            android:fontFamily="@font/ocra"
-                            android:text="Vehículo:"
-                            android:textColor="@color/gris_visualizar" />
-
-                        <TextView
-                            android:id="@+id/ver_vehiculo_ci_vn_txt"
-                            style="@style/texto_style"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/text_space"
-                            android:fontFamily="@font/ocra"
-                            android:hint="KIA Picanto"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
+                            android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                            <TextView
+                                style="@style/texto_style"
+                                android:layout_width="105dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/text_space"
+                                android:fontFamily="@font/ocra"
+                                android:text="Vendedor:"
+                                android:textColor="@color/gris_visualizar" />
+
+                            <TextView
+                                android:id="@+id/ver_vendedor_ci_vn_txt"
+                                style="@style/texto_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/text_space"
+                                android:fontFamily="@font/ocra"
+                                android:hint="Juan Jácome"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
 
                         <TextView
                             style="@style/texto_style"
@@ -259,7 +258,7 @@
                             style="@style/texto_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/text_space"
+                            android:layout_marginBottom="5dp"
                             android:fontFamily="@font/ocra"
                             android:hint="Se acordó un descuento del 10% para su venta posterior."
                             android:textColor="@color/black" />
