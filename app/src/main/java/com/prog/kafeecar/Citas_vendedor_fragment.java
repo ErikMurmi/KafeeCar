@@ -122,7 +122,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Está seguro de guardar los cambios?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    if(editarCita() == true){
+                    if(editarCita()){
                         irListaCitas();
                     }
                 } catch (Exception e) {
@@ -385,7 +385,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_etxt);
         EditText fechacitahora = mainView.findViewById(R.id.hora_ci_vn_etxt);
-        Vendedor vendedor_v = null;
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
@@ -486,7 +485,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     hora,
                     resolucion_str,
                     cliente_c,
-                    vendedor_v,
+                    usuarioActual,
                     vehiculo);
             patio.aniadirCita(nueva);
             if (patio.getCitas().contiene(nueva)) {
@@ -497,16 +496,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
-    }
-
-    public void irAniadirCita(String placa) {
-        if (!placa.equals("")) {
-            try {
-                Vehiculo v = patio.buscarVehiculos("Placa", placa);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void irVer() {
