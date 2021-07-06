@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,10 +48,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private EditText mes_b;
     private EditText anio_b;
     //Botones
-    private Button irVerCita;
+    private Button irVerEditable;
+    private Button anular;
     private FloatingActionButton irAniadirCita;
 
     private LinearLayout verCita;
+    private LinearLayout citaEditable;
     private LinearLayout listaCitas;
     private LinearLayout aniadirCita;
 
@@ -63,10 +66,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_ad_srv);
         verCita = mainView.findViewById(R.id.ver_ci_ad_lyt);
         aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
+        citaEditable = mainView.findViewById(R.id.editar_cita_ad_lyt);
         listaCitas = mainView.findViewById(R.id.citas_lyt);
 
         //Botones
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
+        irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
+        anular = mainView.findViewById(R.id.anular_ci_ad_btn);
         //TextViews
         vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
@@ -83,7 +89,28 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             aniadirCita.setVisibility(View.VISIBLE);
         });
 
+        anular.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("ANULAR");
+            msg.setMessage("¿Está seguro de anular la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
+                    irListaCitas();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
 
+        irVerEditable.setOnClickListener(v -> {
+            listaCitas.setVisibility(View.GONE);
+            verCita.setVisibility(View.GONE);
+            aniadirCita.setVisibility(View.GONE);
+            citaEditable.setVisibility(View.VISIBLE);
+        });
         /*buscar_btn.setOnClickListener(v -> {
             CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
             CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
@@ -149,9 +176,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     }
 
     public void irListaCitas(){
-        busqueda_citas.setVisibility(View.VISIBLE);
+
         cargar();
+        listaCitas.setVisibility(View.VISIBLE);
         verCita.setVisibility(View.GONE);
+        aniadirCita.setVisibility(View.GONE);
+        citaEditable.setVisibility(View.GONE);
     }
 
     public void visualizarCita() {
