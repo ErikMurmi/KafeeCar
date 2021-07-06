@@ -160,7 +160,7 @@ public class PatioVenta {
         boolean agregado =false;
 
         if(tipo.compareTo("Vendedor")==0){
-            vendedores.add(nuevo);
+            vendedores.add((Vendedor) nuevo);
             agregado = vendedores.contiene(nuevo);
         }else if(tipo.compareTo("Cliente")==0){
             clientes.add(nuevo);
@@ -180,17 +180,24 @@ public class PatioVenta {
      * @return true si se elimino de la lista, caso contrario false
      */
     
-    public void removerCita(String placa, String cedula) throws Exception {
+    public boolean removerCita(String placa, String cedula) {
         int cont = 0;
         boolean removido = false;
-        while(cont<citas.contar() && !removido){
+        while(cont<citas.contar() && removido==false){
             Cita actual = (Cita) citas.getPos(cont);
-            if(actual.getVisitante().getCedula().compareTo(cedula)==0 && actual.getVehiculo().getPlaca().compareTo(placa)==0){
-                    citas.eliminarPos(cont);
+            if(actual.getCliente().getCedula().compareTo(cedula)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(placa)==0){
+                    try {
+                        citas.eliminarPos(cont);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     removido = true;
+                }
             }
             cont++;
         }
+        return removido;
     }
 
 
@@ -286,7 +293,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getPlaca().compareTo(vehiculo)==0 && actual.getVisitante().getCedula().compareTo(cliente)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(vehiculo)==0 && actual.getCliente().getCedula().compareTo(cliente)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -306,7 +313,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVisitante().getCedula().compareTo(vehiculo)==0){
+                if(actual.getCliente().getCedula().compareTo(vehiculo)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }

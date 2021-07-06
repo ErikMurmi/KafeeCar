@@ -1,7 +1,5 @@
 package com.prog.kafeecar;
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -45,8 +42,8 @@ public class Adaptador_Lista_Citas extends RecyclerView.Adapter<Adaptador_Lista_
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Citas.clienteHolder holder, int position) {
         try {
             Cita c= (Cita) citas_buscadas.getPos(position);
-            String nombre= c.getVisitante().getNombre();
-            String telefono =c.getVisitante().getTelefono();
+            String nombre= c.getCliente().getNombre();
+            String telefono =c.getCliente().getTelefono();
             //String vehiculo = c.getVehiculo().getMarca() + c.getVehiculo().getModelo();
             String placa = c.getVehiculo().getPlaca();
             String horario = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
@@ -68,7 +65,7 @@ public class Adaptador_Lista_Citas extends RecyclerView.Adapter<Adaptador_Lista_
             holder.telefono.setText(telefono);
             holder.placa.setText(placa);
             //holder.vehiculo.setText(vehiculo);
-            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa,c.getVisitante().getCedula()));
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa,c.getCliente().getCedula()));
 
         } catch (Exception e) {
             e.printStackTrace();

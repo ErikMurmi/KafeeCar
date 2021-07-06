@@ -329,7 +329,7 @@ public class Lista {
 
             while (aux != null) {
                 Cita actual = (Cita) aux.getDato();
-                if (actual.getVisitante().getCedula().compareTo(c.getCedula()) == 0) {
+                if (actual.getCliente().getCedula().compareTo(c.getCedula()) == 0) {
                     encontrados.add(actual);
                 }
                 aux = aux.getSiguiente();

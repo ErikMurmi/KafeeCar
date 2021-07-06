@@ -28,7 +28,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
@@ -36,7 +35,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private View mainView;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private PatioVenta patio;
-    private Cita cita_mostrar;
+    Cita cita_mostrar;
     Cliente cliente_mostrar;
 
     public EditText placa_ci_vn_etxt;
@@ -83,9 +82,10 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Está seguro de anular la cita?");
             msg.setPositiveButton("Si", (dialog, which) -> {
             try {
-                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getVisitante().getCedula());
+                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cliente_mostrar.getCedula());
                 irListaCitas();
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             });
@@ -158,8 +158,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
         fecha.setText(Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.format("%d:00 %s", cita_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
-        cliente.setText(cita_mostrar.getVisitante().getNombre());
-        contacto.setText(cita_mostrar.getVisitante().getTelefono());
+        cliente.setText(cita_mostrar.getCliente().getNombre());
+        contacto.setText(cita_mostrar.getCliente().getTelefono());
         vendedor.setText(cita_mostrar.getVendedorCita().getNombre());
         vehiculo.setText(cita_mostrar.getVehiculo().getModelo());
         descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());

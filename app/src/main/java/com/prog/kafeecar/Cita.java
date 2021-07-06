@@ -17,7 +17,7 @@ public class Cita {
     private int hora;
     private String resolucion;
 
-    private Cliente visitante;
+    private Cliente cliente;
     private Vendedor vendedorCita;
     private Vehiculo vehiculo;
 
@@ -26,7 +26,7 @@ public class Cita {
         this.fechaCita = fechaCita;
         this.hora = hora;
         this.resolucion = resolucion;
-        this.visitante = cliente;
+        this.cliente = cliente;
         this.vendedorCita = vendedorCita;
         this.vehiculo = vehiculo;
     }
@@ -56,12 +56,12 @@ public class Cita {
         this.resolucion = resolucion;
     }
 
-    public Cliente getVisitante() {
-        return visitante;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setVisitante(Cliente visitante) {
-        this.visitante = visitante;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Vendedor getVendedorCita() {
@@ -86,7 +86,7 @@ public class Cita {
                 + "\nFecha Cita: " + fechaCita
                 + "\nHora: " + hora
                 + "\nResolucion : " + resolucion
-                + "\nCliente: " + visitante
+                + "\nCliente: " + cliente
                 + "\nVendedorCita: " + vendedorCita
                 + "\nVehiculo: " + vehiculo;
     }
@@ -120,7 +120,7 @@ public class Cita {
         this.hora = hora;
         this.vehiculo = vehiculo;
         vendedorCita = vendedor;
-        this.visitante = visitante;
+        this.cliente = visitante;
         return this;  
     }
 
