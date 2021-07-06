@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 
-public class Favoritos_cliente_fragment extends Fragment{
+public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Lista_Favoritos.RecyclerItemClick {
     View mainview;
     Cliente cliente;
     PatioVenta patio;
@@ -38,7 +38,7 @@ public class Favoritos_cliente_fragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.favorito_cliente, container, false);
-        //patio = Patioventainterfaz.listaFav;
+        patio = Patioventainterfaz.patioventa;
 
         try {
             cargar();
@@ -47,18 +47,22 @@ public class Favoritos_cliente_fragment extends Fragment{
         }
         return mainview;
             }
-            public void cargar() throws Exception {
-                Cliente autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();
-                RecyclerView listaview = mainview.findViewById(R.id.listafavoritos_Rv);
-                RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
-                listaview.setLayoutManager(manager);
-                listaview.setItemAnimator(new DefaultItemAnimator());
-                adptadorlistaview=new Adaptador_Lista_Favoritos( cliente.getFavoritos().listabusqueda(autofavorito.getFavoritos()), (Adaptador_Lista_Favoritos.RecyclerItemClick) this);
-                listaview.setAdapter(adptadorlistaview);
-                listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
-            }
 
+        public void cargar() {
+            RecyclerView listaview = mainview.findViewById(R.id.listafavoritos_Rv);
+            RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
+            listaview.setLayoutManager(manager);
+            listaview.setItemAnimator(new DefaultItemAnimator());
+            adptadorlistaview=new Adaptador_Lista_Favoritos( patio.getVehiculos(), this);
+            listaview.setAdapter(adptadorlistaview);
+            listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
         }
+
+    @Override
+    public void itemClick(String placa) {
+        int i =0;
+    }
+}
 
 
 
