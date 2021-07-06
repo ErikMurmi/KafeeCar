@@ -83,9 +83,8 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
+
 /////te quedaste aqui
     @Override
     public int getItemCount() {

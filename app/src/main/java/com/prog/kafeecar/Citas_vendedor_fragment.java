@@ -36,7 +36,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private PatioVenta patio;
     Cita cita_mostrar;
-    Cliente cliente_mostrar;
 
     public EditText placa_ci_vn_etxt;
 
@@ -223,6 +222,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
 
     }
+
     public void editarCita() throws Exception {
         EditText fechacitadia = mainView.findViewById(R.id.ed_dia_ci_vn_etxt);
         EditText fechacitames = mainView.findViewById(R.id.ed_mes_ci_vn_etxt);

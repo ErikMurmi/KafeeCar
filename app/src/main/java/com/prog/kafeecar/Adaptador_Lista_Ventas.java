@@ -128,6 +128,24 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
         notifyDataSetChanged();
     }
 
+    public void buscar(String fecha){
+        if(fecha.length()==0){
+            ventas_buscadas.vaciar();
+            ventas_buscadas.copiar(ventas_original);
+        }else {
+            ventas_buscadas.vaciar();
+            for (int i = 0; i < ventas_original.contar(); i++) {
+                Venta actual = (Venta) ventas_original.getPos(i);
+                String f = Patioventainterfaz.getFechaMod(actual.getFecha());
+                if (f.contains(fecha)) {
+                    ventas_buscadas.add(actual);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
     public interface RecyclerItemClick{
         void itemClick(String placa, String cliente);
     }

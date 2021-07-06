@@ -67,11 +67,11 @@
                             android:orientation="horizontal">
 
                             <EditText
-                                android:id="@+id/ed_dia_ci_vn_etxt"
+                                android:id="@+id/ed_dia_ci_ad_etxt"
                                 android:layout_width="70dp"
                                 android:layout_height="37dp"
-                                android:layout_marginEnd="12dp"
 
+                                android:layout_marginEnd="12dp"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
                                 android:ems="10"
                                 android:fontFamily="@font/ocra"
@@ -82,7 +82,7 @@
                                 android:textSize="19sp" />
 
                             <EditText
-                                android:id="@+id/ed_mes_ci_vn_etxt"
+                                android:id="@+id/ed_mes_ci_ad_etxt"
                                 android:layout_width="70dp"
                                 android:layout_height="37dp"
                                 android:layout_marginEnd="12dp"
@@ -96,12 +96,12 @@
                                 android:textSize="19sp" />
 
                             <EditText
-                                android:id="@+id/ed_anio_ci_vn_etxt"
+                                android:id="@+id/ed_anio_ci_ad_etxt"
                                 android:layout_width="80dp"
                                 android:layout_height="37dp"
                                 android:layout_marginEnd="12dp"
-                                android:background="@drawable/bordesmarcoscafegrisaceo"
 
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
                                 android:ems="10"
                                 android:fontFamily="@font/ocra"
                                 android:hint="aaaa"
@@ -136,12 +136,12 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/ed_hora_ci_vn_etxt"
+                            android:id="@+id/ed_hora_ci_ad_etxt"
                             android:layout_width="65dp"
                             android:layout_height="37dp"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:ems="10"
 
+                            android:ems="10"
                             android:fontFamily="@font/ocra"
                             android:hint="h"
                             android:inputType="number"
@@ -174,10 +174,10 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ed_cedula_cliente_ci_cn_etxt"
+                        android:id="@+id/ed_cliente_ci_ad_etxt"
                         android:layout_width="280dp"
-                        android:layout_height="wrap_content"
 
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:fontFamily="@font/ocra"
                         android:hint="@string/cedula_c"
@@ -220,9 +220,9 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ed_cedula_vendedor_ci_vn_etxt"
-                        android:layout_width="280dp"
+                        android:id="@+id/ed_vendedor_ci_ad_etxt"
 
+                        android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:fontFamily="@font/ocra"
@@ -265,10 +265,10 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ed_placa_ci_vn_etxt"
+                        android:id="@+id/ed_placa_ci_ad_etxt"
                         android:layout_width="280dp"
-                        android:layout_height="wrap_content"
 
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:fontFamily="@font/ocra"
                         android:hint="@string/placa_c"
@@ -304,10 +304,10 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/ed_resolucion_ci_vn_etxt"
+                    android:id="@+id/ed_resolucion_ci_ad_etxt"
                     android:layout_width="match_parent"
-                    android:layout_height="88dp"
 
+                    android:layout_height="88dp"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:fontFamily="@font/ocra"
                     android:hint="Por ver"

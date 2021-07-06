@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -24,6 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
@@ -110,6 +115,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.GONE);
             citaEditable.setVisibility(View.VISIBLE);
+            visualizarEditable();
         });
         /*buscar_btn.setOnClickListener(v -> {
             CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
@@ -122,11 +128,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             irAniadirCita.callOnClick();
             vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
             vehiculo_nuevacita.setTextColor(Color.BLACK);
-        }else{
-            try {
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         /*
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -155,12 +156,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         };*/
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
-        /*buscar_btn.setOnClickListener(v -> {
-            String dia = dia_b.getText().toString();
-            String mes = mes_b.getText().toString();
-            String anio = anio_b.getText().toString();
-            adptadorlistaview.buscar(dia,mes,anio);
-        });*/
         return mainView;
     }
 
@@ -214,6 +209,43 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         }
 
         precio.setText(" $" + cita_mostrar.getVehiculo().getPrecioVenta());
+    }
+
+    public void visualizarEditable(){
+        ImageView imagen_ed = mainView.findViewById(R.id.ed_carro_ci_vn_img);
+        TextView dia_ed = mainView.findViewById(R.id.ed_dia_ci_ad_etxt);
+        TextView mes_ed = mainView.findViewById(R.id.ed_mes_ci_ad_etxt);
+        TextView anio_ed = mainView.findViewById(R.id.ed_anio_ci_ad_etxt);
+        TextView hora_ed = mainView.findViewById(R.id.ed_hora_ci_ad_etxt);
+        TextView cliente_ed = mainView.findViewById(R.id.ed_cliente_ci_ad_etxt);
+        TextView vendedor_ed = mainView.findViewById(R.id.ed_vendedor_ci_ad_etxt);
+        TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
+        TextView resolucion_ed = mainView.findViewById(R.id.ed_placa_ci_ad_etxt);
+
+        String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
+        String dia = fecha.split("-")[0];
+        String mes = fecha.split("-")[1];
+        String anio = fecha.split("-")[2];
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen_ed.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dia_ed.setText(dia);
+        mes_ed.setText(mes);
+        anio_ed.setText(anio);
+        hora_ed.setText(String.valueOf(cita_mostrar.getHora()));
+        cliente_ed.setText(cita_mostrar.getCliente().getCedula());
+        vendedor_ed.setText(cita_mostrar.getVendedorCita().getCedula());
+        vehiculo_ed.setText(cita_mostrar.getVehiculo().getPlaca());
+        resolucion_ed.setText(cita_mostrar.getResolucion());
     }
 
     public void registarCita(View v) throws Exception {

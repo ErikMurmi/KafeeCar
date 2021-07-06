@@ -131,6 +131,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
         return mainView;
     }
+
     public void cargar() {
         RecyclerView listaview = mainView.findViewById(R.id.lista_autos_cl_Rv);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
@@ -139,6 +140,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         adptadorlistaview = new Adaptador_Lista_Catalogo_Cl(patio.getVehiculos(), this);
         listaview.setAdapter(adptadorlistaview);
     }
+
     public void irVer() throws Exception {
 
 
