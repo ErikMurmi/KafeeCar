@@ -29,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
@@ -36,6 +37,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     private String TAG = "Citas_Admin";
     private PatioVenta patio;
+    private Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     private Adaptador_Lista_Citas adptadorlistaview;
@@ -55,6 +57,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     //Botones
     private Button irVerEditable;
     private Button anular;
+    private Button descartar;
+    private Button guardar_edit;
     private FloatingActionButton irAniadirCita;
 
     private LinearLayout verCita;
@@ -78,6 +82,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
         irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
         anular = mainView.findViewById(R.id.anular_ci_ad_btn);
+        descartar = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
+        guardar_edit = mainView.findViewById(R.id.ed_editar_ci_vn_btn);
         //TextViews
         vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
@@ -94,6 +100,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             aniadirCita.setVisibility(View.VISIBLE);
         });
 
+
+
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("ANULAR");
@@ -102,6 +110,39 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 try {
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                     irListaCitas();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+
+        descartar.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de salir sin guardar los cambios?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    irListaCitas();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        guardar_edit.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Guardar");
+            msg.setMessage("¿Está seguro de guardar los cambios en la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(editarCita()){
+                        irListaCitas();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,6 +215,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         cargar();
         listaCitas.setVisibility(View.VISIBLE);
+        irAniadirCita.setVisibility(View.VISIBLE);
         verCita.setVisibility(View.GONE);
         aniadirCita.setVisibility(View.GONE);
         citaEditable.setVisibility(View.GONE);
@@ -183,6 +225,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         listaCitas.setVisibility(View.GONE);
         irAniadirCita.setVisibility(View.GONE);
         verCita.setVisibility(View.VISIBLE);
+        ImageView imagen_ed = mainView.findViewById(R.id.ver_cita_im_ad_img);
         TextView fecha = mainView.findViewById(R.id.ver_fecha_ci_ad_txt);
         TextView hora = mainView.findViewById(R.id.ver_hora_ci_ad_txt);
         TextView cliente = mainView.findViewById(R.id.ver_cliente_ci_ad_txt);
@@ -192,7 +235,16 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_ad_txt);
         TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_ad_txt);
         TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_ad_txt);
-
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen_ed.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         fecha.setText(getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.valueOf(cita_mostrar.getHora()));
         cliente.setText(cita_mostrar.getCliente().getNombre());
@@ -212,15 +264,15 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     }
 
     public void visualizarEditable(){
-        ImageView imagen_ed = mainView.findViewById(R.id.ed_carro_ci_vn_img);
+        ImageView imagen_ed = mainView.findViewById(R.id.ed_carro_ci_ad_img);
         TextView dia_ed = mainView.findViewById(R.id.ed_dia_ci_ad_etxt);
         TextView mes_ed = mainView.findViewById(R.id.ed_mes_ci_ad_etxt);
         TextView anio_ed = mainView.findViewById(R.id.ed_anio_ci_ad_etxt);
         TextView hora_ed = mainView.findViewById(R.id.ed_hora_ci_ad_etxt);
         TextView cliente_ed = mainView.findViewById(R.id.ed_cliente_ci_ad_etxt);
         TextView vendedor_ed = mainView.findViewById(R.id.ed_vendedor_ci_ad_etxt);
-        TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
-        TextView resolucion_ed = mainView.findViewById(R.id.ed_placa_ci_ad_etxt);
+        TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_ad_etxt);
+        TextView resolucion_ed = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
 
         String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
         String dia = fecha.split("-")[0];
@@ -248,7 +300,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         resolucion_ed.setText(cita_mostrar.getResolucion());
     }
 
-    public void registarCita(View v) throws Exception {
+    public void registarCita() throws Exception {
         EditText fechacitadia = mainView.findViewById(R.id.fechacitadia_txt);
         EditText fechacitames = mainView.findViewById(R.id.fechacitames_txt);
         EditText fechacitaanio = mainView.findViewById(R.id.fechacitaanio_txt);
@@ -304,6 +356,125 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         }
 
+    }
+
+    public boolean editarCita() throws Exception {
+        EditText fechacitadia = mainView.findViewById(R.id.ed_dia_ci_ad_etxt);
+        EditText fechacitames = mainView.findViewById(R.id.ed_mes_ci_ad_etxt);
+        EditText fechacitaanio = mainView.findViewById(R.id.ed_anio_ci_ad_etxt);
+        EditText fechacitahora = mainView.findViewById(R.id.ed_hora_ci_ad_etxt);
+        Cliente cliente_c = null;
+        Vehiculo vehiculo = null;
+        int c = 0;
+        int hora = -1;
+        int dia = -1;
+        int mes = -1;
+        int anio = -1;
+
+        if (!isEmpty(fechacitaanio)) {
+            String anio_str = fechacitaanio.getText().toString();
+            anio = Integer.parseInt(anio_str);
+            if (anio < 2021) {
+                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                fechacitaanio.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        if (!isEmpty(fechacitames)) {
+            String mes_str = fechacitames.getText().toString();
+            mes = Integer.parseInt(mes_str);
+            if (mes < 1 || mes > 12) {
+                Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+                fechacitames.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+            fechacitames.setText("");
+            c++;
+        }
+
+        if (!isEmpty(fechacitadia)) {
+            String dia_str = fechacitadia.getText().toString();
+            dia = Integer.parseInt(dia_str);
+            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
+                Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
+                fechacitadia.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText cliente = mainView.findViewById(R.id.ed_cliente_ci_ad_etxt);
+        EditText auto = mainView.findViewById(R.id.ed_placa_ci_ad_etxt);
+
+        if (!isEmpty(cliente)) {
+            String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
+            }
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            if (vehiculo_str.length() != 8) {
+                Toast.makeText(mainView.getContext(), "Número de placa inválido", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        if (!isEmpty(fechacitahora)) {
+            String hora_str = fechacitahora.getText().toString();
+            hora = Integer.parseInt(hora_str);
+            if(hora>24 || hora <1){
+                Toast.makeText(mainView.getContext(), "Hora invalida", Toast.LENGTH_SHORT).show();
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        Date fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
+        if((hora>24 || hora <1) || !usuarioActual.disponible(fecha, hora)){
+            Toast.makeText(mainView.getContext(), "El vendedor no está disponible", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
+        String resolucion_str = resolucion.getText().toString();
+
+        if (c == 0) {
+            Cita actualizada = cita_mostrar.actualizarVen(
+                    fecha,
+                    hora,
+                    vehiculo,
+                    usuarioActual,
+                    cliente_c,
+                    resolucion_str);
+            if (patio.getCitas().contiene(actualizada)) {
+                Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return false;
     }
 
     public String formatoHora(int hora) {

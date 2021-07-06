@@ -13,7 +13,7 @@
         android:background="@drawable/actualizar_cita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ed_carro_ci_vn_img"
+                    android:id="@+id/ed_carro_ci_ad_img"
                     android:layout_width="278dp"
                     android:layout_height="166dp"
                     android:layout_marginBottom="10dp"
@@ -327,7 +327,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/ed_descartar_ci_vn_btn"
+                        android:id="@+id/ed_descartar_ci_ad_btn"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="125dp"
                         android:layout_height="45dp"
@@ -350,7 +350,6 @@
                         android:background="@drawable/boton_redondeado"
                         android:backgroundTint="@color/botones"
                         android:fontFamily="@font/valorant"
-                        android:onClick="registarCita"
                         android:text="Editar"
                         android:textColor="#FFFFFF"
                         android:textSize="17.5sp" />
@@ -373,7 +372,7 @@
         android:background="@drawable/cita_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -388,6 +387,7 @@
                 android:paddingRight="20dp">
 
                 <ImageView
+                    android:id="@+id/ver_cita_im_ad_img"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:adjustViewBounds="true"
