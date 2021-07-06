@@ -85,10 +85,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Está seguro de anular la cita?");
             msg.setPositiveButton("Si", (dialog, which) -> {
             try {
-                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cliente_mostrar.getCedula());
+                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                 irListaCitas();
             } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             });

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainView;
+    private SearchView busqueda_ventas;
     private PatioVenta patio;
     private Button irVentasGenerales;
     private Button irRegistrarNuevaVenta;
@@ -74,7 +75,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
         contar= mainView.findViewById(R.id.contar_txt);
         contar.setText(String.valueOf(patio.getVehiculos().contar()));
-
 
         cargar();
 
@@ -165,14 +165,21 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     @Override
-    public boolean onQueryTextChange(String s) {
-        s=s.toUpperCase();
-        try{
-            adptadorlistaview.filtro(s);
-
-        }catch (Exception e){
-            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+    public boolean onQueryTextChange(String newText) {
+        String b = newText;
+        if(newText.length()==2){
+            b+="-";
+            busqueda_ventas.setQuery(b,false);
         }
+        if(newText.length()==5){
+            b+="-";
+            busqueda_ventas.setQuery(b,false);
+        }
+        if(newText.length()>10){
+            b= b.substring(0,10);
+            busqueda_ventas.setQuery(b,false);
+        }
+        adptadorlistaview.buscar(b);
         return false;
     }
 

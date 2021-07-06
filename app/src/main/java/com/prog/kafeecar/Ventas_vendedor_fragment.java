@@ -16,14 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 
-public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick {
+public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainview;
+    private SearchView busqueda_ventas;
     private LinearLayout verventa;
     private LinearLayout aniadirventa;
     private LinearLayout editarventa;
@@ -41,7 +43,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainview = inflater.inflate(R.layout.ventas_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
-
+        busqueda_ventas = mainview.findViewById(R.id.busqueda_vt_vn_srv);
         //Botones
         aniadir = mainview.findViewById(R.id.aniadir_vt_vn_ftbn);
 
@@ -72,7 +74,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
-
+        busqueda_ventas.setOnQueryTextListener(this);
         cargar();
         return mainview;
     }
@@ -125,6 +127,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         verventa.setVisibility(View.VISIBLE);
     }
 
+    public void verVentaEditable(){
+        lista_ventas.setVisibility(View.GONE);
+        verventa.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void itemClick(String placa, String cliente) {
         try {
@@ -135,5 +142,29 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String b = newText;
+        if(newText.length()==2){
+            b+="-";
+            busqueda_ventas.setQuery(b,false);
+        }
+        if(newText.length()==5){
+            b+="-";
+            busqueda_ventas.setQuery(b,false);
+        }
+        if(newText.length()>10){
+            b= b.substring(0,10);
+            busqueda_ventas.setQuery(b,false);
+        }
+        adaptadorVentas.buscar(b);
+        return false;
     }
 }

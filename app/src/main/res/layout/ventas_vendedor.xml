@@ -12,7 +12,7 @@
         android:background="@drawable/ventas_lista"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <Button
             android:id="@+id/eliminar_vt_vn_btn"
