@@ -62,6 +62,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
         Button anular_ci_vn_btn = mainView.findViewById(R.id.anular_ci_vn_btn);
         Button editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
+        Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
+        Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
+        EditText ed_cedula_vendedor_ci_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_etxt);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -69,13 +72,20 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         });
 
         guardar_ci_vn_btn.setOnClickListener(v -> {
-            try {
-                registarCita();
-                Toast.makeText(mainView.getContext(), "Cita Registrada", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "No se pudo registrar la cita", Toast.LENGTH_SHORT).show();
-                citas_vendedor_lyt.setVisibility(View.VISIBLE);
-            }
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("AÑADIR");
+            msg.setMessage("¿Está seguro de añadir la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    registarCita();
+                    irListaCitas();
+                } catch (Exception e) {
+                    citas_vendedor_lyt.setVisibility(View.VISIBLE);
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         anular_ci_vn_btn.setOnClickListener(v -> {
@@ -93,6 +103,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
+
         editar_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
             citas_vendedor_lyt.setVisibility(View.GONE);
@@ -100,6 +111,37 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             aniadir_ci_vn_lyt.setVisibility(View.GONE);
             editar_ci_vn_lyt.setVisibility(View.VISIBLE);
             visualizarEditable();
+        });
+
+        ed_cedula_vendedor_ci_vn_etxt.setOnClickListener(v -> {
+            Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show();
+        });
+
+        ed_guardar_ci_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("GUARDAR");
+            msg.setMessage("¿Está seguro de guardar los cambios?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    editarCita();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                irVer();
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        ed_descartar_ci_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de descartar los cambios?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                irVer();
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         if (Patioventainterfaz.CITA_CON_VEHICULO) {
@@ -228,7 +270,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         EditText fechacitames = mainView.findViewById(R.id.ed_mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.ed_anio_ci_vn_etxt);
         EditText fechacitahora = mainView.findViewById(R.id.ed_hora_ci_vn_etxt);
-        Vendedor vendedor_v = usuarioActual;
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
@@ -392,7 +433,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
 
         EditText cliente = mainView.findViewById(R.id.cedula_cliente_ci_cn_etxt);
-        EditText vendedor = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
         EditText auto = mainView.findViewById(R.id.placa_ci_vn_etxt);
 
         if (!isEmpty(cliente)) {
@@ -484,7 +524,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }else{
                 irVer();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

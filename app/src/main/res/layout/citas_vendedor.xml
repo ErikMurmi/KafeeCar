@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/actualizar_cita"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -225,11 +225,12 @@
 
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:editable="true"
                         android:fontFamily="@font/ocra"
                         android:hint="@string/cedula_c"
                         android:inputType="number"
                         android:textAlignment="center"
-                        android:textColor="#000000"
+                        android:textColor="@color/cafe_grisaceo"
                         android:textSize="19sp" />
 
                     <ImageButton
@@ -238,9 +239,12 @@
                         android:layout_height="35dp"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:backgroundTint="@color/cafe_grisaceo"
+                        android:backgroundTint="@color/white"
+                        android:clickable="false"
                         android:src="@drawable/icono_busqueda"
-                        app:srcCompat="@drawable/icono_busqueda" />
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/icono_busqueda"
+                        tools:visibility="invisible" />
 
                 </LinearLayout>
 
@@ -343,7 +347,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
-                        android:id="@+id/ed_editar_ci_vn_btn"
+                        android:id="@+id/ed_guardar_ci_vn_btn"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="115dp"
                         android:layout_height="45dp"
@@ -674,8 +678,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
