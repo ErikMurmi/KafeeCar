@@ -64,7 +64,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
         Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
-        EditText ed_cedula_vendedor_ci_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_etxt);
+
+        TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -113,9 +114,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             visualizarEditable();
         });
 
-        ed_cedula_vendedor_ci_vn_etxt.setOnClickListener(v -> {
-            Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show();
-        });
+        ed_cedula_vendedor_ci_vn_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         ed_guardar_ci_vn_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -123,11 +122,13 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Está seguro de guardar los cambios?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    editarCita();
+                    if(editarCita() == true){
+                        irListaCitas();
+                    }
                 } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "No se pudo actualizar los datos", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
-                irVer();
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
@@ -137,9 +138,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de descartar los cambios?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                irVer();
-            });
+            msg.setPositiveButton("Si", (dialog, which) -> irVer());
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -190,7 +189,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         TextView anio_ed = mainView.findViewById(R.id.ed_anio_ci_vn_etxt);
         TextView hora_ed = mainView.findViewById(R.id.ed_hora_ci_vn_etxt);
         TextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_ci_cn_etxt);
-        TextView vendedor_ed = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_etxt);
+        TextView vendedor_ed = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
         TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
         TextView resolucion_ed = mainView.findViewById(R.id.ed_resolucion_ci_vn_etxt);
 
@@ -265,7 +264,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     }
 
-    public void editarCita() throws Exception {
+    public boolean editarCita() throws Exception {
+        Toast.makeText(mainView.getContext(), "10", Toast.LENGTH_SHORT).show();
         EditText fechacitadia = mainView.findViewById(R.id.ed_dia_ci_vn_etxt);
         EditText fechacitames = mainView.findViewById(R.id.ed_mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.ed_anio_ci_vn_etxt);
@@ -374,8 +374,10 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     resolucion_str);
             if (patio.getCitas().contiene(actualizada)) {
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
+                return true;
             }
         }
+        return false;
     }
 
     public void registarCita() throws Exception {
