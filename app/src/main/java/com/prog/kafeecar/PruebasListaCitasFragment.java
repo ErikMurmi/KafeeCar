@@ -1,18 +1,13 @@
 package com.prog.kafeecar;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -47,7 +42,7 @@ public class PruebasListaCitasFragment extends Fragment {
         RecyclerView.LayoutManager manager=new LinearLayoutManager(context);
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.getCitas().listabusqueda(cita1.getVisitante()));
+        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.getCitas().listabusqueda(cita1.getCliente()));
         listaview.setAdapter(adptadorlistaview);
         listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }

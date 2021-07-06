@@ -1,6 +1,5 @@
 package com.prog.kafeecar;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -8,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -46,8 +42,8 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             citas=Patioventainterfaz.patioventa.getCitas().listabusqueda(cienteactual);
             Cita c=(Cita)citas.getPos(position);
             String hora= "Hora: "+c.getHora();
-            String nombre= "Nombre: "+c.getVisitante().getNombre();
-            String telefono= "Telefono: "+c.getVisitante().getTelefono();
+            String nombre= "Nombre: "+c.getCliente().getNombre();
+            String telefono= "Telefono: "+c.getCliente().getTelefono();
             String matricula="Matricula N#= "+c.getVehiculo().getMatricula();
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
             Glide.with(view)

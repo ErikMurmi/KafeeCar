@@ -28,7 +28,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
@@ -36,7 +35,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private View mainView;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private PatioVenta patio;
-    private Cita cita_mostrar;
+    Cita cita_mostrar;
     Cliente cliente_mostrar;
 
     public EditText placa_ci_vn_etxt;
@@ -44,6 +43,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private LinearLayout aniadir_ci_vn_lyt;
     private LinearLayout citas_vendedor_lyt;
     private LinearLayout ver_ci_vn_lyt;
+    private LinearLayout editar_ci_vn_lyt;
 
     private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
 
@@ -57,10 +57,12 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         ver_ci_vn_lyt = mainView.findViewById(R.id.ver_ci_vn_lyt);
         citas_vendedor_lyt = mainView.findViewById(R.id.citas_vendedor_lyt);
         aniadir_ci_vn_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
+        editar_ci_vn_lyt = mainView.findViewById(R.id.editar_ci_vn_lyt);
 
         ir_aniadir_ci_vn_btn = mainView.findViewById(R.id.ir_aniadir_ci_vn_btn);
         Button guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
         Button anular_ci_vn_btn = mainView.findViewById(R.id.anular_ci_vn_btn);
+        Button editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -83,14 +85,23 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Está seguro de anular la cita?");
             msg.setPositiveButton("Si", (dialog, which) -> {
             try {
-                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getVisitante().getCedula());
+                patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cliente_mostrar.getCedula());
                 irListaCitas();
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "1", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
+        });
+        editar_ci_vn_btn.setOnClickListener(v -> {
+            ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
+            citas_vendedor_lyt.setVisibility(View.GONE);
+            ver_ci_vn_lyt.setVisibility(View.GONE);
+            aniadir_ci_vn_lyt.setVisibility(View.GONE);
+            editar_ci_vn_lyt.setVisibility(View.VISIBLE);
+            visualizarEditable();
         });
 
         if (Patioventainterfaz.CITA_CON_VEHICULO) {
@@ -132,6 +143,44 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         listaview.setAdapter(adptadorlistaview);
     }
 
+    public void visualizarEditable(){
+        ImageView imagen_ed = mainView.findViewById(R.id.ed_carro_ci_vn_img);
+        TextView dia_ed = mainView.findViewById(R.id.ed_dia_ci_vn_etxt);
+        TextView mes_ed = mainView.findViewById(R.id.ed_mes_ci_vn_etxt);
+        TextView anio_ed = mainView.findViewById(R.id.ed_anio_ci_vn_etxt);
+        TextView hora_ed = mainView.findViewById(R.id.ed_hora_ci_vn_etxt);
+        TextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_ci_cn_etxt);
+        TextView vendedor_ed = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_etxt);
+        TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
+        TextView resolucion_ed = mainView.findViewById(R.id.ed_resolucion_ci_vn_etxt);
+
+        String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
+        String dia = fecha.split("-")[0];
+        String mes = fecha.split("-")[1];
+        String anio = fecha.split("-")[2];
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen_ed.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dia_ed.setText(dia);
+        mes_ed.setText(mes);
+        anio_ed.setText(anio);
+        hora_ed.setText(String.valueOf(cita_mostrar.getHora()));
+        cliente_ed.setText(cita_mostrar.getCliente().getCedula());
+        vendedor_ed.setText(cita_mostrar.getVendedorCita().getCedula());
+        vehiculo_ed.setText(cita_mostrar.getVehiculo().getPlaca());
+        resolucion_ed.setText(cita_mostrar.getResolucion());
+
+    }
+
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void visualizarCita() {
         ImageView imagen = mainView.findViewById(R.id.foto_auto_ci_vn_img);
@@ -158,8 +207,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
         fecha.setText(Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.format("%d:00 %s", cita_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
-        cliente.setText(cita_mostrar.getVisitante().getNombre());
-        contacto.setText(cita_mostrar.getVisitante().getTelefono());
+        cliente.setText(cita_mostrar.getCliente().getNombre());
+        contacto.setText(cita_mostrar.getCliente().getTelefono());
         vendedor.setText(cita_mostrar.getVendedorCita().getNombre());
         vehiculo.setText(cita_mostrar.getVehiculo().getModelo());
         descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());

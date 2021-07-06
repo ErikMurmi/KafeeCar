@@ -2,7 +2,6 @@ package com.prog.kafeecar;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,8 +170,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         fecha.setText(getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.valueOf(cita_mostrar.getHora()));
-        cliente.setText(cita_mostrar.getVisitante().getNombre());
-        contacto.setText(cita_mostrar.getVisitante().getTelefono());
+        cliente.setText(cita_mostrar.getCliente().getNombre());
+        contacto.setText(cita_mostrar.getCliente().getTelefono());
         vendedor.setText(cita_mostrar.getVendedorCita().getNombre());
         vehiculo.setText(cita_mostrar.getVehiculo().getMarca() + cita_mostrar.getVehiculo().getModelo());
         String resolucion_str =cita_mostrar.getResolucion();
