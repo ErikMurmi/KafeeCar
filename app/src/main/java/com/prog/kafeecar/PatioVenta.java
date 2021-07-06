@@ -160,7 +160,7 @@ public class PatioVenta {
         boolean agregado =false;
 
         if(tipo.compareTo("Vendedor")==0){
-            vendedores.add((Vendedor) nuevo);
+            vendedores.add(nuevo);
             agregado = vendedores.contiene(nuevo);
         }else if(tipo.compareTo("Cliente")==0){
             clientes.add(nuevo);
@@ -180,24 +180,17 @@ public class PatioVenta {
      * @return true si se elimino de la lista, caso contrario false
      */
     
-    public boolean removerCita(String placa, String cedula) {
+    public void removerCita(String placa, String cedula) throws Exception {
         int cont = 0;
         boolean removido = false;
-        while(cont<citas.contar() && removido==false){
+        while(cont<citas.contar() && !removido){
             Cita actual = (Cita) citas.getPos(cont);
-            if(actual.getVisitante().getCedula().compareTo(cedula)==0){
-                if(actual.getVehiculo().getPlaca().compareTo(placa)==0){
-                    try {
-                        citas.eliminarPos(cont);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            if(actual.getVisitante().getCedula().compareTo(cedula)==0 && actual.getVehiculo().getPlaca().compareTo(placa)==0){
+                    citas.eliminarPos(cont);
                     removido = true;
-                }
             }
             cont++;
         }
-        return removido;
     }
 
 

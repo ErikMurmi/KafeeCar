@@ -100,7 +100,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirUsuario((new Vendedor("1721835213.jpg", 8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg", 8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg", 8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
-        patioventa.aniadirUsuario(new Cliente("Daniel", "175014048", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"), "175014048.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Daniel", "1750140489", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"), "175014048.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115623.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Diana","1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115233.jpg"), "Cliente");
         Cliente c = (Cliente) patioventa.getClientes().getPos(1);
@@ -111,18 +111,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         Date fechaCita3 = sdf.parse("02-8-2020");
         Date fechaCita4 = sdf.parse("12-7-2021");
         Date fechaCita5 = sdf.parse("21-6-2021");
-        Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
-        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
-        patioventa.aniadirCita(c1);
-        patioventa.aniadirCita(c2);
-        patioventa.aniadirCita(c3);
-        patioventa.aniadirCita(c4);
-        patioventa.aniadirCita(c5);
-        patioventa.aniadirCita(c6);
         Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven1);
         Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
@@ -135,6 +123,18 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVenta(ven5);
         Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven6);
+        Cita c1 = new Cita(fechaCita, 10, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Cita c2 = new Cita(fechaCita1, 14, " ", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
+        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
+        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
+        patioventa.aniadirCita(c1);
+        patioventa.aniadirCita(c2);
+        patioventa.aniadirCita(c3);
+        patioventa.aniadirCita(c4);
+        patioventa.aniadirCita(c5);
+        patioventa.aniadirCita(c6);
     }
 
     private void irAplicacion(String tipo) {
@@ -296,8 +296,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
         Toast.makeText(Patioventainterfaz.this, msg, Toast.LENGTH_SHORT).show();
     }
-
-
 
 
     /*public void citaNueva(View v) throws Exception {
