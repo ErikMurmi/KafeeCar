@@ -124,4 +124,14 @@ public class Cita {
         return this;  
     }
 
+    public Cita actualizarVen(Date fecha, int hora, Vehiculo vehiculo, Vendedor vendedor, Cliente visitante, String resolucion) {
+        fechaCita = fecha;
+        this.hora = hora;
+        this.vehiculo = vehiculo;
+        vendedorCita = vendedor;
+        this.cliente = visitante;
+        this.resolucion = resolucion;
+        return this;
+    }
+
 }
