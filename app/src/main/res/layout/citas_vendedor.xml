@@ -7,6 +7,366 @@
     android:background="@drawable/citas_lista">
 
     <LinearLayout
+        android:id="@+id/editar_ci_vn_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/anadircita"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/top_space">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ed_carro_ci_vn_img"
+                    android:layout_width="278dp"
+                    android:layout_height="166dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/ic_car_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ed_fecha_ci_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Fecha de la cita"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/ed_dia_ci_vn_etxt"
+                                android:layout_width="70dp"
+                                android:layout_height="37dp"
+                                android:layout_marginEnd="12dp"
+
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:ems="10"
+                                android:fontFamily="@font/ocra"
+                                android:hint="dd"
+                                android:inputType="number"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="19sp" />
+
+                            <EditText
+                                android:id="@+id/ed_mes_ci_vn_etxt"
+                                android:layout_width="70dp"
+                                android:layout_height="37dp"
+                                android:layout_marginEnd="12dp"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:ems="10"
+                                android:fontFamily="@font/ocra"
+                                android:hint="mm"
+                                android:inputType="number"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="19sp" />
+
+                            <EditText
+                                android:id="@+id/ed_anio_ci_vn_etxt"
+                                android:layout_width="80dp"
+                                android:layout_height="37dp"
+                                android:layout_marginEnd="12dp"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+
+                                android:ems="10"
+                                android:fontFamily="@font/ocra"
+                                android:hint="aaaa"
+                                android:inputType="number"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="19sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ed_horaCita_ci_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Hora"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/ed_hora_ci_vn_etxt"
+                            android:layout_width="65dp"
+                            android:layout_height="37dp"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:ems="10"
+
+                            android:fontFamily="@font/ocra"
+                            android:hint="h"
+                            android:inputType="number"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="19sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ed_cliente_ci_vn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Cliente "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ed_cedula_cliente_ci_cn_etxt"
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:fontFamily="@font/ocra"
+                        android:hint="@string/cedula_c"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/ed_buscar_cedCliente_ci_vn_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        android:src="@drawable/icono_busqueda"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ed_Vendedor_ci_vn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vendedor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ed_cedula_vendedor_ci_vn_etxt"
+                        android:layout_width="280dp"
+
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:fontFamily="@font/ocra"
+                        android:hint="@string/cedula_c"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/ed_buscar_cedVendedor_ci_vn_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        android:src="@drawable/icono_busqueda"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ed_Vehiculo_ci_vn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vehículo"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ed_placa_ci_vn_etxt"
+                        android:layout_width="280dp"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:fontFamily="@font/ocra"
+                        android:hint="@string/placa_c"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/ed_buscar_placa_ci_vn_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        android:src="@drawable/icono_busqueda"
+                        app:srcCompat="@drawable/icono_busqueda" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ed_resolucion_ci_vn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Resolución"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ed_resolucion_ci_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="88dp"
+
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Por ver"
+                    android:inputType="textMultiLine|text"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18.5sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/ed_descartar_ci_vn_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="125dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/black"
+                        android:fontFamily="@font/valorant"
+                        android:text="Descartar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/ed_editar_ci_vn_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="@color/botones"
+                        android:fontFamily="@font/valorant"
+                        android:onClick="registarCita"
+                        android:text="Editar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17.5sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/ver_ci_vn_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -490,7 +850,7 @@
                                 android:ems="10"
                                 android:fontFamily="@font/ocra"
                                 android:hint="dd"
-                                android:inputType="textPersonName"
+                                android:inputType="number"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 android:textSize="19sp" />
@@ -504,7 +864,7 @@
                                 android:ems="10"
                                 android:fontFamily="@font/ocra"
                                 android:hint="mm"
-                                android:inputType="textPersonName"
+                                android:inputType="number"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 android:textSize="19sp" />
@@ -519,7 +879,7 @@
 
                                 android:fontFamily="@font/ocra"
                                 android:hint="aaaa"
-                                android:inputType="textPersonName"
+                                android:inputType="number"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
                                 android:textSize="19sp" />
@@ -558,7 +918,7 @@
                             android:fontFamily="@font/ocra"
 
                             android:hint="h"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="19sp" />

@@ -373,7 +373,7 @@
 
                             android:fontFamily="@font/ocra"
                             android:hint="dd"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="19sp" />
@@ -386,7 +386,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:fontFamily="@font/ocra"
                             android:hint="mm"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="19sp" />
@@ -400,7 +400,7 @@
                             android:fontFamily="@font/ocra"
 
                             android:hint="aaaa"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="19sp" />
@@ -439,7 +439,7 @@
                         android:fontFamily="@font/ocra"
                         android:hint="h"
 
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="19sp" />
