@@ -356,7 +356,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
 
         Date fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
-        if(!usuarioActual.disponible(fecha, hora)){
+        if((hora < 7 || hora > 24) || !usuarioActual.disponible(fecha, hora)){
             Toast.makeText(mainView.getContext(), "El vendedor no está disponible", Toast.LENGTH_SHORT).show();
             c++;
         }
@@ -472,7 +472,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
 
         Date fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
-        if(!usuarioActual.disponible(fecha, hora)){
+        if((hora < 7 || hora > 24) || !usuarioActual.disponible(fecha, hora)){
             Toast.makeText(mainView.getContext(), "El vendedor no está disponible", Toast.LENGTH_SHORT).show();
             c++;
         }
