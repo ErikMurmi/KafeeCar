@@ -511,10 +511,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     public void itemClick(String placa, String cedula_cliente) {
         try {
             cita_mostrar = patio.buscarCitas("Vehiculo",placa,cedula_cliente);
-            if(cita_mostrar == null){
-            }else{
-                irVer();
-            }
+            irVer();
         } catch (Exception e) {
             e.printStackTrace();
         }
