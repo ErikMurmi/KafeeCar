@@ -32,10 +32,10 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
 
     public Adaptador_Lista_Favoritos(Lista fav, RecyclerItemClick itemClick){
 
-        this.autos_buscados =fav;
+        this.favoritos =fav;
         this.itemClick = itemClick;
-        favoritos = new Lista();
-        favoritos.copiar(fav);
+        //favoritos = new Lista();
+        //favoritos.copiar(fav);
     }
 
     @NonNull
@@ -48,8 +48,6 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
     @Override
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Favoritos.clienteHolder holder, int position) {
         try {
-            Cliente cienteactual=(Cliente)Patioventainterfaz.usuarioActual;
-            favoritos=Patioventainterfaz.listaFav.getFavoritos().listabusqueda(cienteactual);
             Vehiculo c=(Vehiculo)favoritos.getPos(position);
             String precio="";
             if (c.getPromocion()==0){
@@ -91,7 +89,7 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
 /////te quedaste aqui
     @Override
     public int getItemCount() {
-        return autos_buscados.contar();
+        return favoritos.contar();
     }
     public void filtro(String strBuscar){
         if(strBuscar.length()==0){
