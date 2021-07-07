@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -28,13 +30,14 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick {
+public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private View mainView;
 
     private LinearLayout verVehiculo;
 
     private LinearLayout verCatalogo;
+    private Adaptador_Lista_Catalogo adptadorlistaview;
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
@@ -53,9 +56,8 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
         verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
 
-
-
-
+        //Search view catalogo
+        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_vn_bar);
 
 
         /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -85,6 +87,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
         //requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         //busqueda_placa.setOnQueryTextListener(this);
+        busqueda_placa.setOnQueryTextListener(this);
         cargar();
 
         return mainView;
@@ -95,7 +98,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        Adaptador_Lista_Catalogo adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos(), this);
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -161,5 +164,17 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         verCatalogo.setVisibility(View.GONE);
         verVehiculo.setVisibility(View.VISIBLE);
         visualizarVehiculoVendedor();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toUpperCase();
+        adptadorlistaview.filtro(newText);
+        return false;
     }
 }

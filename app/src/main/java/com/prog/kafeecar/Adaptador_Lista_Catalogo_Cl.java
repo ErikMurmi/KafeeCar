@@ -44,7 +44,7 @@ public class Adaptador_Lista_Catalogo_Cl extends RecyclerView.Adapter<Adaptador_
             try {
                 Vehiculo c=(Vehiculo) autos_buscados.getPos(position);
                 String precio;
-                String modelo=c.getModelo();
+                String modelo=c.getModelo().toUpperCase();
                 if (c.getPromocion()==0){
                     precio= "$ "+c.getPrecioVenta();
                 }else{

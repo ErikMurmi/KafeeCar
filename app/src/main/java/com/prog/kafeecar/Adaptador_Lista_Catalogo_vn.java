@@ -42,17 +42,13 @@ public class Adaptador_Lista_Catalogo_vn extends RecyclerView.Adapter<Adaptador_
         try {
             Vehiculo c =(Vehiculo) autos_vn_buscados.getPos(position);
             String precio;
-            String modelo = c.getModelo();
+            String modelo = c.getModelo().toUpperCase();
             if (c.getPromocion()==0){
                  precio = "$ "+c.getPrecioVenta();
             }else{
                  precio = "$ "+c.getPromocion();
             }
             String marca = c.getMarca();
-            //TODO
-            /*
-            Cambiar matricula por marca y titulo solo modelo
-            * */
             String placa = c.getPlaca();
             String anio = String.valueOf(c.getAnio());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());

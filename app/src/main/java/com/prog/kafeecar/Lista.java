@@ -5,6 +5,9 @@
  */
 package com.prog.kafeecar;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  *
  * @author Erik
@@ -377,6 +380,14 @@ public class Lista {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ArrayList<Cita> toArrayList(){
+        ArrayList<Cita> citas = new ArrayList<Cita>();
+        for(int i=0; i<contar();i++){
+                citas.add((Cita)getPos(i));
+        }
+        return citas;
     }
     
 }
