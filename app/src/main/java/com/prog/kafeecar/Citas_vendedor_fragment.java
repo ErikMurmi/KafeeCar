@@ -50,11 +50,12 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private FloatingActionButton ir_aniadir_ci_vn_btn;
 
+    @SuppressLint("CutPasteId")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
 
-        placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_etxt);
+        placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_actv);
         ver_ci_vn_lyt = mainView.findViewById(R.id.ver_ci_vn_lyt);
         citas_vendedor_lyt = mainView.findViewById(R.id.citas_vendedor_lyt);
         aniadir_ci_vn_lyt = mainView.findViewById(R.id.aniadir_ci_vn_lyt);
@@ -68,9 +69,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
 
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
-        AutoCompleteTextView ced_ven_vt_ad_actv = mainView.findViewById(R.id.ced_ven_vt_ad_actv);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasVendedores());
-        ced_ven_vt_ad_actv.setAdapter(adapter);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -78,6 +76,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             editar_ci_vn_lyt.setVisibility(View.GONE);
             ver_ci_vn_lyt.setVisibility(View.GONE);
             aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
+            adaptador();
         });
 
         guardar_ci_vn_btn.setOnClickListener(v -> {
@@ -169,6 +168,19 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         return mainView;
     }
 
+    public void adaptador(){
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_vn_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        cliente.setAdapter(adapter);
+
+        TextView cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
+        cedula_vendedor_ci_vn_txt.setText(usuarioActual.getCedula());
+
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_vn_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        auto.setAdapter(adapterPla);
+    }
+
     public void irListaCitas(){
         try {
             cargar();
@@ -196,7 +208,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         TextView mes_ed = mainView.findViewById(R.id.ed_mes_ci_vn_etxt);
         TextView anio_ed = mainView.findViewById(R.id.ed_anio_ci_vn_etxt);
         TextView hora_ed = mainView.findViewById(R.id.ed_hora_ci_vn_etxt);
-        TextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_ci_cn_etxt);
+        TextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_ci_vn_etxt);
         TextView vendedor_ed = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
         TextView vehiculo_ed = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
         TextView resolucion_ed = mainView.findViewById(R.id.ed_resolucion_ci_vn_etxt);
@@ -326,7 +338,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             c++;
         }
 
-        EditText cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_cn_etxt);
+        EditText cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_vn_etxt);
         EditText auto = mainView.findViewById(R.id.ed_placa_ci_vn_etxt);
 
         if (!isEmpty(cliente)) {
@@ -389,6 +401,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
     public void registarCita() throws Exception {
+        Toast.makeText(mainView.getContext(), "10", Toast.LENGTH_SHORT).show();
         EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_etxt);
         EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_etxt);
@@ -441,8 +454,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             c++;
         }
 
-        EditText cliente = mainView.findViewById(R.id.cedula_cliente_ci_cn_etxt);
-        EditText auto = mainView.findViewById(R.id.placa_ci_vn_etxt);
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_vn_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_vn_actv);
 
         if (!isEmpty(cliente)) {
             String cliente_str = cliente.getText().toString();

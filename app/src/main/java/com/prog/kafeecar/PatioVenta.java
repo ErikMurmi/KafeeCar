@@ -543,12 +543,12 @@ public class PatioVenta {
         return cedulas;
     }
 
-    public ArrayList<String> getPlacasClientes(){
+    public ArrayList<String> getPlacasVehiculo(){
         ArrayList<String> placas = new ArrayList<>();
         int cont = 0;
-        while(cont<clientes.contar()){
-            Vendedor actual = (Vendedor) vehiculos.getPos(cont);
-            placas.add(actual.getCedula());
+        while(cont<vehiculos.contar()){
+            Vehiculo actual = (Vehiculo) vehiculos.getPos(cont);
+            placas.add(actual.getPlaca());
             cont++;
         }
         return placas;
