@@ -532,6 +532,28 @@ public class PatioVenta {
         return cedulas;
     }
 
+    public ArrayList<String> getCedulasClientes(){
+        ArrayList<String> cedulas = new ArrayList<>();
+        int cont = 0;
+        while(cont<clientes.contar()){
+            Cliente actual = (Cliente) clientes.getPos(cont);
+            cedulas.add(actual.getCedula());
+            cont++;
+        }
+        return cedulas;
+    }
+
+    public ArrayList<String> getPlacasClientes(){
+        ArrayList<String> placas = new ArrayList<>();
+        int cont = 0;
+        while(cont<clientes.contar()){
+            Vendedor actual = (Vendedor) vehiculos.getPos(cont);
+            placas.add(actual.getCedula());
+            cont++;
+        }
+        return placas;
+    }
+
 
     /**
      * Actualiza todos los datos de un vehículo

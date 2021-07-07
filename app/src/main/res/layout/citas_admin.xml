@@ -372,7 +372,7 @@
         android:background="@drawable/cita_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -675,7 +675,7 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -828,30 +828,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/cliente_txt"
-                    android:layout_width="250dp"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-
-                    android:hint="@string/cedula_c"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="19sp" />
-
-                <ImageButton
-                    android:id="@+id/busqueda_citas_admin_btn2"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-                    android:backgroundTint="@color/cafe_grisaceo"
-                    android:src="@drawable/icono_busqueda"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
+                    android:layout_weight="1"
+                    android:text="AutoCompleteTextView" />
             </LinearLayout>
 
             <TextView
@@ -875,29 +857,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/vendedor_txt"
-                    android:layout_width="250dp"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="@string/cedula_c"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="19sp" />
-
-                <ImageButton
-                    android:id="@+id/busqueda_citas_admin_btn3"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-                    android:backgroundTint="@color/cafe_grisaceo"
-                    android:src="@drawable/icono_busqueda"
-                    app:srcCompat="@drawable/icono_busqueda" />
+                    android:layout_weight="1"
+                    android:text="AutoCompleteTextView" />
 
             </LinearLayout>
 
@@ -921,29 +886,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/vehiculo_txt"
-                    android:layout_width="250dp"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-
-                    android:hint="@string/placa_c"
-                    android:inputType="textPersonName"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="19sp" />
-
-                <ImageButton
-                    android:id="@+id/busqueda_citas_admin_btn4"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-                    android:backgroundTint="@color/cafe_grisaceo"
-                    android:src="@drawable/icono_busqueda"
-                    app:srcCompat="@drawable/icono_busqueda" />
+                    android:layout_weight="1"
+                    android:text="AutoCompleteTextView" />
 
             </LinearLayout>
 
