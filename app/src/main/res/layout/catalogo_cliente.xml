@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:visibility="invisible">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente"
@@ -33,12 +33,13 @@
 
                 <SearchView
                     android:id="@+id/busqueda_placa_cl_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
-                    android:backgroundTint="@color/botones"
+                    android:background="@drawable/bordesbotongris"
                     android:iconifiedByDefault="false"
+                    android:queryBackground="@color/white"
                     android:queryHint="@string/placa_c" />
 
                 <LinearLayout
@@ -96,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/editarcita_EC_txt"
@@ -263,7 +264,7 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/nueva_cita_cliente_lb"
@@ -408,7 +409,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"

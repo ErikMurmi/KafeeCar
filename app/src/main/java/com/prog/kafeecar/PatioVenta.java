@@ -1,6 +1,7 @@
 
 package com.prog.kafeecar;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PatioVenta {
@@ -520,6 +521,16 @@ public class PatioVenta {
         return buscado;
     }
 
+    public ArrayList<String> getCedulasVendedores(){
+        ArrayList<String> cedulas = new ArrayList<>();
+        int cont = 0;
+        while(cont<vendedores.contar()){
+            Vendedor actual = (Vendedor) vendedores.getPos(cont);
+            cedulas.add(actual.getCedula());
+            cont++;
+        }
+        return cedulas;
+    }
 
 
     /**
