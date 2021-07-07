@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -66,9 +68,15 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
 
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
+        AutoCompleteTextView ced_ven_vt_ad_actv = mainView.findViewById(R.id.ced_ven_vt_ad_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasVendedores());
+        ced_ven_vt_ad_actv.setAdapter(adapter);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
+            citas_vendedor_lyt.setVisibility(View.GONE);
+            editar_ci_vn_lyt.setVisibility(View.GONE);
+            ver_ci_vn_lyt.setVisibility(View.GONE);
             aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
         });
 

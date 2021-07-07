@@ -283,15 +283,6 @@
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/HoraCita.title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ocra"
-                    android:text="Hora"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textSize="18sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -337,16 +328,6 @@
                     android:inputType="number"
                     android:textColor="#CEC9D5" />
 
-                <EditText
-                    android:id="@+id/fecha_venta_hora_etxt"
-                    android:layout_width="70dp"
-                    android:layout_height="42dp"
-                    android:background="@drawable/bordesboton"
-                    android:ems="10"
-
-                    android:fontFamily="@font/ocra"
-                    android:inputType="number"
-                    android:textColor="#CEC9D5" />
             </LinearLayout>
 
             <LinearLayout
@@ -544,8 +525,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"

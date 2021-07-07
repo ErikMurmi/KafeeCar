@@ -101,12 +101,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         EditText fechaventadia= mainview.findViewById(R.id.fecha_venta_dia_etxt);
         EditText fechaventames= mainview.findViewById(R.id.fecha_venta_mes_etxt);
         EditText fechaventaanio= mainview.findViewById(R.id.fecha_venta_anio_etxt);
-        EditText fechaventahora= mainview.findViewById(R.id.fecha_venta_hora_etxt);
+
         String fechaventa_str=fechaventaanio.getText().toString()+"-"+fechaventames.getText().toString()+"-"+fechaventadia.getText().toString();
         String clientes_str=clientes.getText().toString();
         String vendedores_str= vendedor.getText().toString();
         String autos_str = auto.getText().toString();
-        int hora= Integer.parseInt(fechaventahora.getText().toString());
         float precioventa= Float.parseFloat(precio.getText().toString());
         Cliente clienteventa= patio.buscarClientes("Nombre",clientes_str);
         Vendedor vendedorventa= patio.buscarVendedores("Nombre",vendedores_str);
