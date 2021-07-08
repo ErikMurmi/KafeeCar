@@ -68,32 +68,40 @@ public class Cliente extends Usuario{
      * @param matricula del vehiculo favorito a agregar
      * @return  true si se agrego,caso contrario false
      */
-    public Boolean aniadirFavorito(TextView matricula ){
-        favoritos.add(matricula);
-        return false;
+    public void aniadirFavorito(String placa ){
+        favoritos.add(placa);
     }
     
     /**
      * Este método ayuda al cliente a borrar elementos de la lista de favoritos
-     * @param matricula del vehiculo a remover de favoritos
+     * @param placa del vehiculo a remover de favoritos
      * @return true si se borro, caso contrario false
      */
 
    //**** public void removeFavorito(String matricula) throws Exception {
-    public void removeFavorito(TextView matricula) throws Exception{
-        if (favoritos.esVacia()) {
-            throw new Exception("Esta vacia");
-        }
+    public void removerFavorito(String placa) throws Exception{
         int cont=0;
         while (cont< favoritos.contar()) {
             String vehiculo=(String)favoritos.getPos(cont);
-            if (vehiculo.compareToIgnoreCase(String.valueOf(matricula)) == 0) {
+            if (vehiculo.compareToIgnoreCase(placa) == 0) {
                 favoritos.eliminarPos(cont);
                 break;
             }
             cont++;
         }
+    }
 
+    public boolean esFavorito(String placa) {
+        int cont=0;
+        while (cont< favoritos.contar()) {
+            String vehiculo=(String)favoritos.getPos(cont);
+            if (vehiculo.compareToIgnoreCase(placa) == 0) {
+                return true;
+
+            }
+            cont++;
+        }
+        return false;
     }
 
     

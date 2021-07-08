@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -54,6 +56,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     private Uri foto = null;
     private boolean editar_imagen = false;
     private Adaptador_Lista_Catalogo adptadorlistaview;
+    private SearchView busqueda_placa;
 
     @Nullable
     @Override
@@ -61,7 +64,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
-        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
+        busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
         patio = Patioventainterfaz.patioventa;
         //Botones
         selec_vehiculo_img = mainView.findViewById(R.id.aniadir_vehiculo_imagen_btn);
@@ -159,6 +162,11 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
+        AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_ad_ddm);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
+        filtros.setAdapter(adapt);
+        filtros.setOnItemClickListener((parent, view, position, id) -> busqueda_placa.setQueryHint(adapt.getItem(position)));
+
 
         //Metodo para el control del boton atras
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -188,7 +196,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         busqueda_placa.setOnQueryTextListener(this);
-        cargar();
+        irCatalogo();
 
         return mainView;
     }
@@ -580,7 +588,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     public boolean onQueryTextChange(String newText) {
         newText = newText.toUpperCase();
         try {
-            adptadorlistaview.filtro(newText);
+            adptadorlistaview.buscar(newText,busqueda_placa.getQueryHint().toString());
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }

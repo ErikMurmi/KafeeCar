@@ -42,35 +42,6 @@
                     android:queryBackground="@color/white"
                     android:queryHint="@string/placa_c" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/filtro_cliente_lb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/ocra"
-                        android:text="Filtros"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/aplicar_filtros_cliente_btn"
-                        android:layout_width="90dp"
-                        android:layout_height="27dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/boton_redondeado"
-                        android:fontFamily="@font/valorant"
-                        android:text="Aplicar"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -409,7 +380,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"

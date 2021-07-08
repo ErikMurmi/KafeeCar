@@ -50,6 +50,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     private ImageButton reg_img;
     public static Vehiculo v_aux_cita;
     private BottomNavigationView navBar;
+    public static final String[] filtros_vehiculos = new String[]{"Marca","Modelo","Placa","Año","Color","Precio"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,8 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirCita(c4);
         patioventa.aniadirCita(c5);
         patioventa.aniadirCita(c6);
+        Cliente temp = (Cliente)patioventa.getClientes().getPos(1);
+        temp.aniadirFavorito((((Vehiculo) patioventa.getVehiculos().getPos(1)).getPlaca()));
     }
 
     private void irAplicacion(String tipo) {

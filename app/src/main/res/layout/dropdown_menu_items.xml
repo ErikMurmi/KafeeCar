@@ -1,5 +1,5 @@
 <TextView android:id="@+id/textView24"
-    android:layout_width="match_parent"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:text="TextView"
     android:padding="6dp"

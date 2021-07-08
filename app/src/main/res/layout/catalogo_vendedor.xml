@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/visualizar_vehiculo_ca_vn_sv"
@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -458,17 +458,54 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
-        <SearchView
-            android:id="@+id/busqueda_placa_vn_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/bordesbotongris"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@color/white"
-            android:queryHint="@string/placa_c" />
+            android:layout_marginRight="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:theme="@style/Theme.MaterialComponents.Light">
+
+            <SearchView
+                android:id="@+id/busqueda_placa_vn_bar"
+                android:layout_width="200dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bordesbotongris"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@color/white"
+                android:queryHint="@string/placa_c" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="filled"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconTint="@color/botones">
+
+                <AutoCompleteTextView
+                    android:id="@+id/v_filtros_vn_ddm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white"
+                    android:editable="false"
+                    android:fontFamily="@font/ocra"
+                    android:includeFontPadding="false"
+                    android:inputType="none"
+                    android:paddingStart="10dp"
+                    android:text="Filtros"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -484,30 +521,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/filtros_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/ocra"
-                    android:text="Filtros"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/aplicar_filtros_vendedor_btn"
-                    android:layout_width="90dp"
-                    android:layout_height="27dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:fontFamily="@font/valorant"
-                    android:text="Aplicar"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
         </LinearLayout>
 

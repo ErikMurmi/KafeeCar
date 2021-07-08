@@ -82,23 +82,68 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
         return autos_buscados.contar();
     }
 
-    public void filtro(String strBuscar){
+    public void buscar(String strBuscar,String criterio){
         if(strBuscar.length()==0){
             autos_buscados.vaciar();
             autos_buscados.copiar(autos_original);
         }else {
             autos_buscados.vaciar();
-            for(int i=0; i<autos_original.contar();i++){
-                Vehiculo actual=null;
-                try {
-                    actual = (Vehiculo) autos_original.getPos(i);
-                } catch (Exception e) {
-                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-                if(actual.getPlaca().contains(strBuscar)){
-                    autos_buscados.add(actual);
+            if(criterio.compareTo("Placa")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual= (Vehiculo) autos_original.getPos(i);
+                    if(actual.getPlaca().toUpperCase().contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
                 }
             }
+            if(criterio.compareTo("Marca")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual= (Vehiculo) autos_original.getPos(i);
+                    if(actual.getMarca().toUpperCase().contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
+                }
+            }
+            if(criterio.compareTo("Modelo")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual=(Vehiculo) autos_original.getPos(i);
+                    if(actual.getModelo().toUpperCase().contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
+                }
+            }
+            if(criterio.compareTo("Año")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual = (Vehiculo) autos_original.getPos(i);
+                    String anio = String.valueOf(actual.getAnio());
+                    if(anio.contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
+                }
+            }
+            if(criterio.compareTo("Color")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual= (Vehiculo) autos_original.getPos(i);
+                    if(actual.getColor().toUpperCase().contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
+                }
+            }
+            if(criterio.compareTo("Precio")==0){
+                for(int i=0; i<autos_original.contar();i++){
+                    Vehiculo actual = (Vehiculo) autos_original.getPos(i);
+                    String precio;
+                    if(actual.getPromocion()==0){
+                        precio = String.valueOf(actual.getPrecioVenta());
+                    }else {
+                        precio = String.valueOf(actual.getPromocion());
+                    }
+                    if(precio.contains(strBuscar)){
+                        autos_buscados.add(actual);
+                    }
+                }
+            }
+
         }
         notifyDataSetChanged();
     }

@@ -46,8 +46,9 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
             e.printStackTrace();
         }
         return mainview;
-            }
-            public void cargar() throws Exception {
+    }
+
+    public void cargar() throws Exception {
                 cliente= (Cliente)Patioventainterfaz.usuarioActual;
 
                 //P autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();

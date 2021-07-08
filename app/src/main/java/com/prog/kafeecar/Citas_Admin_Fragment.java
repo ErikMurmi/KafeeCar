@@ -114,9 +114,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         TextInputLayout n = mainView.findViewById(R.id.txt_lyt);
         AutoCompleteTextView horas = mainView.findViewById(R.id.horas_ddm);
 
-        n.setEndIconOnClickListener(v -> horas.performClick()
-
-        );
+        n.setEndIconOnClickListener(v -> horas.performClick());
 
         horas.setOnClickListener(v -> {
             if(horas_mostradas){

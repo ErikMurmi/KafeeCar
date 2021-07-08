@@ -1,21 +1,18 @@
 package com.prog.kafeecar;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +20,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -41,7 +37,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
-
+    private SearchView busqueda_placa;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     @Nullable
@@ -57,7 +53,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
 
         //Search view catalogo
-        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_vn_bar);
+         busqueda_placa = mainView.findViewById(R.id.busqueda_placa_vn_bar);
 
 
         /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -87,6 +83,11 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
         //requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         //busqueda_placa.setOnQueryTextListener(this);
+        //Busqueda por filtros
+        AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_vn_ddm);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
+        filtros.setAdapter(adapt);
+        filtros.setOnItemClickListener((parent, view, position, id) -> busqueda_placa.setQueryHint(adapt.getItem(position)));
         busqueda_placa.setOnQueryTextListener(this);
         cargar();
 
@@ -174,7 +175,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
     @Override
     public boolean onQueryTextChange(String newText) {
         newText = newText.toUpperCase();
-        adptadorlistaview.filtro(newText);
+        adptadorlistaview.buscar(newText,busqueda_placa.getQueryHint().toString());
         return false;
     }
 }

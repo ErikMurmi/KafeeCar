@@ -51,6 +51,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private Button agendarcita;
     private Button regresarVistaVehiculo;
     private Drawable estrelladorada;
+    private Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
 
 
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
@@ -143,7 +144,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
     public void irVer() throws Exception {
 
-
         verCatalogo.setVisibility(View.GONE);
 
         //Activar el diseño deseado
@@ -185,21 +185,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
 
     public void modificarFavorito(){
-        Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
-        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
-        if(esfavorito()){
-           clienteActual.getFavoritos().eliminar(placa.getText());
+
+        if(clienteActual.esFavorito(vMostrar.getPlaca())){
+           clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
         }else{
-            clienteActual.getFavoritos().add(placa.getText());
+            clienteActual.getFavoritos().add(vMostrar.getPlaca());
             favoritoBoton.setBackground(estrelladorada);
 
         }
-    }
-    public boolean esfavorito(){
-        Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
-        TextView placa = mainView.findViewById(R.id.placa_cliente_txt);
-        return clienteActual.getFavoritos().contiene(placa.getText());
     }
 
 
@@ -232,20 +226,19 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         color.setText(format("Color :%s",vMostrar.getColor()));
         preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
         promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
+        if(clienteActual.esFavorito(vMostrar.getPlaca())){
+            favoritoBoton.setBackground(estrelladorada);
+        }else{
+            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
 
+        }
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        //Glide.with(mainView)
-        // .load(filePath)
-        // .into(v_img);
         try {
             final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    v_img.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
             e.printStackTrace();
