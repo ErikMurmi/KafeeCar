@@ -114,9 +114,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         TextInputLayout n = mainView.findViewById(R.id.txt_lyt);
         AutoCompleteTextView horas = mainView.findViewById(R.id.horas_ddm);
 
-        n.setEndIconOnClickListener(v -> {
-            horas.performClick();
-            }
+        n.setEndIconOnClickListener(v -> horas.performClick()
+
         );
 
         horas.setOnClickListener(v -> {
@@ -136,21 +135,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         });
 
-        horas.setOnContextClickListener(new View.OnContextClickListener() {
-            @Override
-            public boolean onContextClick(View v) {
-                Toast.makeText(mainView.getContext(), "Prueba", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        /*n.setOnContextClickListener(new View.OnContextClickListener() {
-            @Override
-            public boolean onContextClick(View v) {
-                Toast.makeText(mainView.getContext(), "yoooo", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });*/
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -208,12 +192,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             citaEditable.setVisibility(View.VISIBLE);
             visualizarEditable();
         });
-        /*buscar_btn.setOnClickListener(v -> {
-            CheckBox dia = mainView.findViewById(R.id.filtro_dia_ckb);
-            CheckBox mes = mainView.findViewById(R.id.filtro_mes_ckb);
-            CheckBox anio = mainView.findViewById(R.id.filtro_anio_ckb);
-            CheckBox hora = mainView.findViewById(R.id.filtro_hora_ckb);
-        });*/
+
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
