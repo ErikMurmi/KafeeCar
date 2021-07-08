@@ -35,7 +35,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lista_Vendedores.RecyclerItemClick, SearchView.OnQueryTextListener {
@@ -146,7 +145,10 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
 
         listo_btn.setOnClickListener(v -> {
             try {
-                registrarVendedor();
+                if(registrarVendedor()){
+                    Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
                 regresarPantallaPrncipal();
@@ -269,7 +271,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         irAdministrarVendedor.setVisibility(View.VISIBLE);
     }
 
-    public void registrarVendedor() {
+    public boolean registrarVendedor() {
         EditText nombreVendedor;
         EditText apellidoVendedor;
         EditText cedulaVendedor;
@@ -284,6 +286,12 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         EditText horaSalidaVendedor;
         EditText horaAlmuerzoVendedor;
         int c = 0;
+        //todo
+        //insertar el color rojo para campos vacios y mensajes emergentes para lo mismo
+        if(foto == null){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Imagen*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
 
         nombreVendedor = mainView.findViewById(R.id.nombreVendedor_etxt);
         apellidoVendedor = mainView.findViewById(R.id.apellidoVendedor_etxt);
@@ -452,16 +460,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             }
         }
 
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor.getText().toString() + "_img");
-        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(mainView.getContext(), "Se ha añadió satisfactoriamente la imagen", Toast.LENGTH_SHORT).show()
-        );
-
-        if (foto == null) {
-            Toast.makeText(mainView.getContext(), "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
         if (c == 0) {
             Date fecha = null;
             try {
@@ -469,8 +467,11 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor_str+".jpg");
+            filePath.putFile(foto);
+
             Vendedor vendedor = new Vendedor(
-                    String.format("%s.jpg", cedulaVendedor_str),
+                    cedulaVendedor_str + ".jpg",
                     horaEntradaVendedor_int,
                     horaSalidaVendedor_int,
                     horaAlmuerzoVendedor_int,
@@ -482,6 +483,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     contraseniaVendedor_str,
                     fecha);
             patio.aniadirUsuario(vendedor, "Vendedor");
+
             try {
                 if (patio.buscarVendedores("Cedula", vendedor.getCedula()) != null) {
                     Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
@@ -490,7 +492,9 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return true;
         }
+        return false;
     }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
