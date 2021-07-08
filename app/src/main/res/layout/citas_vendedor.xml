@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/anadircita"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible">
 
         <ScrollView
@@ -44,7 +44,7 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
@@ -53,7 +53,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="10dp"
                             android:fontFamily="@font/ocra"
                             android:text="Fecha de cita"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -63,52 +62,73 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
+                            android:gravity="center|center_horizontal"
+                            android:orientation="horizontal"
+                            android:theme="@style/Theme.MaterialComponents.Light">
 
-                            <EditText
-                                android:id="@+id/dia_ci_vn_etxt"
-                                android:layout_width="70dp"
-                                android:layout_height="37dp"
-                                android:layout_marginEnd="12dp"
-                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/anio_ci_vn_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                                android:ems="10"
-                                android:fontFamily="@font/ocra"
-                                android:hint="dd"
-                                android:inputType="number"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                android:textSize="19sp" />
+                                <AutoCompleteTextView
+                                    android:id="@+id/anio_ci_vn_etxt"
+                                    android:layout_width="90dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:ems="10"
 
-                            <EditText
-                                android:id="@+id/mes_ci_vn_etxt"
-                                android:layout_width="70dp"
-                                android:layout_height="37dp"
-                                android:layout_marginEnd="12dp"
-                                android:background="@drawable/bordesmarcoscafegrisaceo"
-                                android:ems="10"
-                                android:fontFamily="@font/ocra"
-                                android:hint="mm"
-                                android:inputType="number"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                android:textSize="19sp" />
+                                    android:fontFamily="@font/ocra"
+                                    android:hint="aaaa"
+                                    android:inputType="number"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="19sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <EditText
-                                android:id="@+id/anio_ci_vn_etxt"
-                                android:layout_width="80dp"
-                                android:layout_height="37dp"
-                                android:layout_marginEnd="12dp"
-                                android:background="@drawable/bordesmarcoscafegrisaceo"
-                                android:ems="10"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/mes_ci_vn_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                                android:fontFamily="@font/ocra"
-                                android:hint="aaaa"
-                                android:inputType="number"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                android:textSize="19sp" />
+                                <AutoCompleteTextView
+                                    android:id="@+id/mes_ci_vn_etxt"
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:ems="10"
+                                    android:fontFamily="@font/ocra"
+                                    android:hint="mm"
+                                    android:inputType="number"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="19sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/dia_ci_vn_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/dia_ci_vn_etxt"
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:ems="10"
+                                    android:fontFamily="@font/ocra"
+                                    android:hint="dd"
+                                    android:inputType="none"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="19sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -143,27 +163,11 @@
 
                             <AutoCompleteTextView
                                 android:id="@+id/hora_ci_vn_acv"
-                                android:layout_width="50dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
                                 android:inputType="none" />
                         </com.google.android.material.textfield.TextInputLayout>
-
-                        <EditText
-                            android:id="@+id/hora_ci_vn_etxt"
-                            android:layout_width="65dp"
-                            android:layout_height="37dp"
-                            android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:ems="10"
-                            android:fontFamily="@font/ocra"
-
-                            android:hint="h"
-                            android:inputType="number"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="19sp"
-                            android:visibility="gone"
-                            tools:visibility="gone" />
 
                     </LinearLayout>
 

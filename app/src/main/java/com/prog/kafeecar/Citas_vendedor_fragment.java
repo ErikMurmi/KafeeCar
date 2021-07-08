@@ -454,11 +454,10 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
     public void registarCita() throws Exception {
-        Toast.makeText(mainView.getContext(), "10", Toast.LENGTH_SHORT).show();
         EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_etxt);
         EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_etxt);
         EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_etxt);
-        EditText fechacitahora = mainView.findViewById(R.id.hora_ci_vn_etxt);
+        AutoCompleteTextView fechacitahora = mainView.findViewById(R.id.hora_ci_vn_acv);
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
