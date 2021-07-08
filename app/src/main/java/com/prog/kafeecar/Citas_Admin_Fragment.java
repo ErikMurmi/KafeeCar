@@ -1,12 +1,17 @@
 package com.prog.kafeecar;
 
 import android.app.AlertDialog;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,20 +23,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
+import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick, SearchView.OnQueryTextListener {
 
@@ -47,6 +57,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private View mainView;
     private SearchView busqueda_citas;
     private Cita cita_mostrar;
+    private boolean horas_mostradas = false;
+
     //Image Buttons
     private ImageButton buscar_btn;
 
@@ -66,6 +78,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private LinearLayout listaCitas;
     private LinearLayout aniadirCita;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,13 +98,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         descartar = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
         guardar_edit = mainView.findViewById(R.id.ed_editar_ci_vn_btn);
         //TextViews
-        vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
+        //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
-        dia_b = mainView.findViewById(R.id.dia_busqueda_etxt);
-        mes_b = mainView.findViewById(R.id.mes_busqueda_etxt);
-        anio_b = mainView.findViewById(R.id.anio_busqueda_etxt);
+        dia_b = mainView.findViewById(R.id.fechacitadia_txt);
+        mes_b = mainView.findViewById(R.id.fechacitames_txt);
+        anio_b = mainView.findViewById(R.id.fechacitaanio_txt);
         //Image Buttons
-        buscar_btn = mainView.findViewById(R.id.busqueda_citas_admin_btn);
         //OnClick
 
         irAniadirCita.setOnClickListener(v -> {
@@ -99,8 +111,46 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
         });
+        TextInputLayout n = mainView.findViewById(R.id.txt_lyt);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.horas_ddm);
 
+        n.setEndIconOnClickListener(v -> {
+            horas.performClick();
+            }
+        );
 
+        horas.setOnClickListener(v -> {
+            if(horas_mostradas){
+                horas.dismissDropDown();
+                horas_mostradas =false;
+            }else{
+                try {
+                    Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    horas.setAdapter(adapt);
+                    horas.showDropDown();
+                    horas_mostradas = true;
+                } catch (ParseException e) {
+                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        horas.setOnContextClickListener(new View.OnContextClickListener() {
+            @Override
+            public boolean onContextClick(View v) {
+                Toast.makeText(mainView.getContext(), "Prueba", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        /*n.setOnContextClickListener(new View.OnContextClickListener() {
+            @Override
+            public boolean onContextClick(View v) {
+                Toast.makeText(mainView.getContext(), "yoooo", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });*/
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -167,8 +217,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
-            vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
-            vehiculo_nuevacita.setTextColor(Color.BLACK);
+            //vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
+            //vehiculo_nuevacita.setTextColor(Color.BLACK);
         }
         /*
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -520,5 +570,28 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         }
         adptadorlistaview.buscar(b);
         return false;
+    }
+
+    public ArrayList<String> horasDisponible(Date fechaCita){
+        ArrayList<String> horas = new ArrayList<>();
+        for(int i = usuarioActual.getHoraEntrada();i<usuarioActual.getHoraComida();i++){
+            try {
+                if(usuarioActual.disponible(fechaCita,i)){
+                    horas.add(String.valueOf(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        for(int i = usuarioActual.getHoraComida()+1;i<usuarioActual.getHoraSalida();i++){
+            try {
+                if(usuarioActual.disponible(fechaCita,i)){
+                    horas.add(String.valueOf(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  horas;
     }
 }

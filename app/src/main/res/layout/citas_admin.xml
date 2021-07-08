@@ -725,12 +725,12 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/fechacitames_txt"
+                            android:id="@+id/fechacitadia_txt"
                             android:layout_width="60dp"
                             android:layout_height="37dp"
                             android:layout_marginEnd="12dp"
-                            android:background="@drawable/bordesmarcoscafegrisaceo"
 
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:fontFamily="@font/ocra"
                             android:hint="dd"
                             android:inputType="number"
@@ -739,7 +739,7 @@
                             android:textSize="19sp" />
 
                         <EditText
-                            android:id="@+id/fechacitadia_txt"
+                            android:id="@+id/fechacitames_txt"
                             android:layout_width="70dp"
                             android:layout_height="37dp"
                             android:layout_marginEnd="12dp"
@@ -824,16 +824,34 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:theme="@style/Theme.MaterialComponents.Light">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="AutoCompleteTextView" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txt_lyt"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:dropDownVerticalOffset="10dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxStrokeColor="@color/botones"
+                    app:endIconTint="@color/black">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/horas_ddm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:editable="false"
+                        android:inputType="none"
+                        android:textSize="16sp"
+                        tools:visibility="visible" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <TextView
@@ -862,6 +880,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:text="AutoCompleteTextView" />
 
             </LinearLayout>
@@ -997,86 +1016,6 @@
                     android:inputType="date"
                     android:queryBackground="@color/white"
                     android:queryHint="dd/mm/aaaa" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="55dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/dia_busqueda_etxt"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:hint="dd"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/mes_busqueda_etxt"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:hint="mm"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/anio_busqueda_etxt"
-                    android:layout_width="70dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:hint="aaaa"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/mes_busqueda_etxt2"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/monglos"
-                    android:hint="hh"
-                    android:inputType="text"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="#959898"
-                    android:textSize="15sp" />
-
-                <ImageButton
-                    android:id="@+id/busqueda_citas_admin_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -30,6 +30,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
@@ -179,6 +181,17 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_vn_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
+
+
+        try {
+            AutoCompleteTextView hora = mainView.findViewById(R.id.hora_acv);
+            ArrayAdapter<String> horas = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, horasDisponible(Patioventainterfaz.sdf.parse("12-12-2021")));
+            hora.setAdapter(horas);
+            hora.enoughToFilter();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void irListaCitas(){
@@ -514,6 +527,31 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         }
     }
+
+
+    public ArrayList<String> horasDisponible(Date fechaCita){
+        ArrayList<String> horas = new ArrayList<>();
+        for(int i = usuarioActual.getHoraEntrada();i<usuarioActual.getHoraComida();i++){
+            try {
+                if(usuarioActual.disponible(fechaCita,i)){
+                    horas.add(String.valueOf(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        for(int i = usuarioActual.getHoraComida()+1;i<usuarioActual.getHoraSalida();i++){
+            try {
+                if(usuarioActual.disponible(fechaCita,i)){
+                    horas.add(String.valueOf(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  horas;
+    }
+
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;

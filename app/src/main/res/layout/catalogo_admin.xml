@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/v_admin"
@@ -404,6 +404,7 @@
 
                 <Button
                     android:id="@+id/eliminar_vehiculo_btn"
+                    android:theme="@style/AppTheme.Button"
                     style="@style/boton_editar"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
@@ -478,7 +479,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
