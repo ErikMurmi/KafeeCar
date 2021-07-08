@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrarvendedores"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +35,8 @@
                     android:background="@drawable/bordesbotongris"
                     android:iconifiedByDefault="false"
                     android:queryBackground="@color/white"
-                    android:queryHint="Búsqueda" />
+                    android:queryHint="Búsqueda"
+                    android:fontFamily="@font/ocra" />
 
             </LinearLayout>
 
@@ -791,10 +792,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/registrarvendedores"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="409dp"
