@@ -122,18 +122,32 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:theme="@style/Theme.MaterialComponents.Light">
 
                         <TextView
                             android:id="@+id/horaCita_ci_vn_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:fontFamily="@font/ocra"
                             android:text="Hora"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/gris_visualizar"
                             android:textSize="18sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/hora_ci_vn_til"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hora_ci_vn_acv"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <EditText
                             android:id="@+id/hora_ci_vn_etxt"
@@ -151,11 +165,6 @@
                             android:visibility="gone"
                             tools:visibility="gone" />
 
-                        <AutoCompleteTextView
-                            android:id="@+id/hora_acv"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bordesmarcoscafegrisaceo" />
                     </LinearLayout>
 
                 </LinearLayout>

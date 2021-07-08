@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -34,12 +35,18 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.sdf;
+
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
 
     private View mainView;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private PatioVenta patio;
     Cita cita_mostrar;
+    private boolean horas_mostradas = false;
+    private EditText dia_ci_vn;
+    private EditText mes_ci_vn;
+    private EditText anio_ci_vn;
 
     public EditText placa_ci_vn_etxt;
 
@@ -65,12 +72,16 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
         ir_aniadir_ci_vn_btn = mainView.findViewById(R.id.ir_aniadir_ci_vn_btn);
         Button guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
+        Button descartar_ci_vn_btn = mainView.findViewById(R.id.descartar_ci_vn_btn);
         Button anular_ci_vn_btn = mainView.findViewById(R.id.anular_ci_vn_btn);
         Button editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
         Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
 
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
+        dia_ci_vn = mainView.findViewById(R.id.dia_ci_vn_etxt);
+        mes_ci_vn = mainView.findViewById(R.id.mes_ci_vn_etxt);
+        anio_ci_vn = mainView.findViewById(R.id.anio_ci_vn_etxt);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -88,6 +99,23 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
                     registarCita();
+                    irListaCitas();
+                } catch (Exception e) {
+                    citas_vendedor_lyt.setVisibility(View.VISIBLE);
+                    Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        descartar_ci_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de descartar la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
                     irListaCitas();
                 } catch (Exception e) {
                     citas_vendedor_lyt.setVisibility(View.VISIBLE);
@@ -167,6 +195,29 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        TextInputLayout n = mainView.findViewById(R.id.hora_ci_vn_til);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_vn_acv);
+
+        n.setEndIconOnClickListener(v -> horas.performClick());
+
+        horas.setOnClickListener(v -> {
+            if(horas_mostradas){
+                horas.dismissDropDown();
+                horas_mostradas =false;
+            }else{
+                try {
+                    Date fecha = sdf.parse(dia_ci_vn.getText().toString() + "-" + mes_ci_vn.getText().toString() + "-" + anio_ci_vn.getText().toString());
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    horas.setAdapter(adapt);
+                    horas.showDropDown();
+                    horas_mostradas = true;
+                } catch (ParseException e) {
+                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return mainView;
     }
 
@@ -181,17 +232,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_vn_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
-
-
-        try {
-            AutoCompleteTextView hora = mainView.findViewById(R.id.hora_acv);
-            ArrayAdapter<String> horas = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, horasDisponible(Patioventainterfaz.sdf.parse("12-12-2021")));
-            hora.setAdapter(horas);
-            hora.enoughToFilter();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void irListaCitas(){
