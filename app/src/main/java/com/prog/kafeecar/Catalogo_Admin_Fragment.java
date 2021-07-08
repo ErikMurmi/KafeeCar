@@ -111,10 +111,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             editar_imagen = true;
         });
 
-        aniadir_vehiculo_btn.setOnClickListener(v -> {
-            aniadirVehiculo();
-            irCatalogo();
-        });
+        aniadir_vehiculo_btn.setOnClickListener(v -> aniadirVehiculo());
 
         eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -237,6 +234,12 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         int c = 0;
         String placa_str;
         EditText placa_ad = mainView.findViewById(R.id.placa_aniadir_etxt);
+        //TODO REEEMPLAZAR POR UN UNICO MENSAJE DE ERROR
+
+        if(foto==null){
+            c++;
+            Toast.makeText(mainView.getContext(), "No se ha escogido una imagen", Toast.LENGTH_SHORT).show();
+        }
         if (isEmpty(placa_ad)) {
             Toast.makeText(mainView.getContext(), "Campo de placa vacio", Toast.LENGTH_SHORT).show();
             c++;
@@ -244,7 +247,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             Toast.makeText(mainView.getContext(), "Placa no válida", Toast.LENGTH_SHORT).show();
             c++;
         }
-
 
         EditText matricula_ad = mainView.findViewById(R.id.aniadir_matricula_etxt);
         /*if(isEmpty(matricula_ad)){
@@ -264,7 +266,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             anio_ad.setText("");
             c++;
         }
-
 
         EditText descripcion_ad = mainView.findViewById(R.id.aniadir_descripcion_etxt);
         if (isEmpty(descripcion_ad)) {
@@ -317,9 +318,10 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         }
         CheckBox matriculado_ad = mainView.findViewById(R.id.matricula_chkbox);
 
+
         if (c == 0) {
             placa_str = placa_ad.getText().toString();
-            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str+".jpg");
+            StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str + ".jpg");
             filePath.putFile(foto);
             patio.aniadirVehiculo(
                     new Vehiculo(
@@ -552,7 +554,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             if (resultCode == Activity.RESULT_OK && data != null) {
                 foto = data.getData();
                 if (editar_imagen) {
-                    Glide.with(mainView).load(data.getData()).into(edit_vehiculo_img);
                     edit_vehiculo_img.setImageURI(foto);
                     editar_imagen = false;
                 } else {
@@ -569,8 +570,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     }
 
     @Override
-    public void itemClick(String placa) {
-        //irVer(placa);
+    public void itemClick(String placa){
         try {
             vMostrar = patio.buscarVehiculos("Placa", placa);
             irVer();
