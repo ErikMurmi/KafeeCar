@@ -129,9 +129,11 @@
                                     android:clickable="false"
                                     android:editable="false"
                                     android:gravity="center"
-                                    android:textSize="18sp"
                                     android:hint="aaaa"
-                                    app:hintTextColor="@color/gris"/>
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/gris"
+                                    android:textSize="18sp"
+                                    app:hintTextColor="@color/gris" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -150,9 +152,11 @@
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
                                     android:editable="false"
                                     android:gravity="center"
-                                    android:textSize="18sp"
                                     android:hint="mm"
-                                    app:hintTextColor="@color/gris"/>
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/gris"
+                                    android:textSize="18sp"
+                                    app:hintTextColor="@color/gris" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -170,10 +174,12 @@
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
                                     android:editable="false"
                                     android:gravity="center"
-                                    android:textAlignment="center"
-                                    android:textSize="18sp"
                                     android:hint="dd"
-                                    app:hintTextColor="@color/gris"/>
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/gris"
+                                    android:textSize="18sp"
+                                    app:hintTextColor="@color/gris" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
@@ -218,10 +224,12 @@
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
                                 android:editable="false"
                                 android:gravity="center"
-                                android:textAlignment="center"
-                                android:textSize="18sp"
                                 android:hint="hh"
-                                app:hintTextColor="@color/gris"/>
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gris"
+                                android:textSize="18sp"
+                                app:hintTextColor="@color/gris" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
