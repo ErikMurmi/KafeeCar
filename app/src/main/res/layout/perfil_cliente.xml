@@ -16,7 +16,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="2dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/barra_nav"
                         android:fontFamily="@font/valorant"
-                        android:text="Deshacer"
+                        android:text="Regresar"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp" />
 
@@ -335,7 +335,7 @@
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imagen_perfil_cliente_img"

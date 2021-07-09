@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -49,7 +50,7 @@ public class Perfil_cliente_fragment extends Fragment{
     //Botones
     private Button editar;
     private Button guardar;
-    private Button regresar;
+    private Button salirsinguardar;
     private Button cerrarsesion;
 
     //Imagenes
@@ -90,10 +91,9 @@ public class Perfil_cliente_fragment extends Fragment{
             }
         });
 
-        regresar.setOnClickListener(v -> {
+        salirsinguardar.setOnClickListener(v -> {
             try {
-                editarperfil.setVisibility(View.GONE);
-                verperfil.setVisibility(View.VISIBLE);
+                salirsinGuardar();
                 verperfilCliente();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -103,14 +103,12 @@ public class Perfil_cliente_fragment extends Fragment{
         return mainview;
         }
    
-        
-
 
     public void iniciaciones() {
         //Botones
         editar = mainview.findViewById(R.id.editar_Cliente_btn);
         guardar = mainview.findViewById(R.id.botonEditListoCliente_btn);
-        regresar = mainview.findViewById(R.id.botonEditDeshacerCliente_btn);
+        salirsinguardar = mainview.findViewById(R.id.botonEditDeshacerCliente_btn);
         //Layouts
         verperfil = mainview.findViewById(R.id.visualizar_cliente_lyt);
         editarperfil = mainview.findViewById(R.id.editar_cliente_lyt);
@@ -120,6 +118,18 @@ public class Perfil_cliente_fragment extends Fragment{
         verperfilCliente();
     }
 
+
+    public void salirsinGuardar(){
+        AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+        msg.setTitle("NO GUARDAR");
+        msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+        msg.setPositiveButton("Aceptar", (dialog, which) -> {
+            verperfil.setVisibility(View.VISIBLE);
+            editarperfil.setVisibility(View.GONE);
+        });
+        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+        msg.show();
+    }
 
     public void verperfilCliente(){
         try{
