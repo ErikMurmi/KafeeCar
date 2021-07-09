@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
-import android.content.res.Resources;
 import android.icu.util.GregorianCalendar;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +48,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Vehiculo v_aux_cita;
     private BottomNavigationView navBar;
     public static final String[] filtros_vehiculos = new String[]{"Marca","Modelo","Placa","Año","Color","Precio"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
