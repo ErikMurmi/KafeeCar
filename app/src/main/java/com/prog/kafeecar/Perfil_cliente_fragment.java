@@ -84,7 +84,12 @@ public class Perfil_cliente_fragment extends Fragment{
 
         guardar.setOnClickListener(v -> {
             try {
-                editarCliente();
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+                msg.setTitle("Editar Perfil");
+                msg.setMessage("¿Estás seguro editar los datos de su perfil?");
+                msg.setPositiveButton("Aceptar", (dialog, which) -> editarCliente());
+                msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                msg.show();
             } catch (Exception e) {
                 Toast.makeText(mainview.getContext(), "No se pudo editar el perfil", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -169,7 +174,6 @@ public class Perfil_cliente_fragment extends Fragment{
 
 
     public void editarCliente(){
-
         try {
             boolean cambiar_clave = false;
             int c = 0;
@@ -277,33 +281,47 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             }
 
-
-            StorageReference filePath = mStorageRef.child("Clientes/").child(cedula_str+".jpg");
-            filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                    Toast.makeText(mainview.getContext(), "Se subio la imagen", Toast.LENGTH_SHORT).show()
-            );
-
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
                 if(cambiar_clave) {
-                    cliente.cambiarDatos(nombre_str, cedula_str, telefono_str, correo_str, contrasenia_str, fecha);
+                    cliente.cambiarDatos(
+                            nombre_pe_cli_etxt.getText().toString(),
+                            cedula_pe_cli_etxt.getText().toString(),
+                            telefono_pe_cli_etxt.getText().toString(),
+                            correo_pe_cli_etxt.getText().toString(),
+                            fecha, contrasenia_str);
+                }else{
+                    cliente.cambiarDatos(
+                            nombre_pe_cli_etxt.getText().toString(),
+                            cedula_pe_cli_etxt.getText().toString(),
+                            telefono_pe_cli_etxt.getText().toString(),
+                            correo_pe_cli_etxt.getText().toString(),
+                            fecha, cliente.getClave());
                 }
-                else {
-                    cliente.cambiarDatos(nombre_str, cedula_str, telefono_str, correo_str, cliente.getClave(), fecha);
+                if(foto!=null){
+                    StorageReference filePath = mStorageRef.child("Clientes").child(cedula_str+".jpg");
+                    filePath.putFile(foto);
                 }
-                cliente.setImagen(String.format("%s.jpg",cedula_pe_cli_etxt.getText().toString()));
-                try {
-                    if (patio.buscarClientes("Cedula", cliente.getCedula()) != null) {
-                        Toast.makeText(mainview.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
-                        volverpantallaprincipal();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                else
+                {
+                    cliente.setImagen(String.format("%s.jpg",cedula_pe_cli_etxt.getText().toString()));
+                }
+                cliente.setImagen(String.format("%s.jpg",cedula_str));
+                if(patio.buscarClientes("Cedula", cedula_str) != null) {
+                    Toast.makeText(mainview.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
+                    irVerPerfilCliente();
+                    verperfilCliente();
                 }
             }
-        }catch (Exception e){
+        }
+        catch (Exception e){
             Toast.makeText(mainview.getContext(), "No se pudo actualizar la información del perfil", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void irVerPerfilCliente(){
+        editarperfil.setVisibility(View.GONE);
+        verperfil.setVisibility(View.VISIBLE);
     }
 
    public void visualizarperfileditable_Cliente()
