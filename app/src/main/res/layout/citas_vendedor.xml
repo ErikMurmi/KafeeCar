@@ -57,7 +57,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/anadircita"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:visibility="gone">
 
         <ScrollView
