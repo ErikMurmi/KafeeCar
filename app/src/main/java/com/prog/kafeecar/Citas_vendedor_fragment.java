@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import java.util.Date;
 
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
-public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick {
+public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private View mainView;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -50,10 +51,12 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     public EditText placa_ci_vn_etxt;
 
+    private SearchView busqueda_citas;
     private LinearLayout aniadir_ci_vn_lyt;
     private LinearLayout citas_vendedor_lyt;
     private LinearLayout ver_ci_vn_lyt;
     private LinearLayout editar_ci_vn_lyt;
+    private Adaptador_Lista_Citas adptadorlistaview;
 
     private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
 
@@ -64,6 +67,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         mainView = inflater.inflate(R.layout.citas_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
 
+        busqueda_citas = mainView.findViewById(R.id.busqueda_c_ve_srv);
         placa_ci_vn_etxt = mainView.findViewById(R.id.placa_ci_vn_actv);
         ver_ci_vn_lyt = mainView.findViewById(R.id.ver_ci_vn_lyt);
         citas_vendedor_lyt = mainView.findViewById(R.id.citas_vendedor_lyt);
@@ -218,6 +222,13 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         });
 
+
+        busqueda_citas.setOnQueryTextListener(this);
+        try {
+            cargar();
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "No carga", Toast.LENGTH_SHORT).show();
+        }
         return mainView;
     }
 
@@ -251,7 +262,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        Adaptador_Lista_Citas adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -606,6 +617,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
 
+
+
     @Override
     public void itemClick(String placa, String cedula_cliente) {
         try {
@@ -614,5 +627,28 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    public boolean onQueryTextChange(String newText) {
+        String b = newText;
+        if(newText.length()==2){
+            b+="-";
+            busqueda_citas.setQuery(b,false);
+        }
+        if(newText.length()==5){
+            b+="-";
+            busqueda_citas.setQuery(b,false);
+        }
+        if(newText.length()>10){
+            b= b.substring(0,10);
+            busqueda_citas.setQuery(b,false);
+        }
+        adptadorlistaview.buscar(b);
+        return false;
     }
 }

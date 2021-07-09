@@ -234,12 +234,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         listaview.setItemAnimator(new DefaultItemAnimator());
         adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas(), this);
         listaview.setAdapter(adptadorlistaview);
-
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     public void irListaCitas(){
-
         cargar();
         listaCitas.setVisibility(View.VISIBLE);
         irAniadirCita.setVisibility(View.VISIBLE);
