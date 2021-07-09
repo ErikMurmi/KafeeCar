@@ -83,9 +83,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
 
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
-        dia_ci_vn = mainView.findViewById(R.id.dia_ci_vn_etxt);
-        mes_ci_vn = mainView.findViewById(R.id.mes_ci_vn_etxt);
-        anio_ci_vn = mainView.findViewById(R.id.anio_ci_vn_etxt);
+        dia_ci_vn = mainView.findViewById(R.id.dia_ci_vn_acv);
+        mes_ci_vn = mainView.findViewById(R.id.mes_ci_vn_acv);
+        anio_ci_vn = mainView.findViewById(R.id.anio_ci_vn_acv);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
             ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
@@ -465,9 +465,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     }
 
     public void registarCita() throws Exception {
-        EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_etxt);
-        EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_etxt);
-        EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_etxt);
+        EditText fechacitadia = mainView.findViewById(R.id.dia_ci_vn_acv);
+        EditText fechacitames = mainView.findViewById(R.id.mes_ci_vn_acv);
+        EditText fechacitaanio = mainView.findViewById(R.id.anio_ci_vn_acv);
         AutoCompleteTextView fechacitahora = mainView.findViewById(R.id.hora_ci_vn_acv);
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;

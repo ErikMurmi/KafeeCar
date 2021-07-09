@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,8 +57,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/anadircita"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -118,7 +118,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
-                                android:hint="aaaa"
                                 app:boxStrokeWidth="0dp"
                                 app:boxStrokeWidthFocused="0dp">
 
@@ -127,8 +126,12 @@
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:clickable="false"
+                                    android:editable="false"
                                     android:gravity="center"
-                                    android:textSize="18sp" />
+                                    android:textSize="18sp"
+                                    android:hint="aaaa"
+                                    app:hintTextColor="@color/gris"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -137,16 +140,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
-                                android:hint="mm"
-                                app:boxStrokeWidth="0dp">
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
 
                                 <AutoCompleteTextView
                                     android:id="@+id/mes_ci_vn_acv"
                                     android:layout_width="70dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
                                     android:gravity="center"
-                                    android:textSize="18sp" />
+                                    android:textSize="18sp"
+                                    android:hint="mm"
+                                    app:hintTextColor="@color/gris"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -154,7 +160,6 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:hint="dd"
                                 app:boxStrokeWidth="0dp"
                                 app:boxStrokeWidthFocused="0dp">
 
@@ -163,9 +168,12 @@
                                     android:layout_width="60dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
                                     android:gravity="center"
                                     android:textAlignment="center"
-                                    android:textSize="18sp" />
+                                    android:textSize="18sp"
+                                    android:hint="dd"
+                                    app:hintTextColor="@color/gris"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
@@ -200,7 +208,6 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="hh"
                             app:boxStrokeWidth="0dp"
                             app:boxStrokeWidthFocused="0dp">
 
@@ -209,9 +216,12 @@
                                 android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
                                 android:gravity="center"
                                 android:textAlignment="center"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:hint="hh"
+                                app:hintTextColor="@color/gris"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
