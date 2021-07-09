@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,8 +57,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/anadircita"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
@@ -98,6 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="7dp"
                             android:fontFamily="@font/ocra"
                             android:text="Fecha de cita"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -113,74 +114,67 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/anio_ci_vn_til"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:hint="aaaa"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
 
                                 <AutoCompleteTextView
-                                    android:id="@+id/anio_ci_vn_etxt"
-                                    android:layout_width="90dp"
+                                    android:id="@+id/anio_ci_vn_acv"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="12dp"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:ems="10"
-
-                                    android:fontFamily="@font/ocra"
-                                    android:hint="aaaa"
-                                    android:inputType="number"
-                                    android:textAlignment="center"
-                                    android:textColor="#000000"
-                                    android:textSize="19sp" />
+                                    android:gravity="center"
+                                    android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/mes_ci_vn_til"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:hint="mm"
+                                app:boxStrokeWidth="0dp">
 
                                 <AutoCompleteTextView
-                                    android:id="@+id/mes_ci_vn_etxt"
+                                    android:id="@+id/mes_ci_vn_acv"
                                     android:layout_width="70dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="12dp"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:ems="10"
-                                    android:fontFamily="@font/ocra"
-                                    android:hint="mm"
-                                    android:inputType="number"
-                                    android:textAlignment="center"
-                                    android:textColor="#000000"
-                                    android:textSize="19sp" />
+                                    android:gravity="center"
+                                    android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/dia_ci_vn_til"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="dd"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
 
                                 <AutoCompleteTextView
-                                    android:id="@+id/dia_ci_vn_etxt"
-                                    android:layout_width="70dp"
+                                    android:id="@+id/dia_ci_vn_acv"
+                                    android:layout_width="60dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:ems="10"
-                                    android:fontFamily="@font/ocra"
-                                    android:hint="dd"
-                                    android:inputType="none"
+                                    android:gravity="center"
                                     android:textAlignment="center"
-                                    android:textColor="#000000"
-                                    android:textSize="19sp" />
-
+                                    android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <Space
-                        android:layout_width="10dp"
-                        android:layout_height="8dp" />
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -194,6 +188,7 @@
                             android:id="@+id/horaCita_ci_vn_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
                             android:fontFamily="@font/ocra"
                             android:text="Hora"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -202,16 +197,21 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/hora_ci_vn_til"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:hint="hh"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
 
                             <AutoCompleteTextView
                                 android:id="@+id/hora_ci_vn_acv"
-                                android:layout_width="wrap_content"
+                                android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
-                                android:inputType="none" />
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:textSize="18sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
