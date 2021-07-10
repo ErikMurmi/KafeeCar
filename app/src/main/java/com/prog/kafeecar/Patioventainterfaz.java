@@ -110,9 +110,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         Date fechaCita = sdf.parse("08-9-2021");
         Date fechaCita1 = sdf.parse("08-10-2020");
         Date fechaCita2 = sdf.parse("01-9-2020");
-        Date fechaCita3 = sdf.parse("02-7-2020");
+        Date fechaCita3 = sdf.parse("02-8-2020");
         Date fechaCita4 = sdf.parse("12-7-2021");
-        Date fechaCita5 = sdf.parse("21-7-2021");
+        Date fechaCita5 = sdf.parse("21-6-2021");
         Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven1);
         Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
