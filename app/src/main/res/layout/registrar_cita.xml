@@ -254,7 +254,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/Descartar.btn"
+                android:id="@+id/descartar_ci_ad_btn"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                 android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/Guardar.btn"
+                android:id="@+id/guardar_ci_ad_btn"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
