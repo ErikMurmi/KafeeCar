@@ -111,10 +111,18 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
         });
-        TextInputLayout n = mainView.findViewById(R.id.txt_lyt);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.horas_ddm);
 
-        n.setEndIconOnClickListener(v -> horas.performClick());
+
+        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
+        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
+        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_ad_til);
+        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_ad_til);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_ad_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_ad_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_ad_acv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_ad_acv);
+
+        anio_lyt.setEndIconOnClickListener(v -> horas.performClick());
 
         horas.setOnClickListener(v -> {
             if(horas_mostradas){
@@ -122,7 +130,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 horas_mostradas =false;
             }else{
                 try {
-                    Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    //Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    Date fecha = sdf.parse("12-12-2021");
                     ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
                     horas.setAdapter(adapt);
                     horas.showDropDown();
@@ -133,6 +142,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         });
 
+        //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
+        /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+        meses.setAdapter(adapt);*/
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());

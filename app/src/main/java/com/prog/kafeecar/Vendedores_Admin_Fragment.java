@@ -560,7 +560,6 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             String dia = fechaNacimiento.split("-")[0];
             String mes = fechaNacimiento.split("-")[1];
             String anio = fechaNacimiento.split("-")[2];
-
             nombre_ed.setText(cedulaVen.getNombre());
             dia_ed.setText(dia);
             mes_ed.setText(mes);

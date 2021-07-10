@@ -47,8 +47,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private Adaptador_Lista_Ventas adptadorlistaview;
     private TextView contar;
     private String [] meses=new String[]{"ENERO","FEBRERO","MAYO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
-    private int []sales={1,2,3,4,5,6,7,8,9,10,11,12};
-
+    private int []sales={0,1,0,0,0,0,0,1,1,1,1,0};
+    //private int []sales = new int[12];
     private Lista ventas= new Lista();
     private int[] colors =new int[]{Color.BLUE,Color.RED,Color.BLUE,Color.RED,Color.BLUE,Color.BLUE,Color.BLUE,Color.BLUE,Color.BLUE,Color.BLUE,Color.BLUE,Color.BLUE};
     @Nullable
@@ -100,20 +100,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
         createcharts();
         ventas = patio.getVentasGenerales();
-        /*for (int i=1;i<=12;i++){
-            int x=0;
-            for (int j=0;i<ventas.contar();j++){
-                Venta actual =(Venta)ventas.getPos(j);
-                int mes =actual.getFecha();
-                sales[i-1]=mes;
-                if (mes==i){
-                    x++;
-                }
-
-            }
-            //sales[i-1]=x;
-        }*/
-
 
         return mainView;
     }
@@ -242,14 +228,33 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         }
         legend.setCustom(entries);
     }
+
+    public void contarVentas(){
+        int mes;
+        for (int i=1;i<=12;i++) {
+            int x = 0;
+            for (int j = 0; i < ventas.contar(); j++) {
+                Venta actual = (Venta) ventas.getPos(j);
+                String fechaNacimiento = Patioventainterfaz.getFechaMod(actual.getFecha());
+                String dia = fechaNacimiento.split("-")[0];
+                String mes_str = fechaNacimiento.split("-")[1];
+                mes = Integer.parseInt(mes_str);
+                if (mes == i) {
+                    x++;
+                }
+            }
+            sales[i-1] = x;
+        }
+    }
     private ArrayList<BarEntry> getBarEntries(){
         ArrayList<BarEntry> entries=new ArrayList<>();
+        //contarVentas();
         for (int i =0; i<sales.length;i++){
             entries.add(new BarEntry(i,sales[i]));
         }
-
         return entries;
     }
+
     private void axisX(XAxis axis){
 
         axis.setGranularityEnabled(true);

@@ -48,6 +48,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Vehiculo v_aux_cita;
     private BottomNavigationView navBar;
     public static final String[] filtros_vehiculos = new String[]{"Marca","Modelo","Placa","Año","Color","Precio"};
+    public static final String[] meses = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
+    //public static final String[] meses = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
 
 
     @Override
