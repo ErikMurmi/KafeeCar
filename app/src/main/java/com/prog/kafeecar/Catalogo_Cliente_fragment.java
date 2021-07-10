@@ -44,13 +44,12 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private ScrollView verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
-    private Vehiculo m_vehiculo;
     private Vehiculo vMostrar;
-    private Uri foto;
     private Button favoritoBoton;
     private Button agendarcita;
     private Button regresarVistaVehiculo;
     private Drawable estrelladorada;
+    private Citas_cliente_fragment crearCita;
     private Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
 
 
@@ -66,40 +65,26 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         mainView = inflater.inflate(R.layout.catalogo_cliente, container, false);
         SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_cl_bar);
         patio = Patioventainterfaz.patioventa;
-
-        //
         //Botones
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
         agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
         regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
         //Recursos
         estrelladorada = favoritoBoton.getBackground();
-        /*if (!esfavorito()) {
-            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
-        }*/
-
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-
         irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
 
-
-
-
         regresarVistaVehiculo.setOnClickListener(v -> {
-
             try {
                 vistaVehiculo.setVisibility(View.GONE);
                 verCatalogo.setVisibility(View.VISIBLE);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
-
 
         favoritoBoton.setOnClickListener(v -> {
             modificarFavorito();
@@ -109,7 +94,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             try {
                 vistaVehiculo.setVisibility(View.GONE);
                 irCitaNueva.setVisibility(View.VISIBLE);
-             aniadirCita();
+                crearCita.visualizarcitaEditable();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -122,7 +107,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 if (vistaVehiculo.getVisibility() == View.VISIBLE) {
                     irCatalogo();
                 }
-
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
@@ -144,39 +128,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
     public void irVer() throws Exception {
 
-        verCatalogo.setVisibility(View.GONE);
-
-        //Activar el diseño deseado
-        vistaVehiculo.setVisibility(View.VISIBLE);
         visualizarVehiculo();
     }
     public void irCatalogo() {
-
         vistaVehiculo.setVisibility(View.GONE);
-
         //Activar el diseño deseado
         verCatalogo.setVisibility(View.VISIBLE);
         cargar();
     }
 
-    public void aniadirCita(){
-
-
-    }
-   /* public void irCatalogo(){
-
-
-      vistaVehiculo.setVisibility(View.GONE);
-        //irEditar.setVisibility(View.GONE);
-        //Activar el diseño deseadow
-        verCatalogo.setVisibility(View.VISIBLE);
-
-        try {
-            verLista("PSD-1234","GHC-2434");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     @SuppressLint("DefaultLocale")
@@ -192,7 +152,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         }else{
             clienteActual.getFavoritos().add(vMostrar.getPlaca());
             favoritoBoton.setBackground(estrelladorada);
-
         }
     }
 
@@ -243,8 +202,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         }catch (IOException e){
             e.printStackTrace();
         }
-        //
-
         if(vMostrar.isMatriculado()){
             matriculado.setText("Matriculado: Si");
         }else{
@@ -252,43 +209,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         }
         verCatalogo.setVisibility(View.GONE);
         vistaVehiculo.setVisibility(View.VISIBLE);
-        //irVehiculo();
+
 
 
     }
 
-    public void irVehiculo(){
-
-        vistaVehiculo.setVisibility(View.VISIBLE);
-        //irEditar.setVisibility(View.GONE);
-        //Activar el diseño deseadow
-        verCatalogo.setVisibility(View.GONE);
-    }
-
-    /*public void aniadirCitaCliente() throws Exception {
-        Lista citanueva;
-        Cliente clienten= (Cliente) Patioventainterfaz.usuarioActual;
-
-
-        EditText diacita = mainView.findViewById (R.id.dia_cita_nueva_etxt);
-        EditText mescita = mainView.findViewById(R.id.mes_cita_nueva_etxt);
-        EditText aniocita = mainView.findViewById(R.id.anio_cita_nueva_etxt);
-        EditText minutocita = mainView.findViewById(R.id.minutos_clita_nueva_etxt);
-        EditText horacita = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
-        int cont=0;
-
-        String fechacita_str = aniocita.getText().toString() + "-" + mescita.getText().toString() + "-" + diacita.getText().toString();
-        int hora = Integer.parseInt(horacita.getText().toString());
-
-        if(hora>24 || hora<0){
-            Toast.makeText(mainView.getContext(), "Hora invalido", Toast.LENGTH_SHORT).show();
-            cont++;
-        }
-        if(cont==0){
-           // Cita nuevo=new Cita();//meter inof de la cita
-          //  citanueva.add(nuevo);
-        }
-    }*/
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
@@ -310,7 +235,8 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         //irVer(placa);
         try {
             vMostrar = patio.buscarVehiculos("Placa", placa);
-            irVer();
+            //irVer();
+            visualizarVehiculo();
         } catch (Exception e) {
             e.printStackTrace();
         }
