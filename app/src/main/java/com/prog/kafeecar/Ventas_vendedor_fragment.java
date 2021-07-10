@@ -261,7 +261,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         }
         marca.setText(venta_mostrar.getVehiculo().getMarca());
         modelo.setText(venta_mostrar.getVehiculo().getModelo());
-        anio.setText(venta_mostrar.getVehiculo().getAnio());
+        anio.setText(String.valueOf(venta_mostrar.getVehiculo().getAnio()));
     }
 
     public void verVenta(){

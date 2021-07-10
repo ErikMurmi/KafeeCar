@@ -61,7 +61,8 @@
                         android:text="Datos de la Venta"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="19sp" />
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -279,7 +280,8 @@
                             android:text="Datos del Vehiculo"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="19sp" />
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
 
                         <Space
                             android:layout_width="match_parent"
