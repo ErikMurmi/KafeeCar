@@ -32,16 +32,16 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
 
     public Adaptador_Lista_Favoritos(Lista fav, RecyclerItemClick itemClick){
 
-        this.favoritos =fav;
+        this.autos_buscados =fav;
         this.itemClick = itemClick;
-        //favoritos = new Lista();
-        //favoritos.copiar(fav);
+        favoritos = new Lista();
+        favoritos.copiar(fav);
     }
 
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_auto_cl,parent,false);
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_auto_cl,parent,false);
         return new clienteHolder(view);
     }
 
@@ -49,7 +49,8 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Favoritos.clienteHolder holder, int position) {
         try {
             Vehiculo c=(Vehiculo)favoritos.getPos(position);
-            String precio="";
+            String precio;
+            String modelo=c.getModelo().toUpperCase();
             if (c.getPromocion()==0){
                 precio= "$ "+c.getPrecioVenta();
             }else{
@@ -57,12 +58,9 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
             }
 
             String marca=c.getMarca();
+            //TODO
             String placa = c.getPlaca();
             String anio = String.valueOf(c.getAnio());
-             //holder.imagenauto.setBackground(R.);
-
-
-            /////
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getimagen());
             try {
                 final File localFile = File.createTempFile(c.getimagen(),"jpg");
@@ -73,7 +71,7 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
             }catch (IOException e){
                 e.printStackTrace();
             }
-            holder.modelo.setText(marca);
+            holder.modelo.setText(modelo);
             holder.precioauto.setText(precio);
             holder.marca.setText(marca);
             holder.placa.setText(placa);
@@ -85,10 +83,9 @@ public class Adaptador_Lista_Favoritos extends RecyclerView.Adapter<Adaptador_Li
         }
     }
 
-/////te quedaste aqui
     @Override
     public int getItemCount() {
-        return favoritos.contar();
+        return autos_buscados.contar();
     }
     public void filtro(String strBuscar){
         if(strBuscar.length()==0){

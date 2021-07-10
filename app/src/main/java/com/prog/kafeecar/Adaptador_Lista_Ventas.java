@@ -44,21 +44,12 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
             String nombre= vt.getCliente().getNombre();
             String fecha = Patioventainterfaz.getFechaMod(vt.getFecha());
             String vendedor  = vt.getVendedor().getNombre();
-            String placas = "";
-            for (int i = 0; i<vt.getVehiculo().contar(); i++){
-                Vehiculo actual = (Vehiculo) vt.getVehiculo().getPos(i);
-                if(i==0){
-                    placas += actual.getPlaca();
-                }else{
-                    placas += " ,"+actual.getPlaca();
-                }
-            }
+            String placas = vt.getVehiculo().getPlaca();
             String precio = "$ "+ vt.getPrecio();
-            Vehiculo actual = (Vehiculo) vt.getVehiculo().getPos(0);
+            Vehiculo actual = (Vehiculo) vt.getVehiculo();
             StorageReference filePath = mStorageRef.child("Vehiculos/"+actual.getimagen());
 
             try {
-
                 final File localFile = File.createTempFile(actual.getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                     Uri foto= Uri.parse(localFile.getAbsolutePath());

@@ -139,15 +139,8 @@ public class PatioVenta {
      */
     public void aniadirVenta(Venta nueva) throws Exception {
         ventasGenerales.add(nueva);
-        if (nueva.getVehiculo().contar()==1){
-            Vehiculo actual = (Vehiculo) nueva.getVehiculo().getPos(0);
-            removerVehiculo(actual.getPlaca());
-        }else{
-            for (int i = 1; i<nueva.getVehiculo().contar(); i++){
-                Vehiculo actual = (Vehiculo) nueva.getVehiculo().getPos(i);
-                removerVehiculo(actual.getPlaca());
-            }
-        }
+        Vehiculo actual = (Vehiculo) nueva.getVehiculo();
+        removerVehiculo(actual.getPlaca());
     }
 
 
@@ -233,7 +226,7 @@ public class PatioVenta {
         int cont =0;
         while(cont<ventasGenerales.contar() && !encontrado){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.buscarVehiculo(placa)!=null){
+            if(actual.getVehiculo().getPlaca().compareTo(placa)==0){
                 ventasGenerales.eliminarPos(cont);
                 encontrado=true;
             }
@@ -408,7 +401,7 @@ public class PatioVenta {
         int cont =0;
         while(cont<ventasGenerales.contar() && buscada==null){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.getCliente().getCedula().compareTo(cedula)==0 && actual.buscarVehiculo(placa)!=null){
+            if(actual.getComprador().getCedula().compareTo(cedula)==0 && actual.getVehiculo().getPlaca().compareTo(placa)==0){
                 buscada = actual;
             }
             cont++;
