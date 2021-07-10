@@ -9,7 +9,10 @@
         android:id="@+id/ver_vt_vn_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/visualizarventa"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -18,21 +21,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/top_space"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingLeft="35dp"
                 android:paddingRight="30dp">
-
-                <TextView
-                    android:id="@+id/vt_vn_ver_venta_auto_titulo_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/ocra"
-                    android:hint="CyberTruck"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="34sp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -129,7 +122,7 @@
                             android:textColor="@color/gris_visualizar" />
 
                         <TextView
-                            android:id="@+id/ver_pventa_vt_ad_txt"
+                            android:id="@+id/ver_pventa_vt_vn_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
@@ -160,7 +153,7 @@
                             android:textColor="@color/gris_visualizar" />
 
                         <TextView
-                            android:id="@+id/ver_pinicial_vt_ad_txt"
+                            android:id="@+id/ver_pinicial_vt_vn_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
@@ -229,6 +222,39 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:hint="Luis Guevara"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp">
+
+                        <TextView
+                            android:id="@+id/vt_vn_contacto_cliente_txt"
+                            style="@style/texto_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Contacto: "
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_contacto_cliente_vt_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="0999999999"
                             android:textColor="#000000"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -308,7 +334,7 @@
                                 android:textColor="@color/gris_visualizar" />
 
                             <TextView
-                                android:id="@+id/ver_matricula_vt_ad_txt"
+                                android:id="@+id/ver_matricula_vt_vn_txt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
@@ -339,7 +365,7 @@
                                 android:textColor="@color/gris_visualizar" />
 
                             <TextView
-                                android:id="@+id/ver_matriculado_vt_ad_txt"
+                                android:id="@+id/ver_matriculado_vt_vn_txt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
@@ -370,7 +396,7 @@
                                 android:textColor="@color/gris_visualizar" />
 
                             <TextView
-                                android:id="@+id/ver_marca_vt_ad_txt"
+                                android:id="@+id/ver_marca_vt_vn_txt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
@@ -401,7 +427,7 @@
                                 android:textColor="@color/gris_visualizar" />
 
                             <TextView
-                                android:id="@+id/ver_modelo_vt_ad_txt"
+                                android:id="@+id/ver_modelo_vt_vn_txt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
@@ -432,7 +458,7 @@
                                 android:textColor="@color/gris_visualizar" />
 
                             <TextView
-                                android:id="@+id/ver_anio_vt_ad_txt"
+                                android:id="@+id/ver_anio_vt_vn_txt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocraext"
@@ -514,5 +540,4 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
