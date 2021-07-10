@@ -267,7 +267,9 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
         TextInputLayout d = mainView.findViewById(R.id.dia_ci_vn_til);
         AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_vn_acv);
-
+        //todo
+        //regresar de las citas
+        //lacomprobacion de las horas
         d.setEndIconOnClickListener(v -> dias.performClick());
         dias.setOnClickListener(v -> {
             if(posicion_mes==-1 || posicion_anio == -1){
