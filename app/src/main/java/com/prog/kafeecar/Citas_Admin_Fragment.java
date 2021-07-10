@@ -693,9 +693,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     public final void setPosicion_anio(int pos){
         posicion_anio= pos;
     }
-    private void setPosicion_dia(int pos) {
-        posicion_dia = pos;
-    }
+    private void setPosicion_dia(int pos) {posicion_dia = pos; }
     private void setHora_nueva_cita(int hora) {
         hora_nueva_cita = hora;
     }

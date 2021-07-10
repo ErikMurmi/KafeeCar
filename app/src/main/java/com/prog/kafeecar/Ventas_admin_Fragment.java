@@ -174,7 +174,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
 
        if(c==0) {
-           nueva = new Venta(Patioventainterfaz.sdf.parse(fechaventa_str), clienteventa, vendedorventa, autoventa);
            patio.aniadirVenta(nueva);
 
            if (patio.getVentasGenerales().contiene(nueva)) {

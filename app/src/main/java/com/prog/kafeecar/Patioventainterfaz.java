@@ -113,17 +113,17 @@ public class Patioventainterfaz extends AppCompatActivity {
         Date fechaCita3 = sdf.parse("02-7-2021");
         Date fechaCita4 = sdf.parse("12-7-2021");
         Date fechaCita5 = sdf.parse("21-7-2021");
-        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),45000.50f);
         patioventa.aniadirVenta(ven1);
-        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),12000.50f);
         patioventa.aniadirVenta(ven2);
-        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven3 = new Venta(fechaCita2,  (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),54000.50f);
         patioventa.aniadirVenta(ven3);
-        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven4 = new Venta(fechaCita3, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),67000.50f);
         patioventa.aniadirVenta(ven4);
-        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven5 = new Venta(fechaCita4, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),80000.50f);
         patioventa.aniadirVenta(ven5);
-        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),90000.50f);
         patioventa.aniadirVenta(ven6);
         Cita c1 = new Cita(fechaCita, 8, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(1));
         Cita c2 = new Cita(fechaCita, 9, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(2));
@@ -547,31 +547,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
 
-    public void aniadirVenta(View v) throws Exception {
-        EditText precio = findViewById(R.id.precio_venta_txt);
-        EditText clientes = findViewById(R.id.cliente_venta_txt);
-        EditText vendedor = findViewById(R.id.vendedor_venta_txt);
-        EditText auto = findViewById(R.id.vehiculo_venta_txt);
-        EditText fechaventadia = findViewById(R.id.fecha_venta_dia_etxt);
-        EditText fechaventames = findViewById(R.id.fecha_venta_mes_etxt);
-        EditText fechaventaanio = findViewById(R.id.fecha_venta_anio_etxt);
-        String fechaventa_str = fechaventaanio.getText().toString() + "-" + fechaventames.getText().toString() + "-" + fechaventadia.getText().toString();
-        String clientes_str = clientes.getText().toString();
-        String vendedores_str = vendedor.getText().toString();
-        String autos_str = auto.getText().toString();
-        float precioventa = Float.parseFloat(precio.getText().toString());
-        Cliente clienteventa = patioventa.buscarClientes("Nombre", clientes_str);
-        Vendedor vendedorventa = patioventa.buscarVendedores("Nombre", vendedores_str);
-        Vehiculo autoventa = patioventa.buscarVehiculos("Matricula", autos_str);
-
-
-        Venta nueva = new Venta(sdf.parse(fechaventa_str), clienteventa, vendedorventa, autoventa);
-        patioventa.aniadirVenta(nueva);
-
-        if (patioventa.getVentasGenerales().contiene(nueva)) {
-            Toast.makeText(Patioventainterfaz.this, "Se registro la venta.", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void registrarAdministrador() {
         EditText nombreAdmin;

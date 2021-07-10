@@ -330,7 +330,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="1"
+                        android:completionThreshold="3"
                         android:fontFamily="@font/ocraext"
                         android:hint="Placa"
                         android:inputType="textAutoComplete"
