@@ -965,6 +965,13 @@
         android:background="@drawable/consultar_estadisticas_generales"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/contador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="34sp" />
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/gaficaVentasGenerales"
             android:layout_width="match_parent"
@@ -972,7 +979,9 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="15dp"
-            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
+            tools:ignore="MissingConstraints">
+
+        </com.github.mikephil.charting.charts.BarChart>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

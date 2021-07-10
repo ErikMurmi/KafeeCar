@@ -731,8 +731,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:hint="aaaa"
-                            android:textColorHint="@color/botones"
                             app:boxStrokeWidth="0dp"
                             app:boxStrokeWidthFocused="0dp">
 
@@ -741,10 +739,8 @@
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
                                 android:gravity="center"
-                                android:textColor="#F44336"
-                                android:textColorHighlight="@color/botones"
-                                android:textColorHint="@color/botones"
                                 android:textSize="18sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -754,14 +750,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:hint="mm"
-                            app:boxStrokeWidth="0dp">
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
 
                             <AutoCompleteTextView
                                 android:id="@+id/mes_ci_ad_acv"
                                 android:layout_width="70dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:dropDownHeight="300dp"
+                                android:editable="false"
                                 android:gravity="center"
                                 android:textSize="18sp" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -771,7 +769,6 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="dd"
                             app:boxStrokeWidth="0dp"
                             app:boxStrokeWidthFocused="0dp">
 
@@ -780,6 +777,7 @@
                                 android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
                                 android:gravity="center"
                                 android:textAlignment="center"
                                 android:textSize="18sp" />
@@ -827,7 +825,6 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:editable="false"
                             android:gravity="center"
-                            android:hint="hh"
                             android:textAlignment="center"
                             android:textSize="18sp" />
                     </com.google.android.material.textfield.TextInputLayout>
