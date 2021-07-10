@@ -67,6 +67,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private EditText vehiculo_nuevacita;
     private EditText dia_b;
     private int posicion_mes=-1;
+    private int posicion_anio=-1;
     private EditText anio_b;
     //Botones
     private Button irVerEditable;
@@ -136,7 +137,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         });
 
-
+        anio.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
 
         mes_lyt.setEndIconOnClickListener(v -> mes.performClick());
         mes.setOnClickListener(v -> {
@@ -151,13 +152,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         });
 
-        mes.setOnItemClickListener((parent, view, position, id) -> setString(position));
+        mes.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
 
         dias_lyt.setEndIconOnClickListener(v -> dias.performClick());
 
         dias.setOnClickListener(v -> {
             //String selectedValue =((AutoCompleteTextView)mes_lyt.getEditText()).getText().toString();
-            if(posicion_mes!=-1){
+            if(posicion_mes!=-1 && posicion_anio!=-1){
                 Toast.makeText(mainView.getContext(), "COMPARO", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(mainView.getContext(), "aqui va todo", Toast.LENGTH_SHORT).show();
@@ -641,7 +642,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         return  horas;
     }
 
-    public final void setString(int pos){
+    public final void setPosicion_mes(int pos){
         posicion_mes= pos;
+    }
+    public final void setPosicion_anio(int pos){
+        posicion_anio= pos;
     }
 }
