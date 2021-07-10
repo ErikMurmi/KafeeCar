@@ -70,8 +70,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         busqueda_ventas = mainView.findViewById(R.id.busqueda_vt_vn_srv);
         //Botones
         irAniadirVenta = mainView.findViewById(R.id.aniadir_vt_vn_ftbn);
-
-
         eliminar = mainView.findViewById(R.id.vt_vn_ver_venta_eliminar_btn);
 
         //eliminar = mainView.findViewById(R.id.eliminar_vt_vn_btn);
@@ -189,34 +187,55 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         lista_ventas.setVisibility(View.VISIBLE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
     }
-    /*public void aniadirVenta() throws Exception {
-        EditText precio= mainView.findViewById(R.id.precio_venta_txt);
-        EditText clientes= mainView.findViewById(R.id.cliente_venta_txt);
-        EditText vendedor= mainView.findViewById(R.id.vendedor_venta_txt);
-        EditText auto = mainView.findViewById(R.id.vehiculo_venta_txt);
-        EditText fechaventadia= mainView.findViewById(R.id.fecha_venta_dia_etxt);
-        EditText fechaventames= mainView.findViewById(R.id.fecha_venta_mes_etxt);
-        EditText fechaventaanio= mainView.findViewById(R.id.fecha_venta_anio_etxt);
 
-        String fechaventa_str=fechaventaanio.getText().toString()+"-"+fechaventames.getText().toString()+"-"+fechaventadia.getText().toString();
-        String clientes_str=clientes.getText().toString();
-        String vendedores_str= vendedor.getText().toString();
-        String autos_str = auto.getText().toString();
-        float precioventa= Float.parseFloat(precio.getText().toString());
-        Cliente clienteventa= patio.buscarClientes("Nombre",clientes_str);
-        Vendedor vendedorventa= patio.buscarVendedores("Nombre",vendedores_str);
-        Vehiculo autoventa= patio.buscarVehiculos("Matricula",autos_str);
+    public boolean registarCita() throws Exception {
+        Cliente cliente_c = null;
+        Vehiculo vehiculo = null;
+        int c = 0;
 
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_vn_actv);
 
-        Venta nueva= new Venta(sdf.parse(fechaventa_str),clienteventa,vendedorventa,autoventa);
-        patio.aniadirVenta(nueva);
-
-        if(patio.getVentasGenerales().contiene(nueva)){
-            Toast.makeText(mainView.getContext(),"Se registro la venta.",Toast.LENGTH_SHORT).show();
+        if (!isEmpty(cliente)) {
+            String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
+            }
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
+            c++;
         }
 
-    }*/
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
 
+        EditText precio = mainView.findViewById(R.id.resolucion_ci_vn_etxt);
+        float precio_flt = Float.parseFloat(precio.getText().toString());
+
+        if (c == 0) {
+            fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(fecha_nueva_cita);
+            Venta nueva = new Venta(fecha,cliente_c,vendedor_actual,vehiculo,precio_flt);
+            if (patio.getCitas().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void visualizarVenta() {
         ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);

@@ -64,7 +64,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         //contador=mainView.findViewById(R.id.contador);
-       sales=Patioventainterfaz.contadores();
+        sales=Patioventainterfaz.contadores();
 
 
         //Botones
