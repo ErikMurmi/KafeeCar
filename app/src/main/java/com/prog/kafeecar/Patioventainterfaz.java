@@ -48,8 +48,9 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static Vehiculo v_aux_cita;
     private BottomNavigationView navBar;
     public static final String[] filtros_vehiculos = new String[]{"Marca","Modelo","Placa","Año","Color","Precio"};
-    public static final String[] meses = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
-    //public static final String[] meses = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
+    public static final int[] anios = new int[]{2021,2022};
+    public static final String[] meses = new String[]{"Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"};
+    public static final int[] diasLista = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
 
     @Override
@@ -834,7 +835,6 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public static boolean esBisiesto(int anio) {
-
         GregorianCalendar calendar = new GregorianCalendar();
         boolean esBisiesto = false;
         if (calendar.isLeapYear(anio)) {
@@ -856,8 +856,8 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
 
-    public Lista buscarVentas(String cedula) throws Exception {
-        Venta buscada = null;
+    public Lista buscarVentas(String cedula){
+        Venta buscada;
         Lista ventas = new Lista();
         int cont = 0;
         while (cont < patioventa.getVentasGenerales().contar()) {

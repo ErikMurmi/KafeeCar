@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,6 +223,13 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         });
 
+        TextInputLayout d = mainView.findViewById(R.id.dia_ci_vn_til);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_vn_acv);
+
+        d.setEndIconOnClickListener(v -> dias.performClick());
+        dias.setOnClickListener(v -> {
+
+        });
 
         busqueda_citas.setOnQueryTextListener(this);
         try {
@@ -599,9 +607,28 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 e.printStackTrace();
             }
         }
-        return  horas;
+        return horas;
     }
 
+    public ArrayList<String> diaListaDesplegable(){
+        ArrayList<String> dias = new ArrayList<>();
+
+        if((!isEmpty(anio_ci_vn)) || (!isEmpty(mes_ci_vn))){
+            String anio_str = anio_ci_vn.getText().toString();
+            int anio = Integer.parseInt(anio_str);
+            String mes_str = mes_ci_vn.getText().toString();
+            int mes = Integer.parseInt(mes_str);
+            int i;
+
+            for (i = 1; i<=Patioventainterfaz.diasLista[mes];i++){
+                dias.add(String.valueOf(i));
+            }
+            if(Patioventainterfaz.esBisiesto(anio)){
+                dias.add(String.valueOf(i+1));
+            }
+        }
+        return dias;
+    }
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
