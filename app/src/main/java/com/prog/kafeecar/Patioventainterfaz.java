@@ -125,12 +125,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVenta(ven5);
         Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven6);
-        Cita c1 = new Cita(fechaCita, 8, " ", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c2 = new Cita(fechaCita, 9, " ", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(2));
-        Cita c3 = new Cita(fechaCita2, 16, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
-        Cita c4 = new Cita(fechaCita3, 9, " ", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
-        Cita c5 = new Cita(fechaCita4, 12, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
-        Cita c6 = new Cita(fechaCita5, 8, " ", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
+        Cita c1 = new Cita(fechaCita, 8, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Cita c2 = new Cita(fechaCita, 9, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Cita c3 = new Cita(fechaCita2, 16, "", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
+        Cita c4 = new Cita(fechaCita3, 9, "", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
+        Cita c5 = new Cita(fechaCita4, 12, "", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
+        Cita c6 = new Cita(fechaCita5, 8, "", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(6));
         patioventa.aniadirCita(c1);
         patioventa.aniadirCita(c2);
         patioventa.aniadirCita(c3);

@@ -1,15 +1,12 @@
 package com.prog.kafeecar;
 
 import android.app.AlertDialog;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -58,22 +55,29 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private SearchView busqueda_citas;
     private Cita cita_mostrar;
     private boolean horas_mostradas = false;
-    private boolean mes_mostradas = false;
+    private boolean mes_mostrados = false;
     private boolean anios_mostradas = false;
+    public boolean dias_mostrados = false;
 
     //Image Buttons
     private ImageButton buscar_btn;
 
     private EditText vehiculo_nuevacita;
     private EditText dia_b;
+    private int posicion_dia=-1;
     private int posicion_mes=-1;
     private int posicion_anio=-1;
+    private int hora_nueva_cita=-1;
+    String fecha_nueva_cita;
     private EditText anio_b;
     //Botones
     private Button irVerEditable;
     private Button anular;
     private Button descartar;
     private Button guardar_edit;
+    private Button guardar_cita;
+    private Button descartar_an_cita;
+
     private FloatingActionButton irAniadirCita;
 
     private LinearLayout verCita;
@@ -99,7 +103,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
         anular = mainView.findViewById(R.id.anular_ci_ad_btn);
         descartar = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
-        guardar_edit = mainView.findViewById(R.id.ed_editar_ci_vn_btn);
+        guardar_edit = mainView.findViewById(R.id.ed_editar_ci_ad_btn);
+        guardar_cita = mainView.findViewById(R.id.guardar_ci_ad_btn);
+        descartar_an_cita = mainView.findViewById(R.id.descartar_ci_ad_btn);
         //TextViews
         //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
@@ -111,100 +117,20 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         irAniadirCita.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
+            irAniadirCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
+            adaptador();
         });
 
-
-        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
-        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
-        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_ad_til);
-        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_ad_til);
-        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_ad_acv);
-        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_ad_acv);
-        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_ad_acv);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_ad_acv);
-
-        anio_lyt.setEndIconOnClickListener(v -> anio.performClick());
-        anio.setOnClickListener(v -> {
-            if(anios_mostradas){
-                anio.dismissDropDown();
-                anios_mostradas =false;
-            }else{
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.anios);
-                    anio.setAdapter(adapt);
-                    anio.showDropDown();
-                    anios_mostradas = true;
-            }
-        });
-
-        anio.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
-
-        mes_lyt.setEndIconOnClickListener(v -> mes.performClick());
-        mes.setOnClickListener(v -> {
-            if(mes_mostradas){
-                mes.dismissDropDown();
-                mes_mostradas =false;
-            }else{
-                ArrayAdapter<String> adapt_mes = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
-                mes.setAdapter(adapt_mes);
-                mes.showDropDown();
-                mes_mostradas = true;
-            }
-        });
-
-        mes.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
-
-        dias_lyt.setEndIconOnClickListener(v -> dias.performClick());
-
-        dias.setOnClickListener(v -> {
-            //String selectedValue =((AutoCompleteTextView)mes_lyt.getEditText()).getText().toString();
-            if(posicion_mes!=-1 && posicion_anio!=-1){
-                Toast.makeText(mainView.getContext(), "COMPARO", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mainView.getContext(), "aqui va todo", Toast.LENGTH_SHORT).show();
-            }
-            /*if(horas_mostradas){
-                horas.dismissDropDown();
-                horas_mostradas =false;
-            }else{
-                try {
-                    //Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
-                    Date fecha = sdf.parse("12-12-2021");
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
-                    horas.setAdapter(adapt);
-                    horas.showDropDown();
-                    horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+        guardar_cita.setOnClickListener(v -> {
+            try {
+                if(registarCita()){
+                    irListaCitas();
                 }
-            }*/
-        });
-
-
-        horas_lyt.setEndIconOnClickListener(v -> horas.performClick());
-
-        horas.setOnClickListener(v -> {
-            if(horas_mostradas){
-                horas.dismissDropDown();
-                horas_mostradas =false;
-            }else{
-                try {
-                    //Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
-                    Date fecha = sdf.parse("12-12-2021");
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
-                    horas.setAdapter(adapt);
-                    horas.showDropDown();
-                    horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
-                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
-        /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
-        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
-        meses.setAdapter(adapt);*/
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -263,6 +189,95 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             visualizarEditable();
         });
 
+        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
+        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
+        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_ad_til);
+        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_ad_til);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_ad_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_ad_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_ad_acv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_ad_acv);
+
+        anio_lyt.setEndIconOnClickListener(v -> anio.performClick());
+        anio.setOnClickListener(v -> {
+            if(anios_mostradas){
+                anio.dismissDropDown();
+                anios_mostradas =false;
+            }else{
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.anios);
+                    anio.setAdapter(adapt);
+                    anio.showDropDown();
+                    anios_mostradas = true;
+            }
+        });
+
+        anio.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
+
+        mes_lyt.setEndIconOnClickListener(v -> mes.performClick());
+        mes.setOnClickListener(v -> {
+            if(mes_mostrados){
+                mes.dismissDropDown();
+                mes_mostrados =false;
+            }else{
+                ArrayAdapter<String> adapt_mes = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+                mes.setAdapter(adapt_mes);
+                mes.showDropDown();
+                mes_mostrados = true;
+            }
+        });
+
+        mes.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
+
+        dias_lyt.setEndIconOnClickListener(v -> dias.performClick());
+
+        dias.setOnClickListener(v -> {
+            if(posicion_mes!=-1 && posicion_anio!=-1){
+                if(dias_mostrados){
+                    dias.dismissDropDown();
+                    dias_mostrados =false;
+                }else{
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,diaListaDesplegable());
+                    dias.setAdapter(adapt);
+                    dias.showDropDown();
+                    dias_mostrados = true;
+                }
+            }else{
+                Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dias.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
+
+        horas_lyt.setEndIconOnClickListener(v -> horas.performClick());
+
+        horas.setOnClickListener(v -> {
+            if(horas_mostradas){
+                horas.dismissDropDown();
+                horas_mostradas =false;
+            }else{
+                try {
+                    fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+                    Date fecha = sdf.parse(fecha_nueva_cita);
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    horas.setAdapter(adapt);
+                    horas.showDropDown();
+                    horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
+                    horas_mostradas = true;
+                } catch (ParseException e) {
+                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+        //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
+        /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+        meses.setAdapter(adapt);*/
+
+
+
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
@@ -298,6 +313,20 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         cargar();
         return mainView;
     }
+
+    public void adaptador(){
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        cliente.setAdapter(adapter);
+
+        TextView cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.cedula_vendedor_ci_ad_etxt);
+        cedula_vendedor_ci_ad_txt.setText(usuarioActual.getCedula());
+
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        auto.setAdapter(adapterPla);
+    }
+
 
     public void cargar() {
         RecyclerView listaview = mainView.findViewById(R.id.rc_citas_admin);
@@ -350,7 +379,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         vehiculo.setText(cita_mostrar.getVehiculo().getMarca() + cita_mostrar.getVehiculo().getModelo());
         String resolucion_str =cita_mostrar.getResolucion();
         descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());
-        if(!resolucion_str.equals(" ")){
+        if(!resolucion_str.equals("")){
             resolucion.setVisibility(View.VISIBLE);
             resolucion.setText(resolucion_str);
         }else{
@@ -397,62 +426,65 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         resolucion_ed.setText(cita_mostrar.getResolucion());
     }
 
-    public void registarCita() throws Exception {
-        EditText fechacitadia = mainView.findViewById(R.id.fechacitadia_txt);
-        EditText fechacitames = mainView.findViewById(R.id.fechacitames_txt);
-        EditText fechacitaanio = mainView.findViewById(R.id.fechacitaanio_txt);
-        EditText fechacitahora = mainView.findViewById(R.id.fechacitahoracita_txt);
-        Vendedor vendedor_v = null;
+    public boolean registarCita() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        String fechacita_str = "";
         int c = 0;
-        int hora = -1;
-        if ((!isEmpty(fechacitadia) && !isEmpty(fechacitames)) && (!isEmpty(fechacitaanio) && !isEmpty(fechacitahora))) {
-            fechacita_str = fechacitadia.getText().toString() + "-" + fechacitames.getText().toString() + "-" + fechacitaanio.getText().toString();
-            hora = Integer.parseInt(fechacitahora.getText().toString());
-        } else {
-            c++;
-            Toast.makeText(mainView.getContext(), "Campos de fecha vacíos", Toast.LENGTH_SHORT).show();
-        }
-        EditText cliente = mainView.findViewById(R.id.cliente_txt);
-        EditText vendedor = mainView.findViewById(R.id.vendedor_txt);
-        EditText auto = mainView.findViewById(R.id.vehiculo_txt);
+
+        String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(prueba);
+
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+
         if (!isEmpty(cliente)) {
             String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
+            }
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
             c++;
-            Toast.makeText(mainView.getContext(), "Campo de cliente vacio", Toast.LENGTH_SHORT).show();
-        }
-
-        if (!isEmpty(vendedor)) {
-            String vendedor_str = vendedor.getText().toString();
-            vendedor_v = patio.buscarVendedores("Cedula", vendedor_str);
-        } else {
-            c++;
-            Toast.makeText(mainView.getContext(), "Campo de vendedor vacio", Toast.LENGTH_SHORT).show();
         }
 
         if (!isEmpty(auto)) {
             String vehiculo_str = auto.getText().toString();
             vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
         } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
             c++;
-            Toast.makeText(mainView.getContext(), "Campo de vehiculo vacio", Toast.LENGTH_SHORT).show();
         }
 
-        EditText resolucion = mainView.findViewById(R.id.resolucion_txt);
+        EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
         String resolucion_str = resolucion.getText().toString();
 
-        if (c == 0) {
-            Cita nueva = new Cita(Patioventainterfaz.sdf.parse(fechacita_str), hora, resolucion_str, cliente_c, vendedor_v, vehiculo);
-            patio.aniadirCita(nueva);
-            if (patio.getCitas().contiene(nueva)) {
-                Toast.makeText(mainView.getContext(), "Se agrego correctamente.", Toast.LENGTH_SHORT).show();
-            }
+        if(isEmpty(resolucion)){
+            resolucion.setHint("");
         }
 
+        if (c == 0) {
+            Cita nueva = new Cita(
+                    fecha,
+                    hora_nueva_cita,
+                    resolucion_str,
+                    cliente_c,
+                    usuarioActual,
+                    vehiculo);
+            patio.aniadirCita(nueva);
+            if (patio.getCitas().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean editarCita() throws Exception {
@@ -642,10 +674,29 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         return  horas;
     }
 
+    public ArrayList<String> diaListaDesplegable(){
+        ArrayList<String> dias = new ArrayList<>();
+        int anioa = Integer.parseInt(Patioventainterfaz.anios[posicion_anio]);
+        int i;
+        for (i = 1; i<=Patioventainterfaz.diasLista[posicion_mes];i++){
+            dias.add(String.valueOf(i));
+        }
+        if(Patioventainterfaz.esBisiesto(anioa) && posicion_mes==1){
+            dias.add(String.valueOf(i+1));
+        }
+        return dias;
+    }
+
     public final void setPosicion_mes(int pos){
         posicion_mes= pos;
     }
     public final void setPosicion_anio(int pos){
         posicion_anio= pos;
+    }
+    private void setPosicion_dia(int pos) {
+        posicion_dia = pos;
+    }
+    private void setHora_nueva_cita(int hora) {
+        hora_nueva_cita = hora;
     }
 }

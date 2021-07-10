@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,8 +45,8 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
             String fecha = Patioventainterfaz.getFechaMod(vt.getFecha());
             String vendedor  = vt.getVendedor().getNombre();
             String placas = "";
-            for (int i=0;i<vt.getVehiculos().contar();i++){
-                Vehiculo actual = (Vehiculo) vt.getVehiculos().getPos(i);
+            for (int i = 0; i<vt.getVehiculo().contar(); i++){
+                Vehiculo actual = (Vehiculo) vt.getVehiculo().getPos(i);
                 if(i==0){
                     placas += actual.getPlaca();
                 }else{
@@ -55,7 +54,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
                 }
             }
             String precio = "$ "+ vt.getPrecio();
-            Vehiculo actual = (Vehiculo) vt.getVehiculos().getPos(0);
+            Vehiculo actual = (Vehiculo) vt.getVehiculo().getPos(0);
             StorageReference filePath = mStorageRef.child("Vehiculos/"+actual.getimagen());
 
             try {

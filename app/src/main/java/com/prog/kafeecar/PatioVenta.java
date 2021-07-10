@@ -139,12 +139,12 @@ public class PatioVenta {
      */
     public void aniadirVenta(Venta nueva) throws Exception {
         ventasGenerales.add(nueva);
-        if (nueva.getVehiculos().contar()==1){
-            Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(0);
+        if (nueva.getVehiculo().contar()==1){
+            Vehiculo actual = (Vehiculo) nueva.getVehiculo().getPos(0);
             removerVehiculo(actual.getPlaca());
         }else{
-            for (int i=1;i<nueva.getVehiculos().contar();i++){
-                Vehiculo actual = (Vehiculo) nueva.getVehiculos().getPos(i);
+            for (int i = 1; i<nueva.getVehiculo().contar(); i++){
+                Vehiculo actual = (Vehiculo) nueva.getVehiculo().getPos(i);
                 removerVehiculo(actual.getPlaca());
             }
         }
