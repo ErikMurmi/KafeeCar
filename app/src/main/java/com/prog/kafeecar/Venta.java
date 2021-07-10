@@ -14,7 +14,7 @@ import java.util.Date;
 public class Venta {
     
     private Date fecha;
-    private Cliente comprador;
+    private Cliente cliente;
     private Vendedor vendedor;
     private Vehiculo vehiculo;
     private float precio;
@@ -23,9 +23,9 @@ public class Venta {
         this.precio = precio;
     }
 
-    public Venta(Date fecha, Cliente comprador, Vendedor vendedor, Vehiculo v, float precio) {
+    public Venta(Date fecha, Cliente cliente, Vendedor vendedor, Vehiculo v, float precio) {
         this.fecha = fecha;
-        this.comprador = comprador;
+        this.cliente = cliente;
         this.vendedor = vendedor;
         vehiculo = v;
         this.precio = precio;
@@ -43,12 +43,12 @@ public class Venta {
         return precio;
     }
 
-    public Cliente getComprador() {
-        return comprador;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setComprador(Cliente comprador) {
-        this.comprador = comprador;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Vendedor getVendedor() {
@@ -71,7 +71,7 @@ public class Venta {
     public String toString() {
         return "Venta" + 
                 "\nFecha: " + fecha +
-                "\nComprador: " + comprador +
+                "\nComprador: " + cliente +
                 "\nVendedor: " + vendedor + 
                 "\nVehiculo=" + vehiculo;
     }

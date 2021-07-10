@@ -408,7 +408,7 @@ public class PatioVenta {
         int cont =0;
         while(cont<ventasGenerales.contar() && buscada==null){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.getComprador().getCedula().compareTo(cedula)==0 && actual.buscarVehiculo(placa)!=null){
+            if(actual.getCliente().getCedula().compareTo(cedula)==0 && actual.buscarVehiculo(placa)!=null){
                 buscada = actual;
             }
             cont++;

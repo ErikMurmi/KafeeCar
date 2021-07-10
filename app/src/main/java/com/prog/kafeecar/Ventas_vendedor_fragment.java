@@ -55,7 +55,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         //Botones
         aniadir = mainView.findViewById(R.id.aniadir_vt_vn_ftbn);
 
-        eliminar = mainView.findViewById(R.id.eliminar_vt_vn_btn);
+        eliminar = mainView.findViewById(R.id.vt_vn_ver_venta_eliminar_btn);
         //actualizar = mainview.findViewById(R.id.actualizar_btn);
         //guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
 
@@ -68,7 +68,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
-            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo().getPos(0);
+            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo();
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
                     patio.removerVenta(vh.getPlaca());
@@ -101,7 +101,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         lista_ventas.setVisibility(View.VISIBLE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
     }
-    public void aniadirVenta() throws Exception {
+    /*public void aniadirVenta() throws Exception {
         EditText precio= mainView.findViewById(R.id.precio_venta_txt);
         EditText clientes= mainView.findViewById(R.id.cliente_venta_txt);
         EditText vendedor= mainView.findViewById(R.id.vendedor_venta_txt);
@@ -127,19 +127,23 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             Toast.makeText(mainView.getContext(),"Se registro la venta.",Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
-    public void visualizarCita() {
+    public void visualizarVenta() {
         ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_vn_txt);
+        TextView precioV = mainView.findViewById(R.id.ver_pventa_vt_vn_txt);
+        TextView precioI = mainView.findViewById(R.id.ver_pinicial_vt_vn_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_vt_vn_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_vt_vn_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_cliente_vt_vn_txt);
+
         TextView placa = mainView.findViewById(R.id.ver_placa_vt_vn_txt);
-        TextView precioI = mainView.findViewById(R.id.);
-        TextView cliente = mainView.findViewById(R.id.ver_cliente_ci_vn_txt);
-        TextView contacto = mainView.findViewById(R.id.ver_contacto_ci_vn_txt);
-        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_ci_vn_txt);
-        TextView vehiculo = mainView.findViewById(R.id.ver_vehiculo_ci_vn_txt);
-        TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_vn_txt);
-        TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_vn_txt);
-        TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_vn_txt);
+        TextView matricula = mainView.findViewById(R.id.ver_matricula_vt_vn_txt);
+        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_vt_vn_txt);
+        TextView marca = mainView.findViewById(R.id.ver_marca_vt_vn_txt);
+        TextView modelo = mainView.findViewById(R.id.ver_modelo_vt_vn_txt);
+        TextView anio = mainView.findViewById(R.id.ver_anio_vt_vn_txt);
 
         StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
         try {
@@ -152,33 +156,34 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             e.printStackTrace();
         }
 
-        fecha.setText(Patioventainterfaz.getFechaMod(venta_mostrar.getFechaCita()));
-        hora.setText(String.format("%d:00 %s", venta_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
+        fecha.setText(Patioventainterfaz.getFechaMod(venta_mostrar.getFecha()));
+        precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
+        precioI.setText(String.format("$ %.2f", venta_mostrar.getVehiculo().getPrecioInicial()));
+        vendedor.setText(venta_mostrar.getVendedor().getNombre());
         cliente.setText(venta_mostrar.getCliente().getNombre());
         contacto.setText(venta_mostrar.getCliente().getTelefono());
-        vendedor.setText(venta_mostrar.getVendedorCita().getNombre());
-        vehiculo.setText(venta_mostrar.getVehiculo().getModelo());
-        descripcion.setText(venta_mostrar.getVehiculo().getDescripcion());
-        resolucion.setText(venta_mostrar.getResolucion());
-        String resolucion_str = venta_mostrar.getResolucion();
-        if(resolucion_str.isEmpty()){
-            resolucion.setHint("");
+
+        placa.setText(venta_mostrar.getVehiculo().getPlaca());
+        matricula.setText(venta_mostrar.getVehiculo().getMatricula());
+        if(venta_mostrar.getVehiculo().isMatriculado()){
+            matriculado.setText("Si");
         }else{
-            resolucion.setText(resolucion_str);
+            matriculado.setText("No");
         }
-        precio.setText("$ " + cita_mostrar.getVehiculo().getPrecioVenta());
-
-
+        marca.setText(venta_mostrar.getVehiculo().getMarca());
+        modelo.setText(venta_mostrar.getVehiculo().getModelo());
+        anio.setText(venta_mostrar.getVehiculo().getAnio());
     }
 
     public void verVenta(){
         lista_ventas.setVisibility(View.GONE);
-        verventa.setVisibility(View.VISIBLE);
+        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
+        visualizarVenta();
     }
 
     public void verVentaEditable(){
         lista_ventas.setVisibility(View.GONE);
-        verventa.setVisibility(View.VISIBLE);
+        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
     }
 
     @Override
