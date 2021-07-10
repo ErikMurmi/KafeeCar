@@ -184,8 +184,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 try {
                     String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
                     Date fecha = sdf.parse(prueba);
-                    EditText resolucion = mainView.findViewById(R.id.resolucion_txt);
-                    resolucion.setText(prueba);
                     ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
                     horas.setAdapter(adapt);
                     horas.showDropDown();
@@ -652,14 +650,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         return dias;
     }
 
-    public final void setPosicion_mes(int pos){
-        posicion_mes= pos;
-    }
-    public final void setPosicion_anio(int pos){
-        posicion_anio= pos;
-    }
-
-    private void setPosicion_dia(int pos) {
-        posicion_dia = pos;
-    }
+    public final void setPosicion_mes(int pos){ posicion_mes= pos; }
+    public final void setPosicion_anio(int pos){ posicion_anio= pos; }
+    private void setPosicion_dia(int pos) { posicion_dia = pos; }
 }
