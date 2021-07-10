@@ -550,7 +550,7 @@
         android:background="@drawable/nueva_venta"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -830,7 +830,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/descartar_ci_ad_btn"
+                        android:id="@+id/descartar_vt_vn_btn"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="125dp"
                         android:layout_height="45dp"
@@ -846,7 +846,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
-                        android:id="@+id/guardar_ci_ad_btn"
+                        android:id="@+id/guardar_vt_vn_btn"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="115dp"
                         android:layout_height="45dp"
@@ -871,7 +871,7 @@
         android:background="@drawable/ventas_lista"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

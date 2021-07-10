@@ -71,11 +71,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         //Botones
         irAniadirVenta = mainView.findViewById(R.id.aniadir_vt_vn_ftbn);
         eliminar = mainView.findViewById(R.id.vt_vn_ver_venta_eliminar_btn);
-
         //eliminar = mainView.findViewById(R.id.eliminar_vt_vn_btn);
 
         //actualizar = mainview.findViewById(R.id.actualizar_btn);
-        //guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
+        guardar = mainView.findViewById(R.id.guardar_vt_vn_btn);
 
         //Layouts
         lista_ventas = mainView.findViewById(R.id.lista_vt_vn_lyt);
@@ -87,7 +86,18 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         irAniadirVenta.setOnClickListener(v -> {
             lista_ventas.setVisibility(View.GONE);
             ver_vt_vn_lyt.setVisibility(View.GONE);
+            adaptador();
             aniadirVenta.setVisibility(View.VISIBLE);
+        });
+
+        guardar.setOnClickListener(v -> {
+            try {
+                if(registarVenta()){
+                   irVerListaVentas();
+                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Errores en los datos ingresados", Toast.LENGTH_SHORT).show();
+            }
         });
 
         eliminar.setOnClickListener(v -> {
@@ -182,13 +192,26 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         listaview.setAdapter(adaptadorVentas);
     }
 
+    public void adaptador(){
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        cliente.setAdapter(adapter);
+
+        TextView cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.cedula_vendedor_vt_vn_etxt);
+        cedula_vendedor_ci_vn_txt.setText(vendedor_actual.getCedula());
+
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_vn_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        auto.setAdapter(adapterPla);
+    }
+
     public void irVerListaVentas(){
         cargar();
         lista_ventas.setVisibility(View.VISIBLE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
     }
 
-    public boolean registarCita() throws Exception {
+    public boolean registarVenta() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
