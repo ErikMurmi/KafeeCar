@@ -170,8 +170,9 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             msg.setMessage("¿Está seguro de actualizar los datos del vendedor " + venMostrar.getNombre() + "?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    editarVendedor();
-                    regresarPantallaPrncipal();
+                    if(editarVendedor()){
+                        regresarPantallaPrncipal();
+                    }
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "No se pudo actualizar la información", Toast.LENGTH_SHORT).show();
                     regresarPantallaPrncipal();
@@ -588,7 +589,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         }
     }
 
-    public void editarVendedor() {
+    public boolean editarVendedor() {
         try {
             int c = 0;
             Vendedor cedulaVen = venMostrar;
@@ -746,6 +747,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
                         Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
                         irVisualizarVendedor.setVisibility(View.GONE);
+                        return true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -754,6 +756,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "No se pudo actualizar la información del vendedor", Toast.LENGTH_SHORT).show();
         }
+        return false;
     }
 
     public void openGalery() {
