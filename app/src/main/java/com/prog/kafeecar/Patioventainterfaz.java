@@ -105,11 +105,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         Cliente c = (Cliente) patioventa.getClientes().getPos(1);
         //c.aniadirFavorito("IPO-1963");
         Date fechaCita = sdf.parse("08-9-2021");
-        Date fechaCita1 = sdf.parse("08-10-2020");
-        Date fechaCita2 = sdf.parse("01-9-2020");
-        Date fechaCita3 = sdf.parse("02-8-2020");
+        Date fechaCita1 = sdf.parse("08-10-2021");
+        Date fechaCita2 = sdf.parse("01-9-2021");
+        Date fechaCita3 = sdf.parse("02-7-2021");
         Date fechaCita4 = sdf.parse("12-7-2021");
-        Date fechaCita5 = sdf.parse("21-6-2021");
+        Date fechaCita5 = sdf.parse("21-7-2021");
         Venta ven1 = new Venta(fechaCita, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
         patioventa.aniadirVenta(ven1);
         Venta ven2 = new Venta(fechaCita1, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1));
@@ -874,6 +874,64 @@ public class Patioventainterfaz extends AppCompatActivity {
             return "pm";
         }
         return "am";
+    }
+
+     public static int[] contadores (){
+        int[] datos = new int[12];
+        int sep =0,en=0,feb=0,mar=0,abr=0,may=0,jun=0,jul=0,ago=0,oct=0;
+        for (int i =0;i < patioventa.getVentasGenerales().contar();i++){
+            Venta actual =(Venta) patioventa.getVentasGenerales().getPos(i);
+            if(actual.getFecha().getMonth()==1){
+                en++;
+                datos[1]=en;
+
+            }
+            if(actual.getFecha().getMonth()==2){
+                feb++;
+                datos[2]=feb;
+
+            }
+            if(actual.getFecha().getMonth()==3){
+                mar++;
+                datos[3]=mar;
+
+            }
+            if(actual.getFecha().getMonth()==4){
+                abr++;
+                datos[4]=abr;
+
+            }
+            if(actual.getFecha().getMonth()==5){
+                may++;
+                datos[5]=may;
+
+            }
+            if(actual.getFecha().getMonth()==6){
+                jun++;
+                datos[6]=jun;
+
+            }
+            if(actual.getFecha().getMonth()==7){
+                jul++;
+                datos[7]=jul;
+
+            }
+            if(actual.getFecha().getMonth()==8){
+                ago++;
+                datos[8]=ago;
+
+            }
+            if(actual.getFecha().getMonth()==9){
+                sep++;
+                datos[9]=sep;
+                
+            }
+
+
+        }
+        
+        return datos;
+        
     }
 
 
