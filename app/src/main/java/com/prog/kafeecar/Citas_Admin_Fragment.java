@@ -58,13 +58,16 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private SearchView busqueda_citas;
     private Cita cita_mostrar;
     private boolean horas_mostradas = false;
+    private boolean mes_mostradas = false;
+    private boolean anios_mostradas = false;
 
     //Image Buttons
     private ImageButton buscar_btn;
 
     private EditText vehiculo_nuevacita;
     private EditText dia_b;
-    private EditText mes_b;
+    private int posicion_mes=-1;
+    private int posicion_anio=-1;
     private EditText anio_b;
     //Botones
     private Button irVerEditable;
@@ -101,7 +104,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
         dia_b = mainView.findViewById(R.id.fechacitadia_txt);
-        mes_b = mainView.findViewById(R.id.fechacitames_txt);
         anio_b = mainView.findViewById(R.id.fechacitaanio_txt);
         //Image Buttons
         //OnClick
@@ -111,10 +113,75 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
         });
-        TextInputLayout n = mainView.findViewById(R.id.txt_lyt);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.horas_ddm);
 
-        n.setEndIconOnClickListener(v -> horas.performClick());
+
+        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
+        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
+        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_ad_til);
+        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_ad_til);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_ad_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_ad_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_ad_acv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_ad_acv);
+
+        anio_lyt.setEndIconOnClickListener(v -> anio.performClick());
+        anio.setOnClickListener(v -> {
+            if(anios_mostradas){
+                anio.dismissDropDown();
+                anios_mostradas =false;
+            }else{
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.anios);
+                    anio.setAdapter(adapt);
+                    anio.showDropDown();
+                    anios_mostradas = true;
+            }
+        });
+
+        anio.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
+
+        mes_lyt.setEndIconOnClickListener(v -> mes.performClick());
+        mes.setOnClickListener(v -> {
+            if(mes_mostradas){
+                mes.dismissDropDown();
+                mes_mostradas =false;
+            }else{
+                ArrayAdapter<String> adapt_mes = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+                mes.setAdapter(adapt_mes);
+                mes.showDropDown();
+                mes_mostradas = true;
+            }
+        });
+
+        mes.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
+
+        dias_lyt.setEndIconOnClickListener(v -> dias.performClick());
+
+        dias.setOnClickListener(v -> {
+            //String selectedValue =((AutoCompleteTextView)mes_lyt.getEditText()).getText().toString();
+            if(posicion_mes!=-1 && posicion_anio!=-1){
+                Toast.makeText(mainView.getContext(), "COMPARO", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(mainView.getContext(), "aqui va todo", Toast.LENGTH_SHORT).show();
+            }
+            /*if(horas_mostradas){
+                horas.dismissDropDown();
+                horas_mostradas =false;
+            }else{
+                try {
+                    //Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    Date fecha = sdf.parse("12-12-2021");
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    horas.setAdapter(adapt);
+                    horas.showDropDown();
+                    horas_mostradas = true;
+                } catch (ParseException e) {
+                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                }
+            }*/
+        });
+
+
+        horas_lyt.setEndIconOnClickListener(v -> horas.performClick());
 
         horas.setOnClickListener(v -> {
             if(horas_mostradas){
@@ -122,7 +189,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 horas_mostradas =false;
             }else{
                 try {
-                    Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    //Date fecha = sdf.parse(dia_b.getText().toString()+"-"+mes_b.getText().toString()+"-"+anio_b.getText().toString());
+                    Date fecha = sdf.parse("12-12-2021");
                     ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
                     horas.setAdapter(adapt);
                     horas.showDropDown();
@@ -133,6 +201,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         });
 
+        //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
+        /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+        meses.setAdapter(adapt);*/
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -568,5 +640,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         }
         return  horas;
+    }
+
+    public final void setPosicion_mes(int pos){
+        posicion_mes= pos;
+    }
+    public final void setPosicion_anio(int pos){
+        posicion_anio= pos;
     }
 }

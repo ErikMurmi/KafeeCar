@@ -675,7 +675,7 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -707,11 +707,11 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/fechaCita.title"
+                        android:id="@+id/fecha_ci_vn_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="7dp"
                         android:fontFamily="@font/ocra"
                         android:text="Fecha de cita"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -721,88 +721,114 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:gravity="center|center_horizontal"
+                        android:orientation="horizontal"
+                        android:theme="@style/Theme.MaterialComponents.Light">
 
-                        <EditText
-                            android:id="@+id/fechacitadia_txt"
-                            android:layout_width="60dp"
-                            android:layout_height="37dp"
-                            android:layout_marginEnd="12dp"
-
-                            android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:fontFamily="@font/ocra"
-                            android:hint="dd"
-                            android:inputType="number"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="19sp" />
-
-                        <EditText
-                            android:id="@+id/fechacitames_txt"
-                            android:layout_width="70dp"
-                            android:layout_height="37dp"
-                            android:layout_marginEnd="12dp"
-                            android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:fontFamily="@font/ocra"
-                            android:hint="mm"
-                            android:inputType="number"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="19sp" />
-
-                        <EditText
-                            android:id="@+id/fechacitaanio_txt"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/anio_ci_ad_til"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="wrap_content"
-                            android:layout_height="37dp"
-                            android:layout_marginEnd="12dp"
-                            android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:fontFamily="@font/ocra"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
 
-                            android:hint="aaaa"
-                            android:inputType="number"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="19sp" />
+                            <AutoCompleteTextView
+                                android:id="@+id/anio_ci_ad_acv"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/mes_ci_ad_til"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/mes_ci_ad_acv"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:dropDownHeight="300dp"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/dia_ci_ad_til"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/dia_ci_ad_acv"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <Space
                     android:layout_width="15dp"
-                    android:layout_height="8dp" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:theme="@style/Theme.MaterialComponents.Light">
 
                     <TextView
-                        android:id="@+id/HoraCita.title"
+                        android:id="@+id/horaCita_ci_ad_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="7dp"
                         android:fontFamily="@font/ocra"
                         android:text="Hora"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/gris_visualizar"
                         android:textSize="18sp" />
 
-                    <EditText
-                        android:id="@+id/fechacitahoracita_txt"
-                        android:layout_width="50dp"
-                        android:layout_height="37dp"
-                        android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:ems="10"
-                        android:fontFamily="@font/ocra"
-                        android:hint="h"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/hora_ci_ad_til"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
 
-                        android:inputType="number"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="19sp" />
+                        <AutoCompleteTextView
+                            android:id="@+id/hora_ci_ad_acv"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:editable="false"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -830,7 +856,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txt_lyt"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:dropDownVerticalOffset="10dp"
@@ -839,14 +865,17 @@
                     app:boxCornerRadiusTopEnd="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     app:boxStrokeColor="@color/botones"
+                    app:boxStrokeWidth="0dp"
                     app:endIconTint="@color/black">
 
                     <AutoCompleteTextView
                         android:id="@+id/horas_ddm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
                         android:editable="false"
                         android:inputType="none"
+                        android:text="1"
+                        android:textAlignment="center"
                         android:textSize="16sp"
                         tools:visibility="visible" />
 
@@ -991,7 +1020,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
