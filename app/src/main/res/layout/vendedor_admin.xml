@@ -33,10 +33,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bordesbotongris"
+                    android:fontFamily="@font/ocra"
                     android:iconifiedByDefault="false"
                     android:queryBackground="@color/white"
-                    android:queryHint="Búsqueda"
-                    android:fontFamily="@font/ocra" />
+                    android:queryHint="Búsqueda" />
 
             </LinearLayout>
 

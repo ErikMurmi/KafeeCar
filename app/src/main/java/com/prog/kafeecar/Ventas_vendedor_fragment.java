@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,19 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
-    private View mainview;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+
+    private View mainView;
     private SearchView busqueda_ventas;
-    private LinearLayout verventa;
-    private LinearLayout aniadirventa;
+    private LinearLayout ver_vt_vn_lyt;
     private LinearLayout editarventa;
     private LinearLayout lista_ventas;
     private FloatingActionButton aniadir;
@@ -41,30 +49,30 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainview = inflater.inflate(R.layout.ventas_vendedor, container, false);
+        mainView = inflater.inflate(R.layout.ventas_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
-        busqueda_ventas = mainview.findViewById(R.id.busqueda_vt_vn_srv);
+        busqueda_ventas = mainView.findViewById(R.id.busqueda_vt_vn_srv);
         //Botones
-        aniadir = mainview.findViewById(R.id.aniadir_vt_vn_ftbn);
+        aniadir = mainView.findViewById(R.id.aniadir_vt_vn_ftbn);
 
-        eliminar = mainview.findViewById(R.id.eliminar_vt_vn_btn);
+        eliminar = mainView.findViewById(R.id.eliminar_vt_vn_btn);
         //actualizar = mainview.findViewById(R.id.actualizar_btn);
         //guardar = mainview.findViewById(R.id.guardar_clita_nueva_btn);
 
         //Layouts
-        lista_ventas = mainview.findViewById(R.id.lista_vt_vn_lyt);
-        verventa = mainview.findViewById(R.id.ver_vt_vn_lyt);
+        lista_ventas = mainView.findViewById(R.id.lista_vt_vn_lyt);
+        ver_vt_vn_lyt = mainView.findViewById(R.id.ver_vt_vn_lyt);
         //aniadirventa = mainview.findViewById(R.id.aniadirventa_layout);
         //editarventa = mainview.findViewById(R.id.editarventa_layout);
         eliminar.setOnClickListener(v -> {
-            AlertDialog.Builder msg = new AlertDialog.Builder(mainview.getContext());
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
-            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculos().getPos(0);
+            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo().getPos(0);
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
                     patio.removerVenta(vh.getPlaca());
-                    irVerVentas();
+                    irVerListaVentas();
                     //TODO
                     //Mensaje para aniadir los vehiculos de nuevo al catalogo
                 } catch (Exception e) {
@@ -76,31 +84,31 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         });
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
-        return mainview;
+        return mainView;
     }
 
     public void cargar(){
-        RecyclerView listaview = mainview.findViewById(R.id.rc_ventas_vendedor);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainview.getContext());
+        RecyclerView listaview = mainView.findViewById(R.id.rc_ventas_vendedor);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
         adaptadorVentas = new Adaptador_Lista_Ventas(vendedor_actual.obtenerVentas(), this);
         listaview.setAdapter(adaptadorVentas);
     }
 
-    public void irVerVentas(){
+    public void irVerListaVentas(){
         cargar();
         lista_ventas.setVisibility(View.VISIBLE);
-        verventa.setVisibility(View.GONE);
+        ver_vt_vn_lyt.setVisibility(View.GONE);
     }
     public void aniadirVenta() throws Exception {
-        EditText precio= mainview.findViewById(R.id.precio_venta_txt);
-        EditText clientes= mainview.findViewById(R.id.cliente_venta_txt);
-        EditText vendedor= mainview.findViewById(R.id.vendedor_venta_txt);
-        EditText auto = mainview.findViewById(R.id.vehiculo_venta_txt);
-        EditText fechaventadia= mainview.findViewById(R.id.fecha_venta_dia_etxt);
-        EditText fechaventames= mainview.findViewById(R.id.fecha_venta_mes_etxt);
-        EditText fechaventaanio= mainview.findViewById(R.id.fecha_venta_anio_etxt);
+        EditText precio= mainView.findViewById(R.id.precio_venta_txt);
+        EditText clientes= mainView.findViewById(R.id.cliente_venta_txt);
+        EditText vendedor= mainView.findViewById(R.id.vendedor_venta_txt);
+        EditText auto = mainView.findViewById(R.id.vehiculo_venta_txt);
+        EditText fechaventadia= mainView.findViewById(R.id.fecha_venta_dia_etxt);
+        EditText fechaventames= mainView.findViewById(R.id.fecha_venta_mes_etxt);
+        EditText fechaventaanio= mainView.findViewById(R.id.fecha_venta_anio_etxt);
 
         String fechaventa_str=fechaventaanio.getText().toString()+"-"+fechaventames.getText().toString()+"-"+fechaventadia.getText().toString();
         String clientes_str=clientes.getText().toString();
@@ -116,8 +124,50 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         patio.aniadirVenta(nueva);
 
         if(patio.getVentasGenerales().contiene(nueva)){
-            Toast.makeText(mainview.getContext(),"Se registro la venta.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(),"Se registro la venta.",Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void visualizarCita() {
+        ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
+        TextView placa = mainView.findViewById(R.id.ver_placa_vt_vn_txt);
+        TextView precioI = mainView.findViewById(R.id.);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_ci_vn_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_ci_vn_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_ci_vn_txt);
+        TextView vehiculo = mainView.findViewById(R.id.ver_vehiculo_ci_vn_txt);
+        TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_vn_txt);
+        TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_vn_txt);
+        TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_vn_txt);
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(venta_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        fecha.setText(Patioventainterfaz.getFechaMod(venta_mostrar.getFechaCita()));
+        hora.setText(String.format("%d:00 %s", venta_mostrar.getHora(), Patioventainterfaz.formatoHora(cita_mostrar.getHora())));
+        cliente.setText(venta_mostrar.getCliente().getNombre());
+        contacto.setText(venta_mostrar.getCliente().getTelefono());
+        vendedor.setText(venta_mostrar.getVendedorCita().getNombre());
+        vehiculo.setText(venta_mostrar.getVehiculo().getModelo());
+        descripcion.setText(venta_mostrar.getVehiculo().getDescripcion());
+        resolucion.setText(venta_mostrar.getResolucion());
+        String resolucion_str = venta_mostrar.getResolucion();
+        if(resolucion_str.isEmpty()){
+            resolucion.setHint("");
+        }else{
+            resolucion.setText(resolucion_str);
+        }
+        precio.setText("$ " + cita_mostrar.getVehiculo().getPrecioVenta());
+
 
     }
 

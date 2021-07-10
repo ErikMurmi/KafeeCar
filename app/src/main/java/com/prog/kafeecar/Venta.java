@@ -16,17 +16,20 @@ public class Venta {
     private Date fecha;
     private Cliente comprador;
     private Vendedor vendedor;
-    private Lista vehiculos;
+    private Vehiculo vehiculo;
+    private float precio;
 
-    public Venta(Date fecha, Cliente comprador, Vendedor vendedor, Vehiculo v) {
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public Venta(Date fecha, Cliente comprador, Vendedor vendedor, Vehiculo v, float precio) {
         this.fecha = fecha;
         this.comprador = comprador;
         this.vendedor = vendedor;
-        vehiculos = new Lista();
-        vehiculos.add(v);
+        vehiculo = v;
+        this.precio = precio;
     }
-
-
     
     public Date getFecha() {
         return fecha;
@@ -36,24 +39,9 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public float getPrecio() throws Exception {
-        float precio =0;
-        if(vehiculos.contar()>1){
-            for(int i=0; i<vehiculos.contar();i++){
-                Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
-                if(actual.getPromocion()==0){
-                    precio += actual.getPromocion();
-                }else{
-                    precio += actual.getPrecioVenta();
-                }
-            }
-        }else{
-            Vehiculo vehiculo = (Vehiculo) vehiculos.getPos(0);
-            precio = vehiculo.getPrecioVenta();
-        }
+    public float getPrecio() {
         return precio;
     }
-
 
     public Cliente getComprador() {
         return comprador;
@@ -71,58 +59,12 @@ public class Venta {
         this.vendedor = vendedor;
     }
 
-    public Lista getVehiculos() {
-        return vehiculos;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
     }
 
-    public void setVehiculo(Lista vehiculos) {
-        this.vehiculos = vehiculos;
-    }
-    
-    /**
-     * Aniade un vehiculo a la venta
-     * @param vehiculo que se va a aniadir
-     * @return true si se agrego, caso contrario false
-     */
-    public boolean aniadirVehiculo(Vehiculo vehiculo){
-        vehiculos.add(vehiculo);
-        return false;
-    }
-    
-    /**
-     * Elimina un vehiculo de la venta
-     * @param matricula que se va a remover
-     * @return true si se removio, caso contrario false
-     */
-    public boolean removerVehiculo(String matricula) throws Exception {
-        boolean removido = false;
-        int c = 0;
-        while(c<vehiculos.contar() && !removido)
-        {
-            Vehiculo actual = (Vehiculo) vehiculos.getPos(c);
-            if(actual.getMatricula().compareTo(matricula)==0)
-            {
-                vehiculos.eliminar(actual);
-                removido = true;
-            }
-            c++;
-        }    
-        return removido;
-    }
-    
-    /**
-     * Busca un vehiculo en la venta
-     * @param placa del vehiculo buscado
-     * @return el vehiculo busado
-     */
-    public Vehiculo buscarVehiculo(String placa){
-        for(int i = 0; i<vehiculos.contar();i++){
-            Vehiculo actual = (Vehiculo) vehiculos.getPos(i);
-            if(actual.getPlaca().compareTo(placa)==0){
-                return actual;
-            }
-        }
-        return null;
+    public void setVehiculo(Vehiculo vehiculos) {
+        this.vehiculo = vehiculos;
     }
     
     @Override
@@ -131,7 +73,7 @@ public class Venta {
                 "\nFecha: " + fecha +
                 "\nComprador: " + comprador +
                 "\nVendedor: " + vendedor + 
-                "\nVehiculo=" + vehiculos;
+                "\nVehiculo=" + vehiculo;
     }
     
     /**
