@@ -126,7 +126,7 @@
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:clickable="false"
+                                    android:clickable="true"
                                     android:editable="false"
                                     android:gravity="center"
                                     android:textColor="@color/black"

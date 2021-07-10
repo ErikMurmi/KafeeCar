@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -46,6 +46,11 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private PatioVenta patio;
     Cita cita_mostrar;
     private boolean horas_mostradas = false;
+    private boolean dias_mostrados = false;
+    private boolean meses_mostrados = false;
+    private boolean anios_mostrados = false;
+    private int posicion_mes=-1;
+    private int posicion_anio=-1;
     private EditText dia_ci_vn;
     private EditText mes_ci_vn;
     private EditText anio_ci_vn;
@@ -223,11 +228,65 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         });
 
+        TextInputLayout a = mainView.findViewById(R.id.anio_ci_vn_til);
+        AutoCompleteTextView anios = mainView.findViewById(R.id.anio_ci_vn_acv);
+
+
+        a.setEndIconOnClickListener(v -> anios.performClick());
+        anios.setOnClickListener(v -> {
+            if(anios_mostrados){
+                anios.dismissDropDown();
+                anios_mostrados = false;
+            }else{
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items, Patioventainterfaz.anios);
+                anios.setAdapter(adapt);
+                anios.showDropDown();
+                anios_mostrados = true;
+            }
+        });
+
+        anios.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
+
+        TextInputLayout m = mainView.findViewById(R.id.mes_ci_vn_til);
+        AutoCompleteTextView meses = mainView.findViewById(R.id.mes_ci_vn_acv);
+
+        m.setEndIconOnClickListener(v -> meses.performClick());
+        meses.setOnClickListener(v -> {
+            if(meses_mostrados){
+                meses.dismissDropDown();
+                meses_mostrados = false;
+            }else{
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items, Patioventainterfaz.meses);
+                meses.setAdapter(adapt);
+                meses.showDropDown();
+                meses_mostrados = true;
+            }
+        });
+
+        meses.setOnItemClickListener((parent, view, position, id) -> setString(position));
+
         TextInputLayout d = mainView.findViewById(R.id.dia_ci_vn_til);
         AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_vn_acv);
 
         d.setEndIconOnClickListener(v -> dias.performClick());
         dias.setOnClickListener(v -> {
+            if(posicion_mes==-1 || posicion_anio == -1){
+                Toast.makeText(mainView.getContext(), "Campo de año o mes no seleccionados", Toast.LENGTH_SHORT).show();
+            }else{
+                if(dias_mostrados){
+                    dias.dismissDropDown();
+                    dias_mostrados = false;
+                }else{
+                    try {
+                        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items, diaListaDesplegable());
+                        dias.setAdapter(adapt);
+                        dias.showDropDown();
+                        dias_mostrados = true;
+                    }catch(Exception e){
+                        Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
         });
 
@@ -612,23 +671,18 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     public ArrayList<String> diaListaDesplegable(){
         ArrayList<String> dias = new ArrayList<>();
-
-        if((!isEmpty(anio_ci_vn)) || (!isEmpty(mes_ci_vn))){
-            String anio_str = anio_ci_vn.getText().toString();
-            int anio = Integer.parseInt(anio_str);
-            String mes_str = mes_ci_vn.getText().toString();
-            int mes = Integer.parseInt(mes_str);
-            int i;
-
-            for (i = 1; i<=Patioventainterfaz.diasLista[mes];i++){
-                dias.add(String.valueOf(i));
-            }
-            if(Patioventainterfaz.esBisiesto(anio)){
-                dias.add(String.valueOf(i+1));
-            }
+        int anioa = Integer.parseInt(Patioventainterfaz.anios[posicion_anio]);
+        int i;
+        for (i = 1; i<=Patioventainterfaz.diasLista[posicion_mes];i++){
+            dias.add(String.valueOf(i));
         }
+        if(Patioventainterfaz.esBisiesto(anioa)){
+            dias.add(String.valueOf(i+1));
+        }
+
         return dias;
     }
+
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
@@ -677,4 +731,12 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         adptadorlistaview.buscar(b);
         return false;
     }
+
+    public final void setString(int pos){
+        posicion_mes= pos;
+    }
+    public final void setPosicion_anio(int pos){
+        posicion_anio= pos;
+    }
+
 }
