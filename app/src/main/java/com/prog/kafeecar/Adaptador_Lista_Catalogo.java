@@ -23,7 +23,7 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     private Lista autos_buscados;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     View view;
-    private RecyclerItemClick itemClick;
+    private final RecyclerItemClick itemClick;
 
     public Adaptador_Lista_Catalogo(Lista autos, RecyclerItemClick itemClick){
         this.autos_buscados =autos;
@@ -148,7 +148,7 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
         notifyDataSetChanged();
     }
 
-    public class clienteHolder extends RecyclerView.ViewHolder{
+    public static class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagenauto;
         public TextView precioauto;
         public TextView anio;

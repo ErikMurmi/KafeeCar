@@ -1,23 +1,21 @@
 package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,8 +24,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,27 +31,23 @@ import java.io.File;
 import java.io.IOException;
 
 import static java.lang.String.format;
+
 public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo_Cl.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private static final int REQUEST_IMAGE_GALERY = 101;
+    private final Cliente clienteActual = (Cliente) Patioventainterfaz.usuarioActual;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private String TAG = "Catalogo";
     private View mainView;
     private LinearLayout irCitaNueva;
-    private ScrollView verCatalogo;
+    private LinearLayout verCatalogo;
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo vMostrar;
     private Button favoritoBoton;
-    private Button agendarcita;
-    private Button regresarVistaVehiculo;
     private Drawable estrelladorada;
     private Citas_cliente_fragment crearCita;
-    private Cliente clienteActual=(Cliente)Patioventainterfaz.usuarioActual;
-
-
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
-
-    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     @Nullable
     @Override
@@ -67,12 +59,12 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         patio = Patioventainterfaz.patioventa;
         //Botones
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
-        agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
-        regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
+        Button agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
+        Button regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
         //Recursos
         estrelladorada = favoritoBoton.getBackground();
         //Layouts
-        verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_scl);
+        verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_lyt);
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
         irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
         //Edit Text necesarios
@@ -86,9 +78,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             }
         });
 
-        favoritoBoton.setOnClickListener(v -> {
-            modificarFavorito();
-        });
+        favoritoBoton.setOnClickListener(v -> modificarFavorito());
         agendarcita.setOnClickListener(v -> {
 
             try {
@@ -126,10 +116,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         listaview.setAdapter(adptadorlistaview);
     }
 
-    public void irVer() throws Exception {
+    public void irVer() {
 
         visualizarVehiculo();
     }
+
     public void irCatalogo() {
         vistaVehiculo.setVisibility(View.GONE);
         //Activar el diseño deseado
@@ -138,18 +129,17 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     }
 
 
-
     @SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
     }
 
 
-    public void modificarFavorito(){
+    public void modificarFavorito() {
 
-        if(clienteActual.esFavorito(vMostrar.getPlaca())){
-           clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
-           favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
-        }else{
+        if (clienteActual.esFavorito(vMostrar.getPlaca())) {
+            clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
+            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
+        } else {
             clienteActual.getFavoritos().add(vMostrar.getPlaca());
             favoritoBoton.setBackground(estrelladorada);
         }
@@ -172,44 +162,43 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
         TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
 
-        String titulo_str = vMostrar.getMarca()+" "+vMostrar.getModelo();//ojo
-        String precioTitulo = "$"+vMostrar.getPrecioVenta();
+        String titulo_str = vMostrar.getMarca() + " " + vMostrar.getModelo();//ojo
+        String precioTitulo = "$" + vMostrar.getPrecioVenta();
         precio.setText(precioTitulo);
         titulo.setText(titulo_str);
-        placa.setText( vMostrar.getPlaca());
+        placa.setText(vMostrar.getPlaca());
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
-        anio.setText(format("Año :%s",vMostrar.getAnio()));
-        marca.setText(format("Marca :%s",vMostrar.getMarca()));
-        modelo.setText(format("Modelo :%s",vMostrar.getModelo()));
-        descripcion.setText(format("Descripción :%s",vMostrar.getDescripcion()));
-        color.setText(format("Color :%s",vMostrar.getColor()));
-        preciVenta.setText(format("Precio venta :%.2f",vMostrar.getPrecioVenta()));
-        promocion.setText(format("Precio promoción:%.2f",vMostrar.getPromocion()));
-        if(clienteActual.esFavorito(vMostrar.getPlaca())){
+        anio.setText(format("Año :%s", vMostrar.getAnio()));
+        marca.setText(format("Marca :%s", vMostrar.getMarca()));
+        modelo.setText(format("Modelo :%s", vMostrar.getModelo()));
+        descripcion.setText(format("Descripción :%s", vMostrar.getDescripcion()));
+        color.setText(format("Color :%s", vMostrar.getColor()));
+        preciVenta.setText(format("Precio venta :%.2f", vMostrar.getPrecioVenta()));
+        promocion.setText(format("Precio promoción:%.2f", vMostrar.getPromocion()));
+        if (clienteActual.esFavorito(vMostrar.getPlaca())) {
             favoritoBoton.setBackground(estrelladorada);
-        }else{
+        } else {
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
 
         }
         //Cargar imagen
-        StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
         try {
-            final File localFile = File.createTempFile(vMostrar.getimagen(),"jpg");
+            final File localFile = File.createTempFile(vMostrar.getimagen(), "jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 v_img.setImageBitmap(bitmap);
             });
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        if(vMostrar.isMatriculado()){
+        if (vMostrar.isMatriculado()) {
             matriculado.setText("Matriculado: Si");
-        }else{
+        } else {
             matriculado.setText("Matriculado: No");
         }
         verCatalogo.setVisibility(View.GONE);
         vistaVehiculo.setVisibility(View.VISIBLE);
-
 
 
     }
