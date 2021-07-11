@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +36,7 @@ import static java.lang.String.format;
 
 public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo_Cl.RecyclerItemClick, SearchView.OnQueryTextListener {
 
-    private static final int REQUEST_IMAGE_GALERY = 101;
+    //private static final int REQUEST_IMAGE_GALERY = 101;
     private final Cliente clienteActual = (Cliente) Patioventainterfaz.usuarioActual;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private String TAG = "Catalogo";
@@ -48,14 +50,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private Drawable estrelladorada;
     private Citas_cliente_fragment crearCita;
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
+    private SearchView busqueda_placa;
 
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_cliente, container, false);
-        SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_cl_bar);
+        busqueda_placa = mainView.findViewById(R.id.busqueda_placa_cl_bar);
         patio = Patioventainterfaz.patioventa;
         //Botones
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
@@ -99,6 +102,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 }
             }
         };
+
+        AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_CC_ddm);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
+        filtros.setAdapter(adapt);
+        filtros.setOnItemClickListener((parent, view, position, id) -> busqueda_placa.setQueryHint(adapt.getItem(position)));
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         busqueda_placa.setOnQueryTextListener(this);
         cargar();
@@ -212,11 +220,18 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     public boolean onQueryTextChange(String newText) {
         newText = newText.toUpperCase();
         try {
-            adptadorlistaview.filtro(newText);
+            adptadorlistaview.buscar(newText,busqueda_placa.getQueryHint().toString());
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
         return false;
+        /* newText = newText.toUpperCase();
+        try {
+            adptadorlistaview.buscar(newText);
+        } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+        }
+        return false;*/
     }
 
     @Override
