@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -36,7 +38,11 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,6 +76,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private String [] meses=new String[]{"ENERO","FEBRERO","MAYO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
     private int []sales ;
     private Button vt_admin_estadisticas_btn;
+    private StorageReference mStorageRef;
 
     private Vendedor usuario_admin = (Vendedor) Patioventainterfaz.usuarioActual;
 
@@ -83,7 +90,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         sales=Patioventainterfaz.contadores();
-
+        mStorageRef = Patioventainterfaz.mStorageRef;
 
         //Botones
         //Pag principal
@@ -227,6 +234,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         add_vt_ad_lyt.setVisibility(View.GONE);
         ventas_admin_generales_lyt.setVisibility(View.VISIBLE);
         cargar();
+    }
+
+    public void irVerVenta(){
+
     }
 
     public void irPaginaPrincipal(){
@@ -427,9 +438,56 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         return barData;
     }
 
+    public void visualizarVenta() {
+        ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_vn_txt);
+        TextView precioV = mainView.findViewById(R.id.ver_pventa_vt_vn_txt);
+        TextView precioI = mainView.findViewById(R.id.ver_pinicial_vt_vn_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_vt_vn_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_vt_vn_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_cliente_vt_vn_txt);
+
+        TextView placa = mainView.findViewById(R.id.ver_placa_vt_vn_txt);
+        TextView matricula = mainView.findViewById(R.id.ver_matricula_vt_vn_txt);
+        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_vt_vn_txt);
+        TextView marca = mainView.findViewById(R.id.ver_marca_vt_vn_txt);
+        TextView modelo = mainView.findViewById(R.id.ver_modelo_vt_vn_txt);
+        TextView anio = mainView.findViewById(R.id.ver_anio_vt_vn_txt);
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(venta_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        fecha.setText(Patioventainterfaz.getFechaMod(venta_mostrar.getFecha()));
+        precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
+        precioI.setText(String.format("$ %.2f", venta_mostrar.getVehiculo().getPrecioInicial()));
+        vendedor.setText(venta_mostrar.getVendedor().getNombre());
+        cliente.setText(venta_mostrar.getCliente().getNombre());
+        contacto.setText(venta_mostrar.getCliente().getTelefono());
+
+        placa.setText(venta_mostrar.getVehiculo().getPlaca());
+        matricula.setText(venta_mostrar.getVehiculo().getMatricula());
+        if(venta_mostrar.getVehiculo().isMatriculado()){
+            matriculado.setText("Si");
+        }else{
+            matriculado.setText("No");
+        }
+        marca.setText(venta_mostrar.getVehiculo().getMarca());
+        modelo.setText(venta_mostrar.getVehiculo().getModelo());
+        anio.setText(String.valueOf(venta_mostrar.getVehiculo().getAnio()));
+    }
+
     @Override
     public void itemClick(String placa, String cliente) {
-        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
+        venta_mostrar = patio.buscarVentas(placa,cliente);
+        irVerVenta();
     }
 
     public final void setPosicion_mes(int pos){

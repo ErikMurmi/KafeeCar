@@ -371,7 +371,7 @@
         android:background="@drawable/cita_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -632,6 +632,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/barra_separacion"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -1034,7 +1035,7 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

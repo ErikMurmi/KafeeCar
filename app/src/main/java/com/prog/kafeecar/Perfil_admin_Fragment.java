@@ -37,7 +37,7 @@ public class Perfil_admin_Fragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    public final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private View mainview;
     private PatioVenta patio;
     private Vendedor user = (Vendedor) Patioventainterfaz.usuarioActual;
