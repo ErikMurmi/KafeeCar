@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,9 +57,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private LinearLayout lista_ventas;
     private FloatingActionButton irAniadirVenta;
     private PatioVenta patio;
-    private Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
+    private final Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
     private Venta venta_mostrar;
     private Adaptador_Lista_Ventas adaptadorVentas;
+    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,35 +87,113 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         irAniadirVenta.setOnClickListener(v -> {
             lista_ventas.setVisibility(View.GONE);
             ver_vt_vn_lyt.setVisibility(View.GONE);
+            editar_vt_vn_lyt.setVisibility(View.GONE);
             adaptador();
+            cargar();
             aniadirVenta.setVisibility(View.VISIBLE);
         });
 
+        TextView ed_cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
+        ed_cedula_vendedor_vt_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
+        TextView cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.cedula_vendedor_vt_vn_etxt);
+        cedula_vendedor_vt_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
-        guardar_vt_vn_btn.setOnClickListener(v -> {
-            try {
-                if(registarVenta()){
-                   irVerListaVentas();
+        //add
+        descartar_vt_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Estás seguro de descartar los cambios?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    irVerListaVentas();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Errores en los datos ingresados", Toast.LENGTH_SHORT).show();
-            }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
+        guardar_vt_vn_btn.setOnClickListener(v -> {
+            android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("AÑADIR");
+            msg.setMessage("¿Está seguro de añadir la venta?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(registarVenta()){
+                        irVerListaVentas();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        //ver
         vt_vn_ver_venta_eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
-            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo();
+            Vehiculo vh = venta_mostrar.getVehiculo();
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
                     patio.removerVenta(vh.getPlaca());
                     irVerListaVentas();
-                    //TODO
-                    //Mensaje para aniadir los vehiculos de nuevo al catalogo
+                    //todo
+                    //revisar que el metodo que devuelve el carro despues de
+                    //eliminar la venta este correcto
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        vt_vn_ver_venta_editar_btn.setOnClickListener(v -> {
+            lista_ventas.setVisibility(View.GONE);
+            irAniadirVenta.setVisibility(View.GONE);
+            aniadirVenta.setVisibility(View.GONE);
+            ver_vt_vn_lyt.setVisibility(View.GONE);
+            cargar();
+            adaptadorEditar();
+            editar_vt_vn_lyt.setVisibility(View.VISIBLE);
+            visualizarVentaEditable();
+        });
+
+        //editar
+        ed_guardar_vt_vn_btn.setOnClickListener(v -> {
+            android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("GUARDAR");
+            msg.setMessage("¿Está seguro de guardar los datos?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(editarVenta()){
+                        irVerVenta();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "No se pudo editar la venta", Toast.LENGTH_SHORT).show();
+                    irVerListaVentas();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        ed_descartar_vt_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR CAMBIOS");
+            msg.setMessage("¿Estás seguro de de salir sin guardar?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    irVerVenta();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                    irVerListaVentas();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -179,6 +259,64 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         dias.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
 
+        //Menus desplegables para la funcion editar
+
+        TextInputLayout ed_anio_vt_vn_til = mainView.findViewById(R.id.ed_anio_vt_vn_til);
+        TextInputLayout ed_mes_vt_vn_til = mainView.findViewById(R.id.ed_mes_vt_vn_til);
+        TextInputLayout ed_dia_vt_vn_til = mainView.findViewById(R.id.ed_dia_vt_vn_til);
+        AutoCompleteTextView ed_anio_vt_vn_acv = mainView.findViewById(R.id.ed_anio_vt_vn_acv);
+        AutoCompleteTextView ed_mes_vt_vn_acv = mainView.findViewById(R.id.ed_mes_vt_vn_acv);
+        AutoCompleteTextView ed_dia_vt_vn_acv = mainView.findViewById(R.id.ed_dia_vt_vn_acv);
+
+        ed_anio_vt_vn_til.setEndIconOnClickListener(v -> ed_anio_vt_vn_acv.performClick());
+        ed_anio_vt_vn_acv.setOnClickListener(v -> {
+            if(anios_mostradas){
+                ed_anio_vt_vn_acv.dismissDropDown();
+                anios_mostradas =false;
+            }else{
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.anios);
+                ed_anio_vt_vn_acv.setAdapter(adapt);
+                ed_anio_vt_vn_acv.showDropDown();
+                anios_mostradas = true;
+            }
+        });
+
+        ed_anio_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
+
+        ed_mes_vt_vn_til.setEndIconOnClickListener(v -> ed_mes_vt_vn_acv.performClick());
+        ed_mes_vt_vn_acv.setOnClickListener(v -> {
+            if(mes_mostrados){
+                ed_mes_vt_vn_acv.dismissDropDown();
+                mes_mostrados =false;
+            }else{
+                ArrayAdapter<String> adapt_mes = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+                ed_mes_vt_vn_acv.setAdapter(adapt_mes);
+                ed_mes_vt_vn_acv.showDropDown();
+                mes_mostrados = true;
+            }
+        });
+
+        ed_mes_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
+
+        ed_dia_vt_vn_til.setEndIconOnClickListener(v -> ed_dia_vt_vn_acv.performClick());
+        ed_dia_vt_vn_acv.setOnClickListener(v -> {
+            if(posicion_mes!=-1 && posicion_anio!=-1){
+                if(dias_mostrados){
+                    ed_dia_vt_vn_acv.dismissDropDown();
+                    dias_mostrados =false;
+                }else{
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,diaListaDesplegable());
+                    ed_dia_vt_vn_acv.setAdapter(adapt);
+                    ed_dia_vt_vn_acv.showDropDown();
+                    dias_mostrados = true;
+                }
+            }else{
+                Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ed_dia_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
+
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -206,10 +344,35 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         auto.setAdapter(adapterPla);
     }
 
+    public void adaptadorEditar(){
+        AutoCompleteTextView ed_cedula_cliente_vt_vn_actv = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        ed_cedula_cliente_vt_vn_actv.setAdapter(adapter);
+
+        TextView ed_cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
+        ed_cedula_vendedor_vt_vn_etxt.setText(vendedor_actual.getCedula());
+
+        AutoCompleteTextView ed_placa_vt_vn_actv = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        ed_placa_vt_vn_actv.setAdapter(adapterPla);
+    }
+
+    public void irVerVenta(){
+        cargar();
+        lista_ventas.setVisibility(View.GONE);
+        aniadirVenta.setVisibility(View.GONE);
+        editar_vt_vn_lyt.setVisibility(View.GONE);
+        irAniadirVenta.setVisibility(View.GONE);
+        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
+    }
+
     public void irVerListaVentas(){
         cargar();
-        lista_ventas.setVisibility(View.VISIBLE);
+        editar_vt_vn_lyt.setVisibility(View.GONE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
+        aniadirVenta.setVisibility(View.GONE);
+        irAniadirVenta.setVisibility(View.VISIBLE);
+        lista_ventas.setVisibility(View.VISIBLE);
     }
 
     public boolean registarVenta() throws Exception {
@@ -246,21 +409,22 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             c++;
         }
 
-        EditText precio = mainView.findViewById(R.id.resolucion_ci_vn_etxt);
+        EditText precio = mainView.findViewById(R.id.precio_vt_vn_etxt);
         float precio_flt = Float.parseFloat(precio.getText().toString());
 
         if (c == 0) {
             fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
             Date fecha = sdf.parse(fecha_nueva_cita);
             Venta nueva = new Venta(fecha,cliente_c,vendedor_actual,vehiculo,precio_flt);
-            if (patio.getCitas().contiene(nueva)) {
-                Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
+            if (patio.getVentasGenerales().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
         return false;
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void visualizarVenta() {
         ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
         TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_vn_txt);
@@ -307,15 +471,104 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         anio.setText(String.valueOf(venta_mostrar.getVehiculo().getAnio()));
     }
 
-    public void verVenta(){
-        lista_ventas.setVisibility(View.GONE);
-        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
-        visualizarVenta();
+    @SuppressLint("DefaultLocale")
+    public void visualizarVentaEditable() {
+        try {
+            ImageView imagen = mainView.findViewById(R.id.ed_auto_vt_vn_img);
+            AutoCompleteTextView anio = mainView.findViewById(R.id.ed_anio_vt_vn_acv);
+            AutoCompleteTextView mes = mainView.findViewById(R.id.ed_mes_vt_vn_acv);
+            AutoCompleteTextView dia = mainView.findViewById(R.id.ed_dia_vt_vn_acv);
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+            TextView vendedor = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
+            AutoCompleteTextView placa = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+            EditText precioV = mainView.findViewById(R.id.ed_precio_vt_vn_etxt);
+
+            StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
+            try {
+                final File localFile = File.createTempFile(venta_mostrar.getVehiculo().getimagen(), "jpg");
+                filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                    imagen.setImageURI(nuevo);
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String fechaVenta = Patioventainterfaz.getFechaMod(venta_mostrar.getFecha());
+            String dia_s = fechaVenta.split("-")[0];
+            String mes_s = fechaVenta.split("-")[1];
+            String anio_s = fechaVenta.split("-")[2];
+            anio.setText(anio_s);
+            mes.setText(Patioventainterfaz.meses[Integer.parseInt(mes_s)-1]);
+            dia.setText(dia_s);
+
+            cliente.setText(venta_mostrar.getCliente().getCedula());
+            vendedor.setText(vendedor_actual.getCedula());
+            placa.setText(venta_mostrar.getVehiculo().getPlaca());
+            precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 101", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
-    public void verVentaEditable(){
+    public boolean editarVenta() throws Exception {
+        Cliente cliente_c = null;
+        Vehiculo vehiculo = null;
+        int c = 0;
+
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+
+        if (!isEmpty(cliente)) {
+            String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
+            }
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText precio = mainView.findViewById(R.id.ed_precio_vt_vn_etxt);
+        float precio_flt = Float.parseFloat(precio.getText().toString());
+
+        if (c == 0) {
+            fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(fecha_nueva_cita);
+            venta_mostrar.actualizar(fecha, precio_flt, vehiculo, cliente_c, vendedor_actual);
+            if (patio.buscarVentas(vehiculo.getPlaca(), cliente_c.getCedula())!=null) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void verVenta(){
         lista_ventas.setVisibility(View.GONE);
+        irAniadirVenta.setVisibility(View.GONE);
+        aniadirVenta.setVisibility(View.GONE);
+        editar_vt_vn_lyt.setVisibility(View.GONE);
         ver_vt_vn_lyt.setVisibility(View.VISIBLE);
+        visualizarVenta();
     }
 
     @Override

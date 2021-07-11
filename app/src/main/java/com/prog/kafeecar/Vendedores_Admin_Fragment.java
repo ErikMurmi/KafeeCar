@@ -144,15 +144,23 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         });
 
         listo_btn.setOnClickListener(v -> {
-            try {
-                if(registrarVendedor()){
-                    Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
-                }
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("AÑADIR");
+            msg.setMessage("¿Está seguro de añadir al vendedor?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(registrarVendedor()){
+                        cargar();
+                        irVisualizarVendedor.setVisibility(View.VISIBLE);
+                    }
 
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
-                regresarPantallaPrncipal();
-            }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "No se pudo añadir el vendedor", Toast.LENGTH_SHORT).show();
+                    regresarPantallaPrncipal();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         cancelar_btn.setOnClickListener(v -> {

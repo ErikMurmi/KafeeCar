@@ -86,6 +86,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
 
+        TextView cedula_vendedor_ci_vn_etxt = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_txt);
 
         ir_aniadir_ci_vn_btn.setOnClickListener(v -> {
@@ -158,6 +159,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         });
 
         ed_cedula_vendedor_ci_vn_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
+        cedula_vendedor_ci_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         ed_guardar_ci_vn_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
