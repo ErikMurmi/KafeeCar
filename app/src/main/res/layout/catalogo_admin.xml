@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/v_admin"
