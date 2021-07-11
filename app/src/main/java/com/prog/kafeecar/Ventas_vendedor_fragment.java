@@ -88,19 +88,41 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             adaptador();
             aniadirVenta.setVisibility(View.VISIBLE);
         });
-
-
-
-        guardar_vt_vn_btn.setOnClickListener(v -> {
-            try {
-                if(registarVenta()){
-                   irVerListaVentas();
+        //add
+        descartar_vt_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Estás seguro de descartar los cambios?");
+            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo();
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    irVerListaVentas();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Errores en los datos ingresados", Toast.LENGTH_SHORT).show();
-            }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
+        guardar_vt_vn_btn.setOnClickListener(v -> {
+            android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("AÑADIR");
+            msg.setMessage("¿Está seguro de añadir la venta?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(registarVenta()){
+                        irVerListaVentas();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+
+        });
+        //ver
         vt_vn_ver_venta_eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
@@ -110,14 +132,39 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 try {
                     patio.removerVenta(vh.getPlaca());
                     irVerListaVentas();
-                    //TODO
-                    //Mensaje para aniadir los vehiculos de nuevo al catalogo
+                    //todo
+                    //revisar que el metodo que devuelve el carro despues de
+                    //eliminar la venta este correcto
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
+        });
+
+        vt_vn_ver_venta_editar_btn.setOnClickListener(v -> {
+            //añadir metodo ver editable
+        });
+
+        ed_descartar_vt_vn_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR CAMBIOS");
+            msg.setMessage("¿Estás seguro de de salir sin guardar?");
+            Vehiculo vh = (Vehiculo)venta_mostrar.getVehiculo();
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    irVerVenta();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+        vt_vn_ver_venta_editar_btn.setOnClickListener(v -> {
+            //añadir metodo ver editable
         });
 
         //Menus desplegables
@@ -206,10 +253,22 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         auto.setAdapter(adapterPla);
     }
 
+    public void irVerVenta(){
+        cargar();
+        lista_ventas.setVisibility(View.GONE);
+        aniadirVenta.setVisibility(View.GONE);
+        editar_vt_vn_lyt.setVisibility(View.GONE);
+        irAniadirVenta.setVisibility(View.GONE);
+        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
+    }
+
     public void irVerListaVentas(){
         cargar();
-        lista_ventas.setVisibility(View.VISIBLE);
+        editar_vt_vn_lyt.setVisibility(View.GONE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
+        aniadirVenta.setVisibility(View.GONE);
+        irAniadirVenta.setVisibility(View.VISIBLE);
+        lista_ventas.setVisibility(View.VISIBLE);
     }
 
     public boolean registarVenta() throws Exception {
