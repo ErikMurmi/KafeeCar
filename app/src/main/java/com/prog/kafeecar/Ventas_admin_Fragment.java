@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -36,10 +38,16 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
     private View mainView;
@@ -56,7 +64,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private int posicion_mes=-1;
     private int posicion_anio=-1;
 
-    private String fecha_nueva_cita;
+    private String fecha_nueva_venta;
 
     private boolean mes_mostrados = false;
     private boolean anios_mostradas = false;
@@ -68,6 +76,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private String [] meses=new String[]{"ENERO","FEBRERO","MAYO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
     private int []sales ;
     private Button vt_admin_estadisticas_btn;
+    private StorageReference mStorageRef;
 
     private Vendedor usuario_admin = (Vendedor) Patioventainterfaz.usuarioActual;
 
@@ -81,7 +90,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         sales=Patioventainterfaz.contadores();
-
+        mStorageRef = Patioventainterfaz.mStorageRef;
 
         //Botones
         //Pag principal
@@ -176,10 +185,13 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             msg.setTitle("Registrar Venta");
             msg.setMessage("¿Estás seguro de registrar esta nueva venta?");
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
-
-                if(registarVenta()){
-                    irListaGenerales();
-                    Toast.makeText(mainView.getContext(),"Se registro la venta",Toast.LENGTH_SHORT).show();
+                try {
+                    if(registarVenta()){
+                        irListaGenerales();
+                        Toast.makeText(mainView.getContext(),"Se registro la venta",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(),"No registro la venta",Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -224,6 +236,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         cargar();
     }
 
+    public void irVerVenta(){
+
+    }
+
     public void irPaginaPrincipal(){
         ventas_admin_generales_lyt.setVisibility(View.GONE);
         add_vt_ad_lyt.setVisibility(View.GONE);
@@ -242,65 +258,59 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         auto.setAdapter(adapterPla);
     }
 
-    public boolean registarVenta(){
+    public boolean registarVenta() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
-        try {
-            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
-            AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
-            try {
-                if (!isEmpty(cliente)) {
-                    String cliente_str = cliente.getText().toString();
-                    if (cliente_str.length() != 10) {
-                        Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                        cliente.setText("");
-                        c++;
-                    }
 
-                        cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        String fecha_nueva_venta = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(fecha_nueva_venta);
 
-                } else {
-                    Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-                    c++;
-                }
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "cliente error", Toast.LENGTH_SHORT).show();
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
+
+        if (!isEmpty(cliente)) {
+            String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
             }
-            try {
-                if (!isEmpty(auto)) {
-                    String vehiculo_str = auto.getText().toString();
-
-                        vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
-
-                    if (vehiculo == null) {
-                        Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
-                        auto.setText("");
-                        c++;
-                    }
-                } else {
-                    Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-                    c++;
-                }
-        } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "vehiculo error", Toast.LENGTH_SHORT).show();
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
+            c++;
         }
 
-        EditText precio = mainView.findViewById(R.id.precio_vt_ad_etxt);
-        float precio_flt = Float.parseFloat(precio.getText().toString());
-
-            if (c == 0) {
-                fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-                Date fecha = null;
-                fecha = Patioventainterfaz.sdf.parse(fecha_nueva_cita);
-                Venta nueva = new Venta(fecha,cliente_c,usuario_admin,vehiculo,precio_flt);
-                if (patio.getVentasGenerales().contiene(nueva)) {
-                    Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
             }
-        } catch (ParseException e) {
-            Toast.makeText(mainView.getContext(), "error fecha", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText precio_vt_ad_etxt = mainView.findViewById(R.id.precio_vt_ad_etxt);
+        String precio_str = precio_vt_ad_etxt.getText().toString();
+        float precio = Float.parseFloat(precio_str);
+
+        if (c == 0) {
+            Venta nueva = new Venta(
+                    fecha,
+                    cliente_c,
+                    usuario_admin,
+                    vehiculo,
+                    precio);
+            patio.aniadirVenta(nueva);
+            if (patio.getVentasGenerales().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
+                return true;
+            }
         }
         return false;
     }
@@ -428,9 +438,56 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         return barData;
     }
 
+    public void visualizarVenta() {
+        ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_vn_txt);
+        TextView precioV = mainView.findViewById(R.id.ver_pventa_vt_vn_txt);
+        TextView precioI = mainView.findViewById(R.id.ver_pinicial_vt_vn_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_vt_vn_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_vt_vn_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_cliente_vt_vn_txt);
+
+        TextView placa = mainView.findViewById(R.id.ver_placa_vt_vn_txt);
+        TextView matricula = mainView.findViewById(R.id.ver_matricula_vt_vn_txt);
+        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_vt_vn_txt);
+        TextView marca = mainView.findViewById(R.id.ver_marca_vt_vn_txt);
+        TextView modelo = mainView.findViewById(R.id.ver_modelo_vt_vn_txt);
+        TextView anio = mainView.findViewById(R.id.ver_anio_vt_vn_txt);
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(venta_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                imagen.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        fecha.setText(Patioventainterfaz.getFechaMod(venta_mostrar.getFecha()));
+        precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
+        precioI.setText(String.format("$ %.2f", venta_mostrar.getVehiculo().getPrecioInicial()));
+        vendedor.setText(venta_mostrar.getVendedor().getNombre());
+        cliente.setText(venta_mostrar.getCliente().getNombre());
+        contacto.setText(venta_mostrar.getCliente().getTelefono());
+
+        placa.setText(venta_mostrar.getVehiculo().getPlaca());
+        matricula.setText(venta_mostrar.getVehiculo().getMatricula());
+        if(venta_mostrar.getVehiculo().isMatriculado()){
+            matriculado.setText("Si");
+        }else{
+            matriculado.setText("No");
+        }
+        marca.setText(venta_mostrar.getVehiculo().getMarca());
+        modelo.setText(venta_mostrar.getVehiculo().getModelo());
+        anio.setText(String.valueOf(venta_mostrar.getVehiculo().getAnio()));
+    }
+
     @Override
     public void itemClick(String placa, String cliente) {
-        Toast.makeText(mainView.getContext(), "Se registro la venta.", Toast.LENGTH_SHORT).show();
+        venta_mostrar = patio.buscarVentas(placa,cliente);
+        irVerVenta();
     }
 
     public final void setPosicion_mes(int pos){

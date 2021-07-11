@@ -12,7 +12,7 @@
         android:background="@drawable/visualizarventa"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"

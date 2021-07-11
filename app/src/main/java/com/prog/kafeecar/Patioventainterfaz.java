@@ -42,7 +42,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALERY = 101;
-    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    public static final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Uri foto;
     public static Boolean CITA_CON_VEHICULO = false;
     private ImageButton reg_img;
