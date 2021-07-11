@@ -14,7 +14,9 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="invisible">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente_CV_lyt"
@@ -31,17 +33,53 @@
                 android:paddingLeft="5dp"
                 app:srcCompat="@drawable/catalogo_titulo" />
 
-            <SearchView
-                android:id="@+id/busqueda_placa_cl_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="@dimen/titulos_top"
-                android:background="@drawable/bordesbotongris"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@color/white"
-                android:queryHint="@string/placa_c" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:theme="@style/Theme.MaterialComponents.Light">
+
+                <SearchView
+                    android:id="@+id/busqueda_placa_cl_bar"
+                    android:layout_width="200dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bordesbotongris"
+                    android:iconifiedByDefault="false"
+                    android:queryBackground="@color/white"
+                    android:queryHint="@string/placa_c" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="153dp"
+                    android:layout_height="match_parent"
+                    android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxBackgroundMode="filled"
+                    app:boxStrokeColor="@color/botones"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconTint="@color/botones">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/v_filtros_CC_ddm"
+                        android:layout_width="134dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white"
+                        android:editable="false"
+                        android:fontFamily="@font/ocra"
+                        android:gravity="center|center_horizontal"
+                        android:includeFontPadding="false"
+                        android:inputType="none"
+                        android:paddingStart="10dp"
+                        android:text="Filtros"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -379,7 +417,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"
