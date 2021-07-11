@@ -1,55 +1,44 @@
 package com.prog.kafeecar;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
-
-public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Lista_Favoritos.RecyclerItemClick,  SearchView.OnQueryTextListener {
+public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick, SearchView.OnQueryTextListener {
+    public Catalogo_Cliente_fragment clienteF;
     private View mainView;
     private View mainView2;
-    private Cliente cliente;
     private PatioVenta patio;
     private Vehiculo vMostrar;
-    private Context context;
-    private ScrollView verCatalogofav;
+    private LinearLayout verCatalogofav;
     private ScrollView vistaVehiculo;
-    public Catalogo_Cliente_fragment clienteF;
-    private Adaptador_Lista_Favoritos adptadorlistaview;
-    public Favoritos_cliente_fragment( Context contex){
-        this.context=contex;
-    }
+    private final Cliente cliente_actual = (Cliente) Patioventainterfaz.usuarioActual;
+    private Adaptador_Lista_Catalogo adptadorlistaview;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.favorito_cliente, container, false);
-        mainView2 = inflater.inflate(R.layout.favorito_cliente, container, false);
+        mainView = inflater.inflate(R.layout.favoritos_cliente, container, false);
+
         SearchView busqueda_placa = mainView.findViewById(R.id.busqueda_placa_fav_bar);
         patio = Patioventainterfaz.patioventa;
-        vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-        verCatalogofav = mainView.findViewById(R.id.favorito_cliente_Scl);
+        //vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
+        verCatalogofav = mainView.findViewById(R.id.favorito_cliente_lyt);
 
         //Metodo para el control del boton atras
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -71,24 +60,21 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         }
         return mainView;
     }
-    public void irVer() throws Exception {
+
+    public void irVer() {
 
         clienteF.visualizarVehiculo();
     }
 
     public void cargar() throws Exception {
-                cliente= (Cliente)Patioventainterfaz.usuarioActual;
-
-                //P autofavorito =(Cliente)cliente.getFavoritos().getInicio().getDato();
-                RecyclerView listaview = mainView.findViewById(R.id.listafavoritos_Rv);
-                RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
-                listaview.setLayoutManager(manager);
-                listaview.setItemAnimator(new DefaultItemAnimator());
-                adptadorlistaview=new Adaptador_Lista_Favoritos( patio.buscarVehiculosFav("Placa", cliente.getFavoritos()),this);
-                //adptadorlistaview=new Adaptador_Lista_Favoritos( patio.getVehiculos(),this);
-                listaview.setAdapter(adptadorlistaview);
-                listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
-            }
+        RecyclerView listaview = mainView.findViewById(R.id.listafavoritos_Rv);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
+        listaview.setLayoutManager(manager);
+        listaview.setItemAnimator(new DefaultItemAnimator());
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.buscarVehiculosFav("Placa", cliente_actual.getFavoritos()), this);
+        //adptadorlistaview=new Adaptador_Lista_Favoritos( patio.getVehiculos(),this);
+        listaview.setAdapter(adptadorlistaview);
+    }
 
 
     @Override
@@ -105,6 +91,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
@@ -114,15 +101,15 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
     public boolean onQueryTextChange(String newText) {
         newText = newText.toUpperCase();
         try {
-            adptadorlistaview.filtro(newText);
+            adptadorlistaview.buscar(newText,"Placa");
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
-   // @Override
+    // @Override
     //public void itemClick(String placa) {
-     //   int i=0;
+    //   int i=0;
     //}
 }
 

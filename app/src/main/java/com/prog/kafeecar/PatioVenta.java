@@ -280,7 +280,7 @@ public class PatioVenta {
      * @param vehiculo palabra a buscar en el criterrio
      * @return Lista de citas que corresponden al criterio de busquda
      */
-    public Cita buscarCitas(String criterio, String vehiculo, String cliente){
+    public Cita buscarCita(String criterio, String vehiculo, String cliente){
         Cita citaEncontrada;
 
         if(criterio.compareToIgnoreCase("Vehiculo")==0){
@@ -335,6 +335,20 @@ public class PatioVenta {
 
     }
 
+    public Lista buscarCitas(Cliente cliente) {
+
+        Lista citaslista=new Lista();
+        int cont = 0;
+        while(cont<citas.contar()){
+            Cita actual = (Cita) citas.getPos(cont);
+            if(actual.getCliente().getCedula().compareTo(cliente.getCedula())==0){
+                citaslista.add(actual);
+
+            }
+            cont++;
+        }
+        return citaslista;
+    }
 
 
     

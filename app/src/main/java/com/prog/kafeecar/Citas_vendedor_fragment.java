@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -37,7 +36,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick, SearchView.OnQueryTextListener {
@@ -650,7 +648,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     @Override
     public void itemClick(String placa, String cedula_cliente) {
         try {
-            cita_mostrar = patio.buscarCitas("Vehiculo",placa,cedula_cliente);
+            cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
             irVer();
         } catch (Exception e) {
             e.printStackTrace();

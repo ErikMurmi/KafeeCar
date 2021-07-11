@@ -46,9 +46,8 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             String telefono= "Telefono: "+c.getCliente().getTelefono();
             String matricula="Matricula N#= "+c.getVehiculo().getMatricula();
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
-            Glide.with(view)
-                    .load(filePath)
-                    .into(holder.imagen);
+            //TODO AJUSTAR INFORMACION A LA VISTA DE DESDE UN CLIENTE
+
             try {
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
                 filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {

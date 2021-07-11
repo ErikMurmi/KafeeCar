@@ -620,7 +620,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     @Override
     public void itemClick(String placa, String cedula_cliente) {
         try {
-            cita_mostrar = patio.buscarCitas("Vehiculo",placa,cedula_cliente);
+            cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
             visualizarCita();
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Errores", Toast.LENGTH_SHORT).show();

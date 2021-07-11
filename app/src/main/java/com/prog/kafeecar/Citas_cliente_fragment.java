@@ -54,7 +54,6 @@ public class Citas_cliente_fragment extends Fragment {
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
-    private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
 
     private RecyclerView listaview;
 
@@ -65,13 +64,13 @@ public class Citas_cliente_fragment extends Fragment {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    private Catalogo_Cliente_fragment catplaca;
+    private final Cliente cliente_actual = (Cliente) Patioventainterfaz.usuarioActual;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.lista_citas, container, false);
+        mainView = inflater.inflate(R.layout.citas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
-
+        /*
         //Botones aniadir cita nueva
         deacartarnuevacita= mainView.findViewById(R.id.descartar_NC_btn);
         guardarcitanueva = mainView.findViewById(R.id.guardar_clita_nueva_NC_btn);
@@ -157,13 +156,14 @@ public class Citas_cliente_fragment extends Fragment {
         regresar.setOnClickListener(v -> {
             mainView.setVisibility(View.VISIBLE);
             editarcita.setVisibility(View.GONE);
-        });
+        });*/
+        cargar();
 
         return mainView;
     }
 
 
-    public void visualizarCitacliente() throws Exception {
+    public void visualizarCitacliente() {
         TextView textodia;
         TextView textomes;
         TextView textoanio;
@@ -181,7 +181,7 @@ public class Citas_cliente_fragment extends Fragment {
         textovehiculo = mainView.findViewById(R.id.vehiculo_cita_VC_etxt);
         textodescripcion = mainView.findViewById(R.id.descripcion_cita_VC_etxt);
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = patio.buscarCitas("cliente", cliente.getCedula(), cliente.getCedula());
+        Cita cita = patio.buscarCita("cliente", cliente.getCedula(), cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
         String dia = fecha.split("-")[2];
         String mes = fecha.split("-")[1];
@@ -302,7 +302,7 @@ public class Citas_cliente_fragment extends Fragment {
             if(patio.asignarVendedor(horas_str,fecha)!=null){
                 Vendedor vendedor = patio.asignarVendedor(horas_str,fecha);
                 int entero = Integer.parseInt(horas_str);
-                Cita ac = patio.buscarCitas("correo","Hola@gmail.com",Patioventainterfaz.usuarioActual.getCedula());
+                Cita ac = patio.buscarCita("correo","Hola@gmail.com",Patioventainterfaz.usuarioActual.getCedula());
                 ac.actualizar(fecha,entero,v,vendedor,(Cliente) Patioventainterfaz.usuarioActual);
             }
             else
@@ -334,7 +334,7 @@ public class Citas_cliente_fragment extends Fragment {
         textohoras = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
         PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
-        Cita cita = p.buscarCitas("cliente",cliente.getCedula(),cliente.getCedula());
+        Cita cita = p.buscarCita("cliente",cliente.getCedula(),cliente.getCedula());
         textohoras.setText(cita.getHora());
         textoplaca.setText(cita.getVehiculo().getPlaca());
         String fecha =  Patioventainterfaz.getFechaMod(cita.getFechaCita());
@@ -346,16 +346,15 @@ public class Citas_cliente_fragment extends Fragment {
         textodia.setText(dia);
     }
 
-    public void cargar() throws Exception {
-        Cita cita1=(Cita)patio.getCitas().getInicio().getDato();
+    public void cargar()  {
         listaview= mainView.findViewById(R.id.listacitas_Rv);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.getCitas().listabusqueda(cita1.getCliente()));
+        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.buscarCitas(cliente_actual));
         listaview.setAdapter(adptadorlistaview);
-        listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
+
     public void buscarPorFecha() throws Exception {
         Lista citasencotradas;
        EditText buscarDia;

@@ -230,10 +230,10 @@ public class Patioventainterfaz extends AppCompatActivity {
                         selectedFragement = new Catalogo_Cliente_fragment();
                         break;
                     case R.id.nav_citas_cl:
-                        selectedFragement = new PruebasListaCitasFragment(getApplicationContext());
+                        selectedFragement = new Citas_cliente_fragment();
                         break;
                     case R.id.nav_fav_cl:
-                        selectedFragement = new Favoritos_cliente_fragment(getApplicationContext());
+                        selectedFragement = new Favoritos_cliente_fragment();
                         break;
                     case R.id.nav_perfil_cl:
                         selectedFragement = new Perfil_cliente_fragment();
