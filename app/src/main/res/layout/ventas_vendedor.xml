@@ -331,8 +331,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/visualizarventa"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"

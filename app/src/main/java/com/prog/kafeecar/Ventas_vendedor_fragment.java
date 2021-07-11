@@ -52,12 +52,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private SearchView busqueda_ventas;
     private LinearLayout ver_vt_vn_lyt;
     private LinearLayout aniadirVenta;
-    private LinearLayout editarventa;
+    private LinearLayout editar_vt_vn_lyt;
     private LinearLayout lista_ventas;
     private FloatingActionButton irAniadirVenta;
-    private Button eliminar;
-    private Button actualizar;
-    private Button guardar;
     private PatioVenta patio;
     private Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
     private Venta venta_mostrar;
@@ -70,18 +67,20 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         busqueda_ventas = mainView.findViewById(R.id.busqueda_vt_vn_srv);
         //Botones
         irAniadirVenta = mainView.findViewById(R.id.aniadir_vt_vn_ftbn);
-        eliminar = mainView.findViewById(R.id.vt_vn_ver_venta_eliminar_btn);
-        //eliminar = mainView.findViewById(R.id.eliminar_vt_vn_btn);
-
-        //actualizar = mainview.findViewById(R.id.actualizar_btn);
-        guardar = mainView.findViewById(R.id.guardar_vt_vn_btn);
-
+        //ver
+        Button vt_vn_ver_venta_eliminar_btn = mainView.findViewById(R.id.vt_vn_ver_venta_eliminar_btn);
+        Button vt_vn_ver_venta_editar_btn = mainView.findViewById(R.id.vt_vn_ver_venta_editar_btn);
+        //editar
+        Button ed_descartar_vt_vn_btn = mainView.findViewById(R.id.ed_descartar_vt_vn_btn);
+        Button ed_guardar_vt_vn_btn = mainView.findViewById(R.id.ed_guardar_vt_vn_btn);
+        //Add
+        Button guardar_vt_vn_btn = mainView.findViewById(R.id.guardar_vt_vn_btn);
+        Button descartar_vt_vn_btn = mainView.findViewById(R.id.descartar_vt_vn_btn);
         //Layouts
         lista_ventas = mainView.findViewById(R.id.lista_vt_vn_lyt);
         ver_vt_vn_lyt = mainView.findViewById(R.id.ver_vt_vn_lyt);
         aniadirVenta = mainView.findViewById(R.id.add_vt_vn_lyt);
-        //aniadirventa = mainview.findViewById(R.id.aniadirventa_layout);
-        //editarventa = mainview.findViewById(R.id.editarventa_layout);
+        editar_vt_vn_lyt = mainView.findViewById(R.id.editar_vt_vn_lyt);
 
         irAniadirVenta.setOnClickListener(v -> {
             lista_ventas.setVisibility(View.GONE);
@@ -90,7 +89,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             aniadirVenta.setVisibility(View.VISIBLE);
         });
 
-        guardar.setOnClickListener(v -> {
+
+
+        guardar_vt_vn_btn.setOnClickListener(v -> {
             try {
                 if(registarVenta()){
                    irVerListaVentas();
@@ -100,7 +101,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             }
         });
 
-        eliminar.setOnClickListener(v -> {
+        vt_vn_ver_venta_eliminar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
