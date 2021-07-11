@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/visualizar_admin_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/perfilcliente"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +25,8 @@
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="80dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="70dp"
                 android:adjustViewBounds="false"
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -234,6 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -264,7 +265,7 @@
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/perfil_admin_ed_lyt"
@@ -525,12 +526,15 @@
         android:id="@+id/visualizar_admin_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="20dp"
+        android:foregroundGravity="center_horizontal"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="gone">
 
         <Button
             android:id="@+id/cancelar_edit_admin_btn"

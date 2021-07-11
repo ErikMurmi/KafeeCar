@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -31,7 +30,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.pantallitacita,parent,false);
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cita_cliente,parent,false);
         return new clienteHolder(view);
     }
 

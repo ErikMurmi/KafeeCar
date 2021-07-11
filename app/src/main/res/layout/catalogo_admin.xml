@@ -544,9 +544,9 @@
                 android:id="@+id/rc_autos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp" />
+                android:layout_marginRight="10dp" />
 
         </LinearLayout>
 

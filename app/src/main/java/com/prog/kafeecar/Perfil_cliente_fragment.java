@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class Perfil_cliente_fragment extends Fragment{
     private ImageButton perfil_img_btn;
     private ImageView perfil_imagen;
     //Layouts
-    private LinearLayout verperfil;
+    private ScrollView verperfil;
     private LinearLayout editarperfil;
 
 

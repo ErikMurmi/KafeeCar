@@ -5,261 +5,267 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/visualizar_ven_lyt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/perfilcliente"
-        android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="gone">
-
-        <ImageView
-            android:id="@+id/ven_img"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="80dp"
-            android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="343dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/bordesmarcosnegro"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/monglos"
-                android:text="DATOS PERSONALES"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical">
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/ver_nombre_cliente_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocra"
-                        android:text="Nombre: "
-                        android:textColor="@color/gris_visualizar"
-                        android:textSize="21sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp" />
-
-                    <TextView
-                        android:id="@+id/nombre_pe_vn_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:hint="Martha Pérez"
-                        android:textColor="#000000"
-                        android:textSize="21sp" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="6dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Fecha de nacimiento: "
-                        android:textColor="#686363"
-                        android:textSize="21sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp" />
-
-                    <TextView
-                        android:id="@+id/fecha_pe_vn_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:hint="27/09/1987"
-                        android:textColor="#000000"
-                        android:textSize="21sp" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="6dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Cédula:"
-                        android:textColor="#686363"
-                        android:textSize="21sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp" />
-
-                    <TextView
-                        android:id="@+id/cedula_pe_vn_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/ocraext"
-                        android:hint="9999999999"
-                        android:textColor="#000000"
-                        android:textSize="21sp" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="6dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="132dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Teléfono:"
-                        android:textColor="#686363"
-                        android:textSize="21sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp" />
-
-                    <TextView
-                        android:id="@+id/telefono_cedula_pe_vn_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:hint="02 366 366"
-                        android:textColor="#000000"
-                        android:textSize="21sp" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="6dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/ver_correo_cliente_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:text="Correo:"
-                        android:textColor="#686363"
-                        android:textSize="21sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp" />
-
-                    <TextView
-                        android:id="@+id/correo_cedula_pe_vn_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/ocraext"
-                        android:hint="m.perez@gmail.com"
-                        android:textColor="#000000"
-                        android:textSize="21sp" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="11dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:layout_marginRight="55dp"
-            android:orientation="horizontal">
+            android:background="@drawable/perfilcliente"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
 
-            <Button
-                android:id="@+id/logout_ven_btn"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_dark"
-                android:fontFamily="@font/valorant"
-                android:onClick="salir"
-                android:paddingStart="8dp"
-                android:text="Log out"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/ven_img"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <Space
-                android:layout_width="30dp"
-                android:layout_height="10dp" />
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
-            <Button
-                android:id="@+id/ireditar_ven_btn"
-                style="@style/boton_editar"
-                android:layout_width="60dp"
-                android:text="Editar"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="343dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bordesmarcosnegro"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/monglos"
+                    android:text="DATOS PERSONALES"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ver_nombre_cliente_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:text="Nombre: "
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="21sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
+
+                        <TextView
+                            android:id="@+id/nombre_pe_vn_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="Martha Pérez"
+                            android:textColor="#000000"
+                            android:textSize="21sp" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Fecha de nacimiento: "
+                            android:textColor="#686363"
+                            android:textSize="21sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
+
+                        <TextView
+                            android:id="@+id/fecha_pe_vn_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="27/09/1987"
+                            android:textColor="#000000"
+                            android:textSize="21sp" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Cédula:"
+                            android:textColor="#686363"
+                            android:textSize="21sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
+
+                        <TextView
+                            android:id="@+id/cedula_pe_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="9999999999"
+                            android:textColor="#000000"
+                            android:textSize="21sp" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="132dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Teléfono:"
+                            android:textColor="#686363"
+                            android:textSize="21sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
+
+                        <TextView
+                            android:id="@+id/telefono_cedula_pe_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="02 366 366"
+                            android:textColor="#000000"
+                            android:textSize="21sp" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ver_correo_cliente_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:text="Correo:"
+                            android:textColor="#686363"
+                            android:textSize="21sp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
+
+                        <TextView
+                            android:id="@+id/correo_cedula_pe_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocraext"
+                            android:hint="m.perez@gmail.com"
+                            android:textColor="#000000"
+                            android:textSize="21sp" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginRight="55dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/logout_ven_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado_dark"
+                    android:fontFamily="@font/valorant"
+                    android:onClick="salir"
+                    android:paddingStart="8dp"
+                    android:text="Log out"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="10dp" />
+
+                <Button
+                    android:id="@+id/ireditar_ven_btn"
+                    style="@style/boton_editar"
+                    android:layout_width="60dp"
+                    android:text="Editar"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/perfil_vn_lyt"
@@ -267,7 +273,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

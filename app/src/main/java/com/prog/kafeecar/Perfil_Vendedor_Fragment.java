@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class Perfil_Vendedor_Fragment extends Fragment {
     private Vendedor user = (Vendedor) Patioventainterfaz.usuarioActual;
     private PatioVenta patio;
     //Layouts
-    private LinearLayout perfil_lyt;
+    private ScrollView perfil_lyt;
     private LinearLayout editar_perfil_lyt;
     private LinearLayout perfil_btns_lyt;
 
