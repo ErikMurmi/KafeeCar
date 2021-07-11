@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:windowSoftInputMode="adjustNothing"
         android:theme="@style/Theme.KafeeCar">
-        <activity android:name=".Patioventainterfaz">
+        <activity android:name=".Patioventainterfaz"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

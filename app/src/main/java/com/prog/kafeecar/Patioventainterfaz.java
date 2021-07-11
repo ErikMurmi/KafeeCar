@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -824,6 +825,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         msg.setTitle("LOG OUT");
         msg.setPositiveButton("Aceptar", (dialog, which) -> {
             usuarioActual = null;
+            Window w = getWindow();
+            w.setStatusBarColor(getColor(R.color.botones));
+            w.getDecorView().setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             setContentView(R.layout.login_sinclaves);
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());

@@ -6,4 +6,5 @@
     <dimen name="edit_txt_espacio">5dp</dimen>
     <dimen name="item_lista_espacio">7dp</dimen>
     <dimen name="acv_esquinas">15dp</dimen>
+    <dimen name="titulos_top">10dp</dimen>
 </resources>

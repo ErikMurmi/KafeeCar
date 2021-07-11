@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/citas_lista">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/editar_cita_ad_lyt"
@@ -675,7 +674,7 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -1032,9 +1031,10 @@
         android:id="@+id/citas_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1042,11 +1042,18 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/titulos_top"
+                app:srcCompat="@drawable/citas_titulo" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
