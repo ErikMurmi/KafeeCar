@@ -259,6 +259,64 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         dias.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
 
+        //Menus desplegables para la funcion editar
+
+        TextInputLayout ed_anio_vt_vn_til = mainView.findViewById(R.id.ed_anio_vt_vn_til);
+        TextInputLayout ed_mes_vt_vn_til = mainView.findViewById(R.id.ed_mes_vt_vn_til);
+        TextInputLayout ed_dia_vt_vn_til = mainView.findViewById(R.id.ed_dia_vt_vn_til);
+        AutoCompleteTextView ed_anio_vt_vn_acv = mainView.findViewById(R.id.ed_anio_vt_vn_acv);
+        AutoCompleteTextView ed_mes_vt_vn_acv = mainView.findViewById(R.id.ed_mes_vt_vn_acv);
+        AutoCompleteTextView ed_dia_vt_vn_acv = mainView.findViewById(R.id.ed_dia_vt_vn_acv);
+
+        ed_anio_vt_vn_til.setEndIconOnClickListener(v -> ed_anio_vt_vn_acv.performClick());
+        ed_anio_vt_vn_acv.setOnClickListener(v -> {
+            if(anios_mostradas){
+                ed_anio_vt_vn_acv.dismissDropDown();
+                anios_mostradas =false;
+            }else{
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.anios);
+                ed_anio_vt_vn_acv.setAdapter(adapt);
+                ed_anio_vt_vn_acv.showDropDown();
+                anios_mostradas = true;
+            }
+        });
+
+        ed_anio_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
+
+        ed_mes_vt_vn_til.setEndIconOnClickListener(v -> ed_mes_vt_vn_acv.performClick());
+        ed_mes_vt_vn_acv.setOnClickListener(v -> {
+            if(mes_mostrados){
+                ed_mes_vt_vn_acv.dismissDropDown();
+                mes_mostrados =false;
+            }else{
+                ArrayAdapter<String> adapt_mes = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
+                ed_mes_vt_vn_acv.setAdapter(adapt_mes);
+                ed_mes_vt_vn_acv.showDropDown();
+                mes_mostrados = true;
+            }
+        });
+
+        ed_mes_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
+
+        ed_dia_vt_vn_til.setEndIconOnClickListener(v -> ed_dia_vt_vn_acv.performClick());
+        ed_dia_vt_vn_acv.setOnClickListener(v -> {
+            if(posicion_mes!=-1 && posicion_anio!=-1){
+                if(dias_mostrados){
+                    ed_dia_vt_vn_acv.dismissDropDown();
+                    dias_mostrados =false;
+                }else{
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,diaListaDesplegable());
+                    ed_dia_vt_vn_acv.setAdapter(adapt);
+                    ed_dia_vt_vn_acv.showDropDown();
+                    dias_mostrados = true;
+                }
+            }else{
+                Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ed_dia_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
+
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -441,10 +499,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             String mes_s = fechaVenta.split("-")[1];
             String anio_s = fechaVenta.split("-")[2];
             anio.setText(anio_s);
-            mes.setText(mes_s);
+            mes.setText(Patioventainterfaz.meses[Integer.parseInt(mes_s)-1]);
             dia.setText(dia_s);
 
-            cliente.setText(venta_mostrar.getCliente().getNombre());
+            cliente.setText(venta_mostrar.getCliente().getCedula());
             vendedor.setText(vendedor_actual.getCedula());
             placa.setText(venta_mostrar.getVehiculo().getPlaca());
             precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
