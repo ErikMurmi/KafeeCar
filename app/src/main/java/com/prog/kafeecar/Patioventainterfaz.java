@@ -326,7 +326,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }*/
 
 
-    public void registarCita(View v) throws Exception {
+    /*public void registarCita(View v) throws Exception {
         //EditText cliente = findViewById(R.id.cliente_txt);
         //EditText vendedor = findViewById(R.id.vendedor_txt);
         EditText resolucion = findViewById(R.id.resolucion_txt);
@@ -350,7 +350,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         if (patioventa.getCitas().contiene(nueva)) {
             Toast.makeText(Patioventainterfaz.this, "Se agrego correctamente.", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     public static String getFechaMod(Date fechaMod) {
         return sdf.format(fechaMod);

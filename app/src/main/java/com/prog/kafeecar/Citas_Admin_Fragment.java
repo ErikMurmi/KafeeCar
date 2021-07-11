@@ -63,13 +63,11 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private ImageButton buscar_btn;
 
     private EditText vehiculo_nuevacita;
-    private EditText dia_b;
     private int posicion_dia=-1;
     private int posicion_mes=-1;
     private int posicion_anio=-1;
     private int hora_nueva_cita=-1;
     String fecha_nueva_cita;
-    private EditText anio_b;
     //Botones
     private Button irVerEditable;
     private Button anular;
@@ -109,8 +107,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //TextViews
         //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
         //Edit Text
-        dia_b = mainView.findViewById(R.id.fechacitadia_txt);
-        anio_b = mainView.findViewById(R.id.fechacitaanio_txt);
         //Image Buttons
         //OnClick
 
