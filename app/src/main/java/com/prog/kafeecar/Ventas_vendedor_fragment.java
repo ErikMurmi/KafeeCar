@@ -36,6 +36,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.sdf;
+
 public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -380,6 +382,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         Vehiculo vehiculo = null;
         int c = 0;
 
+        String fecha_nueva_venta = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(fecha_nueva_venta);
+
         AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_vn_actv);
 
@@ -409,13 +414,18 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             c++;
         }
 
-        EditText precio = mainView.findViewById(R.id.precio_vt_vn_etxt);
-        float precio_flt = Float.parseFloat(precio.getText().toString());
+        EditText precio_vt_ad_etxt = mainView.findViewById(R.id.precio_vt_vn_etxt);
+        String precio_str = precio_vt_ad_etxt.getText().toString();
+        float precio = Float.parseFloat(precio_str);
 
         if (c == 0) {
-            fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-            Date fecha = sdf.parse(fecha_nueva_cita);
-            Venta nueva = new Venta(fecha,cliente_c,vendedor_actual,vehiculo,precio_flt);
+            Venta nueva = new Venta(
+                    fecha,
+                    cliente_c,
+                    vendedor_actual,
+                    vehiculo,
+                    precio);
+            patio.aniadirVenta(nueva);
             if (patio.getVentasGenerales().contiene(nueva)) {
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
