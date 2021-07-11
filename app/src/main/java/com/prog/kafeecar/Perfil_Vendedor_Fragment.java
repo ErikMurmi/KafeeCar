@@ -310,27 +310,31 @@ public class Perfil_Vendedor_Fragment extends Fragment {
                                 cedula_ed.getText().toString(),
                                 telefono_ed.getText().toString(),
                                 correo_ed.getText().toString(),
-                                fecha, clave_str);
+                                fecha,
+                                clave_str);
                     }else{
                         user.cambiarDatosVendedor(
                                 nombre_ed.getText().toString(),
                                 cedula_ed.getText().toString(),
                                 telefono_ed.getText().toString(),
                                 correo_ed.getText().toString(),
-                                fecha, user.getClave());
+                                fecha,
+                                user.getClave());
                     }
 
-                    StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_str+".jpg");
-                    filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                            Toast.makeText(mainview.getContext(), "Se subio la imagen", Toast.LENGTH_SHORT).show()
-                    );
+                    if (foto != null) {
+                        StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_str + ".jpg");
+                        filePath.putFile(foto);
+                    }
+
                     user.setImagen(String.format("%s.jpg",cedula_ed.getText().toString()));
 
-                        if (patio.buscarVendedores("Cedula", user.getCedula()) != null) {
-                            Toast.makeText(mainview.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
-                            irPerfil();
-                            verPerfil();
-                        }
+                    if (patio.buscarVendedores("Cedula", user.getCedula()) != null) {
+                        Toast.makeText(mainview.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
+                        irPerfil();
+                        verPerfil();
+                    }
+
                 }catch (Exception e) {
                     Toast.makeText(mainview.getContext(), "No se pudo actualizar la información del vendedor", Toast.LENGTH_SHORT).show();
                 }

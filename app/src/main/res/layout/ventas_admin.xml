@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="3dp"
-    android:visibility="gone"
-    tools:visibility="gone">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ventas_admin_lyt"
@@ -14,11 +11,12 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrar_ventas"
         android:orientation="vertical"
+        android:visibility="visible"
         tools:visibility="visible">
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="570dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="64dp"
             android:layout_marginEnd="24dp"
