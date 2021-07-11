@@ -71,6 +71,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     public boolean dias_mostrados = false;
 
     private LinearLayout verEstadisticasGenerales;
+    private LinearLayout ver_vt_ad_lyt;
     private Adaptador_Lista_Ventas adptadorlistaview;
     private Venta venta_mostrar;
     private String [] meses=new String[]{"ENERO","FEBRERO","MAYO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
@@ -105,6 +106,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ventas_admin_generales_lyt = mainView.findViewById(R.id.ventas_admin_generales_lyt);
         add_vt_ad_lyt= mainView.findViewById(R.id.add_vt_ad_lyt);
         ventas_admin_lyt=mainView.findViewById(R.id.ventas_admin_lyt);
+        ver_vt_ad_lyt = mainView.findViewById(R.id.ver_vt_ad_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
 
@@ -116,7 +118,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
 
         vt_admin_estadisticas_btn.setOnClickListener(view -> {
-            vt_admin_estadisticas_btn.setVisibility(View.GONE);
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
             verEstadisticasGenerales.setVisibility(View.VISIBLE);
@@ -213,16 +214,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
 
         // layouts
-
-
-
         verEstadisticasGenerales=mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
 
         //0nClick
-
-
-
-
         barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
         createcharts();
         ventas = patio.getVentasGenerales();*/
@@ -237,7 +231,11 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     public void irVerVenta(){
-
+        add_vt_ad_lyt.setVisibility(View.GONE);
+        ventas_admin_generales_lyt.setVisibility(View.GONE);
+        ventas_admin_lyt.setVisibility(View.GONE);
+        ver_vt_ad_lyt.setVisibility(View.VISIBLE);
+        visualizarVenta();
     }
 
     public void irPaginaPrincipal(){
@@ -439,20 +437,20 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     public void visualizarVenta() {
-        ImageView imagen = mainView.findViewById(R.id.vt_vn_vehiculo_img);
-        TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_vn_txt);
-        TextView precioV = mainView.findViewById(R.id.ver_pventa_vt_vn_txt);
-        TextView precioI = mainView.findViewById(R.id.ver_pinicial_vt_vn_txt);
-        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_vt_vn_txt);
-        TextView cliente = mainView.findViewById(R.id.ver_cliente_vt_vn_txt);
-        TextView contacto = mainView.findViewById(R.id.ver_contacto_cliente_vt_vn_txt);
+        ImageView imagen = mainView.findViewById(R.id.vt_ad_vehiculo_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_vt_ad_txt);
+        TextView precioV = mainView.findViewById(R.id.ver_pventa_vt_ad_txt);
+        TextView precioI = mainView.findViewById(R.id.ver_pinicial_vt_ad_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_vt_ad_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_vt_ad_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_cliente_vt_ad_txt);
 
-        TextView placa = mainView.findViewById(R.id.ver_placa_vt_vn_txt);
-        TextView matricula = mainView.findViewById(R.id.ver_matricula_vt_vn_txt);
-        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_vt_vn_txt);
-        TextView marca = mainView.findViewById(R.id.ver_marca_vt_vn_txt);
-        TextView modelo = mainView.findViewById(R.id.ver_modelo_vt_vn_txt);
-        TextView anio = mainView.findViewById(R.id.ver_anio_vt_vn_txt);
+        TextView placa = mainView.findViewById(R.id.ver_placa_vt_ad_txt);
+        TextView matricula = mainView.findViewById(R.id.ver_matricula_vt_ad_txt);
+        TextView matriculado = mainView.findViewById(R.id.ver_matriculado_vt_ad_txt);
+        TextView marca = mainView.findViewById(R.id.ver_marca_vt_ad_txt);
+        TextView modelo = mainView.findViewById(R.id.ver_modelo_vt_ad_txt);
+        TextView anio = mainView.findViewById(R.id.ver_anio_vt_ad_txt);
 
         StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
         try {
