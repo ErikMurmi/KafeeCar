@@ -569,7 +569,7 @@
                             android:textSize="18sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/ed_hora_ci_ad_til"
+                            android:id="@+id/ed_hora_ci_vn_til"
                             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -577,7 +577,7 @@
                             app:boxStrokeWidthFocused="0dp">
 
                             <AutoCompleteTextView
-                                android:id="@+id/ed_hora_ci_ad_acv"
+                                android:id="@+id/ed_hora_ci_vn_acv"
                                 android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"

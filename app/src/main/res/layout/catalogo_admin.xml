@@ -1016,7 +1016,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="12dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -1025,7 +1025,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="175dp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -1035,17 +1035,19 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/placa_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/placa_aniadir_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
+                            android:layout_marginBottom="@dimen/aniadir_auto_espacio"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="text"
-                            android:text="PBY 786"
-                            android:textSize="15sp"
+                            android:text="PBY-1234"
+                            android:textSize="17sp"
                             tools:text="PBY 786" />
 
                         <TextView
@@ -1054,13 +1056,15 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/matricula_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_matricula_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
+                            android:layout_marginBottom="@dimen/aniadir_auto_espacio"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
@@ -1075,19 +1079,22 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/anio"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_anio_etxt"
                             style="@style/editar_entradas_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/aniadir_auto_espacio"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
                             android:inputType="number|textPersonName"
                             android:text="2014"
                             android:textAlignment="center"
+                            android:textSize="17sp"
                             tools:text="2014" />
 
                     </LinearLayout>
@@ -1098,7 +1105,7 @@
 
                     <ImageButton
                         android:id="@+id/aniadir_vehiculo_imagen_btn"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginTop="15dp"
                         android:background="#00FFFFFF"
@@ -1111,21 +1118,25 @@
                     android:id="@+id/descripcion_t_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/aniadir_auto_espacio"
                     android:fontFamily="@font/ocra"
                     android:text="@string/descripcion_c"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/aniadir_descripcion_etxt"
                     style="@style/editar_entradas_txt"
                     android:layout_width="match_parent"
                     android:layout_height="77dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:inputType="textMultiLine|text|textImeMultiLine"
                     android:lines="3"
                     android:maxLines="5"
                     android:singleLine="false"
-                    android:text="Todo esta correcto" />
+                    android:text="Todo esta correcto"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1144,7 +1155,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/marca_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_marca_etxt"
@@ -1154,6 +1166,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="text"
                             android:text="Toyota"
+                            android:textSize="18sp"
                             tools:text="Toyota" />
 
                         <LinearLayout
@@ -1168,7 +1181,8 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocra"
                                 android:text="@string/color_c"
-                                android:textColor="#000000" />
+                                android:textColor="#000000"
+                                android:textSize="16sp" />
 
                             <EditText
                                 android:id="@+id/aniadir_color_etxt"
@@ -1179,6 +1193,7 @@
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
                                 android:inputType="text"
                                 android:text="Azul marfil"
+                                android:textSize="18sp"
                                 tools:text="Azul marfil" />
 
                         </LinearLayout>
@@ -1201,7 +1216,8 @@
                             android:layout_gravity="start"
                             android:fontFamily="@font/ocra"
                             android:text="@string/modelo_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_modelo_etxt"
@@ -1211,6 +1227,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="text"
                             android:text="Fortuner"
+                            android:textSize="18sp"
                             tools:text="Fortuner" />
 
                         <CheckBox
@@ -1220,14 +1237,15 @@
 
                             android:layout_marginTop="15dp"
                             android:buttonTint="@color/cafe_grisaceo"
-                            android:text="@string/matriculado_c" />
+                            android:text="@string/matriculado_c"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="21dp" />
+                    android:layout_height="15dp" />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -1240,7 +1258,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -1254,7 +1272,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/inicial_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_pinicial_etxt"
@@ -1264,6 +1283,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
                             android:text="32000"
+                            android:textSize="18sp"
                             tools:text="32000" />
                     </LinearLayout>
 
@@ -1288,7 +1308,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/venta_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_precio_venta_etxt"
@@ -1298,6 +1319,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
                             android:text="35500"
+                            android:textSize="18sp"
                             tools:text="35500" />
                     </LinearLayout>
 
@@ -1318,11 +1340,12 @@
 
                         <TextView
                             android:id="@+id/textView17"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/promocion_c"
-                            android:textColor="#000000" />
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
 
                         <EditText
                             android:id="@+id/aniadir_precio_promocion_etxt"
@@ -1332,6 +1355,7 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:inputType="numberDecimal"
                             android:text="0"
+                            android:textSize="18sp"
                             tools:text="0" />
 
                     </LinearLayout>
@@ -1366,7 +1390,7 @@
                     <Button
                         android:id="@+id/cancelar_ca_ad_btn"
                         android:layout_width="120dp"
-                        android:layout_height="35dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/boton_redondeado_dark"
                         android:fontFamily="@font/valorant"
                         android:text="cancelar"
@@ -1379,7 +1403,7 @@
                     <Button
                         android:id="@+id/aniadir_vehiculo_btn"
                         android:layout_width="120dp"
-                        android:layout_height="35dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/boton_redondeado"
                         android:fontFamily="@font/valorant"
                         android:text="Añadir"

@@ -571,12 +571,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             c++;
         }
 
-        EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
+        EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
         String resolucion_str = resolucion.getText().toString();
-
-        if(isEmpty(resolucion)){
-            resolucion.setHint("");
-        }
 
         if (c == 0) {
             Cita nueva = new Cita(
@@ -588,7 +584,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     vehiculo);
             patio.aniadirCita(nueva);
             if (patio.getCitas().contiene(nueva)) {
-                Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
