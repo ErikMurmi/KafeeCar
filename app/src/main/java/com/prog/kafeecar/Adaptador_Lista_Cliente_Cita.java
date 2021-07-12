@@ -20,16 +20,14 @@ import java.io.IOException;
 
 public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador_Lista_Cliente_Cita.clienteHolder> {
 
-    Lista citas;
     View view;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Lista citas_buscadas;
     private RecyclerItemClick itemClick;
     Lista citas_originales;
 
-    public Adaptador_Lista_Cliente_Cita(Lista citas, Citas_cliente_fragment itemClick){
-        this.citas=citas;
-        this.citas_buscadas =citas;
+    public Adaptador_Lista_Cliente_Cita(Lista citas, RecyclerItemClick itemClick){
+        this.citas_buscadas=citas;
         this.itemClick = itemClick;
         citas_originales = new Lista();
         citas_originales.copiar(citas);
@@ -43,11 +41,9 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  Adaptador_Lista_Cliente_Cita.clienteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  clienteHolder holder, int position) {
         try {
-            Cliente cienteactual=(Cliente)Patioventainterfaz.usuarioActual;
-            citas=Patioventainterfaz.patioventa.getCitas().listabusqueda(cienteactual);
-            Cita c=(Cita)citas.getPos(position);
+            Cita c=(Cita)citas_buscadas.getPos(position);
             String hora= "Hora: "+c.getHora();
             String nombre= "Nombre: "+c.getCliente().getNombre();
             String telefono= "Telefono: "+c.getCliente().getTelefono();
@@ -76,15 +72,15 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
 
     @Override
     public int getItemCount() {
-        return citas.contar();
+        return citas_buscadas.contar();
     }
 
     public void buscar(String fecha){
         if(fecha.length()==0){
-            citas.vaciar();
-            citas.copiar(citas_originales);
+            citas_buscadas.vaciar();
+            citas_buscadas.copiar(citas_originales);
         }else {
-            citas.vaciar();
+            citas_buscadas.vaciar();
             for (int i = 0; i < citas_originales.contar(); i++) {
                 Cita actual = null;
                 try {

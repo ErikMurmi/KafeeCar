@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -231,7 +230,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                         selectedFragement = new Catalogo_Cliente_fragment();
                         break;
                     case R.id.nav_citas_cl:
-                        selectedFragement = new Citas_cliente_fragment();
+                        selectedFragement = new Citas_Cliente_Fragment();
                         break;
                     case R.id.nav_fav_cl:
                         selectedFragement = new Favoritos_cliente_fragment();

@@ -48,7 +48,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private Vehiculo vMostrar;
     private Button favoritoBoton;
     private Drawable estrelladorada;
-    private Citas_cliente_fragment crearCita;
+    private Citas_c_fragment crearCita;
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
     private SearchView busqueda_placa;
 

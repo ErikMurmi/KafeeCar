@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,14 +17,12 @@ import androidx.annotation.Nullable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,9 +39,9 @@ import java.util.Date;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
-public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
+public class Citas_c_fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
 
-    private View mainview;
+    private View mainView;
     //private Button deacartarnuevacita;
     //private Button guardarcitanueva;
     //private Button guardarcitaeditada;
@@ -61,7 +58,7 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
 
     //private LinearLayout editarcita;
    // private LinearLayout nuevacita;
-    private LinearLayout vercita_lyt;
+    private LinearLayout ver_ci_cli_lyt;
     private LinearLayout aniadirCita;
 
     private PatioVenta patio;
@@ -73,16 +70,14 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
     private SearchView busqueda_citas;
     private Adaptador_Lista_Cliente_Cita adptadorlistaview;
 
-
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = Patioventainterfaz.sdf;
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    //private Catalogo_Cliente_fragment catplaca;
+    private final Cliente cliente_actual = (Cliente) Patioventainterfaz.usuarioActual;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainview = inflater.inflate(R.layout.citas_cliente, container, false);
+        mainView = inflater.inflate(R.layout.citas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
 
         //Botones aniadir cita nueva
@@ -93,7 +88,9 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         //descartareditarcita = mainview.findViewById(R.id.descartar_EC_btn);
 
         //boton de ver cita
-        irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+
+        //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+
         //regresar = mainview.findViewById(R.id.regresar_cita_VC_btn);
         //actualizarvercita=mainview.findViewById(R.id.actualizar_cita_VC_btn);
         //boton de Lista Cita
@@ -104,17 +101,19 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         //vercita = mainview.findViewById(R.id.ver_cita_Scroll);
         //cita_cliente_lyt = mainview.findViewById(R.id.citas_cliente_CC_lyt);
         //editarcita = mainview.findViewById(R.id.editar_cita_linear);
-        vercita_lyt = mainview.findViewById(R.id.ver_ci_cli_lyt);
-        busqueda_citas = mainview.findViewById(R.id.busqueda_c_cli_srv);
-        aniadirCita = mainview.findViewById(R.id.add_cita_cli_lyt);
 
 
-        irAniadirCita.setOnClickListener(v -> {
+        //ver_ci_cli_lyt = mainview.findViewById(R.id.ver_ci_cli_lyt);
+        busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
+        //aniadirCita = mainview.findViewById(R.id.add_cita_cli_lyt);
+
+
+        /*irAniadirCita.setOnClickListener(v -> {
             irAniadirCita.setVisibility(View.GONE);
-            vercita_lyt.setVisibility(View.GONE);
+            ver_ci_cli_lyt.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
-        });
+        });*/
 
         //nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);
 
@@ -178,30 +177,32 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
             editarcita.setVisibility(View.GONE);
         });*/
 
-        if(Patioventainterfaz.CITA_CON_VEHICULO){
+        /*if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
         }
 
-        busqueda_citas.setOnQueryTextListener(this);
+
         try {
-            cargar();
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return mainview;
+        }*/
+        busqueda_citas.setOnQueryTextListener(this);
+        cargar();
+        return mainView;
     }
 
 
     public void adaptadorAniadir(){
-        AutoCompleteTextView cliente = mainview.findViewById(R.id.cedula_cliente_ci_cli_actv);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainview.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
         cliente.setAdapter(adapter);
 
         //TextView cedula_vendedor_ci_ad_txt = mainview.findViewById(R.id.cedula_vendedor_ci_cli_etxt);
         //cedula_vendedor_ci_ad_txt.setText(Patioventainterfaz.usuarioActual.getCedula());
 
-        AutoCompleteTextView auto = mainview.findViewById(R.id.placa_ci_cli_actv);
-        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainview.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
     }
 
@@ -215,13 +216,13 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         TextView textodescripcion;
 
 
-        textodia = mainview.findViewById(R.id.dia_cita_VC_etxt);
-        textomes = mainview.findViewById(R.id.mes_cita_VC_etxt);
-        textoanio = mainview.findViewById(R.id.anio_cita_VC_etxt);
-        textohoras = mainview.findViewById(R.id.hora_cita_VC_etxt);
-        textovendedor = mainview.findViewById(R.id.nomvendedor_cita_VC_etxt);
-        textovehiculo = mainview.findViewById(R.id.vehiculo_cita_VC_etxt);
-        textodescripcion = mainview.findViewById(R.id.descripcion_cita_VC_etxt);
+        textodia = mainView.findViewById(R.id.dia_cita_VC_etxt);
+        textomes = mainView.findViewById(R.id.mes_cita_VC_etxt);
+        textoanio = mainView.findViewById(R.id.anio_cita_VC_etxt);
+        textohoras = mainView.findViewById(R.id.hora_cita_VC_etxt);
+        textovendedor = mainView.findViewById(R.id.nomvendedor_cita_VC_etxt);
+        textovehiculo = mainView.findViewById(R.id.vehiculo_cita_VC_etxt);
+        textodescripcion = mainView.findViewById(R.id.descripcion_cita_VC_etxt);
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
         Cita cita = patio.buscarCita("cliente", cliente.getCedula(), cliente.getCedula());
         String fecha = Patioventainterfaz.getFechaMod(cita.getFechaCita());
@@ -240,10 +241,10 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
 
     public void citaNueva(String placa) throws Exception {
         int c = 0;
-        EditText textodia= mainview.findViewById(R.id.dia_cita_nueva_etxt);
-        EditText textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
-        EditText textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
-        EditText textohoras = mainview.findViewById(R.id.hora_cita_nueva_cl_etxt);
+        EditText textodia= mainView.findViewById(R.id.dia_cita_nueva_etxt);
+        EditText textomes = mainView.findViewById(R.id.mes_cita_nueva_etxt);
+        EditText textoanio = mainView.findViewById(R.id.anio_cita_nueva_etxt);
+        EditText textohoras = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         String fechacita_str = "";
@@ -254,7 +255,7 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
             hora = Integer.parseInt(textohoras.getText().toString());
         } else {
             c++;
-            Toast.makeText(mainview.getContext(), "Campos de fecha vacíos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Campos de fecha vacíos", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -269,39 +270,39 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         }
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/"+vMostrar.getimagen());
-        ImageView vehiculo_img = mainview.findViewById(R.id.imagen_auto_cita_NC_img);
-        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
+        ImageView vehiculo_img = mainView.findViewById(R.id.imagen_auto_cita_NC_img);
+        textodia = mainView.findViewById(R.id.dia_cita_nueva_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
         if (dia < 1 || dia > 30) {
-            Toast.makeText(mainview.getContext(), "Dia invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Dia invalido", Toast.LENGTH_SHORT).show();
             textodia.setText("");
             c++;
         }
 
-        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
+        textomes = mainView.findViewById(R.id.mes_cita_nueva_etxt);
         String mes_str = textomes.getText().toString();
         int mes = Integer.parseInt(mes_str);
         if (mes < 1 || mes > 12) {
-            Toast.makeText(mainview.getContext(), "mes invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "mes invalido", Toast.LENGTH_SHORT).show();
             textomes.setText("");
             c++;
         }
 
-        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
+        textoanio = mainView.findViewById(R.id.anio_cita_nueva_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
         if (anio < 2021 || anio > 2022) {
-            Toast.makeText(mainview.getContext(), "año invalido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "año invalido", Toast.LENGTH_SHORT).show();
             textoanio.setText("");
             c++;
         }
 
-        textohoras = mainview.findViewById(R.id.hora_cita_nueva_cl_etxt);
+        textohoras = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
         String horas_str = textohoras.getText().toString();
         int horas = Integer.parseInt(horas_str);
         if (horas < 0 || horas > 24) {
-            Toast.makeText(mainview.getContext(), "horas invalidas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "horas invalidas", Toast.LENGTH_SHORT).show();
             textohoras.setText("");
             c++;
         }
@@ -348,45 +349,45 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
 
         int c=0;
 
-        textoplaca = mainview.findViewById(R.id.placa_etxt);
+        textoplaca = mainView.findViewById(R.id.placa_etxt);
         String placa_str = textoplaca.getText().toString();
 
-        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
+        textodia = mainView.findViewById(R.id.dia_cita_nueva_etxt);
         String dia_str = textodia.getText().toString();
         int dia = Integer.parseInt(dia_str);
         if(dia<1||dia>30)
         {
-            Toast.makeText(mainview.getContext(),"Dia invalido",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(),"Dia invalido",Toast.LENGTH_SHORT).show();
             textodia.setText("");
             c++;
         }
 
-        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
+        textomes = mainView.findViewById(R.id.mes_cita_nueva_etxt);
         String mes_str = textomes.getText().toString();
         int mes = Integer.parseInt(mes_str);
         if(mes<1||mes>12)
         {
-            Toast.makeText(mainview.getContext(),"mes invalido",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(),"mes invalido",Toast.LENGTH_SHORT).show();
             textomes.setText("");
             c++;
         }
 
-        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
+        textoanio = mainView.findViewById(R.id.anio_cita_nueva_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = Integer.parseInt(anio_str);
         if(anio<2021||anio>2022)
         {
-            Toast.makeText(mainview.getContext(),"año invalido",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(),"año invalido",Toast.LENGTH_SHORT).show();
             textoanio.setText("");
             c++;
         }
 
-        textohoras = mainview.findViewById(R.id.horaeditarcita_txt);
+        textohoras = mainView.findViewById(R.id.horaeditarcita_txt);
         String horas_str = textohoras.getText().toString();
         int horas = Integer.parseInt(horas_str);
         if(horas<0||horas>24)
         {
-            Toast.makeText(mainview.getContext(),"horas invalidas",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(),"horas invalidas",Toast.LENGTH_SHORT).show();
             textohoras.setText("");
             c++;
         }
@@ -405,7 +406,7 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
             }
             else
             {
-                Toast.makeText(mainview.getContext(),"No tenemos personal disponible a esa hora",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(),"No tenemos personal disponible a esa hora",Toast.LENGTH_SHORT).show();
                 textoanio.setText("");
                 textodia.setText("");
                 textomes.setText("");
@@ -425,11 +426,11 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         EditText textoanio;
         EditText textohoras;
         EditText textoplaca;
-        textoplaca = mainview.findViewById(R.id.placa_etxt);
-        textodia = mainview.findViewById(R.id.dia_cita_nueva_etxt);
-        textomes = mainview.findViewById(R.id.mes_cita_nueva_etxt);
-        textoanio = mainview.findViewById(R.id.anio_cita_nueva_etxt);
-        textohoras = mainview.findViewById(R.id.hora_cita_nueva_cl_etxt);
+        textoplaca = mainView.findViewById(R.id.placa_etxt);
+        textodia = mainView.findViewById(R.id.dia_cita_nueva_etxt);
+        textomes = mainView.findViewById(R.id.mes_cita_nueva_etxt);
+        textoanio = mainView.findViewById(R.id.anio_cita_nueva_etxt);
+        textohoras = mainView.findViewById(R.id.hora_cita_nueva_cl_etxt);
         PatioVenta p = new PatioVenta();
         Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
         Cita cita = p.buscarCita("cliente",cliente.getCedula(),cliente.getCedula());
@@ -444,15 +445,13 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
         textodia.setText(dia);
     }
 
-    public void cargar() throws Exception {
-        Cita cita1=(Cita)patio.getCitas().getInicio().getDato();
-        listaview=mainview.findViewById(R.id.listacitas_Rv);
-        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainview.getContext());
+    public void cargar()  {
+        listaview= mainView.findViewById(R.id.listacitas_rv);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview=new Adaptador_Lista_Cliente_Cita(patio.getCitas().listabusqueda(cita1.getCliente()),this);
+        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.buscarCitas(cliente_actual),this);
         listaview.setAdapter(adptadorlistaview);
-        listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     /*public void buscarPorFecha() throws Exception {
@@ -528,18 +527,17 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
     */
 
     public void visualizarCita() {
-        vercita_lyt.setVisibility(View.GONE);
-        vercita_lyt.setVisibility(View.VISIBLE);
-        ImageView imagen_ed = mainview.findViewById(R.id.ver_cita_im_cli_img);
-        TextView fecha = mainview.findViewById(R.id.ver_fecha_ci_cli_txt);
-        TextView hora = mainview.findViewById(R.id.ver_hora_ci_cli_txt);
-        TextView cliente = mainview.findViewById(R.id.ver_cliente_ci_cli_txt);
-        TextView contacto = mainview.findViewById(R.id.ver_contacto_ci_cli_txt);
-        TextView vendedor = mainview.findViewById(R.id.ver_vendedor_ci_cli_txt);
-        TextView vehiculo = mainview.findViewById(R.id.ver_vehiculo_ci_cli_txt);
-        TextView precio = mainview.findViewById(R.id.ver_precioVenta_ci_cli_txt);
-        TextView descripcion = mainview.findViewById(R.id.ver_descripcion_ci_cli_txt);
-        TextView resolucion = mainview.findViewById(R.id.ver_resolucion_ci_cli_txt);
+        ver_ci_cli_lyt.setVisibility(View.VISIBLE);
+        ImageView imagen_ed = mainView.findViewById(R.id.ver_cita_im_cli_img);
+        TextView fecha = mainView.findViewById(R.id.ver_fecha_ci_cli_txt);
+        TextView hora = mainView.findViewById(R.id.ver_hora_ci_cli_txt);
+        TextView cliente = mainView.findViewById(R.id.ver_cliente_ci_cli_txt);
+        TextView contacto = mainView.findViewById(R.id.ver_contacto_ci_cli_txt);
+        TextView vendedor = mainView.findViewById(R.id.ver_vendedor_ci_cli_txt);
+        TextView vehiculo = mainView.findViewById(R.id.ver_vehiculo_ci_cli_txt);
+        TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_cli_txt);
+        TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_cli_txt);
+        TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_cli_txt);
         StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
         try {
             final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
@@ -579,7 +577,7 @@ public class Citas_cliente_fragment extends Fragment implements Adaptador_Lista_
             cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
             visualizarCita();
         } catch (Exception e) {
-            Toast.makeText(mainview.getContext(), "Errores", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Errores", Toast.LENGTH_SHORT).show();
         }
     }
 
