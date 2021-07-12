@@ -78,19 +78,17 @@ public class Venta {
     
     /**
      * Método que ayuda al vendedor o administrador a actualizar la información de una venta
-     * @param fechaventa Parametro de venta para establecer como nuevo dato 
-     * @param precioFinal Parametro de venta para establecer como nuevo dato 
-     * @param vehiculos Parametro de venta para establecer como nuevo dato 
-     * @param cliente Parametro de venta para establecer como nuevo dato 
-     * @param vendedor Parametro de venta para establecer como nuevo dato 
-     * @return Retorna los datos de la venta del vehiculo 
+     * @param fecha Parametro de venta para establecer como nuevo dato
+     * @param precio Parametro de venta para establecer como nuevo dato
+     * @param vehiculo Parametro de venta para establecer como nuevo dato
+     * @param cliente Parametro de venta para establecer como nuevo dato
+     * @param vendedor Parametro de venta para establecer como nuevo dato
      */
-    public Vehiculo actualizar(Date fechaventa, Float precioFinal, Vehiculo vehiculos, Cliente cliente, Vendedor vendedor){
-        return null;
-     
+    public void actualizar(Date fecha, Float precio, Vehiculo vehiculo, Cliente cliente, Vendedor vendedor){
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.vendedor = vendedor;
+        this.vehiculo = vehiculo;
+        this.precio = precio;
     }
-    
-    
-    
-    
 }

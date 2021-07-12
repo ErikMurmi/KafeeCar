@@ -181,7 +181,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
                     if(editarVenta()){
-                        irVerVenta();
+                        verVenta();
                     }
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "Error 103", Toast.LENGTH_SHORT).show();
@@ -198,7 +198,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             msg.setMessage("¿Estás seguro de de salir sin guardar?");
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
-                    irVerVenta();
+                    verVenta();
                 }catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(mainView.getContext(), "Error 104", Toast.LENGTH_SHORT).show();
@@ -365,14 +365,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         ed_placa_vt_vn_actv.setText(venta_mostrar.getVehiculo().getPlaca());
     }
 
-    public void irVerVenta(){
-        lista_ventas.setVisibility(View.GONE);
-        aniadirVenta.setVisibility(View.GONE);
-        editar_vt_vn_lyt.setVisibility(View.GONE);
-        irAniadirVenta.setVisibility(View.GONE);
-        ver_vt_vn_lyt.setVisibility(View.VISIBLE);
-    }
-
     public void irVerListaVentas(){
         cargar();
         editar_vt_vn_lyt.setVisibility(View.GONE);
@@ -417,8 +409,15 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         }
 
         EditText precio_vt_ad_etxt = mainView.findViewById(R.id.precio_vt_vn_etxt);
-        String precio_str = precio_vt_ad_etxt.getText().toString();
-        float precio = Float.parseFloat(precio_str);
+        float precio = 0;
+        if(!isEmpty(precio_vt_ad_etxt)){
+            String precio_str = precio_vt_ad_etxt.getText().toString();
+            precio = Float.parseFloat(precio_str);
+        }else{
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Precio*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
 
         if (c == 0) {
             String fecha_nueva_venta = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
@@ -536,7 +535,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     }
 
     public boolean editarVenta() throws Exception {
-
         Cliente cliente_c = null;
         int c = 0;
 
@@ -556,13 +554,16 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             }
 
         EditText precio = mainView.findViewById(R.id.ed_precio_vt_vn_etxt);
-        String precio_s = precio.getText().toString();
+
         float precio_flt = 0;
-        try{
-            precio_flt = Float.parseFloat(precio_s);
-        }catch(Exception e){
-            Toast.makeText(mainView.getContext(), "Error 108", Toast.LENGTH_SHORT).show();
-        }
+            if(!isEmpty(precio)){
+                String precio_s = precio.getText().toString();
+                precio_flt = Float.parseFloat(precio_s);
+            }else{
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Precio*", Toast.LENGTH_SHORT).show();
+                c++;
+            }
+
 
         if (c == 0) {
             fecha_nueva_cita = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
@@ -580,7 +581,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     cliente_c,
                     vendedor_actual);
             if (patio.buscarVentas(venta_mostrar.getVehiculo().getPlaca(), cliente_c.getCedula()) != null) {
-                Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se editó correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
@@ -588,6 +589,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     }
 
     public void verVenta(){
+        cargar();
         lista_ventas.setVisibility(View.GONE);
         irAniadirVenta.setVisibility(View.GONE);
         aniadirVenta.setVisibility(View.GONE);
