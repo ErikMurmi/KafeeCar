@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,9 +23,16 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     Lista citas;
     View view;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    public Adaptador_Lista_Cliente_Cita(Lista citas){
+    private Lista citas_buscadas;
+    private RecyclerItemClick itemClick;
+    Lista citas_originales;
 
+    public Adaptador_Lista_Cliente_Cita(Lista citas, Citas_cliente_fragment itemClick){
         this.citas=citas;
+        this.citas_buscadas =citas;
+        this.itemClick = itemClick;
+        citas_originales = new Lista();
+        citas_originales.copiar(citas);
     }
 
     @NonNull
@@ -70,6 +78,34 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     public int getItemCount() {
         return citas.contar();
     }
+
+    public void buscar(String fecha){
+        if(fecha.length()==0){
+            citas.vaciar();
+            citas.copiar(citas_originales);
+        }else {
+            citas.vaciar();
+            for (int i = 0; i < citas_originales.contar(); i++) {
+                Cita actual = null;
+                try {
+                    actual = (Cita) citas_originales.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                String f = Patioventainterfaz.getFechaMod(actual.getFechaCita());
+                if (f.contains(fecha)) {
+                    citas_buscadas.add(actual);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public interface RecyclerItemClick {
+        void itemClick(String placa,String cedula_cliente);
+    }
+
 
     public class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagen;

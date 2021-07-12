@@ -6,117 +6,703 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/citas_cliente_CC_lyt"
+        android:id="@+id/add_cita_cli_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/citas_lista"
-        android:orientation="vertical">
+        android:background="@drawable/anadircita"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_space">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/Carro.img"
+                    android:layout_width="235dp"
+                    android:layout_height="115dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/ic_car_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/fecha_ci_vn_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Fecha de cita"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|center_horizontal"
+                            android:orientation="horizontal"
+                            android:theme="@style/Theme.MaterialComponents.Light">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/anio_ci_cli_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/anio_ci_ad_acv"
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/mes_ci_cli_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/mes_ci_cli_acv"
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:dropDownHeight="300dp"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/dia_ci_cli_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/dia_ci_cli_acv"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textAlignment="center"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:theme="@style/Theme.MaterialComponents.Light">
+
+                        <TextView
+                            android:id="@+id/horaCita_ci_ad_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Hora"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/hora_ci_cli_til"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hora_ci_ad_acv"
+                                android:layout_width="65dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/cliente_ci_vn_txt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Cedula"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cedula_cliente_ci_cli_actv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:completionThreshold="3"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Cédula"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/vehiculo_ci_vn_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vehículo"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/placa_ci_cli_actv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:completionThreshold="3"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Placa"
+                        android:inputType="textAutoComplete"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/Resolucion.title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Resolución"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/resolucion_ci_cli_etx"
+                    android:layout_width="match_parent"
+                    android:layout_height="88dp"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Por ver"
+                    android:inputType="textMultiLine|text"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="18.5sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/descartar_ci_cli_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="125dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/black"
+                        android:fontFamily="@font/valorant"
+                        android:text="Descartar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/guardar_ci_cli_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="@color/botones"
+                        android:fontFamily="@font/valorant"
+                        android:onClick="registarCita"
+                        android:text="Guardar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ver_ci_cli_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cita_back"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/top_space">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:paddingRight="20dp">
+
+                <ImageView
+                    android:id="@+id/ver_cita_im_cli_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_car_dark"
+                    tools:srcCompat="@drawable/ic_car_dark" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/ocra"
+                            android:text="Fecha:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_fecha_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ocra"
+                            android:hint="01-07-2021"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Hora:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_hora_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="14:00pm"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Cliente:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_cliente_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Martha Sanchez"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Contacto:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_contacto_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="0999999999"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Vendedor:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_vendedor_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Juan Jácome"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="105dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Vehículo:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_vehiculo_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="KIA Picanto"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/texto_style"
+                                android:layout_width="145dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocra"
+                                android:text="Precio venta:"
+                                android:textColor="@color/gris_visualizar" />
+
+                            <TextView
+                                android:id="@+id/ver_precioVenta_ci_cli_txt"
+                                style="@style/texto_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ocra"
+                                android:hint="$5,000"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Descripción:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_descripcion_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Auto que tuvo reparaciones recientes"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:text="Resolución:"
+                            android:textColor="@color/gris_visualizar" />
+
+                        <TextView
+                            android:id="@+id/ver_resolucion_ci_cli_txt"
+                            style="@style/texto_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_space"
+                            android:fontFamily="@font/ocra"
+                            android:hint="Se acordó un descuento del 10% para su venta posterior."
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="13dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/barra_separacion"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/anular_ci_cli_btn"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado_dark"
+                        android:fontFamily="@font/valoran"
+                        android:text="Anular"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <Space
+                        android:layout_width="22dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/editar_ci_cli_btn"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:fontFamily="@font/valoran"
+                        android:text="editar"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/citas_cliente_CC_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plantilla"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/titulos_top"
+                app:srcCompat="@drawable/citas_titulo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="67dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/buscar_dia_CC_etxt"
-                        android:layout_width="50dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="10"
-                        android:fontFamily="@font/monglos"
-                        android:hint="dd"
-                        android:inputType="text"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="#959898"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="66dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/buscar_mes_CC_etxt"
-                        android:layout_width="50dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="10"
-                        android:fontFamily="@font/monglos"
-                        android:hint="mm"
-                        android:inputType="text"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="#959898"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/buscar_anio_CC_etxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="10"
-                        android:fontFamily="@font/monglos"
-                        android:hint="yyy"
-                        android:inputType="text"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="#959898"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="24dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" />
-
-                <Button
-                    android:id="@+id/buscar_listacita_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/bordesboton"
-                    android:backgroundTint="@color/botones"
-                    android:drawableStart="@drawable/icono_busqueda"
-                    app:srcCompat="@drawable/icono_busqueda" />
-
+                <SearchView
+                    android:id="@+id/busqueda_c_cli_srv"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bordesbotongris"
+                    android:iconifiedByDefault="false"
+                    android:inputType="date"
+                    android:queryBackground="@color/white"
+                    android:queryHint="dd/mm/aaaa" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listacitas_Rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/ir_aniadir_cita_cli_fbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    app:backgroundTint="@color/botones"
+                    app:borderWidth="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:maxImageSize="50dp"
+                    app:srcCompat="@drawable/anadir_icon"
+                    tools:visibility="gone" />
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
