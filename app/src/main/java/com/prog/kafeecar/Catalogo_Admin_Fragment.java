@@ -324,24 +324,23 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             placa_str = placa_ad.getText().toString();
             StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str + ".jpg");
             filePath.putFile(foto);
-            patio.aniadirVehiculo(
-                    new Vehiculo(
-                            placa_str,
-                            matricula_ad.getText().toString(),
-                            marca_ad.getText().toString(),
-                            modelo_ad.getText().toString(),
-                            color_ad.getText().toString(),
-                            descripcion_ad.getText().toString(),
-                            Float.parseFloat(pinicial_ad.getText().toString()),
-                            Float.parseFloat(pventa_ad.getText().toString()),
-                            Float.parseFloat(ppromocion_ad.getText().toString()),
-                            matriculado_ad.isChecked(),
-                            Integer.parseInt(anio_ad.getText().toString()),
-                            placa_ad.getText().toString() + ".jpg"
-                    )
+            Vehiculo nuevo = new Vehiculo(
+                    placa_str,
+                    matricula_ad.getText().toString(),
+                    marca_ad.getText().toString(),
+                    modelo_ad.getText().toString(),
+                    color_ad.getText().toString(),
+                    descripcion_ad.getText().toString(),
+                    Float.parseFloat(pinicial_ad.getText().toString()),
+                    Float.parseFloat(pventa_ad.getText().toString()),
+                    Float.parseFloat(ppromocion_ad.getText().toString()),
+                    matriculado_ad.isChecked(),
+                    Integer.parseInt(anio_ad.getText().toString()),
+                    placa_ad.getText().toString() + ".jpg"
             );
+            patio.aniadirVehiculo(nuevo);
             try {
-                if (patio.buscarVehiculos("Placa", placa_str) != null) {
+                if (patio.getVehiculos().contiene(nuevo)) {
                     Toast.makeText(mainView.getContext(), "Se agrego correctamente el vehiculo", Toast.LENGTH_SHORT).show();
                     irCatalogo();
                 }
