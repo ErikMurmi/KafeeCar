@@ -964,6 +964,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -1358,7 +1359,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 

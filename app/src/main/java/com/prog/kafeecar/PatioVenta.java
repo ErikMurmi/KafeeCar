@@ -277,17 +277,17 @@ public class PatioVenta {
     /**
      * Busca citas por distintos criterios
      * @param criterio atributo por el cual buscar del cliente
-     * @param vehiculo palabra a buscar en el criterrio
+     * @param texto palabra a buscar en el criterrio
      * @return Lista de citas que corresponden al criterio de busquda
      */
-    public Cita buscarCita(String criterio, String vehiculo, String cliente){
+    public Cita buscarCita(String criterio, String texto, String cliente){
         Cita citaEncontrada;
 
         if(criterio.compareToIgnoreCase("Vehiculo")==0){
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVehiculo().getPlaca().compareTo(vehiculo)==0 && actual.getCliente().getCedula().compareTo(cliente)==0){
+                if(actual.getVehiculo().getPlaca().compareTo(texto)==0 && actual.getCliente().getCedula().compareTo(cliente)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -297,7 +297,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getVendedorCita().getNombre().compareTo(vehiculo)==0){
+                if(actual.getVendedorCita().getNombre().compareTo(texto)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }
@@ -307,7 +307,7 @@ public class PatioVenta {
             int cont = 0;
             while(cont<citas.contar()){
                 Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getCliente().getCedula().compareTo(vehiculo)==0){
+                if(actual.getCliente().getCedula().compareTo(texto)==0){
                     citaEncontrada = actual;
                     return citaEncontrada;
                 }

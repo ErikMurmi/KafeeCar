@@ -527,7 +527,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             e.printStackTrace();
         }
 
-
         horas.setText(String.valueOf(cita_mostrar.getHora()));
         cliente.setText(cita_mostrar.getCliente().getCedula());
         vendedor_ed.setText(cita_mostrar.getVendedorCita().getCedula());
@@ -597,60 +596,15 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     }
 
     public boolean editarCita() throws Exception {
-        /*EditText fechacitadia = mainView.findViewById(R.id.ed_dia_ci_ad_etxt);
-        EditText fechacitames = mainView.findViewById(R.id.ed_mes_ci_ad_etxt);
-        EditText fechacitaanio = mainView.findViewById(R.id.ed_anio_ci_ad_etxt);
-        EditText fechacitahora = mainView.findViewById(R.id.ed_hora_ci_ad_etxt);
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
-        int hora = -1;
-        int dia = -1;
-        int mes = -1;
-        int anio = -1;
 
-        if (!isEmpty(fechacitaanio)) {
-            String anio_str = fechacitaanio.getText().toString();
-            anio = Integer.parseInt(anio_str);
-            if (anio < 2021) {
-                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
-                fechacitaanio.setText("");
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
+        String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(prueba);
 
-        if (!isEmpty(fechacitames)) {
-            String mes_str = fechacitames.getText().toString();
-            mes = Integer.parseInt(mes_str);
-            if (mes < 1 || mes > 12) {
-                Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
-                fechacitames.setText("");
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
-            fechacitames.setText("");
-            c++;
-        }
-
-        if (!isEmpty(fechacitadia)) {
-            String dia_str = fechacitadia.getText().toString();
-            dia = Integer.parseInt(dia_str);
-            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
-                Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
-                fechacitadia.setText("");
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        EditText cliente = mainView.findViewById(R.id.ed_cliente_ci_ad_etxt);
-        EditText auto = mainView.findViewById(R.id.ed_placa_ci_ad_etxt);
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_ci_ad_actv);
 
         if (!isEmpty(cliente)) {
             String cliente_str = cliente.getText().toString();
@@ -667,51 +621,37 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         if (!isEmpty(auto)) {
             String vehiculo_str = auto.getText().toString();
-            if (vehiculo_str.length() != 8) {
-                Toast.makeText(mainView.getContext(), "Número de placa inválido", Toast.LENGTH_SHORT).show();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
                 c++;
             }
-            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
             c++;
         }
 
-        if (!isEmpty(fechacitahora)) {
-            String hora_str = fechacitahora.getText().toString();
-            hora = Integer.parseInt(hora_str);
-            if(hora>24 || hora <1){
-                Toast.makeText(mainView.getContext(), "Hora invalida", Toast.LENGTH_SHORT).show();
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        Date fecha = Patioventainterfaz.sdf.parse(dia + "-" + mes + "-" + anio);
-        if((hora>24 || hora <1) || !usuarioActual.disponible(fecha, hora)){
-            Toast.makeText(mainView.getContext(), "El vendedor no está disponible", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
+        EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
         String resolucion_str = resolucion.getText().toString();
 
+        if(isEmpty(resolucion)){
+            resolucion.setHint("");
+        }
+
         if (c == 0) {
-            Cita actualizada = cita_mostrar.actualizarVen(
+            cita_mostrar.actualizarVen(
                     fecha,
-                    hora,
+                    hora_nueva_cita,
                     vehiculo,
                     usuarioActual,
                     cliente_c,
                     resolucion_str);
-            if (patio.getCitas().contiene(actualizada)) {
+            if (patio.buscarCita("Vehiculo",vehiculo.getPlaca(),cliente_c.getCedula())!=null) {
                 Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
-        }*/
+        }
         return false;
     }
 
