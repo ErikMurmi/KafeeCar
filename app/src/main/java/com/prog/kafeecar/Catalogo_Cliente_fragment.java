@@ -176,13 +176,13 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         titulo.setText(titulo_str);
         placa.setText(vMostrar.getPlaca());
         matricula.setText(format(getString(R.string.matricula_frmt), vMostrar.getMatricula()));
-        anio.setText(format("Año :%s", vMostrar.getAnio()));
-        marca.setText(format("Marca :%s", vMostrar.getMarca()));
-        modelo.setText(format("Modelo :%s", vMostrar.getModelo()));
-        descripcion.setText(format("Descripción :%s", vMostrar.getDescripcion()));
-        color.setText(format("Color :%s", vMostrar.getColor()));
-        preciVenta.setText(format("Precio venta :%.2f", vMostrar.getPrecioVenta()));
-        promocion.setText(format("Precio promoción:%.2f", vMostrar.getPromocion()));
+        anio.setText(format("%s", vMostrar.getAnio()));
+        marca.setText(format("%s", vMostrar.getMarca()));
+        modelo.setText(format("%s", vMostrar.getModelo()));
+        descripcion.setText(format("%s", vMostrar.getDescripcion()));
+        color.setText(format("%s", vMostrar.getColor()));
+        preciVenta.setText(format("$ %.2f", vMostrar.getPrecioVenta()));
+        promocion.setText(format("$ %.2f", vMostrar.getPromocion()));
         if (clienteActual.esFavorito(vMostrar.getPlaca())) {
             favoritoBoton.setBackground(estrelladorada);
         } else {
