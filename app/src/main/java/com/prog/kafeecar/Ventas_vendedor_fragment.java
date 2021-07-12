@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -36,7 +37,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
@@ -141,26 +141,14 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
-            //Vehiculo vh = venta_mostrar.getVehiculo();
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
                     Toast.makeText(mainView.getContext(), "Error 201", Toast.LENGTH_SHORT).show();
                     if(patio.removerVenta(venta_mostrar.getVehiculo().getPlaca())){
-                        //Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
                         Toast.makeText(mainView.getContext(), "Se elimino correctamente la venta", Toast.LENGTH_SHORT).show();
                         irVerListaVentas();
                     }
-                    /*if(patio.getVentasGenerales().contiene(venta_mostrar)){
-                        Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
-                        String ms = "ESTA EN LA POSICION " + patio.removerVenta(venta_mostrar.getVehiculo().getPlaca());
-                        Toast.makeText(mainView.getContext(), ms, Toast.LENGTH_SHORT).show();
-                        irVerListaVentas();
-                    }*/
-                    //patio.removerVenta(vh.getPlaca());
                     Toast.makeText(mainView.getContext(), "Error 203", Toast.LENGTH_SHORT).show();
-                    //todo
-                    //revisar que el metodo que devuelve el carro despues de
-                    //eliminar la venta este correcto
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(mainView.getContext(), "Error 200", Toast.LENGTH_SHORT).show();
@@ -339,6 +327,32 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         });
 
         ed_dia_vt_vn_acv.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if ((editar_vt_vn_lyt.getVisibility() == View.VISIBLE)||(aniadirVenta.getVisibility() == View.VISIBLE)) {
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            irVerListaVentas();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if (ver_vt_vn_lyt.getVisibility() == View.VISIBLE) {
+                    irVerListaVentas();
+                }
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+
 
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
