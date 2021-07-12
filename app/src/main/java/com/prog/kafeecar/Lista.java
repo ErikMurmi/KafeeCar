@@ -307,7 +307,7 @@ public class Lista {
             aux.setSiguiente(null);
             inicio.setAnterior(null);
         }
-        else if(cont == contar()){
+        else if(cont == contar()-1){
             aux=fin;
             fin=fin.getAnterior();
             aux.setAnterior(null);

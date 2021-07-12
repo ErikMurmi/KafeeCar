@@ -145,14 +145,18 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
                     Toast.makeText(mainView.getContext(), "Error 201", Toast.LENGTH_SHORT).show();
-                    if(patioventa.removerVenta(venta_mostrar.getVehiculo().getPlaca())){
-                        Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
+                    if(patio.removerVenta(venta_mostrar.getVehiculo().getPlaca())){
+                        //Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mainView.getContext(), "Se elimino correctamente la venta", Toast.LENGTH_SHORT).show();
                         irVerListaVentas();
                     }
-
+                    /*if(patio.getVentasGenerales().contiene(venta_mostrar)){
+                        Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
+                        String ms = "ESTA EN LA POSICION " + patio.removerVenta(venta_mostrar.getVehiculo().getPlaca());
+                        Toast.makeText(mainView.getContext(), ms, Toast.LENGTH_SHORT).show();
+                        irVerListaVentas();
+                    }*/
                     //patio.removerVenta(vh.getPlaca());
-
-
                     Toast.makeText(mainView.getContext(), "Error 203", Toast.LENGTH_SHORT).show();
                     //todo
                     //revisar que el metodo que devuelve el carro despues de

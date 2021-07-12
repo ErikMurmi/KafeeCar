@@ -219,21 +219,40 @@ public class PatioVenta {
      * @param placa dato del vehiculo de la venta a ser eliminada
      * @return true si se elimino , false en caso de que no.
      */
-    public boolean removerVenta(String placa) throws Exception {
+    /*public boolean removerVenta(String placa) throws Exception {
 
         boolean encontrado = false;
         int cont =0;
+        Venta actual=null;
         while(cont<ventasGenerales.contar() && !encontrado){
-            Venta actual = (Venta) ventasGenerales.getPos(cont);
+             actual= (Venta) ventasGenerales.getPos(cont);
             if(actual.getVehiculo().getPlaca().compareToIgnoreCase(placa)==0){
                 ventasGenerales.eliminarPos(cont);
                 encontrado=true;
             }
             cont++;
         }
+        if(encontrado){
+            vehiculos.add(actual);
+        }
+        return encontrado;
+    }*/
+
+    public boolean removerVenta(String placa) throws Exception {
+
+        boolean encontrado = false;
+        int cont =0;
+        while(cont<ventasGenerales.contar() && !encontrado){
+            Venta actual= (Venta) ventasGenerales.getPos(cont);
+            if(actual.getVehiculo().getPlaca().compareToIgnoreCase(placa)==0){
+                ventasGenerales.eliminarPos(cont);
+                vehiculos.add(actual.getVehiculo());
+                encontrado= true;
+            }
+            cont++;
+        }
         return encontrado;
     }
-
 
     /**
      * Agrega un cliente a la lista
