@@ -48,7 +48,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private Vehiculo vMostrar;
     private Button favoritoBoton;
     private Drawable estrelladorada;
-    private Citas_c_fragment crearCita;
+    private Citas_Clien_Fragment crearCita;
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
     private SearchView busqueda_placa;
 
@@ -87,7 +87,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             try {
                 vistaVehiculo.setVisibility(View.GONE);
                 irCitaNueva.setVisibility(View.VISIBLE);
-                crearCita.visualizarcitaEditable();
+                //crearCita.visualizarcitaEditable();
             } catch (Exception e) {
                 e.printStackTrace();
             }
