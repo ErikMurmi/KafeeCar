@@ -32,7 +32,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -62,8 +62,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private final Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
     private Venta venta_mostrar;
     private Adaptador_Lista_Ventas adaptadorVentas;
-    @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.ventas_vendedor, container, false);
@@ -97,9 +95,12 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         TextView ed_cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
         ed_cedula_vendedor_vt_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
+        TextView ed_placa_vt_vn_actv = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+        ed_placa_vt_vn_actv.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         TextView cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.cedula_vendedor_vt_vn_etxt);
         cedula_vendedor_vt_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
+
 
         //add
         descartar_vt_vn_btn.setOnClickListener(v -> {
@@ -160,10 +161,16 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             irAniadirVenta.setVisibility(View.GONE);
             aniadirVenta.setVisibility(View.GONE);
             ver_vt_vn_lyt.setVisibility(View.GONE);
-            cargar();
             adaptadorEditar();
+            cargar();
             editar_vt_vn_lyt.setVisibility(View.VISIBLE);
-            visualizarVentaEditable();
+            try{
+                visualizarVentaEditable();
+            }catch (Exception e){
+                Toast.makeText(mainView.getContext(), "Error 102", Toast.LENGTH_SHORT).show();
+                irVerListaVentas();
+            }
+
         });
 
         //editar
@@ -177,7 +184,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                         irVerVenta();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "No se pudo editar la venta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 103", Toast.LENGTH_SHORT).show();
                     irVerListaVentas();
                 }
             });
@@ -194,7 +201,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     irVerVenta();
                 }catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(mainView.getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 104", Toast.LENGTH_SHORT).show();
                     irVerListaVentas();
                 }
             });
@@ -354,13 +361,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         TextView ed_cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
         ed_cedula_vendedor_vt_vn_etxt.setText(vendedor_actual.getCedula());
 
-        AutoCompleteTextView ed_placa_vt_vn_actv = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
-        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
-        ed_placa_vt_vn_actv.setAdapter(adapterPla);
+        TextView ed_placa_vt_vn_actv = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+        ed_placa_vt_vn_actv.setText(venta_mostrar.getVehiculo().getPlaca());
     }
 
     public void irVerVenta(){
-        cargar();
         lista_ventas.setVisibility(View.GONE);
         aniadirVenta.setVisibility(View.GONE);
         editar_vt_vn_lyt.setVisibility(View.GONE);
@@ -381,9 +386,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
-
-        String fecha_nueva_venta = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-        Date fecha = sdf.parse(fecha_nueva_venta);
 
         AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_vn_actv);
@@ -419,6 +421,8 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         float precio = Float.parseFloat(precio_str);
 
         if (c == 0) {
+            String fecha_nueva_venta = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(fecha_nueva_venta);
             Venta nueva = new Venta(
                     fecha,
                     cliente_c,
@@ -490,7 +494,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             AutoCompleteTextView dia = mainView.findViewById(R.id.ed_dia_vt_vn_acv);
             AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
             TextView vendedor = mainView.findViewById(R.id.ed_cedula_vendedor_vt_vn_etxt);
-            AutoCompleteTextView placa = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
+            TextView placa = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
             EditText precioV = mainView.findViewById(R.id.ed_precio_vt_vn_etxt);
 
             StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
@@ -508,14 +512,22 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             String dia_s = fechaVenta.split("-")[0];
             String mes_s = fechaVenta.split("-")[1];
             String anio_s = fechaVenta.split("-")[2];
+
+            for(int i =0;i<Patioventainterfaz.anios.length;i++){
+                if(Patioventainterfaz.anios[i].equals(anio_s))
+                    posicion_anio = i;
+            }
+            posicion_dia = Integer.parseInt(dia_s);
+            posicion_mes = Integer.parseInt(mes_s)-1;
+
             anio.setText(anio_s);
-            mes.setText(Patioventainterfaz.meses[Integer.parseInt(mes_s)-1]);
+            mes.setText(Patioventainterfaz.meses[posicion_mes]);
             dia.setText(dia_s);
 
             cliente.setText(venta_mostrar.getCliente().getCedula());
             vendedor.setText(vendedor_actual.getCedula());
             placa.setText(venta_mostrar.getVehiculo().getPlaca());
-            precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
+            precioV.setText(String.format("%.2f", venta_mostrar.getPrecio()));
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(mainView.getContext(), "Error 101", Toast.LENGTH_SHORT).show();
@@ -524,47 +536,50 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     }
 
     public boolean editarVenta() throws Exception {
+
         Cliente cliente_c = null;
-        Vehiculo vehiculo = null;
         int c = 0;
 
         AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
-        AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_vt_vn_actv);
 
-        if (!isEmpty(cliente)) {
-            String cliente_str = cliente.getText().toString();
-            if (cliente_str.length() != 10) {
-                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                cliente.setText("");
+            if (!isEmpty(cliente)) {
+                String cliente_str = cliente.getText().toString();
+                if (cliente_str.length() != 10) {
+                    Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                    cliente.setText("");
+                    c++;
+                }
+                    cliente_c = patio.buscarClientes("Cedula", cliente_str);
+            } else {
+                Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
                 c++;
             }
-            cliente_c = patio.buscarClientes("Cedula", cliente_str);
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        if (!isEmpty(auto)) {
-            String vehiculo_str = auto.getText().toString();
-            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
-            if (vehiculo == null) {
-                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
-                auto.setText("");
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
 
         EditText precio = mainView.findViewById(R.id.ed_precio_vt_vn_etxt);
-        float precio_flt = Float.parseFloat(precio.getText().toString());
+        String precio_s = precio.getText().toString();
+        float precio_flt = 0;
+        try{
+            precio_flt = Float.parseFloat(precio_s);
+        }catch(Exception e){
+            Toast.makeText(mainView.getContext(), "Error 108", Toast.LENGTH_SHORT).show();
+        }
 
         if (c == 0) {
-            fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-            Date fecha = sdf.parse(fecha_nueva_cita);
-            venta_mostrar.actualizar(fecha, precio_flt, vehiculo, cliente_c, vendedor_actual);
-            if (patio.buscarVentas(vehiculo.getPlaca(), cliente_c.getCedula())!=null) {
+            fecha_nueva_cita = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
+            Date fecha = null;
+            try {
+                fecha = sdf.parse(fecha_nueva_cita);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 106", Toast.LENGTH_SHORT).show();
+            }
+            venta_mostrar.actualizar(
+                    fecha,
+                    precio_flt,
+                    venta_mostrar.getVehiculo(),
+                    cliente_c,
+                    vendedor_actual);
+            if (patio.buscarVentas(venta_mostrar.getVehiculo().getPlaca(), cliente_c.getCedula()) != null) {
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -597,7 +612,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
+//todo arreglar busqueda
     @Override
     public boolean onQueryTextChange(String newText) {
         String b = newText;

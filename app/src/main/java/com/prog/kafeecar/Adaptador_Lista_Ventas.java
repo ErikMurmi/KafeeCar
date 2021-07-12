@@ -102,7 +102,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
         }
     }
 
-    public void filtro(String strBuscar){
+    /*public void filtro(String strBuscar){
         if(strBuscar.length()==0){
             ventas_buscadas.vaciar();
             ventas_buscadas.copiar(ventas_original);
@@ -116,7 +116,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
             }
         }
         notifyDataSetChanged();
-    }
+    }*/
 
     public void buscar(String fecha){
         if(fecha.length()==0){

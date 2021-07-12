@@ -349,7 +349,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             b= b.substring(0,10);
             busqueda_ventas.setQuery(b,false);
         }
-        adptadorlistaview.filtro(b);
+        adptadorlistaview.buscar(b);
         return false;
     }
 
