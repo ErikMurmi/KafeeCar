@@ -382,13 +382,6 @@ public class Perfil_cliente_fragment extends Fragment{
     }
 
 
-    public void volverpantallaprincipal(){
-        editarperfil.setVisibility(View.GONE);
-        verperfil.setVisibility(View.VISIBLE);
-        verperfilCliente();
-    }
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_GALERY){
