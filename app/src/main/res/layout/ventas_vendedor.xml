@@ -12,7 +12,7 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView13"
@@ -298,6 +298,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/barra_separacion"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -342,7 +343,7 @@
         android:background="@drawable/visualizarventa"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -355,7 +356,7 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingLeft="35dp"
-                android:paddingRight="30dp">
+                android:paddingRight="25dp">
 
                 <Space
                     android:layout_width="match_parent"
@@ -822,6 +823,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/barra_separacion"
                     android:orientation="horizontal">
 
                     <Button
@@ -854,18 +856,6 @@
                     <Space
                         android:layout_width="10dp"
                         android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Space
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -1159,6 +1149,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/barra_separacion"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
