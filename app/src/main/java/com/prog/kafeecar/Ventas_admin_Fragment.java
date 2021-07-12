@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -55,7 +56,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private PatioVenta patio;
 
     private Button administrar_venta_generales_btn;
-    private Button administrar_venta_aniadirventa_btn;
     private LinearLayout ventas_admin_generales_lyt;
     private LinearLayout add_vt_ad_lyt;
     private LinearLayout ventas_admin_lyt;
@@ -76,10 +76,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private Venta venta_mostrar;
     private String [] meses=new String[]{"ENERO","FEBRERO","MAYO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
     private int []sales ;
-    private Button vt_admin_estadisticas_btn;
     private StorageReference mStorageRef;
 
-    private Vendedor usuario_admin = (Vendedor) Patioventainterfaz.usuarioActual;
+    private final Vendedor usuario_admin = (Vendedor) Patioventainterfaz.usuarioActual;
 
     private int[] colors =new int[]{Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51),Color.rgb(255,87,51)};
     @Nullable
@@ -96,8 +95,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         //Botones
         //Pag principal
         administrar_venta_generales_btn = mainView.findViewById(R.id.administrar_venta_generales_btn);
-        administrar_venta_aniadirventa_btn = mainView.findViewById(R.id.administrar_venta_aniadirventa_btn);
-        vt_admin_estadisticas_btn = mainView.findViewById(R.id.vt_admin_estadisticas_btn);
+        Button administrar_venta_aniadirventa_btn = mainView.findViewById(R.id.administrar_venta_aniadirventa_btn);
+        Button vt_admin_estadisticas_btn = mainView.findViewById(R.id.vt_admin_estadisticas_btn);
         //ADD
         Button descartar_vt_ad_btn = mainView.findViewById(R.id.descartar_vt_ad_btn);
         ImageButton add_cliente_vt_ad_btn = mainView.findViewById(R.id.add_cliente_vt_ad_btn);
@@ -207,6 +206,32 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                //todo poner en la condicion el lyt de editar
+                if ((add_vt_ad_lyt.getVisibility() == View.VISIBLE)||(add_vt_ad_lyt.getVisibility() == View.VISIBLE)) {
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            irListaGenerales();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if (ver_vt_ad_lyt.getVisibility() == View.VISIBLE) {
+                    irListaGenerales();
+                }
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
 
         //Add
         /*

@@ -222,7 +222,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (irEditarVendedor.getVisibility() == View.VISIBLE) {
+                if ((irEditarVendedor.getVisibility() == View.VISIBLE)||(irRegistrarVendedor.getVisibility() == View.VISIBLE)) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
