@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 
 public class Patioventainterfaz extends AppCompatActivity {
 
-    public static PatioVenta patioventa = new PatioVenta();
+    public static PatioVenta patioventa;
     public static Cliente listaFav=new Cliente();
     public static Usuario usuarioActual = null;
     @SuppressLint("SimpleDateFormat")
@@ -61,6 +61,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         //setContentView(R.layout.login);
 
         // Login de pruebas
+        patioventa = new PatioVenta();
         setContentView(R.layout.login_sinclaves);
         try {
             cargarDatos();

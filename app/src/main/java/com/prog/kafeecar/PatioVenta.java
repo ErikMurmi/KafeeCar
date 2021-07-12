@@ -129,7 +129,6 @@ public class PatioVenta {
      */
     public void aniadirVehiculo(Vehiculo nuevo){
         vehiculos.add(nuevo);
-
     }
 
     /**
@@ -139,7 +138,7 @@ public class PatioVenta {
      */
     public void aniadirVenta(Venta nueva) throws Exception {
         ventasGenerales.add(nueva);
-        Vehiculo actual = (Vehiculo) nueva.getVehiculo();
+        Vehiculo actual = nueva.getVehiculo();
         removerVehiculo(actual.getPlaca());
     }
 
@@ -220,18 +219,19 @@ public class PatioVenta {
      * @param placa dato del vehiculo de la venta a ser eliminada
      * @return true si se elimino , false en caso de que no.
      */
-    public void removerVenta(String placa) throws Exception {
+    public boolean removerVenta(String placa) throws Exception {
 
         boolean encontrado = false;
         int cont =0;
         while(cont<ventasGenerales.contar() && !encontrado){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.getVehiculo().getPlaca().compareTo(placa)==0){
+            if(actual.getVehiculo().getPlaca().compareToIgnoreCase(placa)==0){
                 ventasGenerales.eliminarPos(cont);
                 encontrado=true;
             }
             cont++;
         }
+        return encontrado;
     }
 
 

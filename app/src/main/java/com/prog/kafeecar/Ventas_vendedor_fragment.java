@@ -36,6 +36,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Ventas_vendedor_fragment extends Fragment implements Adaptador_Lista_Ventas.RecyclerItemClick, SearchView.OnQueryTextListener {
@@ -88,8 +89,8 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             lista_ventas.setVisibility(View.GONE);
             ver_vt_vn_lyt.setVisibility(View.GONE);
             editar_vt_vn_lyt.setVisibility(View.GONE);
-            adaptador();
             cargar();
+            adaptador();
             aniadirVenta.setVisibility(View.VISIBLE);
         });
 
@@ -140,16 +141,25 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Eliminar Venta");
             msg.setMessage("¿Estás seguro de eliminar esta venta?");
-            Vehiculo vh = venta_mostrar.getVehiculo();
+            //Vehiculo vh = venta_mostrar.getVehiculo();
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 try {
-                    patio.removerVenta(vh.getPlaca());
-                    irVerListaVentas();
+                    Toast.makeText(mainView.getContext(), "Error 201", Toast.LENGTH_SHORT).show();
+                    if(patioventa.removerVenta(venta_mostrar.getVehiculo().getPlaca())){
+                        Toast.makeText(mainView.getContext(), "Error 202", Toast.LENGTH_SHORT).show();
+                        irVerListaVentas();
+                    }
+
+                    //patio.removerVenta(vh.getPlaca());
+
+
+                    Toast.makeText(mainView.getContext(), "Error 203", Toast.LENGTH_SHORT).show();
                     //todo
                     //revisar que el metodo que devuelve el carro despues de
                     //eliminar la venta este correcto
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 200", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -370,6 +380,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         editar_vt_vn_lyt.setVisibility(View.GONE);
         ver_vt_vn_lyt.setVisibility(View.GONE);
         aniadirVenta.setVisibility(View.GONE);
+
         irAniadirVenta.setVisibility(View.VISIBLE);
         lista_ventas.setVisibility(View.VISIBLE);
     }
