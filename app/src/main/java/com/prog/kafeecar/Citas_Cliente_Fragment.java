@@ -1,6 +1,7 @@
 package com.prog.kafeecar;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -86,6 +87,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
 
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+
 
         //Botones aniadir cita nueva
         //deacartarnuevacita=mainview.findViewById(R.id.descartar_NC_btn);
@@ -534,7 +536,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         }
     }
     */
-
+    @SuppressLint("SetTextI18n")
     public void visualizarCita() {
         aniadirCita.setVisibility(View.GONE);
         verCitaLista.setVisibility(View.GONE);
@@ -550,9 +552,9 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_cli_txt);
         TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_cli_txt);
         TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_cli_txt);
-        StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
         try {
-            final File localFile = File.createTempFile(vMostrar.getimagen(), "jpg");
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Uri nuevo = Uri.parse(localFile.getAbsolutePath());
                 imagen_ed.setImageURI(nuevo);
