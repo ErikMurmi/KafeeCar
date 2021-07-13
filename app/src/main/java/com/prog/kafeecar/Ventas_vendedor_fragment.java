@@ -50,7 +50,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private boolean anios_mostradas = false;
     public boolean dias_mostrados = false;
 
-    String fecha_nueva_cita;
+    String fecha_nueva_venta;
 
     private View mainView;
     private SearchView busqueda_ventas;
@@ -591,12 +591,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 c++;
             }
 
-
         if (c == 0) {
-            fecha_nueva_cita = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
+            fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
             Date fecha = null;
             try {
-                fecha = sdf.parse(fecha_nueva_cita);
+                fecha = sdf.parse(fecha_nueva_venta);
             } catch (ParseException e) {
                 e.printStackTrace();
                 Toast.makeText(mainView.getContext(), "Error 106", Toast.LENGTH_SHORT).show();

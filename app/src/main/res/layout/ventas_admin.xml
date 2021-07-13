@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:visibility="visible">
 
         <ImageView
@@ -34,6 +34,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/ed_auto_vt_ad_img"
                     android:layout_width="match_parent"
                     android:layout_height="206dp"
                     android:layout_marginBottom="10dp"
@@ -813,7 +814,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/vt_vn_ver_venta_eliminar_btn"
+                        android:id="@+id/vt_ad_ver_venta_eliminar_btn"
                         style="@style/boton_editar"
                         android:layout_width="110dp"
                         android:layout_height="45dp"
@@ -828,7 +829,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
-                        android:id="@+id/vt_vn_ver_venta_editar_btn"
+                        android:id="@+id/vt_ad_ver_venta_editar_btn"
                         style="@style/boton_editar"
                         android:layout_width="100dp"
                         android:layout_height="45dp"
@@ -856,7 +857,6 @@
                         android:layout_weight="1" />
 
                 </LinearLayout>
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -1193,7 +1193,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/administrar_ventas"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="gone">
 
         <LinearLayout
