@@ -185,7 +185,10 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("Volver");
                     msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> irCatalogo());
+                    msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                        //aniadir_vehiculo.refreshDrawableState();
+                        irCatalogo();
+                    });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }

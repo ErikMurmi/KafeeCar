@@ -39,7 +39,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -143,7 +142,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                 try {
                     if(editarVenta()){
                         irListaGenerales();
-                        Toast.makeText(mainView.getContext(),"Se registro la venta",Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(),"No registro la venta",Toast.LENGTH_SHORT).show();
@@ -184,12 +182,27 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             @Override
             public void handleOnBackPressed() {
                 //todo poner en la condicion el lyt de editar
-                if ((add_vt_ad_lyt.getVisibility() == View.VISIBLE)||(add_vt_ad_lyt.getVisibility() == View.VISIBLE)) {
+                if ((add_vt_ad_lyt.getVisibility() == View.VISIBLE)) {
                     android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         try {
+                            irListaGenerales();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if(editar_vt_ad_lyt.getVisibility() == View.VISIBLE){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            editar_vt_ad_lyt.invalidate();
                             irListaGenerales();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -353,6 +366,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     public void irPaginaPrincipal(){
         ventas_admin_generales_lyt.setVisibility(View.GONE);
         add_vt_ad_lyt.setVisibility(View.GONE);
+        editar_vt_ad_lyt.setVisibility(View.GONE);
+        ver_vt_ad_lyt.setVisibility(View.GONE);
         ventas_admin_lyt.setVisibility(View.VISIBLE);
     }
     public void adaptadorAniadir(){
@@ -376,21 +391,21 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         TextView cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_vt_ad_etxt);
         cedula_vendedor_ci_vn_txt.setText(usuario_admin.getCedula());
 
-        AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_vt_ad_actv);
-        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
-        auto.setAdapter(adapterPla);
+        TextView auto = mainView.findViewById(R.id.ed_placa_vt_ad_txt);
+        auto.setText(venta_mostrar.getVehiculo().getPlaca());
     }
 
     public void visualizarVentaEditable() {
         try {
             adaptadorEditar();
+            listaDesplegablesEditar();
             ImageView ed_auto_vt_ad_img = mainView.findViewById(R.id.ed_auto_vt_ad_img);
             AutoCompleteTextView ed_anio_vt_ad_acv = mainView.findViewById(R.id.ed_anio_vt_ad_acv);
             AutoCompleteTextView ed_mes_vt_ad_acv = mainView.findViewById(R.id.ed_mes_vt_ad_acv);
             AutoCompleteTextView ed_dia_vt_ad_acv = mainView.findViewById(R.id.ed_dia_vt_ad_acv);
             AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
             TextView vendedor = mainView.findViewById(R.id.ed_cedula_vendedor_vt_ad_etxt);
-            TextView placa = mainView.findViewById(R.id.ed_placa_vt_ad_actv);
+            TextView placa = mainView.findViewById(R.id.ed_placa_vt_ad_txt);
             EditText precioV = mainView.findViewById(R.id.ed_precio_vt_ad_etxt);
 
             StorageReference filePath = mStorageRef.child("Vehiculos/" + venta_mostrar.getVehiculo().getimagen());
