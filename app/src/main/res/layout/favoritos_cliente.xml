@@ -146,7 +146,7 @@
                             style="@style/texto_style"
                             android:layout_width="171dp"
                             android:fontFamily="@font/ocra"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/gris_visualizar" />
 
                     </LinearLayout>
 
@@ -168,11 +168,12 @@
                         <TextView
                             android:id="@+id/matricula_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="228dp"
+                            android:layout_width="204dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="123" />
+                            android:text="123"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -193,11 +194,12 @@
                         <TextView
                             android:id="@+id/vehiculo_anio_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="269dp"
+                            android:layout_width="252dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="2011" />
+                            android:text="2011"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -218,11 +220,12 @@
                         <TextView
                             android:id="@+id/vehiculo_marca_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="269dp"
+                            android:layout_width="253dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="chevrolet" />
+                            android:text="chevrolet"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -243,11 +246,12 @@
                         <TextView
                             android:id="@+id/vehiculo_modelo_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="262dp"
+                            android:layout_width="239dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="2jdhs" />
+                            android:text="2jdhs"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -268,11 +272,12 @@
                         <TextView
                             android:id="@+id/vehiculo_color_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="262dp"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
-                            android:text="Rojito" />
+                            android:text="Rojito"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -293,11 +298,12 @@
                         <TextView
                             android:id="@+id/vehiculo_descripcion_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="207dp"
+                            android:layout_width="193dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/ocra"
-                            android:text="es casi nuevo " />
+                            android:text="es casi nuevo "
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -318,10 +324,11 @@
                         <TextView
                             android:id="@+id/vehiculo_pventa_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="198dp"
+                            android:layout_width="185dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
-                            android:text="5000" />
+                            android:text="5000"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -342,10 +349,11 @@
                         <TextView
                             android:id="@+id/vehiculo_promocion_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="227dp"
+                            android:layout_width="209dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
-                            android:text="12" />
+                            android:text="12"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -366,10 +374,11 @@
                         <TextView
                             android:id="@+id/vehiculo_matriculado_cliente_F_txt"
                             style="@style/texto_style"
-                            android:layout_width="209dp"
+                            android:layout_width="188dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
-                            android:text="Si" />
+                            android:text="Si"
+                            android:textColor="@color/gris_visualizar" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -383,7 +392,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/regresar_VV_cliente_btn"
+                        android:id="@+id/regresar_VVF_cliente_btn"
                         android:layout_width="158dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/boton_redondeado_dark"
@@ -397,7 +406,7 @@
                         android:layout_height="wrap_content" />
 
                     <Button
-                        android:id="@+id/agendarcita_cliente_btn"
+                        android:id="@+id/agendarcita_cliente_F_btn"
                         style="@style/boton_editar"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"

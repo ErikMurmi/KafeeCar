@@ -103,6 +103,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
         //boton de ver cita
         Button anular = mainView.findViewById(R.id.anular_ci_cli_btn);
+        Button irVerEditable = mainView.findViewById(R.id.editar_ci_cli_btn);
 
         //actualizarvercita=mainview.findViewById(R.id.actualizar_cita_VC_btn);
         //boton de Lista Cita
@@ -141,6 +142,12 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
+        });
+        irVerEditable.setOnClickListener(v -> {
+            verCitaLista.setVisibility(View.GONE);
+            verCita.setVisibility(View.GONE);
+            aniadirCita.setVisibility(View.GONE);
+            //visualizarEditable();
         });
 
         //nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);

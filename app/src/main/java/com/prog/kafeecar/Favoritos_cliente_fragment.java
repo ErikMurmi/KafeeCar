@@ -58,6 +58,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VVF_scl);
         verCatalogofav = mainView.findViewById(R.id.favorito_cliente_lyt);
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_F_btn);
+        Button regresarFavorito = mainView.findViewById(R.id.regresar_VVF_cliente_btn);
         //estrelladorada = favoritoBoton.getBackground();
 
         //Metodo para el control del boton atras
@@ -75,6 +76,14 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
 
             }
         };
+        regresarFavorito.setOnClickListener(v -> {
+            try {
+                vistaVehiculo.setVisibility(View.GONE);
+                verCatalogofav.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         favoritoBoton.setOnClickListener(v ->{
             clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
