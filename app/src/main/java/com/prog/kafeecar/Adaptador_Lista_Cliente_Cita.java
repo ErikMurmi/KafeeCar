@@ -43,7 +43,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  clienteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  clienteHolder holder, int position) {//uno
         try {
             Cita c=(Cita)citas_buscadas.getPos(position);
             String nombre= c.getCliente().getNombre();
@@ -66,6 +66,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             holder.nombre.setText(nombre);
             holder.telefono.setText(telefono);
             holder.placa.setText(placa);
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(placa,c.getCliente().getCedula()));
         } catch (Exception e) {
             e.printStackTrace();
         }

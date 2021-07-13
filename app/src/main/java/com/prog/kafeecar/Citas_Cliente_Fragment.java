@@ -1,9 +1,11 @@
 package com.prog.kafeecar;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,7 +43,7 @@ import java.util.Date;
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 
 public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
-    private String TAG = "Citas_Cliete";
+
     private View mainView;
     //private Button deacartarnuevacita;
     //private Button guardarcitanueva;
@@ -52,36 +55,31 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     private FloatingActionButton irAniadirCita;
     private Cita cita_mostrar;
 
-
-   // private ScrollView vercita;
-    //private ScrollView catalogoAutosCliente;
-   // private LinearLayout nuevacita;
-
     private LinearLayout editarCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
-    //private Patioventainterfaz PatioIterfaz = new Patioventainterfaz();
-
-    private RecyclerView listaview;
-
-    private SearchView busqueda_citas;
-    private Adaptador_Lista_Cliente_Cita adptadorlistaview;
-
-    private SimpleDateFormat sdf = Patioventainterfaz.sdf;
-
-    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private final Cliente cliente_actual = (Cliente) Patioventainterfaz.usuarioActual;
 
+    private RecyclerView listaview;
+    private SearchView busqueda_citas;
+    private Adaptador_Lista_Cliente_Cita adptadorlistaview;
+    private SimpleDateFormat sdf = Patioventainterfaz.sdf;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
+
         verCitaLista = mainView.findViewById(R.id.citas_cliente_CC_lyt);
         editarCita = mainView.findViewById(R.id.add_cita_cli_lyt);
         verCita = mainView.findViewById(R.id.ver_ci_cli_lyt);
+
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
 
         //Botones aniadir cita nueva
@@ -530,10 +528,10 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         }
     }
     */
-
+    @SuppressLint("SetTextI18n")
     public void visualizarCita() {
-        editarCita.setVisibility(View.GONE);
         verCitaLista.setVisibility(View.GONE);
+        editarCita.setVisibility(View.GONE);
         verCita.setVisibility(View.VISIBLE);
 
         ImageView imagen_ed = mainView.findViewById(R.id.ver_cita_im_cli_img);
@@ -580,6 +578,11 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     }
 
     @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
     public void itemClick(String placa, String cedula_cliente) {
         try {
             cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
@@ -587,11 +590,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         } catch (Exception e) {
             Toast.makeText(mainView.getContext(), "Errores", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
     }
 
     @Override

@@ -658,7 +658,7 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -698,8 +698,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_marginRight="15dp"></androidx.recyclerview.widget.RecyclerView>
 
             </androidx.recyclerview.widget.RecyclerView>
 
