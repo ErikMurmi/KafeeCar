@@ -351,9 +351,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-
-
-
+        
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
         return mainView;
