@@ -75,6 +75,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private int[] sales;
     private StorageReference mStorageRef;
     private int[] colors = new int[]{Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51)};
+    private SearchView busqueda_placa;
+    private Lista ventas;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -101,7 +103,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ventas_admin_lyt = mainView.findViewById(R.id.ventas_admin_lyt);
         ver_vt_ad_lyt = mainView.findViewById(R.id.ver_vt_ad_lyt);
         editar_vt_ad_lyt = mainView.findViewById(R.id.editar_vt_ad_lyt);
-
+        verEstadisticasGenerales=mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
         busqueda_ventas = mainView.findViewById(R.id.vt_busqueda_plcas_admin);
 
 
@@ -215,15 +217,13 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
         busqueda_ventas.setOnQueryTextListener(this);
 
-        //Add
-        /*
-        // layouts
-        verEstadisticasGenerales=mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
 
-        //0nClick
+
+
+
         barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
         createcharts();
-        ventas = patio.getVentasGenerales();*/
+        ventas = patio.getVentasGenerales();
         return mainView;
     }
 
