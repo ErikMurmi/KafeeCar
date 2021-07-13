@@ -505,7 +505,7 @@
                         <TextView
                             android:id="@+id/placa_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="171dp"
+                            android:layout_width="163dp"
                             android:fontFamily="@font/ocra"
                             android:text="DHC-123"
                             android:textColor="@color/gris_visualizar" />
@@ -529,7 +529,7 @@
                         <TextView
                             android:id="@+id/matricula_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="226dp"
+                            android:layout_width="197dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
@@ -554,7 +554,7 @@
                         <TextView
                             android:id="@+id/vehiculo_anio_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="253dp"
+                            android:layout_width="246dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
@@ -579,7 +579,7 @@
                         <TextView
                             android:id="@+id/vehiculo_marca_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="248dp"
+                            android:layout_width="246dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
@@ -604,7 +604,7 @@
                         <TextView
                             android:id="@+id/vehiculo_modelo_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="253dp"
+                            android:layout_width="244dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
@@ -629,7 +629,7 @@
                         <TextView
                             android:id="@+id/vehiculo_color_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="268dp"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_space"
                             android:fontFamily="@font/ocra"
@@ -654,7 +654,7 @@
                         <TextView
                             android:id="@+id/vehiculo_descripcion_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="210dp"
+                            android:layout_width="188dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/ocra"
@@ -679,7 +679,7 @@
                         <TextView
                             android:id="@+id/vehiculo_pventa_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="198dp"
+                            android:layout_width="171dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="$5000"
@@ -703,7 +703,7 @@
                         <TextView
                             android:id="@+id/vehiculo_promocion_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="230dp"
+                            android:layout_width="176dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="$2000"
@@ -727,7 +727,7 @@
                         <TextView
                             android:id="@+id/vehiculo_matriculado_cliente_txt"
                             style="@style/texto_style"
-                            android:layout_width="213dp"
+                            android:layout_width="166dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="Si"

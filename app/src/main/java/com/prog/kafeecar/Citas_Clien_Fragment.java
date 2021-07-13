@@ -33,7 +33,7 @@ public class Citas_Clien_Fragment extends Fragment implements Adaptador_Lista_Cl
     }
 
     public void cargar() {
-        RecyclerView listacitas_rv = mainView.findViewById(R.id.listacitas_Rv);
+        RecyclerView listacitas_rv = mainView.findViewById(R.id.listacitas_rv);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listacitas_rv.setLayoutManager(manager);
         listacitas_rv.setItemAnimator(new DefaultItemAnimator());

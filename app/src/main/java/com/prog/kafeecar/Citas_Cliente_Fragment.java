@@ -1,6 +1,8 @@
 package com.prog.kafeecar;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,7 +60,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     //private ScrollView catalogoAutosCliente;
    // private LinearLayout nuevacita;
 
-    private LinearLayout editarCita;
+    private LinearLayout aniadirCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
 
@@ -79,10 +82,14 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
-        verCitaLista = mainView.findViewById(R.id.citas_cliente_CC_lyt);
-        editarCita = mainView.findViewById(R.id.add_cita_cli_lyt);
+        verCitaLista = mainView.findViewById(R.id.citas_cliente_cc_lyt);
+        aniadirCita = mainView.findViewById(R.id.add_cita_cli_lyt);
         verCita = mainView.findViewById(R.id.ver_ci_cli_lyt);
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
+
+
+        irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+
 
         //Botones aniadir cita nueva
         //deacartarnuevacita=mainview.findViewById(R.id.descartar_NC_btn);
@@ -91,11 +98,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //guardarcitaeditada=mainview.findViewById(R.id.guardar_cita_nueva_EC_btn);
         //descartareditarcita = mainview.findViewById(R.id.descartar_EC_btn);
 
-        //boton de ver cita
+
 
         //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+        //boton de ver cita
+        Button anular = mainView.findViewById(R.id.anular_ci_cli_btn);
+        Button irVerEditable = mainView.findViewById(R.id.editar_ci_cli_btn);
 
-        //regresar = mainview.findViewById(R.id.regresar_cita_VC_btn);
         //actualizarvercita=mainview.findViewById(R.id.actualizar_cita_VC_btn);
         //boton de Lista Cita
         //buscarCitaFecha=mainview.findViewById(R.id.buscar_listacita_btn);
@@ -112,12 +121,34 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //aniadirCita = mainview.findViewById(R.id.add_cita_cli_lyt);
 
 
-        /*irAniadirCita.setOnClickListener(v -> {
+        irAniadirCita.setOnClickListener(v -> {
             irAniadirCita.setVisibility(View.GONE);
-            ver_ci_cli_lyt.setVisibility(View.GONE);
+            verCita.setVisibility(View.GONE);
+            verCitaLista.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
-        });*/
+        });
+        anular.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("ANULAR");
+            msg.setMessage("¿Está seguro de anular la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
+                    irListaCitas();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+        irVerEditable.setOnClickListener(v -> {
+            verCitaLista.setVisibility(View.GONE);
+            verCita.setVisibility(View.GONE);
+            aniadirCita.setVisibility(View.GONE);
+            //visualizarEditable();
+        });
 
         //nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);
 
@@ -194,6 +225,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
+    }
+    public void irListaCitas(){
+        cargar();
+        verCitaLista.setVisibility(View.VISIBLE);
+        irAniadirCita.setVisibility(View.VISIBLE);
+        verCita.setVisibility(View.GONE);
+        aniadirCita.setVisibility(View.GONE);
     }
 
 
@@ -451,7 +489,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     }*/
 
     public void cargar()  {
-        listaview= mainView.findViewById(R.id.listacitas_Rv);
+        listaview= mainView.findViewById(R.id.listacitas_rv);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -530,9 +568,9 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         }
     }
     */
-
+    @SuppressLint("SetTextI18n")
     public void visualizarCita() {
-        editarCita.setVisibility(View.GONE);
+        aniadirCita.setVisibility(View.GONE);
         verCitaLista.setVisibility(View.GONE);
         verCita.setVisibility(View.VISIBLE);
 
@@ -546,9 +584,9 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         TextView precio = mainView.findViewById(R.id.ver_precioVenta_ci_cli_txt);
         TextView descripcion = mainView.findViewById(R.id.ver_descripcion_ci_cli_txt);
         TextView resolucion = mainView.findViewById(R.id.ver_resolucion_ci_cli_txt);
-        StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
         try {
-            final File localFile = File.createTempFile(vMostrar.getimagen(), "jpg");
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Uri nuevo = Uri.parse(localFile.getAbsolutePath());
                 imagen_ed.setImageURI(nuevo);

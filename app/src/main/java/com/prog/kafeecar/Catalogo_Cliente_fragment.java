@@ -201,9 +201,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             e.printStackTrace();
         }
         if (vMostrar.isMatriculado()) {
-            matriculado.setText("Matriculado: Si");
+            matriculado.setText(" Si");
         } else {
-            matriculado.setText("Matriculado: No");
+            matriculado.setText(" No");
         }
         verCatalogo.setVisibility(View.GONE);
         vistaVehiculo.setVisibility(View.VISIBLE);
