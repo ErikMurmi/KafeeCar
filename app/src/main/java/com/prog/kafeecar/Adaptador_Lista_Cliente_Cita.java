@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -23,8 +24,9 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     View view;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Lista citas_buscadas;
-    private RecyclerItemClick itemClick;
     Lista citas_originales;
+    private RecyclerItemClick itemClick;
+
 
     public Adaptador_Lista_Cliente_Cita(Lista citas, RecyclerItemClick itemClick){
         this.citas_buscadas=citas;
@@ -44,12 +46,12 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     public void onBindViewHolder(@NonNull  clienteHolder holder, int position) {
         try {
             Cita c=(Cita)citas_buscadas.getPos(position);
-            String hora= "Hora: "+c.getHora();
-            String nombre= "Nombre: "+c.getCliente().getNombre();
-            String telefono= "Telefono: "+c.getCliente().getTelefono();
-            String matricula="Matricula N#= "+c.getVehiculo().getMatricula();
+            String nombre= c.getCliente().getNombre();
+            String telefono= c.getCliente().getTelefono();
+            String placa= c.getVehiculo().getPlaca();
+            String hora = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
+            formatoHora(c.getHora());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
-            //TODO AJUSTAR INFORMACION A LA VISTA DE DESDE UN CLIENTE
 
             try {
                 final File localFile = File.createTempFile(c.getVehiculo().getimagen(),"jpg");
@@ -63,7 +65,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             holder.horacita.setText(hora);
             holder.nombre.setText(nombre);
             holder.telefono.setText(telefono);
-            holder.matricula.setText(matricula);
+            holder.placa.setText(placa);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,6 +77,52 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
         return citas_buscadas.contar();
     }
 
+   /* public void buscar(String fecha){
+        if(fecha.length()==0){
+            citas_buscadas.vaciar();
+            citas_buscadas.copiar(citas_originales);
+        }else {
+            citas_buscadas.vaciar();
+            for (int i = 0; i < citas_originales.contar(); i++) {
+                Cita actual = null;
+                try {
+                    actual = (Cita) citas_originales.getPos(i);
+                } catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+                String f = Patioventainterfaz.getFechaMod(actual.getFechaCita());
+                if (f.contains(fecha)) {
+                    citas_buscadas.add(actual);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+    }*/
+
+
+
+
+    public class clienteHolder extends RecyclerView.ViewHolder{
+        public ImageView imagen;
+        public TextView horacita;
+        public TextView nombre;
+        public TextView placa;
+        public TextView telefono;
+
+
+        public clienteHolder(@NonNull View view) {
+            super(view);
+            imagen=view.findViewById(R.id.c_lista_cliente_img);
+            nombre=view.findViewById(R.id.nombre_c_lista_cliente_txt);
+            horacita=view.findViewById(R.id.hora_c_lista_cliente_txt);
+            placa = view.findViewById(R.id.placa_c_lista_cliente_txt);
+            telefono = view.findViewById(R.id.telefono_c_lista_cliente_txt);
+        }
+    }
+    public interface RecyclerItemClick {
+        void itemClick(String placa,String cedula_cliente);
+    }
     public void buscar(String fecha){
         if(fecha.length()==0){
             citas_buscadas.vaciar();
@@ -98,26 +146,11 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
         notifyDataSetChanged();
     }
 
-    public interface RecyclerItemClick {
-        void itemClick(String placa,String cedula_cliente);
-    }
-
-
-    public class clienteHolder extends RecyclerView.ViewHolder{
-        public ImageView imagen;
-        public TextView horacita;
-        public TextView nombre;
-        public TextView matricula;
-        public TextView telefono;
-
-
-        public clienteHolder(@NonNull View view) {
-            super(view);
-            imagen=view.findViewById(R.id.imagen_cita_cliente_img);
-            horacita=view.findViewById(R.id.hora_cita_cliente_txt);
-            nombre=view.findViewById(R.id.nombre_cita_cliente_txt);
-            telefono=view.findViewById(R.id.telefono_cita_cliente_txt);
-            matricula=view.findViewById(R.id.matricula_cita_cliente_txt);
+    @SuppressLint("DefaultLocale")
+    public String formatoHora(int hora){
+        if(hora>12){
+            return "pm";
         }
+        return "am";
     }
 }
