@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -96,11 +98,12 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //guardarcitaeditada=mainview.findViewById(R.id.guardar_cita_nueva_EC_btn);
         //descartareditarcita = mainview.findViewById(R.id.descartar_EC_btn);
 
-        //boton de ver cita
+
 
         //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
+        //boton de ver cita
+        Button anular = mainView.findViewById(R.id.anular_ci_cli_btn);
 
-        //regresar = mainview.findViewById(R.id.regresar_cita_VC_btn);
         //actualizarvercita=mainview.findViewById(R.id.actualizar_cita_VC_btn);
         //boton de Lista Cita
         //buscarCitaFecha=mainview.findViewById(R.id.buscar_listacita_btn);
@@ -123,6 +126,21 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             verCitaLista.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
+        });
+        anular.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("ANULAR");
+            msg.setMessage("¿Está seguro de anular la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
+                    irListaCitas();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         //nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);
@@ -200,6 +218,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
+    }
+    public void irListaCitas(){
+        cargar();
+        verCitaLista.setVisibility(View.VISIBLE);
+        irAniadirCita.setVisibility(View.VISIBLE);
+        verCita.setVisibility(View.GONE);
+        aniadirCita.setVisibility(View.GONE);
     }
 
 

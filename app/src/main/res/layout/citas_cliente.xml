@@ -12,7 +12,7 @@
         android:background="@drawable/cita_back"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -642,14 +642,14 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:clickable="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:backgroundTint="@color/botones"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="50dp"
         app:srcCompat="@drawable/anadir_icon"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/citas_cliente_cc_lyt"
