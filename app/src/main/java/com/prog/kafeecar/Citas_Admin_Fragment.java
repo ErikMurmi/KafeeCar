@@ -1,5 +1,6 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.net.Uri;
 import android.os.Build;
@@ -11,13 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -42,15 +43,11 @@ import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick, SearchView.OnQueryTextListener {
 
-    private String TAG = "Citas_Admin";
     private PatioVenta patio;
-    private Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
+    private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     private Adaptador_Lista_Citas adptadorlistaview;
-    //Auxiliar para pasar del vehiculo a registrar cita
-    //TODO
-    private static Vehiculo aux;
     private View mainView;
     private SearchView busqueda_citas;
     private Cita cita_mostrar;
@@ -59,22 +56,11 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private boolean anios_mostradas = false;
     public boolean dias_mostrados = false;
 
-    //Image Buttons
-    private ImageButton buscar_btn;
-
-    private EditText vehiculo_nuevacita;
     private int posicion_dia=-1;
     private int posicion_mes=-1;
     private int posicion_anio=-1;
     private int hora_nueva_cita=-1;
     String fecha_nueva_cita;
-    //Botones
-    private Button irVerEditable;
-    private Button anular;
-    private Button descartar;
-    private Button ed_guardar_ci_ad_btn;
-    private Button guardar_cita;
-    private Button descartar_an_cita;
 
     private FloatingActionButton irAniadirCita;
 
@@ -98,17 +84,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         //Botones
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
-        irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
-        anular = mainView.findViewById(R.id.anular_ci_ad_btn);
-        descartar = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
-        ed_guardar_ci_ad_btn = mainView.findViewById(R.id.ed_guardar_ci_ad_btn);
-        guardar_cita = mainView.findViewById(R.id.guardar_ci_ad_btn);
-        descartar_an_cita = mainView.findViewById(R.id.descartar_ci_ad_btn);
-        //TextViews
-        //vehiculo_nuevacita = mainView.findViewById(R.id.vehiculo_txt);
-        //Edit Text
-        //Image Buttons
-        //OnClick
+        //Botones
+        Button irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
+        Button anular = mainView.findViewById(R.id.anular_ci_ad_btn);
+        Button ed_descartar_ci_ad_btn = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
+        Button ed_guardar_ci_ad_btn = mainView.findViewById(R.id.ed_guardar_ci_ad_btn);
+        Button guardar_cita = mainView.findViewById(R.id.guardar_ci_ad_btn);
+        Button descartar_ci_ad_btn = mainView.findViewById(R.id.descartar_ci_ad_btn);
 
         irAniadirCita.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
@@ -116,6 +98,22 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             irAniadirCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
+        });
+
+        descartar_ci_ad_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de salir sin guardar?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
+                    visualizarCita();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
         });
 
         guardar_cita.setOnClickListener(v -> {
@@ -145,7 +143,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         });
 
 
-        descartar.setOnClickListener(v -> {
+        ed_descartar_ci_ad_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de salir sin guardar los cambios?");
@@ -187,48 +185,41 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         listasDesplegableAniadir();
 
-
-
-
-
         //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
         /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
         ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
         meses.setAdapter(adapt);*/
-
-
-
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
             //vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
             //vehiculo_nuevacita.setTextColor(Color.BLACK);
         }
-        /*
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                /*
-                verCita = mainView.findViewById(R.id.ver_cita_lyt);
-                aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
-                listaCitas = mainView.findViewById(R.id.citas_admin_lyt);
-
-                if(editar_vehiculo.getVisibility()== View.VISIBLE){
+                if ((ed_cita_admin_lyt.getVisibility() == View.VISIBLE)||(aniadirCita.getVisibility() == View.VISIBLE)) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> {
-                        irV1();
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            irListaCitas();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if(verVehiculo.getVisibility()== View.VISIBLE){
-                    irCatalogo();
+                if (verCita.getVisibility() == View.VISIBLE) {
+                    irListaCitas();
                 }
-                //Intent myIntent = new Intent(nombreClase.this,activityDestiny.class);
             }
-        };*/
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -444,6 +435,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         ed_cita_admin_lyt.setVisibility(View.GONE);
     }
 
+    @SuppressLint("SetTextI18n")
     public void visualizarCita() {
         listaCitas.setVisibility(View.GONE);
         irAniadirCita.setVisibility(View.GONE);
@@ -649,13 +641,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             }
         }
         return false;
-    }
-
-    public String formatoHora(int hora) {
-        if (hora > 12) {
-            return "pm";
-        }
-        return "am";
     }
 
     private boolean isEmpty(EditText etText) {

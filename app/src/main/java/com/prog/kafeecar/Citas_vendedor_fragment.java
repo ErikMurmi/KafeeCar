@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -203,6 +204,29 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         }
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if ((editar_ci_vn_lyt.getVisibility() == View.VISIBLE)||(aniadir_ci_vn_lyt.getVisibility() == View.VISIBLE)) {
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            irListaCitas();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if (ver_ci_vn_lyt.getVisibility() == View.VISIBLE) {
+                    irListaCitas();
+                }
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
 
         busqueda_citas.setOnQueryTextListener(this);
