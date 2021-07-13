@@ -40,7 +40,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
     @Override
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Ventas.clienteHolder holder, int position) {
         try {
-            Venta vt= (Venta) ventas_original.getPos(position);
+            Venta vt= (Venta) ventas_buscadas.getPos(position);
             String nombre= vt.getCliente().getNombre();
             String fecha = Patioventainterfaz.getFechaMod(vt.getFecha());
             String vendedor  = vt.getVendedor().getNombre();
