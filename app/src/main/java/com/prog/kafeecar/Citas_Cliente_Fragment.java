@@ -57,7 +57,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     //private ScrollView catalogoAutosCliente;
    // private LinearLayout nuevacita;
 
-    private LinearLayout editarCita;
+    private LinearLayout aniadirCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
 
@@ -79,10 +79,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_cliente, container, false);
         patio = Patioventainterfaz.patioventa;
-        verCitaLista = mainView.findViewById(R.id.citas_cliente_CC_lyt);
-        editarCita = mainView.findViewById(R.id.add_cita_cli_lyt);
+        verCitaLista = mainView.findViewById(R.id.citas_cliente_cc_lyt);
+        aniadirCita = mainView.findViewById(R.id.add_cita_cli_lyt);
         verCita = mainView.findViewById(R.id.ver_ci_cli_lyt);
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
+
+
+        irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
 
         //Botones aniadir cita nueva
         //deacartarnuevacita=mainview.findViewById(R.id.descartar_NC_btn);
@@ -112,12 +115,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //aniadirCita = mainview.findViewById(R.id.add_cita_cli_lyt);
 
 
-        /*irAniadirCita.setOnClickListener(v -> {
+        irAniadirCita.setOnClickListener(v -> {
             irAniadirCita.setVisibility(View.GONE);
-            ver_ci_cli_lyt.setVisibility(View.GONE);
+            verCita.setVisibility(View.GONE);
+            verCitaLista.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
-        });*/
+        });
 
         //nuevacita=mainview.findViewById(R.id.nueva_cita_cliente_lay);
 
@@ -451,7 +455,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     }*/
 
     public void cargar()  {
-        listaview= mainView.findViewById(R.id.listacitas_Rv);
+        listaview= mainView.findViewById(R.id.listacitas_rv);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
@@ -532,7 +536,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     */
 
     public void visualizarCita() {
-        editarCita.setVisibility(View.GONE);
+        aniadirCita.setVisibility(View.GONE);
         verCitaLista.setVisibility(View.GONE);
         verCita.setVisibility(View.VISIBLE);
 
