@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,16 +54,19 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     //private Button actualizarvercita;
     //private Button buscarCitaFecha;
     private FloatingActionButton irAniadirCita;
+    private Button descartarnuevacita;
+    private Button editarcita;
     private Cita cita_mostrar;
 
 
    // private ScrollView vercita;
     //private ScrollView catalogoAutosCliente;
-   // private LinearLayout nuevacita;
+
 
     private LinearLayout aniadirCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
+    private ScrollView modificarCita;
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
@@ -85,6 +89,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         verCitaLista = mainView.findViewById(R.id.citas_cliente_cc_lyt);
         aniadirCita = mainView.findViewById(R.id.add_cita_cli_lyt);
         verCita = mainView.findViewById(R.id.ver_ci_cli_lyt);
+        modificarCita = mainView.findViewById(R.id.ed_cita_cli_lyt);
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
 
 
@@ -96,8 +101,8 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //guardarcitanueva = mainview.findViewById(R.id.guardar_clita_nueva_NC_btn);
         //Botones actualizar cita cuando se edita
         //guardarcitaeditada=mainview.findViewById(R.id.guardar_cita_nueva_EC_btn);
-        //descartareditarcita = mainview.findViewById(R.id.descartar_EC_btn);
-
+        descartarnuevacita = mainView.findViewById(R.id.descartar_ci_cli_btn);
+        editarcita = mainView.findViewById(R.id.editar_ci_cli_btn);
 
 
         //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
@@ -113,13 +118,32 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //catalogoAutosCliente = mainview.findViewById(R.id.catalogo_vehiculo_cliente_Rv);
         //vercita = mainview.findViewById(R.id.ver_cita_Scroll);
         //cita_cliente_lyt = mainview.findViewById(R.id.citas_cliente_CC_lyt);
-        //editarcita = mainview.findViewById(R.id.editar_cita_linear);
+
 
 
         //ver_ci_cli_lyt = mainview.findViewById(R.id.ver_ci_cli_lyt);
 
         //aniadirCita = mainview.findViewById(R.id.add_cita_cli_lyt);
 
+
+        descartarnuevacita.setOnClickListener(v ->{
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de salir sin guardar?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    irAniadirCita.setVisibility(View.VISIBLE);
+                    verCita.setVisibility(View.GONE);
+                    verCitaLista.setVisibility(View.VISIBLE);
+                    aniadirCita.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+
+        });
 
         irAniadirCita.setOnClickListener(v -> {
             irAniadirCita.setVisibility(View.GONE);
@@ -128,6 +152,8 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
         });
+
+
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("ANULAR");
@@ -143,7 +169,9 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
+
         irVerEditable.setOnClickListener(v -> {
+            modificarCita.setVisibility(View.VISIBLE);
             verCitaLista.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.GONE);
@@ -226,6 +254,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         cargar();
         return mainView;
     }
+
     public void irListaCitas(){
         cargar();
         verCitaLista.setVisibility(View.VISIBLE);
