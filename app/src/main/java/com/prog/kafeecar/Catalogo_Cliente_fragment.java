@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,31 +36,33 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.sdf;
 import static java.lang.String.format;
 
 public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo_Cl.RecyclerItemClick, SearchView.OnQueryTextListener {
 
-    //private static final int REQUEST_IMAGE_GALERY = 101;
-    private final Cliente clienteActual = (Cliente) Patioventainterfaz.usuarioActual;
-    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    private String TAG = "Catalogo";
     private View mainView;
-    private LinearLayout irCitaNueva;
-    private LinearLayout verCatalogo;
-    private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo vMostrar;
     private Cita cita_mostrar;
-    private Button favoritoBoton;
-    private Drawable estrelladorada;
-    private Citas_Clien_Fragment crearCita;
-    private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
-    private SearchView busqueda_placa;
+    private final Cliente clienteActual = (Cliente) Patioventainterfaz.usuarioActual;
+    private LinearLayout irCitaNueva;
+    private LinearLayout verCatalogo;
+    private ScrollView vistaVehiculo;
 
+    private Button favoritoBoton;
+
+    private SearchView busqueda_placa;
+    private Drawable estrelladorada;
+    private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
+    private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
     @Override
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_cliente, container, false);
@@ -103,14 +108,24 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         });
 
         favoritoBoton.setOnClickListener(v -> modificarFavorito());
-        agendarcita.setOnClickListener(v -> {
 
+        agendarcita.setOnClickListener(v -> {
             try {
                 vistaVehiculo.setVisibility(View.GONE);
                 irCitaNueva.setVisibility(View.VISIBLE);
                 verAgendarCita();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+        guardarcita.setOnClickListener(v -> {
+            try {
+                if(registarCita()){
+                    irCatalogo();
+                    Toast.makeText(mainView.getContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
             }
         });
         //Metodo para el control del boton atras
@@ -145,22 +160,24 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         listaview.setAdapter(adptadorlistaview);
     }
 
-    public void irVer() {
+    /*public void irVer() {
 
         visualizarVehiculo();
-    }
+    }*/
 
     public void irCatalogo() {
+        cargar();
         vistaVehiculo.setVisibility(View.GONE);
+        irCitaNueva.setVisibility(View.GONE);
         //Activar el diseño deseado
         verCatalogo.setVisibility(View.VISIBLE);
-        cargar();
+
     }
 
 
-    @SuppressLint("DefaultLocale")
+    /*@SuppressLint("DefaultLocale")
     public void verLista(String placa, String placa1) throws Exception {
-    }
+    }*/
 
 
     public void modificarFavorito() {
@@ -176,6 +193,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
 
     public void visualizarVehiculo() {
+        verCatalogo.setVisibility(View.GONE);
+        irCitaNueva.setVisibility(View.GONE);
+        vistaVehiculo.setVisibility(View.VISIBLE);
 
         ImageView v_img = mainView.findViewById(R.id.foto_auto_imageView);
         TextView titulo = mainView.findViewById(R.id.titulo_auto_txt);
@@ -226,9 +246,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         } else {
             matriculado.setText(" No");
         }
-        verCatalogo.setVisibility(View.GONE);
-        irCitaNueva.setVisibility(View.GONE);
-        vistaVehiculo.setVisibility(View.VISIBLE);
+
 
 
     }
@@ -237,7 +255,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         vistaVehiculo.setVisibility(View.GONE);
         irCitaNueva.setVisibility(View.VISIBLE);
         ImageView vehiculo_img = mainView.findViewById(R.id.auto_cita_cli_vv_img);
-        AutoCompleteTextView cedula = mainView.findViewById(R.id.cedula_cliente_ci_cli_vv_actv);
+        TextView cedula = mainView.findViewById(R.id.cedula_ci_cli_vv_etxt);
         AutoCompleteTextView placavehiculo = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
         AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_cli_vv_actv);
         AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_cli_vv_actv);
@@ -267,6 +285,72 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         placavehiculo.setText(cita_mostrar.getVehiculo().getPlaca());
 
     }
+    public boolean registarCita() throws Exception {
+        Cliente cliente_c = clienteActual;
+        Vehiculo vehiculo = vMostrar;
+        int c = 0;
+
+        /*String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(prueba);
+
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+
+        if (!isEmpty(cliente)) {
+            String cliente_str = cliente.getText().toString();
+            if (cliente_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                cliente.setText("");
+                c++;
+            }
+            cliente_c = patio.buscarClientes("Cedula", cliente_str);
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+        EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
+        String resolucion_str = resolucion.getText().toString();
+
+        if (c == 0) {
+            Cita nueva = new Cita(
+                    fecha,
+                    hora_nueva_cita,
+                    cliente_c,
+                    vehiculo);
+            patio.aniadirCita(nueva);
+            if (patio.getCitas().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }*/
+        return false;
+    }
+
+    /*public void adaptadorAniadir(){
+        TextView cedulaCliente = mainView.findViewById(R.id.cedula_ci_cli_vv_etxt);
+        cedulaCliente.setText(clienteActual.getCedula());
+
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
+        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
+        auto.setAdapter(adapterPla);
+    }
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }*/
 
     @Override
     public boolean onQueryTextSubmit(String query) {
