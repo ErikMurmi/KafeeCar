@@ -93,7 +93,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
-                    verAgendarCita();
+                    visualizarVehiculo();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
