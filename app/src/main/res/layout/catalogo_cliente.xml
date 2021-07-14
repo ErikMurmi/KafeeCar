@@ -543,7 +543,7 @@
                         android:background="@drawable/boton_redondeado"
                         android:backgroundTint="@color/botones"
                         android:fontFamily="@font/valorant"
-                        android:onClick="h"
+
                         android:text="Guardar"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp" />
