@@ -55,7 +55,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     //private Button buscarCitaFecha;
     private FloatingActionButton irAniadirCita;
     private Button descartarnuevacita;
-    private Button editarcita;
     private Cita cita_mostrar;
 
 
@@ -66,7 +65,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     private LinearLayout aniadirCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
-    private ScrollView modificarCita;
+    private LinearLayout modificarCita;
 
     private PatioVenta patio;
     private Vehiculo vMostrar;
@@ -102,7 +101,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //Botones actualizar cita cuando se edita
         //guardarcitaeditada=mainview.findViewById(R.id.guardar_cita_nueva_EC_btn);
         descartarnuevacita = mainView.findViewById(R.id.descartar_ci_cli_btn);
-        editarcita = mainView.findViewById(R.id.editar_ci_cli_btn);
+
 
 
         //irAniadirCita = mainview.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
