@@ -227,6 +227,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             matriculado.setText(" No");
         }
         verCatalogo.setVisibility(View.GONE);
+        irCitaNueva.setVisibility(View.GONE);
         vistaVehiculo.setVisibility(View.VISIBLE);
 
 
@@ -243,10 +244,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         AutoCompleteTextView dias = mainView.findViewById(R.id.dia_cita_cli_vv_actv);
         AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_cli_vv_actv);
 
-        /*String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
+        String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
         String dia_str = fecha.split("-")[0];
         String mes_str = fecha.split("-")[1];
-        String anio_str = fecha.split("-")[2];*/
+        String anio_str = fecha.split("-")[2];
+
 
 
         StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
