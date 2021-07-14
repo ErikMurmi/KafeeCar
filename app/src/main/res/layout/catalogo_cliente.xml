@@ -264,151 +264,293 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/nueva_cita_cliente_lay"
-        android:layout_width="421dp"
-        android:layout_height="724dp"
-        android:gravity="center_horizontal"
+        android:id="@+id/add_cita_cli_vv_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/nueva_cita_cliente_lb"
-            android:layout_width="288dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/ocraext"
-            android:text="Nueva Cita"
-            android:textAlignment="textStart"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="@android:color/background_dark" />
-
-        <ImageView
-            android:id="@+id/imagen_auto_cita_NC_img"
-            android:layout_width="386dp"
-            android:layout_height="224dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <Space
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <TextView
-            android:id="@+id/ingresar_fecha_lb"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@android:color/background_light"
-            android:text="Ingrese la fecha:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_dark"
-            android:visibility="visible"
-            tools:visibility="visible" />
+            android:layout_marginTop="@dimen/top_space">
 
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="58dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/dia_cita_nueva_etxt"
-                android:layout_width="60dp"
-                android:layout_height="39dp"
-                android:background="@drawable/bordesmarcosgris"
-                android:ems="10"
-                android:inputType="number"
-                android:textColor="@android:color/background_dark" />
+                <ImageView
+                    android:id="@+id/auto_cita_cli_vv_img"
+                    android:layout_width="267dp"
+                    android:layout_height="146dp"
+                    android:layout_marginBottom="10dp"
+                    app:srcCompat="@drawable/ic_car_dark" />
 
-            <EditText
-                android:id="@+id/mes_cita_nueva_etxt"
-                android:layout_width="60dp"
-                android:layout_height="39dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/bordesmarcosgris"
-                android:ems="10"
-                android:inputType="number" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp" />
 
-            <EditText
-                android:id="@+id/anio_cita_nueva_etxt"
-                android:layout_width="60dp"
-                android:layout_height="39dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/bordesmarcosgris"
-                android:ems="10"
-                android:inputType="number" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ingresar_hora_lb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ingrese la hora:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/background_dark"
-            android:visibility="visible"
-            tools:visibility="visible" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/hora_cita_nueva_cl_etxt"
-            android:layout_width="97dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bordesmarcosgris"
-            android:ems="10"
-            android:inputType="date|number" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Fecha de cita"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
 
-        <LinearLayout
-            android:id="@+id/lyt"
-            android:layout_width="390dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|center_horizontal"
+                            android:orientation="horizontal"
+                            android:theme="@style/Theme.MaterialComponents.Light">
 
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/dia_cita_cli_vv_textin"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
 
-            <Button
-                android:id="@+id/descartar_NC_btn"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/barra_nav"
-                android:fontFamily="@font/valorant"
-                android:gravity="center"
-                android:text="Descartar"
-                android:textColor="@color/ic_banner_background"
-                android:textSize="16sp" />
+                                <AutoCompleteTextView
+                                    android:id="@+id/dia_cita_cli_vv_actv"
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/guardar_clita_nueva_NC_btn"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/boton_redondeado"
-                android:backgroundTint="?android:attr/colorMultiSelectHighlight"
-                android:elegantTextHeight="true"
-                android:elevation="0dp"
-                android:fontFamily="@font/valorant"
-                android:gravity="center"
-                android:lineSpacingExtra="8sp"
-                android:padding="5dp"
-                android:text="Guardar"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:visibility="visible" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/mes_cita_cli_vv_textin"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
 
-        </LinearLayout>
+                                <AutoCompleteTextView
+                                    android:id="@+id/mes_ci_cli_vv_actv"
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:dropDownHeight="300dp"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/anio_ci_cli_vv_txtin"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeWidth="0dp"
+                                app:boxStrokeWidthFocused="0dp">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/anio_ci_cli_vv_actv"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                                    android:editable="false"
+                                    android:gravity="center"
+                                    android:inputType="none"
+                                    android:textAlignment="center"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:theme="@style/Theme.MaterialComponents.Light">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/ocra"
+                            android:text="Hora"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/gris_visualizar"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/hora_ci_cli_vv_textin"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hora_ci_cli_vv_actv"
+                                android:layout_width="65dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Cedula"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cedula_cliente_ci_cli_vv_actv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:completionThreshold="3"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Cédula"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:layout_marginBottom="@dimen/espacios"
+                    android:fontFamily="@font/ocra"
+                    android:text="Vehículo"
+                    android:textColor="@color/gris_visualizar"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/placa_ci_cli_vv_actv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:completionThreshold="3"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="Placa"
+                        android:inputType="textAutoComplete"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/descartar_ci_cli_vv_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="125dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bordesboton"
+                        android:backgroundTint="@color/black"
+                        android:fontFamily="@font/valorant"
+                        android:text="Descartar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/guardar_ci_cli_vv_btn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="115dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="@color/botones"
+                        android:fontFamily="@font/valorant"
+                        android:onClick="h"
+                        android:text="Guardar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
@@ -417,7 +559,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/vista_vehiculo_lay"

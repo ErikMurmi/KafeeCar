@@ -1,9 +1,11 @@
 package com.prog.kafeecar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private ScrollView vistaVehiculo;
     private PatioVenta patio;
     private Vehiculo vMostrar;
+    private Cita cita_mostrar;
     private Button favoritoBoton;
     private Drawable estrelladorada;
     private Citas_Clien_Fragment crearCita;
@@ -64,12 +67,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
         Button agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
         Button regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
+        Button descartarcita = mainView.findViewById(R.id.descartar_ci_cli_vv_btn);
+        Button guardarcita = mainView.findViewById(R.id.guardar_ci_cli_vv_btn);
         //Recursos
         estrelladorada = favoritoBoton.getBackground();
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_lyt);
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-        irCitaNueva = mainView.findViewById(R.id.nueva_cita_cliente_lay);
+        irCitaNueva = mainView.findViewById(R.id.add_cita_cli_vv_lyt);
+
         //Edit Text necesarios
 
         regresarVistaVehiculo.setOnClickListener(v -> {
@@ -80,6 +86,21 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 e.printStackTrace();
             }
         });
+        descartarcita.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("DESCARTAR");
+            msg.setMessage("¿Está seguro de salir sin guardar?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
+                    verAgendarCita();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
 
         favoritoBoton.setOnClickListener(v -> modificarFavorito());
         agendarcita.setOnClickListener(v -> {
@@ -87,7 +108,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             try {
                 vistaVehiculo.setVisibility(View.GONE);
                 irCitaNueva.setVisibility(View.VISIBLE);
-                //crearCita.visualizarcitaEditable();
+                verAgendarCita();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -208,6 +229,40 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         verCatalogo.setVisibility(View.GONE);
         vistaVehiculo.setVisibility(View.VISIBLE);
 
+
+    }
+    public void verAgendarCita(){
+        verCatalogo.setVisibility(View.GONE);
+        vistaVehiculo.setVisibility(View.GONE);
+        irCitaNueva.setVisibility(View.VISIBLE);
+        ImageView vehiculo_img = mainView.findViewById(R.id.auto_cita_cli_vv_img);
+        AutoCompleteTextView cedula = mainView.findViewById(R.id.cedula_cliente_ci_cli_vv_actv);
+        AutoCompleteTextView placavehiculo = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_cli_vv_actv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_cli_vv_actv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_cita_cli_vv_actv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_cli_vv_actv);
+
+        /*String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
+        String dia_str = fecha.split("-")[0];
+        String mes_str = fecha.split("-")[1];
+        String anio_str = fecha.split("-")[2];*/
+
+
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        try {
+            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Uri nuevo = Uri.parse(localFile.getAbsolutePath());
+                vehiculo_img.setImageURI(nuevo);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        horas.setText(String.valueOf(cita_mostrar.getHora()));
+        cedula.setText(cita_mostrar.getCliente().getCedula());
+        placavehiculo.setText(cita_mostrar.getVehiculo().getPlaca());
 
     }
 
