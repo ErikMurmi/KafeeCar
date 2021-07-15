@@ -750,7 +750,7 @@
                                 app:boxStrokeWidthFocused="0dp">
 
                                 <AutoCompleteTextView
-                                    android:id="@+id/anio_ci_ad_acv"
+                                    android:id="@+id/anio_ci_cli_acv"
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
@@ -930,34 +930,6 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" />
-
-                <TextView
-                    android:id="@+id/Resolucion.title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="@dimen/edit_txt_espacio"
-                    android:layout_marginBottom="@dimen/espacios"
-                    android:fontFamily="@font/ocra"
-                    android:text="Resolución"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/gris_visualizar"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/resolucion_ci_cli_etx"
-                    android:layout_width="match_parent"
-                    android:layout_height="88dp"
-                    android:background="@drawable/bordesmarcoscafegrisaceo"
-
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Por ver"
-                    android:inputType="textMultiLine|text"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="18.5sp" />
 
                 <Space
                     android:layout_width="match_parent"
