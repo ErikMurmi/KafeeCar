@@ -30,6 +30,12 @@ public class Cita {
         this.vendedorCita = vendedorCita;
         this.vehiculo = vehiculo;
     }
+    public Cita(Date fechaCita, int hora, Cliente cliente, Vehiculo vehiculo) {
+        this.fechaCita = fechaCita;
+        this.hora = hora;
+        this.cliente = cliente;
+        this.vehiculo = vehiculo;
+    }
     //
     public Cita(Date parse, int hora, Vehiculo vehiculo) {
         this.fechaCita = fechaCita;
