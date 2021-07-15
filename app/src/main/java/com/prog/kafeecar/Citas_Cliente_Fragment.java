@@ -155,6 +155,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             irAniadirCita.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             verCitaLista.setVisibility(View.GONE);
+            modificarCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
         });
@@ -167,7 +168,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
-                    modificarCita.setVisibility(View.GONE);
                     irListaCitas();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -276,14 +276,14 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         }
 
         if (c == 0) {
-            cita_mostrar.actualizarVen(
+            cita_mostrar.actualizar(
                     fecha,
                     hora_nueva_cita,
                     vehiculo,
                     cita_mostrar.getVendedorCita(),
-                    cliente_actual,
-                    cita_mostrar.getResolucion());
-            if (patio.buscarCita("Vehiculo",vehiculo.getPlaca(),cliente_c.getCedula())!=null) {
+                    cliente_actual
+                    );
+            if (patio.buscarCita("Cliente",cliente_actual.getCedula(),cliente_actual.getCedula())!=null) {
                 Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
