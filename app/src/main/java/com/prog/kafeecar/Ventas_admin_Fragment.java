@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -54,8 +53,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     public LinearLayout editar_vt_ad_lyt;
     public boolean dias_mostrados = false;
     @Nullable
-    LineChart lineChart;
+
     BarChart barChart;
+    BarChart Usuarios;
     private View mainView;
     private PatioVenta patio;
     private LinearLayout ventas_admin_generales_lyt;
@@ -75,14 +75,13 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private int[] sales;
     private StorageReference mStorageRef;
     private int[] colors = new int[]{Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51)};
-    private SearchView busqueda_placa;
     private Lista ventas;
-
+    private String cedulaVendedor="";
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
-        sales = Patioventainterfaz.contadores();
+
         mStorageRef = Patioventainterfaz.mStorageRef;
 
         //Botones
@@ -90,6 +89,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         Button administrar_venta_generales_btn = mainView.findViewById(R.id.administrar_venta_generales_btn);
         Button administrar_venta_aniadirventa_btn = mainView.findViewById(R.id.administrar_venta_aniadirventa_btn);
         Button vt_admin_estadisticas_btn = mainView.findViewById(R.id.vt_admin_estadisticas_btn);
+        Button vt_admin_estadiciticas_usuario_btn= mainView.findViewById(R.id.vt_admin_estadiciticas_usuario_btn);
         //ADD
         Button descartar_vt_ad_btn = mainView.findViewById(R.id.descartar_vt_ad_btn);
         ImageButton add_cliente_vt_ad_btn = mainView.findViewById(R.id.add_cliente_vt_ad_btn);
@@ -105,7 +105,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         editar_vt_ad_lyt = mainView.findViewById(R.id.editar_vt_ad_lyt);
         verEstadisticasGenerales=mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
         busqueda_ventas = mainView.findViewById(R.id.vt_busqueda_plcas_admin);
-
+        LinearLayout vt_estadisticasusuario_lyt =mainView.findViewById(R.id.vt_estadisticasusuario_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
 
@@ -117,10 +117,24 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
 
         vt_admin_estadisticas_btn.setOnClickListener(view -> {
+            sales = Patioventainterfaz.contadores(patio.getVentasGenerales());
+            barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
+            createcharts(barChart);
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
             verEstadisticasGenerales.setVisibility(View.VISIBLE);
+
         });
+
+        vt_admin_estadiciticas_usuario_btn.setOnClickListener(view -> {
+
+            ventas_admin_generales_lyt.setVisibility(View.GONE);
+            ventas_admin_lyt.setVisibility(View.GONE);
+            vt_estadisticasusuario_lyt.setVisibility(View.VISIBLE);
+            adaptadorVendedoresGrafico();
+
+
+        } );
 
         vt_ad_ver_venta_editar_btn.setOnClickListener(v -> {
             add_vt_ad_lyt.setVisibility(View.GONE);
@@ -221,10 +235,17 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
 
 
-        barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
-        createcharts();
+
+
         ventas = patio.getVentasGenerales();
+
+
         return mainView;
+    }
+
+    public void setCedulaVendedor(String cedula){
+
+        cedulaVendedor=cedula;
     }
 
     public void listaDesplegablesAniadir() {
@@ -378,6 +399,27 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
+    }
+    public void adaptadorVendedoresGrafico() {
+        AutoCompleteTextView vendedor = mainView.findViewById(R.id.buscar_vendedor_vt_ad_actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasVendedores());
+        vendedor.setAdapter(adapter);
+        vendedor.setOnItemClickListener((adapterView, view, i, l) -> {
+            setCedulaVendedor((String) adapterView.getItemAtPosition(i));
+            try {
+                Vendedor temp =patio.buscarVendedores("Cedula",cedulaVendedor);
+                sales=Patioventainterfaz.contadores(temp.obtenerVentas());
+                Usuarios=(BarChart)mainView.findViewById(R.id.gaficaVentasusuario);
+                createcharts(Usuarios);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
+
+
     }
 
     public void adaptadorEditar() {
@@ -647,7 +689,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     }
 
-    public void createcharts() {
+    public void createcharts(BarChart barChart) {
         barChart = (BarChart) getSameChart(barChart, "", Color.RED, Color.rgb(253, 254, 254), 30000);
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(true);
@@ -749,4 +791,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private void setPosicion_dia(int pos) {
         posicion_dia = pos;
     }
+
+
+
 }

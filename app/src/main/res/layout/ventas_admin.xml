@@ -1323,7 +1323,7 @@
                     android:background="@drawable/boton_redondeado"
                     android:backgroundTint="@color/black"
                     android:fontFamily="@font/valorant"
-                    android:text="Por usuario "
+                    android:text="Por Vendedor "
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -1346,7 +1346,7 @@
         android:background="@drawable/consultar_estadisticas_generales"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1370,7 +1370,7 @@
             android:background="@drawable/bordesmarcosgris"
             android:iconifiedByDefault="false"
             android:queryBackground="@color/white"
-            android:queryHint="Placa" />
+            android:queryHint="Fecha" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1412,6 +1412,43 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/gaficaVentasGenerales"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="15dp"
+            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vt_estadisticasusuario_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/consultar_estadisticas_vendedores"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <AutoCompleteTextView
+            android:id="@+id/buscar_vendedor_vt_ad_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/bordesmarcoscafegrisaceo"
+            android:completionThreshold="1"
+            android:fontFamily="@font/ocraext"
+            android:hint="Cédula vendedor"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="19sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/gaficaVentasusuario"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginStart="25dp"

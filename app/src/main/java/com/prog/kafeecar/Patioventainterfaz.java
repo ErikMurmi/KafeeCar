@@ -857,11 +857,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         return "am";
     }
 
-     public static int[] contadores (){
+     public static int[] contadores (Lista ventas){
         int[] datos = new int[12];
         int sep =0,en=0,feb=0,mar=0,abr=0,may=0,jun=0,jul=0,ago=0,oct=0;
-        for (int i =0;i < patioventa.getVentasGenerales().contar();i++){
-            Venta actual =(Venta) patioventa.getVentasGenerales().getPos(i);
+        for (int i =0;i < ventas.contar();i++){
+            Venta actual =(Venta) ventas.getPos(i);
             if(actual.getFecha().getMonth()==1){
                 en++;
                 datos[1]=en;
