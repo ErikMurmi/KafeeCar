@@ -8,7 +8,7 @@
         android:id="@+id/aniadir_cliente_vt_vn_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/plantilla_vacia"
+        android:background="@drawable/plantilla"
         android:orientation="vertical">
 
         <ScrollView
@@ -25,18 +25,16 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
                     android:fontFamily="@font/monglos"
                     android:paddingBottom="@dimen/espacios"
                     android:text="Datos del Cliente"
                     android:textAlignment="center"
-                    android:textColor="@color/cafe_grisaceo"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="27sp" />
 
                 <ImageView
-                    android:id="@+id/reg_imagen_admin_btn2"
                     android:layout_width="match_parent"
                     android:layout_height="218dp"
                     android:layout_marginBottom="15dp"
