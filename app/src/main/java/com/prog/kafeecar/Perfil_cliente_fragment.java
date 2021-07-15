@@ -39,7 +39,7 @@ import java.util.Date;
 public class Perfil_cliente_fragment extends Fragment{
     private View mainview;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     private Cliente cliente = (Cliente) Patioventainterfaz.usuarioActual;
     private static final int REQUEST_PERMISSION_CODE = 100;
