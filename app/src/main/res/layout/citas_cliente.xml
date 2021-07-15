@@ -211,12 +211,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/ed_cedula_cliente_ci_cli_actv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="1"
                         android:editable="false"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
@@ -315,12 +314,13 @@
                     android:textColor="@color/gris_visualizar"
                     android:textSize="18sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/ed_descripcion_ci_cli_etxt"
 
                     android:layout_width="match_parent"
                     android:layout_height="88dp"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:editable="false"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
                     android:hint="Por ver"
