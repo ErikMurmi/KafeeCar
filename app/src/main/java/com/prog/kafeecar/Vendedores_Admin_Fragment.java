@@ -254,7 +254,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores(), this);
+        adptadorlistaview = new Adaptador_Lista_Vendedores(patio.getVendedores().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
         //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
