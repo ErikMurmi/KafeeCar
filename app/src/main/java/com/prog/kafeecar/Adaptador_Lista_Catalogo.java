@@ -26,19 +26,13 @@ public class Adaptador_Lista_Catalogo extends RecyclerView.Adapter<Adaptador_Lis
     View view;
     private final RecyclerItemClick itemClick;
 
-    public Adaptador_Lista_Catalogo(RecyclerItemClick itemClick){
-        this.autos_buscados =autos;
-        this.itemClick = itemClick;
-        autos_original = new Lista();
-        autos_original.copiar(autos);
-    }
-
     public Adaptador_Lista_Catalogo(Lista autos,RecyclerItemClick itemClick){
         this.autos_buscados =autos;
         this.itemClick = itemClick;
         autos_original = new Lista();
         autos_original.copiar(autos);
     }
+
     @NonNull
     @Override
     public clienteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

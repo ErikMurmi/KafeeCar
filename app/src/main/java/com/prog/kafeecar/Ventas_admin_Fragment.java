@@ -595,7 +595,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Ventas(patio.getVentasGenerales(), this);
+        adptadorlistaview = new Adaptador_Lista_Ventas(patio.getVentasGenerales().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -635,7 +635,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         chart.setBackgroundColor(fondo);
         chart.animateY(yxes);
         legend(chart);
-
         return chart;
     }
 
