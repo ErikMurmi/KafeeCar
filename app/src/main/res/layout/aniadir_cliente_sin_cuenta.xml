@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/aniadir_cliente_vt_vn_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plantilla"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:orientation="vertical"
+                android:paddingLeft="28dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/monglos"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Datos del Cliente"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="27sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="218dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:fitsSystemWindows="true"
+                    android:onClick="botonImagenPerfilVendedor"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/perfil_icono" />
+
+                <TextView
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Nombre"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/add_nombre_vt_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Nombre del Cliente"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Apellido"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_apellido_vt_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Apellido del Cliente"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Cédula"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_cedula_vt_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Cédula del Cliente"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Fecha de Nacimiento"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/reg_dia_vt_vn_etxt"
+                        android:layout_width="101dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Día"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/reg_mes_vt_vn_etxt"
+                        android:layout_width="102dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Mes"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/reg_anio_vt_vn_etxt"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="10"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Año"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Teléfono"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_telefono_vt_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Teléfono del Cliente"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Correo"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_correo_vt_vn_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Correo del Cliente"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reg_list_vt_vn_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="#F7530C"
+                        android:fontFamily="@font/valorant"
+                        android:gravity="center"
+                        android:insetLeft="5dp"
+                        android:insetTop="5dp"
+                        android:insetRight="5dp"
+                        android:insetBottom="5dp"
+                        android:onClick="registrarAdministrador"
+                        android:text="Listo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        app:cornerRadius="50dp"
+                        app:iconTint="#FF5722"
+                        app:rippleColor="#FF5722"
+                        app:strokeColor="#FF5722" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ public class PatioVenta {
     private Lista clientes;
     private Lista vehiculos;
     private Lista citas;
-
+//TODO COMPROBACIONES DE ELEMENTOS YA REGISTRADOS EN EL SISTEMA
     
     private Vendedor administrador;
     private String direccion;
@@ -192,7 +192,6 @@ public class PatioVenta {
         }
         return removido;
     }
-
 
     /**
      * Elimina un vehiculo del catalogo

@@ -446,7 +446,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -589,7 +589,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     cliente_c,
                     resolucion_str);
             if (patio.buscarCita("Vehiculo", vehiculo.getPlaca(), cliente_c.getCedula()) != null) {
-                Toast.makeText(mainView.getContext(), "Se edito correctamentela cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }

@@ -64,6 +64,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     private FloatingActionButton irAniadirCita;
 
+    private TextView cedula_vendedor_ci_ad_txt;
+    private TextView ed_cedula_vendedor_ci_ad_txt;
+    private AutoCompleteTextView placa_ci_ad_actv;
+
     private LinearLayout verCita;
     private LinearLayout ed_cita_admin_lyt;
     private LinearLayout listaCitas;
@@ -91,6 +95,11 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         Button ed_guardar_ci_ad_btn = mainView.findViewById(R.id.ed_guardar_ci_ad_btn);
         Button guardar_cita = mainView.findViewById(R.id.guardar_ci_ad_btn);
         Button descartar_ci_ad_btn = mainView.findViewById(R.id.descartar_ci_ad_btn);
+        //Textview permanentes
+        cedula_vendedor_ci_ad_txt =mainView.findViewById(R.id.cedula_vendedor_ci_ad_txt);
+        ed_cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_ad_txt);
+        cedula_vendedor_ci_ad_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
+        ed_cedula_vendedor_ci_ad_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         irAniadirCita.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
@@ -104,14 +113,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de salir sin guardar?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                try {
-                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
-                    visualizarCita();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+            msg.setPositiveButton("Si", (dialog, which) -> irListaCitas());
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -185,15 +187,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         listasDesplegableAniadir();
 
-        //TextInputLayout m = mainView.findViewById(R.id.meses_acv_lyt);
-        /*AutoCompleteTextView meses = mainView.findViewById(R.id.meses_ci_ad_acv);
-        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.meses);
-        meses.setAdapter(adapt);*/
-
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
-            //vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
-            //vehiculo_nuevacita.setTextColor(Color.BLACK);
+            placa_ci_ad_actv.setText(Patioventainterfaz.v_aux_cita.getPlaca());
         }
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -394,12 +390,11 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
         cliente.setAdapter(adapter);
 
-        TextView cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.cedula_vendedor_ci_ad_etxt);
         cedula_vendedor_ci_ad_txt.setText(usuarioActual.getCedula());
 
-        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+        placa_ci_ad_actv = mainView.findViewById(R.id.placa_ci_ad_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
-        auto.setAdapter(adapterPla);
+        placa_ci_ad_actv.setAdapter(adapterPla);
     }
 
     public void adaptadorEditar(){
@@ -407,8 +402,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
         cliente.setAdapter(adapter);
 
-        TextView cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_ad_etxt);
-        cedula_vendedor_ci_ad_txt.setText(usuarioActual.getCedula());
+        ed_cedula_vendedor_ci_ad_txt.setText(usuarioActual.getCedula());
 
         AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_ci_ad_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
@@ -420,9 +414,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
-        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     public void irListaCitas(){
@@ -488,7 +481,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         AutoCompleteTextView mes = mainView.findViewById(R.id.ed_mes_ci_ad_acv);
         AutoCompleteTextView dias = mainView.findViewById(R.id.ed_dia_ci_ad_acv);
         AutoCompleteTextView horas = mainView.findViewById(R.id.ed_hora_ci_ad_acv);
-        TextView vendedor_ed = mainView.findViewById(R.id.ed_cedula_vendedor_ci_ad_etxt);
         EditText resolucion_ed = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
 
         String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
@@ -520,7 +512,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         horas.setText(String.valueOf(cita_mostrar.getHora()));
         cliente.setText(cita_mostrar.getCliente().getCedula());
-        vendedor_ed.setText(cita_mostrar.getVendedorCita().getCedula());
         auto.setText(cita_mostrar.getVehiculo().getPlaca());
         resolucion_ed.setText(cita_mostrar.getResolucion());
     }
@@ -542,8 +533,14 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
                 c++;
+            }else{
+                cliente_c = patio.buscarClientes("Cedula", cliente_str);
+                if(cliente_c==null){
+                    Toast.makeText(mainView.getContext(), "Cliente no encontrados", Toast.LENGTH_SHORT).show();
+                    cliente.setText("");
+                    c++;
+                }
             }
-            cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
             c++;
@@ -599,8 +596,14 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
                 c++;
+            }else{
+                cliente_c = patio.buscarClientes("Cedula", cliente_str);
+                if(cliente_c==null){
+                    Toast.makeText(mainView.getContext(), "Cliente no encontrados", Toast.LENGTH_SHORT).show();
+                    cliente.setText("");
+                    c++;
+                }
             }
-            cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
             c++;
@@ -635,7 +638,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     cliente_c,
                     resolucion_str);
             if (patio.buscarCita("Vehiculo",vehiculo.getPlaca(),cliente_c.getCedula())!=null) {
-                Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se edito la cita correctamente", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }

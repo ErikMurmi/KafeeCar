@@ -63,7 +63,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mainView = inflater.inflate(R.layout.catalogo_admin, container, false);
         busqueda_placa = mainView.findViewById(R.id.busqueda_placa_bar);
         patio = Patioventainterfaz.patioventa;
@@ -111,7 +110,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             openGalery();
             editar_imagen = true;
         });
-
+        //TODO ALER DIALOG
         aniadir_vehiculo_btn.setOnClickListener(v -> aniadirVehiculo());
 
         eliminar_btn.setOnClickListener(v -> {
@@ -131,6 +130,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.show();
         });
 
+        //TODO CAMBIAR POR DESCARTAR
         deshacer_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Deshacer Cambios");
@@ -140,13 +140,14 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.show();
         });
 
+        //TODO I
         editar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Editar vehículo");
             msg.setMessage("¿Está seguro de editar el vehículo con la placa " + vMostrar.getPlaca() + " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 editarVehiculo();
-                verVehiculoEditable();
+                irCatalogo();
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
@@ -160,10 +161,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
-        AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_ad_ddm);
-        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
-        filtros.setAdapter(adapt);
-        filtros.setOnItemClickListener((parent, view, position, id) -> busqueda_placa.setQueryHint(adapt.getItem(position)));
 
 
         //Metodo para el control del boton atras
@@ -186,7 +183,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                     msg.setTitle("Volver");
                     msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
                     msg.setPositiveButton("Aceptar", (dialog, which) -> {
-                        //aniadir_vehiculo.refreshDrawableState();
                         irCatalogo();
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -196,22 +192,38 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         };
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-        busqueda_placa.setOnQueryTextListener(this);
         irCatalogo();
 
         return mainView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        busqueda_placa.setOnQueryTextListener(this);
+        cargar();
+    }
+
 
     public void cargar() {
         RecyclerView listaview = mainView.findViewById(R.id.rc_autos);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos(), this);
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos().copiar(),this);
         listaview.setAdapter(adptadorlistaview);
     }
 
     public void irCatalogo() {
+        busqueda_placa.setOnQueryTextListener(this);
+        cargar();
+        AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_ad_ddm);
+        ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
+        filtros.setAdapter(adapt);
+        filtros.setOnItemClickListener((parent, view, position, id) -> {
+            cargar();
+            busqueda_placa.setQueryHint(adapt.getItem(position));
+        });
         irAniadirVehiculo.setVisibility(View.GONE);
         verVehiculo.setVisibility(View.GONE);
         aniadir_vehiculo.setVisibility(View.GONE);
@@ -219,7 +231,6 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         //Activar el diseño deseado
         verCatalogo.setVisibility(View.VISIBLE);
         irAniadirVehiculo.setVisibility(View.VISIBLE);
-        cargar();
     }
 
     public void irVer() {
@@ -491,7 +502,14 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                     Integer.parseInt(anio_ed.getText().toString()),
                     placa_n + ".jpg"
             );
-            Toast.makeText(mainView.getContext(), "Se cambio", Toast.LENGTH_SHORT).show();
+            try {
+                if(patio.buscarVehiculos("Placa",placa_n)!=null){
+                    Toast.makeText(mainView.getContext(), "Se edito correctamente el auto", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 2", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

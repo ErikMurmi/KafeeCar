@@ -52,6 +52,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static final String[] meses = new String[]{"Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"};
     public static final int[] diasLista = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
+    public static Lista vehiculos_orignal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,6 +205,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_citas:
                         selectedFragement = new Citas_Admin_Fragment();
+                        //vehiculos_orignal = patioventa.getVehiculos();
                         break;
                     case R.id.nav_cat:
                         selectedFragement = new Catalogo_Admin_Fragment();
@@ -857,11 +859,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         return "am";
     }
 
-     public static int[] contadores (){
+     public static int[] contadores (Lista ventas){
         int[] datos = new int[12];
         int sep =0,en=0,feb=0,mar=0,abr=0,may=0,jun=0,jul=0,ago=0,oct=0;
-        for (int i =0;i < patioventa.getVentasGenerales().contar();i++){
-            Venta actual =(Venta) patioventa.getVentasGenerales().getPos(i);
+        for (int i =0;i < ventas.contar();i++){
+            Venta actual =(Venta) ventas.getPos(i);
             if(actual.getFecha().getMonth()==1){
                 en++;
                 datos[1]=en;

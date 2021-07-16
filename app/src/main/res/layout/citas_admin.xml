@@ -231,14 +231,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/ed_cedula_vendedor_ci_ad_etxt"
+                        android:id="@+id/ed_cedula_vendedor_ci_ad_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:textAlignment="center"
-                        android:textColor="#000000"
+                        android:textColor="@color/cafe_grisaceo"
                         android:textSize="19sp" />
 
                 </LinearLayout>
@@ -860,7 +860,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="3"
+                        android:completionThreshold="1"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:inputType="number"
@@ -892,7 +892,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/cedula_vendedor_ci_ad_etxt"
+                        android:id="@+id/cedula_vendedor_ci_ad_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -900,7 +900,7 @@
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:textAlignment="center"
-                        android:textColor="#000000"
+                        android:textColor="@color/cafe_grisaceo"
                         android:textSize="19sp" />
 
                 </LinearLayout>
@@ -931,7 +931,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="3"
+                        android:completionThreshold="1"
                         android:fontFamily="@font/ocraext"
                         android:hint="Placa"
                         android:inputType="textAutoComplete"
