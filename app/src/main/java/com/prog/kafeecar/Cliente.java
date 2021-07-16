@@ -34,6 +34,12 @@ public class Cliente extends Usuario{
         this.imagen = "";
         favoritos = new Lista();
     }
+
+    public Cliente(String nombre, String cedula, String telefono,String correo,Date fecha){
+        super(nombre, cedula,telefono, correo, "",fecha);
+        this.imagen = "";
+        favoritos = new Lista();
+    }
     public Cliente(){
 
     }
@@ -65,7 +71,7 @@ public class Cliente extends Usuario{
      
      /**
      * Este método permite al cliente poder crear una lista de los vehículos favoritos
-     * @param matricula del vehiculo favorito a agregar
+     * @param placa del vehiculo favorito a agregar
      * @return  true si se agrego,caso contrario false
      */
     public void aniadirFavorito(String placa ){

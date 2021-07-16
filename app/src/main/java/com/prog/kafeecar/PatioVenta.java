@@ -193,7 +193,6 @@ public class PatioVenta {
         return removido;
     }
 
-
     /**
      * Elimina un vehiculo del catalogo
      * @param placa vehiculo a eliminar a la lista
