@@ -230,16 +230,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         busqueda_ventas.setOnQueryTextListener(this);
-
-
-
-
-
-
-
         ventas = patio.getVentasGenerales();
-
-
         return mainView;
     }
 

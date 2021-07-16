@@ -382,6 +382,18 @@ public class Lista {
         }
     }
 
+    public Lista copiar(){
+        Lista copia = new Lista();
+        for(int i=0; i<contar();i++){
+            try {
+                copia.add(getPos(i));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return copia;
+    }
+
     public ArrayList<Cita> toArrayList(){
         ArrayList<Cita> citas = new ArrayList<Cita>();
         for(int i=0; i<contar();i++){

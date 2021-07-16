@@ -52,6 +52,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     public static final String[] meses = new String[]{"Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"};
     public static final int[] diasLista = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
+    public static Lista vehiculos_orignal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,6 +205,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_citas:
                         selectedFragement = new Citas_Admin_Fragment();
+                        //vehiculos_orignal = patioventa.getVehiculos();
                         break;
                     case R.id.nav_cat:
                         selectedFragement = new Catalogo_Admin_Fragment();
