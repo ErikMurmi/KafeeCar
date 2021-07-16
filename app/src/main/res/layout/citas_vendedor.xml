@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -497,15 +499,24 @@
                         android:id="@+id/cedula_cliente_ci_vn_actv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="3"
+                        android:completionThreshold="2"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:inputType="number"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/add_cliente_ci_vn_btn"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bordes_drop_down"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        app:srcCompat="@drawable/icono_aniadir" />
 
                 </LinearLayout>
 
@@ -668,7 +679,7 @@
         android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -853,8 +864,10 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/ed_cedula_cliente_ci_vn_actv"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:completionThreshold="1"
                         android:fontFamily="@font/ocraext"
@@ -863,6 +876,14 @@
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/ed_add_cliente_ci_vn_btn"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bordes_drop_down"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        app:srcCompat="@drawable/icono_aniadir" />
 
                 </LinearLayout>
 

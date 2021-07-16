@@ -167,14 +167,14 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         add_cliente_vt_vn_btn.setOnClickListener(v -> {
             add_vt_vn_lyt.setVisibility(View.GONE);
-            add_cliente_ed = true;
+            add_cliente_an = true;
             clearRegistrarCli();
             aniadir_cliente_vt_vn_lyt.setVisibility(View.VISIBLE);
         });
 
         ed_cliente_vt_vn_btn.setOnClickListener(v -> {
             editar_vt_vn_lyt.setVisibility(View.GONE);
-            add_cliente_an = true;
+            add_cliente_ed = true;
             aniadir_cliente_vt_vn_lyt.setVisibility(View.VISIBLE);
         });
 
@@ -294,16 +294,15 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 if (ver_vt_vn_lyt.getVisibility() == View.VISIBLE) {
                     irVerListaVentas();
                 }
-                if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
+                if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
                     aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
                     add_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    add_cliente_ed = false;
-
-                }else if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
-                    editar_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
                     add_cliente_an = false;
 
+                }else if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
+                    editar_vt_vn_lyt.setVisibility(View.VISIBLE);
+                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
+                    add_cliente_ed = false;
                 }
             }
         };
