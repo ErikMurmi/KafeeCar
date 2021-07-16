@@ -589,7 +589,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     cliente_c,
                     resolucion_str);
             if (patio.buscarCita("Vehiculo", vehiculo.getPlaca(), cliente_c.getCedula()) != null) {
-                Toast.makeText(mainView.getContext(), "Se edito correctamentela cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
