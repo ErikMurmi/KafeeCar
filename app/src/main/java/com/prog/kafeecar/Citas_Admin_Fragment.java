@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -56,13 +57,16 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private boolean anios_mostradas = false;
     public boolean dias_mostrados = false;
 
+    private boolean add_cliente_ci_ad = false;
+    private boolean add_cliente_ci_ed = false;
+
     private int posicion_dia=-1;
     private int posicion_mes=-1;
     private int posicion_anio=-1;
     private int hora_nueva_cita=-1;
     String fecha_nueva_cita;
 
-    private FloatingActionButton irAniadirCita;
+    private FloatingActionButton ir_aniadir_cita_ad_fbtn;
 
     private TextView cedula_vendedor_ci_ad_txt;
     private TextView ed_cedula_vendedor_ci_ad_txt;
@@ -72,11 +76,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private LinearLayout ed_cita_admin_lyt;
     private LinearLayout listaCitas;
     private LinearLayout aniadirCita;
+    private LinearLayout aniadir_cliente_ci_vn_lyt;
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         mainView = inflater.inflate(R.layout.citas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
         //Layouts
@@ -85,9 +90,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
         ed_cita_admin_lyt = mainView.findViewById(R.id.ed_cita_admin_lyt);
         listaCitas = mainView.findViewById(R.id.citas_lyt);
+        aniadir_cliente_ci_vn_lyt = mainView.findViewById(R.id.aniadir_cliente_ci_vn_lyt);
 
         //Botones
-        irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
+        ir_aniadir_cita_ad_fbtn = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
         //Botones
         Button irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
         Button anular = mainView.findViewById(R.id.anular_ci_ad_btn);
@@ -95,16 +101,20 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         Button ed_guardar_ci_ad_btn = mainView.findViewById(R.id.ed_guardar_ci_ad_btn);
         Button guardar_cita = mainView.findViewById(R.id.guardar_ci_ad_btn);
         Button descartar_ci_ad_btn = mainView.findViewById(R.id.descartar_ci_ad_btn);
+        ImageButton add_cliente_ci_ad_btn = mainView.findViewById(R.id.add_cliente_ci_ad_btn);
+        ImageButton ed_add_cliente_ci_ad_btn = mainView.findViewById(R.id.ed_add_cliente_ci_ad_btn);
+        Button reg_list_ci_ad_btn = mainView.findViewById(R.id.reg_list_ci_ad_btn);
+
         //Textview permanentes
         cedula_vendedor_ci_ad_txt =mainView.findViewById(R.id.cedula_vendedor_ci_ad_txt);
         ed_cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_ad_txt);
         cedula_vendedor_ci_ad_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
         ed_cedula_vendedor_ci_ad_txt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
-        irAniadirCita.setOnClickListener(v -> {
+        ir_aniadir_cita_ad_fbtn.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
-            irAniadirCita.setVisibility(View.GONE);
+            ir_aniadir_cita_ad_fbtn.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
             adaptadorAniadir();
         });
@@ -127,6 +137,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -185,10 +197,38 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             visualizarEditable();
         });
 
+        //Add cliente
+        add_cliente_ci_ad_btn.setOnClickListener(v -> {
+            aniadirCita.setVisibility(View.GONE);
+            add_cliente_ci_ad = true;
+            aniadir_cliente_ci_vn_lyt.setVisibility(View.VISIBLE);
+        });
+
+        ed_add_cliente_ci_ad_btn.setOnClickListener(v -> {
+            ed_cita_admin_lyt.setVisibility(View.GONE);
+            add_cliente_ci_ed = true;
+            aniadir_cliente_ci_vn_lyt.setVisibility(View.VISIBLE);
+        });
+
+        reg_list_ci_ad_btn.setOnClickListener(v -> {
+            androidx.appcompat.app.AlertDialog.Builder msg = new androidx.appcompat.app.AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Registrar Cliente");
+            msg.setMessage("¿Estás seguro de registrar un cliente con estos datos?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                if(registrarCliente()){
+                    ir_aniadir_cita_ad_fbtn.callOnClick();
+                }else{
+                    Toast.makeText(mainView.getContext(), "Error 154: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
         listasDesplegableAniadir();
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
-            irAniadirCita.callOnClick();
+            ir_aniadir_cita_ad_fbtn.callOnClick();
             placa_ci_ad_actv.setText(Patioventainterfaz.v_aux_cita.getPlaca());
         }
 
@@ -201,6 +241,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         try {
+                            onCreate(savedInstanceState);
                             irListaCitas();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -221,6 +262,116 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         return mainView;
     }
 
+    public boolean registrarCliente(){
+        EditText add_nombre_ci_ad_etxt = mainView.findViewById(R.id.add_nombre_ci_ad_etxt);
+        EditText reg_apellido_ci_ad_etxt = mainView.findViewById(R.id.reg_apellido_ci_ad_etxt);
+        EditText reg_cedula_ci_ad_etxt = mainView.findViewById(R.id.reg_cedula_ci_ad_etxt);
+        EditText reg_dia_ci_ad_etxt = mainView.findViewById(R.id.reg_dia_ci_ad_etxt);
+        EditText reg_mes_ci_ad_etxt = mainView.findViewById(R.id.reg_mes_ci_ad_etxt);
+        EditText reg_anio_ci_ad_etxt = mainView.findViewById(R.id.reg_anio_ci_ad_etxt);
+        EditText reg_telefono_ci_ad_etxt = mainView.findViewById(R.id.reg_telefono_ci_ad_etxt);
+        EditText reg_correo_ci_ad_etxt = mainView.findViewById(R.id.reg_correo_ci_ad_etxt);
+        int vacios = 0;
+        int invalidos = 0;
+
+        String nombre_str = add_nombre_ci_ad_etxt.getText().toString();
+        if (nombre_str.isEmpty()) {
+            vacios++;
+        }
+
+        String apellido_str = reg_apellido_ci_ad_etxt.getText().toString();
+        if (apellido_str.isEmpty()) {
+            vacios++;
+        }
+
+        String cedula_str = reg_cedula_ci_ad_etxt.getText().toString();
+        if (cedula_str.isEmpty()) {
+            vacios++;
+        } else {
+            if (cedula_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
+                reg_cedula_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        String mes_str = reg_mes_ci_ad_etxt.getText().toString();
+        int mes = -1;
+        if (mes_str.isEmpty()) {
+            vacios++;
+        } else {
+            mes = Integer.parseInt(mes_str);
+            if (mes < 1 || mes > 12) {
+                Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
+                reg_mes_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        String anio_str = reg_anio_ci_ad_etxt.getText().toString();
+        int anio = -1;
+        if (anio_str.isEmpty()) {
+            vacios++;
+        } else {
+            anio = Integer.parseInt(anio_str);
+            if (anio < 1900 || anio > 2003) {
+                Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
+                reg_anio_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        String dia_str = reg_dia_ci_ad_etxt.getText().toString();
+        int dia;
+        if (dia_str.isEmpty()) {
+            vacios++;
+        } else {
+            dia = Integer.parseInt(dia_str);
+            if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
+                Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
+                reg_dia_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        String telefono_str = reg_telefono_ci_ad_etxt.getText().toString();
+        if (telefono_str.isEmpty()) {
+            vacios++;
+        } else {
+            if (telefono_str.length() != 10) {
+                Toast.makeText(mainView.getContext(), "Numero de telefono inválido", Toast.LENGTH_SHORT).show();
+                reg_telefono_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        String correo_str = reg_correo_ci_ad_etxt.getText().toString();
+        if (correo_str.isEmpty()) {
+            vacios++;
+        } else {
+            if (!Patioventainterfaz.validarMail(correo_str)) {
+                Toast.makeText(mainView.getContext(), "Correo no válido", Toast.LENGTH_SHORT).show();
+                reg_correo_ci_ad_etxt.setText("");
+                invalidos++;
+            }
+        }
+
+        if (vacios == 0 && invalidos == 0) {
+            try {
+                Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+                Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
+                if (patio.aniadirUsuario(cliente, "Cliente")) {
+                    Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 158: No se registro el cliente", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
 
     public void listasDesplegableAniadir(){
         TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
@@ -422,7 +573,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     public void irListaCitas(){
         cargar();
         listaCitas.setVisibility(View.VISIBLE);
-        irAniadirCita.setVisibility(View.VISIBLE);
+        ir_aniadir_cita_ad_fbtn.setVisibility(View.VISIBLE);
         verCita.setVisibility(View.GONE);
         aniadirCita.setVisibility(View.GONE);
         ed_cita_admin_lyt.setVisibility(View.GONE);
@@ -431,7 +582,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     @SuppressLint("SetTextI18n")
     public void visualizarCita() {
         listaCitas.setVisibility(View.GONE);
-        irAniadirCita.setVisibility(View.GONE);
+        ir_aniadir_cita_ad_fbtn.setVisibility(View.GONE);
         verCita.setVisibility(View.VISIBLE);
         ImageView imagen_ed = mainView.findViewById(R.id.ver_cita_im_ad_img);
         TextView fecha = mainView.findViewById(R.id.ver_fecha_ci_ad_txt);
