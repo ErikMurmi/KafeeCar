@@ -114,7 +114,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         TextView cedula_vendedor_vt_vn_etxt = mainView.findViewById(R.id.cedula_vendedor_vt_vn_etxt);
         cedula_vendedor_vt_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
-
         //add
         descartar_vt_vn_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
@@ -296,7 +295,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adaptadorVentas = new Adaptador_Lista_Ventas(vendedor_actual.obtenerVentas(), this);
+        adaptadorVentas = new Adaptador_Lista_Ventas(vendedor_actual.obtenerVentas().copiar(), this);
         listaview.setAdapter(adaptadorVentas);
     }
 

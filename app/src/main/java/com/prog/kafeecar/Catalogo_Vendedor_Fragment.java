@@ -99,7 +99,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Catalogo(this);
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos().copiar(),this);
         listaview.setAdapter(adptadorlistaview);
     }
 

@@ -446,7 +446,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(usuarioActual.obtenerCitas().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
