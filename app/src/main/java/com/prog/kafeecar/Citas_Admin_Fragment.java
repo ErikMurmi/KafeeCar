@@ -66,6 +66,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
     private TextView cedula_vendedor_ci_ad_txt;
     private TextView ed_cedula_vendedor_ci_ad_txt;
+    private AutoCompleteTextView placa_ci_ad_actv;
 
     private LinearLayout verCita;
     private LinearLayout ed_cita_admin_lyt;
@@ -188,8 +189,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             irAniadirCita.callOnClick();
-            //vehiculo_nuevacita.setText(Patioventainterfaz.v_aux_cita.getPlaca());
-            //vehiculo_nuevacita.setTextColor(Color.BLACK);
+            placa_ci_ad_actv.setText(Patioventainterfaz.v_aux_cita.getPlaca());
         }
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -392,9 +392,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         cedula_vendedor_ci_ad_txt.setText(usuarioActual.getCedula());
 
-        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+        placa_ci_ad_actv = mainView.findViewById(R.id.placa_ci_ad_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
-        auto.setAdapter(adapterPla);
+        placa_ci_ad_actv.setAdapter(adapterPla);
     }
 
     public void adaptadorEditar(){
@@ -415,9 +415,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas(), this);
+        adptadorlistaview = new Adaptador_Lista_Citas(patio.getCitas().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
-        //listaview.addItemDecoration(new DividerItemDecoration(listaview.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     public void irListaCitas(){
@@ -640,7 +639,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     cliente_c,
                     resolucion_str);
             if (patio.buscarCita("Vehiculo",vehiculo.getPlaca(),cliente_c.getCedula())!=null) {
-                Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se edito la cita correctamente", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
