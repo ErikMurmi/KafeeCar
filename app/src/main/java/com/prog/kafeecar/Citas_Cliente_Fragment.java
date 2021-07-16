@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
+import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
@@ -54,6 +55,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     private FloatingActionButton irAniadirCita;
     private Button descartarnuevacita;
     private Button guardarcambios;
+    private Button guardarcita;
     private Cita cita_mostrar;
 
 
@@ -107,6 +109,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         //Botones
         descartarnuevacita = mainView.findViewById(R.id.descartar_ci_cli_btn);
         guardarcambios = mainView.findViewById(R.id.ed_guardar_ci_cli_btn);
+        guardarcita = mainView.findViewById(R.id.guardar_ci_cli_btn);
         Button anular = mainView.findViewById(R.id.anular_ci_cli_btn);
         Button irVerEditable = mainView.findViewById(R.id.editar_ci_cli_btn);
 
@@ -114,6 +117,23 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         listasDesplegableAniadir();
 
         //SetONClicks
+        guardarcita.setOnClickListener(v ->{
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Guardar");
+            msg.setMessage("¿Está seguro de registrar la cita?");
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                try {
+                    if(registarCita()){
+                        irListaCitas();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
         guardarcambios.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Guardar");
@@ -153,6 +173,8 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
         irAniadirCita.setOnClickListener(v -> {
             irAniadirCita.setVisibility(View.GONE);
+            TextView c = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
+            c.setText(Patioventainterfaz.usuarioActual.getCedula());
             verCita.setVisibility(View.GONE);
             verCitaLista.setVisibility(View.GONE);
             modificarCita.setVisibility(View.GONE);
@@ -375,11 +397,11 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
 
     public void adaptadorAniadir(){
-        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
-        cliente.setAdapter(adapter);
+        //AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
+        //cliente.setAdapter(adapter);
 
-        //TextView cedula_vendedor_ci_ad_txt = mainview.findViewById(R.id.cedula_vendedor_ci_cli_etxt);
+        //TextView cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.cedula_vendedor_ci_cli_etxt);
         //cedula_vendedor_ci_ad_txt.setText(Patioventainterfaz.usuarioActual.getCedula());
 
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
@@ -468,6 +490,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         });
     }
 
+
     public void adaptadorEditar(){
         //AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_cli_actv);
         //ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
@@ -543,6 +566,52 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+
+    public boolean registarCita() throws Exception {
+        Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
+        Vehiculo vehiculo = null;
+        Vendedor vendedor = null;
+        int c = 0;
+        String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+        Date fecha = sdf.parse(prueba);
+
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
+
+
+        if (!isEmpty(auto)) {
+            String vehiculo_str = auto.getText().toString();
+            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
+            if (vehiculo == null) {
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                auto.setText("");
+                c++;
+            }
+        } else {
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+
+
+
+        String hora = String.valueOf(hora_nueva_cita);
+        vendedor = patioventa.asignarVendedor(hora,fecha);
+        if (c == 0) {
+            Cita nueva = new Cita(
+                    fecha,
+                    hora_nueva_cita,
+                    "sin especificar",
+                    clien,
+                    vendedor,
+                    vehiculo);
+            patio.aniadirCita(nueva);
+            if (patio.getCitas().contiene(nueva)) {
+                Toast.makeText(mainView.getContext(), "Se registro correctamente la cita", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void itemClick(String placa, String cedula_cliente) {
