@@ -464,6 +464,13 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
+                    if(add_cliente_an){
+                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
+                        cliente_ed.setText(cedula_str);
+                    }else if(add_cliente_ed){
+                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+                        cliente_an.setText(cedula_str);
+                    }
                     Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     return true;
                 }
