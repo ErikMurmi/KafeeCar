@@ -277,13 +277,37 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     irListaCitas();
                 }
                 if(aniadir_cliente_ci_vn_lyt.getVisibility() == View.VISIBLE && add_cliente_an){
-                    aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
-                    aniadir_cliente_ci_vn_lyt.setVisibility(View.GONE);
-                    add_cliente_an = false;
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
+                            aniadir_cliente_ci_vn_lyt.setVisibility(View.GONE);
+                            add_cliente_an = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 142: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }else if(aniadir_cliente_ci_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
-                    editar_ci_vn_lyt.setVisibility(View.VISIBLE);
-                    aniadir_cliente_ci_vn_lyt.setVisibility(View.GONE);
-                    add_cliente_ed = false;
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            editar_ci_vn_lyt.setVisibility(View.VISIBLE);
+                            aniadir_cliente_ci_vn_lyt.setVisibility(View.GONE);
+                            add_cliente_ed = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 143: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }
         };
