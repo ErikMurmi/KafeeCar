@@ -560,7 +560,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         auto.setAdapter(adapterPla);
     }
 
-
     public void cargar() {
         RecyclerView listaview = mainView.findViewById(R.id.rc_citas_admin);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());

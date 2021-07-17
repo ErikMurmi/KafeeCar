@@ -28,7 +28,7 @@
         android:background="@drawable/cita_individual_editar"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -686,7 +686,7 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -754,7 +754,7 @@
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:editable="true"
+                                    android:editable="false"
                                     android:gravity="center"
                                     android:inputType="none"
                                     android:textSize="18sp" />
@@ -775,7 +775,7 @@
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
                                     android:dropDownHeight="300dp"
-                                    android:editable="true"
+                                    android:editable="false"
                                     android:gravity="center"
                                     android:inputType="none"
                                     android:textSize="18sp" />
@@ -794,7 +794,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/bordesmarcoscafegrisaceo"
-                                    android:editable="true"
+                                    android:editable="false"
                                     android:gravity="center"
                                     android:inputType="none"
                                     android:textAlignment="center"
@@ -841,7 +841,7 @@
                                 android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
-                                android:editable="true"
+                                android:editable="false"
                                 android:gravity="center"
                                 android:textAlignment="center"
                                 android:textSize="18sp" />
@@ -872,13 +872,13 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/cedula_cliente_ci_cli_actv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="3"
+                        android:editable="false"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:inputType="number"
