@@ -167,14 +167,14 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
 
         add_cliente_vt_vn_btn.setOnClickListener(v -> {
             add_vt_vn_lyt.setVisibility(View.GONE);
-            add_cliente_ed = true;
+            add_cliente_an = true;
             clearRegistrarCli();
             aniadir_cliente_vt_vn_lyt.setVisibility(View.VISIBLE);
         });
 
         ed_cliente_vt_vn_btn.setOnClickListener(v -> {
             editar_vt_vn_lyt.setVisibility(View.GONE);
-            add_cliente_an = true;
+            add_cliente_ed = true;
             aniadir_cliente_vt_vn_lyt.setVisibility(View.VISIBLE);
         });
 
@@ -294,16 +294,38 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 if (ver_vt_vn_lyt.getVisibility() == View.VISIBLE) {
                     irVerListaVentas();
                 }
-                if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
-                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
-                    add_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    add_cliente_ed = false;
-
-                }else if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
-                    editar_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
-                    add_cliente_an = false;
-
+                if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
+                            add_vt_vn_lyt.setVisibility(View.VISIBLE);
+                            add_cliente_an = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 164: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }else if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            editar_vt_vn_lyt.setVisibility(View.VISIBLE);
+                            aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
+                            add_cliente_ed = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 165: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }
         };

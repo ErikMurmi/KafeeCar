@@ -560,7 +560,7 @@
         android:background="@drawable/cita_individual_editar"
         android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -969,12 +969,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/editar_v_deshacer_btn"
+                        android:id="@+id/editar_v_descartar_btn"
                         android:layout_width="120dp"
                         android:layout_height="35dp"
                         android:background="@drawable/boton_redondeado_dark"
                         android:fontFamily="@font/valorant"
-                        android:text="Deshacer"
+                        android:text="Descartar"
                         android:textColor="@color/white" />
 
                     <Space
@@ -1002,7 +1002,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1045,10 +1045,9 @@
                             android:layout_height="35dp"
                             android:layout_marginBottom="@dimen/aniadir_auto_espacio"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="PBY-1234"
                             android:inputType="text"
-                            android:text="PBY-1234"
-                            android:textSize="17sp"
-                            tools:text="PBY 786" />
+                            android:textSize="17sp" />
 
                         <TextView
                             android:id="@+id/matricula_t_txt"
@@ -1068,10 +1067,9 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
+                            android:hint="GMN-005195560-PAR"
                             android:inputType="textPersonName|text"
-                            android:text="GMN-005195560-PAR"
-                            android:textAlignment="center"
-                            tools:text="GMN-005195560-PAR" />
+                            android:textAlignment="center" />
 
                         <TextView
                             android:id="@+id/anio_t_txt"
@@ -1091,11 +1089,10 @@
                             android:background="@drawable/bordesmarcoscafegrisaceo"
                             android:ems="10"
                             android:fontFamily="@font/ocra"
+                            android:hint="2014"
                             android:inputType="number|textPersonName"
-                            android:text="2014"
                             android:textAlignment="center"
-                            android:textSize="17sp"
-                            tools:text="2014" />
+                            android:textSize="17sp" />
 
                     </LinearLayout>
 
@@ -1131,11 +1128,11 @@
                     android:layout_height="77dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:hint="Todo esta correcto"
                     android:inputType="textMultiLine|text|textImeMultiLine"
                     android:lines="3"
                     android:maxLines="5"
                     android:singleLine="false"
-                    android:text="Todo esta correcto"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -1164,10 +1161,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="Toyota"
                             android:inputType="text"
-                            android:text="Toyota"
-                            android:textSize="18sp"
-                            tools:text="Toyota" />
+                            android:textSize="18sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -1191,10 +1187,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="0dp"
                                 android:background="@drawable/bordesmarcoscafegrisaceo"
+                                android:hint="Azul marfil"
                                 android:inputType="text"
-                                android:text="Azul marfil"
-                                android:textSize="18sp"
-                                tools:text="Azul marfil" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -1225,10 +1220,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
-                            android:inputType="text"
-                            android:text="Fortuner"
-                            android:textSize="18sp"
-                            tools:text="Fortuner" />
+                            android:hint="Fortuner"
+                            android:inputType="text" />
 
                         <CheckBox
                             android:id="@+id/matricula_chkbox"
@@ -1281,10 +1274,9 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="32000"
                             android:inputType="numberDecimal"
-                            android:text="32000"
-                            android:textSize="18sp"
-                            tools:text="32000" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <TextView
@@ -1317,10 +1309,9 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="35500"
                             android:inputType="numberDecimal"
-                            android:text="35500"
-                            android:textSize="18sp"
-                            tools:text="35500" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <TextView
@@ -1353,10 +1344,9 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:hint="0"
                             android:inputType="numberDecimal"
-                            android:text="0"
-                            android:textSize="18sp"
-                            tools:text="0" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 

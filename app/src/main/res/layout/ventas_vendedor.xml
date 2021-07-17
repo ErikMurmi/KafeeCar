@@ -254,7 +254,7 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/imageView13"
@@ -1121,7 +1121,7 @@
         android:background="@drawable/nueva_venta"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -1454,7 +1454,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/ventas_lista"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:visibility="gone">
 
         <LinearLayout
