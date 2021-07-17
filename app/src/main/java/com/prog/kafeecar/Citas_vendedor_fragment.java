@@ -128,7 +128,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                             }
                         } catch (Exception e) {
                             citas_vendedor_lyt.setVisibility(View.VISIBLE);
-                            Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mainView.getContext(), "Error 126: No se pudo añadir la cita", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     });
@@ -136,6 +136,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     msg.show();
                 }
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 141: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         });
@@ -149,6 +150,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     irListaCitas();
                 } catch (Exception e) {
                     citas_vendedor_lyt.setVisibility(View.VISIBLE);
+                    Toast.makeText(mainView.getContext(), "Error 127: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             });
@@ -165,6 +167,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                     irListaCitas();
                 } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "Error 128: No se pudo eliminar la cita", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             });
@@ -194,7 +197,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                         irListaCitas();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "No se pudo actualizar los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 129: No se pudo actualizar la cita", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             });
@@ -218,6 +221,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             try {
                 cargar();
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 130: No se pudo cargar", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -231,7 +235,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 if(registrarCliente()){
                     ir_aniadir_ci_vn_btn.callOnClick();
                 }else{
-                    Toast.makeText(mainView.getContext(), "Error 154: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 131: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -262,6 +266,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                         try {
                             irListaCitas();
                         } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 132: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     });
@@ -288,7 +293,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         try {
             cargar();
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "No carga", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Error 133: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
         }
         return mainView;
     }
@@ -379,9 +384,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             }
         });
 
-        //todo
-        //regresar de las citas
-        //lacomprobacion de las horas
         d.setEndIconOnClickListener(v -> dias.performClick());
         dias.setOnClickListener(v -> {
             if (posicion_mes == -1 || posicion_anio == -1) {
@@ -397,14 +399,12 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                         dias.showDropDown();
                         dias_mostrados = true;
                     } catch (Exception e) {
-                        Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mainView.getContext(), "Error 134: No se puede mostrar (Adapter)", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-
         dias.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
-
     }
 
     public void listasDesplegableEditar() {
@@ -448,7 +448,6 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         mes.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
 
         dias_lyt.setEndIconOnClickListener(v -> dias.performClick());
-
         dias.setOnClickListener(v -> {
             if (posicion_mes != -1 && posicion_anio != -1) {
                 if (dias_mostrados) {
@@ -466,9 +465,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         });
 
         dias.setOnItemClickListener((parent, view, position, id) -> setPosicion_dia(position));
-
         horas_lyt.setEndIconOnClickListener(v -> horas.performClick());
-
         horas.setOnClickListener(v -> {
             if (horas_mostradas) {
                 horas.dismissDropDown();
@@ -493,6 +490,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         try {
             cargar();
         } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error 135: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         ver_ci_vn_lyt.setVisibility(View.GONE);
@@ -634,7 +632,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     return true;
                 }
             } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Error 158: No se registro el cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Error 136: No se registro el cliente", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
@@ -680,6 +678,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 imagen_ed.setImageURI(nuevo);
             });
         } catch (IOException e) {
+            Toast.makeText(mainView.getContext(), "Error 137: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         horas.setText(String.valueOf(cita_mostrar.getHora()));
@@ -710,6 +709,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 imagen.setImageURI(nuevo);
             });
         } catch (IOException e) {
+            Toast.makeText(mainView.getContext(), "Error 137: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -811,7 +811,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     public boolean registarCita() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        int c = 0;
+        int vacios = 0;
+        int invalidos = 0;
 
         String prueba = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -824,12 +825,11 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             if (cliente_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
-                c++;
+                invalidos++;
             }
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         if (!isEmpty(auto)) {
@@ -838,11 +838,10 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             if (vehiculo == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                invalidos++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         EditText resolucion = mainView.findViewById(R.id.resolucion_ci_vn_etxt);
@@ -851,7 +850,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             resolucion.setHint("");
         }
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos == 0) {
             Cita nueva = new Cita(
                     fecha,
                     posicion_hora,
@@ -864,6 +863,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }else{
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -876,6 +877,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     horas.add(String.valueOf(i));
                 }
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 138: busqueda fallida del usuario actual", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -885,6 +887,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                     horas.add(String.valueOf(i));
                 }
             } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 139: busqueda fallida del usuario actual", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -922,6 +925,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             cita_mostrar = patio.buscarCita("Vehiculo", placa, cedula_cliente);
             irVer();
         } catch (Exception e) {
+            Toast.makeText(mainView.getContext(), "Error 140: busqueda fallida de la cita", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
