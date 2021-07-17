@@ -328,7 +328,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-        
+
         busqueda_ventas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -363,7 +363,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         reg_correo_vt_vn_etxt.getText().clear();
     }
 
+
+
     public boolean registrarCliente(){
+
         EditText add_nombre_vt_vn_etxt = mainView.findViewById(R.id.add_nombre_vt_vn_etxt);
         EditText reg_apellido_vt_vn_etxt = mainView.findViewById(R.id.reg_apellido_vt_vn_etxt);
         EditText reg_cedula_vt_vn_etxt = mainView.findViewById(R.id.reg_cedula_vt_vn_etxt);
@@ -372,9 +375,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         EditText reg_anio_vt_vn_etxt = mainView.findViewById(R.id.reg_anio_vt_vn_etxt);
         EditText reg_telefono_vt_vn_etxt = mainView.findViewById(R.id.reg_telefono_vt_vn_etxt);
         EditText reg_correo_vt_vn_etxt = mainView.findViewById(R.id.reg_correo_vt_vn_etxt);
+
         int vacios = 0;
         int invalidos = 0;
-
         String nombre_str = add_nombre_vt_vn_etxt.getText().toString();
         if (nombre_str.isEmpty()) {
             vacios++;
