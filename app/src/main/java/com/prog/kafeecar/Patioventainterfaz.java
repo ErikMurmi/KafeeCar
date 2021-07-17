@@ -418,6 +418,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         int vacios = 0;
         int invalidos = 0;
 
+        if(foto == null){
+            Toast.makeText(Patioventainterfaz.this, "No ha seleccionado Imagen de Perfil", Toast.LENGTH_SHORT).show();
+            vacios++;
+        }
+        
         textocedula = findViewById(R.id.reg_cedula_us_etxt);
         String cedula_str = textocedula.getText().toString();
         if (cedula_str.isEmpty()) {
@@ -431,15 +436,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
         textonombre = findViewById(R.id.reg_nombre_us_etxt);
         String nombre_str = textonombre.getText().toString();
-        if (nombre_str.isEmpty()) {
-            vacios++;
-        }
         textapellido = findViewById(R.id.reg_apellido_us_etxt);
         String apellido_str = textapellido.getText().toString();
-        if (apellido_str.isEmpty()) {
+        String nombre_Completo = null;
+        if (nombre_str.isEmpty()) {
             vacios++;
+        }else if (apellido_str.isEmpty()) {
+            vacios++;
+        }else{
+            nombre_Completo = nombre_str + " " + apellido_str;
         }
-        String nombre_Completo = nombre_str + " " + apellido_str;
 
         textotelefono = findViewById(R.id.reg_telefono_us_etxt);
         String telefono_str = textotelefono.getText().toString();
@@ -538,6 +544,10 @@ public class Patioventainterfaz extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            StorageReference filePath = mStorageRef.child("Clientes").child(cedula_str + ".jpg");
+            filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                    Toast.makeText(Patioventainterfaz.this, "Se subio la imagen", Toast.LENGTH_SHORT).show()
+            );
             try {
                 Cliente cliente_comprobacion = patioventa.buscarClientes("Cedula",cedula_str);
                 if(cliente_comprobacion== null){
@@ -548,6 +558,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                     }
                 }else{
                     cliente_comprobacion.cambiarDatos(nombre_Completo,cedula_str,telefono_str,correo_str,clave_str,getFechaMod(fecha));
+                    cliente_comprobacion.setImagen(cedula_str + ".jpg");
                     irAplicacion("CLIENTE");
                 }
             } catch (Exception e) {
@@ -557,8 +568,6 @@ public class Patioventainterfaz extends AppCompatActivity {
             Toast.makeText(Patioventainterfaz.this, "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     public void registrarAdministrador() {
         EditText nombreAdmin;
@@ -575,7 +584,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         EditText horaSalidaAdmin;
         EditText horaAlmuerzoAdmin;
 
-        int c = 0;
+        int vacios = 0;
+
+        if(foto == null){
+            Toast.makeText(Patioventainterfaz.this, "No ha seleccionado Imagen de Perfil", Toast.LENGTH_SHORT).show();
+            vacios++;
+        }
 
         nombreAdmin = findViewById(R.id.reg_nombre_admin_etxt);
         apellidoAdmin = findViewById(R.id.reg_apellido_admin_etxt);
@@ -584,11 +598,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         String nombreCompletoAdmin_str = "";
         if (nombreCampoAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (apellidoCampoAdmin_str.isEmpty()) {
                 Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Apellido*", Toast.LENGTH_SHORT).show();
-                c++;
+                vacios++;
             } else {
                 nombreCompletoAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
             }
@@ -598,12 +612,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         String cedulaAdmin_str = cedulaAdmin.getText().toString();
         if (cedulaAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (cedulaAdmin_str.length() != 10) {
                 Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedulaAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -612,13 +626,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         int anio = -1;
         if (anio_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             anio = Integer.parseInt(anio_str);
             if (anio < 1900 || anio > 2003) {
                 Toast.makeText(Patioventainterfaz.this, "Año inválido", Toast.LENGTH_SHORT).show();
                 anioNacimientoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -627,13 +641,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         int mes = -1;
         if (mes_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             mes = Integer.parseInt(mes_str);
             if (mes < 1 || mes > 12) {
                 Toast.makeText(Patioventainterfaz.this, "Mes inválido", Toast.LENGTH_SHORT).show();
                 mesNacimientoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -642,13 +656,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         int dia;
         if (dia_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             dia = Integer.parseInt(dia_str);
             if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
                 Toast.makeText(Patioventainterfaz.this, "Día inválido", Toast.LENGTH_SHORT).show();
                 diaNacimientoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -656,12 +670,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         String telefonoAdmin_str = telefonoAdmin.getText().toString();
         if (telefonoAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (telefonoAdmin_str.length() != 10) {
                 Toast.makeText(Patioventainterfaz.this, "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
                 telefonoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -669,12 +683,12 @@ public class Patioventainterfaz extends AppCompatActivity {
         String correoAdmin_str = correoAdmin.getText().toString();
         if (correoAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (!validarMail(correoAdmin_str)) {
                 Toast.makeText(Patioventainterfaz.this, "Correo no valido", Toast.LENGTH_SHORT).show();
                 correoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -684,17 +698,17 @@ public class Patioventainterfaz extends AppCompatActivity {
         String confirmarContraseniaAdmin_str = confirmarContraseniaAdmin.getText().toString();
         if (contraseniaAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (confirmarContraseniaAdmin_str.isEmpty()) {
                 Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
-                c++;
+                vacios++;
             } else {
                 if (contraseniaAdmin_str.compareTo(confirmarContraseniaAdmin_str) != 0) {
                     Toast.makeText(Patioventainterfaz.this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                     contraseniaAdmin.setText("");
                     confirmarContraseniaAdmin.setText("");
-                    c++;
+                    vacios++;
                 }
             }
         }
@@ -704,13 +718,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         int horaEntradaAdmin_int = -1;
         if (horaEntradaAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Entrada*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             horaEntradaAdmin_int = Integer.parseInt(horaEntradaAdmin.getText().toString());
             if (horaEntradaAdmin_int < 0 || horaEntradaAdmin_int > 24) {
                 Toast.makeText(Patioventainterfaz.this, "Hora de entrada inválida", Toast.LENGTH_SHORT).show();
                 horaEntradaAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -719,13 +733,13 @@ public class Patioventainterfaz extends AppCompatActivity {
         int horaAlmuerzoAdmin_int = -1;
         if (horaAlmuerzoAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Almuerzo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             horaAlmuerzoAdmin_int = Integer.parseInt(horaAlmuerzoAdmin.getText().toString());
             if (horaAlmuerzoAdmin_int < 0 || horaAlmuerzoAdmin_int > 24) {
                 Toast.makeText(Patioventainterfaz.this, "Hora de almuerzo inválida", Toast.LENGTH_SHORT).show();
                 horaAlmuerzoAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
@@ -734,29 +748,27 @@ public class Patioventainterfaz extends AppCompatActivity {
         int horaSalidaAdmin_int = -1;
         if (horaSalidaAdmin_str.isEmpty()) {
             Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Hora de Salida*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             horaSalidaAdmin_int = Integer.parseInt(horaSalidaAdmin.getText().toString());
             if (horaSalidaAdmin_int < 0 || horaSalidaAdmin_int > 24) {
                 Toast.makeText(Patioventainterfaz.this, "Hora de salida inválida", Toast.LENGTH_SHORT).show();
                 horaSalidaAdmin.setText("");
-                c++;
+                vacios++;
             }
         }
 
-        StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str + ".jpg");
-        filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
-                Toast.makeText(Patioventainterfaz.this, "Se subio la imagen", Toast.LENGTH_SHORT).show()
-        );
-
-
-        if (c == 0) {
+        if (vacios == 0) {
             Date fecha = null;
             try {
                 fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str + ".jpg");
+            filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
+                    Toast.makeText(Patioventainterfaz.this, "Se subio la imagen", Toast.LENGTH_SHORT).show()
+            );
             Vendedor user = new Vendedor(
                     String.format("%s.jpg", cedulaAdmin_str),
                     horaEntradaAdmin_int,
