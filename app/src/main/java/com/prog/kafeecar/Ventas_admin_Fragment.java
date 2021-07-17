@@ -77,6 +77,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private int[] colors = new int[]{Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51)};
     private Lista ventas;
     private String cedulaVendedor="";
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mainView = inflater.inflate(R.layout.ventas_admin, container, false);
@@ -127,13 +128,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
 
         vt_admin_estadiciticas_usuario_btn.setOnClickListener(view -> {
-
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
             vt_estadisticasusuario_lyt.setVisibility(View.VISIBLE);
             adaptadorVendedoresGrafico();
-
-
         } );
 
         vt_ad_ver_venta_editar_btn.setOnClickListener(v -> {
