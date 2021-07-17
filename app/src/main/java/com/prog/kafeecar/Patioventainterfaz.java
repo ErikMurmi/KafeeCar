@@ -540,7 +540,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             try {
                 if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {
                     Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
-                    irAplicacion("ADMIN");
+                    irAplicacion("CLIENTE");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
