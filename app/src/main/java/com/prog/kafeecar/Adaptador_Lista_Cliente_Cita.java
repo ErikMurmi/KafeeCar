@@ -25,8 +25,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private Lista citas_buscadas;
     Lista citas_originales;
-    private RecyclerItemClick itemClick;
-
+    private final RecyclerItemClick itemClick;
 
     public Adaptador_Lista_Cliente_Cita(Lista citas, RecyclerItemClick itemClick){
         this.citas_buscadas=citas;
@@ -49,7 +48,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
             String nombre= c.getCliente().getNombre();
             String telefono= c.getCliente().getTelefono();
             String placa= c.getVehiculo().getPlaca();
-            String hora = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
+            @SuppressLint("DefaultLocale") String hora = String.format("%02d:00%s-%02d:00%s",c.getHora(),formatoHora(c.getHora()),c.getHora()+1,formatoHora(c.getHora()+1));
             formatoHora(c.getHora());
             StorageReference filePath = mStorageRef.child("Vehiculos/"+c.getVehiculo().getimagen());
 
@@ -78,33 +77,7 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
         return citas_buscadas.contar();
     }
 
-   /* public void buscar(String fecha){
-        if(fecha.length()==0){
-            citas_buscadas.vaciar();
-            citas_buscadas.copiar(citas_originales);
-        }else {
-            citas_buscadas.vaciar();
-            for (int i = 0; i < citas_originales.contar(); i++) {
-                Cita actual = null;
-                try {
-                    actual = (Cita) citas_originales.getPos(i);
-                } catch (Exception e) {
-                    Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-                String f = Patioventainterfaz.getFechaMod(actual.getFechaCita());
-                if (f.contains(fecha)) {
-                    citas_buscadas.add(actual);
-                }
-            }
-        }
-
-        notifyDataSetChanged();
-    }*/
-
-
-
-
-    public class clienteHolder extends RecyclerView.ViewHolder{
+    public static class clienteHolder extends RecyclerView.ViewHolder{
         public ImageView imagen;
         public TextView horacita;
         public TextView nombre;
@@ -143,7 +116,6 @@ public class Adaptador_Lista_Cliente_Cita extends RecyclerView.Adapter<Adaptador
                 }
             }
         }
-
         notifyDataSetChanged();
     }
 

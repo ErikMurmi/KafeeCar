@@ -1,4 +1,5 @@
 package com.prog.kafeecar;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
@@ -54,7 +55,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private LinearLayout irCitaNueva;
     private LinearLayout verCatalogo;
     private ScrollView vistaVehiculo;
-    private String horascita[]=new String[]{"8","9","10","11","12","13","14","15","16"};
+    private final String[] horascita =new String[]{"8","9","10","11","12","13","14","15","16"};
 
     private Button favoritoBoton;
 
@@ -74,7 +75,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private Drawable estrelladorada;
     private Adaptador_Lista_Catalogo_Cl adptadorlistaview;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
@@ -97,11 +97,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
         irCitaNueva = mainView.findViewById(R.id.add_cita_v_cli_lyt);
 
-
         listasDesplegableAniadir();
 
         //Edit Text necesarios
-
         regresarVistaVehiculo.setOnClickListener(v -> {
             try {
                 vistaVehiculo.setVisibility(View.GONE);
@@ -176,7 +174,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         busqueda_placa.setOnQueryTextListener(this);
         cargar();
 
-
         return mainView;
     }
 
@@ -189,11 +186,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         listaview.setAdapter(adptadorlistaview);
     }
 
-    /*public void irVer() {
-
-        visualizarVehiculo();
-    }*/
-
     public void irCatalogo() {
         cargar();
         vistaVehiculo.setVisibility(View.GONE);
@@ -202,12 +194,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         verCatalogo.setVisibility(View.VISIBLE);
 
     }
-
-
-    /*@SuppressLint("DefaultLocale")
-    public void verLista(String placa, String placa1) throws Exception {
-    }*/
-
 
     public void modificarFavorito() {
 
@@ -220,8 +206,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         }
     }
 
-
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void visualizarVehiculo() {
         verCatalogo.setVisibility(View.GONE);
         irCitaNueva.setVisibility(View.GONE);
@@ -241,7 +226,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         TextView promocion = mainView.findViewById(R.id.vehiculo_promocion_cliente_txt);
         TextView matriculado = mainView.findViewById(R.id.vehiculo_matriculado_cliente_txt);
 
-        String titulo_str = vMostrar.getMarca() + " " + vMostrar.getModelo();//ojo
+        String titulo_str = vMostrar.getMarca() + " " + vMostrar.getModelo();
         String precioTitulo = "$" + vMostrar.getPrecioVenta();
         precio.setText(precioTitulo);
         titulo.setText(titulo_str);
@@ -258,7 +243,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             favoritoBoton.setBackground(estrelladorada);
         } else {
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
-
         }
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
@@ -276,9 +260,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         } else {
             matriculado.setText(" No");
         }
-
-
-
     }
     public void verAgendarCita(){
         ImageView vehiculo_img = mainView.findViewById(R.id.Carro_ci_v_img);
@@ -300,7 +281,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
     public boolean registarCita() throws Exception {
         Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
-        Vendedor vendedor = null;
+        Vendedor vendedor;
         int c = 0;
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -389,46 +370,14 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 horas.dismissDropDown();
                 horas_mostradas =false;
             }else{
-                try {
-                    fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-                    Date fecha = sdf.parse(fecha_nueva_cita);
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
-                    horas.setAdapter(adapt);
-                    horas.showDropDown();
-                    horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
-                    horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
-                }
+                fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
+                horas.setAdapter(adapt);
+                horas.showDropDown();
+                horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
+                horas_mostradas = true;
             }
         });
-    }
-
-
-    private boolean isEmpty(EditText etText) {
-        return etText.getText().toString().trim().length() == 0;
-    }public ArrayList<String> horasDisponible(Date fechaCita){
-        ArrayList<String> horas = new ArrayList<>();
-        Vendedor vendedor = cita_mostrar.getVendedorCita();
-        for(int i = vendedor.getHoraEntrada();i<vendedor.getHoraComida();i++){
-            try {
-                if(vendedor.disponible(fechaCita,i)){
-                    horas.add(String.valueOf(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        for(int i = vendedor.getHoraComida()+1;i<vendedor.getHoraSalida();i++){
-            try {
-                if(vendedor.disponible(fechaCita,i)){
-                    horas.add(String.valueOf(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return  horas;
     }
 
     public ArrayList<String> diaListaDesplegable(){
@@ -455,7 +404,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         hora_nueva_cita = hora;
     }
 
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
@@ -470,25 +418,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
         return false;
-        /* newText = newText.toUpperCase();
-        try {
-            adptadorlistaview.buscar(newText);
-        } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
-        }
-        return false;*/
     }
 
     @Override
     public void itemClick(String placa) {
-        //irVer(placa);
         try {
             vMostrar = patio.buscarVehiculos("Placa", placa);
-            //irVer();
             visualizarVehiculo();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

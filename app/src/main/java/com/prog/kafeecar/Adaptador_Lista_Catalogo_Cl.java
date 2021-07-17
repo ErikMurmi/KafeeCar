@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,7 +73,6 @@ public class Adaptador_Lista_Catalogo_Cl extends RecyclerView.Adapter<Adaptador_
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
         @Override

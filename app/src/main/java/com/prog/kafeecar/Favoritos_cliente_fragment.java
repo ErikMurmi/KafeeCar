@@ -1,9 +1,9 @@
 package com.prog.kafeecar;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,11 +40,9 @@ import java.util.Date;
 import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static java.lang.String.format;
 
-
 public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Lista_Catalogo.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private View mainView;
-    //private View mainView2;
     private PatioVenta patio;
     private Vehiculo vMostrar;
     private LinearLayout verCatalogofav;
@@ -53,13 +51,9 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
     private final Cliente clienteActual = (Cliente) Patioventainterfaz.usuarioActual;
     private Adaptador_Lista_Catalogo adptadorlistaview;
     private Button favoritoBoton;
-    private Button iragendar;
-    private Button agendarcita;
-    private Button descartarcita;
-    //private Drawable estrelladorada;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    private String horascita[]=new String[]{"8","9","10","11","12","13","14","15","16"};
-    private SimpleDateFormat sdf = Patioventainterfaz.sdf;
+    private final String[] horascita =new String[]{"8","9","10","11","12","13","14","15","16"};
+    private final SimpleDateFormat sdf = Patioventainterfaz.sdf;
 
     private int posicion_dia=-1;
     private int posicion_mes=-1;
@@ -73,7 +67,6 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
 
     String fecha_nueva_cita;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,12 +78,11 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         verCatalogofav = mainView.findViewById(R.id.favorito_cliente_lyt);
         agenCitaNueva = mainView.findViewById(R.id.add_cita_fav_cli_vv_lyt);
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_F_btn);
-        agendarcita = mainView.findViewById(R.id.guardar_ci_fav_cli_vv_btn);
-        descartarcita = mainView.findViewById(R.id.descartar_ci_fav_cli_vv_btn);
-        iragendar = mainView.findViewById(R.id.agendarcita_cliente_F_btn);
+        Button agendarcita = mainView.findViewById(R.id.guardar_ci_fav_cli_vv_btn);
+        Button descartarcita = mainView.findViewById(R.id.descartar_ci_fav_cli_vv_btn);
+        Button iragendar = mainView.findViewById(R.id.agendarcita_cliente_F_btn);
         Button regresarFavorito = mainView.findViewById(R.id.regresar_VVF_cliente_btn);
         listasDesplegableAniadir();
-        //estrelladorada = favoritoBoton.getBackground();
 
         //Metodo para el control del boton atras
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -103,7 +95,6 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                         e.printStackTrace();
                     }
                 }
-
             }
         };
 
@@ -180,10 +171,6 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         return mainView;
     }
 
-    public void irVer() {
-        visualizarVehiculoF();
-    }
-
     public void cargar() throws Exception {
         RecyclerView listaview = mainView.findViewById(R.id.listafavoritos_Rv);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
@@ -205,19 +192,10 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         cedulaclien.setText(Patioventainterfaz.usuarioActual.getCedula());
         palcaVe.setText(vMostrar.getMatricula());
     }
-    public void modificarFavorito() {
-
-        //if (clienteActual.esFavorito(vMostrar.getPlaca())) {
-
-        /*} else {
-            clienteActual.getFavoritos().add(vMostrar.getPlaca());
-            favoritoBoton.setBackground(estrelladorada);
-        }*/
-    }
 
     public boolean registarCita() throws Exception {
         Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
-        Vendedor vendedor = null;
+        Vendedor vendedor;
         int c = 0;
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -241,6 +219,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
     }
 
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void visualizarVehiculoF() {
         ImageView v_img = mainView.findViewById(R.id.foto_auto_F_imageView);
         TextView titulo = mainView.findViewById(R.id.titulo_auto_F_txt);
@@ -269,11 +248,6 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         color.setText(format("%s", vMostrar.getColor()));
         preciVenta.setText(format("$ %.2f", vMostrar.getPrecioVenta()));
         promocion.setText(format("$ %.2f", vMostrar.getPromocion()));
-        /*if (clienteActual.esFavorito(vMostrar.getPlaca())) {
-            favoritoBoton.setBackground(estrelladorada);
-        } else {
-            favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
-        }*/
         //Cargar imagen
         StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
         try {
@@ -360,29 +334,21 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 horas.dismissDropDown();
                 horas_mostradas =false;
             }else{
-                try {
-                    fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-                    Date fecha = sdf.parse(fecha_nueva_cita);
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
-                    horas.setAdapter(adapt);
-                    horas.showDropDown();
-                    horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
-                    horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
-                }
+                fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+                ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
+                horas.setAdapter(adapt);
+                horas.showDropDown();
+                horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
+                horas_mostradas = true;
             }
         });
     }
-
 
     @Override
     public void itemClick(String placa) {
         try {
             vMostrar = patio.buscarVehiculos("Placa", placa);
-            //clienteF.visualizarVehiculo();
             visualizarVehiculoF();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -403,10 +369,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         }
         return false;
     }
-    // @Override
-    //public void itemClick(String placa) {
-    //   int i=0;
-    //}
+
     public ArrayList<String> diaListaDesplegable(){
         ArrayList<String> dias = new ArrayList<>();
         int anioa = Integer.parseInt(Patioventainterfaz.anios[posicion_anio]);
