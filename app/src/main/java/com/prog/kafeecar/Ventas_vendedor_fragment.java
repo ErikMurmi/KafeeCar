@@ -284,7 +284,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                         try {
                             irVerListaVentas();
                         } catch (Exception e) {
-                            
+                            Toast.makeText(mainView.getContext(), "Error 166: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -304,7 +304,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                             add_cliente_an = false;
                         } catch (Exception e) {
                             Toast.makeText(mainView.getContext(), "Error 164: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
-                            
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
