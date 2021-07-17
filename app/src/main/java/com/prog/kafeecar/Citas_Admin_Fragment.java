@@ -57,7 +57,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private boolean anios_mostradas = false;
     public boolean dias_mostrados = false;
 
-    private boolean add_cliente_ci_ad = false;
+    private boolean add_cliente_ci_an = false;
     private boolean add_cliente_ci_ed = false;
 
     private int posicion_dia=-1;
@@ -148,7 +148,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                                 irListaCitas();
                             }
                         } catch (Exception e) {
-                            Toast.makeText(mainView.getContext(), "Error 152: No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mainView.getContext(), "Error 21: No se pudo añadir la cita", Toast.LENGTH_SHORT).show();
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -156,7 +156,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 msg.show();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(mainView.getContext(), "Error 153: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Error 22: Búsqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -170,7 +170,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                     irListaCitas();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 23: No se pudo remover la cita", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -183,18 +183,14 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de salir sin guardar los cambios?");
             msg.setPositiveButton("Si", (dialog, which) -> {
-                try {
                     irListaCitas();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
 
         ed_guardar_ci_ad_btn.setOnClickListener(v -> {
-            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_ad_actv);
             String cli = cliente.getText().toString();
             try {
                 Cliente aux = patio.buscarClientes("Cedula",cli);
@@ -237,7 +233,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //Add cliente
         add_cliente_ci_ad_btn.setOnClickListener(v -> {
             add_cita_admin_lyt.setVisibility(View.GONE);
-            add_cliente_ci_ad = true;
+            add_cliente_ci_an = true;
             aniadir_cliente_ci_ad_lyt.setVisibility(View.VISIBLE);
         });
 
@@ -287,14 +283,17 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if(aniadir_cliente_ci_ad_lyt.getVisibility()==View.VISIBLE && add_cliente_ci_ad){
+                if(verCita.getVisibility()==View.VISIBLE){
+                    irListaCitas();
+                }
+                if(aniadir_cliente_ci_ad_lyt.getVisibility()==View.VISIBLE && add_cliente_ci_an){
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         aniadir_cliente_ci_ad_lyt.setVisibility(View.GONE);
                         add_cita_admin_lyt.setVisibility(View.VISIBLE);
-                        add_cliente_ci_ad =false;
+                        add_cliente_ci_an =false;
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
@@ -307,7 +306,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         aniadir_cliente_ci_ad_lyt.setVisibility(View.GONE);
                         ed_cita_admin_lyt.setVisibility(View.VISIBLE);
-                        add_cliente_ci_ad =false;
+                        add_cliente_ci_an =false;
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
@@ -420,6 +419,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
+                    if(add_cliente_ci_an){
+                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+                        cliente_ed.setText(cedula_str);
+                    }else if(add_cliente_ci_ed) {
+                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_ci_ad_actv);
+                        cliente_an.setText(cedula_str);
+                    }
                     Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     return true;
                 }
@@ -667,7 +673,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         cliente.setText(cita_mostrar.getCliente().getNombre());
         contacto.setText(cita_mostrar.getCliente().getTelefono());
         vendedor.setText(cita_mostrar.getVendedorCita().getNombre());
-        vehiculo.setText(cita_mostrar.getVehiculo().getMarca() + cita_mostrar.getVehiculo().getModelo());
+        vehiculo.setText(cita_mostrar.getVehiculo().getMarca() +" "+ cita_mostrar.getVehiculo().getModelo());
         String resolucion_str =cita_mostrar.getResolucion();
         descripcion.setText(cita_mostrar.getVehiculo().getDescripcion());
         if(!resolucion_str.equals("")){
@@ -834,10 +840,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
         String resolucion_str = resolucion.getText().toString();
-
-        if(isEmpty(resolucion)){
-            resolucion.setHint("");
-        }
 
         if (c == 0) {
             cita_mostrar.actualizarVen(
