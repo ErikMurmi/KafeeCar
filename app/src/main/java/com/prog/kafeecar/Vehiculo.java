@@ -16,10 +16,6 @@ public class Vehiculo {
     private boolean matriculado;
     private int anio;
 
-    public Vehiculo() {
-        
-    }
-
     public Vehiculo(String placa, String matricula, String marca, String modelo, String color, String descripcion,
                     float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen) {
         this.placa = placa;
@@ -35,7 +31,6 @@ public class Vehiculo {
         this.anio = anio;
         this.imagen = imagen;
     }
-
    
     public String getPlaca() {
         return placa;
@@ -85,71 +80,7 @@ public class Vehiculo {
     {
         return imagen;
     }
-    
-    /***
-     * El metodo cambiarDato nos permite cambiar un dato en especifico
-     * @param criterio contiene el criterio que deseamos cambiar
-     * @param dato lleva el contenido del dato que deseamoscambiar
-     */
-    public void cambiarDato(String criterio, String dato)
-    {
-        if(criterio.compareToIgnoreCase("placa")==0)
-        {
-            this.placa = dato;    
-        }
-        else if (criterio.compareToIgnoreCase("matricula")==0)
-        {
-            this.matricula = dato;    
-        }
-        else if (criterio.compareToIgnoreCase("marca")==0)
-        {  
-            this.marca = dato;    
-        }       
-        else if (criterio.compareToIgnoreCase("modelo")==0) 
-        {        
-            this.modelo = dato;   
-        }            
-        else if (criterio.compareToIgnoreCase("color")==0)
-        {
-            this.color= dato;  
-        }
-        else if (criterio.compareToIgnoreCase("descripcion")==0)
-        {
-            this.descripcion = dato;   
-        }
-        else if(criterio.compareToIgnoreCase("imagen")==0)
-        {
-            this.imagen = dato;        
-        }
-        else if(criterio.compareToIgnoreCase("precioInicial")==0)
-        {
-            float flotante = Float.parseFloat(dato);
-            this.precioInicial = flotante;   
-        }
-        else if(criterio.compareToIgnoreCase("precioVenta")==0)
-        {
-            float flotante = Float.parseFloat(dato);
-            this.precioVenta = flotante;    
-        }
-        else if(criterio.compareToIgnoreCase("promocion")==0)
-        {
-            float flotante = Float.parseFloat(dato);
-            this.promocion = flotante;    
-        }
-        else if(criterio.compareToIgnoreCase("matriculado")==0)
-        {
-            boolean bo = Boolean.valueOf(dato);
-            this.matriculado = bo;    
-        }
-        else if(criterio.compareToIgnoreCase("anio")==0)
-        {
-            int entero = Integer.parseInt(dato);
-            this.anio = entero;   
-        }      
-    }  
-    
-    
-    
+
    /***
     * Metodo actualizardatos se encargara de actualizar todos los datos de un vehiculo
     * @param placa actualiza la placa

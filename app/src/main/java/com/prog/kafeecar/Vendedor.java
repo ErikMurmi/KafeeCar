@@ -1,13 +1,8 @@
 package com.prog.kafeecar;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Erik
- */
 public class Vendedor extends Usuario{
     
     private int horaEntrada;
@@ -97,11 +92,10 @@ public class Vendedor extends Usuario{
        {
             Cita act= (Cita) copiaSitema.getPos(cont) ;
             if(this.getNombre().compareTo(act.getVendedorCita().getNombre())==0){
-                citas.add(act);}
+            citas.add(act);}
                                 
-                 cont++;
+            cont++;
        }
-         
         return citas;
     }
     
@@ -148,5 +142,4 @@ public class Vendedor extends Usuario{
         }
         return disponible;
     }
-
 }
