@@ -406,6 +406,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void aniadirCliente(View v) {
         EditText textonombre;
+        EditText textapellido;
         EditText textocedula;
         EditText textodia;
         EditText textomes;
@@ -414,138 +415,146 @@ public class Patioventainterfaz extends AppCompatActivity {
         EditText textocorreo;
         EditText textoclave;
         EditText textorepetirclave;
-        int c = 0;
+        int vacios = 0;
+        int invalidos = 0;
 
-        textonombre = findViewById(R.id.nombre_etxt);
-        String nombre_str = textonombre.getText().toString();
-        if (nombre_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        textocedula = findViewById(R.id.cedula_etxt);
+        textocedula = findViewById(R.id.reg_cedula_us_etxt);
         String cedula_str = textocedula.getText().toString();
         if (cedula_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (cedula_str.length() != 10) {
                 Toast.makeText(Patioventainterfaz.this, "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 textocedula.setText("");
-                c++;
+                invalidos++;
             }
         }
+        textonombre = findViewById(R.id.reg_nombre_us_etxt);
+        String nombre_str = textonombre.getText().toString();
+        if (nombre_str.isEmpty()) {
+            vacios++;
+        }
+        textapellido = findViewById(R.id.reg_apellido_us_etxt);
+        String apellido_str = textapellido.getText().toString();
+        if (apellido_str.isEmpty()) {
+            vacios++;
+        }
+        String nombre_Completo = nombre_str + " " + apellido_str;
 
-        textotelefono = findViewById(R.id.telefono_etxt);
+        textotelefono = findViewById(R.id.reg_telefono_us_etxt);
         String telefono_str = textotelefono.getText().toString();
         if (telefono_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (telefono_str.length() != 10) {
                 Toast.makeText(Patioventainterfaz.this, "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
                 textotelefono.setText("");
-                c++;
+                invalidos++;
             }
         }
 
-        textocorreo = findViewById(R.id.correo_etxt);
+        textocorreo = findViewById(R.id.reg_correo_us_etxt);
         String correo_str = textocorreo.getText().toString();
         if (correo_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (!Patioventainterfaz.validarMail(correo_str)) {
                 Toast.makeText(Patioventainterfaz.this, "Correo no valido", Toast.LENGTH_SHORT).show();
                 textocorreo.setText("");
-                c++;
+                invalidos++;
             }
         }
 
-        textoclave = findViewById(R.id.claveuser_etxt);
+        textoclave = findViewById(R.id.reg_contraseña_us_etxt);
         String clave_str = textoclave.getText().toString();
-        textorepetirclave = findViewById(R.id.repetirclaveuser_etxt);
+        textorepetirclave = findViewById(R.id.reg_confir_contraseña_us_etxt);
         String repetirclave_str = textorepetirclave.getText().toString();
         if (clave_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Contraseña*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (repetirclave_str.isEmpty()) {
-                Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Confirmar Contraseña*", Toast.LENGTH_SHORT).show();
-                c++;
+                vacios++;
             } else {
-                if (clave_str.compareTo(repetirclave_str) != 0) {
+                if(clave_str.length()<=8 || repetirclave_str.length()<=8){
+                    Toast.makeText(Patioventainterfaz.this, "La clave debe contener 8 caracteres mínimo", Toast.LENGTH_SHORT).show();
+                    textoclave.setText("");
+                    textorepetirclave.setText("");
+                    invalidos++;
+                }else if (clave_str.compareTo(repetirclave_str) != 0) {
                     Toast.makeText(Patioventainterfaz.this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                     textoclave.setText("");
                     textorepetirclave.setText("");
-                    c++;
+                    invalidos++;
                 }
             }
         }
 
-        textomes = findViewById(R.id.mes_etxt);
+        textomes = findViewById(R.id.reg_mes_us_etxt);
         String mes_str = textomes.getText().toString();
         int mes = -1;
         if (mes_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             mes = Integer.parseInt(mes_str);
             if (mes < 1 || mes > 12) {
                 Toast.makeText(Patioventainterfaz.this, "Mes inválido", Toast.LENGTH_SHORT).show();
                 textomes.setText("");
-                c++;
+                invalidos++;
             }
         }
 
-        textoanio = findViewById(R.id.anio_etxt);
+        textoanio = findViewById(R.id.reg_anio_us_etxt);
         String anio_str = textoanio.getText().toString();
         int anio = -1;
         if (anio_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             anio = Integer.parseInt(anio_str);
             if (anio < 1900 || anio > 2003) {
                 Toast.makeText(Patioventainterfaz.this, "Año inválido", Toast.LENGTH_SHORT).show();
                 textoanio.setText("");
-                c++;
+                invalidos++;
             }
         }
 
-        textodia = findViewById(R.id.dia_etxt);
+        textodia = findViewById(R.id.reg_dia_us_etxt);
         String dia_str = textodia.getText().toString();
         int dia;
         if (dia_str.isEmpty()) {
-            Toast.makeText(Patioventainterfaz.this, "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             dia = Integer.parseInt(dia_str);
             if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
                 Toast.makeText(Patioventainterfaz.this, "Día inválido", Toast.LENGTH_SHORT).show();
                 textodia.setText("");
-                c++;
+                invalidos++;
             }
         }
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos == 0) {
             Date fecha = null;
             try {
                 fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha, cedula_str + ".jpg");
-            patioventa.aniadirUsuario(cliente, "Cliente");
             try {
-                if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {
-                    Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                Cliente cliente_comprobacion = patioventa.buscarClientes("Cedula",cedula_str);
+                if(cliente_comprobacion== null){
+                    Cliente cliente = new Cliente(nombre_Completo, cedula_str, telefono_str, correo_str, clave_str, fecha, cedula_str + ".jpg");
+                    if(patioventa.aniadirUsuario(cliente, "Cliente")){
+                        Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                        irAplicacion("CLIENTE");
+                    }
+                }else{
+                    cliente_comprobacion.cambiarDatos(nombre_Completo,cedula_str,telefono_str,correo_str,clave_str,getFechaMod(fecha));
                     irAplicacion("CLIENTE");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+        }else{
+            Toast.makeText(Patioventainterfaz.this, "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
     }
 
