@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.prog.kafeecar;
 
 import java.util.Date;
 
-/**
- *
- * @author Erik
- */
 public class Cita {
 
     private Date fechaCita;
@@ -21,7 +12,6 @@ public class Cita {
     private Vendedor vendedorCita;
     private Vehiculo vehiculo;
 
-    //Metodos por defecto 
     public Cita(Date fechaCita, int hora, String resolucion, Cliente cliente, Vendedor vendedorCita, Vehiculo vehiculo) {
         this.fechaCita = fechaCita;
         this.hora = hora;
@@ -37,7 +27,7 @@ public class Cita {
         this.vehiculo = vehiculo;
     }
     //
-    public Cita(Date parse, int hora, Vehiculo vehiculo) {
+    public Cita(Date fechaCita, int hora, Vehiculo vehiculo) {
         this.fechaCita = fechaCita;
         this.hora = hora;
         this.vehiculo = vehiculo;
@@ -101,20 +91,6 @@ public class Cita {
                 + "\nCliente: " + cliente
                 + "\nVendedorCita: " + vendedorCita
                 + "\nVehiculo: " + vehiculo;
-    }
-
-    //Metodos necesarios para el sistema
-    /**
-     * Pospone la fecha u hora de una cita
-     *
-     * @param fecha dia/mes/anio de la cita
-     * @param hora hora en la que se realizara la cita
-     * @return cita pospuesta
-     */
-    public Cita posponer(Date fecha, int hora) {
-        fechaCita = fecha;
-        this.hora = hora;
-        return this;
     }
 
     /**

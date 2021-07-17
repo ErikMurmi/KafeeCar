@@ -1,17 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.prog.kafeecar;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-/**
- *
- * @author Erik
- */
 public class Lista {
     private Nodo inicio;
     private Nodo fin;
@@ -92,13 +80,13 @@ public class Lista {
             inicio = nuevo;
         }   
     }
-    
-    
+
+
     /**
      * Aniade un elemento a cierta posicion
      * @param pos
      * @param dato
-     * @throws Exception 
+     * @throws Exception
      */
     public void addPos(int pos, Object dato) throws Exception{
         if(esVacia()){
@@ -192,29 +180,7 @@ public class Lista {
         aux.setDato(dato);
     }
     
-    
-    /**
-     * Cambia un dato por otro 
-     * @param buscado dato a ser cambiado
-     * @param dato reemplazo de dato actual
-     * @return true si se realizo el cambio , caso contrario false
-     * @throws Exception 
-    */
-    public boolean cambiarDato(Object buscado,Object dato) throws Exception{
-        if(esVacia()){
-            throw new Exception("No hay elementos");
-        }
-        Nodo aux = inicio;
-        boolean cambiado = false;
-        while(aux != null  || !cambiado){
-            if(aux.getDato().equals(buscado)){
-                aux.setDato(dato);
-                cambiado = true;
-            }
-            aux = aux.getSiguiente();
-        } 
-        return cambiado;
-    }
+
     private Object eliminarNodo(Nodo nodoeliminar){
         if(esVacia()){
             return null;
@@ -261,30 +227,7 @@ public class Lista {
         
         return aux.getDato();
     }
-    
-    
-    /**
-     * Elimina un objeto de determina posicion  
-     * @param pos posicion del objeto a eliminar
-     * @throws Exception
-     */
-    /*public Object eliminarPos(int pos) throws Exception{
-        if(esVacia()){
-            throw new Exception("Esta vacia");
-        }else if(pos>contar()){
-            throw new Exception("El indice supera el tamanio de la lista");
-        }
-        int cont=0;
-        Nodo aux = inicio;
-        while(cont < pos){
-            cont++;
-            aux = aux.getSiguiente();
-        }
-        aux.getAnterior().setSiguiente(aux.getSiguiente());
-        aux.setAnterior(null);
-        aux.setSiguiente(null);
-        return aux.getDato();
-    }*/
+
 
     public void eliminarPos(int pos) throws Exception{
         if(esVacia()){
@@ -320,58 +263,6 @@ public class Lista {
         }
     }
 
-    public Lista listabusqueda(Object buscar) throws Exception {
-        if (esVacia()) {
-            return new Lista();
-        }
-        Lista encontrados = new Lista();
-        Nodo aux = inicio;
-
-        if (buscar instanceof Cliente) {
-            Cliente c = (Cliente) buscar;
-
-            while (aux != null) {
-                Cita actual = (Cita) aux.getDato();
-                if (actual.getCliente().getCedula().compareTo(c.getCedula()) == 0) {
-                    encontrados.add(actual);
-                }
-                aux = aux.getSiguiente();
-
-            }
-        } else {
-            throw new Exception("No implementado");
-        }
-
-
-        return encontrados;
-    }
-    public Lista listabusquedaFav(Object placa) throws Exception {
-        if (esVacia()) {
-            return new Lista();
-        }
-        Lista encontradosF = new Lista();
-        Nodo aux = inicio;
-
-        if (placa instanceof Vehiculo) {
-            Vehiculo v = (Vehiculo) placa;
-
-            while (aux != null) {
-                Vehiculo actual = (Vehiculo) aux.getDato();
-                if (actual.getPlaca().compareTo(v.getPlaca()) == 0) {
-                    encontradosF.add(actual);
-                }
-                aux = aux.getSiguiente();
-
-            }
-        } else {
-            throw new Exception("No implementado");
-        }
-
-
-        return encontradosF;
-    }
-
-
     public void copiar(Lista c){
         for(int i=0; i<c.contar();i++){
             try {
@@ -392,14 +283,6 @@ public class Lista {
             }
         }
         return copia;
-    }
-
-    public ArrayList<Cita> toArrayList(){
-        ArrayList<Cita> citas = new ArrayList<Cita>();
-        for(int i=0; i<contar();i++){
-                citas.add((Cita)getPos(i));
-        }
-        return citas;
     }
     
 }
