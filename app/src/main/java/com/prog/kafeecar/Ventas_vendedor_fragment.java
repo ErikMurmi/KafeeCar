@@ -295,15 +295,28 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     irVerListaVentas();
                 }
                 if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
-                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
-                    add_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    add_cliente_ed = false;
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
+                        add_vt_vn_lyt.setVisibility(View.VISIBLE);
+                        add_cliente_ed = false;
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
 
                 }else if(aniadir_cliente_vt_vn_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
-                    editar_vt_vn_lyt.setVisibility(View.VISIBLE);
-                    aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
-                    add_cliente_an = false;
-
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        editar_vt_vn_lyt.setVisibility(View.VISIBLE);
+                        aniadir_cliente_vt_vn_lyt.setVisibility(View.GONE);
+                        add_cliente_an = false;
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }
         };

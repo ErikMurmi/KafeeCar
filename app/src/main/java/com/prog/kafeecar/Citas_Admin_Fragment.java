@@ -75,8 +75,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private LinearLayout verCita;
     private LinearLayout ed_cita_admin_lyt;
     private LinearLayout listaCitas;
-    private LinearLayout aniadirCita;
-    private LinearLayout aniadir_cliente_ci_vn_lyt;
+    private LinearLayout add_cita_admin_lyt;
+    private LinearLayout aniadir_cliente_ci_ad_lyt;
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
@@ -87,10 +87,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //Layouts
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_ad_srv);
         verCita = mainView.findViewById(R.id.ver_ci_ad_lyt);
-        aniadirCita = mainView.findViewById(R.id.add_cita_admin_lyt);
+        add_cita_admin_lyt = mainView.findViewById(R.id.add_cita_admin_lyt);
         ed_cita_admin_lyt = mainView.findViewById(R.id.ed_cita_admin_lyt);
         listaCitas = mainView.findViewById(R.id.citas_lyt);
-        aniadir_cliente_ci_vn_lyt = mainView.findViewById(R.id.aniadir_cliente_ci_vn_lyt);
+        aniadir_cliente_ci_ad_lyt = mainView.findViewById(R.id.aniadir_cliente_ci_ad_lyt);
 
         //Botones
         ir_aniadir_cita_ad_fbtn = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
@@ -115,7 +115,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             ir_aniadir_cita_ad_fbtn.setVisibility(View.GONE);
-            aniadirCita.setVisibility(View.VISIBLE);
+            add_cita_admin_lyt.setVisibility(View.VISIBLE);
             adaptadorAniadir();
         });
 
@@ -129,15 +129,36 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         });
 
         guardar_cita.setOnClickListener(v -> {
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+            String cli = cliente.getText().toString();
             try {
-                if(registarCita()){
-                    irListaCitas();
+                Cliente aux = patio.buscarClientes("Cedula",cli);
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                if(aux==null){
+                    msg.setTitle("CLIENTE NO REGISTRADO");
+                    msg.setMessage("Presione 'Si' para añadir al cliente" );
+                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_ad_btn.callOnClick());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                }else{
+                    msg.setTitle("AÑADIR");
+                    msg.setMessage("¿Está seguro de añadir la venta?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            if(registarCita()){
+                                irListaCitas();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 152: No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                 }
+                msg.show();
             } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 153: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         anular.setOnClickListener(v -> {
@@ -173,41 +194,57 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         });
 
         ed_guardar_ci_ad_btn.setOnClickListener(v -> {
-            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-            msg.setTitle("Guardar");
-            msg.setMessage("¿Está seguro de guardar los cambios en la cita?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                try {
-                    if(editarCita()){
-                        irListaCitas();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
+            String cli = cliente.getText().toString();
+            try {
+                Cliente aux = patio.buscarClientes("Cedula",cli);
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                if(aux==null){
+                    msg.setTitle("CLIENTE NO REGISTRADO");
+                    msg.setMessage("Presione 'Si' para añadir al cliente" );
+                    msg.setPositiveButton("Si", (dialog, which) -> ed_add_cliente_ci_ad_btn.callOnClick());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                }else{
+                    msg.setTitle("GUARDAR");
+                    msg.setMessage("¿Está seguro de guardar los cambios en la cita?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            if(editarCita()){
+                                irListaCitas();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 157: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
+                            irListaCitas();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                 }
-            });
-            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-            msg.show();
+                msg.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 163: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
+            }
         });
 
         irVerEditable.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
-            aniadirCita.setVisibility(View.GONE);
+            add_cita_admin_lyt.setVisibility(View.GONE);
             ed_cita_admin_lyt.setVisibility(View.VISIBLE);
             visualizarEditable();
         });
 
         //Add cliente
         add_cliente_ci_ad_btn.setOnClickListener(v -> {
-            aniadirCita.setVisibility(View.GONE);
+            add_cita_admin_lyt.setVisibility(View.GONE);
             add_cliente_ci_ad = true;
-            aniadir_cliente_ci_vn_lyt.setVisibility(View.VISIBLE);
+            aniadir_cliente_ci_ad_lyt.setVisibility(View.VISIBLE);
         });
 
         ed_add_cliente_ci_ad_btn.setOnClickListener(v -> {
             ed_cita_admin_lyt.setVisibility(View.GONE);
             add_cliente_ci_ed = true;
-            aniadir_cliente_ci_vn_lyt.setVisibility(View.VISIBLE);
+            aniadir_cliente_ci_ad_lyt.setVisibility(View.VISIBLE);
         });
 
         reg_list_ci_ad_btn.setOnClickListener(v -> {
@@ -235,7 +272,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if ((ed_cita_admin_lyt.getVisibility() == View.VISIBLE)||(aniadirCita.getVisibility() == View.VISIBLE)) {
+                if ((ed_cita_admin_lyt.getVisibility() == View.VISIBLE)||(add_cita_admin_lyt.getVisibility() == View.VISIBLE)) {
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
@@ -250,8 +287,30 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if (verCita.getVisibility() == View.VISIBLE) {
-                    irListaCitas();
+                if(aniadir_cliente_ci_ad_lyt.getVisibility()==View.VISIBLE && add_cliente_ci_ad){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        aniadir_cliente_ci_ad_lyt.setVisibility(View.GONE);
+                        add_cita_admin_lyt.setVisibility(View.VISIBLE);
+                        add_cliente_ci_ad =false;
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+
+                }
+                if (aniadir_cliente_ci_ad_lyt.getVisibility()==View.VISIBLE && add_cliente_ci_ed) {
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        aniadir_cliente_ci_ad_lyt.setVisibility(View.GONE);
+                        ed_cita_admin_lyt.setVisibility(View.VISIBLE);
+                        add_cliente_ci_ad =false;
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }
         };
@@ -574,7 +633,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         listaCitas.setVisibility(View.VISIBLE);
         ir_aniadir_cita_ad_fbtn.setVisibility(View.VISIBLE);
         verCita.setVisibility(View.GONE);
-        aniadirCita.setVisibility(View.GONE);
+        add_cita_admin_lyt.setVisibility(View.GONE);
         ed_cita_admin_lyt.setVisibility(View.GONE);
     }
 
