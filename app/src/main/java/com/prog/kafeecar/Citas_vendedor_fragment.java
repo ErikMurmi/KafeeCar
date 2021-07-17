@@ -188,21 +188,38 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         cedula_vendedor_ci_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         ed_guardar_ci_vn_btn.setOnClickListener(v -> {
-            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-            msg.setTitle("GUARDAR");
-            msg.setMessage("¿Está seguro de guardar los cambios?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                try {
-                    if (editarCita()) {
-                        irListaCitas();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "Error 129: No se pudo actualizar la cita", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
+            String cli = cliente.getText().toString();
+            try {
+                Cliente aux = patio.buscarClientes("Cedula",cli);
+                if(aux!=null){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("CLIENTE NO REGISTRADO");
+                    msg.setMessage("Presione 'Si' para añadir al cliente" );
+                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_vn_btn.callOnClick());
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }else{
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("GUARDAR");
+                    msg.setMessage("¿Está seguro de guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            if (editarCita()) {
+                                irListaCitas();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 144: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
-            });
-            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-            msg.show();
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 145: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         });
 
         ed_descartar_ci_vn_btn.setOnClickListener(v -> {
