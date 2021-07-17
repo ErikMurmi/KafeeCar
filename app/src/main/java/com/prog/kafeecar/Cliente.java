@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.prog.kafeecar;
 
-import android.widget.TextView;
 
 import java.util.Date;
 
 
 public class Cliente extends Usuario{
 
-    
     public Lista favoritos;
     private String imagen;
+
     /**
      * Este es el constructor que inicialeza los parámetros 
      * @param nombre Parámetro de cliente
@@ -62,12 +57,10 @@ public class Cliente extends Usuario{
     public String getImagen(){
         return imagen;
     }
+
     public void setImagen(String imagen){
         this.imagen = imagen;
     }
-
-
-    //Metodos para el sistemas
      
      /**
      * Este método permite al cliente poder crear una lista de los vehículos favoritos
@@ -83,8 +76,6 @@ public class Cliente extends Usuario{
      * @param placa del vehiculo a remover de favoritos
      * @return true si se borro, caso contrario false
      */
-
-   //**** public void removeFavorito(String matricula) throws Exception {
     public void removerFavorito(String placa) throws Exception{
         int cont=0;
         while (cont< favoritos.contar()) {
