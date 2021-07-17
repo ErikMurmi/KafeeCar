@@ -58,11 +58,11 @@ public class Patioventainterfaz extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Login normal
-        //setContentView(R.layout.login);
+        setContentView(R.layout.login);
 
         // Login de pruebas
         patioventa = new PatioVenta();
-        setContentView(R.layout.login_sinclaves);
+        //setContentView(R.layout.login_sinclaves);
         try {
             cargarDatos();
         } catch (Exception e) {
@@ -536,15 +536,12 @@ public class Patioventainterfaz extends AppCompatActivity {
                 e.printStackTrace();
             }
             Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str, clave_str, fecha, cedula_str + ".jpg");
-            patioventa.aniadirUsuario(cliente, "Cliente");
-            try {
-                if (patioventa.buscarClientes("Cedula", cliente.getCedula()) != null) {
-                    Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
-                    irAplicacion("CLIENTE");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(patioventa.aniadirUsuario(cliente, "Cliente")){
+                usuarioActual = cliente;
+                Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
+                irAplicacion("CLIENTE");
             }
+
 
         }
     }
@@ -830,7 +827,8 @@ public class Patioventainterfaz extends AppCompatActivity {
             Window w = getWindow();
             w.setStatusBarColor(getColor(R.color.botones));
             w.getDecorView().setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            setContentView(R.layout.login_sinclaves);
+            //setContentView(R.layout.login_sinclaves);
+            setContentView(R.layout.login);
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
         msg.show();
