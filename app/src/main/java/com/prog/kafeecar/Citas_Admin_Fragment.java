@@ -78,6 +78,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     private LinearLayout add_cita_admin_lyt;
     private LinearLayout aniadir_cliente_ci_ad_lyt;
 
+    private Button editar_ci_ad_btn;
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Nullable
     @Override
@@ -95,7 +97,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         //Botones
         ir_aniadir_cita_ad_fbtn = mainView.findViewById(R.id.ir_aniadir_cita_ad_fbtn);
         //Botones
-        Button irVerEditable = mainView.findViewById(R.id.editar_ci_ad_btn);
+        editar_ci_ad_btn = mainView.findViewById(R.id.editar_ci_ad_btn);
         Button anular = mainView.findViewById(R.id.anular_ci_ad_btn);
         Button ed_descartar_ci_ad_btn = mainView.findViewById(R.id.ed_descartar_ci_ad_btn);
         Button ed_guardar_ci_ad_btn = mainView.findViewById(R.id.ed_guardar_ci_ad_btn);
@@ -209,7 +211,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                                 irListaCitas();
                             }
                         } catch (Exception e) {
-                            Toast.makeText(mainView.getContext(), "Error 157: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mainView.getContext(), "Error 24: No se pudo editar la cita", Toast.LENGTH_SHORT).show();
                             irListaCitas();
                         }
                     });
@@ -217,12 +219,11 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 }
                 msg.show();
             } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(mainView.getContext(), "Error 163: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Error 25: Búsqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
 
-        irVerEditable.setOnClickListener(v -> {
+        editar_ci_ad_btn.setOnClickListener(v -> {
             listaCitas.setVisibility(View.GONE);
             verCita.setVisibility(View.GONE);
             add_cita_admin_lyt.setVisibility(View.GONE);
@@ -248,10 +249,10 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             msg.setTitle("Registrar Cliente");
             msg.setMessage("¿Estás seguro de registrar un cliente con estos datos?");
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
-                if(registrarCliente()){
-                    ir_aniadir_cita_ad_fbtn.callOnClick();
+                if(registrarCliente()) {
+                    Toast.makeText(mainView.getContext(), "Se registró el cliente", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(mainView.getContext(), "Error 154: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 26: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -274,10 +275,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         try {
-                            onCreate(savedInstanceState);
                             irListaCitas();
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(mainView.getContext(), "Error 26: No se pudo editar la cita", Toast.LENGTH_SHORT).show();
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -419,25 +419,27 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Date fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
+                    Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     if(add_cliente_ci_an){
+                        ir_aniadir_cita_ad_fbtn.callOnClick();
                         AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
                         cliente_ed.setText(cedula_str);
                     }else if(add_cliente_ci_ed) {
+                        editar_ci_ad_btn.callOnClick();
                         AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_ci_ad_actv);
                         cliente_an.setText(cedula_str);
                     }
-                    Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     return true;
                 }
             } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Error 158: No se registro el cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Error 27: No se registro el cliente", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
-
+    //TODO CLEAR DEL CLIENTE
     public void listasDesplegableAniadir(){
         TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
         TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
@@ -513,7 +515,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
                     horas_mostradas = true;
                 } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 27: Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -595,7 +597,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
                     horas_mostradas = true;
                 } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainView.getContext(), "Error 29: Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -666,7 +668,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 imagen_ed.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 30: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
         fecha.setText(getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.valueOf(cita_mostrar.getHora()));
@@ -723,7 +725,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 imagen_ed.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 31: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
 
         horas.setText(String.valueOf(cita_mostrar.getHora()));
@@ -735,7 +737,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     public boolean registarCita() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        int c = 0;
+        int vacios = 0;
+        int invalidos = 0;
 
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -748,18 +751,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             if (cliente_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
-                c++;
+                invalidos++;
             }else{
                 cliente_c = patio.buscarClientes("Cedula", cliente_str);
-                if(cliente_c==null){
-                    Toast.makeText(mainView.getContext(), "Cliente no encontrados", Toast.LENGTH_SHORT).show();
-                    cliente.setText("");
-                    c++;
-                }
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         if (!isEmpty(auto)) {
@@ -768,17 +765,16 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             if (vehiculo == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                invalidos++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_ad_etxt);
         String resolucion_str = resolucion.getText().toString();
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos==0) {
             Cita nueva = new Cita(
                     fecha,
                     hora_nueva_cita,
@@ -791,14 +787,18 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }else{
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
+
         return false;
     }
 
     public boolean editarCita() throws Exception {
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        int c = 0;
+        int vacios = 0;
+        int invalidos =0;
 
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -811,18 +811,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             if (cliente_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
-                c++;
+                invalidos++;
             }else{
                 cliente_c = patio.buscarClientes("Cedula", cliente_str);
-                if(cliente_c==null){
-                    Toast.makeText(mainView.getContext(), "Cliente no encontrados", Toast.LENGTH_SHORT).show();
-                    cliente.setText("");
-                    c++;
-                }
             }
         } else {
             Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         if (!isEmpty(auto)) {
@@ -831,17 +826,16 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             if (vehiculo == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                invalidos++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
         String resolucion_str = resolucion.getText().toString();
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos==0) {
             cita_mostrar.actualizarVen(
                     fecha,
                     hora_nueva_cita,
@@ -853,6 +847,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Se edito la cita correctamente", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }else{
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -867,7 +863,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
             visualizarCita();
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Errores", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Error 31: Busqueda de vehículo fallida", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -903,7 +899,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     horas.add(String.valueOf(i));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 32: Búsqueda fallida de horas disponible", Toast.LENGTH_SHORT).show();
             }
         }
         for(int i = usuarioActual.getHoraComida()+1;i<usuarioActual.getHoraSalida();i++){
@@ -912,7 +908,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     horas.add(String.valueOf(i));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 33: Búsqueda fallida de horas disponible", Toast.LENGTH_SHORT).show();
             }
         }
         return  horas;
@@ -931,14 +927,12 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         return dias;
     }
 
-    public final void setPosicion_mes(int pos){
-        posicion_mes= pos;
-    }
-    public final void setPosicion_anio(int pos){
-        posicion_anio= pos;
-    }
-    private void setPosicion_dia(int pos) {posicion_dia = pos; }
-    private void setHora_nueva_cita(int hora) {
-        hora_nueva_cita = hora;
-    }
+    public final void setPosicion_mes(int pos){ posicion_mes= pos; }
+
+    public final void setPosicion_anio(int pos){ posicion_anio= pos;}
+
+    private void setPosicion_dia(int pos) { posicion_dia = pos; }
+
+    private void setHora_nueva_cita(int hora) { hora_nueva_cita = hora;}
+
 }
