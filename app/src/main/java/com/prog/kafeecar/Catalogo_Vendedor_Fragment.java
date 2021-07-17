@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -47,50 +49,29 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
 
         mainView = inflater.inflate(R.layout.catalogo_vendedor, container, false);
         patio = Patioventainterfaz.patioventa;
-
         //Layouts
         verCatalogo = mainView.findViewById(R.id.vehiculos_catalogo_vendedor);
         verVehiculo = mainView.findViewById(R.id.visualizar_vehiculo_ca_vn_sv);
-
         //Search view catalogo
-         busqueda_placa = mainView.findViewById(R.id.busqueda_placa_vn_bar);
+        busqueda_placa = mainView.findViewById(R.id.busqueda_placa_vn_bar);
 
-
-        /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (aniadir.getVisibility() == View.VISIBLE) {
-                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("NO GUARDAR");
-                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> irVer());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
-                }
                 if (verVehiculo.getVisibility() == View.VISIBLE) {
-                    irCatalogo();
-                }
-                if (aniadir_vehiculo.getVisibility() == View.VISIBLE) {
-                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("Volver");
-                    msg.setMessage("¿Estás seguro de salir sin aniadir el vehiculo?");
-                    msg.setPositiveButton("Aceptar", (dialog, which) -> irCatalogo());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
+                    irListaCatalogo();
                 }
             }
-        };*/
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
-        //requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-        //busqueda_placa.setOnQueryTextListener(this);
-        //Busqueda por filtros
         AutoCompleteTextView filtros = mainView.findViewById(R.id.v_filtros_vn_ddm);
         ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,Patioventainterfaz.filtros_vehiculos);
         filtros.setAdapter(adapt);
         filtros.setOnItemClickListener((parent, view, position, id) -> busqueda_placa.setQueryHint(adapt.getItem(position)));
+
         busqueda_placa.setOnQueryTextListener(this);
         cargar();
-
         return mainView;
     }
 
@@ -101,6 +82,11 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
         listaview.setItemAnimator(new DefaultItemAnimator());
         adptadorlistaview = new Adaptador_Lista_Catalogo(patio.getVehiculos().copiar(),this);
         listaview.setAdapter(adptadorlistaview);
+    }
+    public void irListaCatalogo(){
+        cargar();
+        verVehiculo.setVisibility(View.GONE);
+        verCatalogo.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("SetTextI18n")
@@ -147,7 +133,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
                 v_img.setImageBitmap(bitmap);
             });
         }catch (IOException e){
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 101: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -157,7 +143,7 @@ public class Catalogo_Vendedor_Fragment extends Fragment implements Adaptador_Li
             vMostrar = patio.buscarVehiculos("Placa", placa);
             irVer();
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 102: búsqueda fallida del vehículo", Toast.LENGTH_SHORT).show();
         }
     }
 

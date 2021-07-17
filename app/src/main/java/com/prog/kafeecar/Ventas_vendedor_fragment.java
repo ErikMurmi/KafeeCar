@@ -64,6 +64,8 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
     private LinearLayout lista_ventas;
     private LinearLayout aniadir_cliente_vt_vn_lyt;
     private FloatingActionButton aniadir_vt_vn_ftbn;
+    private Button ed_guardar_vt_vn_btn;
+    private Button guardar_vt_vn_btn;
     private PatioVenta patio;
     private final Vendedor vendedor_actual = (Vendedor) Patioventainterfaz.usuarioActual;
     private Venta venta_mostrar;
@@ -80,9 +82,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         Button vt_vn_ver_venta_editar_btn = mainView.findViewById(R.id.vt_vn_ver_venta_editar_btn);
         //editar
         Button ed_descartar_vt_vn_btn = mainView.findViewById(R.id.ed_descartar_vt_vn_btn);
-        Button ed_guardar_vt_vn_btn = mainView.findViewById(R.id.ed_guardar_vt_vn_btn);
+        ed_guardar_vt_vn_btn = mainView.findViewById(R.id.ed_guardar_vt_vn_btn);
         //Add
-        Button guardar_vt_vn_btn = mainView.findViewById(R.id.guardar_vt_vn_btn);
+        guardar_vt_vn_btn = mainView.findViewById(R.id.guardar_vt_vn_btn);
         Button descartar_vt_vn_btn = mainView.findViewById(R.id.descartar_vt_vn_btn);
         ImageButton add_cliente_vt_vn_btn = mainView.findViewById(R.id.add_cliente_vt_vn_btn);
         ImageButton ed_cliente_vt_vn_btn = mainView.findViewById(R.id.ed_add_cliente_vt_vn_btn);
@@ -123,7 +125,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 try {
                     irVerListaVentas();
                 } catch (Exception e) {
-                    e.printStackTrace();
                     Toast.makeText(mainView.getContext(), "Error 151: No se pudo descartar", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -160,7 +161,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     msg.show();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
                 Toast.makeText(mainView.getContext(), "Error 153: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
@@ -175,6 +175,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         ed_cliente_vt_vn_btn.setOnClickListener(v -> {
             editar_vt_vn_lyt.setVisibility(View.GONE);
             add_cliente_ed = true;
+            clearRegistrarCli();
             aniadir_cliente_vt_vn_lyt.setVisibility(View.VISIBLE);
         });
 
@@ -206,7 +207,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                         irVerListaVentas();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                     Toast.makeText(mainView.getContext(), "Error 155: No se pudo eliminar la venta", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -260,7 +260,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     msg.show();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
                 Toast.makeText(mainView.getContext(), "Error 163: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
@@ -285,7 +284,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                         try {
                             irVerListaVentas();
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -305,7 +304,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                             add_cliente_an = false;
                         } catch (Exception e) {
                             Toast.makeText(mainView.getContext(), "Error 164: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                            
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -321,7 +320,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                             add_cliente_ed = false;
                         } catch (Exception e) {
                             Toast.makeText(mainView.getContext(), "Error 165: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                            
                         }
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -465,9 +464,11 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
                     if(add_cliente_an){
+                        guardar_vt_vn_btn.callOnClick();
                         AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
                         cliente_ed.setText(cedula_str);
                     }else if(add_cliente_ed){
+                        ed_guardar_vt_vn_btn.callOnClick();
                         AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_vt_vn_actv);
                         cliente_an.setText(cedula_str);
                     }
@@ -741,7 +742,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 imagen.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
             Toast.makeText(mainView.getContext(), "Error 159: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
 
@@ -784,7 +784,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                     imagen.setImageURI(nuevo);
                 });
             } catch (IOException e) {
-                e.printStackTrace();
                 Toast.makeText(mainView.getContext(), "Error 160: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
             }
 
@@ -844,7 +843,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             try {
                 fecha = sdf.parse(fecha_nueva_venta);
             } catch (ParseException e) {
-                e.printStackTrace();
                 Toast.makeText(mainView.getContext(), "Error 161: No se pudo obtener la fecha (Parse)", Toast.LENGTH_SHORT).show();
             }
             venta_mostrar.actualizar(
@@ -881,7 +879,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 verVenta();
             }
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(mainView.getContext(), "Error 162: búsqueda fallida de la venta", Toast.LENGTH_SHORT).show();
         }
     }
