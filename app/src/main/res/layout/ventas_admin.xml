@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/aniadir_cliente_vt_vn_lyt"
+        android:id="@+id/aniadir_cliente_vt_ad_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
@@ -58,7 +58,7 @@
                     android:textSize="17sp" />
 
                 <EditText
-                    android:id="@+id/add_nombre_vt_vn_etxt"
+                    android:id="@+id/add_nombre_vt_ad_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"
@@ -79,7 +79,7 @@
                     android:textSize="17sp" />
 
                 <EditText
-                    android:id="@+id/reg_apellido_vt_vn_etxt"
+                    android:id="@+id/reg_apellido_vt_ad_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"
@@ -100,7 +100,7 @@
                     android:textSize="17sp" />
 
                 <EditText
-                    android:id="@+id/reg_cedula_vt_vn_etxt"
+                    android:id="@+id/reg_cedula_vt_ad_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"
@@ -128,7 +128,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/reg_dia_vt_vn_etxt"
+                        android:id="@+id/reg_dia_vt_ad_etxt"
                         android:layout_width="101dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="7dp"
@@ -141,7 +141,7 @@
                         android:textColor="#000000" />
 
                     <EditText
-                        android:id="@+id/reg_mes_vt_vn_etxt"
+                        android:id="@+id/reg_mes_vt_ad_etxt"
                         android:layout_width="102dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="7dp"
@@ -154,7 +154,7 @@
                         android:textColor="#000000" />
 
                     <EditText
-                        android:id="@+id/reg_anio_vt_vn_etxt"
+                        android:id="@+id/reg_anio_vt_ad_etxt"
                         android:layout_width="127dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesbotongris"
@@ -178,7 +178,7 @@
                     android:textSize="17sp" />
 
                 <EditText
-                    android:id="@+id/reg_telefono_vt_vn_etxt"
+                    android:id="@+id/reg_telefono_vt_ad_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"
@@ -200,7 +200,7 @@
                     android:textSize="17sp" />
 
                 <EditText
-                    android:id="@+id/reg_correo_vt_vn_etxt"
+                    android:id="@+id/reg_correo_vt_ad_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bordesbotongris"

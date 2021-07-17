@@ -184,9 +184,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de salir sin guardar los cambios?");
-            msg.setPositiveButton("Si", (dialog, which) -> {
-                    irListaCitas();
-            });
+            msg.setPositiveButton("Si", (dialog, which) -> irListaCitas());
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -233,12 +231,14 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
 
         //Add cliente
         add_cliente_ci_ad_btn.setOnClickListener(v -> {
+            clearRegistrarCli();
             add_cita_admin_lyt.setVisibility(View.GONE);
             add_cliente_ci_an = true;
             aniadir_cliente_ci_ad_lyt.setVisibility(View.VISIBLE);
         });
 
         ed_add_cliente_ci_ad_btn.setOnClickListener(v -> {
+            clearRegistrarCli();
             ed_cita_admin_lyt.setVisibility(View.GONE);
             add_cliente_ci_ed = true;
             aniadir_cliente_ci_ad_lyt.setVisibility(View.VISIBLE);
@@ -321,6 +321,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     }
 
     public boolean registrarCliente(){
+
         EditText add_nombre_ci_ad_etxt = mainView.findViewById(R.id.add_nombre_ci_ad_etxt);
         EditText reg_apellido_ci_ad_etxt = mainView.findViewById(R.id.reg_apellido_ci_ad_etxt);
         EditText reg_cedula_ci_ad_etxt = mainView.findViewById(R.id.reg_cedula_ci_ad_etxt);
@@ -439,7 +440,31 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         }
         return false;
     }
-    //TODO CLEAR DEL CLIENTE
+
+    public void clearRegistrarCli(){
+        EditText nombre = mainView.findViewById(R.id.add_nombre_ci_ad_etxt);
+        EditText apellido = mainView.findViewById(R.id.reg_apellido_ci_ad_etxt);
+        EditText cedula = mainView.findViewById(R.id.reg_cedula_ci_ad_etxt);
+        EditText dias = mainView.findViewById(R.id.reg_dia_ci_ad_etxt);
+        EditText meses = mainView.findViewById(R.id.reg_mes_ci_ad_etxt);
+        EditText anio = mainView.findViewById(R.id.reg_anio_ci_ad_etxt);
+        EditText telefono = mainView.findViewById(R.id.reg_telefono_ci_ad_etxt);
+        EditText correo = mainView.findViewById(R.id.reg_correo_ci_ad_etxt);
+        posicion_dia = -1;
+        posicion_mes = -1;
+        posicion_anio = -1;
+
+        nombre.getText().clear();
+        apellido.getText().clear();
+        cedula.getText().clear();
+        dias.getText().clear();
+        meses.getText().clear();
+        anio.getText().clear();
+        telefono.getText().clear();
+        correo.getText().clear();
+
+    }
+
     public void listasDesplegableAniadir(){
         TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_ad_til);
         TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_ad_til);
