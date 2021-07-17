@@ -51,6 +51,7 @@ import static com.prog.kafeecar.Patioventainterfaz.sdf;
 public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
     private String TAG = "Citas_Cliete";
     private View mainView;
+    private String horascita[]=new String[]{"8","9","10","11","12","13","14","16","15"};
 
     private FloatingActionButton irAniadirCita;
     private Button descartarnuevacita;
@@ -172,6 +173,8 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         });
 
         irAniadirCita.setOnClickListener(v -> {
+            listasDesplegableAniadir();
+            adaptadorAniadir();
             irAniadirCita.setVisibility(View.GONE);
             TextView c = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
             c.setText(Patioventainterfaz.usuarioActual.getCedula());
@@ -179,7 +182,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             verCitaLista.setVisibility(View.GONE);
             modificarCita.setVisibility(View.GONE);
             aniadirCita.setVisibility(View.VISIBLE);
-            adaptadorAniadir();
         });
 
 
@@ -383,7 +385,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 try {
                     fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
                     Date fecha = sdf.parse(fecha_nueva_cita);
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
                     horas.setAdapter(adapt);
                     horas.showDropDown();
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
@@ -478,7 +480,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 try {
                     fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
                     Date fecha = sdf.parse(fecha_nueva_cita);
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
                     horas.setAdapter(adapt);
                     horas.showDropDown();
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
@@ -513,7 +515,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.buscarCitas(cliente_actual),this);
+        adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.buscarCitas(cliente_actual).copiar(),this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -647,29 +649,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         return false;
     }
 
-    public ArrayList<String> horasDisponible(Date fechaCita){
-        ArrayList<String> horas = new ArrayList<>();
-        Vendedor vendedor = cita_mostrar.getVendedorCita();
-        for(int i = vendedor.getHoraEntrada();i<vendedor.getHoraComida();i++){
-            try {
-                if(vendedor.disponible(fechaCita,i)){
-                    horas.add(String.valueOf(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        for(int i = vendedor.getHoraComida()+1;i<vendedor.getHoraSalida();i++){
-            try {
-                if(vendedor.disponible(fechaCita,i)){
-                    horas.add(String.valueOf(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return  horas;
-    }
+
 
     public ArrayList<String> diaListaDesplegable(){
         ArrayList<String> dias = new ArrayList<>();
