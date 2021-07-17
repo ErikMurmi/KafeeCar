@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 import static java.lang.String.format;
 
@@ -53,6 +54,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private LinearLayout irCitaNueva;
     private LinearLayout verCatalogo;
     private ScrollView vistaVehiculo;
+    private String horascita[]=new String[]{"8","9","10","11","12","13","14","15","16"};
 
     private Button favoritoBoton;
 
@@ -86,15 +88,17 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_btn);
         Button agendarcita = mainView.findViewById(R.id.agendarcita_cliente_btn);
         Button regresarVistaVehiculo = mainView.findViewById(R.id.regresar_VV_cliente_btn);
-        Button descartarcita = mainView.findViewById(R.id.descartar_ci_cli_vv_btn);
-        Button guardarcita = mainView.findViewById(R.id.guardar_ci_cli_vv_btn);
+        Button descartarcita = mainView.findViewById(R.id.descartar_ci_v_cli_btn);
+        Button guardarcita = mainView.findViewById(R.id.guardar_ci_v_cli_btn);
         //Recursos
         estrelladorada = favoritoBoton.getBackground();
         //Layouts
         verCatalogo = mainView.findViewById(R.id.catalogoautos_cliente_lyt);
         vistaVehiculo = mainView.findViewById(R.id.vista_vehiculo_VV_scl);
-        irCitaNueva = mainView.findViewById(R.id.add_cita_cli_vv_lyt);
+        irCitaNueva = mainView.findViewById(R.id.add_cita_v_cli_lyt);
 
+
+        listasDesplegableAniadir();
 
         //Edit Text necesarios
 
@@ -106,6 +110,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 e.printStackTrace();
             }
         });
+
         descartarcita.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
@@ -126,7 +131,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
         agendarcita.setOnClickListener(v -> {
             try {
-                cita_mostrar = patio.buscarCita("Vehiculo",vMostrar.getPlaca(),clienteActual.getCedula());
+                listasDesplegableAniadir();
                 vistaVehiculo.setVisibility(View.GONE);
                 irCitaNueva.setVisibility(View.VISIBLE);
                 verAgendarCita();
@@ -134,6 +139,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 e.printStackTrace();
             }
         });
+
         guardarcita.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Guardar");
@@ -150,6 +156,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
+
         //Metodo para el control del boton atras
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -274,38 +281,12 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
 
     }
     public void verAgendarCita(){
-        adaptadorEditar();
-        listasDesplegableEditar();
-        verCatalogo.setVisibility(View.GONE);
-        vistaVehiculo.setVisibility(View.GONE);
-        irCitaNueva.setVisibility(View.VISIBLE);
-        ImageView vehiculo_img = mainView.findViewById(R.id.auto_cita_cli_vv_img);
-        AutoCompleteTextView cedula = mainView.findViewById(R.id.cedula_ci_cli_vv_actv);
-        AutoCompleteTextView placavehiculo = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
-        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_cli_vv_actv);
-        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_cli_vv_actv);
-        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_cita_cli_vv_actv);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_cli_vv_actv);
-
-        String fecha = Patioventainterfaz.getFechaMod(cita_mostrar.getFechaCita());
-        String dia_str = fecha.split("-")[0];
-        String mes_str = fecha.split("-")[1];
-        String anio_str = fecha.split("-")[2];
-
-        for(int i =0;i<Patioventainterfaz.anios.length;i++){
-            if(Patioventainterfaz.anios[i].equals(anio_str))
-                posicion_anio = i;
-        }
-        posicion_dia = Integer.parseInt(dia_str);
-        posicion_mes = Integer.parseInt(mes_str);
-
-        dias.setText(dia_str);
-        mes.setText(Patioventainterfaz.meses[posicion_mes]);
-        anio.setText(anio_str);
-
-        StorageReference filePath = mStorageRef.child("Vehiculos/" + cita_mostrar.getVehiculo().getimagen());
+        ImageView vehiculo_img = mainView.findViewById(R.id.Carro_ci_v_img);
+        TextView cedula = mainView.findViewById(R.id.cedula_cliente_v_ci_cli_actv);
+        TextView placavehiculo = mainView.findViewById(R.id.placa_ci_v_cli_actv);
+        StorageReference filePath = mStorageRef.child("Vehiculos/" + vMostrar.getimagen());
         try {
-            final File localFile = File.createTempFile(cita_mostrar.getVehiculo().getimagen(), "jpg");
+            final File localFile = File.createTempFile(vMostrar.getimagen(), "jpg");
             filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Uri nuevo = Uri.parse(localFile.getAbsolutePath());
                 vehiculo_img.setImageURI(nuevo);
@@ -313,74 +294,44 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        horas.setText(String.valueOf(cita_mostrar.getHora()));
-        cedula.setText(cita_mostrar.getCliente().getCedula());
-        placavehiculo.setText(cita_mostrar.getVehiculo().getPlaca());
-
+        cedula.setText(Patioventainterfaz.usuarioActual.getCedula());
+        placavehiculo.setText(vMostrar.getMatricula());
     }
-    public boolean registarCita() throws Exception {
-        Cliente cliente_c = null;
-        Vehiculo vehiculo = null;
-        int c = 0;
 
+    public boolean registarCita() throws Exception {
+        Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
+        Vendedor vendedor = null;
+        int c = 0;
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
-
-        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_ci_cli_vv_actv);
-        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
-
-        if (!isEmpty(cliente)) {
-            String cliente_str = cliente.getText().toString();
-            if (cliente_str.length() != 10) {
-                Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
-                cliente.setText("");
-                c++;
-            }
-            cliente_c = patio.buscarClientes("Cedula", cliente_str);
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-        if (!isEmpty(auto)) {
-            String vehiculo_str = auto.getText().toString();
-            vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
-            if (vehiculo == null) {
-                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
-                auto.setText("");
-                c++;
-            }
-        } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
-        }
-
-
-
+        String hora = String.valueOf(hora_nueva_cita);
+        vendedor = patioventa.asignarVendedor(hora,fecha);
         if (c == 0) {
             Cita nueva = new Cita(
                     fecha,
                     hora_nueva_cita,
-                    cliente_c,
-                    vehiculo);
+                    "sin especificar",
+                    clien,
+                    vendedor,
+                    vMostrar);
             patio.aniadirCita(nueva);
             if (patio.getCitas().contiene(nueva)) {
-                Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Se registro correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
         return false;
     }
-    public void listasDesplegableEditar(){
-        TextInputLayout anio_lyt = mainView.findViewById(R.id.ed_anio_ci_cli_til);
-        TextInputLayout mes_lyt = mainView.findViewById(R.id.ed_mes_ci_cli_til);
-        TextInputLayout dias_lyt = mainView.findViewById(R.id.ed_dia_ci_cli_til);
-        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_cli_til);
-        AutoCompleteTextView anio = mainView.findViewById(R.id.ed_anio_ci_cli_acv);
-        AutoCompleteTextView mes = mainView.findViewById(R.id.ed_mes_ci_cli_acv);
-        AutoCompleteTextView dias = mainView.findViewById(R.id.ed_dia_ci_cli_acv);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.ed_hora_ci_cli_acv);
+
+    public void listasDesplegableAniadir(){
+        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_v_cli_til);
+        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_v_cli_til);
+        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_v_cli_til);
+        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_v_cli_til);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_v_cli_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_v_cli_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_v_cli_acv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_v_cli_acv);
         anio_lyt.setEndIconOnClickListener(v -> anio.performClick());
         anio.setOnClickListener(v -> {
             if(anios_mostradas){
@@ -395,7 +346,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         });
 
         anio.setOnItemClickListener((parent, view, position, id) -> setPosicion_anio(position));
-        anio.setListSelection(1);
 
         mes_lyt.setEndIconOnClickListener(v -> mes.performClick());
         mes.setOnClickListener(v -> {
@@ -442,27 +392,18 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 try {
                     fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
                     Date fecha = sdf.parse(fecha_nueva_cita);
-                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horasDisponible(fecha));
+                    ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
                     horas.setAdapter(adapt);
                     horas.showDropDown();
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
                     horas_mostradas = true;
-                }  catch (ParseException e) {
+                } catch (ParseException e) {
                     Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-//// esto busca
-    public void adaptadorEditar(){
-        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_ci_cli_vv_actv);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
-        cliente.setAdapter(adapter);
-        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_vv_actv);
-        ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
-        auto.setAdapter(adapterPla);
 
-    }
 
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
