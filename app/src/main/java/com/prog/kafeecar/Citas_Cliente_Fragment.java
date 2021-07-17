@@ -51,7 +51,7 @@ import static com.prog.kafeecar.Patioventainterfaz.sdf;
 public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
     private String TAG = "Citas_Cliete";
     private View mainView;
-    private String horascita[]=new String[]{"8","9","10","11","12","13","14","16","15"};
+    private String horascita[]=new String[]{"8","9","10","11","12","13","14","15","16"};
 
     private FloatingActionButton irAniadirCita;
     private Button descartarnuevacita;
@@ -399,13 +399,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
 
     public void adaptadorAniadir(){
-        //AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_cli_actv);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
-        //cliente.setAdapter(adapter);
-
-        //TextView cedula_vendedor_ci_ad_txt = mainView.findViewById(R.id.cedula_vendedor_ci_cli_etxt);
-        //cedula_vendedor_ci_ad_txt.setText(Patioventainterfaz.usuarioActual.getCedula());
-
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
@@ -576,10 +569,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         int c = 0;
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
-
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
-
-
         if (!isEmpty(auto)) {
             String vehiculo_str = auto.getText().toString();
             vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
@@ -592,9 +582,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
             c++;
         }
-
-
-
         String hora = String.valueOf(hora_nueva_cita);
         vendedor = patioventa.asignarVendedor(hora,fecha);
         if (c == 0) {
