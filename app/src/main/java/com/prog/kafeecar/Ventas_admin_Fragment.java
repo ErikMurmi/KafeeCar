@@ -37,6 +37,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.StorageReference;
 
@@ -70,10 +71,11 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     private Button administrar_venta_aniadirventa_btn;
     private Button vt_ad_ver_venta_editar_btn;
+    private FloatingActionButton ir_aniadir_vt_ftbtn;
 
     private boolean add_cliente_an =false;
     private boolean add_cliente_ed = false;
-    private LinearLayout verEstadisticasGenerales;
+    private LinearLayout vt_estadisticasgenerales_admin_lyt;
     private LinearLayout ver_vt_ad_lyt;
     private Adaptador_Lista_Ventas adptadorlistaview;
     private Venta venta_mostrar;
@@ -99,10 +101,12 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         Button vt_admin_estadiciticas_usuario_btn= mainView.findViewById(R.id.vt_admin_estadiciticas_usuario_btn);
         //ADD
         Button descartar_vt_ad_btn = mainView.findViewById(R.id.descartar_vt_ad_btn);
+        Button vt_ad_ver_venta_eliminar_btn= mainView.findViewById(R.id.vt_ad_ver_venta_eliminar_btn);
         ImageButton add_cliente_vt_ad_btn = mainView.findViewById(R.id.add_cliente_vt_ad_btn);
         ImageButton ed_add_cliente_vt_ad_btn = mainView.findViewById(R.id.ed_add_cliente_vt_ad_btn);
         Button guardar_vt_ad_btn = mainView.findViewById(R.id.guardar_vt_ad_btn);
         Button reg_list_vt_ad_btn = mainView.findViewById(R.id.reg_list_vt_ad_btn);
+        FloatingActionButton ir_aniadir_vt_ftbtn = mainView.findViewById(R.id.ir_aniadir_vt_ftbtn);
         //Ver
         vt_ad_ver_venta_editar_btn = mainView.findViewById(R.id.vt_ad_ver_venta_editar_btn);
         Button ed_guardar_vt_ad_btn = mainView.findViewById(R.id.ed_guardar_vt_ad_btn);
@@ -112,27 +116,54 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ventas_admin_lyt = mainView.findViewById(R.id.ventas_admin_lyt);
         ver_vt_ad_lyt = mainView.findViewById(R.id.ver_vt_ad_lyt);
         editar_vt_ad_lyt = mainView.findViewById(R.id.editar_vt_ad_lyt);
-        verEstadisticasGenerales=mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
+        vt_estadisticasgenerales_admin_lyt =mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
         busqueda_ventas = mainView.findViewById(R.id.vt_busqueda_plcas_admin);
         LinearLayout vt_estadisticasusuario_lyt =mainView.findViewById(R.id.vt_estadisticasusuario_lyt);
         LinearLayout aniadir_cliente_vt_ad_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_ad_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
-
+        //todo on back
+        //todo cambiar campos vacios
+        //todo on back floating action buttton
         administrar_venta_aniadirventa_btn.setOnClickListener(view -> {
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
             add_vt_ad_lyt.setVisibility(View.VISIBLE);
             adaptadorAniadir();
+            listaDesplegablesAniadir();
+        });
+
+        vt_ad_ver_venta_eliminar_btn.setOnClickListener(v -> {
+            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+            msg.setTitle("Eliminar Venta");
+            msg.setMessage("¿Estás seguro de eliminar esta venta?");
+            msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                try {
+                    if(patio.removerVenta(venta_mostrar.getVehiculo().getPlaca())){
+                        Toast.makeText(mainView.getContext(), "Se elimino correctamente la venta", Toast.LENGTH_SHORT).show();
+                        irListaGenerales();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "Error 155: No se pudo eliminar la venta", Toast.LENGTH_SHORT).show();
+                }
+            });
+            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            msg.show();
+        });
+
+
+        ir_aniadir_vt_ftbtn.setOnClickListener(v -> {
+            administrar_venta_aniadirventa_btn.callOnClick();
         });
 
         vt_admin_estadisticas_btn.setOnClickListener(view -> {
+            ir_aniadir_vt_ftbtn.setVisibility(View.GONE);
             sales = Patioventainterfaz.contadores(patio.getVentasGenerales());
             barChart= (BarChart)mainView.findViewById(R.id.gaficaVentasGenerales);
             createcharts(barChart);
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
-            verEstadisticasGenerales.setVisibility(View.VISIBLE);
+            vt_estadisticasgenerales_admin_lyt.setVisibility(View.VISIBLE);
 
         });
 
@@ -174,8 +205,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 if(registrarCliente()) {
                     Toast.makeText(mainView.getContext(), "Se registró el cliente", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(mainView.getContext(), "Error 26: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -230,7 +259,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             @Override
             public void handleOnBackPressed() {
                 //todo poner en la condicion el lyt de editar
-                if ((add_vt_ad_lyt.getVisibility() == View.VISIBLE)) {
+                if (add_vt_ad_lyt.getVisibility() == View.VISIBLE) {
                     android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
@@ -246,6 +275,44 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
+                if(add_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            aniadir_cliente_vt_ad_lyt.setVisibility(View.GONE);
+                            add_vt_ad_lyt.setVisibility(View.VISIBLE);
+                            add_cliente_an = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 164: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }else if(add_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
+                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("NO GUARDAR");
+                    msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            editar_vt_ad_lyt.setVisibility(View.VISIBLE);
+                            add_vt_ad_lyt.setVisibility(View.GONE);
+                            add_cliente_ed = false;
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 165: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
+                if(vt_estadisticasgenerales_admin_lyt.getVisibility()==View.VISIBLE){
+                    irPaginaPrincipal();
+                }
+                if(vt_estadisticasusuario_lyt.getVisibility()==View.VISIBLE){
+                    irPaginaPrincipal();
+                }
                 if (ver_vt_ad_lyt.getVisibility() == View.VISIBLE) {
                     irListaGenerales();
                 }
@@ -259,11 +326,13 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     public void setCedulaVendedor(String cedula){
-
         cedulaVendedor=cedula;
     }
 
     public void listaDesplegablesAniadir() {
+        posicion_dia =-1;
+        posicion_mes=-1;
+        posicion_anio=-1;
         TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_vt_ad_til);
         TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_vt_ad_til);
         TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_vt_ad_til);
@@ -323,6 +392,9 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     public void listaDesplegablesEditar() {
+        posicion_dia =-1;
+        posicion_mes=-1;
+        posicion_anio=-1;
         TextInputLayout anio_lyt = mainView.findViewById(R.id.ed_anio_vt_ad_til);
         TextInputLayout mes_lyt = mainView.findViewById(R.id.ed_mes_vt_ad_til);
         TextInputLayout dias_lyt = mainView.findViewById(R.id.ed_dia_vt_ad_til);
@@ -383,8 +455,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     public void irListaGenerales() {
         add_vt_ad_lyt.setVisibility(View.GONE);
-        ventas_admin_generales_lyt.setVisibility(View.VISIBLE);
         cargar();
+        ventas_admin_generales_lyt.setVisibility(View.VISIBLE);
+        ir_aniadir_vt_ftbtn.setVisibility(View.VISIBLE);
+
     }
 
     public void irVerVenta() {
@@ -392,6 +466,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ventas_admin_generales_lyt.setVisibility(View.GONE);
         ventas_admin_lyt.setVisibility(View.GONE);
         ver_vt_ad_lyt.setVisibility(View.VISIBLE);
+        ir_aniadir_vt_ftbtn.setVisibility(View.GONE);
         visualizarVenta();
     }
 
@@ -400,6 +475,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         add_vt_ad_lyt.setVisibility(View.GONE);
         editar_vt_ad_lyt.setVisibility(View.GONE);
         ver_vt_ad_lyt.setVisibility(View.GONE);
+        ir_aniadir_vt_ftbtn.setVisibility(View.GONE);
         ventas_admin_lyt.setVisibility(View.VISIBLE);
     }
 
@@ -493,8 +569,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     public boolean editarVenta() throws Exception {
         Cliente cliente_c = null;
-        //todo cambiar a vacios e invalidos
-        int c = 0;
+        int vacios = 0;
+        int invalidos = 0;
 
         AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
 
@@ -503,12 +579,11 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             if (cliente_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
-                c++;
+                invalidos++;
             }
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         EditText precio = mainView.findViewById(R.id.ed_precio_vt_ad_etxt);
@@ -518,12 +593,14 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             String precio_s = precio.getText().toString();
             precio_flt = Float.parseFloat(precio_s);
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Precio*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
+        if((posicion_anio==-1 || posicion_mes==-1) || posicion_dia==-1){
+            vacios++;
+        }
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos==0) {
             String fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
             Date fecha = null;
             try {
@@ -541,6 +618,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                 Toast.makeText(mainView.getContext(), "Se editó correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }else if(vacios>0){
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -551,10 +630,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         listaDesplegablesAniadir();
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
-        int c = 0;
-
-        String fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
-        Date fecha = sdf.parse(fecha_nueva_venta);
+        int vacios = 0;
+        int invalidos =0;
 
         AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
@@ -564,12 +641,11 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             if (cliente_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cliente.setText("");
-                c++;
+                invalidos++;
             }
             cliente_c = patio.buscarClientes("Cedula", cliente_str);
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula Cliente*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         if (!isEmpty(auto)) {
@@ -578,18 +654,23 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             if (vehiculo == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                invalidos++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
         EditText precio_vt_ad_etxt = mainView.findViewById(R.id.precio_vt_ad_etxt);
         String precio_str = precio_vt_ad_etxt.getText().toString();
         float precio = Float.parseFloat(precio_str);
 
-        if (c == 0) {
+        if((posicion_anio==-1 || posicion_mes==-1) || posicion_dia==-1){
+            vacios++;
+        }
+
+        if (vacios == 0 && invalidos==0) {
+            String fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(fecha_nueva_venta);
             Venta nueva = new Venta(
                     fecha,
                     cliente_c,
@@ -601,6 +682,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }else if(vacios>0){
+            Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
     }

@@ -6,248 +6,6 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/aniadir_cliente_vt_ad_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/plantilla"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
-                android:orientation="vertical"
-                android:paddingLeft="28dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
-                    android:fontFamily="@font/monglos"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Datos del Cliente"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="27sp" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="218dp"
-                    android:layout_marginBottom="15dp"
-                    android:backgroundTint="#00FFFFFF"
-                    android:fitsSystemWindows="true"
-                    android:onClick="botonImagenPerfilVendedor"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/perfil_icono" />
-
-                <TextView
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Nombre"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/add_nombre_vt_ad_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Nombre del Cliente"
-                    android:inputType="textPersonName" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Apellido"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/reg_apellido_vt_ad_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Apellido del Cliente"
-                    android:inputType="textPersonName" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Cédula"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/reg_cedula_vt_ad_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Cédula del Cliente"
-                    android:inputType="numberSigned"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="@dimen/edit_txt_espacio"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Fecha de Nacimiento"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/reg_dia_vt_ad_etxt"
-                        android:layout_width="101dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="2"
-                        android:fontFamily="@font/ocra"
-                        android:hint="Día"
-                        android:inputType="date"
-                        android:textAlignment="center"
-                        android:textColor="#000000" />
-
-                    <EditText
-                        android:id="@+id/reg_mes_vt_ad_etxt"
-                        android:layout_width="102dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="2"
-                        android:fontFamily="@font/ocra"
-                        android:hint="Mes"
-                        android:inputType="date"
-                        android:textAlignment="center"
-                        android:textColor="#000000" />
-
-                    <EditText
-                        android:id="@+id/reg_anio_vt_ad_etxt"
-                        android:layout_width="127dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bordesbotongris"
-                        android:ems="4"
-                        android:fontFamily="@font/ocra"
-                        android:hint="Año"
-                        android:inputType="date"
-                        android:textAlignment="center"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Teléfono"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/reg_telefono_vt_ad_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Teléfono del Cliente"
-                    android:inputType="numberSigned"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/ocra"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Correo"
-                    android:textColor="#959898"
-                    android:textSize="17sp" />
-
-                <EditText
-                    android:id="@+id/reg_correo_vt_ad_etxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bordesbotongris"
-                    android:ems="10"
-                    android:fontFamily="@font/ocra"
-                    android:hint="Correo del Cliente"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#000000" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/reg_list_vt_ad_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/boton_redondeado"
-                        android:backgroundTint="#F7530C"
-                        android:fontFamily="@font/valorant"
-                        android:gravity="center"
-                        android:insetLeft="5dp"
-                        android:insetTop="5dp"
-                        android:insetRight="5dp"
-                        android:insetBottom="5dp"
-                        android:onClick="registrarAdministrador"
-                        android:text="Listo"
-                        android:textColor="#FFFFFF"
-                        android:textSize="22sp"
-                        app:cornerRadius="50dp"
-                        app:iconTint="#FF5722"
-                        app:rippleColor="#FF5722"
-                        app:strokeColor="#FF5722" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
-
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/editar_vt_ad_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -590,13 +348,524 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/vt_estadisticasusuario_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/consultar_estadisticas_vendedores"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <AutoCompleteTextView
+            android:id="@+id/buscar_vendedor_vt_ad_actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/bordesmarcoscafegrisaceo"
+            android:completionThreshold="1"
+            android:fontFamily="@font/ocraext"
+            android:hint="Cédula vendedor"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="19sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/gaficaVentasusuario"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="15dp"
+            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/aniadir_cliente_vt_ad_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plantilla"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:orientation="vertical"
+                android:paddingLeft="28dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/monglos"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Datos del Cliente"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="27sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="218dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:fitsSystemWindows="true"
+                    android:onClick="botonImagenPerfilVendedor"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/perfil_icono" />
+
+                <TextView
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Nombre"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/add_nombre_vt_ad_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Nombre del Cliente"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Apellido"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_apellido_vt_ad_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Apellido del Cliente"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Cédula"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_cedula_vt_ad_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Cédula del Cliente"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="@dimen/edit_txt_espacio"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Fecha de Nacimiento"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/reg_dia_vt_ad_etxt"
+                        android:layout_width="101dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="2"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Día"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/reg_mes_vt_ad_etxt"
+                        android:layout_width="102dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="2"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Mes"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/reg_anio_vt_ad_etxt"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesbotongris"
+                        android:ems="4"
+                        android:fontFamily="@font/ocra"
+                        android:hint="Año"
+                        android:inputType="date"
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Teléfono"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_telefono_vt_ad_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Teléfono del Cliente"
+                    android:inputType="numberSigned"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ocra"
+                    android:paddingBottom="@dimen/espacios"
+                    android:text="Correo"
+                    android:textColor="#959898"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/reg_correo_vt_ad_etxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bordesbotongris"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Correo del Cliente"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reg_list_vt_ad_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="#F7530C"
+                        android:fontFamily="@font/valorant"
+                        android:gravity="center"
+                        android:insetLeft="5dp"
+                        android:insetTop="5dp"
+                        android:insetRight="5dp"
+                        android:insetBottom="5dp"
+                        android:onClick="registrarAdministrador"
+                        android:text="Listo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        app:cornerRadius="50dp"
+                        app:iconTint="#FF5722"
+                        app:rippleColor="#FF5722"
+                        app:strokeColor="#FF5722" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ventas_admin_generales_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/consultar_estadisticas_generales"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+        <SearchView
+            android:id="@+id/vt_busqueda_plcas_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bordesmarcosgris"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@color/white"
+            android:queryHint="Fecha" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scroll_view_lista_ventas_generales_srcll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_ventas_admin_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ventas_admin_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/administrar_ventas"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pngwing_3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_aniadirventa_btn"
+                    android:layout_width="197dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:fontFamily="@font/valorant"
+                    android:text="REGISTRAR VENTA "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    app:srcCompat="@drawable/logo_venta" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/administrar_venta_generales_btn"
+                    android:layout_width="194dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/boton_redondeado_dark"
+                    android:fontFamily="@font/valorant"
+                    android:text="Generales "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                app:srcCompat="@drawable/group_20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/vt_admin_estadisticas_btn"
+                    android:layout_width="194dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:backgroundTint="@color/cafe_grisaceo"
+                    android:fontFamily="@font/valorant"
+                    android:text="Generales "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/estaditicageneral" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/vt_admin_estadiciticas_usuario_btn"
+                    android:layout_width="194dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/valorant"
+                    android:text="Por Vendedor "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vt_estadisticasgenerales_admin_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/estadisticas_back"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/gaficaVentasGenerales"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="15dp"
+            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/ver_vt_ad_lyt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/visualizarventa"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -1440,273 +1709,19 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ventas_admin_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/administrar_ventas"
-        android:orientation="vertical"
-        android:visibility="visible"
-        tools:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="24dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/pngwing_3" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/administrar_venta_aniadirventa_btn"
-                    android:layout_width="197dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:fontFamily="@font/valorant"
-                    android:text="REGISTRAR VENTA "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    app:srcCompat="@drawable/logo_venta" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/administrar_venta_generales_btn"
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/boton_redondeado_dark"
-                    android:fontFamily="@font/valorant"
-                    android:text="Generales "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <Space
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icons8_comportamiento_de_las_ventas_64_1" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
-                app:srcCompat="@drawable/group_20" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/vt_admin_estadisticas_btn"
-                    android:layout_width="194dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:backgroundTint="@color/cafe_grisaceo"
-                    android:fontFamily="@font/valorant"
-                    android:text="Generales "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/estaditicageneral" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/vt_admin_estadiciticas_usuario_btn"
-                    android:layout_width="194dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="16dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:backgroundTint="@color/black"
-                    android:fontFamily="@font/valorant"
-                    android:text="Por Vendedor "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    app:srcCompat="@drawable/icons8_gestion_de_clientes_64_1" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ventas_admin_generales_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/consultar_estadisticas_generales"
-        android:orientation="vertical"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ir_aniadir_vt_ftbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
         android:visibility="gone"
-        tools:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-        </LinearLayout>
-
-        <SearchView
-            android:id="@+id/vt_busqueda_plcas_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/bordesmarcosgris"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@color/white"
-            android:queryHint="Fecha" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="24dp"
-            android:orientation="vertical">
-
-            <ScrollView
-                android:id="@+id/scroll_view_lista_ventas_generales_srcll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lista_ventas_admin_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vt_estadisticasgenerales_admin_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/consultar_estadisticas_generales"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/gaficaVentasGenerales"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="15dp"
-            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vt_estadisticasusuario_lyt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/consultar_estadisticas_vendedores"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-        <AutoCompleteTextView
-            android:id="@+id/buscar_vendedor_vt_ad_actv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="85dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="35dp"
-            android:background="@drawable/bordesmarcoscafegrisaceo"
-            android:completionThreshold="1"
-            android:fontFamily="@font/ocraext"
-            android:hint="Cédula vendedor"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="19sp" />
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/gaficaVentasusuario"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="15dp"
-            tools:ignore="MissingConstraints"></com.github.mikephil.charting.charts.BarChart>
-
-    </LinearLayout>
+        app:backgroundTint="@color/botones"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/anadir_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
