@@ -582,7 +582,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                 if (Patioventainterfaz.anios[i].equals(anio_s))
                     posicion_anio = i;
             }
-            posicion_dia = Integer.parseInt(dia_s);
+            posicion_dia = Integer.parseInt(dia_s)-1;
             posicion_mes = Integer.parseInt(mes_s) - 1;
 
             ed_anio_vt_ad_acv.setText(anio_s);

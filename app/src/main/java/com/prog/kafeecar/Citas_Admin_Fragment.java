@@ -131,7 +131,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
-
+        //TODO COMPROBACION DE CEDULA VALIDA PRIMERO
         guardar_cita.setOnClickListener(v -> {
             AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
             String cli = cliente.getText().toString();
@@ -745,8 +745,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             if(Patioventainterfaz.anios[i].equals(anio_str))
                 posicion_anio = i;
         }
-        posicion_dia = Integer.parseInt(dia_str);
-        posicion_mes = Integer.parseInt(mes_str);
+        posicion_dia = Integer.parseInt(dia_str)-1;
+        posicion_mes = Integer.parseInt(mes_str)-1;
+        hora_nueva_cita = cita_mostrar.getHora();
 
         dias.setText(dia_str);
         mes.setText(Patioventainterfaz.meses[posicion_mes]);

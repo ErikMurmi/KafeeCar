@@ -137,27 +137,29 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             String cli = cliente.getText().toString();
             try {
                 Cliente aux = patio.buscarClientes("Cedula",cli);
-                if(aux==null){
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("CLIENTE NO REGISTRADO");
-                    msg.setMessage("Presione 'Si' para añadir al cliente" );
-                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_vn_btn.callOnClick());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
+                android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                if(cli.length()!=10 ) {
+                    Toast.makeText(mainView.getContext(), "Cedula de cliente inválida", Toast.LENGTH_SHORT).show();
                 }else{
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("AÑADIR");
-                    msg.setMessage("¿Está seguro de añadir la venta?");
-                    msg.setPositiveButton("Si", (dialog, which) -> {
-                        try {
-                            if(registarVenta()){
-                                irVerListaVentas();
+                    if(aux==null){
+                        msg.setTitle("CLIENTE NO REGISTRADO");
+                        msg.setMessage("Presione 'Si' para añadir al cliente" );
+                        msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_vn_btn.callOnClick());
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }else{
+                        msg.setTitle("AÑADIR");
+                        msg.setMessage("¿Está seguro de añadir la venta?");
+                        msg.setPositiveButton("Si", (dialog, which) -> {
+                            try {
+                                if(registarVenta()){
+                                    irVerListaVentas();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(mainView.getContext(), "Error 152: No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(mainView.getContext(), "Error 152: No se pudo añadir la venta", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        });
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }
                     msg.show();
                 }
             } catch (Exception e) {
@@ -235,28 +237,30 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             String cli = cliente.getText().toString();
             try {
                 Cliente aux = patio.buscarClientes("Cedula",cli);
-                if(aux==null){
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("CLIENTE NO REGISTRADO");
-                    msg.setMessage("Presione 'Si' para añadir al cliente" );
-                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_vn_btn.callOnClick());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
+                android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                if(cli.length()!=10 ) {
+                    Toast.makeText(mainView.getContext(), "Cedula de cliente inválida", Toast.LENGTH_SHORT).show();
                 }else{
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("GUARDAR");
-                    msg.setMessage("¿Está seguro de guardar los datos?");
-                    msg.setPositiveButton("Si", (dialog, which) -> {
-                        try {
-                            if(editarVenta()){
+                    if(aux==null){
+                        msg.setTitle("CLIENTE NO REGISTRADO");
+                        msg.setMessage("Presione 'Si' para añadir al cliente" );
+                        msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_vn_btn.callOnClick());
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }else{
+                        msg.setTitle("GUARDAR");
+                        msg.setMessage("¿Está seguro de guardar los datos?");
+                        msg.setPositiveButton("Si", (dialog, which) -> {
+                            try {
+                                if(editarVenta()){
+                                    irVerListaVentas();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(mainView.getContext(), "Error 157: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
                                 irVerListaVentas();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(mainView.getContext(), "Error 157: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
-                            irVerListaVentas();
-                        }
-                    });
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        });
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }
                     msg.show();
                 }
             } catch (Exception e) {
@@ -799,7 +803,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 if(Patioventainterfaz.anios[i].equals(anio_s))
                     posicion_anio = i;
             }
-            posicion_dia = Integer.parseInt(dia_s);
+            posicion_dia = Integer.parseInt(dia_s)-1;
             posicion_mes = Integer.parseInt(mes_s)-1;
 
             anio.setText(anio_s);

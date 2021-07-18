@@ -724,7 +724,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             if (Patioventainterfaz.anios[i].equals(anio_str))
                 posicion_anio = i;
         }
-        posicion_dia = Integer.parseInt(dia_str);
+        posicion_dia = Integer.parseInt(dia_str)-1;
         posicion_mes = Integer.parseInt(mes_str) - 1;
         hora_nueva_cita = cita_mostrar.getHora();
 
