@@ -107,33 +107,35 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         });
 
         guardar_ci_vn_btn.setOnClickListener(v -> {
-            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_vn_actv);
             String cli = cliente.getText().toString();
             try {
                 Cliente aux = patio.buscarClientes("Cedula",cli);
-                if(aux!=null){
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("CLIENTE NO REGISTRADO");
-                    msg.setMessage("Presione 'Si' para añadir al cliente" );
-                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_vn_btn.callOnClick());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                if(cli.length()!=10 ) {
+                    Toast.makeText(mainView.getContext(), "Cedula de cliente inválida", Toast.LENGTH_SHORT).show();
                 }else{
-                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("AÑADIR");
-                    msg.setMessage("¿Está seguro de añadir la cita?");
-                    msg.setPositiveButton("Si", (dialog, which) -> {
-                        try {
-                            if (registarCita()) {
-                                irListaCitas();
+                    if(aux==null){
+                        msg.setTitle("CLIENTE NO REGISTRADO");
+                        msg.setMessage("Presione 'Si' para añadir al cliente" );
+                        msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_vn_btn.callOnClick());
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }else{
+                        msg.setTitle("AÑADIR");
+                        msg.setMessage("¿Está seguro de añadir la cita?");
+                        msg.setPositiveButton("Si", (dialog, which) -> {
+                            try {
+                                if (registarCita()) {
+                                    irListaCitas();
+                                }
+                            } catch (Exception e) {
+                                citas_vendedor_lyt.setVisibility(View.VISIBLE);
+                                Toast.makeText(mainView.getContext(), "Error 126: No se pudo añadir la cita", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            citas_vendedor_lyt.setVisibility(View.VISIBLE);
-                            Toast.makeText(mainView.getContext(), "Error 126: No se pudo añadir la cita", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    });
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        });
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }
                     msg.show();
                 }
             } catch (Exception e) {
@@ -189,32 +191,34 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         cedula_vendedor_ci_vn_etxt.setOnClickListener(v -> Toast.makeText(mainView.getContext(), "No se puede editar este campo", Toast.LENGTH_SHORT).show());
 
         ed_guardar_ci_vn_btn.setOnClickListener(v -> {
-            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_vn_actv);
-            String cli = cliente.getText().toString();
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_vn_actv);
             try {
+                String cli = cliente.getText().toString();
                 Cliente aux = patio.buscarClientes("Cedula",cli);
-                if(aux!=null){
-                    android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("CLIENTE NO REGISTRADO");
-                    msg.setMessage("Presione 'Si' para añadir al cliente" );
-                    msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_vn_btn.callOnClick());
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-                    msg.show();
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                if(cli.length()!=10 ) {
+                    Toast.makeText(mainView.getContext(), "Cedula de cliente inválida", Toast.LENGTH_SHORT).show();
                 }else{
-                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-                    msg.setTitle("GUARDAR");
-                    msg.setMessage("¿Está seguro de guardar los cambios?");
-                    msg.setPositiveButton("Si", (dialog, which) -> {
-                        try {
-                            if (editarCita()) {
-                                irListaCitas();
+                    if(aux==null){
+                        msg.setTitle("CLIENTE NO REGISTRADO");
+                        msg.setMessage("Presione 'Si' para añadir al cliente" );
+                        msg.setPositiveButton("Si", (dialog, which) -> add_cliente_ci_vn_btn.callOnClick());
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }else{
+                        msg.setTitle("GUARDAR");
+                        msg.setMessage("¿Está seguro de guardar los cambios?");
+                        msg.setPositiveButton("Si", (dialog, which) -> {
+                            try {
+                                if (editarCita()) {
+                                    irListaCitas();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(mainView.getContext(), "Error 144: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(mainView.getContext(), "Error 144: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    });
-                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        });
+                        msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    }
                     msg.show();
                 }
             } catch (Exception e) {
@@ -425,6 +429,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 meses_mostrados = true;
             }
         });
+        meses.setOnItemClickListener((parent, view, position, id) -> setPosicion_mes(position));
 
         d.setEndIconOnClickListener(v -> dias.performClick());
         dias.setOnClickListener(v -> {

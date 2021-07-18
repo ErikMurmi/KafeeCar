@@ -300,7 +300,7 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -502,7 +502,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="2"
+                        android:completionThreshold="1"
                         android:fontFamily="@font/ocraext"
                         android:hint="Cédula"
                         android:inputType="number"
@@ -581,7 +581,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:completionThreshold="3"
+                        android:completionThreshold="1"
                         android:fontFamily="@font/ocraext"
                         android:hint="Placa"
                         android:inputType="textAutoComplete"
@@ -679,7 +679,7 @@
         android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
