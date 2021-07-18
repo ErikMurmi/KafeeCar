@@ -203,16 +203,6 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         verCatalogofav.setVisibility(View.VISIBLE);
         cargar();
     }
-    public void irVistaVehiculo() {
-        try {
-            vistaVehiculo.setVisibility(View.VISIBLE);
-            visualizarVehiculoF();
-            verCatalogofav.setVisibility(View.GONE);
-            agenCitaNueva.setVisibility(View.GONE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void mostraragendamiento(){
