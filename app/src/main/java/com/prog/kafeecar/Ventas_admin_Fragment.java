@@ -106,7 +106,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ImageButton ed_add_cliente_vt_ad_btn = mainView.findViewById(R.id.ed_add_cliente_vt_ad_btn);
         Button guardar_vt_ad_btn = mainView.findViewById(R.id.guardar_vt_ad_btn);
         Button reg_list_vt_ad_btn = mainView.findViewById(R.id.reg_list_vt_ad_btn);
-        FloatingActionButton ir_aniadir_vt_ftbtn = mainView.findViewById(R.id.ir_aniadir_vt_ftbtn);
+        ir_aniadir_vt_ftbtn = mainView.findViewById(R.id.ir_aniadir_vt_ftbtn);
         //Ver
         vt_ad_ver_venta_editar_btn = mainView.findViewById(R.id.vt_ad_ver_venta_editar_btn);
         Button ed_guardar_vt_ad_btn = mainView.findViewById(R.id.ed_guardar_vt_ad_btn);
@@ -455,11 +455,12 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     public void irListaGenerales() {
         add_vt_ad_lyt.setVisibility(View.GONE);
+        editar_vt_ad_lyt.setVisibility(View.GONE);
+        ver_vt_ad_lyt.setVisibility(View.GONE);
+        ventas_admin_lyt.setVisibility(View.GONE);
         cargar();
         ir_aniadir_vt_ftbtn.setVisibility(View.VISIBLE);
         ventas_admin_generales_lyt.setVisibility(View.VISIBLE);
-        ir_aniadir_vt_ftbtn.setVisibility(View.VISIBLE);
-
     }
 
     public void irVerVenta() {
@@ -625,7 +626,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         return false;
     }
 
-    public boolean registarVenta() throws Exception {
+    public boolean registarVenta()  {
 
         adaptadorAniadir();
         Cliente cliente_c = null;
@@ -669,19 +670,25 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         }
 
         if (vacios == 0 && invalidos==0) {
-            String fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
-            Date fecha = sdf.parse(fecha_nueva_venta);
-            Venta nueva = new Venta(
-                    fecha,
-                    cliente_c,
-                    usuario_admin,
-                    vehiculo,
-                    precio);
-            patio.aniadirVenta(nueva);
-            if (patio.getVentasGenerales().contiene(nueva)) {
-                Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
-                return true;
+
+            try {
+                String fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
+                Date fecha = sdf.parse(fecha_nueva_venta);
+                Venta nueva = new Venta(
+                        fecha,
+                        cliente_c,
+                        usuario_admin,
+                        vehiculo,
+                        precio);
+                patio.aniadirVenta(nueva);
+                if (patio.getVentasGenerales().contiene(nueva)) {
+                    Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 0", Toast.LENGTH_SHORT).show();
             }
+
         }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
