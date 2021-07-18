@@ -19,6 +19,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -106,6 +107,18 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             });
 
+        //Metodo para el control del boton atras
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (editarperfil.getVisibility() == View.VISIBLE) {
+                    editarperfil.setVisibility(View.GONE);
+                    verperfil.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         return mainview;
         }
    
