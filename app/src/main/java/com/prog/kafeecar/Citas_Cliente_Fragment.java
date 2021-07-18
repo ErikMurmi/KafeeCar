@@ -260,6 +260,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         }
         posicion_dia = Integer.parseInt(dia_str);
         posicion_mes = Integer.parseInt(mes_str);
+        hora_nueva_cita = cita_mostrar.getHora();
 
         dias.setText(dia_str);
         mes.setText(Patioventainterfaz.meses[posicion_mes]);
