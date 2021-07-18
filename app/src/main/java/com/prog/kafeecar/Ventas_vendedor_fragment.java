@@ -812,7 +812,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             precioV.setText(String.format("%.2f", venta_mostrar.getPrecio()));
     }
 
-    public boolean editarVenta() throws Exception {
+    public boolean editarVenta(){
         Cliente cliente_c = null;
         int vacios = 0;
         int invalidos = 0;

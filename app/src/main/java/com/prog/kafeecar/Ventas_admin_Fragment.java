@@ -84,6 +84,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private StorageReference mStorageRef;
     private int[] colors = new int[]{Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51), Color.rgb(255, 87, 51)};
     private Lista ventas;
+    private Button ed_guardar_vt_ad_btn;
+    private Button guardar_vt_ad_btn;
     private String cedulaVendedor="";
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,12 +106,12 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         Button vt_ad_ver_venta_eliminar_btn= mainView.findViewById(R.id.vt_ad_ver_venta_eliminar_btn);
         ImageButton add_cliente_vt_ad_btn = mainView.findViewById(R.id.add_cliente_vt_ad_btn);
         ImageButton ed_add_cliente_vt_ad_btn = mainView.findViewById(R.id.ed_add_cliente_vt_ad_btn);
-        Button guardar_vt_ad_btn = mainView.findViewById(R.id.guardar_vt_ad_btn);
+        guardar_vt_ad_btn = mainView.findViewById(R.id.guardar_vt_ad_btn);
         Button reg_list_vt_ad_btn = mainView.findViewById(R.id.reg_list_vt_ad_btn);
         ir_aniadir_vt_ftbtn = mainView.findViewById(R.id.ir_aniadir_vt_ftbtn);
         //Ver
         vt_ad_ver_venta_editar_btn = mainView.findViewById(R.id.vt_ad_ver_venta_editar_btn);
-        Button ed_guardar_vt_ad_btn = mainView.findViewById(R.id.ed_guardar_vt_ad_btn);
+        ed_guardar_vt_ad_btn = mainView.findViewById(R.id.ed_guardar_vt_ad_btn);
         //LYT
         ventas_admin_generales_lyt = mainView.findViewById(R.id.ventas_admin_generales_lyt);
         add_vt_ad_lyt = mainView.findViewById(R.id.add_vt_ad_lyt);
@@ -122,9 +124,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         LinearLayout aniadir_cliente_vt_ad_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_ad_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
-        //todo on back
-        //todo cambiar campos vacios
-        //todo on back floating action buttton
         administrar_venta_aniadirventa_btn.setOnClickListener(view -> {
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
@@ -150,7 +149,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
-
 
         ir_aniadir_vt_ftbtn.setOnClickListener(v -> {
             administrar_venta_aniadirventa_btn.callOnClick();
@@ -212,38 +210,62 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
 
         ed_guardar_vt_ad_btn.setOnClickListener(v -> {
-            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-            msg.setTitle("Editar Venta");
-            msg.setMessage("¿Estás seguro de editar esta venta?");
-            msg.setPositiveButton("Aceptar", (dialog, which) -> {
-                try {
-                    if (editarVenta()) {
-                        irListaGenerales();
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
+            String cli = cliente.getText().toString();
+            Cliente aux = patio.buscarClientes("Cedula",cli);
+            if(aux==null){
+                android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                msg.setTitle("CLIENTE NO REGISTRADO");
+                msg.setMessage("Presione 'Si' para añadir al cliente" );
+                msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_ad_btn.callOnClick());
+                msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                msg.show();
+            }else{
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                msg.setTitle("Editar Venta");
+                msg.setMessage("¿Estás seguro de editar esta venta?");
+                msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                    try {
+                        if (editarVenta()) {
+                            irListaGenerales();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(mainView.getContext(), "Error 61: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "Error 61: No se pudo editar la venta", Toast.LENGTH_SHORT).show();
-                }
-            });
-            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-            msg.show();
+                });
+                msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                msg.show();
+            }
         });
 
         guardar_vt_ad_btn.setOnClickListener(view -> {
-            AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
-            msg.setTitle("Registrar Venta");
-            msg.setMessage("¿Estás seguro de registrar esta nueva venta?");
-            msg.setPositiveButton("Aceptar", (dialog, which) -> {
-                try {
-                    if (registarVenta()) {
-                        irListaGenerales();
-                        Toast.makeText(mainView.getContext(), "Se registro la venta", Toast.LENGTH_SHORT).show();
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
+            String cli = cliente.getText().toString();
+            Cliente aux = patio.buscarClientes("Cedula",cli);
+            if(aux==null){
+                android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
+                msg.setTitle("CLIENTE NO REGISTRADO");
+                msg.setMessage("Presione 'Si' para añadir al cliente" );
+                msg.setPositiveButton("Si", (dialog, which) -> add_cliente_vt_ad_btn.callOnClick());
+                msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                msg.show();
+            }else{
+                AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                msg.setTitle("Registrar Venta");
+                msg.setMessage("¿Estás seguro de registrar esta nueva venta?");
+                msg.setPositiveButton("Aceptar", (dialog, which) -> {
+                    try {
+                        if (registarVenta()) {
+                            irListaGenerales();
+                            Toast.makeText(mainView.getContext(), "Se registro la venta", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(mainView.getContext(), "Error 62: No se registro la venta", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "Error 62: No se registro la venta", Toast.LENGTH_SHORT).show();
-                }
-            });
-            msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-            msg.show();
+                });
+                msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                msg.show();
+            }
         });
 
         descartar_vt_ad_btn.setOnClickListener(v -> {
