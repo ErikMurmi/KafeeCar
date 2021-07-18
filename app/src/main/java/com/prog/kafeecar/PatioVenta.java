@@ -10,7 +10,6 @@ public class PatioVenta {
     private Lista clientes;
     private Lista vehiculos;
     private Lista citas;
-//TODO COMPROBACIONES DE ELEMENTOS YA REGISTRADOS EN EL SISTEMA
     
     private Vendedor administrador;
     private String telefono;
@@ -21,6 +20,7 @@ public class PatioVenta {
         clientes = new Lista();
         vehiculos = new Lista();
         citas = new Lista();
+        administrador = null;
     }
 
     public PatioVenta(Lista ventasGenerales, Lista vendedores, Lista clientes, Lista vehiculos, Vendedor administrador) {
@@ -333,7 +333,7 @@ public class PatioVenta {
         int cont =0;
         while(cont<ventasGenerales.contar() && buscada==null){
             Venta actual = (Venta) ventasGenerales.getPos(cont);
-            if(actual.getCliente().getCedula().compareTo(cedula)==0 && actual.getVehiculo().getPlaca().compareTo(placa)==0){
+            if(actual.getComprador().getCedula().compareTo(cedula)==0 && actual.getVehiculo().getPlaca().compareTo(placa)==0){
                 buscada = actual;
             }
             cont++;

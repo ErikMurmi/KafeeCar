@@ -589,7 +589,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             ed_mes_vt_ad_acv.setText(Patioventainterfaz.meses[posicion_mes]);
             ed_dia_vt_ad_acv.setText(dia_s);
 
-            cliente.setText(venta_mostrar.getCliente().getCedula());
+            cliente.setText(venta_mostrar.getComprador().getCedula());
             vendedor.setText(usuario_admin.getCedula());
             placa.setText(venta_mostrar.getVehiculo().getPlaca());
             precioV.setText(String.format("%.2f", venta_mostrar.getPrecio()));
@@ -1039,8 +1039,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         precioV.setText(String.format("$ %.2f", venta_mostrar.getPrecio()));
         precioI.setText(String.format("$ %.2f", venta_mostrar.getVehiculo().getPrecioInicial()));
         vendedor.setText(venta_mostrar.getVendedor().getNombre());
-        cliente.setText(venta_mostrar.getCliente().getNombre());
-        contacto.setText(venta_mostrar.getCliente().getTelefono());
+        cliente.setText(venta_mostrar.getComprador().getNombre());
+        contacto.setText(venta_mostrar.getComprador().getTelefono());
 
         placa.setText(venta_mostrar.getVehiculo().getPlaca());
         matricula.setText(venta_mostrar.getVehiculo().getMatricula());

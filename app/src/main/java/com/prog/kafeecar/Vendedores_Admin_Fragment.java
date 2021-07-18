@@ -440,38 +440,43 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
         }
 
         if (vacios == 0 && invalidos==0) {
-            Date fecha = null;
-            try {
-                fecha = Patioventainterfaz.sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
-            } catch (ParseException e) {
-                Toast.makeText(mainView.getContext(), "Error 44: No se pudo generar la fecha", Toast.LENGTH_SHORT).show();
-            }
-            StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor_str+".jpg");
-            filePath.putFile(foto);
-
-            Vendedor vendedor = new Vendedor(
-                    cedulaVendedor_str + ".jpg",
-                    horaEntradaVendedor_int,
-                    horaSalidaVendedor_int,
-                    horaAlmuerzoVendedor_int,
-                    patio,
-                    nombreCompletoVendedor_str,
-                    cedulaVendedor_str,
-                    telefonoVendedor_str,
-                    correoVendedor_str,
-                    contraseniaVendedor_str,
-                    fecha);
-            patio.aniadirUsuario(vendedor, "Vendedor");
-
-            try {
-                if (patio.buscarVendedores("Cedula", vendedor.getCedula()) != null) {
-                    Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
-                    regresarPantallaPrncipal();
+            if(patio.buscarVendedores("Cedula",cedulaVendedor_str)==null){
+                Date fecha = null;
+                try {
+                    fecha = Patioventainterfaz.sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
+                } catch (ParseException e) {
+                    Toast.makeText(mainView.getContext(), "Error 44: No se pudo generar la fecha", Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Error 45: Búsqueda fallida de vendedor", Toast.LENGTH_SHORT).show();
+                StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaVendedor_str+".jpg");
+                filePath.putFile(foto);
+
+                Vendedor vendedor = new Vendedor(
+                        cedulaVendedor_str + ".jpg",
+                        horaEntradaVendedor_int,
+                        horaSalidaVendedor_int,
+                        horaAlmuerzoVendedor_int,
+                        patio,
+                        nombreCompletoVendedor_str,
+                        cedulaVendedor_str,
+                        telefonoVendedor_str,
+                        correoVendedor_str,
+                        contraseniaVendedor_str,
+                        fecha);
+                patio.aniadirUsuario(vendedor, "Vendedor");
+
+                try {
+                    if (patio.buscarVendedores("Cedula", vendedor.getCedula()) != null) {
+                        Toast.makeText(mainView.getContext(), "Se añadió el vendedor correctamente", Toast.LENGTH_SHORT).show();
+                        regresarPantallaPrncipal();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mainView.getContext(), "Error 45: Búsqueda fallida de vendedor", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }else{
+                Toast.makeText(mainView.getContext(), "La cédula ya se encuentra registrada", Toast.LENGTH_SHORT).show();
             }
-            return true;
+
         }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
@@ -696,30 +701,35 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             }
 
             if (vacios == 0 && invalidos==0) {
-                String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                if(foto!=null){
-                    StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString() + ".jpg");
-                    filePath.putFile(foto);
-                }
-                cedulaVen.cambiarDatosSinClaveVendedor(
-                        horaEntradaVendedor_int,
-                        horaSalidaVendedor_int,
-                        horaAlmuerzoVendedor_int,
-                        nombre_ed.getText().toString(),
-                        cedula_ed.getText().toString(),
-                        telefono_ed.getText().toString(),
-                        correo_ed.getText().toString(),
-                        fecha);
-                cedulaVen.setImagen(String.format("%s.jpg", cedula_ed.getText().toString()));
-                try {
-                    if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
-                        Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
-                        irVisualizarVendedor.setVisibility(View.GONE);
-                        return true;
+                if(cedula_str.compareTo(venMostrar.getCedula())==0 || patio.buscarVendedores("Cedula",cedula_str)==null){
+                    String fecha = dia_str + "-" + mes_str + "-" + anio_str;
+                    if(foto!=null){
+                        StorageReference filePath = mStorageRef.child("Vendedores").child(cedula_ed.getText().toString() + ".jpg");
+                        filePath.putFile(foto);
                     }
-                } catch (Exception e) {
-                    Toast.makeText(mainView.getContext(), "Error 48: Búsqueda fallida del vendedor", Toast.LENGTH_SHORT).show();
+                    cedulaVen.cambiarDatosSinClaveVendedor(
+                            horaEntradaVendedor_int,
+                            horaSalidaVendedor_int,
+                            horaAlmuerzoVendedor_int,
+                            nombre_ed.getText().toString(),
+                            cedula_ed.getText().toString(),
+                            telefono_ed.getText().toString(),
+                            correo_ed.getText().toString(),
+                            fecha);
+                    cedulaVen.setImagen(String.format("%s.jpg", cedula_ed.getText().toString()));
+                    try {
+                        if (patio.buscarVendedores("Cedula", cedulaVen.getCedula()) != null) {
+                            Toast.makeText(mainView.getContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
+                            irVisualizarVendedor.setVisibility(View.GONE);
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(mainView.getContext(), "Error 48: Búsqueda fallida del vendedor", Toast.LENGTH_SHORT).show();
+                    }
+                }else if(patio.buscarVendedores("Cedula",cedula_str)!=null){
+                    Toast.makeText(mainView.getContext(), "La cédula ya se encuentra registrada", Toast.LENGTH_SHORT).show();
                 }
+
             }else if(vacios>0){
                 Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
             }

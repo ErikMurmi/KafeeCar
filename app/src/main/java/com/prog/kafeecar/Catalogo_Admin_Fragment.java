@@ -2,6 +2,7 @@ package com.prog.kafeecar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -151,14 +154,14 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             msg.show();
         });
 
-        //TODO I
         editar_btn.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("Editar vehículo");
             msg.setMessage("¿Está seguro de editar el vehículo con la placa " + vMostrar.getPlaca() + " ?");
             msg.setPositiveButton("Si", (dialog, which) -> {
-                editarVehiculo();
-                irCatalogo();
+                if(editarVehiculo()){
+                    irCatalogo();
+                }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
@@ -326,8 +329,8 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
 
         if (vacios == 0 && invalidos == 0) {
+            placa_str = placa_ad.getText().toString();
             if(patio.buscarVehiculos("Placa",placa_str)==null){
-                placa_str = placa_ad.getText().toString();
                 StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_str + ".jpg");
                 filePath.putFile(foto);
                 Vehiculo nuevo = new Vehiculo(
@@ -402,7 +405,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
 
     }
 
-    public void editarVehiculo() {
+    public boolean editarVehiculo() {
         int vacios = 0;
         int invalidos = 0;
 
@@ -476,35 +479,36 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         CheckBox matriculado_ed = mainView.findViewById(R.id.editar_matriculado_chkbox);
         if (vacios == 0 && invalidos == 0) {
             String placa_n = placa_ed.getText().toString();
-            if (foto != null) {
-                StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_n + ".jpg");
-                filePath.putFile(foto);
-            }
-            vMostrar.actualizarDatos(
-                    placa_n,
-                    matricula_ed.getText().toString(),
-                    marca_ed.getText().toString(),
-                    modelo_ed.getText().toString(),
-                    color_ed.getText().toString(),
-                    descripcion_ed.getText().toString(),
-                    Float.parseFloat(pinicial_ed.getText().toString()),
-                    Float.parseFloat(pventa_ed.getText().toString()),
-                    Float.parseFloat(ppromocion_ed.getText().toString()),
-                    matriculado_ed.isChecked(),
-                    Integer.parseInt(anio_ed.getText().toString()),
-                    placa_n + ".jpg"
-            );
-            try {
-                if (patio.buscarVehiculos("Placa", placa_n) != null) {
-                    Toast.makeText(mainView.getContext(), "Se edito correctamente el auto", Toast.LENGTH_SHORT).show();
+            if(placa_n.compareToIgnoreCase(vMostrar.getPlaca())==0 || patio.buscarVehiculos("Placa",placa_n)==null){
+                if (foto != null) {
+                    StorageReference filePath = mStorageRef.child("Vehiculos").child(placa_n + ".jpg");
+                    filePath.putFile(foto);
                 }
-            } catch (Exception e) {
-                Toast.makeText(mainView.getContext(), "Error 4: Edición fallida del auto", Toast.LENGTH_SHORT).show();
+                vMostrar.actualizarDatos(
+                        placa_n.toUpperCase(),
+                        matricula_ed.getText().toString(),
+                        marca_ed.getText().toString(),
+                        modelo_ed.getText().toString(),
+                        color_ed.getText().toString(),
+                        descripcion_ed.getText().toString(),
+                        Float.parseFloat(pinicial_ed.getText().toString()),
+                        Float.parseFloat(pventa_ed.getText().toString()),
+                        Float.parseFloat(ppromocion_ed.getText().toString()),
+                        matriculado_ed.isChecked(),
+                        Integer.parseInt(anio_ed.getText().toString()),
+                        placa_n + ".jpg"
+                );
+                if (patio.buscarVehiculos("Placa", placa_n) != null) {
+                    Toast.makeText(mainView.getContext(), "Se editó correctamente el auto", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            }else if(patio.buscarVehiculos("Placa",placa_n)!=null){
+                Toast.makeText(mainView.getContext(), "Placa ya registrada en el patio", Toast.LENGTH_SHORT).show();
             }
-
         } else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
+        return false;
     }
 
     public void visualizarVehiculo() {
@@ -579,6 +583,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
         aniadir_precio_venta_etxt.getText().clear();
         aniadir_precio_promocion_etxt.getText().clear();
         matricula_chkbox.setChecked(false);
+        foto=null;
     }
 
     public void openGalery() {

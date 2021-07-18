@@ -41,7 +41,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
     public void onBindViewHolder(@NonNull  Adaptador_Lista_Ventas.clienteHolder holder, int position) {
         try {
             Venta vt= (Venta) ventas_buscadas.getPos(position);
-            String nombre= vt.getCliente().getNombre();
+            String nombre= vt.getComprador().getNombre();
             String fecha = Patioventainterfaz.getFechaMod(vt.getFecha());
             String vendedor  = vt.getVendedor().getNombre();
             String placas = vt.getVehiculo().getPlaca();
@@ -66,7 +66,7 @@ public class Adaptador_Lista_Ventas extends RecyclerView.Adapter<Adaptador_Lista
             holder.placas.setText(placas);
             holder.precio.setText(precio);
 
-            holder.itemView.setOnClickListener(v -> itemClick.itemClick(actual.getPlaca(),vt.getCliente().getCedula()));
+            holder.itemView.setOnClickListener(v -> itemClick.itemClick(actual.getPlaca(),vt.getComprador().getCedula()));
             /*
             holder.itemView.setOnClickListener(v -> {
                 Catalogo_Admin_Fragment.irVer(placa);
