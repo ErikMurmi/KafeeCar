@@ -103,6 +103,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         regresarVistaVehiculo.setOnClickListener(v -> {
             try {
                 vistaVehiculo.setVisibility(View.GONE);
+                irCitaNueva.setVisibility(View.GONE);
                 verCatalogo.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -115,7 +116,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             msg.setMessage("¿Está seguro de salir sin guardar?");
             msg.setPositiveButton("Si", (dialog, which) -> {
                 try {
-                    patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                     visualizarVehiculo();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -182,7 +182,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Catalogo_Cl(patio.getVehiculos(), this);
+        adptadorlistaview = new Adaptador_Lista_Catalogo_Cl(patio.getVehiculos().copiar(), this);
         listaview.setAdapter(adptadorlistaview);
     }
 
@@ -287,6 +287,26 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         Date fecha = sdf.parse(prueba);
         String hora = String.valueOf(hora_nueva_cita);
         vendedor = patioventa.asignarVendedor(hora,fecha);
+        AutoCompleteTextView dia_cita = mainView.findViewById(R.id.dia_ci_v_cli_acv);
+        AutoCompleteTextView mes_cita = mainView.findViewById(R.id.mes_ci_v_cli_acv);
+        AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_v_cli_acv);
+        AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_v_cli_acv);
+        if(isEmpty(hora_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(dia_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(mes_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(anio_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
         if (c == 0) {
             Cita nueva = new Cita(
                     fecha,
@@ -402,6 +422,10 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
     private void setPosicion_dia(int pos) {posicion_dia = pos; }
     private void setHora_nueva_cita(int hora) {
         hora_nueva_cita = hora;
+    }
+
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
     }
 
     @Override

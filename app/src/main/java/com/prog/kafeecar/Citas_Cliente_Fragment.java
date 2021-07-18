@@ -36,6 +36,8 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -256,6 +258,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     public boolean editarCita() throws Exception {
         Vehiculo vehiculo = null;
         int c = 0;
+
 
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -522,6 +525,26 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
+        AutoCompleteTextView dia_cita = mainView.findViewById(R.id.dia_ci_cli_acv);
+        AutoCompleteTextView mes_cita = mainView.findViewById(R.id.mes_ci_cli_acv);
+        AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_cli_acv);
+        AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_cli_acv);
+        if(isEmpty(hora_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(dia_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(mes_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(anio_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
         if (!isEmpty(auto)) {
             String vehiculo_str = auto.getText().toString();
             vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);

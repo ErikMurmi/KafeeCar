@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -78,8 +79,8 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         verCatalogofav = mainView.findViewById(R.id.favorito_cliente_lyt);
         agenCitaNueva = mainView.findViewById(R.id.add_cita_fav_cli_vv_lyt);
         favoritoBoton = mainView.findViewById(R.id.aniadir_favorito_F_btn);
-        Button agendarcita = mainView.findViewById(R.id.guardar_ci_fav_cli_vv_btn);
-        Button descartarcita = mainView.findViewById(R.id.descartar_ci_fav_cli_vv_btn);
+        Button agendarcita = mainView.findViewById(R.id.guardar_ci_fav_cli_btn);
+        Button descartarcita = mainView.findViewById(R.id.descartar_ci_fav_cli_btn);
         Button iragendar = mainView.findViewById(R.id.agendarcita_cliente_F_btn);
         Button regresarFavorito = mainView.findViewById(R.id.regresar_VVF_cliente_btn);
         listasDesplegableAniadir();
@@ -176,7 +177,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         RecyclerView.LayoutManager manager = new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
-        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.buscarVehiculosFav("Placa", clienteActual.getFavoritos()), this);
+        adptadorlistaview = new Adaptador_Lista_Catalogo(patio.buscarVehiculosFav("Placa", clienteActual.getFavoritos()).copiar(), this);
         listaview.setAdapter(adptadorlistaview);
     }
     public void irCatalogo() throws Exception {
@@ -187,8 +188,8 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
     }
 
     public void mostraragendamiento(){
-        TextView cedulaclien = mainView.findViewById(R.id.cedula_ci_fav_cli_vv_actv);
-        TextView palcaVe = mainView.findViewById(R.id.placa_ci_fav_cli_vv_actv);
+        TextView cedulaclien = mainView.findViewById(R.id.cedula_cliente_fav_ci_cli_actv);
+        TextView palcaVe = mainView.findViewById(R.id.placa_ci_fav_cli_actv);
         cedulaclien.setText(Patioventainterfaz.usuarioActual.getCedula());
         palcaVe.setText(vMostrar.getMatricula());
     }
@@ -201,6 +202,27 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         Date fecha = sdf.parse(prueba);
         String hora = String.valueOf(hora_nueva_cita);
         vendedor = patioventa.asignarVendedor(hora,fecha);
+        AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_fav_cli_acv);
+        AutoCompleteTextView mes_cita = mainView.findViewById(R.id.mes_ci_fav_cli_acv);
+        AutoCompleteTextView dia_cita = mainView.findViewById(R.id.dia_ci_fav_cli_acv);
+        AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_fav_cli_acv);
+
+        if(isEmpty(hora_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(dia_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(mes_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
+        if(isEmpty(anio_cita)){
+            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
+            c++;
+        }
         if (c == 0) {
             Cita nueva = new Cita(
                     fecha,
@@ -269,14 +291,14 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
 
     }
     public void listasDesplegableAniadir(){
-        TextInputLayout anio_lyt = mainView.findViewById(R.id.dia_cita_fav_cli_vv_textin);
-        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_cita_fav_cli_vv_textin);
-        TextInputLayout dias_lyt = mainView.findViewById(R.id.anio_ci_fav_cli_vv_txtin);
-        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_fav_cli_vv_textin);
-        AutoCompleteTextView anio = mainView.findViewById(R.id.dia_cita_fav_cli_vv_actv);
-        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_fav_cli_vv_actv);
-        AutoCompleteTextView dias = mainView.findViewById(R.id.anio_ci_fav_cli_vv_actv);
-        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_fav_cli_vv_actv);
+        TextInputLayout anio_lyt = mainView.findViewById(R.id.anio_ci_fav_cli_til);
+        TextInputLayout mes_lyt = mainView.findViewById(R.id.mes_ci_fav_cli_til);
+        TextInputLayout dias_lyt = mainView.findViewById(R.id.dia_ci_fav_cli_til);
+        TextInputLayout horas_lyt = mainView.findViewById(R.id.hora_ci_fav_cli_til);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_ci_fav_cli_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_ci_fav_cli_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_fav_cli_acv);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_fav_cli_acv);
         anio_lyt.setEndIconOnClickListener(v -> anio.performClick());
         anio.setOnClickListener(v -> {
             if(anios_mostradas){
@@ -342,6 +364,10 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 horas_mostradas = true;
             }
         });
+    }
+
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
     }
 
     @Override
