@@ -114,7 +114,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                         irListaCitas();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 251: no se pudo abrir la lista de citas", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -131,7 +131,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                         irListaCitas();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 252: no se pudo abrir la lista de citas", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -149,7 +149,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                     verCitaLista.setVisibility(View.VISIBLE);
                     aniadirCita.setVisibility(View.GONE);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 253: no se pudo abrir la lista de citas", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -178,7 +178,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                     patio.removerCita(cita_mostrar.getVehiculo().getPlaca(), cita_mostrar.getCliente().getCedula());
                     irListaCitas();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 254: no se pudo abrir la lista de citas", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -273,7 +273,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 imagen_ed.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 255: no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
 
         horas.setText(String.valueOf(cita_mostrar.getHora()));
@@ -519,7 +519,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 imagen_ed.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 256: no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
         fecha.setText(getFechaMod(cita_mostrar.getFechaCita()));
         hora.setText(String.valueOf(cita_mostrar.getHora()));
@@ -608,7 +608,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             cita_mostrar = patio.buscarCita("Vehiculo",placa,cedula_cliente);
             visualizarCita();
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Errores", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Error 257: no se pudo visualizar la cita", Toast.LENGTH_SHORT).show();
         }
     }
 

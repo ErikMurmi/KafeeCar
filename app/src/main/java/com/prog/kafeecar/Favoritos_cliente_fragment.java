@@ -93,7 +93,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                     try {
                         irCatalogo();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Toast.makeText(mainView.getContext(), "Error 226: No se pudo abrir los favoritos ", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -110,7 +110,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                         verCatalogofav.setVisibility(View.GONE);
                         agenCitaNueva.setVisibility(View.GONE);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 227: no se pudo volver a los favoritos ", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -125,7 +125,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 agenCitaNueva.setVisibility(View.VISIBLE);
                 mostraragendamiento();
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 228: no se pudo mostrar pantalla agendar ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -134,7 +134,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 vistaVehiculo.setVisibility(View.GONE);
                 verCatalogofav.setVisibility(View.VISIBLE);
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 229: no se pudo mostrar favorito ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -150,7 +150,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                         agenCitaNueva.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 230: no se pudo mostrar agendar cita ", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -167,7 +167,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         try {
             cargar();
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 231: no se cargo los datos", Toast.LENGTH_SHORT).show();
         }
         return mainView;
     }
@@ -279,7 +279,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 v_img.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 232: no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
         if (vMostrar.isMatriculado()) {
             matriculado.setText("Si");
@@ -376,7 +376,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
             vMostrar = patio.buscarVehiculos("Placa", placa);
             visualizarVehiculoF();
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 233: no se pudo visualizar los datos del vehiculo", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -391,7 +391,7 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         try {
             adptadorlistaview.buscar(newText,"Placa");
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Error 234", Toast.LENGTH_SHORT).show();
         }
         return false;
     }

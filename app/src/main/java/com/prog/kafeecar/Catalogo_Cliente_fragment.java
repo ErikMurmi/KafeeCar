@@ -106,7 +106,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 irCitaNueva.setVisibility(View.GONE);
                 verCatalogo.setVisibility(View.VISIBLE);
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 201: No se pudo regresar al vehiculo ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,7 +118,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 try {
                     visualizarVehiculo();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 202: No se pudo regresar al vehiculo ", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -134,7 +134,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 irCitaNueva.setVisibility(View.VISIBLE);
                 verAgendarCita();
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(mainView.getContext(), "Error 203: No se pudo regresar al vehiculo ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -148,7 +148,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                         irCatalogo();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(mainView.getContext(), "Error 204: No se pudo regresar al catalogo ", Toast.LENGTH_SHORT).show();
                 }
             });
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -253,7 +253,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 v_img.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 205: No se pudo cargar la imagen ", Toast.LENGTH_SHORT).show();
         }
         if (vMostrar.isMatriculado()) {
             matriculado.setText(" Si");
@@ -273,7 +273,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 vehiculo_img.setImageURI(nuevo);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 206: No se pudo cargar la imagen ", Toast.LENGTH_SHORT).show();
         }
         cedula.setText(Patioventainterfaz.usuarioActual.getCedula());
         placavehiculo.setText(vMostrar.getMatricula());
@@ -438,7 +438,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         try {
             adptadorlistaview.buscar(newText,busqueda_placa.getQueryHint().toString());
         } catch (Exception e) {
-            Toast.makeText(mainView.getContext(), "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainView.getContext(), "Error 207 ", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -449,7 +449,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             vMostrar = patio.buscarVehiculos("Placa", placa);
             visualizarVehiculo();
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mainView.getContext(), "Error 208: No se pudo abrir el vehiculo ", Toast.LENGTH_SHORT).show();
         }
     }
 }

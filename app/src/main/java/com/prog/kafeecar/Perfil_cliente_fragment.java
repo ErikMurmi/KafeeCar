@@ -80,7 +80,7 @@ public class Perfil_cliente_fragment extends Fragment{
                 verperfil.setVisibility(View.GONE);
                 editarperfil.setVisibility(View.VISIBLE);
             } catch (Exception e){
-                e.printStackTrace();
+                Toast.makeText(mainview.getContext(), "Error 276: no se pudo visualizar el perfil ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,8 +93,7 @@ public class Perfil_cliente_fragment extends Fragment{
                 msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                 msg.show();
             } catch (Exception e) {
-                Toast.makeText(mainview.getContext(), "No se pudo editar el perfil", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+                Toast.makeText(mainview.getContext(), "Error 277: no se pudo editar el perfil", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +102,7 @@ public class Perfil_cliente_fragment extends Fragment{
                 salirsinGuardar();
                 verperfilCliente();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                 Toast.makeText(mainview.getContext(), "Error 278: no se pudo ver el perfil", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -178,11 +177,11 @@ public class Perfil_cliente_fragment extends Fragment{
                     }
                 });
             }catch (IOException e) {
-                e.printStackTrace();
+                Toast.makeText(mainview.getContext(), "Error 279: no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
             }
         }
         catch(Exception e){
-            Toast.makeText(mainview.getContext(), "No se puede mostrar la información", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainview.getContext(), "Error 280: no se pudo mostrar la informacion", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -319,7 +318,7 @@ public class Perfil_cliente_fragment extends Fragment{
             }
         }
         catch (Exception e){
-            Toast.makeText(mainview.getContext(), "No se pudo actualizar la información del perfil", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainview.getContext(), "Error 281: no se pudo actualizar la informaicon del perfil", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -372,7 +371,7 @@ public class Perfil_cliente_fragment extends Fragment{
                 }
             });
         }catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(mainview.getContext(), "Error 282:no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
 
     }
