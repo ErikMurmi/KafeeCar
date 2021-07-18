@@ -357,7 +357,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
             } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "Error 2: Error al agregar el vehículo", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        } else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
     }
@@ -504,7 +504,7 @@ public class Catalogo_Admin_Fragment extends Fragment implements Adaptador_Lista
                 Toast.makeText(mainView.getContext(), "Error 4: Edición fallida del auto", Toast.LENGTH_SHORT).show();
             }
 
-        } else {
+        } else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
     }

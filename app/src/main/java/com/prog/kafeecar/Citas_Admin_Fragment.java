@@ -435,7 +435,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "Error 27: No se registro el cliente", Toast.LENGTH_SHORT).show();
             }
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -812,7 +812,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
 
@@ -872,7 +872,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                 Toast.makeText(mainView.getContext(), "Se edito la cita correctamente", Toast.LENGTH_SHORT).show();
                 return true;
             }
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;

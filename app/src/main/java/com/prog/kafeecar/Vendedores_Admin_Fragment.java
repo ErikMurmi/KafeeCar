@@ -472,7 +472,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 Toast.makeText(mainView.getContext(), "Error 45: Búsqueda fallida de vendedor", Toast.LENGTH_SHORT).show();
             }
             return true;
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -720,7 +720,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "Error 48: Búsqueda fallida del vendedor", Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            }else if(vacios>0){
                 Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
