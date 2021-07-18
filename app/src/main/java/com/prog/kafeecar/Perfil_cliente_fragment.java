@@ -189,14 +189,12 @@ public class Perfil_cliente_fragment extends Fragment{
 
     public void editarCliente(){
         try {
-            boolean cambiar_clave = false;
             int c = 0;
 
             EditText nombre_pe_cli_etxt = mainview.findViewById(R.id.nombreEditCliente_etxt);
             String nombre_str = nombre_pe_cli_etxt.getText().toString();
 
             if(nombre_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
                 c++;
             }
 
@@ -204,11 +202,9 @@ public class Perfil_cliente_fragment extends Fragment{
             String anio_str = anio_pe_cli_etxt.getText().toString();
             int anio = Integer.parseInt(anio_str);
             if(anio_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if (anio < 1900 || anio > 2003) {
-                    Toast.makeText(mainview.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
                     anio_pe_cli_etxt.setText("");
                     c++;
                 }
@@ -218,11 +214,9 @@ public class Perfil_cliente_fragment extends Fragment{
             String mes_str = mes_pe_cli_etxt.getText().toString();
             int mes = Integer.parseInt(mes_str);
             if(mes_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if (mes < 1 || mes > 12) {
-                    Toast.makeText(mainview.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
                     mes_pe_cli_etxt.setText("");
                     c++;
                 }
@@ -232,11 +226,9 @@ public class Perfil_cliente_fragment extends Fragment{
             String dia_str = dia_pe_cli_etxt.getText().toString();
             int dia = Integer.parseInt(dia_str);
             if(dia_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
-                    Toast.makeText(mainview.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
                     dia_pe_cli_etxt.setText("");
                     c++;
                 }
@@ -245,7 +237,6 @@ public class Perfil_cliente_fragment extends Fragment{
             EditText cedula_pe_cli_etxt = mainview.findViewById(R.id.cedulaEditCliente_etxt);
             String cedula_str = cedula_pe_cli_etxt.getText().toString();
             if(cedula_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if(cedula_str.length()!=10){
@@ -257,7 +248,6 @@ public class Perfil_cliente_fragment extends Fragment{
             EditText telefono_pe_cli_etxt = mainview.findViewById(R.id.telefonoEditCliente_etxt);
             String telefono_str = telefono_pe_cli_etxt.getText().toString();
             if(telefono_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if (telefono_str.length() != 10) {
@@ -270,7 +260,6 @@ public class Perfil_cliente_fragment extends Fragment{
             EditText correo_pe_cli_etxt = mainview.findViewById(R.id.correoEditCliente_etxt);
             String correo_str = correo_pe_cli_etxt.getText().toString();
             if(correo_str.isEmpty()){
-                Toast.makeText(mainview.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
                 c++;
             }else{
                 if (!Patioventainterfaz.validarMail(correo_str)) {
@@ -323,6 +312,10 @@ public class Perfil_cliente_fragment extends Fragment{
                     irVerPerfilCliente();
                     verperfilCliente();
                 }
+            }
+            else
+            {
+                Toast.makeText(mainview.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e){

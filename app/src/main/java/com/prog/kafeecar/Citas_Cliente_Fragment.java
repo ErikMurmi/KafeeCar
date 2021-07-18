@@ -211,11 +211,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             }
         };
 
-
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-
-
-
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -229,6 +225,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         visualizarCita();
         aniadirCita.setVisibility(View.GONE);
     }
+
     public void irListaCitas(){
         modificarCita.setVisibility(View.GONE);
         cargar();
@@ -305,7 +302,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 c++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
             c++;
         }
 
@@ -321,6 +317,9 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 Toast.makeText(mainView.getContext(), "Se edito la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }
+        else{
+            Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -378,8 +377,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                     dias.showDropDown();
                     dias_mostrados = true;
                 }
-            }else{
-                Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -460,8 +457,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                     dias.showDropDown();
                     dias_mostrados = true;
                 }
-            }else{
-                Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -561,19 +556,15 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_cli_acv);
         AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_cli_acv);
         if(isEmpty(hora_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(dia_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(mes_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(anio_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if (!isEmpty(auto)) {
@@ -585,7 +576,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 c++;
             }
         } else {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Placa Vehiculo*", Toast.LENGTH_SHORT).show();
             c++;
         }
         String hora = String.valueOf(hora_nueva_cita);
@@ -603,6 +593,10 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 Toast.makeText(mainView.getContext(), "Se registro correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }
+        else
+        {
+            Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
         return false;
     }

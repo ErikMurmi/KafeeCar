@@ -208,19 +208,15 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_fav_cli_acv);
 
         if(isEmpty(hora_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(dia_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(mes_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(anio_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if (c == 0) {
@@ -236,6 +232,10 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 Toast.makeText(mainView.getContext(), "Se registro correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }
+        else
+        {
+            Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
