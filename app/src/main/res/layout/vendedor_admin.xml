@@ -489,7 +489,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocra"
                         android:text="Nombre: "
-                        android:textColor="#686363"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="19sp" />
 
                     <TextView
@@ -520,7 +520,7 @@
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Fecha de nacimiento: "
-                        android:textColor="#686363"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="19sp" />
 
                     <TextView
@@ -549,7 +549,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
                         android:text="Cédula:"
-                        android:textColor="#686363"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="19sp" />
 
                     <TextView
@@ -579,7 +579,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ocraext"
                         android:text="Teléfono:"
-                        android:textColor="#686363"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="19sp" />
 
                     <TextView
@@ -608,7 +608,7 @@
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/ocraext"
                         android:text="Correo:"
-                        android:textColor="#686363"
+                        android:textColor="@color/gris_visualizar"
                         android:textSize="19sp" />
 
                     <TextView
@@ -652,7 +652,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Entrada:"
-                            android:textColor="#686363"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="19sp" />
 
                         <TextView
@@ -682,7 +682,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Almuerzo:"
-                            android:textColor="#686363"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="19sp" />
 
                         <TextView
@@ -710,7 +710,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocraext"
                             android:text="Salida:"
-                            android:textColor="#686363"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="19sp" />
 
                         <TextView

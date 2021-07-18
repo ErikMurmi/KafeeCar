@@ -115,8 +115,9 @@ public class PatioVenta {
      * @param nuevo vehiculo a aniadir a la lista
      * @return true si se agrego el vehiculo, false en caso de que no.
      */
-    public void aniadirVehiculo(Vehiculo nuevo){
+    public boolean aniadirVehiculo(Vehiculo nuevo){
         vehiculos.add(nuevo);
+        return vehiculos.contiene(nuevo);
     }
 
     /**

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/v_admin"
@@ -995,7 +995,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/plantilla"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1038,6 +1038,7 @@
                             android:layout_height="35dp"
                             android:layout_marginBottom="@dimen/aniadir_auto_espacio"
                             android:background="@drawable/bordesmarcoscafegrisaceo"
+                            android:capitalize="characters"
                             android:hint="PBY-1234"
                             android:inputType="text"
                             android:textSize="17sp" />

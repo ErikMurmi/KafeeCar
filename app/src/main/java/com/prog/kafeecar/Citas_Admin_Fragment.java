@@ -125,7 +125,9 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
             msg.setMessage("¿Está seguro de salir sin guardar?");
-            msg.setPositiveButton("Si", (dialog, which) -> irListaCitas());
+            msg.setPositiveButton("Si", (dialog, which) -> {
+                irListaCitas();
+                Patioventainterfaz.CITA_CON_VEHICULO = false;});
             msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
             msg.show();
         });
@@ -276,6 +278,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         try {
                             irListaCitas();
+                            Patioventainterfaz.CITA_CON_VEHICULO = false;
                         } catch (Exception e) {
                             Toast.makeText(mainView.getContext(), "Error 26: No se pudo editar la cita", Toast.LENGTH_SHORT).show();
                         }
@@ -319,6 +322,13 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         cargar();
         return mainView;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Patioventainterfaz.CITA_CON_VEHICULO = false;
+    }
+
 
     public boolean registrarCliente(){
 
@@ -809,6 +819,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
                     vehiculo);
             patio.aniadirCita(nueva);
             if (patio.getCitas().contiene(nueva)) {
+                Patioventainterfaz.CITA_CON_VEHICULO = false;
                 Toast.makeText(mainView.getContext(), "Se edito correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
