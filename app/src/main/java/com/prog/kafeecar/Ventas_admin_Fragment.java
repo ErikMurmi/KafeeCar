@@ -122,9 +122,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         LinearLayout aniadir_cliente_vt_ad_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_ad_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
-        //todo on back
-        //todo cambiar campos vacios
-        //todo on back floating action buttton
         administrar_venta_aniadirventa_btn.setOnClickListener(view -> {
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
