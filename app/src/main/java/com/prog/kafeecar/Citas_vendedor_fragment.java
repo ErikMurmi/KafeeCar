@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -42,7 +43,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
-    public EditText placa_ci_vn_etxt;
+    public AutoCompleteTextView placa_ci_vn_etxt;
     Cita cita_mostrar;
     String fecha_nueva_cita;
     private View mainView;
@@ -88,8 +89,8 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
         Button reg_list_ci_vn_btn = mainView.findViewById(R.id.reg_list_ci_vn_btn);
-        Button add_cliente_ci_vn_btn = mainView.findViewById(R.id.add_cliente_ci_vn_btn);
-        Button ed_add_cliente_ci_vn_btn = mainView.findViewById(R.id.ed_add_cliente_ci_vn_btn);
+        ImageButton add_cliente_ci_vn_btn = mainView.findViewById(R.id.add_cliente_ci_vn_btn);
+        ImageButton ed_add_cliente_ci_vn_btn = mainView.findViewById(R.id.ed_add_cliente_ci_vn_btn);
 
         TextView cedula_vendedor_ci_vn_etxt = mainView.findViewById(R.id.cedula_vendedor_ci_vn_etxt);
         TextView ed_cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_vn_etxt);
