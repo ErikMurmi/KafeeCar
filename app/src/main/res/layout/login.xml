@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login"
+        android:background="@drawable/login_2"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/datos"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="22dp"
             android:gravity="bottom|center_horizontal"
             android:orientation="vertical"
@@ -36,10 +36,11 @@
             <EditText
                 android:id="@+id/email_etxt"
                 style="@style/entradas_txt"
+                android:layout_height="40dp"
+                android:background="@drawable/bordesmarcoscafegrisaceo"
                 android:fontFamily="@font/ocra"
-                android:hint="correo"
-                android:inputType="textEmailAddress"
-                tools:text="example@gmail.com" />
+                android:hint="example@gmail.com"
+                android:inputType="textEmailAddress" />
 
             <Space
                 android:layout_width="match_parent"
@@ -59,10 +60,12 @@
                 android:id="@+id/clave_etxt"
                 style="@style/entradas_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="0"
+                android:background="@drawable/bordesmarcoscafegrisaceo"
                 android:ems="10"
                 android:fontFamily="@font/ocra"
+                android:hint="Min 8 caráteres"
                 android:inputType="textPassword"
                 android:padding="8dp" />
 
@@ -80,11 +83,11 @@
                 android:padding="5dp"
                 android:text="@string/login"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="19sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="88dp" />
+                android:layout_height="80dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

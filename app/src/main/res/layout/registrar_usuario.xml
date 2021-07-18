@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical"
                 android:paddingLeft="28dp">
 
@@ -137,6 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <EditText
@@ -167,7 +168,7 @@
 
                     <EditText
                         android:id="@+id/reg_anio_us_etxt"
-                        android:layout_width="127dp"
+                        android:layout_width="102dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="4"
@@ -274,6 +275,30 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/regresar_reg_us_btn"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado"
+                        android:backgroundTint="@color/black"
+                        android:fontFamily="@font/valorant"
+                        android:gravity="center"
+                        android:insetLeft="5dp"
+                        android:insetTop="5dp"
+                        android:insetRight="5dp"
+                        android:insetBottom="5dp"
+                        android:text="Regresar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        app:cornerRadius="50dp"
+                        app:iconTint="#FF5722"
+                        app:rippleColor="#FF5722"
+                        app:strokeColor="#FF5722" />
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
                         android:id="@+id/reg_listo_us_btn"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
@@ -288,11 +313,12 @@
                         android:onClick="aniadirCliente"
                         android:text="Listo"
                         android:textColor="#FFFFFF"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         app:cornerRadius="50dp"
                         app:iconTint="#FF5722"
                         app:rippleColor="#FF5722"
                         app:strokeColor="#FF5722" />
+
                 </LinearLayout>
 
                 <Space

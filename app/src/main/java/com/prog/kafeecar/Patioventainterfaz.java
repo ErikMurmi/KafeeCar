@@ -58,7 +58,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Login normal
-        //setContentView(R.layout.login);
+        //
 
         // Login de pruebas
         patioventa = new PatioVenta();
@@ -69,12 +69,14 @@ public class Patioventainterfaz extends AppCompatActivity {
             Toast.makeText(Patioventainterfaz.this, "Error 301: Datos no quemados", Toast.LENGTH_SHORT).show();
         }
 
+        //Primera vez que se inicia la aplicacion se registra un administrador
         if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
             Button reg_list = findViewById(R.id.reg_list_btn);
             reg_list.setOnClickListener(v -> registrarAdministrador());
         }
+        setContentView(R.layout.login);
     }
 
     public static void cargarDatos() throws Exception {
@@ -141,6 +143,9 @@ public class Patioventainterfaz extends AppCompatActivity {
         temp.aniadirFavorito((((Vehiculo) patioventa.getVehiculos().getPos(1)).getPlaca()));
     }
 
+    private void irLogin(View v){
+        setContentView(R.layout.login);
+    }
     private void irAplicacion(String tipo) {
         Window w = getWindow();
         w.setStatusBarColor(0);
@@ -348,7 +353,9 @@ public class Patioventainterfaz extends AppCompatActivity {
 
     public void irRegistarse(View view) {
         setContentView(R.layout.registrar_usuario);
+        reg_img = findViewById(R.id.reg_imagen_us_img);
     }
+
 
     public void aniadirCliente(View v) {
         EditText textonombre;
