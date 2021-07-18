@@ -54,11 +54,10 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private boolean anios_mostrados = false;
     public boolean add_cliente_ed = false;
     public boolean add_cliente_an = false;
-    private int posicion_hora = -1;
+    private int hora_nueva_cita = -1;
     private int posicion_mes = -1;
     private int posicion_anio = -1;
     private int posicion_dia = -1;
-    private int hora_nueva_cita = -1;
     private SearchView busqueda_citas;
     private LinearLayout aniadir_ci_vn_lyt;
     private LinearLayout citas_vendedor_lyt;
@@ -67,6 +66,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
     private LinearLayout aniadir_cliente_ci_vn_lyt;
     private Adaptador_Lista_Citas adptadorlistaview;
     private FloatingActionButton ir_aniadir_ci_vn_btn;
+    private Button editar_ci_vn_btn;
 
     @SuppressLint("CutPasteId")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         Button guardar_ci_vn_btn = mainView.findViewById(R.id.guardar_ci_vn_btn);
         Button descartar_ci_vn_btn = mainView.findViewById(R.id.descartar_ci_vn_btn);
         Button anular_ci_vn_btn = mainView.findViewById(R.id.anular_ci_vn_btn);
-        Button editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
+        editar_ci_vn_btn = mainView.findViewById(R.id.editar_ci_vn_btn);
         Button ed_guardar_ci_vn_btn = mainView.findViewById(R.id.ed_guardar_ci_vn_btn);
         Button ed_descartar_ci_vn_btn = mainView.findViewById(R.id.ed_descartar_ci_vn_btn);
         Button reg_list_ci_vn_btn = mainView.findViewById(R.id.reg_list_ci_vn_btn);
@@ -255,7 +255,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
             msg.setMessage("¿Estás seguro de registrar un cliente con estos datos?");
             msg.setPositiveButton("Aceptar", (dialog, which) -> {
                 if(registrarCliente()){
-                    ir_aniadir_ci_vn_btn.callOnClick();
+                    Toast.makeText(mainView.getContext(), "Se registro el cliente", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(mainView.getContext(), "Error 131: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
                 }
@@ -676,11 +676,18 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
                     if(add_cliente_an){
-                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_ci_vn_actv);
-                        cliente_ed.setText(cedula_str);
-                    }else if(add_cliente_ed){
-                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_ci_vn_actv);
+                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.cedula_cliente_ci_vn_actv);
                         cliente_an.setText(cedula_str);
+                        ir_aniadir_ci_vn_btn.setVisibility(View.GONE);
+                        citas_vendedor_lyt.setVisibility(View.GONE);
+                        editar_ci_vn_lyt.setVisibility(View.GONE);
+                        ver_ci_vn_lyt.setVisibility(View.GONE);
+                        aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
+                        adaptadorAniadir();
+                    }else if(add_cliente_ed){
+                        editar_ci_vn_btn.callOnClick();
+                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_ci_vn_actv);
+                        cliente_ed.setText(cedula_str);
                     }
                     Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     return true;
@@ -718,7 +725,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         }
         posicion_dia = Integer.parseInt(dia_str);
         posicion_mes = Integer.parseInt(mes_str) - 1;
-        posicion_hora = cita_mostrar.getHora();
+        hora_nueva_cita = cita_mostrar.getHora();
 
         dias.setText(dia_str);
         mes.setText(Patioventainterfaz.meses[posicion_mes]);
@@ -826,7 +833,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         if (vacios == 0 && invalidos ==0) {
             cita_mostrar.actualizarVen(
                     fecha,
-                    posicion_hora,
+                    hora_nueva_cita,
                     vehiculo,
                     usuarioActual,
                     cliente_c,
@@ -907,7 +914,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         if (vacios == 0 && invalidos == 0) {
             Cita nueva = new Cita(
                     fecha,
-                    posicion_hora,
+                    hora_nueva_cita,
                     resolucion_str,
                     cliente_c,
                     usuarioActual,
