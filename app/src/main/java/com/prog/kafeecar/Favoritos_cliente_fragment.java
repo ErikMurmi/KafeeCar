@@ -33,7 +33,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,6 +94,23 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                if (agenCitaNueva.getVisibility() == View.VISIBLE){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("Guardar");
+                    msg.setMessage("¿Está seguro de cancelar el registro de la cita?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            vistaVehiculo.setVisibility(View.VISIBLE);
+                            visualizarVehiculoF();
+                            verCatalogofav.setVisibility(View.GONE);
+                            agenCitaNueva.setVisibility(View.GONE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
                 }
             }
         };
@@ -182,10 +198,22 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
     }
     public void irCatalogo() throws Exception {
         vistaVehiculo.setVisibility(View.GONE);
+        agenCitaNueva.setVisibility(View.GONE);
         //Activar el diseño deseado
-        mainView.setVisibility(View.VISIBLE);
+        verCatalogofav.setVisibility(View.VISIBLE);
         cargar();
     }
+    public void irVistaVehiculo() {
+        try {
+            vistaVehiculo.setVisibility(View.VISIBLE);
+            visualizarVehiculoF();
+            verCatalogofav.setVisibility(View.GONE);
+            agenCitaNueva.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void mostraragendamiento(){
         TextView cedulaclien = mainView.findViewById(R.id.cedula_cliente_fav_ci_cli_actv);
