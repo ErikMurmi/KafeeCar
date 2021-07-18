@@ -159,7 +159,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-
                 if (vistaVehiculo.getVisibility() == View.VISIBLE) {
                     irCatalogo();
                 }
