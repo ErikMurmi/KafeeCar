@@ -14,12 +14,12 @@
         android:background="@drawable/anadircita"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/top_space">
+            android:layout_marginTop="120dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,9 +31,9 @@
 
                 <ImageView
                     android:id="@+id/Carro_ci_v_img"
-                    android:layout_width="235dp"
-                    android:layout_height="115dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="30dp"
                     app:srcCompat="@drawable/ic_car_dark" />
 
                 <LinearLayout
@@ -311,7 +311,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:id="@+id/vehiculos_cliente_CV_lyt"
