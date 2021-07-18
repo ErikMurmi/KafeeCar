@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -163,6 +161,20 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 if (vistaVehiculo.getVisibility() == View.VISIBLE) {
                     irCatalogo();
                 }
+                if (irCitaNueva.getVisibility()==View.VISIBLE){
+                    AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
+                    msg.setTitle("DESCARTAR");
+                    msg.setMessage("¿Está seguro de salir sin guardar?");
+                    msg.setPositiveButton("Si", (dialog, which) -> {
+                        try {
+                            visualizarVehiculo();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                    msg.show();
+                }
             }
         };
 
@@ -193,6 +205,13 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         //Activar el diseño deseado
         verCatalogo.setVisibility(View.VISIBLE);
 
+    }
+    public void irVistaVehiculo(){
+        vistaVehiculo.setVisibility(View.VISIBLE);
+        irCitaNueva.setVisibility(View.GONE);
+        //Activar el diseño deseado
+        verCatalogo.setVisibility(View.GONE);
+        visualizarVehiculo();
     }
 
     public void modificarFavorito() {
