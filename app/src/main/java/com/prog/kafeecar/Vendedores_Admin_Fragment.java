@@ -220,7 +220,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                     AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
-                    msg.setPositiveButton("Si", (dialog, which) -> visualizarVendedor());
+                    msg.setPositiveButton("Si", (dialog, which) -> regresarPantallaPrncipal());
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
