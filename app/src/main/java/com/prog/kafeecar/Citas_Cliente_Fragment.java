@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -193,11 +194,41 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             visualizarEditable();
         });
 
+        //Metodo para el control del boton atras
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (verCita.getVisibility() == View.VISIBLE) {
+                    irListaCitas();
+                }
+                if (modificarCita.getVisibility() == View.VISIBLE) {
+                    volvercita();
+                }
+                if (aniadirCita.getVisibility() == View.VISIBLE) {
+                   irListaCitas();
+                }
+
+            }
+        };
+
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+
+
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
     }
 
+    public void volvercita(){
+        modificarCita.setVisibility(View.GONE);
+        verCitaLista.setVisibility(View.GONE);
+        irAniadirCita.setVisibility(View.GONE);
+        verCita.setVisibility(View.VISIBLE);
+        visualizarCita();
+        aniadirCita.setVisibility(View.GONE);
+    }
     public void irListaCitas(){
         modificarCita.setVisibility(View.GONE);
         cargar();
