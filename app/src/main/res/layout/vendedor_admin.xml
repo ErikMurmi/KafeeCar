@@ -432,7 +432,7 @@
         android:background="@drawable/visualizarvendedor"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/imagen_perfil_vendedor_img"
@@ -775,7 +775,7 @@
         android:background="@drawable/registrarvendedores"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -785,7 +785,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical"
                 android:paddingLeft="28dp">
 
@@ -834,7 +834,9 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName" />
+                    android:hint="Martha"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/padding_texto" />
 
                 <TextView
                     android:id="@+id/apellidoVendedor_txt"
@@ -855,7 +857,9 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
-                    android:inputType="textPersonName" />
+                    android:hint="Perez"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/padding_texto" />
 
                 <TextView
                     android:id="@+id/cedulaVendedor_txt"
@@ -876,8 +880,10 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
+                    android:hint="1234567890"
                     android:inputType="numberSigned"
-                    android:textColor="#959898" />
+                    android:paddingStart="@dimen/padding_texto"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/fechaNacimientoVendedor_txt"
@@ -895,6 +901,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
@@ -905,8 +912,10 @@
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
+                        android:hint="dd"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/mesNacimientoVendedor_etxt"
@@ -916,18 +925,21 @@
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
+                        android:hint="mm"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/anioNacimientoVendedor_etxt"
-                        android:layout_width="127dp"
+                        android:layout_width="102dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
-                        android:ems="410"
                         android:fontFamily="@font/ocra"
+                        android:hint="aaaa"
                         android:inputType="date"
-                        android:textColor="@color/gris" />
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -949,8 +961,10 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
+                    android:hint="0987654231"
                     android:inputType="numberSigned"
-                    android:textColor="#959898" />
+                    android:paddingStart="@dimen/padding_texto"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/correoVendedor_txt"
@@ -971,8 +985,10 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
+                    android:hint="ejemplo@gmail.com"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/gris" />
+                    android:paddingStart="@dimen/padding_texto"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/contraseniaVendedor_txt"
@@ -993,8 +1009,10 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
+                    android:hint="Min 8 caracteres"
                     android:inputType="textPassword"
-                    android:textColor="@color/gris" />
+                    android:paddingStart="@dimen/padding_texto"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/confirmarContraseniaVendedor_txt"
@@ -1015,8 +1033,10 @@
                     android:background="@drawable/bordesmarcoscafegrisaceo"
                     android:ems="10"
                     android:fontFamily="@font/ocra"
+                    android:hint="Repetir clave"
                     android:inputType="textPassword"
-                    android:textColor="@color/gris" />
+                    android:paddingStart="@dimen/padding_texto"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/horario_txt"
@@ -1093,7 +1113,10 @@
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:hint="8"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/horaAlmuerzoVendedor_etxt"
@@ -1105,7 +1128,10 @@
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:hint="12"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/horaSalidaVendedor_etxt"
@@ -1116,7 +1142,10 @@
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:ems="10"
                         android:fontFamily="@font/ocra"
-                        android:inputType="number" />
+                        android:hint="17"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -1127,9 +1156,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="@dimen/barra_separacion"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <Button

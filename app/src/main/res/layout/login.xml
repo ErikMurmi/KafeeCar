@@ -6,119 +6,123 @@
     android:layout_height="match_parent"
     tools:context=".Patioventainterfaz">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/login_2"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/datos"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="22dp"
-            android:gravity="bottom|center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="340dp">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="9dp"
-                android:fontFamily="@font/ocra"
-                android:text="@string/correo"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/email_etxt"
-                style="@style/entradas_txt"
-                android:layout_height="40dp"
-                android:background="@drawable/bordesmarcoscafegrisaceo"
-                android:fontFamily="@font/ocra"
-                android:hint="example@gmail.com"
-                android:inputType="textEmailAddress" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="9dp"
-                android:fontFamily="@font/ocra"
-                android:text="@string/Contrasenia"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/clave_etxt"
-                style="@style/entradas_txt"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/bordesmarcoscafegrisaceo"
-                android:ems="10"
-                android:fontFamily="@font/ocra"
-                android:hint="Min 8 caráteres"
-                android:inputType="textPassword"
-                android:padding="8dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round_btn"
-                android:fontFamily="@font/valorant"
-                android:onClick="logIn"
-                android:padding="5dp"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="19sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="80dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_2"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/datos"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_margin="22dp"
+                android:gravity="bottom|center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="340dp">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
                     android:fontFamily="@font/ocra"
-                    android:text="@string/mensaje_registro"
+                    android:text="@string/correo"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/email_etxt"
+                    style="@style/entradas_txt"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:fontFamily="@font/ocra"
+                    android:hint="example@gmail.com"
+                    android:inputType="textEmailAddress" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
 
                 <TextView
-                    android:id="@+id/resgistrar_txt"
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    android:fontFamily="@font/ocra"
+                    android:text="@string/Contrasenia"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/clave_etxt"
+                    style="@style/entradas_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/bordesmarcoscafegrisaceo"
+                    android:ems="10"
+                    android:fontFamily="@font/ocra"
+                    android:hint="Min 8 caráteres"
+                    android:inputType="textPassword"
+                    android:padding="8dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_btn"
+                    android:fontFamily="@font/valorant"
+                    android:onClick="logIn"
+                    android:padding="5dp"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:fontFamily="@font/ocra"
-                    android:onClick="irRegistarse"
-                    android:paddingStart="7dp"
-                    android:text="@string/registrate"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ocra"
+                        android:text="@string/mensaje_registro"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/resgistrar_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:fontFamily="@font/ocra"
+                        android:onClick="irRegistarse"
+                        android:paddingStart="7dp"
+                        android:text="@string/registrate"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

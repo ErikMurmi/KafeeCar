@@ -9,4 +9,5 @@
     <dimen name="titulos_top">15dp</dimen>
     <dimen name="barra_separacion">20dp</dimen>
     <dimen name="aniadir_auto_espacio">8dp</dimen>
+    <dimen name="padding_texto">20dp</dimen>
 </resources>

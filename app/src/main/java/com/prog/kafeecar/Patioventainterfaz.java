@@ -100,15 +100,15 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVehiculo(new Vehiculo("HPO-2517", "JD8382", "Chevrolet", "DMAX Optima", "Gris", "Camioneta una cavina", 14500, 16500, 16000, true, 2013, "HPO-2517.jpg"));
         patioventa.aniadirVehiculo(new Vehiculo("SGD-0916", "D3828E", "Hyundai", "HD270", "Blanca", "Volqueta para trabajo", 40000, 42000, 41500, true, 2011, "SGD-0916.jpg"));
 
-        Vendedor admin = new Vendedor("1721053207.jpg", 8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave", sdf.parse("05-06-2003"));
+        Vendedor admin = new Vendedor("1721053207.jpg", 8, 17, 13, patioventa, "Juan Jácome", "1721053207", "0987654321", "juanj@gmail.com", "clave123", sdf.parse("05-06-2003"));
         //patioventa.aniadirUsuario(new Vendedor("1721053207.jpg",8, 17, 13, patioventa, "Juan Jácome", "1721053207", "1721053207", "juanj@gmail.com", "clave", sdf.parse("05-06-2006")), "Vendedor");
         patioventa.aniadirUsuario(admin, "Administrador");
         patioventa.aniadirUsuario((new Vendedor("1732221032.jpg", 8, 17, 13, patioventa, "Elizabeth Perez", "1732221032", "1721053207", "eli.perez@gmail.com", "Spe123", sdf.parse("09-05-2000"))), "Vendedor");
-        patioventa.aniadirUsuario((new Vendedor("1721835213.jpg", 8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david_m@gmail.com", "DM12pc", sdf.parse("19-02-2001"))), "Vendedor");
+        patioventa.aniadirUsuario((new Vendedor("1721835213.jpg", 8, 17, 13, patioventa, "David Montalvo", "1721835213", "1721053207", "david.m@gmail.com", "david123", sdf.parse("19-02-2001"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("1928364726.jpg", 8, 17, 13, patioventa, "Luiz Velasquez", "1928364726", "1721053207", "luisvelasquesz@outlook.es", "super1015", sdf.parse("12-01-1990"))), "Vendedor");
         patioventa.aniadirUsuario((new Vendedor("0923837273.jpg", 8, 17, 13, patioventa, "Jessica Alvarez", "1721053207", "0923837273", "jessyesperanza@gmail.com", "0912jessy", sdf.parse("08-4-2001"))), "Vendedor");
         patioventa.aniadirUsuario(new Cliente("Daniel", "1750140489", "0999548928", "daniel@gmail.com", "1207", sdf.parse("08-4-2001"), "175014048.jpg"), "Cliente");
-        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115623.jpg"), "Cliente");
+        patioventa.aniadirUsuario(new Cliente("Erik", "1750115623", "0999548928", "erik@gmail.com", "kafeecar", sdf.parse("08-4-2001"), "1750115623.jpg"), "Cliente");
         patioventa.aniadirUsuario(new Cliente("Diana","1750115233", "0995648998", "diana@gmail.com", "1207", sdf.parse("08-4-2001"), "1750115233.jpg"), "Cliente");
         Cliente c = (Cliente) patioventa.getClientes().getPos(1);
         //c.aniadirFavorito("IPO-1963");
@@ -498,7 +498,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             try {
                 fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             } catch (ParseException e) {
-                e.printStackTrace();
+                Toast.makeText(Patioventainterfaz.this, "Error 304: Fallo al obtener la fecha", Toast.LENGTH_SHORT).show();
             }
             StorageReference filePath = mStorageRef.child("Clientes").child(cedula_str + ".jpg");
             filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
@@ -509,16 +509,18 @@ public class Patioventainterfaz extends AppCompatActivity {
                 if(cliente_comprobacion== null){
                     Cliente cliente = new Cliente(nombre_Completo, cedula_str, telefono_str, correo_str, clave_str, fecha, cedula_str + ".jpg");
                     if(patioventa.aniadirUsuario(cliente, "Cliente")){
+                        usuarioActual = cliente;
                         Toast.makeText(Patioventainterfaz.this, "Se aniadio el cliente correctamente", Toast.LENGTH_SHORT).show();
                         irAplicacion("CLIENTE");
                     }
                 }else{
                     cliente_comprobacion.cambiarDatos(nombre_Completo,cedula_str,telefono_str,correo_str,clave_str,getFechaMod(fecha));
                     cliente_comprobacion.setImagen(cedula_str + ".jpg");
+                    usuarioActual = cliente_comprobacion;
                     irAplicacion("CLIENTE");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(Patioventainterfaz.this, "Error 305: Búsqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(Patioventainterfaz.this, "Existen campos vacíos", Toast.LENGTH_SHORT).show();
@@ -713,7 +715,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             try {
                 fecha = sdf.parse(dia_str + "-" + mes_str + "-" + anio_str);
             } catch (ParseException e) {
-                e.printStackTrace();
+                Toast.makeText(Patioventainterfaz.this, "Error 306: Fallo al obtener la fecha", Toast.LENGTH_SHORT).show();
             }
             StorageReference filePath = mStorageRef.child("Vendedores").child(cedulaAdmin_str + ".jpg");
             filePath.putFile(foto).addOnSuccessListener(taskSnapshot ->
@@ -737,7 +739,7 @@ public class Patioventainterfaz extends AppCompatActivity {
                 irAplicacion("ADMIN");
                 Toast.makeText(Patioventainterfaz.this, "Administrador registrado correctamente", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(Patioventainterfaz.this, "Error 304: No se pudo completar el registro (Administrador)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Patioventainterfaz.this, "Error 307: No se pudo completar el registro (Administrador)", Toast.LENGTH_SHORT).show();
             }
 
         }else{
@@ -800,10 +802,6 @@ public class Patioventainterfaz extends AppCompatActivity {
         msg.setTitle("LOG OUT");
         msg.setPositiveButton("Aceptar", (dialog, which) -> {
             usuarioActual = null;
-            /*Window w = getWindow();
-            w.setStatusBarColor(getColor(R.color.botones));
-            w.getDecorView().setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            setContentView(R.layout.login_sinclaves);*/
             setContentView(R.layout.login);
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());

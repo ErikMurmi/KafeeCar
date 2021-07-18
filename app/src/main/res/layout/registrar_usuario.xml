@@ -13,6 +13,18 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/monglos"
+            android:paddingBottom="@dimen/espacios"
+            android:text="Registro de Usuario"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="27sp" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -23,18 +35,6 @@
                 android:layout_marginRight="20dp"
                 android:orientation="vertical"
                 android:paddingLeft="28dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/monglos"
-                    android:paddingBottom="@dimen/espacios"
-                    android:text="Registro de Usuario"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/textView48"

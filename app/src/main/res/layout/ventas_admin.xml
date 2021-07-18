@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:foregroundTint="@color/black">
 
     <LinearLayout
         android:id="@+id/editar_vt_ad_lyt"
@@ -1410,7 +1411,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
                     android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/ic_car_dark" />
+                    android:backgroundTint="@color/black"
+                    app:srcCompat="@drawable/ic_round_directions_car_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
