@@ -91,6 +91,11 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
                 if (vistaVehiculo.getVisibility() == View.VISIBLE) {
                     try {
                         irCatalogo();
+                        try {
+                            cargar();
+                        } catch (Exception e) {
+                            Toast.makeText(mainView.getContext(), "Error 236: no se cargo los datos", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (Exception e) {
                         Toast.makeText(mainView.getContext(), "Error 226: No se pudo abrir los favoritos ", Toast.LENGTH_SHORT).show();
                     }
@@ -176,6 +181,12 @@ public class Favoritos_cliente_fragment extends Fragment implements Adaptador_Li
         favoritoBoton.setOnClickListener(v ->{
             clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
+            try {
+                cargar();
+            } catch (Exception e) {
+                Toast.makeText(mainView.getContext(), "Error 235: no se cargo los datos", Toast.LENGTH_SHORT).show();
+            }
+            Toast.makeText(mainView.getContext(), "Se quito de la lista de favoritos", Toast.LENGTH_SHORT).show();
         });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);

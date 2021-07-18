@@ -123,7 +123,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
             msg.show();
         });
 
-        favoritoBoton.setOnClickListener(v -> modificarFavorito());
+        favoritoBoton.setOnClickListener(v -> {
+            modificarFavorito();
+        });
 
         agendarcita.setOnClickListener(v -> {
             try {
@@ -212,9 +214,11 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         if (clienteActual.esFavorito(vMostrar.getPlaca())) {
             clienteActual.getFavoritos().eliminar(vMostrar.getPlaca());
             favoritoBoton.setBackgroundResource(R.drawable.favoritos_icono);
+            Toast.makeText(mainView.getContext(), "Se elimino favorito", Toast.LENGTH_SHORT).show();
         } else {
             clienteActual.getFavoritos().add(vMostrar.getPlaca());
             favoritoBoton.setBackground(estrelladorada);
+            Toast.makeText(mainView.getContext(), "Se agrego a la lista de favoritos", Toast.LENGTH_SHORT).show();
         }
     }
 
