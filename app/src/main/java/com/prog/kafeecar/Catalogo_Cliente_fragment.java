@@ -206,13 +206,6 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         verCatalogo.setVisibility(View.VISIBLE);
 
     }
-    public void irVistaVehiculo(){
-        vistaVehiculo.setVisibility(View.VISIBLE);
-        irCitaNueva.setVisibility(View.GONE);
-        //Activar el diseño deseado
-        verCatalogo.setVisibility(View.GONE);
-        visualizarVehiculo();
-    }
 
     public void modificarFavorito() {
 
