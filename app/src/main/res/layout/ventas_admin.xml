@@ -391,7 +391,7 @@
         android:background="@drawable/plantilla"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -422,7 +422,6 @@
                     android:layout_marginBottom="15dp"
                     android:backgroundTint="#00FFFFFF"
                     android:fitsSystemWindows="true"
-                    android:onClick="botonImagenPerfilVendedor"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/perfil_icono" />
 
@@ -633,7 +632,7 @@
         android:background="@drawable/consultar_estadisticas_generales"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
