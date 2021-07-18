@@ -480,7 +480,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/imageView9"
@@ -560,7 +560,7 @@
         android:background="@drawable/cita_individual_editar"
         android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -682,13 +682,6 @@
                         android:scaleType="centerCrop"
                         android:visibility="visible"
                         tools:visibility="visible" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:visibility="gone"
-                        tools:srcCompat="@tools:sample/avatars" />
 
                 </LinearLayout>
 
@@ -1035,7 +1028,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/placa_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1055,7 +1048,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/matricula_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1077,7 +1070,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/anio"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1118,7 +1111,7 @@
                     android:layout_marginTop="@dimen/aniadir_auto_espacio"
                     android:fontFamily="@font/ocra"
                     android:text="@string/descripcion_c"
-                    android:textColor="#000000"
+                    android:textColor="@color/gris_visualizar"
                     android:textSize="16sp" />
 
                 <EditText
@@ -1152,7 +1145,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/marca_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1177,7 +1170,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/ocra"
                                 android:text="@string/color_c"
-                                android:textColor="#000000"
+                                android:textColor="@color/gris_visualizar"
                                 android:textSize="16sp" />
 
                             <EditText
@@ -1211,7 +1204,7 @@
                             android:layout_gravity="start"
                             android:fontFamily="@font/ocra"
                             android:text="@string/modelo_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1265,7 +1258,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/inicial_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1300,7 +1293,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/venta_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText
@@ -1335,7 +1328,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ocra"
                             android:text="@string/promocion_c"
-                            android:textColor="#000000"
+                            android:textColor="@color/gris_visualizar"
                             android:textSize="16sp" />
 
                         <EditText

@@ -493,6 +493,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
 
     public boolean editarVenta() throws Exception {
         Cliente cliente_c = null;
+        //todo cambiar a vacios e invalidos
         int c = 0;
 
         AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
@@ -748,7 +749,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             } catch (Exception e) {
                 Toast.makeText(mainView.getContext(), "Error 66: No se pudo registrar el cliente", Toast.LENGTH_SHORT).show();
             }
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
