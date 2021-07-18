@@ -1,6 +1,5 @@
 package com.prog.kafeecar;
 
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
@@ -49,16 +48,11 @@ import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
 
 public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_Cliente_Cita.RecyclerItemClick, SearchView.OnQueryTextListener {
-    private String TAG = "Citas_Cliete";
     private View mainView;
-    private String horascita[]=new String[]{"8","9","10","11","12","13","14","15","16"};
+    private final String[] horascita =new String[]{"8","9","10","11","12","13","14","15","16"};
 
     private FloatingActionButton irAniadirCita;
-    private Button descartarnuevacita;
-    private Button guardarcambios;
-    private Button guardarcita;
     private Cita cita_mostrar;
-
 
     private boolean horas_mostradas = false;
     private boolean mes_mostrados = false;
@@ -72,27 +66,20 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
     String fecha_nueva_cita;
 
-
-
     private LinearLayout aniadirCita;
     private LinearLayout verCitaLista;
     private LinearLayout verCita;
     private LinearLayout modificarCita;
 
     private PatioVenta patio;
-    private Vehiculo vMostrar;
-
-
-    private RecyclerView listaview;
 
     private SearchView busqueda_citas;
     private Adaptador_Lista_Cliente_Cita adptadorlistaview;
 
-    private SimpleDateFormat sdf = Patioventainterfaz.sdf;
+    private final SimpleDateFormat sdf = Patioventainterfaz.sdf;
 
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private final Cliente cliente_actual = (Cliente) Patioventainterfaz.usuarioActual;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.citas_cliente, container, false);
@@ -103,17 +90,13 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         modificarCita = mainView.findViewById(R.id.ed_cita_cli_lyt);
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_cli_srv);
 
-
         irAniadirCita = mainView.findViewById(R.id.ir_aniadir_cita_cli_fbtn);
-
-
         //Botones
-        descartarnuevacita = mainView.findViewById(R.id.descartar_ci_cli_btn);
-        guardarcambios = mainView.findViewById(R.id.ed_guardar_ci_cli_btn);
-        guardarcita = mainView.findViewById(R.id.guardar_ci_cli_btn);
+        Button descartarnuevacita = mainView.findViewById(R.id.descartar_ci_cli_btn);
+        Button guardarcambios = mainView.findViewById(R.id.ed_guardar_ci_cli_btn);
+        Button guardarcita = mainView.findViewById(R.id.guardar_ci_cli_btn);
         Button anular = mainView.findViewById(R.id.anular_ci_cli_btn);
         Button irVerEditable = mainView.findViewById(R.id.editar_ci_cli_btn);
-
 
         listasDesplegableAniadir();
 
@@ -152,7 +135,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             msg.show();
         });
 
-
         descartarnuevacita.setOnClickListener(v ->{
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("DESCARTAR");
@@ -184,7 +166,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             aniadirCita.setVisibility(View.VISIBLE);
         });
 
-
         anular.setOnClickListener(v -> {
             AlertDialog.Builder msg = new AlertDialog.Builder(mainView.getContext());
             msg.setTitle("ANULAR");
@@ -210,7 +191,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             visualizarEditable();
         });
 
-
         busqueda_citas.setOnQueryTextListener(this);
         cargar();
         return mainView;
@@ -223,10 +203,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         irAniadirCita.setVisibility(View.VISIBLE);
         verCita.setVisibility(View.GONE);
         aniadirCita.setVisibility(View.GONE);
-
     }
-
-
 
     public void visualizarEditable(){
 
@@ -277,7 +254,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     }
 
     public boolean editarCita() throws Exception {
-        Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int c = 0;
 
@@ -382,21 +358,15 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 horas.dismissDropDown();
                 horas_mostradas =false;
             }else{
-                try {
                     fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-                    Date fecha = sdf.parse(fecha_nueva_cita);
                     ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
                     horas.setAdapter(adapt);
                     horas.showDropDown();
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
                     horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
-
 
     public void adaptadorAniadir(){
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
@@ -470,48 +440,31 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 horas.dismissDropDown();
                 horas_mostradas =false;
             }else{
-                try {
                     fecha_nueva_cita = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-                    Date fecha = sdf.parse(fecha_nueva_cita);
                     ArrayAdapter<String> adapt = new ArrayAdapter<>(mainView.getContext(), R.layout.dropdown_menu_items,horascita);
                     horas.setAdapter(adapt);
                     horas.showDropDown();
                     horas.setOnItemClickListener((parent, view, position, id) -> setHora_nueva_cita(Integer.parseInt(adapt.getItem(position))));
                     horas_mostradas = true;
-                } catch (ParseException e) {
-                    Toast.makeText(mainView.getContext(), "Campos de fecha vacios", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
 
 
     public void adaptadorEditar(){
-        //AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_ci_cli_actv);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
-        //cliente.setAdapter(adapter);
-
-        //TextView cedula_vendedor_ci_cli_txt = mainView.findViewById(R.id.ed_cedula_vendedor_ci_cli_etxt);
-        //cedula_vendedor_ci_cli_txt.setText();
-
         AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_ci_cli_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
         auto.setAdapter(adapterPla);
     }
 
-
-
-
-
     public void cargar()  {
-        listaview= mainView.findViewById(R.id.listacitas_rv);
+        RecyclerView listaview = mainView.findViewById(R.id.listacitas_rv);
         RecyclerView.LayoutManager manager=new LinearLayoutManager(mainView.getContext());
         listaview.setLayoutManager(manager);
         listaview.setItemAnimator(new DefaultItemAnimator());
         adptadorlistaview=new Adaptador_Lista_Cliente_Cita( patio.buscarCitas(cliente_actual).copiar(),this);
         listaview.setAdapter(adptadorlistaview);
     }
-
 
     @SuppressLint("SetTextI18n")
     public void visualizarCita() {
@@ -557,7 +510,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         precio.setText(" $" + cita_mostrar.getVehiculo().getPrecioVenta());
     }
 
-
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
@@ -565,7 +517,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
     public boolean registarCita() throws Exception {
         Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
         Vehiculo vehiculo = null;
-        Vendedor vendedor = null;
+        Vendedor vendedor;
         int c = 0;
         String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
         Date fecha = sdf.parse(prueba);
@@ -635,8 +587,6 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         adptadorlistaview.buscar(b);
         return false;
     }
-
-
 
     public ArrayList<String> diaListaDesplegable(){
         ArrayList<String> dias = new ArrayList<>();

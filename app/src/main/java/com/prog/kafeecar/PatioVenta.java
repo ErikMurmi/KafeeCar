@@ -13,7 +13,6 @@ public class PatioVenta {
 //TODO COMPROBACIONES DE ELEMENTOS YA REGISTRADOS EN EL SISTEMA
     
     private Vendedor administrador;
-    private String direccion;
     private String telefono;
 
     public PatioVenta() {
@@ -32,21 +31,12 @@ public class PatioVenta {
         setAdministrador(administrador);
     }
 
-
     public Lista getCitas() {
         return citas;
     }
 
     public void setCitas(Lista citas) {
         this.citas = citas;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public String getTelefono() {
@@ -110,8 +100,6 @@ public class PatioVenta {
     
     //Metodos que necesita el sistema
     
-    
-    
     /**
      * Agrega una cita
      * @param nueva cita a ser agregada
@@ -141,7 +129,6 @@ public class PatioVenta {
         Vehiculo actual = nueva.getVehiculo();
         removerVehiculo(actual.getPlaca());
     }
-
 
     /**
      * Agrega un usuario al sistema
@@ -212,31 +199,6 @@ public class PatioVenta {
         return encontrado;
     }
 
-
-    /**
-     * Remueve una venta
-     * @param placa dato del vehiculo de la venta a ser eliminada
-     * @return true si se elimino , false en caso de que no.
-     */
-    /*public boolean removerVenta(String placa) throws Exception {
-
-        boolean encontrado = false;
-        int cont =0;
-        Venta actual=null;
-        while(cont<ventasGenerales.contar() && !encontrado){
-             actual= (Venta) ventasGenerales.getPos(cont);
-            if(actual.getVehiculo().getPlaca().compareToIgnoreCase(placa)==0){
-                ventasGenerales.eliminarPos(cont);
-                encontrado=true;
-            }
-            cont++;
-        }
-        if(encontrado){
-            vehiculos.add(actual);
-        }
-        return encontrado;
-    }*/
-
     public boolean removerVenta(String placa) throws Exception {
 
         boolean encontrado = false;
@@ -252,46 +214,6 @@ public class PatioVenta {
         }
         return encontrado;
     }
-
-    /**
-     * Agrega un cliente a la lista
-     * @param cedula identificador del usuario a eliminar
-     * @param tipo el tipo de usuario cliente o vendedor
-     * @return true si se elimino el usuario, false en caso de que no.
-     */
-    public boolean removerUsuario(String cedula, String tipo) throws Exception {
-        boolean removido = false;
-        int c=0;
-        if(tipo.compareToIgnoreCase("Vendedor")==0)
-        {
-            while(c < vendedores.contar() && !removido)
-            {
-                Vendedor actual = (Vendedor) vendedores.getPos(c);
-                if(actual.getCedula().compareTo(cedula)==0)
-                {
-                    vendedores.eliminar(actual);
-                    removido = true;
-                }
-                c++;
-            }
-        }
-        else if(tipo.compareToIgnoreCase("Cliente")==0)
-        {
-            while(c< clientes.contar() && !removido)
-            {
-                Cliente actual = (Cliente) clientes.getPos(c);
-                if(actual.getCedula().compareTo(cedula)==0)
-                {
-                    clientes.eliminar(actual);
-                    removido = true;
-                }
-                c++;
-            }
-        }
-        return removido;
-    }
-
-    
     /**
      * Busca citas por distintos criterios
      * @param criterio atributo por el cual buscar del cliente
@@ -335,24 +257,6 @@ public class PatioVenta {
         return null;
     }
 
-    public Lista buscarporfecha(Date fech) {
-        Cita citaEncontrada;
-        Lista citaslista=new Lista();
-            int cont = 0;
-            while(cont<citas.contar()){
-                Cita actual = (Cita) citas.getPos(cont);
-                if(actual.getFechaCita().compareTo(fech)==0){
-                    citaEncontrada=actual;
-                    citaslista.add(citaEncontrada);
-                    return citaslista;
-                }
-                cont++;
-            }
-
-        return null;
-
-    }
-
     public Lista buscarCitas(Cliente cliente) {
 
         Lista citaslista=new Lista();
@@ -367,9 +271,6 @@ public class PatioVenta {
         }
         return citaslista;
     }
-
-
-    
     /**
      *
      * Busca vehiculos por sus caracteristicas
@@ -377,7 +278,7 @@ public class PatioVenta {
      * @param codigo palabra a buscar dentro del criterio
      * @return Vehiculo que coincide con el codigo buscado en el criterio de busqueda.
      */
-    public Vehiculo buscarVehiculos(String criterio, String codigo) throws Exception {
+    public Vehiculo buscarVehiculos(String criterio, String codigo) {
         Vehiculo buscado = null;
 
         if(criterio.compareTo("Placa")==0){
@@ -420,8 +321,6 @@ public class PatioVenta {
         }
         return listaBuscadosFav;
     }
-
-    
     /**
      * Busca ventas bajo disintos criterios
      * @param cedula cedula del cliente de la venta
@@ -440,19 +339,14 @@ public class PatioVenta {
         }
         return buscada;
     }   
-    
-    
 
-    
-
-    
     /**
      * Busca un cliente en la lista
      * @param criterio tipo de busqueda por cedula o nombre
      * @param codigo dato de la cedula o nombre
      * @return clientes que cumplen parametros de busqueda
      */
-    public Cliente buscarClientes(String criterio, String codigo) throws Exception {
+    public Cliente buscarClientes(String criterio, String codigo) {
         Cliente buscado = null;
         boolean encontrado = false;
         if(criterio.compareToIgnoreCase("Nombre")==0) 
@@ -505,7 +399,7 @@ public class PatioVenta {
      * @param texto dato de la cedula o nombre
      * @return vendedores que cumplen parametros de busqueda
      */
-    public Vendedor buscarVendedores(String criterio, String texto) throws Exception {
+    public Vendedor buscarVendedores(String criterio, String texto) {
 
         boolean encontrado = false;
         Vendedor buscado = null;
@@ -577,92 +471,6 @@ public class PatioVenta {
             cont++;
         }
         return placas;
-    }
-
-
-    /**
-     * Actualiza todos los datos de un vehículo
-     * @param placa codigo para buscar el vehiculo
-     * @param nuevaPlaca codigo para buscar el vehiculo
-     * @param matricula actualiza la matricula
-     * @param marca actualiza la marca
-     * @param modelo actualiza el modelo
-     * @param color actualiza el color
-     * @param descripcion actualiza la descripcion
-     * @param precioInicial actualiza el precio inicial
-     * @param precioVenta actualiza el precio de venta
-     * @param promocion actualiza la promocion del vehiculo
-     * @param matriculado actualiza el estado de matricula
-     * @param anio actualiza el año del vehiculo
-     * @param imagen actualiza la imagen del vehiculo
-     */
-    public Vehiculo actualizarVehiculo(String placa, String nuevaPlaca,String matricula, String marca, String modelo, String color, String descripcion, float precioInicial, float precioVenta, float promocion, boolean matriculado, int anio, String imagen)
-    {
-        return null;
-    }
-
-
-    /**
-     * Actualizar los datos de una venta
-     * @param matricula identificador para buscar el vehiculo
-     * @param fecha fecha de la venta
-     * @param vendedor agente que la vendio
-     * @param comprador cliente que compro el vehiculo
-     * @param vehiculos vehiculos de la venta
-     * @return Venta actualizada
-     */
-    public Venta actualizarVenta(String matricula,Date fecha, Vendedor vendedor,Cliente comprador,Lista vehiculos){
-        //Comprobar si el nuevo vehiculo es el mismo que el que ya estaba en la cita
-        // si no volver a aniadir el vehiculo al catalogo
-        return null;
-    }
-
-
-    /**
-     * Actualiza los datos de un cliente o vendedor
-     * @param cedula identificador para buscar el usuario
-     * @param nombre nombre dato actualizado
-     * @param nuevaCedula cedula dato actualizado
-     * @param correo correo dato actualizado
-     * @param telefono telefono de contacto del cliente
-     * @return cliente con los datos actulizados
-     */
-    public Cliente actualizarCliente(String cedula, String nombre,String nuevaCedula, String correo,String telefono){
-        return null;
-        
-    }
-    
-    /**
-     * Actualiza los datos de un cliente o vendedor
-     * @param cedula identificador para buscar el usuario
-     * @param nombre nombre dato actualizado
-     * @param nuevaCedula cedula dato actualizado
-     * @param correo correo dato actualizado
-     * @param telefono telefono de contacto del cliente
-     * @return Vendedor con los datos actualizados
-     */
-    public Vendedor actualizarVendedor(String cedula, String nombre,String nuevaCedula, String correo,String telefono){
-        
-        return null;
-    }
-
-
-    /**
-     * Actualiza todos los datos de la cita
-     * @param matricula del vehiculo de la cita que se busca
-     * @param cedula del cliente que agendo esa cita
-     * @param fechaCita dato nuevo de la fecha de la cita
-     * @param hora dato nuevo de la hora de la cita
-     * @param resolucion dato nuevo de la resolucion de la cita
-     * @param cliente dato nuevo del cliente de la cita
-     * @param vendedorCita dato nuevo del vendedor de la cita
-     * @param vehiculo dato nuevo del vehiculo de la cita
-     * @return cita con los datos actualizados
-     */
-
-    public Cita actualizarDatosCita(String matricula, String cedula,Date fechaCita, int hora, String resolucion, Cliente cliente, Vendedor vendedorCita, Vehiculo vehiculo){
-        Cita cita = null;
-        return cita;
     }
 
     public Vendedor asignarVendedor(String hora,Date fecha) throws Exception{

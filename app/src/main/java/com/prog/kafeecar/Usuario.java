@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.prog.kafeecar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- *
- * @author Erik
- */
 public class Usuario {
     
     private String nombre;
@@ -78,8 +69,6 @@ public class Usuario {
         this.telefono = telefono;
     }
     
-
-
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -87,7 +76,6 @@ public class Usuario {
     public void setFechaNacimiento(String fechaNacimiento) throws ParseException {
         this.fechaNacimiento = Patioventainterfaz.sdf.parse(fechaNacimiento);
     }
-
 
     @Override
     public String toString() {
@@ -98,10 +86,8 @@ public class Usuario {
                 "\nCorreo: " + correo + 
                 "\nClave: " + clave;
     }
-
-    
     //Metodos del sistema
-    
+
     /**
      * Cambia todos los datos de un usuario
      * @param nombre dato nuevo de nombre
@@ -123,42 +109,4 @@ public class Usuario {
         setFechaNacimiento(fechaNacimiento);
         return usuario;
     }
-
-    protected void cambiarDatosSinClave(String nombre, String cedula, String telefono, String correo, String fechaNacimiento) throws ParseException{
-        setNombre(nombre);
-        setCedula(cedula);
-        setTelefono(telefono);
-        setCorreo(correo);
-        setFechaNacimiento(fechaNacimiento);
-    }
-    
-    /**
-     * Cambia un dato especifico del usuario
-     * @param criterio identificar del dato que se desea cambiar
-     * @param dato indentificador por el cual se actualizará la informacion
-     * @return usuario con el dato actualizado
-     */
-    
-    public Usuario cambiarDato(String criterio, String dato) throws ParseException{
-        Usuario usuario = null;
-        if(criterio.compareToIgnoreCase("nombre")==0){
-            setNombre(dato);
-        }else if(criterio.compareToIgnoreCase("cedula")==0){
-            setCedula(dato);
-        }else if(criterio.compareToIgnoreCase("correo")==0){
-            setCorreo(dato);
-        }else if(criterio.compareToIgnoreCase("clave")==0){
-            setClave(dato);
-        }else if(criterio.compareToIgnoreCase("telefono")==0){
-            setTelefono(dato);
-        }else if(criterio.compareTo("fechaNacimiento")==0){
-            setFechaNacimiento(dato);
-        }
-        return usuario;
-    }
-    
-        
-
-    
-    
 }
