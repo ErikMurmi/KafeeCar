@@ -295,7 +295,7 @@ public class Perfil_cliente_fragment extends Fragment{
                             cedula_pe_cli_etxt.getText().toString(),
                             telefono_pe_cli_etxt.getText().toString(),
                             correo_pe_cli_etxt.getText().toString(),
-                            fecha, contra);
+                            contra, fecha);
                 if(foto!=null){
                     StorageReference filePath = mStorageRef.child("Clientes").child(cedula_str+".jpg");
                     filePath.putFile(foto);
