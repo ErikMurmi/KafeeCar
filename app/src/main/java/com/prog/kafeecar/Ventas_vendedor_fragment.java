@@ -363,8 +363,6 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         reg_correo_vt_vn_etxt.getText().clear();
     }
 
-
-
     public boolean registrarCliente(){
 
         EditText add_nombre_vt_vn_etxt = mainView.findViewById(R.id.add_nombre_vt_vn_etxt);
@@ -695,7 +693,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
             String precio_str = precio_vt_ad_etxt.getText().toString();
             precio = Float.parseFloat(precio_str);
         }else{
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Precio*", Toast.LENGTH_SHORT).show();
+            vacios++;
+        }
+
+        if((posicion_anio==-1 || posicion_mes==-1)||posicion_dia==-1){
             vacios++;
         }
 
@@ -713,7 +714,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 Toast.makeText(mainView.getContext(), "Se agrego correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
-        }else{
+        }else if(vacios >0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -839,6 +840,10 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 vacios++;
             }
 
+        if((posicion_dia==-1 || posicion_mes==-1)||posicion_anio==-1){
+            vacios++;
+        }
+
         if (vacios == 0 && invalidos == 0) {
             fecha_nueva_venta = (posicion_dia + 1) + "-" + (posicion_mes + 1) + "-" + Patioventainterfaz.anios[posicion_anio];
             Date fecha = null;
@@ -857,7 +862,7 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 Toast.makeText(mainView.getContext(), "Se editó correctamente la venta", Toast.LENGTH_SHORT).show();
                 return true;
             }
-        }else{
+        }else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Existen campos vacíos", Toast.LENGTH_SHORT).show();
         }
         return false;

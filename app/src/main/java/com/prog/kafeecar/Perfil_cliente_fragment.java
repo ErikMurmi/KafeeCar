@@ -271,34 +271,31 @@ public class Perfil_cliente_fragment extends Fragment{
             String contrasenia_str = contrasenia_pe_cli_etxt.getText().toString();
             EditText confirmarcontrasenia_pe_cli_etxt = mainview.findViewById(R.id.confirmarcontraseniaEditCliente_etxt);
             String confirmarcontrasenia_str = confirmarcontrasenia_pe_cli_etxt.getText().toString();
+            String contra = null;
             if(!contrasenia_str.isEmpty() && !confirmarcontrasenia_str.isEmpty()){
                 if ( (contrasenia_str.compareTo(confirmarcontrasenia_str) != 0)) {
+
                     Toast.makeText(mainview.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                     contrasenia_pe_cli_etxt.setText("");
                     confirmarcontrasenia_pe_cli_etxt.setText("");
                     c++;
                 }else{
-                    cambiar_clave = true;
+                    if(contrasenia_str.compareTo(cliente.getClave())==0){
+                        contra = cliente.getClave();
+                    }else{
+                        contra = contrasenia_str;
+                    }
                 }
             }
 
             if (c == 0) {
                 String fecha = dia_str + "-" + mes_str + "-" + anio_str;
-                if(cambiar_clave) {
                     cliente.cambiarDatos(
                             nombre_pe_cli_etxt.getText().toString(),
                             cedula_pe_cli_etxt.getText().toString(),
                             telefono_pe_cli_etxt.getText().toString(),
                             correo_pe_cli_etxt.getText().toString(),
-                            fecha, contrasenia_str);
-                }else{
-                    cliente.cambiarDatos(
-                            nombre_pe_cli_etxt.getText().toString(),
-                            cedula_pe_cli_etxt.getText().toString(),
-                            telefono_pe_cli_etxt.getText().toString(),
-                            correo_pe_cli_etxt.getText().toString(),
-                            fecha, cliente.getClave());
-                }
+                            contra, fecha);
                 if(foto!=null){
                     StorageReference filePath = mStorageRef.child("Clientes").child(cedula_str+".jpg");
                     filePath.putFile(foto);
