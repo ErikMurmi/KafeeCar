@@ -76,6 +76,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     private boolean add_cliente_an =false;
     private boolean add_cliente_ed = false;
     private LinearLayout vt_estadisticasgenerales_admin_lyt;
+    private LinearLayout vt_estadisticasusuario_lyt;
     private LinearLayout ver_vt_ad_lyt;
     private Adaptador_Lista_Ventas adptadorlistaview;
     private Venta venta_mostrar;
@@ -120,7 +121,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         editar_vt_ad_lyt = mainView.findViewById(R.id.editar_vt_ad_lyt);
         vt_estadisticasgenerales_admin_lyt =mainView.findViewById(R.id.vt_estadisticasgenerales_admin_lyt);
         busqueda_ventas = mainView.findViewById(R.id.vt_busqueda_plcas_admin);
-        LinearLayout vt_estadisticasusuario_lyt =mainView.findViewById(R.id.vt_estadisticasusuario_lyt);
+        vt_estadisticasusuario_lyt =mainView.findViewById(R.id.vt_estadisticasusuario_lyt);
         LinearLayout aniadir_cliente_vt_ad_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_ad_lyt);
 
         administrar_venta_generales_btn.setOnClickListener(view -> irListaGenerales());
@@ -128,6 +129,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             ventas_admin_generales_lyt.setVisibility(View.GONE);
             ventas_admin_lyt.setVisibility(View.GONE);
             add_vt_ad_lyt.setVisibility(View.VISIBLE);
+            clearAniadirVenta();
             adaptadorAniadir();
             listaDesplegablesAniadir();
         });
@@ -239,7 +241,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         });
 
         guardar_vt_ad_btn.setOnClickListener(view -> {
-            AutoCompleteTextView cliente = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
+            AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
             String cli = cliente.getText().toString();
             Cliente aux = patio.buscarClientes("Cedula",cli);
             if(aux==null){
@@ -297,7 +299,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if(add_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
+                if(aniadir_cliente_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_an){
                     android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
@@ -312,14 +314,14 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                     });
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
-                }else if(add_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
+                }else if(aniadir_cliente_vt_ad_lyt.getVisibility() == View.VISIBLE  && add_cliente_ed){
                     android.app.AlertDialog.Builder msg = new android.app.AlertDialog.Builder(mainView.getContext());
                     msg.setTitle("NO GUARDAR");
                     msg.setMessage("¿Estás seguro de salir sin guardar los cambios?");
                     msg.setPositiveButton("Si", (dialog, which) -> {
                         try {
                             editar_vt_ad_lyt.setVisibility(View.VISIBLE);
-                            add_vt_ad_lyt.setVisibility(View.GONE);
+                            aniadir_cliente_vt_ad_lyt.setVisibility(View.GONE);
                             add_cliente_ed = false;
                         } catch (Exception e) {
                             Toast.makeText(mainView.getContext(), "Error 165: No se pudo ejecutar la acción", Toast.LENGTH_SHORT).show();
@@ -329,10 +331,10 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                     msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
                     msg.show();
                 }
-                if(vt_estadisticasgenerales_admin_lyt.getVisibility()==View.VISIBLE){
+                if(vt_estadisticasgenerales_admin_lyt.getVisibility()==View.VISIBLE ||vt_estadisticasusuario_lyt.getVisibility()==View.VISIBLE){
                     irPaginaPrincipal();
                 }
-                if(vt_estadisticasusuario_lyt.getVisibility()==View.VISIBLE){
+                if( ventas_admin_generales_lyt.getVisibility() == View.VISIBLE){
                     irPaginaPrincipal();
                 }
                 if (ver_vt_ad_lyt.getVisibility() == View.VISIBLE) {
@@ -495,6 +497,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     }
 
     public void irPaginaPrincipal() {
+        vt_estadisticasgenerales_admin_lyt.setVisibility(View.GONE);
+        vt_estadisticasusuario_lyt.setVisibility(View.GONE);
         ventas_admin_generales_lyt.setVisibility(View.GONE);
         add_vt_ad_lyt.setVisibility(View.GONE);
         editar_vt_ad_lyt.setVisibility(View.GONE);
@@ -508,8 +512,8 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getCedulasClientes());
         cliente.setAdapter(adapter);
 
-        TextView cedula_vendedor_ci_vn_txt = mainView.findViewById(R.id.cedula_vendedor_vt_ad_txt);
-        cedula_vendedor_ci_vn_txt.setText(usuario_admin.getCedula());
+        TextView cedula_vendedor_vt_ad_txt = mainView.findViewById(R.id.cedula_vendedor_vt_ad_txt);
+        cedula_vendedor_vt_ad_txt.setText(usuario_admin.getCedula());
 
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
         ArrayAdapter<String> adapterPla = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_list_item_1, patio.getPlacasVehiculo());
@@ -591,7 +595,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
             precioV.setText(String.format("%.2f", venta_mostrar.getPrecio()));
     }
 
-    public boolean editarVenta() throws Exception {
+    public boolean editarVenta() {
         Cliente cliente_c = null;
         int vacios = 0;
         int invalidos = 0;
@@ -746,6 +750,22 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
         reg_correo_vt_ad_etxt.getText().clear();
     }
 
+    public void clearAniadirVenta(){
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_vt_ad_actv);
+        EditText precio_vt_ad_etxt = mainView.findViewById(R.id.precio_vt_ad_etxt);
+        AutoCompleteTextView anio = mainView.findViewById(R.id.anio_vt_ad_acv);
+        AutoCompleteTextView mes = mainView.findViewById(R.id.mes_vt_ad_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_vt_ad_acv);
+
+        cliente.getText().clear();
+        auto.getText().clear();
+        precio_vt_ad_etxt.getText().clear();
+        anio.getText().clear();
+        mes.getText().clear();
+        dias.getText().clear();
+    }
+
     public boolean registrarCliente(){
 
         EditText add_nombre_vt_ad_etxt = mainView.findViewById(R.id.add_nombre_vt_ad_etxt);
@@ -847,13 +867,16 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
                 Cliente cliente = new Cliente(nombre_str, cedula_str, telefono_str, correo_str,fecha);
                 if (patio.aniadirUsuario(cliente, "Cliente")) {
                     if(add_cliente_an){
-                        administrar_venta_aniadirventa_btn.callOnClick();
-                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
-                        cliente_ed.setText(cedula_str);
+                        ventas_admin_generales_lyt.setVisibility(View.GONE);
+                        ventas_admin_lyt.setVisibility(View.GONE);
+                        add_vt_ad_lyt.setVisibility(View.VISIBLE);
+                        adaptadorAniadir();
+                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.cedula_cliente_vt_ad_actv);
+                        cliente_an.setText(cedula_str);
                     }else if(add_cliente_ed){
                         vt_ad_ver_venta_editar_btn.callOnClick();
-                        AutoCompleteTextView cliente_an = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
-                        cliente_an.setText(cedula_str);
+                        AutoCompleteTextView cliente_ed = mainView.findViewById(R.id.ed_cedula_cliente_vt_ad_actv);
+                        cliente_ed.setText(cedula_str);
                     }
                     Toast.makeText(mainView.getContext(), "Se registro el cliente correctamente", Toast.LENGTH_SHORT).show();
                     return true;
