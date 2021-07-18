@@ -800,7 +800,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public static String formatoHora(int hora) {
-        if (hora > 12) {
+        if (hora >= 12) {
             return "pm";
         }
         return "am";

@@ -682,6 +682,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
                         citas_vendedor_lyt.setVisibility(View.GONE);
                         editar_ci_vn_lyt.setVisibility(View.GONE);
                         ver_ci_vn_lyt.setVisibility(View.GONE);
+                        aniadir_cliente_ci_vn_lyt.setVisibility(View.GONE);
                         aniadir_ci_vn_lyt.setVisibility(View.VISIBLE);
                         adaptadorAniadir();
                     }else if(add_cliente_ed){
