@@ -157,6 +157,7 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+
                 if (vistaVehiculo.getVisibility() == View.VISIBLE) {
                     irCatalogo();
                 }
@@ -310,19 +311,15 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
         AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_v_cli_acv);
         AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_v_cli_acv);
         if(isEmpty(hora_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Hora*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(dia_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Dia fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(mes_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if(isEmpty(anio_cita)){
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Año fecha*", Toast.LENGTH_SHORT).show();
             c++;
         }
         if (c == 0) {
@@ -338,6 +335,9 @@ public class Catalogo_Cliente_fragment extends Fragment implements Adaptador_Lis
                 Toast.makeText(mainView.getContext(), "Se registro correctamente la cita", Toast.LENGTH_SHORT).show();
                 return true;
             }
+        }
+        else {
+            Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
         return false;
     }

@@ -162,9 +162,8 @@ public class Perfil_admin_Fragment extends Fragment {
         EditText cedula_ed = mainView.findViewById(R.id.cedula_admin_etxt);
         EditText telefono_ed = mainView.findViewById(R.id.telefono_admin_etxt);
         EditText correo_ed = mainView.findViewById(R.id.correo_admin_etxt);
-            /*EditText contrasenia_ed = mainview.findViewById(R.id.contrasenia_admin_etxt);
-            EditText confirm_c_ed = mainview.findViewById(R.id.contrasenia_confirm_admin_etxt);*/
-
+        EditText contrasenia_ed = mainView.findViewById(R.id.contrasenia_admin_etxt);
+        EditText confirm_c_ed = mainView.findViewById(R.id.contrasenia_confirm_admin_etxt);
         String fechaNacimiento = Patioventainterfaz.getFechaMod(user.getFechaNacimiento());
         String dia = fechaNacimiento.split("-")[0];
         String mes = fechaNacimiento.split("-")[1];
@@ -177,16 +176,15 @@ public class Perfil_admin_Fragment extends Fragment {
         cedula_ed.setText(user.getCedula());
         telefono_ed.setText(user.getTelefono());
         correo_ed.setText(user.getCorreo());
+        contrasenia_ed.setText("");
+        confirm_c_ed.setText("");
 
         StorageReference filePath = mStorageRef.child("Vendedores/" + user.getImagen());
         try {
             final File localFile = File.createTempFile(user.getImagen(), "jpg");
-            filePath.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    admin_img_btn.setImageBitmap(bitmap);
-                }
+            filePath.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                admin_img_btn.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
             Toast.makeText(mainView.getContext(), "Error 82: No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
@@ -195,23 +193,23 @@ public class Perfil_admin_Fragment extends Fragment {
 
     public void editarAdmin() {
         boolean cambiar_clave = false;
-        int c = 0;
-        EditText nombre_ed = mainView.findViewById(R.id.nombre_pe_vn_etxt);
+        int vacios = 0;
+        int invalidos = 0;
+        EditText nombre_ed = mainView.findViewById(R.id.nombre_admin_etxt);
         String nombre_str = nombre_ed.getText().toString();
         if (nombre_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Nombre*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         }
 
-        EditText cedula_ed = mainView.findViewById(R.id.cedula_pe_vn_etxt);
+        EditText cedula_ed = mainView.findViewById(R.id.cedula_admin_etxt);
         String cedula_str = cedula_ed.getText().toString();
         if (cedula_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Cédula*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (cedula_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Número de cédula inválido", Toast.LENGTH_SHORT).show();
                 cedula_ed.setText("");
+                invalidos++;
             }
         }
 
@@ -220,14 +218,13 @@ public class Perfil_admin_Fragment extends Fragment {
         String anio_str = anio_ed.getText().toString();
         int anio = -1;
         if (anio_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Año*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             anio = Integer.parseInt(anio_ed.getText().toString());
             if (anio < 1900 || anio > 2003) {
                 Toast.makeText(mainView.getContext(), "Año inválido", Toast.LENGTH_SHORT).show();
                 anio_ed.setText("");
-                c++;
+                invalidos++;
             }
         }
 
@@ -235,14 +232,13 @@ public class Perfil_admin_Fragment extends Fragment {
         String mes_str = mes_ed.getText().toString();
         int mes = -1;
         if (mes_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Mes*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             mes = Integer.parseInt(mes_str);
             if (mes < 1 || mes > 12) {
                 Toast.makeText(mainView.getContext(), "Mes inválido", Toast.LENGTH_SHORT).show();
                 mes_ed.setText("");
-                c++;
+                invalidos++;
             }
         }
 
@@ -250,14 +246,13 @@ public class Perfil_admin_Fragment extends Fragment {
         String dia_str = dia_ed.getText().toString();
         int dia;
         if (dia_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Día*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             dia = Integer.parseInt(dia_str);
             if (!Patioventainterfaz.validarDia(anio, mes, dia)) {
                 Toast.makeText(mainView.getContext(), "Día inválido", Toast.LENGTH_SHORT).show();
                 dia_ed.setText("");
-                c++;
+                invalidos++;
             }
         }
 
@@ -265,26 +260,24 @@ public class Perfil_admin_Fragment extends Fragment {
         EditText telefono_ed = mainView.findViewById(R.id.telefono_admin_etxt);
         String telefono_str = telefono_ed.getText().toString();
         if (telefono_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Teléfono*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (telefono_str.length() != 10) {
                 Toast.makeText(mainView.getContext(), "Numero de telefono invalido", Toast.LENGTH_SHORT).show();
                 telefono_ed.setText("");
-                c++;
+                invalidos++;
             }
         }
 
         EditText correo_ed = mainView.findViewById(R.id.correo_admin_etxt);
         String correo_str = correo_ed.getText().toString();
         if (correo_str.isEmpty()) {
-            Toast.makeText(mainView.getContext(), "Campo vacío: *Correo*", Toast.LENGTH_SHORT).show();
-            c++;
+            vacios++;
         } else {
             if (!Patioventainterfaz.validarMail(correo_str)) {
                 Toast.makeText(mainView.getContext(), "Correo no valido", Toast.LENGTH_SHORT).show();
                 correo_ed.setText("");
-                c++;
+                invalidos++;
             }
         }
 
@@ -297,13 +290,13 @@ public class Perfil_admin_Fragment extends Fragment {
                 Toast.makeText(mainView.getContext(), "Las claves no coinciden", Toast.LENGTH_SHORT).show();
                 textoclave.setText("");
                 textorepetirclave.setText("");
-                c++;
+                invalidos++;
             } else {
                 cambiar_clave = true;
             }
         }
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos==0) {
             String fecha = dia_str + "-" + mes_str + "-" + anio_str;
             try {
                 if (cambiar_clave) {
@@ -337,6 +330,8 @@ public class Perfil_admin_Fragment extends Fragment {
                 Toast.makeText(mainView.getContext(), "Error 83: Fallo en la busqueda del vendedor", Toast.LENGTH_SHORT).show();
             }
 
+        }if(vacios>0){
+            Toast.makeText(mainView.getContext(), "Campos vacíos", Toast.LENGTH_SHORT).show();
         }
 
     }
