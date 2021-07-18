@@ -456,6 +456,7 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     public void irListaGenerales() {
         add_vt_ad_lyt.setVisibility(View.GONE);
         cargar();
+        ir_aniadir_vt_ftbtn.setVisibility(View.VISIBLE);
         ventas_admin_generales_lyt.setVisibility(View.VISIBLE);
         ir_aniadir_vt_ftbtn.setVisibility(View.VISIBLE);
 
@@ -627,7 +628,6 @@ public class Ventas_admin_Fragment extends Fragment implements Adaptador_Lista_V
     public boolean registarVenta() throws Exception {
 
         adaptadorAniadir();
-        listaDesplegablesAniadir();
         Cliente cliente_c = null;
         Vehiculo vehiculo = null;
         int vacios = 0;
