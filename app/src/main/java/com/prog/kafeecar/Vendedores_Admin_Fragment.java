@@ -703,8 +703,8 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 }
                 cedulaVen.cambiarDatosSinClaveVendedor(
                         horaEntradaVendedor_int,
-                        horaAlmuerzoVendedor_int,
                         horaSalidaVendedor_int,
+                        horaAlmuerzoVendedor_int,
                         nombre_ed.getText().toString(),
                         cedula_ed.getText().toString(),
                         telefono_ed.getText().toString(),
