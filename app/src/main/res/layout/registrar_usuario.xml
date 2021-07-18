@@ -286,6 +286,7 @@
                         android:insetTop="5dp"
                         android:insetRight="5dp"
                         android:insetBottom="5dp"
+                        android:onClick="irLogin"
                         android:text="Regresar"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"

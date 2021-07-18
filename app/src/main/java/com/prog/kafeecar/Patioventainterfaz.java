@@ -62,7 +62,7 @@ public class Patioventainterfaz extends AppCompatActivity {
 
         // Login de pruebas
         patioventa = new PatioVenta();
-        setContentView(R.layout.login_sinclaves);
+        //setContentView(R.layout.login_sinclaves);
         try {
             cargarDatos();
         } catch (Exception e) {
@@ -77,6 +77,9 @@ public class Patioventainterfaz extends AppCompatActivity {
             reg_list.setOnClickListener(v -> registrarAdministrador());
         }
         setContentView(R.layout.login);
+        Window w = getWindow();
+        w.setStatusBarColor(0);
+        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     public static void cargarDatos() throws Exception {
@@ -143,7 +146,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         temp.aniadirFavorito((((Vehiculo) patioventa.getVehiculos().getPos(1)).getPlaca()));
     }
 
-    private void irLogin(View v){
+    public void irLogin(View view){
         setContentView(R.layout.login);
     }
     private void irAplicacion(String tipo) {
@@ -797,10 +800,11 @@ public class Patioventainterfaz extends AppCompatActivity {
         msg.setTitle("LOG OUT");
         msg.setPositiveButton("Aceptar", (dialog, which) -> {
             usuarioActual = null;
-            Window w = getWindow();
+            /*Window w = getWindow();
             w.setStatusBarColor(getColor(R.color.botones));
             w.getDecorView().setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            setContentView(R.layout.login_sinclaves);
+            setContentView(R.layout.login_sinclaves);*/
+            setContentView(R.layout.login);
         });
         msg.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
         msg.show();
