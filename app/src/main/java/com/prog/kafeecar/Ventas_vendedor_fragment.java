@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -97,9 +98,9 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         add_vt_vn_lyt = mainView.findViewById(R.id.add_vt_vn_lyt);
         editar_vt_vn_lyt = mainView.findViewById(R.id.editar_vt_vn_lyt);
         aniadir_cliente_vt_vn_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_vn_lyt);
+        AutoCompleteTextView placa_vt_vn_actv = mainView.findViewById(R.id.placa_vt_vn_actv);
 
         buscar_auto_vt_vn_btn.setOnClickListener(v -> {
-            AutoCompleteTextView placa_vt_vn_actv = mainView.findViewById(R.id.placa_vt_vn_actv);
             String placa = placa_vt_vn_actv.getText().toString();
             TextView precio_vt_vn_etxt2 = mainView.findViewById(R.id.precio_vt_vn_etxt2);
             Vehiculo veh = patio.buscarVehiculos("Placa", placa);
@@ -107,7 +108,12 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 precio_vt_vn_etxt2.setText(String.valueOf(veh.getPrecioVenta()));
             }else{
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                precio_vt_vn_etxt2.setText("");
             }
+        });
+
+        placa_vt_vn_actv.setOnItemClickListener((parent, view, position, id) ->  {buscar_auto_vt_vn_btn.callOnClick();
+
         });
 
         aniadir_vt_vn_ftbn.setOnClickListener(v -> {
