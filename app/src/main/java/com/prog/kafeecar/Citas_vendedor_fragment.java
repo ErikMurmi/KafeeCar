@@ -831,7 +831,7 @@ public class Citas_vendedor_fragment extends Fragment implements Adaptador_Lista
         EditText resolucion = mainView.findViewById(R.id.ed_resolucion_ci_vn_etxt);
         String resolucion_str = resolucion.getText().toString();
 
-        if ( (posicion_dia==-1 || posicion_mes ==1) || (posicion_anio==-1||hora_nueva_cita==-1)){
+        if ( (posicion_dia==-1 || posicion_mes ==-1) || (posicion_anio==-1||hora_nueva_cita==-1)){
             invalidos++;
             Toast.makeText(mainView.getContext(), "Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
         }
