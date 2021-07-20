@@ -101,9 +101,13 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         buscar_auto_vt_vn_btn.setOnClickListener(v -> {
             AutoCompleteTextView placa_vt_vn_actv = mainView.findViewById(R.id.placa_vt_vn_actv);
             String placa = placa_vt_vn_actv.getText().toString();
-            EditText precio_vt_vn_etxt2 = mainView.findViewById(R.id.precio_vt_vn_etxt2);
+            TextView precio_vt_vn_etxt2 = mainView.findViewById(R.id.precio_vt_vn_etxt2);
             Vehiculo veh = patio.buscarVehiculos("Placa", placa);
-            precio_vt_vn_etxt2.setText(String.valueOf(veh.getPrecioVenta()));
+            if(veh!=null){
+                precio_vt_vn_etxt2.setText(String.valueOf(veh.getPrecioVenta()));
+            }else{
+                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+            }
         });
 
         aniadir_vt_vn_ftbn.setOnClickListener(v -> {
