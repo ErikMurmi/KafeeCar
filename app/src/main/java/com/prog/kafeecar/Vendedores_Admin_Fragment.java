@@ -151,7 +151,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 try {
                     if(registrarVendedor()){
                         cargar();
-                        irVisualizarVendedor.setVisibility(View.VISIBLE);
+                        regresarPantallaPrncipal();
                     }
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "Error 42: No se pudo registrar el vendedor", Toast.LENGTH_SHORT).show();
