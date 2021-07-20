@@ -65,14 +65,16 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
 
         //Primera vez que se inicia la aplicacion se registra un administrador
-        if (patioventa.getAdministrador() == null) {
+       if (patioventa.getAdministrador() == null) {
             setContentView(R.layout.registrar_admin_lyt);
             reg_img = findViewById(R.id.reg_imagen_admin_btn);
             Button reg_list = findViewById(R.id.reg_list_btn);
             reg_list.setOnClickListener(v -> registrarAdministrador());
         }else{
-            setContentView(R.layout.login);
-        }
+            //setContentView(R.layout.login)};
+            setContentView(R.layout.login_sinclaves);
+       }
+
         Window w = getWindow();
         w.setStatusBarColor(0);
         w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -126,8 +128,8 @@ public class Patioventainterfaz extends AppCompatActivity {
         patioventa.aniadirVenta(ven5);
         Venta ven6 = new Venta(fechaCita5, (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(1),90000.50f);
         patioventa.aniadirVenta(ven6);
-        Cita c1 = new Cita(fechaCita, 8, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(1));
-        Cita c2 = new Cita(fechaCita, 9, "", (Cliente) patioventa.getClientes().getPos(0), patioventa.getAdministrador(), (Vehiculo) patioventa.getVehiculos().getPos(2));
+        Cita c1 = new Cita(fechaCita, 8, "", (Cliente) patioventa.getClientes().getPos(0),(Vendedor) patioventa.getVendedores().getPos(1) , (Vehiculo) patioventa.getVehiculos().getPos(1));
+        Cita c2 = new Cita(fechaCita, 9, "", (Cliente) patioventa.getClientes().getPos(0), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(2));
         Cita c3 = new Cita(fechaCita2, 16, "", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(3));
         Cita c4 = new Cita(fechaCita3, 9, "", (Cliente) patioventa.getClientes().getPos(1), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(4));
         Cita c5 = new Cita(fechaCita4, 12, "", (Cliente) patioventa.getClientes().getPos(2), (Vendedor) patioventa.getVendedores().getPos(1), (Vehiculo) patioventa.getVehiculos().getPos(5));
@@ -191,7 +193,7 @@ public class Patioventainterfaz extends AppCompatActivity {
     }
 
     public void irVendedor(View v){
-        usuarioActual = (Usuario) patioventa.getVendedores().getPos(1);
+        usuarioActual = (Vendedor) patioventa.getVendedores().getPos(1);
         irAplicacion("VENDEDOR");
     }
 
@@ -276,7 +278,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         String clave_str = clave.getText().toString();
         Usuario usuario;
         String tipo = "";
-        if (patioventa.getAdministrador() != null && correo_str.compareTo(patioventa.getAdministrador().getCorreo()) == 0) {
+        if (correo_str.compareTo(patioventa.getAdministrador().getCorreo()) == 0) {
             usuario = patioventa.getAdministrador();
             tipo = "ADMIN";
         } else {
@@ -288,7 +290,6 @@ public class Patioventainterfaz extends AppCompatActivity {
                 tipo = "VENDEDOR";
             }
         }
-
         if (usuario != null) {
             if (usuario.getClave().compareTo(clave_str) == 0) {
                 msg = "Se ha iniciado secion correctamente";

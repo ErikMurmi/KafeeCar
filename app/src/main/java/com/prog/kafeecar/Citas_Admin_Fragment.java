@@ -45,7 +45,7 @@ import static com.prog.kafeecar.Patioventainterfaz.sdf;
 public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Citas.RecyclerItemClick, SearchView.OnQueryTextListener {
 
     private PatioVenta patio;
-    private final Vendedor usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
+    private Vendedor usuarioActual;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     private Adaptador_Lista_Citas adptadorlistaview;
@@ -86,6 +86,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         mainView = inflater.inflate(R.layout.citas_admin, container, false);
         patio = Patioventainterfaz.patioventa;
+        usuarioActual = (Vendedor) Patioventainterfaz.usuarioActual;
         //Layouts
         busqueda_citas = mainView.findViewById(R.id.busqueda_c_ad_srv);
         verCita = mainView.findViewById(R.id.ver_ci_ad_lyt);

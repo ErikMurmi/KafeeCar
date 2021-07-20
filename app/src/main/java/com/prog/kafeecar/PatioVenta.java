@@ -409,7 +409,7 @@ public class PatioVenta {
             int cont =0;
             while(cont<vendedores.contar() && !encontrado){
                 Vendedor actual = (Vendedor) vendedores.getPos(cont);
-                if(actual.getCorreo().compareTo(texto)==0){
+                if(actual.getCorreo().compareToIgnoreCase(texto)==0){
                     buscado = actual;
                     encontrado=true;
                 }
