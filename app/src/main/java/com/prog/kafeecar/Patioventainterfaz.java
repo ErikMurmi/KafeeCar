@@ -556,7 +556,7 @@ public class Patioventainterfaz extends AppCompatActivity {
             if (apellidoCampoAdmin_str.isEmpty()) {
                 vacios++;
             } else {
-                nombreCompletoAdmin_str = nombreAdmin.getText().toString() + "" + apellidoAdmin.getText().toString();
+                nombreCompletoAdmin_str = nombreAdmin.getText().toString() + " " + apellidoAdmin.getText().toString();
             }
         }
 
