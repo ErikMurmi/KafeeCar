@@ -287,11 +287,8 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
 
     public boolean editarCita() throws Exception {
         Vehiculo vehiculo = null;
-        int c = 0;
-
-
-        String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-        Date fecha = sdf.parse(prueba);
+        int vacios = 0;
+        int invalidos=0;
 
         AutoCompleteTextView auto = mainView.findViewById(R.id.ed_placa_ci_cli_actv);
 
@@ -301,13 +298,19 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             if (vehiculo == null) {
                 Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                vacios++;
             }
         } else {
-            c++;
+            vacios++;
+        }
+        if ( (posicion_dia==-1 || posicion_mes ==1) || (posicion_anio==-1||hora_nueva_cita==-1)){
+            invalidos++;
+            Toast.makeText(mainView.getContext(), "Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
         }
 
-        if (c == 0) {
+        if (vacios == 0 && invalidos==0) {
+            String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(prueba);
             cita_mostrar.actualizar(
                     fecha,
                     hora_nueva_cita,
@@ -320,7 +323,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 return true;
             }
         }
-        else{
+        else if(vacios>0){
             Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -549,40 +552,48 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         Cliente clien = (Cliente) Patioventainterfaz.usuarioActual;
         Vehiculo vehiculo = null;
         Vendedor vendedor;
-        int c = 0;
-        String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
-        Date fecha = sdf.parse(prueba);
+        int vacios = 0;
+        int invalidos =0;
+
         AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_cli_actv);
         AutoCompleteTextView dia_cita = mainView.findViewById(R.id.dia_ci_cli_acv);
         AutoCompleteTextView mes_cita = mainView.findViewById(R.id.mes_ci_cli_acv);
         AutoCompleteTextView anio_cita = mainView.findViewById(R.id.anio_ci_cli_acv);
         AutoCompleteTextView hora_cita = mainView.findViewById(R.id.hora_ci_cli_acv);
         if(isEmpty(hora_cita)){
-            c++;
+            vacios++;
         }
         if(isEmpty(dia_cita)){
-            c++;
+            vacios++;
         }
         if(isEmpty(mes_cita)){
-            c++;
+            vacios++;
         }
         if(isEmpty(anio_cita)){
-            c++;
+            vacios++;
         }
         if (!isEmpty(auto)) {
+
             String vehiculo_str = auto.getText().toString();
             vehiculo = patio.buscarVehiculos("Placa", vehiculo_str);
             if (vehiculo == null) {
-                Toast.makeText(mainView.getContext(), "No existe el vehículo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainView.getContext(), "Placa invalida", Toast.LENGTH_SHORT).show();
                 auto.setText("");
-                c++;
+                invalidos++;
             }
         } else {
-            c++;
+            vacios++;
         }
-        String hora = String.valueOf(hora_nueva_cita);
-        vendedor = patioventa.asignarVendedor(hora,fecha);
-        if (c == 0) {
+        if ( (posicion_dia==-1 || posicion_mes ==1) || (posicion_anio==-1||hora_nueva_cita==-1)){
+            invalidos++;
+            Toast.makeText(mainView.getContext(), "Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
+        }
+
+        if (vacios == 0 && invalidos==0) {
+            String hora = String.valueOf(hora_nueva_cita);
+            String prueba = (posicion_dia+1)+"-"+(posicion_mes+1)+"-"+Patioventainterfaz.anios[posicion_anio];
+            Date fecha = sdf.parse(prueba);
+            vendedor = patioventa.asignarVendedor(hora,fecha);
             Cita nueva = new Cita(
                     fecha,
                     hora_nueva_cita,
@@ -596,7 +607,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
                 return true;
             }
         }
-        else
+        else if(vacios>0)
         {
             Toast.makeText(mainView.getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
