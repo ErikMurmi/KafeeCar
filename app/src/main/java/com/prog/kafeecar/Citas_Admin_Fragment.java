@@ -120,6 +120,8 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             verCita.setVisibility(View.GONE);
             ir_aniadir_cita_ad_fbtn.setVisibility(View.GONE);
             add_cita_admin_lyt.setVisibility(View.VISIBLE);
+            clearRegistrarCI();
+            listasDesplegableAniadir();
             adaptadorAniadir();
         });
 
@@ -263,8 +265,6 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             msg.show();
         });
 
-        listasDesplegableAniadir();
-
         if(Patioventainterfaz.CITA_CON_VEHICULO){
             ir_aniadir_cita_ad_fbtn.callOnClick();
             placa_ci_ad_actv.setText(Patioventainterfaz.v_aux_cita.getPlaca());
@@ -331,6 +331,26 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
         Patioventainterfaz.CITA_CON_VEHICULO = false;
     }
 
+    public void clearRegistrarCI(){
+        AutoCompleteTextView cliente = mainView.findViewById(R.id.cedula_cliente_ci_ad_actv);
+        AutoCompleteTextView auto = mainView.findViewById(R.id.placa_ci_ad_actv);
+        EditText resolucion = mainView.findViewById(R.id.resolucion_ci_ad_etx);
+        AutoCompleteTextView horas = mainView.findViewById(R.id.hora_ci_ad_acv);
+        AutoCompleteTextView anios = mainView.findViewById(R.id.anio_ci_ad_acv);
+        AutoCompleteTextView meses = mainView.findViewById(R.id.mes_ci_ad_acv);
+        AutoCompleteTextView dias = mainView.findViewById(R.id.dia_ci_ad_acv);
+        posicion_dia = -1;
+        posicion_mes = -1;
+        posicion_anio = -1;
+
+        cliente.getText().clear();
+        auto.getText().clear();
+        resolucion.getText().clear();
+        dias.getText().clear();
+        meses.getText().clear();
+        anios.getText().clear();
+        horas.getText().clear();
+    }
 
     public boolean registrarCliente(){
 
