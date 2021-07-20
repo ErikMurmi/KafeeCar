@@ -46,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.prog.kafeecar.Patioventainterfaz.formatoHora;
 import static com.prog.kafeecar.Patioventainterfaz.getFechaMod;
 import static com.prog.kafeecar.Patioventainterfaz.patioventa;
 import static com.prog.kafeecar.Patioventainterfaz.sdf;
@@ -496,7 +497,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
         listaview.setAdapter(adptadorlistaview);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     public void visualizarCita() {
         aniadirCita.setVisibility(View.GONE);
         verCitaLista.setVisibility(View.GONE);
@@ -523,7 +524,7 @@ public class Citas_Cliente_Fragment extends Fragment implements Adaptador_Lista_
             Toast.makeText(mainView.getContext(), "Error 256: no se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
         }
         fecha.setText(getFechaMod(cita_mostrar.getFechaCita()));
-        hora.setText(String.valueOf(cita_mostrar.getHora()));
+        hora.setText(String.format("%d:00 %s",cita_mostrar.getHora(), formatoHora(cita_mostrar.getHora())));
         cliente.setText(cita_mostrar.getCliente().getNombre());
         contacto.setText(cita_mostrar.getCliente().getTelefono());
         vendedor.setText(cita_mostrar.getVendedorCita().getNombre());

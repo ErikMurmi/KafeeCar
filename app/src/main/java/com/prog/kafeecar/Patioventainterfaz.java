@@ -293,7 +293,7 @@ public class Patioventainterfaz extends AppCompatActivity {
         }
         if (usuario != null) {
             if (usuario.getClave().compareTo(clave_str) == 0) {
-                msg = "Se ha iniciado secion correctamente";
+                msg = "Se ha iniciado sesión correctamente";
                 usuarioActual = usuario;
                 irAplicacion(tipo);
             } else {
