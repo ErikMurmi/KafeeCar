@@ -895,7 +895,7 @@ public class Citas_Admin_Fragment extends Fragment implements Adaptador_Lista_Ci
             vacios++;
         }
 
-        if ( (posicion_dia==-1 || posicion_mes ==1) || (posicion_anio==-1||hora_nueva_cita==-1)){
+        if ( (posicion_dia==-1 || posicion_mes ==-1) || (posicion_anio==-1||hora_nueva_cita==-1)){
             invalidos++;
             Toast.makeText(mainView.getContext(), "Campos de fecha no seleccionados", Toast.LENGTH_SHORT).show();
         }
