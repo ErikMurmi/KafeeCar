@@ -1351,6 +1351,7 @@
                         android:id="@+id/placa_vt_vn_actv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/bordesmarcoscafegrisaceo"
                         android:completionThreshold="1"
@@ -1361,6 +1362,14 @@
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="19sp" />
+
+                    <ImageButton
+                        android:id="@+id/buscar_auto_vt_vn_btn"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bordes_drop_down"
+                        android:backgroundTint="@color/cafe_grisaceo"
+                        app:srcCompat="@drawable/icono_busqueda" />
 
                 </LinearLayout>
 
@@ -1386,6 +1395,19 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/precio_vt_vn_etxt2"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bordesmarcoscafegrisaceo"
+                        android:drawableEnd="@drawable/ic_money"
+                        android:fontFamily="@font/ocraext"
+                        android:hint="0.0"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="19sp" />
 
                     <EditText
                         android:id="@+id/precio_vt_vn_etxt"

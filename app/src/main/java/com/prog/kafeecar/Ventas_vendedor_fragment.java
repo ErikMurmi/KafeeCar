@@ -90,12 +90,21 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
         ImageButton ed_cliente_vt_vn_btn = mainView.findViewById(R.id.ed_add_cliente_vt_vn_btn);
         //Add Cliente
         Button reg_list_vt_vn_btn = mainView.findViewById(R.id.reg_list_vt_vn_btn);
+        ImageButton buscar_auto_vt_vn_btn = mainView.findViewById(R.id.buscar_auto_vt_vn_btn);
         //Layouts
         lista_ventas = mainView.findViewById(R.id.lista_vt_vn_lyt);
         ver_vt_vn_lyt = mainView.findViewById(R.id.ver_vt_vn_lyt);
         add_vt_vn_lyt = mainView.findViewById(R.id.add_vt_vn_lyt);
         editar_vt_vn_lyt = mainView.findViewById(R.id.editar_vt_vn_lyt);
         aniadir_cliente_vt_vn_lyt = mainView.findViewById(R.id.aniadir_cliente_vt_vn_lyt);
+
+        buscar_auto_vt_vn_btn.setOnClickListener(v -> {
+            AutoCompleteTextView placa_vt_vn_actv = mainView.findViewById(R.id.placa_vt_vn_actv);
+            String placa = placa_vt_vn_actv.getText().toString();
+            EditText precio_vt_vn_etxt2 = mainView.findViewById(R.id.precio_vt_vn_etxt2);
+            Vehiculo veh = patio.buscarVehiculos("Placa", placa);
+            precio_vt_vn_etxt2.setText(String.valueOf(veh.getPrecioVenta()));
+        });
 
         aniadir_vt_vn_ftbn.setOnClickListener(v -> {
             adaptadorAniadir();
@@ -166,6 +175,8 @@ public class Ventas_vendedor_fragment extends Fragment implements Adaptador_List
                 Toast.makeText(mainView.getContext(), "Error 153: busqueda fallida del cliente", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         add_cliente_vt_vn_btn.setOnClickListener(v -> {
             add_vt_vn_lyt.setVisibility(View.GONE);
