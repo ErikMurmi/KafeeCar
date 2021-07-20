@@ -151,7 +151,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
                 try {
                     if(registrarVendedor()){
                         cargar();
-                        irVisualizarVendedor.setVisibility(View.VISIBLE);
+                        regresarPantallaPrncipal();
                     }
                 } catch (Exception e) {
                     Toast.makeText(mainView.getContext(), "Error 42: No se pudo registrar el vendedor", Toast.LENGTH_SHORT).show();
@@ -296,7 +296,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             if (apellidoCampoVendedor_str.isEmpty()) {
                 vacios++;
             } else {
-                nombreCompletoVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
+                nombreCompletoVendedor_str = nombreVendedor.getText().toString() + " " + apellidoVendedor.getText().toString();
             }
         }
 
