@@ -296,7 +296,7 @@ public class Vendedores_Admin_Fragment extends Fragment implements Adaptador_Lis
             if (apellidoCampoVendedor_str.isEmpty()) {
                 vacios++;
             } else {
-                nombreCompletoVendedor_str = nombreVendedor.getText().toString() + "" + apellidoVendedor.getText().toString();
+                nombreCompletoVendedor_str = nombreVendedor.getText().toString() + " " + apellidoVendedor.getText().toString();
             }
         }
 
