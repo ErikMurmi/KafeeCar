@@ -255,7 +255,7 @@
                     android:fontFamily="@font/ocra"
                     android:inputType="textPassword"
                     android:paddingStart="20dp"
-                    android:text="clave"
+                    android:text="12345678"
                     android:textColor="#000000" />
 
                 <TextView
@@ -279,7 +279,7 @@
                     android:fontFamily="@font/ocra"
                     android:inputType="textPassword"
                     android:paddingStart="20dp"
-                    android:text="clave"
+                    android:text="12345678"
                     android:textColor="#000000" />
 
                 <TextView
